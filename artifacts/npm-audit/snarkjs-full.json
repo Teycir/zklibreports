@@ -1,0 +1,174 @@
+﻿{
+  "auditReportVersion": 2,
+  "vulnerabilities": {
+    "brace-expansion": {
+      "name": "brace-expansion",
+      "severity": "low",
+      "isDirect": false,
+      "via": [
+        {
+          "source": 1105443,
+          "name": "brace-expansion",
+          "dependency": "brace-expansion",
+          "title": "brace-expansion Regular Expression Denial of Service vulnerability",
+          "url": "https://github.com/advisories/GHSA-v6h2-p8h4-qcjw",
+          "severity": "low",
+          "cwe": [
+            "CWE-400"
+          ],
+          "cvss": {
+            "score": 3.1,
+            "vectorString": "CVSS:3.1/AV:N/AC:H/PR:L/UI:N/S:U/C:N/I:N/A:L"
+          },
+          "range": ">=1.0.0 <=1.1.11"
+        },
+        {
+          "source": 1105444,
+          "name": "brace-expansion",
+          "dependency": "brace-expansion",
+          "title": "brace-expansion Regular Expression Denial of Service vulnerability",
+          "url": "https://github.com/advisories/GHSA-v6h2-p8h4-qcjw",
+          "severity": "low",
+          "cwe": [
+            "CWE-400"
+          ],
+          "cvss": {
+            "score": 3.1,
+            "vectorString": "CVSS:3.1/AV:N/AC:H/PR:L/UI:N/S:U/C:N/I:N/A:L"
+          },
+          "range": ">=2.0.0 <=2.0.1"
+        }
+      ],
+      "effects": [],
+      "range": "1.0.0 - 1.1.11 || 2.0.0 - 2.0.1",
+      "nodes": [
+        "node_modules/brace-expansion",
+        "node_modules/filelist/node_modules/brace-expansion",
+        "node_modules/mocha/node_modules/brace-expansion"
+      ],
+      "fixAvailable": true
+    },
+    "diff": {
+      "name": "diff",
+      "severity": "low",
+      "isDirect": false,
+      "via": [
+        {
+          "source": 1112705,
+          "name": "diff",
+          "dependency": "diff",
+          "title": "jsdiff has a Denial of Service vulnerability in parsePatch and applyPatch",
+          "url": "https://github.com/advisories/GHSA-73rr-hh4g-fpgx",
+          "severity": "low",
+          "cwe": [
+            "CWE-400",
+            "CWE-1333"
+          ],
+          "cvss": {
+            "score": 0,
+            "vectorString": null
+          },
+          "range": ">=5.0.0 <5.2.2"
+        }
+      ],
+      "effects": [],
+      "range": "5.0.0 - 5.2.1",
+      "nodes": [
+        "node_modules/diff"
+      ],
+      "fixAvailable": true
+    },
+    "js-yaml": {
+      "name": "js-yaml",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        {
+          "source": 1112715,
+          "name": "js-yaml",
+          "dependency": "js-yaml",
+          "title": "js-yaml has prototype pollution in merge (<<)",
+          "url": "https://github.com/advisories/GHSA-mh29-5h37-fv8m",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-1321"
+          ],
+          "cvss": {
+            "score": 5.3,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:L/A:N"
+          },
+          "range": ">=4.0.0 <4.1.1"
+        }
+      ],
+      "effects": [],
+      "range": "4.0.0 - 4.1.0",
+      "nodes": [
+        "node_modules/js-yaml"
+      ],
+      "fixAvailable": true
+    },
+    "jsonpath": {
+      "name": "jsonpath",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        {
+          "source": 1112974,
+          "name": "jsonpath",
+          "dependency": "jsonpath",
+          "title": "JSONPath vulnerable to Prototype Pollution due to insufficient input validation of object keys in lib/index.js",
+          "url": "https://github.com/advisories/GHSA-6c59-mwgh-r2x6",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-1321"
+          ],
+          "cvss": {
+            "score": 0,
+            "vectorString": null
+          },
+          "range": "<1.2.0"
+        },
+        {
+          "source": 1113157,
+          "name": "jsonpath",
+          "dependency": "jsonpath",
+          "title": "jsonpath has Arbitrary Code Injection via Unsafe Evaluation of JSON Path Expressions",
+          "url": "https://github.com/advisories/GHSA-87r5-mp6g-5w5j",
+          "severity": "high",
+          "cwe": [
+            "CWE-94"
+          ],
+          "cvss": {
+            "score": 9.8,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H"
+          },
+          "range": "<1.2.1"
+        }
+      ],
+      "effects": [],
+      "range": "<=1.2.0",
+      "nodes": [
+        "node_modules/jsonpath"
+      ],
+      "fixAvailable": true
+    }
+  },
+  "metadata": {
+    "vulnerabilities": {
+      "info": 0,
+      "low": 2,
+      "moderate": 1,
+      "high": 1,
+      "critical": 0,
+      "total": 4
+    },
+    "dependencies": {
+      "prod": 49,
+      "dev": 200,
+      "optional": 2,
+      "peer": 0,
+      "peerOptional": 0,
+      "total": 249
+    }
+  }
+}

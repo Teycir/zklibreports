@@ -1,0 +1,17 @@
+# Build outputs
+**/target/
+**/node_modules/
+**/dist/
+**/build/
+**/.venv/
+**/__pycache__/
+*.pyc
+
+# OS/editor
+.DS_Store
+Thumbs.db
+.vscode/
+
+# Temp/log
+*.log
+*.tmp

@@ -1,0 +1,17 @@
+﻿FILE=\\VBOXSVR\elements\Repos\zk0d\cat8_libs\snarkjs\test\circuit2\circuit.circom
+EXIT=0
+
+[0m[1m[38;5;11mwarning[P1004][0m[1m: File "circuit.circom" does not include pragma version. Assuming pragma version 2.2.3[0m
+ [0m[36m=[0m At the beginning of file "circuit.circom", you should add the directive "pragma circom <Version>", to indicate which compiler version you are using.
+System.Management.Automation.RemoteException
+[32mtemplate instances[0m: 1
+non-linear constraints: 1000
+linear constraints: 0
+public inputs: 3
+private inputs: 0
+public outputs: 1
+wires: 1004
+labels: 1005
+[32mWritten successfully:[0m C:\Users\vboxuser\Desktop\Repos\zklibreports\artifacts\formal_clean\circuit2-circuit\build\circuit.r1cs
+[32mWritten successfully:[0m C:\Users\vboxuser\Desktop\Repos\zklibreports\artifacts\formal_clean\circuit2-circuit\build\circuit_js\circuit.wasm
+[32mEverything went okay[0m

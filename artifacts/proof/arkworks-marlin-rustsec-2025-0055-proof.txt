@@ -1,0 +1,47 @@
+﻿Proof attempt UTC: 2026-02-15 20:49:38
+Repo: \\VBOXSVR\elements\Repos\zk0d\cat8_libs\arkworks-marlin
+
+[1] Dependency path (all features)
+tracing-subscriber v0.2.25
+└── ark-relations v0.3.0
+    ├── ark-marlin v0.3.0 (\\vboxsvr\elements\Repos\zk0d\cat8_libs\arkworks-marlin)
+    ├── ark-nonnative-field v0.3.0
+    │   └── ark-poly-commit v0.3.0
+    │       └── ark-marlin v0.3.0 (\\vboxsvr\elements\Repos\zk0d\cat8_libs\arkworks-marlin)
+    ├── ark-poly-commit v0.3.0 (*)
+    └── ark-r1cs-std v0.3.1
+        ├── ark-mnt4-298 v0.3.0
+        │   └── ark-mnt6-298 v0.3.0
+        │       [dev-dependencies]
+        │       └── ark-marlin v0.3.0 (\\vboxsvr\elements\Repos\zk0d\cat8_libs\arkworks-marlin)
+        │   [dev-dependencies]
+        │   └── ark-marlin v0.3.0 (\\vboxsvr\elements\Repos\zk0d\cat8_libs\arkworks-marlin)
+        ├── ark-mnt4-753 v0.3.0
+        │   └── ark-mnt6-753 v0.3.0
+        │       [dev-dependencies]
+        │       └── ark-marlin v0.3.0 (\\vboxsvr\elements\Repos\zk0d\cat8_libs\arkworks-marlin)
+        │   [dev-dependencies]
+        │   └── ark-marlin v0.3.0 (\\vboxsvr\elements\Repos\zk0d\cat8_libs\arkworks-marlin)
+        ├── ark-mnt6-298 v0.3.0 (*)
+        ├── ark-mnt6-753 v0.3.0 (*)
+        └── ark-nonnative-field v0.3.0 (*)
+
+[2] Direct tracing usage in repo source
+no matches
+
+[3] Logging macros in repo source
+no matches
+
+[4] ark-relations trace formatting check
+54:            TracingMode::OnlyConstraints => metadata.target() == "r1cs",
+55:            TracingMode::NoConstraints => metadata.target() != "r1cs",
+258:            if metadata.target() == "r1cs" {
+259:                let n = metadata.name();
+263:                    .and_then(|(n, m)| metadata.file().map(|f| (n, m, f)))
+264:                    .and_then(|(n, m, f)| metadata.line().map(|l| (n, m, f, l)));
+290:            if metadata.target() != "r1cs" {
+303:                    metadata.name()
+309:                .file()
+310:                .and_then(|file| metadata.line().map(|line| (file, line)))
+
+Conclusion: advisory present, but no reproducible exploit witness in repo executable paths.

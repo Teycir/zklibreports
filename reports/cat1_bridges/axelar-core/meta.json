@@ -1,0 +1,32 @@
+﻿{
+    "name":  "axelar-core",
+    "source_path":  "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat1_bridges\\axelar-core",
+    "scanned_at_utc":  "2026-02-15 23:02:26 UTC",
+    "git":  {
+                "head":  "f303a5aa961771b475b63bce433ed3b0e6cf3b1a",
+                "branch":  "main",
+    "remote_origin":  "https://github.com/axelarnetwork/axelar-core"
+            },
+    "stacks":  [
+                   "go",
+                   "node"
+               ],
+    "outputs":  {
+                    "gitleaks":  {
+                                     "file":  "reports\\cat1_bridges\\axelar-core\\artifacts\\gitleaks.json",
+                                     "exit_code":  1
+                                 },
+                    "osv":  {
+                                "file":  "reports\\cat1_bridges\\axelar-core\\artifacts\\osv.json",
+                                "exit_code":  1
+                            },
+                    "govulncheck":  {
+                                        "file":  "reports\\cat1_bridges\\axelar-core\\artifacts\\govulncheck.json",
+                                        "exit_code":  1
+                                    },
+                    "gosec":  {
+                                  "file":  "reports\\cat1_bridges\\axelar-core\\artifacts\\gosec.json",
+                                  "exit_code":  1
+                              }
+                }
+}

@@ -1,0 +1,12 @@
+﻿FILE=\\VBOXSVR\elements\Repos\zk0d\cat8_libs\snarkjs\test\circuit\circuit.circom
+EXIT=1
+
+error[P1000]: Unrecognized token `input` found. Expected one of `,`, `;`, `<--`, `<==` or `[`.
+  ┌─ \\?\UNC\VBOXSVR\elements\Repos\zk0d\cat8_libs\snarkjs\test\circuit\circuit.circom:2:20
+  │
+2 │     signal private input a;
+  │                    ^^^^^ This token is invalid or unexpected here.
+  │
+  = To ignore this type of result, use `--allow P1000`.
+
+circomspect: 1 issue found.

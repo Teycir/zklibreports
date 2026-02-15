@@ -1,0 +1,13 @@
+Checking template Multiplier(1000)
+Number of signals (i,int,o): 1004
+Number of constraints in template: 1001
+### UNKNOWN: VERIFICATION OF WEAK SAFETY USING THE SPECIFICATION TIMEOUT
+Verification time per template: 301.6292949
+     NUMBER OF ROUNDS: 0
+
+******** VERIFICATION RESULTS ********
+-----> WEAK SAFETY: UNKNOWN -> VERIFICATION TIMEOUT
+
+
+
+

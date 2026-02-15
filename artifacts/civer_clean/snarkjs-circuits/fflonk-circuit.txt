@@ -1,0 +1,32 @@
+﻿FILE=\\VBOXSVR\elements\Repos\zk0d\cat8_libs\snarkjs\test\fflonk\circuit.circom
+[32mtemplate instances[0m: 1
+civer_circom.exe : [33mNot including tag specifications: in case you want to add extra tag specifications, use the 
+flag --civer followed by the name of the file including the specifications (example: --civer tags.circom)[0m
+At line:2 char:745
++ ... ; $result = & 'C:\Tools\circom_civer\target\release\civer_circom.exe' ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: ([33mNot includ...ags.circom)[0m:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+
+--------------------------------------------
+--------------------------------------------
+-------- CIVER VERIFICATION RESULTS --------
+--------------------------------------------
+--------------------------------------------
+
+-> All components satisfy weak safety :)
+  * Number of verified components (weak-safety): 1
+  * Number of failed components (weak-safety): 0
+  * Number of timeout components (weak-safety): 0
+  * Percentage of verified constraints: 100 - (101 / 101)
+  * Percentage of verified components: 100 - (1 / 1)
+
+
+--------------------------------------------
+--------------------------------------------
+
+[32mEverything went okay, circom safe[0m
+
+EXIT=0
+

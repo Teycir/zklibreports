@@ -1,0 +1,28 @@
+﻿FILE=\\VBOXSVR\elements\Repos\zk0d\cat8_libs\snarkjs\test\circuit\circuit.circom
+EXIT=1
+
+[0m[1m[38;5;9merror[P1008][0m[1m: Missing semicolon[0m
+  [0m[36m┌─[0m "circuit.circom":2:19
+  [0m[36m│[0m
+[0m[36m2[0m [0m[36m│[0m     signal private[0m[31m [0minput a;
+  [0m[36m│[0m                   [0m[31m^[0m [0m[31mA semicolon is needed here[0m
+System.Management.Automation.RemoteException
+[0m[1m[38;5;9merror[P1012][0m[1m: illegal expression[0m
+  [0m[36m┌─[0m "circuit.circom":2:20
+  [0m[36m│[0m
+[0m[36m2[0m [0m[36m│[0m     signal private [0m[31minput a;[0m
+  [0m[36m│[0m                    [0m[31m^^^^^^^^[0m [0m[31mhere[0m
+System.Management.Automation.RemoteException
+[0m[1m[38;5;9merror[P1008][0m[1m: Missing semicolon[0m
+  [0m[36m┌─[0m "circuit.circom":3:19
+  [0m[36m│[0m
+[0m[36m3[0m [0m[36m│[0m     signal private[0m[31m [0minput b;
+  [0m[36m│[0m                   [0m[31m^[0m [0m[31mA semicolon is needed here[0m
+System.Management.Automation.RemoteException
+[0m[1m[38;5;9merror[P1012][0m[1m: illegal expression[0m
+  [0m[36m┌─[0m "circuit.circom":3:20
+  [0m[36m│[0m
+[0m[36m3[0m [0m[36m│[0m     signal private [0m[31minput b;[0m
+  [0m[36m│[0m                    [0m[31m^^^^^^^^[0m [0m[31mhere[0m
+System.Management.Automation.RemoteException
+[31mprevious errors were found[0m

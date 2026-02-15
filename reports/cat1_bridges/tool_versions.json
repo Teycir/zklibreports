@@ -1,0 +1,16 @@
+﻿{
+    "timestamp_utc":  "2026-02-15 23:04:33 UTC",
+    "host":  "W10",
+    "root":  "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat1_bridges",
+    "tools":  {
+                  "git":  "git version 2.52.0.windows.1",
+                  "gitleaks":  "8.30.0",
+                  "osv_scanner":  "osv-scanner version: 2.3.3\nosv-scalibr version: 0.4.2\ncommit: n/a\nbuilt at: n/a",
+                  "go":  "go version go1.26.0 windows/amd64",
+                  "govulncheck":  "Go: go1.26.0\nScanner: govulncheck@v1.1.4\nDB: https://vuln.go.dev\nDB updated: 2026-02-05 17:23:17 +0000 UTC\n\nNo vulnerabilities found.",
+                  "gosec":  "Version: dev\nGit tag: \nBuild date: ",
+                  "rustc":  "rustc 1.93.0 (254b59607 2026-01-19)",
+                  "cargo":  "cargo 1.93.0 (083ac5135 2025-12-15)",
+                  "cargo_audit":  "cargo-audit-audit 0.22.1"
+              }
+}

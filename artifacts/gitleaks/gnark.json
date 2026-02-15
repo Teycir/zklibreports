@@ -1,0 +1,22 @@
+[
+ {
+  "RuleID": "generic-api-key",
+  "Description": "Detected a Generic API Key, potentially exposing access to various services and sensitive operations.",
+  "StartLine": 34,
+  "EndLine": 34,
+  "StartColumn": 6,
+  "EndColumn": 46,
+  "Match": "groth16.ProvingKey, REDACTED ",
+  "Secret": "REDACTED",
+  "File": "//VBOXSVR/elements/Repos/zk0d/cat8_libs/gnark/examples/serialization/main.go",
+  "SymlinkFile": "",
+  "Commit": "",
+  "Entropy": 3.821928,
+  "Author": "",
+  "Email": "",
+  "Date": "",
+  "Message": "",
+  "Tags": [],
+  "Fingerprint": "//VBOXSVR/elements/Repos/zk0d/cat8_libs/gnark/examples/serialization/main.go:generic-api-key:34"
+ }
+]

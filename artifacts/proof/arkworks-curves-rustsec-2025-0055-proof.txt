@@ -1,0 +1,109 @@
+﻿Proof attempt UTC: 2026-02-15 20:49:24
+Repo: \\VBOXSVR\elements\Repos\zk0d\cat8_libs\arkworks-curves
+
+[1] Dependency path (all features)
+tracing-subscriber v0.2.25
+└── ark-relations v0.4.0
+    ├── ark-curve-constraint-tests v0.4.0 (\\vboxsvr\elements\Repos\zk0d\cat8_libs\arkworks-curves\curve-constraint-tests)
+    │   [dev-dependencies]
+    │   ├── ark-bls12-377 v0.4.0 (\\vboxsvr\elements\Repos\zk0d\cat8_libs\arkworks-curves\bls12_377)
+    │   │   ├── ark-bw6-761 v0.4.0 (\\vboxsvr\elements\Repos\zk0d\cat8_libs\arkworks-curves\bw6_761)
+    │   │   ├── ark-cp6-782 v0.4.0 (\\vboxsvr\elements\Repos\zk0d\cat8_libs\arkworks-curves\cp6_782)
+    │   │   ├── ark-ed-on-bls12-377 v0.4.0 (\\vboxsvr\elements\Repos\zk0d\cat8_libs\arkworks-curves\ed_on_bls12_377)
+    │   │   └── ark-ed-on-cp6-782 v0.4.0 (\\vboxsvr\elements\Repos\zk0d\cat8_libs\arkworks-curves\ed_on_cp6_782)
+    │   │       └── ark-ed-on-bw6-761 v0.4.0 (\\vboxsvr\elements\Repos\zk0d\cat8_libs\arkworks-curves\ed_on_bw6_761)
+    │   ├── ark-curve25519 v0.4.0 (\\vboxsvr\elements\Repos\zk0d\cat8_libs\arkworks-curves\curve25519)
+    │   │   └── ark-ed25519 v0.4.0 (\\vboxsvr\elements\Repos\zk0d\cat8_libs\arkworks-curves\ed25519)
+    │   ├── ark-ed-on-bls12-377 v0.4.0 (\\vboxsvr\elements\Repos\zk0d\cat8_libs\arkworks-curves\ed_on_bls12_377)
+    │   ├── ark-ed-on-bls12-381 v0.4.0 (\\vboxsvr\elements\Repos\zk0d\cat8_libs\arkworks-curves\ed_on_bls12_381)
+    │   ├── ark-ed-on-bls12-381-bandersnatch v0.4.0 (\\vboxsvr\elements\Repos\zk0d\cat8_libs\arkworks-curves\ed_on_bls12_381_bandersnatch)
+    │   ├── ark-ed-on-bn254 v0.4.0 (\\vboxsvr\elements\Repos\zk0d\cat8_libs\arkworks-curves\ed_on_bn254)
+    │   ├── ark-ed-on-cp6-782 v0.4.0 (\\vboxsvr\elements\Repos\zk0d\cat8_libs\arkworks-curves\ed_on_cp6_782) (*)
+    │   ├── ark-ed-on-mnt4-298 v0.4.0 (\\vboxsvr\elements\Repos\zk0d\cat8_libs\arkworks-curves\ed_on_mnt4_298)
+    │   ├── ark-ed-on-mnt4-753 v0.4.0 (\\vboxsvr\elements\Repos\zk0d\cat8_libs\arkworks-curves\ed_on_mnt4_753)
+    │   ├── ark-ed25519 v0.4.0 (\\vboxsvr\elements\Repos\zk0d\cat8_libs\arkworks-curves\ed25519)
+    │   ├── ark-grumpkin v0.4.0 (\\vboxsvr\elements\Repos\zk0d\cat8_libs\arkworks-curves\grumpkin)
+    │   ├── ark-mnt4-298 v0.4.0 (\\vboxsvr\elements\Repos\zk0d\cat8_libs\arkworks-curves\mnt4_298)
+    │   │   ├── ark-ed-on-mnt4-298 v0.4.0 (\\vboxsvr\elements\Repos\zk0d\cat8_libs\arkworks-curves\ed_on_mnt4_298)
+    │   │   └── ark-mnt6-298 v0.4.0 (\\vboxsvr\elements\Repos\zk0d\cat8_libs\arkworks-curves\mnt6_298)
+    │   ├── ark-mnt4-753 v0.4.0 (\\vboxsvr\elements\Repos\zk0d\cat8_libs\arkworks-curves\mnt4_753)
+    │   │   ├── ark-ed-on-mnt4-753 v0.4.0 (\\vboxsvr\elements\Repos\zk0d\cat8_libs\arkworks-curves\ed_on_mnt4_753)
+    │   │   └── ark-mnt6-753 v0.4.0 (\\vboxsvr\elements\Repos\zk0d\cat8_libs\arkworks-curves\mnt6_753)
+    │   ├── ark-mnt6-298 v0.4.0 (\\vboxsvr\elements\Repos\zk0d\cat8_libs\arkworks-curves\mnt6_298)
+    │   ├── ark-mnt6-753 v0.4.0 (\\vboxsvr\elements\Repos\zk0d\cat8_libs\arkworks-curves\mnt6_753)
+    │   ├── ark-pallas v0.4.0 (\\vboxsvr\elements\Repos\zk0d\cat8_libs\arkworks-curves\pallas)
+    │   │   └── ark-vesta v0.4.0 (\\vboxsvr\elements\Repos\zk0d\cat8_libs\arkworks-curves\vesta)
+    │   ├── ark-secp256k1 v0.4.0 (\\vboxsvr\elements\Repos\zk0d\cat8_libs\arkworks-curves\secp256k1)
+    │   │   └── ark-secq256k1 v0.4.0 (\\vboxsvr\elements\Repos\zk0d\cat8_libs\arkworks-curves\secq256k1)
+    │   ├── ark-secp256r1 v0.4.0 (\\vboxsvr\elements\Repos\zk0d\cat8_libs\arkworks-curves\secp256r1)
+    │   ├── ark-secp384r1 v0.4.0 (\\vboxsvr\elements\Repos\zk0d\cat8_libs\arkworks-curves\secp384r1)
+    │   ├── ark-secq256k1 v0.4.0 (\\vboxsvr\elements\Repos\zk0d\cat8_libs\arkworks-curves\secq256k1)
+    │   └── ark-vesta v0.4.0 (\\vboxsvr\elements\Repos\zk0d\cat8_libs\arkworks-curves\vesta)
+    └── ark-r1cs-std v0.4.0
+        ├── ark-bls12-377 v0.4.0 (\\vboxsvr\elements\Repos\zk0d\cat8_libs\arkworks-curves\bls12_377) (*)
+        ├── ark-curve-constraint-tests v0.4.0 (\\vboxsvr\elements\Repos\zk0d\cat8_libs\arkworks-curves\curve-constraint-tests) (*)
+        ├── ark-curve25519 v0.4.0 (\\vboxsvr\elements\Repos\zk0d\cat8_libs\arkworks-curves\curve25519) (*)
+        ├── ark-ed-on-bls12-377 v0.4.0 (\\vboxsvr\elements\Repos\zk0d\cat8_libs\arkworks-curves\ed_on_bls12_377)
+        ├── ark-ed-on-bls12-381 v0.4.0 (\\vboxsvr\elements\Repos\zk0d\cat8_libs\arkworks-curves\ed_on_bls12_381)
+        ├── ark-ed-on-bls12-381-bandersnatch v0.4.0 (\\vboxsvr\elements\Repos\zk0d\cat8_libs\arkworks-curves\ed_on_bls12_381_bandersnatch)
+        ├── ark-ed-on-bn254 v0.4.0 (\\vboxsvr\elements\Repos\zk0d\cat8_libs\arkworks-curves\ed_on_bn254)
+        ├── ark-ed-on-cp6-782 v0.4.0 (\\vboxsvr\elements\Repos\zk0d\cat8_libs\arkworks-curves\ed_on_cp6_782) (*)
+        ├── ark-ed-on-mnt4-298 v0.4.0 (\\vboxsvr\elements\Repos\zk0d\cat8_libs\arkworks-curves\ed_on_mnt4_298)
+        ├── ark-ed-on-mnt4-753 v0.4.0 (\\vboxsvr\elements\Repos\zk0d\cat8_libs\arkworks-curves\ed_on_mnt4_753)
+        ├── ark-ed25519 v0.4.0 (\\vboxsvr\elements\Repos\zk0d\cat8_libs\arkworks-curves\ed25519)
+        ├── ark-grumpkin v0.4.0 (\\vboxsvr\elements\Repos\zk0d\cat8_libs\arkworks-curves\grumpkin)
+        ├── ark-mnt4-298 v0.4.0 (\\vboxsvr\elements\Repos\zk0d\cat8_libs\arkworks-curves\mnt4_298) (*)
+        ├── ark-mnt4-753 v0.4.0 (\\vboxsvr\elements\Repos\zk0d\cat8_libs\arkworks-curves\mnt4_753) (*)
+        ├── ark-mnt6-298 v0.4.0 (\\vboxsvr\elements\Repos\zk0d\cat8_libs\arkworks-curves\mnt6_298)
+        ├── ark-mnt6-753 v0.4.0 (\\vboxsvr\elements\Repos\zk0d\cat8_libs\arkworks-curves\mnt6_753)
+        ├── ark-pallas v0.4.0 (\\vboxsvr\elements\Repos\zk0d\cat8_libs\arkworks-curves\pallas) (*)
+        ├── ark-secp256k1 v0.4.0 (\\vboxsvr\elements\Repos\zk0d\cat8_libs\arkworks-curves\secp256k1) (*)
+        ├── ark-secp256r1 v0.4.0 (\\vboxsvr\elements\Repos\zk0d\cat8_libs\arkworks-curves\secp256r1)
+        ├── ark-secp384r1 v0.4.0 (\\vboxsvr\elements\Repos\zk0d\cat8_libs\arkworks-curves\secp384r1)
+        ├── ark-secq256k1 v0.4.0 (\\vboxsvr\elements\Repos\zk0d\cat8_libs\arkworks-curves\secq256k1)
+        └── ark-vesta v0.4.0 (\\vboxsvr\elements\Repos\zk0d\cat8_libs\arkworks-curves\vesta)
+        [dev-dependencies]
+        └── ark-ed-on-bw6-761 v0.4.0 (\\vboxsvr\elements\Repos\zk0d\cat8_libs\arkworks-curves\ed_on_bw6_761)
+    [dev-dependencies]
+    ├── ark-bls12-377 v0.4.0 (\\vboxsvr\elements\Repos\zk0d\cat8_libs\arkworks-curves\bls12_377) (*)
+    ├── ark-curve25519 v0.4.0 (\\vboxsvr\elements\Repos\zk0d\cat8_libs\arkworks-curves\curve25519) (*)
+    ├── ark-ed-on-bls12-377 v0.4.0 (\\vboxsvr\elements\Repos\zk0d\cat8_libs\arkworks-curves\ed_on_bls12_377)
+    ├── ark-ed-on-bls12-381 v0.4.0 (\\vboxsvr\elements\Repos\zk0d\cat8_libs\arkworks-curves\ed_on_bls12_381)
+    ├── ark-ed-on-bls12-381-bandersnatch v0.4.0 (\\vboxsvr\elements\Repos\zk0d\cat8_libs\arkworks-curves\ed_on_bls12_381_bandersnatch)
+    ├── ark-ed-on-bn254 v0.4.0 (\\vboxsvr\elements\Repos\zk0d\cat8_libs\arkworks-curves\ed_on_bn254)
+    ├── ark-ed-on-bw6-761 v0.4.0 (\\vboxsvr\elements\Repos\zk0d\cat8_libs\arkworks-curves\ed_on_bw6_761)
+    ├── ark-ed-on-cp6-782 v0.4.0 (\\vboxsvr\elements\Repos\zk0d\cat8_libs\arkworks-curves\ed_on_cp6_782) (*)
+    ├── ark-ed-on-mnt4-298 v0.4.0 (\\vboxsvr\elements\Repos\zk0d\cat8_libs\arkworks-curves\ed_on_mnt4_298)
+    ├── ark-ed-on-mnt4-753 v0.4.0 (\\vboxsvr\elements\Repos\zk0d\cat8_libs\arkworks-curves\ed_on_mnt4_753)
+    ├── ark-ed25519 v0.4.0 (\\vboxsvr\elements\Repos\zk0d\cat8_libs\arkworks-curves\ed25519)
+    ├── ark-grumpkin v0.4.0 (\\vboxsvr\elements\Repos\zk0d\cat8_libs\arkworks-curves\grumpkin)
+    ├── ark-mnt4-298 v0.4.0 (\\vboxsvr\elements\Repos\zk0d\cat8_libs\arkworks-curves\mnt4_298) (*)
+    ├── ark-mnt4-753 v0.4.0 (\\vboxsvr\elements\Repos\zk0d\cat8_libs\arkworks-curves\mnt4_753) (*)
+    ├── ark-mnt6-298 v0.4.0 (\\vboxsvr\elements\Repos\zk0d\cat8_libs\arkworks-curves\mnt6_298)
+    ├── ark-mnt6-753 v0.4.0 (\\vboxsvr\elements\Repos\zk0d\cat8_libs\arkworks-curves\mnt6_753)
+    ├── ark-pallas v0.4.0 (\\vboxsvr\elements\Repos\zk0d\cat8_libs\arkworks-curves\pallas) (*)
+    ├── ark-secp256k1 v0.4.0 (\\vboxsvr\elements\Repos\zk0d\cat8_libs\arkworks-curves\secp256k1) (*)
+    ├── ark-secp256r1 v0.4.0 (\\vboxsvr\elements\Repos\zk0d\cat8_libs\arkworks-curves\secp256r1)
+    ├── ark-secp384r1 v0.4.0 (\\vboxsvr\elements\Repos\zk0d\cat8_libs\arkworks-curves\secp384r1)
+    ├── ark-secq256k1 v0.4.0 (\\vboxsvr\elements\Repos\zk0d\cat8_libs\arkworks-curves\secq256k1)
+    └── ark-vesta v0.4.0 (\\vboxsvr\elements\Repos\zk0d\cat8_libs\arkworks-curves\vesta)
+
+[2] Direct tracing usage in repo source
+no matches
+
+[3] Logging macros in repo source
+no matches
+
+[4] ark-relations trace formatting check
+54:            TracingMode::OnlyConstraints => metadata.target() == "r1cs",
+55:            TracingMode::NoConstraints => metadata.target() != "r1cs",
+257:            if metadata.target() == "r1cs" {
+258:                let n = metadata.name();
+262:                    .and_then(|(n, m)| metadata.file().map(|f| (n, m, f)))
+263:                    .and_then(|(n, m, f)| metadata.line().map(|l| (n, m, f, l)));
+289:            if metadata.target() != "r1cs" {
+302:                    metadata.name()
+308:                .file()
+309:                .and_then(|file| metadata.line().map(|line| (file, line)))
+
+Conclusion: advisory present, but no reproducible exploit witness in repo executable paths.

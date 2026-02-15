@@ -1,0 +1,23 @@
+﻿FILE=\\VBOXSVR\elements\Repos\zk0d\cat8_libs\snarkjs\test\circuit\circuit.circom
+civer_circom.exe : [0m[1m[38;5;9merror[P1008][0m[1m: Missing semicolon[0m
+At line:2 char:745
++ ... ; $result = & 'C:\Tools\circom_civer\target\release\civer_circom.exe' ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: ([0m[1m[38;5;...g semicolon[0m:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+  [0m[36m┌─[0m "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat8_libs\\snarkjs\\test\\circuit\\circuit.circom":2:20
+  [0m[36m│[0m
+[0m[36m2[0m [0m[36m│[0m     signal private [0m[31minput[0m a;
+  [0m[36m│[0m                    [0m[31m^^^^^[0m [0m[31mA semicolon is needed here[0m
+
+[0m[1m[38;5;9merror[P1012][0m[1m: illegal expression[0m
+  [0m[36m┌─[0m "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat8_libs\\snarkjs\\test\\circuit\\circuit.circom":2:27
+  [0m[36m│[0m
+[0m[36m2[0m [0m[36m│[0m     signal private input a[0m[31m;[0m
+  [0m[36m│[0m                           [0m[31m^[0m [0m[31mhere[0m
+
+[31mprevious errors were found[0m
+
+EXIT=1
+

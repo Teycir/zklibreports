@@ -1,0 +1,1188 @@
+{
+	"Golang errors": {
+		".": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \".\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"backend": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"backend\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"backend\\accelerated\\icicle": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"backend\\\\accelerated\\\\icicle\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"backend\\accelerated\\icicle\\groth16": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"backend\\\\accelerated\\\\icicle\\\\groth16\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"backend\\accelerated\\icicle\\groth16\\bls12-377": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"backend\\\\accelerated\\\\icicle\\\\groth16\\\\bls12-377\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"backend\\accelerated\\icicle\\groth16\\bls12-381": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"backend\\\\accelerated\\\\icicle\\\\groth16\\\\bls12-381\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"backend\\accelerated\\icicle\\groth16\\bn254": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"backend\\\\accelerated\\\\icicle\\\\groth16\\\\bn254\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"backend\\accelerated\\icicle\\groth16\\bw6-761": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"backend\\\\accelerated\\\\icicle\\\\groth16\\\\bw6-761\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"backend\\accelerated\\icicle\\internal\\generator": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"backend\\\\accelerated\\\\icicle\\\\internal\\\\generator\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"backend\\groth16": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"backend\\\\groth16\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"backend\\groth16\\bls12-377": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"backend\\\\groth16\\\\bls12-377\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"backend\\groth16\\bls12-377\\mpcsetup": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"backend\\\\groth16\\\\bls12-377\\\\mpcsetup\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"backend\\groth16\\bls12-381": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"backend\\\\groth16\\\\bls12-381\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"backend\\groth16\\bls12-381\\mpcsetup": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"backend\\\\groth16\\\\bls12-381\\\\mpcsetup\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"backend\\groth16\\bn254": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"backend\\\\groth16\\\\bn254\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"backend\\groth16\\bn254\\mpcsetup": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"backend\\\\groth16\\\\bn254\\\\mpcsetup\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"backend\\groth16\\bw6-761": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"backend\\\\groth16\\\\bw6-761\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"backend\\groth16\\bw6-761\\mpcsetup": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"backend\\\\groth16\\\\bw6-761\\\\mpcsetup\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"backend\\groth16\\internal": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"backend\\\\groth16\\\\internal\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"backend\\groth16\\internal\\test_utils": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"backend\\\\groth16\\\\internal\\\\test_utils\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"backend\\plonk": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"backend\\\\plonk\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"backend\\plonk\\bls12-377": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"backend\\\\plonk\\\\bls12-377\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"backend\\plonk\\bls12-381": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"backend\\\\plonk\\\\bls12-381\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"backend\\plonk\\bn254": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"backend\\\\plonk\\\\bn254\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"backend\\plonk\\bw6-761": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"backend\\\\plonk\\\\bw6-761\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"backend\\plonk\\internal": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"backend\\\\plonk\\\\internal\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"backend\\plonk\\koalabear": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"backend\\\\plonk\\\\koalabear\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"backend\\solidity": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"backend\\\\solidity\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"backend\\witness": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"backend\\\\witness\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"constraint": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"constraint\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"constraint\\babybear": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"constraint\\\\babybear\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"constraint\\bls12-377": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"constraint\\\\bls12-377\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"constraint\\bls12-381": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"constraint\\\\bls12-381\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"constraint\\bn254": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"constraint\\\\bn254\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"constraint\\bw6-761": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"constraint\\\\bw6-761\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"constraint\\koalabear": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"constraint\\\\koalabear\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"constraint\\solver": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"constraint\\\\solver\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"constraint\\solver\\gkrgates": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"constraint\\\\solver\\\\gkrgates\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"constraint\\tinyfield": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"constraint\\\\tinyfield\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"debug": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"debug\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"examples": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"examples\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"examples\\accelerated_gpu": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"examples\\\\accelerated_gpu\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"examples\\cubic": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"examples\\\\cubic\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"examples\\emulated": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"examples\\\\emulated\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"examples\\exponentiate": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"examples\\\\exponentiate\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"examples\\inputpacking": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"examples\\\\inputpacking\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"examples\\mimc": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"examples\\\\mimc\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"examples\\plonk": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"examples\\\\plonk\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"examples\\print_constraints": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"examples\\\\print_constraints\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"examples\\pubkeyhashing": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"examples\\\\pubkeyhashing\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"examples\\rollup": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"examples\\\\rollup\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"examples\\serialization": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"examples\\\\serialization\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"examples\\sudoku": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"examples\\\\sudoku\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"examples\\witness": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"examples\\\\witness\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"frontend": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"frontend\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"frontend\\cs": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"frontend\\\\cs\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"frontend\\cs\\r1cs": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"frontend\\\\cs\\\\r1cs\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"frontend\\cs\\scs": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"frontend\\\\cs\\\\scs\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"frontend\\internal\\expr": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"frontend\\\\internal\\\\expr\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"frontend\\schema": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"frontend\\\\schema\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"frontend\\schema\\internal\\reflectwalk": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"frontend\\\\schema\\\\internal\\\\reflectwalk\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"internal\\backend\\circuits": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"internal\\\\backend\\\\circuits\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"internal\\backend\\ioutils": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"internal\\\\backend\\\\ioutils\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"internal\\circuitdefer": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"internal\\\\circuitdefer\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"internal\\frontendtype": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"internal\\\\frontendtype\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"internal\\generator\\backend": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"internal\\\\generator\\\\backend\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"internal\\gkr": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"internal\\\\gkr\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"internal\\gkr\\bls12-377": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"internal\\\\gkr\\\\bls12-377\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"internal\\gkr\\bls12-381": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"internal\\\\gkr\\\\bls12-381\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"internal\\gkr\\bn254": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"internal\\\\gkr\\\\bn254\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"internal\\gkr\\bw6-761": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"internal\\\\gkr\\\\bw6-761\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"internal\\gkr\\gkrtesting": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"internal\\\\gkr\\\\gkrtesting\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"internal\\gkr\\gkrtypes": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"internal\\\\gkr\\\\gkrtypes\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"internal\\gkr\\small_rational": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"internal\\\\gkr\\\\small_rational\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"internal\\gkr\\test_vectors": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"internal\\\\gkr\\\\test_vectors\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"internal\\hints": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"internal\\\\hints\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"internal\\kvstore": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"internal\\\\kvstore\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"internal\\regression_tests": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"internal\\\\regression_tests\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"internal\\regression_tests\\issue1045": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"internal\\\\regression_tests\\\\issue1045\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"internal\\regression_tests\\issue1048": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"internal\\\\regression_tests\\\\issue1048\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"internal\\regression_tests\\issue1227": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"internal\\\\regression_tests\\\\issue1227\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"internal\\regression_tests\\issue1246": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"internal\\\\regression_tests\\\\issue1246\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"internal\\security_tests\\advisory-9xcg": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"internal\\\\security_tests\\\\advisory-9xcg\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"internal\\small_rational": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"internal\\\\small_rational\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"internal\\small_rational\\polynomial": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"internal\\\\small_rational\\\\polynomial\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"internal\\smallfields": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"internal\\\\smallfields\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"internal\\smallfields\\tinyfield": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"internal\\\\smallfields\\\\tinyfield\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"internal\\stats": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"internal\\\\stats\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"internal\\stats\\generate": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"internal\\\\stats\\\\generate\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"internal\\utils": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"internal\\\\utils\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"internal\\utils\\test_utils": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"internal\\\\utils\\\\test_utils\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"internal\\widecommitter": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"internal\\\\widecommitter\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"io": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"io\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"logger": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"logger\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"profile": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"profile\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"profile\\internal\\graph": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"profile\\\\internal\\\\graph\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"profile\\internal\\measurement": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"profile\\\\internal\\\\measurement\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"profile\\internal\\report": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"profile\\\\internal\\\\report\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"std": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"std\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"std\\accumulator\\merkle": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"std\\\\accumulator\\\\merkle\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"std\\algebra": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"std\\\\algebra\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"std\\algebra\\algopts": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"std\\\\algebra\\\\algopts\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"std\\algebra\\emulated\\fields_bls12381": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"std\\\\algebra\\\\emulated\\\\fields_bls12381\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"std\\algebra\\emulated\\fields_bn254": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"std\\\\algebra\\\\emulated\\\\fields_bn254\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"std\\algebra\\emulated\\fields_bw6761": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"std\\\\algebra\\\\emulated\\\\fields_bw6761\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"std\\algebra\\emulated\\sw_bls12381": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"std\\\\algebra\\\\emulated\\\\sw_bls12381\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"std\\algebra\\emulated\\sw_bn254": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"std\\\\algebra\\\\emulated\\\\sw_bn254\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"std\\algebra\\emulated\\sw_bw6761": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"std\\\\algebra\\\\emulated\\\\sw_bw6761\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"std\\algebra\\emulated\\sw_emulated": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"std\\\\algebra\\\\emulated\\\\sw_emulated\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"std\\algebra\\native\\fields_bls12377": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"std\\\\algebra\\\\native\\\\fields_bls12377\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"std\\algebra\\native\\sw_bls12377": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"std\\\\algebra\\\\native\\\\sw_bls12377\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"std\\algebra\\native\\sw_grumpkin": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"std\\\\algebra\\\\native\\\\sw_grumpkin\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"std\\algebra\\native\\twistededwards": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"std\\\\algebra\\\\native\\\\twistededwards\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"std\\commitments\\fri": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"std\\\\commitments\\\\fri\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"std\\commitments\\kzg": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"std\\\\commitments\\\\kzg\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"std\\commitments\\pedersen": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"std\\\\commitments\\\\pedersen\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"std\\compress": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"std\\\\compress\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"std\\compress\\internal": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"std\\\\compress\\\\internal\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"std\\compress\\internal\\plonk": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"std\\\\compress\\\\internal\\\\plonk\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"std\\compress\\lzss": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"std\\\\compress\\\\lzss\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"std\\compress\\lzss\\large-tests": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"std\\\\compress\\\\lzss\\\\large-tests\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"std\\conversion": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"std\\\\conversion\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"std\\evmprecompiles": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"std\\\\evmprecompiles\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"std\\fiat-shamir": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"std\\\\fiat-shamir\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"std\\gkrapi": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"std\\\\gkrapi\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"std\\gkrapi\\gkr": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"std\\\\gkrapi\\\\gkr\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"std\\hash": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"std\\\\hash\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"std\\hash\\all": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"std\\\\hash\\\\all\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"std\\hash\\expand": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"std\\\\hash\\\\expand\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"std\\hash\\mimc": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"std\\\\hash\\\\mimc\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"std\\hash\\mimc\\gkr-mimc": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"std\\\\hash\\\\mimc\\\\gkr-mimc\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"std\\hash\\poseidon2": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"std\\\\hash\\\\poseidon2\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"std\\hash\\poseidon2\\gkr-poseidon2": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"std\\\\hash\\\\poseidon2\\\\gkr-poseidon2\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"std\\hash\\ripemd160": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"std\\\\hash\\\\ripemd160\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"std\\hash\\sha2": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"std\\\\hash\\\\sha2\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"std\\hash\\sha3": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"std\\\\hash\\\\sha3\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"std\\internal\\fieldextension": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"std\\\\internal\\\\fieldextension\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"std\\internal\\limbcomposition": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"std\\\\internal\\\\limbcomposition\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"std\\internal\\logderivarg": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"std\\\\internal\\\\logderivarg\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"std\\internal\\logderivprecomp": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"std\\\\internal\\\\logderivprecomp\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"std\\internal\\mimc": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"std\\\\internal\\\\mimc\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"std\\lookup\\logderivlookup": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"std\\\\lookup\\\\logderivlookup\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"std\\math\\bits": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"std\\\\math\\\\bits\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"std\\math\\bitslice": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"std\\\\math\\\\bitslice\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"std\\math\\cmp": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"std\\\\math\\\\cmp\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"std\\math\\emulated": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"std\\\\math\\\\emulated\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"std\\math\\emulated\\emparams": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"std\\\\math\\\\emulated\\\\emparams\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"std\\math\\polynomial": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"std\\\\math\\\\polynomial\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"std\\math\\uints": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"std\\\\math\\\\uints\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"std\\multicommit": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"std\\\\multicommit\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"std\\permutation\\gkr-mimc": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"std\\\\permutation\\\\gkr-mimc\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"std\\permutation\\keccakf": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"std\\\\permutation\\\\keccakf\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"std\\permutation\\poseidon2": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"std\\\\permutation\\\\poseidon2\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"std\\permutation\\poseidon2\\gkr-poseidon2": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"std\\\\permutation\\\\poseidon2\\\\gkr-poseidon2\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"std\\permutation\\ripemd160": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"std\\\\permutation\\\\ripemd160\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"std\\permutation\\sha2": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"std\\\\permutation\\\\sha2\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"std\\polynomial": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"std\\\\polynomial\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"std\\rangecheck": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"std\\\\rangecheck\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"std\\recursion": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"std\\\\recursion\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"std\\recursion\\groth16": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"std\\\\recursion\\\\groth16\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"std\\recursion\\plonk": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"std\\\\recursion\\\\plonk\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"std\\recursion\\sumcheck": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"std\\\\recursion\\\\sumcheck\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"std\\selector": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"std\\\\selector\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"std\\signature\\bls": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"std\\\\signature\\\\bls\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"std\\signature\\ecdsa": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"std\\\\signature\\\\ecdsa\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"std\\signature\\eddsa": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"std\\\\signature\\\\eddsa\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"test": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"test\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		],
+		"test\\unsafekzg": [
+			{
+				"line": 0,
+				"column": 0,
+				"error": "loading files from package \"test\\\\unsafekzg\": err: go command required, not found: exec: \"go\": executable file not found in %PATH%: stderr: "
+			}
+		]
+	},
+	"Issues": [],
+	"Stats": {
+		"files": 0,
+		"lines": 0,
+		"nosec": 0,
+		"found": 0
+	},
+	"GosecVersion": "dev"
+}
