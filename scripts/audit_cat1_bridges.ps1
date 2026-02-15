@@ -82,6 +82,7 @@ if (_CmdExists "cargo") { $toolVersions.tools.rustc = ((rustc --version) -join "
 if (_CmdExists "cargo") {
   try { $toolVersions.tools.cargo_audit = ((cargo audit -V) -join "`n") } catch {}
 }
+if (_CmdExists "halmos") { $toolVersions.tools.halmos = ((halmos --version) -join "`n") }
 
 _WriteJson (Join-Path $OutRoot "tool_versions.json") $toolVersions
 
