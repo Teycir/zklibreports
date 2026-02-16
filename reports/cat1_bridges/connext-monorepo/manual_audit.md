@@ -4,7 +4,7 @@ Scope: `\\VBOXSVR\elements\Repos\zk0d\cat1_bridges\connext-monorepo`
 
 HEAD: `7758e62037bba281b8844c37831bde0b838edd36`
 
-Pass status: In progress (F1/F2/F3 evidence-closed; one high-signal hypothesis still open).
+Pass status: Exhausted for this pass (F1/F2/F3 proven; F4 falsified with deterministic + fuzz + specialist evidence).
 
 Primary scope (this pass):
 - `packages/deployments/contracts/contracts/core/connext/facets`
@@ -193,12 +193,51 @@ Executable witness:
   - `reports/cat1_bridges/connext-monorepo/manual_artifacts/f3_bump_transfer_sender_tax_formal_echidna_30s.txt`
   - `reports/cat1_bridges/connext-monorepo/manual_artifacts/f3_bump_transfer_sender_tax_formal_campaign_meta.json`
 
+## Falsified / Not Promoted Hypotheses
+
+### F4: Fast-liquidity execute trust boundary before reconcile does not expose a direct protocol auth-bypass in tested model
+
+Severity: N/A (hypothesis not promoted; integration caveat remains for lenient destination receivers)
+
+Affected code (validated behavior):
+- `\\VBOXSVR\elements\Repos\zk0d\cat1_bridges\connext-monorepo\packages\deployments\contracts\contracts\core\connext\facets\BridgeFacet.sol`
+  - `execute(...)` (line ~446)
+  - `_executeSanityChecks(...)` (line ~753)
+  - `_executeCalldata(...)` (line ~984)
+    - fast path passes `originSender = address(0)` when unreconciled (line ~1007)
+    - fast path reverts on external call failure (line ~1013)
+- `\\VBOXSVR\elements\Repos\zk0d\cat1_bridges\connext-monorepo\packages\deployments\contracts\contracts\core\connext\facets\InboxFacet.sol`
+  - `_reconcile(...)` status transitions `None->Reconciled` and `Executed->Completed` (line ~148)
+
+Validation outcome:
+1. Strict receiver model requiring authenticated `originSender` cannot be successfully called on unreconciled fast path.
+2. Fast-path strict-call failure reverts `execute`, rolling back both status and fund transfer in the same transaction.
+3. Reconciled slow path supplies authenticated `originSender`; strict receiver succeeds.
+4. Lenient receiver model can intentionally accept fast-path `originSender=0` (documented integration trust boundary), but this did not produce a direct protocol-level signature/auth bypass in this pass.
+
+Executable falsification witness:
+- Harness:
+  - `proof_harness/cat1_connext_f4_execute_pre_reconcile_trust_boundary`
+- Tests:
+  - `test_f4_fast_path_strict_receiver_reverts_and_rolls_back`
+  - `test_f4_fast_path_lenient_receiver_observes_zero_origin_sender`
+  - `test_f4_reconciled_slow_path_authenticates_origin_sender_for_strict_receiver`
+  - `test_f4_reconciled_path_swallows_receiver_revert`
+  - `testFuzz_f4_fast_path_strict_receiver_always_reverts`
+- Artifacts:
+  - `reports/cat1_bridges/connext-monorepo/manual_artifacts/f4_execute_pre_reconcile_trust_boundary_forge_test.txt`
+  - `reports/cat1_bridges/connext-monorepo/manual_artifacts/f4_execute_pre_reconcile_trust_boundary_fuzz_5000_runs.txt`
+  - `reports/cat1_bridges/connext-monorepo/manual_artifacts/f4_execute_pre_reconcile_trust_boundary_formal_medusa_30s.txt`
+  - `reports/cat1_bridges/connext-monorepo/manual_artifacts/f4_execute_pre_reconcile_trust_boundary_formal_echidna_30s.txt`
+  - `reports/cat1_bridges/connext-monorepo/manual_artifacts/f4_execute_pre_reconcile_trust_boundary_formal_campaign_meta.json`
+
 ## Specialist Fuzzing (Medusa + Echidna)
 
 Harnesses:
 - `proof_harness/cat1_connext_f1_router_sender_tax/src/MedusaConnextRouterSenderTaxHarness.sol`
 - `proof_harness/cat1_connext_f2_execute_custodied_sender_tax/src/MedusaConnextExecuteCustodiedSenderTaxHarness.sol`
 - `proof_harness/cat1_connext_f3_bump_transfer_sender_tax/src/MedusaConnextBumpTransferSenderTaxHarness.sol`
+- `proof_harness/cat1_connext_f4_execute_pre_reconcile_trust_boundary/src/MedusaConnextExecuteTrustBoundaryHarness.sol`
 
 Property results:
 - Bug properties falsified:
@@ -212,6 +251,9 @@ Property results:
   - `property_fixed_collateral_covers_router_balances`
   - `property_fixed_collateral_covers_custodied`
   - `property_fixed_collateral_covers_router_balances_after_bump`
+  - `property_fast_path_cannot_authenticate_strict_receiver`
+  - `property_fast_path_not_stuck_executed_without_success`
+  - `echidna_fast_path_cannot_authenticate_strict_receiver`
 
 ## Hypotheses (Ranked Leads To Validate Next)
 
@@ -227,4 +269,6 @@ F3: ERC20 `bumpTransfer` sender-tax collateral drift
 F4: Fast-liquidity execute path trust boundary before reconcile
 - Observation: `BridgeFacet.execute(...)` documentation notes calldata properties may be unverified prior to reconcile completion.
 - Question: can any externally meaningful state change occur in pre-reconcile windows that violates intended origin authenticity assumptions?
-- Status: open.
+- Status: validated and not promoted (falsified in this pass; no direct protocol auth-bypass witness).
+
+- No remaining high/medium hypotheses are open for this pass.

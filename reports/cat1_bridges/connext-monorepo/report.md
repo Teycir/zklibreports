@@ -15,8 +15,10 @@
 
 ## Manual Audit Progress
 - Manual report: `reports/cat1_bridges/connext-monorepo/manual_audit.md`
-- Pass status: in progress.
+- Pass status: exhausted for this pass.
 - Proven (model + fuzz + specialist):
   - F1 router liquidity withdrawal can undercollateralize remaining router balances under sender-tax payout token behavior.
   - F2 canonical-domain execute payout can desynchronize `custodied` from real collateral under sender-tax token behavior.
   - F3 ERC20 `bumpTransfer` fee forwarding can consume bridge collateral under sender-tax payout token behavior.
+- Falsified (not promoted):
+  - F4 fast-liquidity execute trust-boundary auth-bypass hypothesis (strict-receiver fast-path auth bypass not reproducible in tested model).
