@@ -29,20 +29,23 @@ Date: `2026-02-16`
 ## Promoted finding
 
 - `F-TAIKOMONO-01` (`Medium`): `TrailblazersBadgesS2.getBadge` inverted token boundary check.
+- `F-TAIKOMONO-02` (`Medium`): `EventRegister` deploy/init split enables first-caller role takeover before intended initialization.
 - Proof artifacts:
 - `manual_artifacts/f_taikomono_01_getbadge_boundary_forge_test.txt`
 - `manual_artifacts/f_taikomono_01_medusa_failfast_30s.txt`
 - `manual_artifacts/f_taikomono_01_echidna_30s.txt`
 - `manual_artifacts/f_taikomono_01_halmos.txt`
 - `manual_artifacts/f_taikomono_01_halmos.json`
+- `manual_artifacts/f_taikomono_02_eventregister_init_hijack_forge_test.txt`
+- `manual_artifacts/f_taikomono_02_key_snippets.txt`
 
 ## Non-promoted leads
 
-- Core protocol initialization and upgrade surfaces were reviewed; no additional first-caller takeover or privilege break witness was reproduced from these paths under CAT2 constraints.
+- Core protocol initialization and upgrade surfaces were reviewed; no additional first-caller takeover or privilege break witness was reproduced beyond `F-TAIKOMONO-02` under CAT2 constraints.
 - Remaining static leads did not cross the witness threshold for promotion.
 
 ## Manual verdict
 
-- `CONFIRMED`: 1
+- `CONFIRMED`: 2
 - `LIKELY`: 0
 - `NOT CONFIRMED`: all other triaged leads

@@ -9,7 +9,7 @@
 
 ## Manual Verdict
 
-- `CONFIRMED`: 1
+- `CONFIRMED`: 2
 - `LIKELY`: 0
 - `NOT CONFIRMED`: baseline and manual leads that did not reach unprivileged exploit witness threshold
 
@@ -60,6 +60,43 @@ Specialist fuzz witness:
 
 Primary source snippets:
 - `reports/cat2_rollups/taiko-mono/manual_artifacts/f_taikomono_01_key_snippets.txt`
+
+## F-TAIKOMONO-02: `EventRegister` deploy/init split allows first-caller role takeover and event-state poisoning
+
+Severity: `Medium`
+
+Status: `CONFIRMED`
+
+Affected code:
+- `packages/nfts/contracts/eventRegister/EventRegister.sol:92` - `initialize()` is `external initializer` and assigns `EVENT_MANAGER_ROLE` + owner to caller.
+- `packages/nfts/contracts/eventRegister/EventRegister.sol:103` - constructor grants `DEFAULT_ADMIN_ROLE` only at deployment transaction time.
+- `packages/nfts/contracts/eventRegister/EventRegister.sol:143` - `createEvent(...)` is `onlyRole(EVENT_MANAGER_ROLE)` and mutates persistent event registry state.
+- `packages/nfts/script/trailblazer/eventRegister/Deploy.s.sol:14` - script deploys `new EventRegister()` in one step.
+- `packages/nfts/script/trailblazer/eventRegister/Deploy.s.sol:19` - script calls `eventRegister.initialize()` as a separate call.
+
+Root cause:
+- Deployment is non-atomic: privileged initialization is a separate transaction-like call after deployment, and initialization is first-caller without caller allowlist.
+
+Witness sequence:
+1. Deployer creates `EventRegister`.
+2. Attacker calls `initialize()` first and becomes owner + `EVENT_MANAGER_ROLE`.
+3. Attacker calls `createEvent(...)` and persists attacker-chosen event state.
+4. Deployer's intended `initialize()` call reverts and cannot restore pre-compromise state.
+
+Business implication (non-technical):
+- Unauthorized accounts can inject event records and influence registry-derived eligibility or campaign flows in deployment windows.
+- Even with later admin recovery (role revocation/grant by deployer), attacker-created event state remains onchain.
+- Deployment automation can fail unexpectedly because intended initializer step is permanently consumed.
+
+Deterministic witness:
+- Harness: `proof_harness/cat2_taikomono_f2_event_register_init_hijack/src/TaikoMonoF2EventRegisterInitHijackHarness.sol`
+- Test: `proof_harness/cat2_taikomono_f2_event_register_init_hijack/test/TaikoMonoF2EventRegisterInitHijack.t.sol`
+- Run: `forge test --root proof_harness/cat2_taikomono_f2_event_register_init_hijack`
+- Artifact: `reports/cat2_rollups/taiko-mono/manual_artifacts/f_taikomono_02_eventregister_init_hijack_forge_test.txt`
+- Result: 3/3 tests passed.
+
+Primary source snippets:
+- `reports/cat2_rollups/taiko-mono/manual_artifacts/f_taikomono_02_key_snippets.txt`
 
 ## Tool Outputs (Baseline)
 
