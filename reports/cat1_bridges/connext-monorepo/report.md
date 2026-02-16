@@ -18,3 +18,4 @@
 - Pass status: in progress.
 - Proven (model + fuzz + specialist):
   - F1 router liquidity withdrawal can undercollateralize remaining router balances under sender-tax payout token behavior.
+  - F2 canonical-domain execute payout can desynchronize `custodied` from real collateral under sender-tax token behavior.

@@ -4,7 +4,7 @@ Scope: `\\VBOXSVR\elements\Repos\zk0d\cat1_bridges\connext-monorepo`
 
 HEAD: `7758e62037bba281b8844c37831bde0b838edd36`
 
-Pass status: In progress (F1 evidence-closed; additional high-signal hypotheses pending).
+Pass status: In progress (F1/F2 evidence-closed; one high-signal hypothesis still open).
 
 Primary scope (this pass):
 - `packages/deployments/contracts/contracts/core/connext/facets`
@@ -13,7 +13,7 @@ Primary scope (this pass):
 Non-goals (this pass):
 - Deployment scripts, agent orchestration, and non-EVM surfaces unless needed for a concrete on-chain witness.
 
-## Protocol Snapshot (Router Liquidity Path)
+## Protocol Snapshot (Router + Execute Accounting Paths)
 
 - Router liquidity is supplied via:
   - `RoutersFacet.addRouterLiquidityFor(...)`
@@ -21,6 +21,10 @@ Non-goals (this pass):
 - Router liquidity is withdrawn via:
   - `RoutersFacet.removeRouterLiquidityFor(...)`
   - `RoutersFacet.removeRouterLiquidity(...)`
+- Destination execute path:
+  - `BridgeFacet.execute(...)` delegates to `_handleExecuteLiquidity(...)` and `_handleExecuteTransaction(...)`.
+  - Canonical-domain cap-tracked path decrements `s.tokenConfigs[_key].custodied` by intent amount (`toSwap`) in `_handleExecuteLiquidity(...)`.
+  - Payout to recipient uses `AssetLogic.handleOutgoingAsset(...)`.
 - Core transfer helpers:
   - `AssetLogic.handleIncomingAsset(...)` validates exact incoming amount and rejects fee-on-transfer behavior.
   - `AssetLogic.handleOutgoingAsset(...)` performs raw transfer out without sender-side debit validation.
@@ -31,6 +35,8 @@ Non-goals (this pass):
   - For a given local asset, contract collateral should remain at least the sum of outstanding router balances for that asset.
 - Withdrawal accounting correctness:
   - Router-balance decrement amount should match actual collateral debit caused by payout transfer.
+- Canonical cap/custody accounting coverage:
+  - For cap-tracked canonical assets, real collateral should not fall below tracked `custodied`.
 
 ## Proven Findings
 
@@ -83,26 +89,81 @@ Executable witness:
   - `reports/cat1_bridges/connext-monorepo/manual_artifacts/f1_router_sender_tax_formal_echidna_30s.txt`
   - `reports/cat1_bridges/connext-monorepo/manual_artifacts/f1_router_sender_tax_formal_campaign_meta.json`
 
+### F2: Canonical-domain execute payout can desynchronize `custodied` from real collateral under sender-tax token behavior
+
+Severity: Medium (token-specific solvency/liveness + cap-accounting drift)
+
+Affected code:
+- `\\VBOXSVR\elements\Repos\zk0d\cat1_bridges\connext-monorepo\packages\deployments\contracts\contracts\core\connext\facets\BridgeFacet.sol`
+  - `execute(...)` (line ~446)
+  - `_handleExecuteLiquidity(...)` decrements `s.tokenConfigs[_key].custodied -= toSwap` on canonical cap-tracked path (line ~924)
+  - `_handleExecuteTransaction(...)` transfers out via `AssetLogic.handleOutgoingAsset(...)` (line ~963)
+- `\\VBOXSVR\elements\Repos\zk0d\cat1_bridges\connext-monorepo\packages\deployments\contracts\contracts\core\connext\libraries\AssetLogic.sol`
+  - `handleOutgoingAsset(...)` performs transfer without sender-side debit validation (line ~85)
+
+Root cause:
+- Cap-tracked canonical execute path decrements `custodied` by intent amount (`toSwap`) before transfer out.
+- Outgoing transfer path assumes sender debit equals requested amount.
+- For sender-tax token behavior on Connext-originated transfers, actual sender debit can exceed requested amount.
+- Result: real collateral can decrease faster than tracked `custodied`, violating coverage (`collateral < custodied`).
+
+Concrete witness sequence:
+1. Seed canonical custody with `200_000` (tracked `custodied = 200_000`).
+2. Configure sender-tax behavior for transfers where Connext contract is sender (5% extra debit).
+3. Execute payout of `100_000`.
+4. `custodied` decreases to `100_000` by intent-level accounting.
+5. Actual token balance decreases to `95_000` due sender-tax extra debit.
+6. Post-state violates coverage invariant (`collateral < custodied`).
+
+Impact:
+- Cap-tracked accounting can overstate retrievable collateral for affected token classes.
+- Subsequent destination payouts can fail earlier than accounting implies, creating token-specific liveness/solvency stress.
+- Cap-related operational decisions can be made on drifted custody data.
+
+Recommended fix:
+- Validate sender-side balance delta around execute payout transfer equals intended amount.
+- Couple `custodied` updates to validated actual debit, or revert on mismatch.
+- Optionally block unsupported sender-tax token classes for cap-tracked canonical assets.
+
+Executable witness:
+- Harness:
+  - `proof_harness/cat1_connext_f2_execute_custodied_sender_tax`
+- Tests:
+  - `test_f2_bug_model_sender_tax_execute_breaks_collateral_vs_custodied`
+  - `test_f2_fixed_model_rejects_sender_tax_execute`
+  - `testFuzz_f2_bug_model_sender_tax_can_break_collateral_vs_custodied`
+- Artifacts:
+  - `reports/cat1_bridges/connext-monorepo/manual_artifacts/f2_execute_custodied_sender_tax_forge_test.txt`
+  - `reports/cat1_bridges/connext-monorepo/manual_artifacts/f2_execute_custodied_sender_tax_fuzz_5000_runs.txt`
+  - `reports/cat1_bridges/connext-monorepo/manual_artifacts/f2_execute_custodied_sender_tax_formal_medusa_30s.txt`
+  - `reports/cat1_bridges/connext-monorepo/manual_artifacts/f2_execute_custodied_sender_tax_formal_echidna_30s.txt`
+  - `reports/cat1_bridges/connext-monorepo/manual_artifacts/f2_execute_custodied_sender_tax_formal_campaign_meta.json`
+
 ## Specialist Fuzzing (Medusa + Echidna)
 
-Harness:
+Harnesses:
 - `proof_harness/cat1_connext_f1_router_sender_tax/src/MedusaConnextRouterSenderTaxHarness.sol`
+- `proof_harness/cat1_connext_f2_execute_custodied_sender_tax/src/MedusaConnextExecuteCustodiedSenderTaxHarness.sol`
 
 Property results:
-- Bug property falsified:
+- Bug properties falsified:
   - `property_bug_collateral_covers_router_balances`
   - `echidna_bug_collateral_covers_router_balances`
-- Fixed control passed:
+  - `property_bug_collateral_covers_custodied`
+  - `echidna_bug_collateral_covers_custodied`
+- Fixed controls passed:
   - `property_fixed_collateral_covers_router_balances`
+  - `property_fixed_collateral_covers_custodied`
 
 ## Hypotheses (Ranked Leads To Validate Next)
 
-F2: Fast-liquidity execute path trust boundary before reconcile
+F1: Router liquidity withdrawal under sender-tax payout tokens
+- Status: validated and promoted (proven).
+
+F2: Execute/custodied accounting drift under sender-tax payout tokens
+- Status: validated and promoted (proven).
+
+F3: Fast-liquidity execute path trust boundary before reconcile
 - Observation: `BridgeFacet.execute(...)` documentation notes calldata properties may be unverified prior to reconcile completion.
 - Question: can any externally meaningful state change occur in pre-reconcile windows that violates intended origin authenticity assumptions?
-- Status: open.
-
-F3: Router-liquidity and cap accounting interactions across mixed asset behaviors
-- Observation: router balances, custodied accounting, and transfer helpers rely on behavior assumptions that differ between incoming and outgoing paths.
-- Question: are there additional accounting-drift paths across cap enforcement, router withdrawal, and representation/canonical transitions?
 - Status: open.
