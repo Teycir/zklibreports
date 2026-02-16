@@ -1,0 +1,8 @@
+=== Repository scope README ===
+    1: # Arbitrum repository directory
+    2: This repository serves as an index to the most commonly used repositories within the organisation.
+    3:
+    4: ## Common repositories
+    5: - [Arbitrum Nitro](https://github.com/OffchainLabs/nitro/) - Nitro is the latest iteration of the Arbitrum technology
+    6: - [Arbitrum Nitro Contracts](https://github.com/OffchainLabs/nitro-contracts/) - The core Arbitrum Nitro contracts deployed to the parent chain to host the rollup
+
