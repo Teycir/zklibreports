@@ -30,12 +30,15 @@ For Solidity/EVM deep analysis we also use:
 - `slither` (static analyzer; run in a controlled mode because it may invoke compilation/build steps)
 - `aderyn` (additional Solidity analyzer; treat output as leads until you have a repro)
 - Foundry (harness + fuzzing): `scripts/forge.ps1`, `scripts/cast.ps1`, `scripts/anvil.ps1`
+- Echidna (stateful fuzzing): `scripts/echidna.ps1`
 
 For TS/JS and general codebase lead generation:
 - `semgrep` via `scripts/semgrep.ps1` (kept in a venv to avoid Python dependency conflicts with Halmos)
+- Optional deep dataflow: CodeQL via `scripts/codeql.ps1` (not in baseline scans)
 
 For ZK/circuit fuzzing workstreams (when a target contains circuits):
 - `zkfuzz` via `scripts/zkfuzz.ps1` (local build)
+- Circom + SnarkJS are available for witness/proof verification (not baseline scans): `circom`, `scripts/snarkjs.ps1`
 
 More detailed tool notes: `docs/TOOLS.md`
 
