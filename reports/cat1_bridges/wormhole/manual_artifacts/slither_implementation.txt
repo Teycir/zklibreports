@@ -1,0 +1,84 @@
+﻿'solc --version' running
+'solc @openzeppelin/=C:\Users\vboxuser\Desktop\Repos\zklibreports\tools\oz\node_modules\@openzeppelin\ \\VBOXSVR\elements\Repos\zk0d\cat1_bridges\wormhole\ethereum\contracts\Implementation.sol --combined-json abi,ast,bin,bin-runtime,srcmap,srcmap-runtime,userdoc,devdoc,hashes --allow-paths .,\\VBOXSVR\elements\Repos\zk0d\cat1_bridges\wormhole\ethereum\contracts' running
+Compilation warnings/errors on \\VBOXSVR\elements\Repos\zk0d\cat1_bridges\wormhole\ethereum\contracts\Implementation.sol:
+Warning: 'transfer' is deprecated and scheduled for removal. Use 'call{value: <amount>}("")' instead.
+System.Management.Automation.RemoteException
+   --> contracts/Governance.sol:140:9:
+System.Management.Automation.RemoteException
+    |
+System.Management.Automation.RemoteException
+140 |         recipient.transfer(transfer.amount);
+System.Management.Automation.RemoteException
+    |         ^^^^^^^^^^^^^^^^^^
+System.Management.Automation.RemoteException
+System.Management.Automation.RemoteException
+System.Management.Automation.RemoteException
+System.Management.Automation.RemoteException
+System.Management.Automation.RemoteException
+Detector: arbitrary-send-eth
+Governance.submitTransferFees(bytes) (contracts/Governance.sol#117-141) sends eth to arbitrary user
+	Dangerous calls:
+	- recipient.transfer(transfer.amount) (contracts/Governance.sol#140)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#functions-that-send-ether-to-arbitrary-destinations
+System.Management.Automation.RemoteException
+Detector: controlled-delegatecall
+Governance.upgradeImplementation(address) (contracts/Governance.sol#174-185) uses delegatecall to a input-controlled function id
+	- (success,reason) = newImplementation.delegatecall(abi.encodeWithSignature(initialize())) (contracts/Governance.sol#180)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#controlled-delegatecall
+System.Management.Automation.RemoteException
+Detector: uninitialized-local
+Implementation.initialize().evmChainId (contracts/Implementation.sol#36) is a local variable never initialized
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#uninitialized-local-variables
+System.Management.Automation.RemoteException
+Detector: shadowing-local
+Implementation.initialize().evmChainId (contracts/Implementation.sol#36) shadows:
+	- Getters.evmChainId() (contracts/Getters.sol#33-35) (function)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#local-variable-shadowing
+System.Management.Automation.RemoteException
+Detector: reentrancy-events
+Reentrancy in Governance.upgradeImplementation(address) (contracts/Governance.sol#174-185):
+	External calls:
+	- (success,reason) = newImplementation.delegatecall(abi.encodeWithSignature(initialize())) (contracts/Governance.sol#180)
+	Event emitted after the call(s):
+	- ContractUpgraded(currentImplementation,newImplementation) (contracts/Governance.sol#184)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#reentrancy-vulnerabilities-4
+System.Management.Automation.RemoteException
+Detector: timestamp
+Messages.verifyVMInternal(Structs.VM,bool) (contracts/Messages.sol#40-102) uses timestamp for comparisons
+	Dangerous comparisons:
+	- vm.guardianSetIndex != getCurrentGuardianSetIndex() && guardianSet.expirationTime < block.timestamp (contracts/Messages.sol#80)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#block-timestamp
+System.Management.Automation.RemoteException
+Detector: cyclomatic-complexity
+Implementation.initialize() (contracts/Implementation.sol#33-62) has a high cyclomatic complexity (18).
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#cyclomatic-complexity
+System.Management.Automation.RemoteException
+Detector: dead-code
+Setters.setGovernanceChainId(uint16) (contracts/Setters.sol#37-39) is never used and should be removed
+Setters.setGovernanceContract(bytes32) (contracts/Setters.sol#41-43) is never used and should be removed
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#dead-code
+System.Management.Automation.RemoteException
+Detector: low-level-calls
+Low level call in Governance.upgradeImplementation(address) (contracts/Governance.sol#174-185):
+	- (success,reason) = newImplementation.delegatecall(abi.encodeWithSignature(initialize())) (contracts/Governance.sol#180)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#low-level-calls
+System.Management.Automation.RemoteException
+Detector: naming-convention
+Parameter Governance.submitContractUpgrade(bytes)._vm (contracts/Governance.sol#27) is not in mixedCase
+Parameter Governance.submitSetMessageFee(bytes)._vm (contracts/Governance.sol#54) is not in mixedCase
+Parameter Governance.submitNewGuardianSet(bytes)._vm (contracts/Governance.sol#79) is not in mixedCase
+Parameter Governance.submitTransferFees(bytes)._vm (contracts/Governance.sol#117) is not in mixedCase
+Parameter Governance.submitRecoverChainId(bytes)._vm (contracts/Governance.sol#146) is not in mixedCase
+Constant Governance.module (contracts/Governance.sol#22) is not in UPPER_CASE_WITH_UNDERSCORES
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#conformance-to-solidity-naming-conventions
+System.Management.Automation.RemoteException
+Detector: too-many-digits
+Implementation.slitherConstructorConstantVariables() (contracts/Implementation.sol#11-80) uses literals with too many digits:
+	- module = 0x00000000000000000000000000000000000000000000000000000000436f7265 (contracts/Governance.sol#22)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#too-many-digits
+System.Management.Automation.RemoteException
+Detector: unindexed-event-address
+Event Events.LogMessagePublished(address,uint32,bytes) (contracts/State.sol#14-18) has address parameters but no indexed parameters
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#unindexed-event-address-parameters
+\\VBOXSVR\elements\Repos\zk0d\cat1_bridges\wormhole\ethereum\contracts\Implementation.sol analyzed (15 contracts with 101 detectors), 18 result(s) found
+INFO:Slither:reports\cat1_bridges\wormhole\manual_artifacts\slither_implementation.json exists already, the overwrite is prevented

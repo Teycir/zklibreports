@@ -132,6 +132,17 @@ Slither (Solidity static analysis):
 - Config already exists in the repo: `\\VBOXSVR\elements\Repos\zk0d\cat1_bridges\wormhole\ethereum\slither.config.json`
 - Suggested initial run (core + bridge): run Slither from `wormhole/ethereum` and record output as a baseline triage artifact.
 
+Slither snapshot (this workspace):
+- Artifacts:
+  - `reports/cat1_bridges/wormhole/manual_artifacts/slither_messages.json`
+  - `reports/cat1_bridges/wormhole/manual_artifacts/slither_governance.json`
+  - `reports/cat1_bridges/wormhole/manual_artifacts/slither_implementation.json`
+  - `reports/cat1_bridges/wormhole/manual_artifacts/slither_bridge.json`
+- High-signal notes (still just leads until proven):
+  - `controlled-delegatecall` appears in the upgrade helpers (expected due to governance-driven upgrades; this is “high impact by design”).
+  - `reentrancy-*` findings appear around ETH flows and redemption paths; these should be validated with a concrete harness (ties to H2).
+  - `arbitrary-send-eth` appears in governance fee transfer logic; validate that only governance VAAs can trigger it.
+
 Halmos (symbolic / invariant testing):
 - Halmos is installed on this host.
 - To use it effectively, we should install Foundry (`forge`) and use the existing Foundry tests under `wormhole/ethereum/forge-test`.

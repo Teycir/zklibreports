@@ -1,0 +1,47 @@
+﻿'solc --version' running
+'solc @openzeppelin/=C:\Users\vboxuser\Desktop\Repos\zklibreports\tools\oz\node_modules\@openzeppelin\ \\VBOXSVR\elements\Repos\zk0d\cat1_bridges\wormhole\ethereum\contracts\Messages.sol --combined-json abi,ast,bin,bin-runtime,srcmap,srcmap-runtime,userdoc,devdoc,hashes --allow-paths .,\\VBOXSVR\elements\Repos\zk0d\cat1_bridges\wormhole\ethereum\contracts' running
+System.Management.Automation.RemoteException
+Detector: uninitialized-state
+State._state (contracts/State.sol#51) is never initialized. It is used in:
+	- Getters.getGuardianSet(uint32) (contracts/Getters.sol#9-11)
+	- Getters.getCurrentGuardianSetIndex() (contracts/Getters.sol#13-15)
+	- Getters.getGuardianSetExpiry() (contracts/Getters.sol#17-19)
+	- Getters.governanceActionIsConsumed(bytes32) (contracts/Getters.sol#21-23)
+	- Getters.isInitialized(address) (contracts/Getters.sol#25-27)
+	- Getters.chainId() (contracts/Getters.sol#29-31)
+	- Getters.evmChainId() (contracts/Getters.sol#33-35)
+	- Getters.governanceChainId() (contracts/Getters.sol#41-43)
+	- Getters.governanceContract() (contracts/Getters.sol#45-47)
+	- Getters.messageFee() (contracts/Getters.sol#49-51)
+	- Getters.nextSequence(address) (contracts/Getters.sol#53-55)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#uninitialized-state-variables
+System.Management.Automation.RemoteException
+Detector: timestamp
+Messages.verifyVMInternal(Structs.VM,bool) (contracts/Messages.sol#40-102) uses timestamp for comparisons
+	Dangerous comparisons:
+	- vm.guardianSetIndex != getCurrentGuardianSetIndex() && guardianSet.expirationTime < block.timestamp (contracts/Messages.sol#80)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#block-timestamp
+System.Management.Automation.RemoteException
+Detector: solc-version
+Version constraint ^0.8.0 contains known severe issues (https://solidity.readthedocs.io/en/latest/bugs.html)
+	- FullInlinerNonExpressionSplitArgumentEvaluationOrder
+	- MissingSideEffectsOnSelectorAccess
+	- AbiReencodingHeadOverflowWithStaticArrayCleanup
+	- DirtyBytesArrayToStorage
+	- DataLocationChangeInInternalOverride
+	- NestedCalldataArrayAbiReencodingSizeValidation
+	- SignedImmutables
+	- ABIDecodeTwoDimensionalArrayMemory
+	- KeccakCaching.
+It is used by:
+	- ^0.8.0 (contracts/Getters.sol#4)
+	- ^0.8.0 (contracts/Messages.sol#4)
+	- ^0.8.0 (contracts/State.sol#4)
+	- ^0.8.0 (contracts/Structs.sol#4)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#incorrect-versions-of-solidity
+System.Management.Automation.RemoteException
+Detector: unindexed-event-address
+Event Events.LogMessagePublished(address,uint32,bytes) (contracts/State.sol#14-18) has address parameters but no indexed parameters
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#unindexed-event-address-parameters
+\\VBOXSVR\elements\Repos\zk0d\cat1_bridges\wormhole\ethereum\contracts\Messages.sol analyzed (7 contracts with 101 detectors), 4 result(s) found
+INFO:Slither:reports\cat1_bridges\wormhole\manual_artifacts\slither_messages.json exists already, the overwrite is prevented

@@ -1,0 +1,211 @@
+﻿'solc --version' running
+'solc @openzeppelin/=C:\Users\vboxuser\Desktop\Repos\zklibreports\tools\oz\node_modules\@openzeppelin\ \\VBOXSVR\elements\Repos\zk0d\cat1_bridges\wormhole\ethereum\contracts\bridge\Bridge.sol --combined-json abi,ast,bin,bin-runtime,srcmap,srcmap-runtime,userdoc,devdoc,hashes --allow-paths .,\\VBOXSVR\elements\Repos\zk0d\cat1_bridges\wormhole\ethereum\contracts\bridge' running
+Compilation warnings/errors on \\VBOXSVR\elements\Repos\zk0d\cat1_bridges\wormhole\ethereum\contracts\bridge\Bridge.sol:
+Warning: 'transfer' is deprecated and scheduled for removal. Use 'call{value: <amount>}("")' instead.
+System.Management.Automation.RemoteException
+   --> contracts/bridge/Bridge.sol:143:13:
+System.Management.Automation.RemoteException
+    |
+System.Management.Automation.RemoteException
+143 |             payable(msg.sender).transfer(dust);
+System.Management.Automation.RemoteException
+    |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+System.Management.Automation.RemoteException
+System.Management.Automation.RemoteException
+System.Management.Automation.RemoteException
+Warning: 'transfer' is deprecated and scheduled for removal. Use 'call{value: <amount>}("")' instead.
+System.Management.Automation.RemoteException
+   --> contracts/bridge/Bridge.sol:547:17:
+System.Management.Automation.RemoteException
+    |
+System.Management.Automation.RemoteException
+547 |                 payable(msg.sender).transfer(nativeFee);
+System.Management.Automation.RemoteException
+    |                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+System.Management.Automation.RemoteException
+System.Management.Automation.RemoteException
+System.Management.Automation.RemoteException
+Warning: 'transfer' is deprecated and scheduled for removal. Use 'call{value: <amount>}("")' instead.
+System.Management.Automation.RemoteException
+   --> contracts/bridge/Bridge.sol:567:13:
+System.Management.Automation.RemoteException
+    |
+System.Management.Automation.RemoteException
+567 |             payable(transferRecipient).transfer(transferAmount);
+System.Management.Automation.RemoteException
+    |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+System.Management.Automation.RemoteException
+System.Management.Automation.RemoteException
+System.Management.Automation.RemoteException
+Warning: Contract code size is 35003 bytes and exceeds 24576 bytes (a limit introduced in Spurious Dragon). This contract may not be deployable on Mainnet. Consider enabling the optimizer (with a low "runs" value!), turning off revert strings, or using libraries.
+System.Management.Automation.RemoteException
+  --> contracts/bridge/Bridge.sol:20:1:
+System.Management.Automation.RemoteException
+   |
+System.Management.Automation.RemoteException
+20 | contract Bridge is BridgeGovernance, ReentrancyGuard {
+System.Management.Automation.RemoteException
+   | ^ (Relevant source part starts here and spans across multiple lines).
+System.Management.Automation.RemoteException
+System.Management.Automation.RemoteException
+System.Management.Automation.RemoteException
+System.Management.Automation.RemoteException
+System.Management.Automation.RemoteException
+Detector: controlled-delegatecall
+BridgeGovernance.upgradeImplementation(address) (contracts/bridge/BridgeGovernance.sol#102-113) uses delegatecall to a input-controlled function id
+	- (success,reason) = newImplementation.delegatecall(abi.encodeWithSignature(initialize())) (contracts/bridge/BridgeGovernance.sol#108)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#controlled-delegatecall
+System.Management.Automation.RemoteException
+Detector: reentrancy-eth
+Reentrancy in Bridge._wrapAndTransferETH(uint256) (contracts/bridge/Bridge.sol#128-161):
+	External calls:
+	- WETH().deposit{value: amount - dust}() (contracts/bridge/Bridge.sol#147-149)
+	External calls sending eth:
+	- address(msg.sender).transfer(dust) (contracts/bridge/Bridge.sol#143)
+	- WETH().deposit{value: amount - dust}() (contracts/bridge/Bridge.sol#147-149)
+	State variables written after the call(s):
+	- bridgeOut(address(WETH()),normalizedAmount) (contracts/bridge/Bridge.sol#152)
+		- _state.outstandingBridged[token] = outstanding (contracts/bridge/BridgeSetters.sol#56)
+	BridgeState._state (contracts/bridge/BridgeState.sol#56) can be used in cross function reentrancies:
+	- BridgeGetters.WETH() (contracts/bridge/BridgeGetters.sol#62-64)
+	- BridgeGetters.bridgeContracts(uint16) (contracts/bridge/BridgeGetters.sol#54-56)
+	- BridgeGetters.chainId() (contracts/bridge/BridgeGetters.sol#30-32)
+	- BridgeGetters.evmChainId() (contracts/bridge/BridgeGetters.sol#34-36)
+	- BridgeGetters.finality() (contracts/bridge/BridgeGetters.sol#74-76)
+	- BridgeGetters.governanceActionIsConsumed(bytes32) (contracts/bridge/BridgeGetters.sol#14-16)
+	- BridgeGetters.governanceChainId() (contracts/bridge/BridgeGetters.sol#42-44)
+	- BridgeGetters.governanceContract() (contracts/bridge/BridgeGetters.sol#46-48)
+	- BridgeGetters.isInitialized(address) (contracts/bridge/BridgeGetters.sol#18-20)
+	- BridgeGetters.isTransferCompleted(bytes32) (contracts/bridge/BridgeGetters.sol#22-24)
+	- BridgeGetters.isWrappedAsset(address) (contracts/bridge/BridgeGetters.sol#70-72)
+	- BridgeGetters.outstandingBridged(address) (contracts/bridge/BridgeGetters.sol#66-68)
+	- BridgeSetters.setBridgeImplementation(uint16,bytes32) (contracts/bridge/BridgeSetters.sol#33-35)
+	- BridgeSetters.setChainId(uint16) (contracts/bridge/BridgeSetters.sol#21-23)
+	- BridgeSetters.setEvmChainId(uint256) (contracts/bridge/BridgeSetters.sol#63-66)
+	- BridgeSetters.setGovernanceActionConsumed(bytes32) (contracts/bridge/BridgeSetters.sol#13-15)
+	- BridgeSetters.setOutstandingBridged(address,uint256) (contracts/bridge/BridgeSetters.sol#55-57)
+	- BridgeSetters.setTransferCompleted(bytes32) (contracts/bridge/BridgeSetters.sol#17-19)
+	- BridgeSetters.setWrappedAsset(uint16,bytes32,address) (contracts/bridge/BridgeSetters.sol#50-53)
+	- BridgeGetters.tokenImplementation() (contracts/bridge/BridgeGetters.sol#58-60)
+	- BridgeGetters.wormhole() (contracts/bridge/BridgeGetters.sol#26-28)
+	- BridgeGetters.wrappedAsset(uint16,bytes32) (contracts/bridge/BridgeGetters.sol#50-52)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#reentrancy-vulnerabilities-1
+System.Management.Automation.RemoteException
+Detector: reentrancy-no-eth
+Reentrancy in Bridge._transferTokens(address,uint256,uint256) (contracts/bridge/Bridge.sol#231-286):
+	External calls:
+	- SafeERC20.safeTransferFrom(IERC20(token),msg.sender,address(this),amount) (contracts/bridge/Bridge.sol#256)
+	- SafeERC20.safeTransferFrom(IERC20(token),msg.sender,address(this),amount) (contracts/bridge/Bridge.sol#265)
+	- TokenImplementation(token).burn(address(this),amount) (contracts/bridge/Bridge.sol#267)
+	State variables written after the call(s):
+	- bridgeOut(token,normalizedAmount) (contracts/bridge/Bridge.sol#276)
+		- _state.outstandingBridged[token] = outstanding (contracts/bridge/BridgeSetters.sol#56)
+	BridgeState._state (contracts/bridge/BridgeState.sol#56) can be used in cross function reentrancies:
+	- BridgeGetters.WETH() (contracts/bridge/BridgeGetters.sol#62-64)
+	- BridgeGetters.bridgeContracts(uint16) (contracts/bridge/BridgeGetters.sol#54-56)
+	- BridgeGetters.chainId() (contracts/bridge/BridgeGetters.sol#30-32)
+	- BridgeGetters.evmChainId() (contracts/bridge/BridgeGetters.sol#34-36)
+	- BridgeGetters.finality() (contracts/bridge/BridgeGetters.sol#74-76)
+	- BridgeGetters.governanceActionIsConsumed(bytes32) (contracts/bridge/BridgeGetters.sol#14-16)
+	- BridgeGetters.governanceChainId() (contracts/bridge/BridgeGetters.sol#42-44)
+	- BridgeGetters.governanceContract() (contracts/bridge/BridgeGetters.sol#46-48)
+	- BridgeGetters.isInitialized(address) (contracts/bridge/BridgeGetters.sol#18-20)
+	- BridgeGetters.isTransferCompleted(bytes32) (contracts/bridge/BridgeGetters.sol#22-24)
+	- BridgeGetters.isWrappedAsset(address) (contracts/bridge/BridgeGetters.sol#70-72)
+	- BridgeGetters.outstandingBridged(address) (contracts/bridge/BridgeGetters.sol#66-68)
+	- BridgeSetters.setBridgeImplementation(uint16,bytes32) (contracts/bridge/BridgeSetters.sol#33-35)
+	- BridgeSetters.setChainId(uint16) (contracts/bridge/BridgeSetters.sol#21-23)
+	- BridgeSetters.setEvmChainId(uint256) (contracts/bridge/BridgeSetters.sol#63-66)
+	- BridgeSetters.setGovernanceActionConsumed(bytes32) (contracts/bridge/BridgeSetters.sol#13-15)
+	- BridgeSetters.setOutstandingBridged(address,uint256) (contracts/bridge/BridgeSetters.sol#55-57)
+	- BridgeSetters.setTransferCompleted(bytes32) (contracts/bridge/BridgeSetters.sol#17-19)
+	- BridgeSetters.setWrappedAsset(uint16,bytes32,address) (contracts/bridge/BridgeSetters.sol#50-53)
+	- BridgeGetters.tokenImplementation() (contracts/bridge/BridgeGetters.sol#58-60)
+	- BridgeGetters.wormhole() (contracts/bridge/BridgeGetters.sol#26-28)
+	- BridgeGetters.wrappedAsset(uint16,bytes32) (contracts/bridge/BridgeGetters.sol#50-52)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#reentrancy-vulnerabilities-2
+System.Management.Automation.RemoteException
+Detector: missing-zero-check
+Bridge.attestToken(address,uint32).tokenAddress (contracts/bridge/Bridge.sol#38) lacks a zero-check on :
+		- (None,queriedDecimals) = tokenAddress.staticcall(abi.encodeWithSignature(decimals())) (contracts/bridge/Bridge.sol#40)
+		- (None,queriedSymbol) = tokenAddress.staticcall(abi.encodeWithSignature(symbol())) (contracts/bridge/Bridge.sol#41)
+		- (None,queriedName) = tokenAddress.staticcall(abi.encodeWithSignature(name())) (contracts/bridge/Bridge.sol#42)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#missing-zero-address-validation
+System.Management.Automation.RemoteException
+Detector: reentrancy-events
+Reentrancy in BridgeGovernance.upgradeImplementation(address) (contracts/bridge/BridgeGovernance.sol#102-113):
+	External calls:
+	- (success,reason) = newImplementation.delegatecall(abi.encodeWithSignature(initialize())) (contracts/bridge/BridgeGovernance.sol#108)
+	Event emitted after the call(s):
+	- ContractUpgraded(currentImplementation,newImplementation) (contracts/bridge/BridgeGovernance.sol#112)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#reentrancy-vulnerabilities-4
+System.Management.Automation.RemoteException
+Detector: timestamp
+TokenImplementation.permit(address,address,uint256,uint256,uint8,bytes32,bytes32) (contracts/bridge/token/TokenImplementation.sol#274-310) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(block.timestamp <= deadline_,ERC20Permit: expired deadline) (contracts/bridge/token/TokenImplementation.sol#288)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#block-timestamp
+System.Management.Automation.RemoteException
+Detector: assembly
+Bridge.attestToken(address,uint32) (contracts/bridge/Bridge.sol#38-71) uses assembly
+	- INLINE ASM (contracts/bridge/Bridge.sol#51-55)
+Bridge._createWrapped(BridgeStructs.AssetMeta,uint64) (contracts/bridge/Bridge.sol#396-431) uses assembly
+	- INLINE ASM (contracts/bridge/Bridge.sol#422-428)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#assembly-usage
+System.Management.Automation.RemoteException
+Detector: boolean-equal
+Bridge._completeTransfer(bytes,bool) (contracts/bridge/Bridge.sol#495-578) compares to a boolean constant:
+	-require(bool,string)(unwrapWETH == false || address(transferToken) == address(WETH()),invalid token, can only unwrap WETH) (contracts/bridge/Bridge.sol#530)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#boolean-equality
+System.Management.Automation.RemoteException
+Detector: dead-code
+BridgeSetters.setFinality(uint8) (contracts/bridge/BridgeSetters.sol#59-61) is never used and should be removed
+BridgeSetters.setGovernanceChainId(uint16) (contracts/bridge/BridgeSetters.sol#25-27) is never used and should be removed
+BridgeSetters.setGovernanceContract(bytes32) (contracts/bridge/BridgeSetters.sol#29-31) is never used and should be removed
+BridgeSetters.setInitialized(address) (contracts/bridge/BridgeSetters.sol#9-11) is never used and should be removed
+BridgeSetters.setTokenImplementation(address) (contracts/bridge/BridgeSetters.sol#37-40) is never used and should be removed
+BridgeSetters.setWETH(address) (contracts/bridge/BridgeSetters.sol#42-44) is never used and should be removed
+BridgeSetters.setWormhole(address) (contracts/bridge/BridgeSetters.sol#46-48) is never used and should be removed
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#dead-code
+System.Management.Automation.RemoteException
+Detector: low-level-calls
+Low level call in Bridge.attestToken(address,uint32) (contracts/bridge/Bridge.sol#38-71):
+	- (None,queriedDecimals) = tokenAddress.staticcall(abi.encodeWithSignature(decimals())) (contracts/bridge/Bridge.sol#40)
+	- (None,queriedSymbol) = tokenAddress.staticcall(abi.encodeWithSignature(symbol())) (contracts/bridge/Bridge.sol#41)
+	- (None,queriedName) = tokenAddress.staticcall(abi.encodeWithSignature(name())) (contracts/bridge/Bridge.sol#42)
+Low level call in Bridge._transferTokens(address,uint256,uint256) (contracts/bridge/Bridge.sol#231-286):
+	- (None,queriedDecimals) = token.staticcall(abi.encodeWithSignature(decimals())) (contracts/bridge/Bridge.sol#244)
+	- (None,queriedBalanceBefore) = token.staticcall(abi.encodeWithSelector(IERC20.balanceOf.selector,address(this))) (contracts/bridge/Bridge.sol#252)
+	- (None,queriedBalanceAfter) = token.staticcall(abi.encodeWithSelector(IERC20.balanceOf.selector,address(this))) (contracts/bridge/Bridge.sol#259)
+Low level call in Bridge._completeTransfer(bytes,bool) (contracts/bridge/Bridge.sol#495-578):
+	- (None,queriedDecimals) = address(transferToken).staticcall(abi.encodeWithSignature(decimals())) (contracts/bridge/Bridge.sol#533)
+Low level call in BridgeGovernance.upgradeImplementation(address) (contracts/bridge/BridgeGovernance.sol#102-113):
+	- (success,reason) = newImplementation.delegatecall(abi.encodeWithSignature(initialize())) (contracts/bridge/BridgeGovernance.sol#108)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#low-level-calls
+System.Management.Automation.RemoteException
+Detector: naming-convention
+Function Bridge._parseTransferCommon(bytes) (contracts/bridge/Bridge.sol#742-760) is not in mixedCase
+Function BridgeGetters.WETH() (contracts/bridge/BridgeGetters.sol#62-64) is not in mixedCase
+Constant BridgeGovernance.module (contracts/bridge/BridgeGovernance.sol#25) is not in UPPER_CASE_WITH_UNDERSCORES
+Function TokenImplementation.DOMAIN_SEPARATOR() (contracts/bridge/token/TokenImplementation.sol#316-318) is not in mixedCase
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#conformance-to-solidity-naming-conventions
+System.Management.Automation.RemoteException
+Detector: reentrancy-unlimited-gas
+Reentrancy in Bridge._wrapAndTransferETH(uint256) (contracts/bridge/Bridge.sol#128-161):
+	External calls:
+	- address(msg.sender).transfer(dust) (contracts/bridge/Bridge.sol#143)
+	External calls sending eth:
+	- address(msg.sender).transfer(dust) (contracts/bridge/Bridge.sol#143)
+	- WETH().deposit{value: amount - dust}() (contracts/bridge/Bridge.sol#147-149)
+	State variables written after the call(s):
+	- bridgeOut(address(WETH()),normalizedAmount) (contracts/bridge/Bridge.sol#152)
+		- _state.outstandingBridged[token] = outstanding (contracts/bridge/BridgeSetters.sol#56)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#reentrancy-vulnerabilities-5
+System.Management.Automation.RemoteException
+Detector: too-many-digits
+Bridge._createWrapped(BridgeStructs.AssetMeta,uint64) (contracts/bridge/Bridge.sol#396-431) uses literals with too many digits:
+	- bytecode = abi.encodePacked(type()(BridgeToken).creationCode,constructorArgs) (contracts/bridge/Bridge.sol#418)
+Bridge.slitherConstructorConstantVariables() (contracts/bridge/Bridge.sol#20-776) uses literals with too many digits:
+	- module = 0x000000000000000000000000000000000000000000546f6b656e427269646765 (contracts/bridge/BridgeGovernance.sol#25)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#too-many-digits
+\\VBOXSVR\elements\Repos\zk0d\cat1_bridges\wormhole\ethereum\contracts\bridge\Bridge.sol analyzed (27 contracts with 101 detectors), 27 result(s) found
