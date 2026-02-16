@@ -1,5 +1,7 @@
 # optimism
 
+> Exhaustion status: closed at commit `6c24c04393a5b22ddde1c03e99958e1ad5b4f8d1`. See `reports/cat2_rollups/optimism/manual_audit.md` and `reports/cat2_rollups/optimism/EXHAUSTION_ADDENDUM.md`.
+
 - Source: `\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\optimism`
 - HEAD: `6c24c04393a5b22ddde1c03e99958e1ad5b4f8d1`
 - origin: `https://github.com/ethereum-optimism/optimism`
