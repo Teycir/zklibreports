@@ -31,6 +31,7 @@ For Solidity/EVM deep analysis we also use:
 - `aderyn` (additional Solidity analyzer; treat output as leads until you have a repro)
 - Foundry (harness + fuzzing): `scripts/forge.ps1`, `scripts/cast.ps1`, `scripts/anvil.ps1`
 - Echidna (stateful fuzzing): `scripts/echidna.ps1`
+- Medusa (stateful fuzzing): `scripts/medusa.ps1`
 
 For TS/JS and general codebase lead generation:
 - `semgrep` via `scripts/semgrep.ps1` (kept in a venv to avoid Python dependency conflicts with Halmos)

@@ -85,6 +85,11 @@ bolero = "0.11"
    - Host note: installed at `C:\\echidna\\echidna.exe` (not on `PATH` by default).
    - Run (example): `powershell -NoProfile -File scripts/echidna.ps1 --version`
 
+- Medusa (stateful fuzzing / invariants):
+  - Proof: a minimized transaction sequence/corpus that violates a property, plus a manual confirmation and root cause in code.
+  - Host note: installed at `C:\\Users\\vboxuser\\go\\bin\\medusa.exe` (Go toolchain install).
+  - Run (example): `powershell -NoProfile -File scripts/medusa.ps1 --version`
+
 ## ZK / Circom
 
 - `circom`: circuit compiler.
