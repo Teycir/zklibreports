@@ -13876,6 +13876,7 @@
                 "GO-2026-4337"
               ],
               "aliases": [
+                "BIT-golang-2025-68121",
                 "CVE-2025-68121",
                 "GO-2026-4337"
               ],
@@ -23320,6 +23321,7 @@
                 }
               ],
               "aliases": [
+                "BIT-golang-2025-68121",
                 "CVE-2025-68121"
               ],
               "credits": [
@@ -23336,7 +23338,7 @@
               },
               "details": "During session resumption in crypto/tls, if the underlying Config has its ClientCAs or RootCAs fields mutated between the initial handshake and the resumed handshake, the resumed handshake may succeed when it should have failed. This may happen when a user calls Config.Clone and mutates the returned Config, or uses Config.GetConfigForClient. This can cause a client to resume a session with a server that it would not have resumed with during the initial handshake, or cause a server to resume a session with a client that it would not have resumed with during the initial handshake.",
               "id": "GO-2026-4337",
-              "modified": "2026-02-05T18:11:18.077689Z",
+              "modified": "2026-02-16T10:43:46.773382Z",
               "published": "2026-02-05T17:23:09Z",
               "references": [
                 {
@@ -23351,6 +23353,10 @@
                   "type": "REPORT",
                   "url": "https://go.dev/issue/77217"
                 }
+              ],
+              "related": [
+                "CGA-j2p9-cw73-9qp7",
+                "RHSA-2026:2706"
               ],
               "schema_version": "1.7.3",
               "summary": "Unexpected session resumption in crypto/tls"
@@ -23513,7 +23519,7 @@
               },
               "details": "The net/url package does not set a limit on the number of query parameters in a query.\n\nWhile the maximum size of query parameters in URLs is generally limited by the maximum request header size, the net/http.Request.ParseForm method can parse large URL-encoded forms. Parsing a large form containing many unique query parameters can cause excessive memory consumption.",
               "id": "GO-2026-4341",
-              "modified": "2026-02-04T03:16:50.659443Z",
+              "modified": "2026-02-16T10:43:46.642372Z",
               "published": "2026-01-28T19:08:18Z",
               "references": [
                 {
@@ -23530,7 +23536,8 @@
                 }
               ],
               "related": [
-                "CGA-j4jw-ch2g-7f2h"
+                "CGA-j4jw-ch2g-7f2h",
+                "RHSA-2026:2706"
               ],
               "schema_version": "1.7.3",
               "summary": "Memory exhaustion in query parameter parsing in net/url"
@@ -23593,7 +23600,7 @@
               },
               "details": "archive/zip uses a super-linear file name indexing algorithm that is invoked the first time a file in an archive is opened. This can lead to a denial of service when consuming a maliciously constructed ZIP archive.",
               "id": "GO-2026-4342",
-              "modified": "2026-02-04T02:59:19.152891Z",
+              "modified": "2026-02-16T10:43:46.936114Z",
               "published": "2026-01-28T19:08:28Z",
               "references": [
                 {
@@ -23610,7 +23617,8 @@
                 }
               ],
               "related": [
-                "CGA-mmfw-mpcj-7qfm"
+                "CGA-mmfw-mpcj-7qfm",
+                "RHSA-2026:2706"
               ],
               "schema_version": "1.7.3",
               "summary": "Excessive CPU consumption when building archive index in archive/zip"

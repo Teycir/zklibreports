@@ -1,7 +1,7 @@
 ﻿{
     "name":  "synapse-contracts",
     "source_path":  "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat1_bridges\\synapse-contracts",
-    "scanned_at_utc":  "2026-02-16 00:35:33 UTC",
+    "scanned_at_utc":  "2026-02-16 21:17:09 UTC",
     "git":  {
                 "head":  "60f1c25cf2f115911e11255f515e1450fe96100c",
                 "branch":  "master",
@@ -28,20 +28,20 @@
                                                   "--log-level",
                                                   "error",
                                                   "--timeout",
-                                                  "1800"
+                                                  "600"
                                               ],
-                                     "arg_string":  "detect --source \\\\VBOXSVR\\elements\\Repos\\zk0d\\cat1_bridges\\synapse-contracts --report-format json --report-path C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\synapse-contracts\\artifacts\\gitleaks.json --redact --no-banner --log-level error --timeout 1800",
+                                     "arg_string":  "detect --source \\\\VBOXSVR\\elements\\Repos\\zk0d\\cat1_bridges\\synapse-contracts --report-format json --report-path C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\synapse-contracts\\artifacts\\gitleaks.json --redact --no-banner --log-level error --timeout 600",
                                      "runner":  "cmd.exe",
                                      "runner_args":  [
                                                          "/d",
                                                          "/s",
                                                          "/c",
-                                                         "gitleaks detect --source \\\\VBOXSVR\\elements\\Repos\\zk0d\\cat1_bridges\\synapse-contracts --report-format json --report-path C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\synapse-contracts\\artifacts\\gitleaks.json --redact --no-banner --log-level error --timeout 1800 1\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\synapse-contracts\\artifacts\\gitleaks.stdout.log 2\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\synapse-contracts\\artifacts\\gitleaks.stderr.log"
+                                                         "gitleaks detect --source \\\\VBOXSVR\\elements\\Repos\\zk0d\\cat1_bridges\\synapse-contracts --report-format json --report-path C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\synapse-contracts\\artifacts\\gitleaks.json --redact --no-banner --log-level error --timeout 600 1\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\synapse-contracts\\artifacts\\gitleaks.stdout.log 2\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\synapse-contracts\\artifacts\\gitleaks.stderr.log"
                                                      ],
                                      "cwd":  "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat1_bridges\\synapse-contracts",
-                                     "start_utc":  "2026-02-16 00:35:42 UTC",
-                                     "end_utc":  "2026-02-16 00:35:56 UTC",
-                                     "duration_sec":  15,
+                                     "start_utc":  "2026-02-16 21:17:17 UTC",
+                                     "end_utc":  "2026-02-16 21:17:38 UTC",
+                                     "duration_sec":  20,
                                      "timed_out":  false,
                                      "exit_code":  1,
                                      "stdout":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\synapse-contracts\\artifacts\\gitleaks.stdout.log",
@@ -85,9 +85,9 @@
                                                     "osv-scanner scan source -r \\\\VBOXSVR\\elements\\Repos\\zk0d\\cat1_bridges\\synapse-contracts -f json --output C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\synapse-contracts\\artifacts\\osv.json --allow-no-lockfiles --verbosity warn --experimental-exclude g:**/node_modules --experimental-exclude g:**/target --experimental-exclude g:**/.git --experimental-exclude g:**/dist --experimental-exclude g:**/build --experimental-exclude g:**/out 1\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\synapse-contracts\\artifacts\\osv.stdout.log 2\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\synapse-contracts\\artifacts\\osv.stderr.log"
                                                 ],
                                 "cwd":  "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat1_bridges\\synapse-contracts",
-                                "start_utc":  "2026-02-16 00:35:56 UTC",
-                                "end_utc":  "2026-02-16 00:36:03 UTC",
-                                "duration_sec":  8,
+                                "start_utc":  "2026-02-16 21:17:38 UTC",
+                                "end_utc":  "2026-02-16 21:17:48 UTC",
+                                "duration_sec":  10,
                                 "timed_out":  false,
                                 "exit_code":  1,
                                 "stdout":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\synapse-contracts\\artifacts\\osv.stdout.log",
@@ -112,8 +112,8 @@
                                                               "npm.cmd audit --package-lock-only --json 1\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\synapse-contracts\\artifacts\\npm-audit_package-lock.json.json 2\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\synapse-contracts\\artifacts\\npm-audit_package-lock.json.stderr.log"
                                                           ],
                                           "cwd":  "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat1_bridges\\synapse-contracts",
-                                          "start_utc":  "2026-02-16 00:36:04 UTC",
-                                          "end_utc":  "2026-02-16 00:36:05 UTC",
+                                          "start_utc":  "2026-02-16 21:17:49 UTC",
+                                          "end_utc":  "2026-02-16 21:17:50 UTC",
                                           "duration_sec":  1,
                                           "timed_out":  false,
                                           "exit_code":  1,

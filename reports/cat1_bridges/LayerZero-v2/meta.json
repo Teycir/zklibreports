@@ -1,7 +1,7 @@
 ﻿{
     "name":  "LayerZero-v2",
     "source_path":  "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat1_bridges\\LayerZero-v2",
-    "scanned_at_utc":  "2026-02-16 00:29:15 UTC",
+    "scanned_at_utc":  "2026-02-16 21:12:26 UTC",
     "git":  {
                 "head":  "ab9b083410b9359285a5756807e1b6145d4711a7",
                 "branch":  "main",
@@ -28,20 +28,20 @@
                                                   "--log-level",
                                                   "error",
                                                   "--timeout",
-                                                  "1800"
+                                                  "600"
                                               ],
-                                     "arg_string":  "detect --source \\\\VBOXSVR\\elements\\Repos\\zk0d\\cat1_bridges\\LayerZero-v2 --report-format json --report-path C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\LayerZero-v2\\artifacts\\gitleaks.json --redact --no-banner --log-level error --timeout 1800",
+                                     "arg_string":  "detect --source \\\\VBOXSVR\\elements\\Repos\\zk0d\\cat1_bridges\\LayerZero-v2 --report-format json --report-path C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\LayerZero-v2\\artifacts\\gitleaks.json --redact --no-banner --log-level error --timeout 600",
                                      "runner":  "cmd.exe",
                                      "runner_args":  [
                                                          "/d",
                                                          "/s",
                                                          "/c",
-                                                         "gitleaks detect --source \\\\VBOXSVR\\elements\\Repos\\zk0d\\cat1_bridges\\LayerZero-v2 --report-format json --report-path C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\LayerZero-v2\\artifacts\\gitleaks.json --redact --no-banner --log-level error --timeout 1800 1\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\LayerZero-v2\\artifacts\\gitleaks.stdout.log 2\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\LayerZero-v2\\artifacts\\gitleaks.stderr.log"
+                                                         "gitleaks detect --source \\\\VBOXSVR\\elements\\Repos\\zk0d\\cat1_bridges\\LayerZero-v2 --report-format json --report-path C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\LayerZero-v2\\artifacts\\gitleaks.json --redact --no-banner --log-level error --timeout 600 1\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\LayerZero-v2\\artifacts\\gitleaks.stdout.log 2\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\LayerZero-v2\\artifacts\\gitleaks.stderr.log"
                                                      ],
                                      "cwd":  "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat1_bridges\\LayerZero-v2",
-                                     "start_utc":  "2026-02-16 00:29:17 UTC",
-                                     "end_utc":  "2026-02-16 00:29:39 UTC",
-                                     "duration_sec":  21,
+                                     "start_utc":  "2026-02-16 21:12:28 UTC",
+                                     "end_utc":  "2026-02-16 21:12:50 UTC",
+                                     "duration_sec":  22,
                                      "timed_out":  false,
                                      "exit_code":  1,
                                      "stdout":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\LayerZero-v2\\artifacts\\gitleaks.stdout.log",
@@ -85,9 +85,9 @@
                                                     "osv-scanner scan source -r \\\\VBOXSVR\\elements\\Repos\\zk0d\\cat1_bridges\\LayerZero-v2 -f json --output C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\LayerZero-v2\\artifacts\\osv.json --allow-no-lockfiles --verbosity warn --experimental-exclude g:**/node_modules --experimental-exclude g:**/target --experimental-exclude g:**/.git --experimental-exclude g:**/dist --experimental-exclude g:**/build --experimental-exclude g:**/out 1\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\LayerZero-v2\\artifacts\\osv.stdout.log 2\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\LayerZero-v2\\artifacts\\osv.stderr.log"
                                                 ],
                                 "cwd":  "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat1_bridges\\LayerZero-v2",
-                                "start_utc":  "2026-02-16 00:29:39 UTC",
-                                "end_utc":  "2026-02-16 00:29:50 UTC",
-                                "duration_sec":  13,
+                                "start_utc":  "2026-02-16 21:12:50 UTC",
+                                "end_utc":  "2026-02-16 21:13:06 UTC",
+                                "duration_sec":  16,
                                 "timed_out":  false,
                                 "exit_code":  1,
                                 "stdout":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\LayerZero-v2\\artifacts\\osv.stdout.log",
@@ -113,8 +113,8 @@
                                                                 "cargo audit --json --file \\\\VBOXSVR\\elements\\Repos\\zk0d\\cat1_bridges\\LayerZero-v2\\packages\\layerzero-v2\\solana\\anchor-latest\\Cargo.lock 1\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\LayerZero-v2\\artifacts\\cargo-audit_packages_layerzero-v2_solana_anchor-latest_Cargo.lock.json 2\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\LayerZero-v2\\artifacts\\cargo-audit_packages_layerzero-v2_solana_anchor-latest_Cargo.lock.stderr.log"
                                                             ],
                                             "cwd":  "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat1_bridges\\LayerZero-v2",
-                                            "start_utc":  "2026-02-16 00:29:50 UTC",
-                                            "end_utc":  "2026-02-16 00:29:54 UTC",
+                                            "start_utc":  "2026-02-16 21:13:06 UTC",
+                                            "end_utc":  "2026-02-16 21:13:11 UTC",
                                             "duration_sec":  5,
                                             "timed_out":  false,
                                             "exit_code":  0,
@@ -140,9 +140,9 @@
                                                                 "cargo audit --json --file \\\\VBOXSVR\\elements\\Repos\\zk0d\\cat1_bridges\\LayerZero-v2\\packages\\layerzero-v2\\solana\\programs\\Cargo.lock 1\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\LayerZero-v2\\artifacts\\cargo-audit_packages_layerzero-v2_solana_programs_Cargo.lock.json 2\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\LayerZero-v2\\artifacts\\cargo-audit_packages_layerzero-v2_solana_programs_Cargo.lock.stderr.log"
                                                             ],
                                             "cwd":  "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat1_bridges\\LayerZero-v2",
-                                            "start_utc":  "2026-02-16 00:29:54 UTC",
-                                            "end_utc":  "2026-02-16 00:29:58 UTC",
-                                            "duration_sec":  6,
+                                            "start_utc":  "2026-02-16 21:13:11 UTC",
+                                            "end_utc":  "2026-02-16 21:13:15 UTC",
+                                            "duration_sec":  4,
                                             "timed_out":  false,
                                             "exit_code":  1,
                                             "stdout":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\LayerZero-v2\\artifacts\\cargo-audit_packages_layerzero-v2_solana_programs_Cargo.lock.json",

@@ -1,0 +1,11 @@
+﻿Target: hop
+Source: \\VBOXSVR\elements\Repos\zk0d\cat1_bridges\hop
+
+Blocker checks:
+- Solidity files (*.sol): 0
+- Foundry config files (foundry.toml): 0
+- File-type profile: go=0 ts=1252 js=19
+
+Interpretation:
+- Specialist EVM fuzzing workflow (Foundry/Medusa/Halmos/Echidna) is not applicable on this snapshot because no in-repo Solidity target/harness surface exists.
+- Move to next target and record blocker.

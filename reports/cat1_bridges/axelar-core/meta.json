@@ -1,7 +1,7 @@
 ﻿{
     "name":  "axelar-core",
     "source_path":  "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat1_bridges\\axelar-core",
-    "scanned_at_utc":  "2026-02-16 00:13:26 UTC",
+    "scanned_at_utc":  "2026-02-16 20:53:46 UTC",
     "git":  {
                 "head":  "f303a5aa961771b475b63bce433ed3b0e6cf3b1a",
                 "branch":  "main",
@@ -28,20 +28,20 @@
                                                   "--log-level",
                                                   "error",
                                                   "--timeout",
-                                                  "1800"
+                                                  "600"
                                               ],
-                                     "arg_string":  "detect --source \\\\VBOXSVR\\elements\\Repos\\zk0d\\cat1_bridges\\axelar-core --report-format json --report-path C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\axelar-core\\artifacts\\gitleaks.json --redact --no-banner --log-level error --timeout 1800",
+                                     "arg_string":  "detect --source \\\\VBOXSVR\\elements\\Repos\\zk0d\\cat1_bridges\\axelar-core --report-format json --report-path C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\axelar-core\\artifacts\\gitleaks.json --redact --no-banner --log-level error --timeout 600",
                                      "runner":  "cmd.exe",
                                      "runner_args":  [
                                                          "/d",
                                                          "/s",
                                                          "/c",
-                                                         "gitleaks detect --source \\\\VBOXSVR\\elements\\Repos\\zk0d\\cat1_bridges\\axelar-core --report-format json --report-path C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\axelar-core\\artifacts\\gitleaks.json --redact --no-banner --log-level error --timeout 1800 1\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\axelar-core\\artifacts\\gitleaks.stdout.log 2\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\axelar-core\\artifacts\\gitleaks.stderr.log"
+                                                         "gitleaks detect --source \\\\VBOXSVR\\elements\\Repos\\zk0d\\cat1_bridges\\axelar-core --report-format json --report-path C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\axelar-core\\artifacts\\gitleaks.json --redact --no-banner --log-level error --timeout 600 1\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\axelar-core\\artifacts\\gitleaks.stdout.log 2\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\axelar-core\\artifacts\\gitleaks.stderr.log"
                                                      ],
                                      "cwd":  "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat1_bridges\\axelar-core",
-                                     "start_utc":  "2026-02-16 00:13:27 UTC",
-                                     "end_utc":  "2026-02-16 00:15:15 UTC",
-                                     "duration_sec":  108,
+                                     "start_utc":  "2026-02-16 20:53:50 UTC",
+                                     "end_utc":  "2026-02-16 20:56:08 UTC",
+                                     "duration_sec":  138,
                                      "timed_out":  false,
                                      "exit_code":  1,
                                      "stdout":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\axelar-core\\artifacts\\gitleaks.stdout.log",
@@ -85,9 +85,9 @@
                                                     "osv-scanner scan source -r \\\\VBOXSVR\\elements\\Repos\\zk0d\\cat1_bridges\\axelar-core -f json --output C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\axelar-core\\artifacts\\osv.json --allow-no-lockfiles --verbosity warn --experimental-exclude g:**/node_modules --experimental-exclude g:**/target --experimental-exclude g:**/.git --experimental-exclude g:**/dist --experimental-exclude g:**/build --experimental-exclude g:**/out 1\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\axelar-core\\artifacts\\osv.stdout.log 2\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\axelar-core\\artifacts\\osv.stderr.log"
                                                 ],
                                 "cwd":  "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat1_bridges\\axelar-core",
-                                "start_utc":  "2026-02-16 00:15:15 UTC",
-                                "end_utc":  "2026-02-16 00:15:36 UTC",
-                                "duration_sec":  21,
+                                "start_utc":  "2026-02-16 20:56:08 UTC",
+                                "end_utc":  "2026-02-16 20:57:49 UTC",
+                                "duration_sec":  101,
                                 "timed_out":  false,
                                 "exit_code":  1,
                                 "stdout":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\axelar-core\\artifacts\\osv.stdout.log",
@@ -114,9 +114,9 @@
                                                                          "govulncheck -C \\\\VBOXSVR\\elements\\Repos\\zk0d\\cat1_bridges\\axelar-core -format json ./... 1\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\axelar-core\\artifacts\\govulncheck.json 2\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\axelar-core\\artifacts\\govulncheck.json.stderr.log"
                                                                      ],
                                                      "cwd":  "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat1_bridges\\axelar-core",
-                                                     "start_utc":  "2026-02-16 00:15:36 UTC",
-                                                     "end_utc":  "2026-02-16 00:15:52 UTC",
-                                                     "duration_sec":  17,
+                                                     "start_utc":  "2026-02-16 20:57:49 UTC",
+                                                     "end_utc":  "2026-02-16 20:58:10 UTC",
+                                                     "duration_sec":  21,
                                                      "timed_out":  false,
                                                      "exit_code":  1,
                                                      "stdout":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\axelar-core\\artifacts\\govulncheck.json",
@@ -143,9 +143,9 @@
                                                                          "govulncheck -C \\\\VBOXSVR\\elements\\Repos\\zk0d\\cat1_bridges\\axelar-core -format text -show traces ./... 1\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\axelar-core\\artifacts\\govulncheck.txt 2\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\axelar-core\\artifacts\\govulncheck.txt.stderr.log"
                                                                      ],
                                                      "cwd":  "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat1_bridges\\axelar-core",
-                                                     "start_utc":  "2026-02-16 00:15:52 UTC",
-                                                     "end_utc":  "2026-02-16 00:16:09 UTC",
-                                                     "duration_sec":  17,
+                                                     "start_utc":  "2026-02-16 20:58:10 UTC",
+                                                     "end_utc":  "2026-02-16 20:58:28 UTC",
+                                                     "duration_sec":  18,
                                                      "timed_out":  false,
                                                      "exit_code":  1,
                                                      "stdout":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\axelar-core\\artifacts\\govulncheck.txt",
@@ -173,9 +173,9 @@
                                                       "gosec -fmt=json -out=C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\axelar-core\\artifacts\\gosec.json -confidence=high -severity=medium -exclude-generated -quiet ./... 1\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\axelar-core\\artifacts\\gosec.stdout.log 2\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\axelar-core\\artifacts\\gosec.stderr.log"
                                                   ],
                                   "cwd":  "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat1_bridges\\axelar-core",
-                                  "start_utc":  "2026-02-16 00:16:09 UTC",
-                                  "end_utc":  "2026-02-16 00:16:14 UTC",
-                                  "duration_sec":  5,
+                                  "start_utc":  "2026-02-16 20:58:28 UTC",
+                                  "end_utc":  "2026-02-16 20:58:37 UTC",
+                                  "duration_sec":  9,
                                   "timed_out":  false,
                                   "exit_code":  1,
                                   "stdout":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\axelar-core\\artifacts\\gosec.stdout.log",

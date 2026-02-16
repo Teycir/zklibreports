@@ -14,11 +14,3 @@
 ## Notes
 - This is an automated baseline (no repo build steps executed). Treat findings as leads until reproduced.
 - Many security tools use non-zero exit codes to indicate findings; see raw JSON for details.
-
-## Manual Audit Progress
-- Manual report: `reports/cat1_bridges/synapse-contracts/manual_audit.md`
-- Pass status: exhausted for this pass.
-- Proven (model + fuzz + specialist):
-  - F1 `SynapseBridge.deposit` / `depositAndSwap` can over-credit cross-chain liability for inbound fee-on-transfer token classes.
-  - F2 `DEFAULT_ADMIN_ROLE` compromise can escalate into `NODEGROUP_ROLE` settlement authority and drain modeled bridge collateral.
-  - F3 destination min-out can be violated on actual user receipt for sender-tax payout token classes.

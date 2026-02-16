@@ -15,11 +15,3 @@
 ## Notes
 - This is an automated baseline (no repo build steps executed). Treat findings as leads until reproduced.
 - Many security tools use non-zero exit codes to indicate findings; see raw JSON for details.
-
-## Manual Audit Progress
-- Manual report: `reports/cat1_bridges/hyperlane-monorepo/manual_audit.md`
-- Pass status: exhausted for this pass (`H1/H2/H3` evidence-closed).
-- Proven (model + fuzz + specialist):
-  - H1 `HypERC20Collateral`/`TokenRouter` intent-level accounting can over-credit remote liabilities for inbound-fee collateral tokens.
-  - H2 `LpCollateralRouter` can overstate `lpAssets` vs real collateral for inbound-fee token classes.
-  - H3 `TokenRouter` fee transfer path can undercollateralize router collateral under sender-tax token behavior.

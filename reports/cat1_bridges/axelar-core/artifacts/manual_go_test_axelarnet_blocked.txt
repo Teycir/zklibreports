@@ -1,0 +1,15 @@
+﻿Command:
+cmd /d /s /c "pushd \\VBOXSVR\elements\Repos\zk0d\cat1_bridges\axelar-core && go test ./x/axelarnet -run TestHandleMessage -count=1 && popd"
+
+Result:
+FAIL github.com/axelarnetwork/axelar-core/x/axelarnet [setup failed]
+
+Primary blocker:
+go: downloading github.com/axelarnetwork/cometbft-sec-tachyon v0.38.21-0.20260113214209-9ac677707f85
+invalid version: git ls-remote ...
+remote: Repository not found.
+fatal: repository 'https://github.com/axelarnetwork/cometbft-sec-tachyon/' not found
+
+Interpretation:
+- Runtime test confirmation is blocked by private module access.
+- Same dependency gate affects govulncheck symbol-level analysis.

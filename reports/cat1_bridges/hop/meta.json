@@ -1,7 +1,7 @@
 ﻿{
     "name":  "hop",
     "source_path":  "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat1_bridges\\hop",
-    "scanned_at_utc":  "2026-02-16 00:17:16 UTC",
+    "scanned_at_utc":  "2026-02-16 20:59:55 UTC",
     "git":  {
                 "head":  "3ae90badbed5708d72cec46d0efeb004a4d0c587",
                 "branch":  "develop",
@@ -27,20 +27,20 @@
                                                   "--log-level",
                                                   "error",
                                                   "--timeout",
-                                                  "1800"
+                                                  "600"
                                               ],
-                                     "arg_string":  "detect --source \\\\VBOXSVR\\elements\\Repos\\zk0d\\cat1_bridges\\hop --report-format json --report-path C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\hop\\artifacts\\gitleaks.json --redact --no-banner --log-level error --timeout 1800",
+                                     "arg_string":  "detect --source \\\\VBOXSVR\\elements\\Repos\\zk0d\\cat1_bridges\\hop --report-format json --report-path C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\hop\\artifacts\\gitleaks.json --redact --no-banner --log-level error --timeout 600",
                                      "runner":  "cmd.exe",
                                      "runner_args":  [
                                                          "/d",
                                                          "/s",
                                                          "/c",
-                                                         "gitleaks detect --source \\\\VBOXSVR\\elements\\Repos\\zk0d\\cat1_bridges\\hop --report-format json --report-path C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\hop\\artifacts\\gitleaks.json --redact --no-banner --log-level error --timeout 1800 1\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\hop\\artifacts\\gitleaks.stdout.log 2\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\hop\\artifacts\\gitleaks.stderr.log"
+                                                         "gitleaks detect --source \\\\VBOXSVR\\elements\\Repos\\zk0d\\cat1_bridges\\hop --report-format json --report-path C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\hop\\artifacts\\gitleaks.json --redact --no-banner --log-level error --timeout 600 1\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\hop\\artifacts\\gitleaks.stdout.log 2\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\hop\\artifacts\\gitleaks.stderr.log"
                                                      ],
                                      "cwd":  "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat1_bridges\\hop",
-                                     "start_utc":  "2026-02-16 00:17:22 UTC",
-                                     "end_utc":  "2026-02-16 00:20:31 UTC",
-                                     "duration_sec":  189,
+                                     "start_utc":  "2026-02-16 21:00:00 UTC",
+                                     "end_utc":  "2026-02-16 21:02:59 UTC",
+                                     "duration_sec":  179,
                                      "timed_out":  false,
                                      "exit_code":  1,
                                      "stdout":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\hop\\artifacts\\gitleaks.stdout.log",
@@ -84,9 +84,9 @@
                                                     "osv-scanner scan source -r \\\\VBOXSVR\\elements\\Repos\\zk0d\\cat1_bridges\\hop -f json --output C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\hop\\artifacts\\osv.json --allow-no-lockfiles --verbosity warn --experimental-exclude g:**/node_modules --experimental-exclude g:**/target --experimental-exclude g:**/.git --experimental-exclude g:**/dist --experimental-exclude g:**/build --experimental-exclude g:**/out 1\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\hop\\artifacts\\osv.stdout.log 2\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\hop\\artifacts\\osv.stderr.log"
                                                 ],
                                 "cwd":  "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat1_bridges\\hop",
-                                "start_utc":  "2026-02-16 00:20:31 UTC",
-                                "end_utc":  "2026-02-16 00:20:41 UTC",
-                                "duration_sec":  10,
+                                "start_utc":  "2026-02-16 21:02:59 UTC",
+                                "end_utc":  "2026-02-16 21:03:11 UTC",
+                                "duration_sec":  12,
                                 "timed_out":  false,
                                 "exit_code":  1,
                                 "stdout":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\hop\\artifacts\\osv.stdout.log",

@@ -1,0 +1,11 @@
+﻿Target: poly
+Source: \\VBOXSVR\elements\Repos\zk0d\cat1_bridges\poly
+
+Blocker checks:
+- Solidity files (*.sol): 0
+- Foundry config files (foundry.toml): 0
+- File-type profile: go=500 ts=0 js=0
+
+Interpretation:
+- Specialist EVM fuzzing workflow (Foundry/Medusa/Halmos/Echidna) is not applicable on this snapshot because no in-repo Solidity target/harness surface exists.
+- Move to next target and record blocker.

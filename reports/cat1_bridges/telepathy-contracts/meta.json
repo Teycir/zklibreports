@@ -1,7 +1,7 @@
 ﻿{
     "name":  "telepathy-contracts",
     "source_path":  "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat1_bridges\\telepathy-contracts",
-    "scanned_at_utc":  "2026-02-16 00:36:05 UTC",
+    "scanned_at_utc":  "2026-02-16 21:17:50 UTC",
     "git":  {
                 "head":  "0f3c6812d6bda96dde6ab7bdd8f8391c47bf5d0b",
                 "branch":  "main",
@@ -28,19 +28,19 @@
                                                   "--log-level",
                                                   "error",
                                                   "--timeout",
-                                                  "1800"
+                                                  "600"
                                               ],
-                                     "arg_string":  "detect --source \\\\VBOXSVR\\elements\\Repos\\zk0d\\cat1_bridges\\telepathy-contracts --report-format json --report-path C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\telepathy-contracts\\artifacts\\gitleaks.json --redact --no-banner --log-level error --timeout 1800",
+                                     "arg_string":  "detect --source \\\\VBOXSVR\\elements\\Repos\\zk0d\\cat1_bridges\\telepathy-contracts --report-format json --report-path C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\telepathy-contracts\\artifacts\\gitleaks.json --redact --no-banner --log-level error --timeout 600",
                                      "runner":  "cmd.exe",
                                      "runner_args":  [
                                                          "/d",
                                                          "/s",
                                                          "/c",
-                                                         "gitleaks detect --source \\\\VBOXSVR\\elements\\Repos\\zk0d\\cat1_bridges\\telepathy-contracts --report-format json --report-path C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\telepathy-contracts\\artifacts\\gitleaks.json --redact --no-banner --log-level error --timeout 1800 1\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\telepathy-contracts\\artifacts\\gitleaks.stdout.log 2\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\telepathy-contracts\\artifacts\\gitleaks.stderr.log"
+                                                         "gitleaks detect --source \\\\VBOXSVR\\elements\\Repos\\zk0d\\cat1_bridges\\telepathy-contracts --report-format json --report-path C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\telepathy-contracts\\artifacts\\gitleaks.json --redact --no-banner --log-level error --timeout 600 1\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\telepathy-contracts\\artifacts\\gitleaks.stdout.log 2\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\telepathy-contracts\\artifacts\\gitleaks.stderr.log"
                                                      ],
                                      "cwd":  "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat1_bridges\\telepathy-contracts",
-                                     "start_utc":  "2026-02-16 00:36:07 UTC",
-                                     "end_utc":  "2026-02-16 00:36:08 UTC",
+                                     "start_utc":  "2026-02-16 21:17:52 UTC",
+                                     "end_utc":  "2026-02-16 21:17:53 UTC",
                                      "duration_sec":  1,
                                      "timed_out":  false,
                                      "exit_code":  1,
@@ -85,8 +85,8 @@
                                                     "osv-scanner scan source -r \\\\VBOXSVR\\elements\\Repos\\zk0d\\cat1_bridges\\telepathy-contracts -f json --output C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\telepathy-contracts\\artifacts\\osv.json --allow-no-lockfiles --verbosity warn --experimental-exclude g:**/node_modules --experimental-exclude g:**/target --experimental-exclude g:**/.git --experimental-exclude g:**/dist --experimental-exclude g:**/build --experimental-exclude g:**/out 1\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\telepathy-contracts\\artifacts\\osv.stdout.log 2\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\telepathy-contracts\\artifacts\\osv.stderr.log"
                                                 ],
                                 "cwd":  "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat1_bridges\\telepathy-contracts",
-                                "start_utc":  "2026-02-16 00:36:08 UTC",
-                                "end_utc":  "2026-02-16 00:36:08 UTC",
+                                "start_utc":  "2026-02-16 21:17:53 UTC",
+                                "end_utc":  "2026-02-16 21:17:54 UTC",
                                 "duration_sec":  1,
                                 "timed_out":  false,
                                 "exit_code":  0,
