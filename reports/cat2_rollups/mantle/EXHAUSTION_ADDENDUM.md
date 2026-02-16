@@ -15,6 +15,6 @@ Primary evidence:
 - `reports/cat2_rollups/mantle/manual_audit.md`
 - `reports/cat2_rollups/mantle/manual_audit_intermediary.md`
 - `reports/cat2_rollups/mantle/manual_artifacts/f_man_01_echidna_30s.txt`
+- `reports/cat2_rollups/mantle/manual_artifacts/f_man_02_assertion_autoconfirm_forge_test.txt`
 - `reports/cat2_rollups/mantle/manual_artifacts/f_man_03_operator_gate_forge_test.txt`
 - `reports/cat2_rollups/mantle/manual_artifacts/f_man_04_challenge_binding_forge_test.txt`
-

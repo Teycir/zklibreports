@@ -1,0 +1,29 @@
+{
+    "exitcode": 1,
+    "test_results": {
+        "test/HalmosLineaF2InitV2UpgradeGap.t.sol:HalmosLineaF2InitV2UpgradeGap": [
+            {
+                "name": "check_attacker_cannot_takeover_initv2()",
+                "exitcode": 1,
+                "num_models": 1,
+                "models": [
+                    {
+                        "model": {},
+                        "is_valid": true
+                    }
+                ],
+                "num_paths": [
+                    1,
+                    0,
+                    0
+                ],
+                "time": [
+                    1.10110480000003,
+                    0.2837234999988141,
+                    0.8173767000007501
+                ],
+                "num_bounded_loops": 0
+            }
+        ]
+    }
+}

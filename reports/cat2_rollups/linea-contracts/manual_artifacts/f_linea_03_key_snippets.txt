@@ -1,0 +1,80 @@
+﻿== contracts/tokenBridge/CustomBridgedToken.sol ==
+   10: contract CustomBridgedToken is BridgedToken {
+   11:   function initializeV2(
+   12:     string memory _tokenName,
+   13:     string memory _tokenSymbol,
+   14:     uint8 _tokenDecimals,
+   15:     address _bridge
+   16:   ) public reinitializer(2) {
+   17:     __ERC20_init(_tokenName, _tokenSymbol);
+   18:     __ERC20Permit_init(_tokenName);
+   19:     bridge = _bridge;
+   20:     _decimals = _tokenDecimals;
+   21:   }
+
+== contracts/tokenBridge/BridgedToken.sol ==
+   30:   function initialize(string memory _tokenName, string memory _tokenSymbol, uint8 _tokenDecimals) external initializer {
+   31:     __ERC20_init(_tokenName, _tokenSymbol);
+   32:     __ERC20Permit_init(_tokenName);
+   33:     bridge = msg.sender;
+   34:     _decimals = _tokenDecimals;
+   35:   }
+   36: 
+   37:   /// @dev Ensures call come from the bridge.
+   38:   modifier onlyBridge() {
+   39:     if (msg.sender != bridge) revert OnlyBridge(bridge);
+   40:     _;
+   48:   function mint(address _recipient, uint256 _amount) external onlyBridge {
+   49:     _mint(_recipient, _amount);
+   50:   }
+
+== scripts/upgrades/upgradeL2MessageService.ts ==
+    9:   const newContractName = requireEnv("NEW_CONTRACT_NAME");
+   10:   const proxyAddress = requireEnv("PROXY_ADDRESS");
+   11: 
+   12:   if (!newContractName || !proxyAddress) {
+   13:     throw new Error(`PROXY_ADDRESS and CONTRACT_NAME env variables are undefined.`);
+   14:   }
+   15:   console.log(`Upgrading contract at ${proxyAddress}`);
+   16: 
+   17:   const newContract = await ethers.getContractFactory(newContractName);
+   18: 
+   19:   try {
+   20:     await upgrades.validateUpgrade(proxyAddress, newContract, {
+   21:       kind: "transparent",
+   22:     });
+   23: 
+   24:     await upgrades.upgradeProxy(proxyAddress, newContract, {
+   25:       kind: "transparent",
+   26:     });
+
+== contracts/proxies/ProxyAdmin.sol ==
+ 1085:   function upgrade(ITransparentUpgradeableProxy proxy, address implementation) public virtual onlyOwner {
+ 1086:     proxy.upgradeTo(implementation);
+ 1087:   }
+ 1088: 
+ 1089:   /**
+ 1090:    * @dev Upgrades `proxy` to `implementation` and calls a function on the new implementation. See
+ 1091:    * {TransparentUpgradeableProxy-upgradeToAndCall}.
+ 1092:    *
+ 1093:    * Requirements:
+ 1094:    *
+ 1095:    * - This contract must be the admin of `proxy`.
+ 1096:    */
+ 1097:   function upgradeAndCall(
+ 1098:     ITransparentUpgradeableProxy proxy,
+ 1099:     address implementation,
+ 1100:     bytes memory data
+ 1101:   ) public payable virtual onlyOwner {
+ 1102:     proxy.upgradeToAndCall{ value: msg.value }(implementation, data);
+ 1103:   }
+
+== deploy/11_deploy_CustomBridgedToken.ts ==
+   30:   // Deploy proxy for custom bridged token
+   31:   const customBridgedToken = await deployUpgradableFromFactory(
+   32:     contractName,
+   33:     [CustomTokenBridge_name, CustomTokenBridge_symbol, CustomTokenBridge_decimals, CustomTokenBridge_bridge_address],
+   34:     {
+   35:       initializer: "initializeV2(string,string,uint8,address)",
+   36:       unsafeAllow: ["constructor"],
+   37:     },

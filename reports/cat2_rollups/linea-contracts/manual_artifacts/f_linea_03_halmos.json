@@ -1,0 +1,29 @@
+{
+    "exitcode": 1,
+    "test_results": {
+        "test/HalmosLineaF3CustomBridgedTokenInitV2Takeover.t.sol:HalmosLineaF3CustomBridgedTokenInitV2Takeover": [
+            {
+                "name": "check_attacker_cannot_takeover_bridge_role()",
+                "exitcode": 1,
+                "num_models": 1,
+                "models": [
+                    {
+                        "model": {},
+                        "is_valid": true
+                    }
+                ],
+                "num_paths": [
+                    1,
+                    0,
+                    0
+                ],
+                "time": [
+                    0.20015670000066166,
+                    0.098656199999823,
+                    0.10149640000054205
+                ],
+                "num_bounded_loops": 0
+            }
+        ]
+    }
+}

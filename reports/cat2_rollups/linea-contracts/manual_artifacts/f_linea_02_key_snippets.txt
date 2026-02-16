@@ -1,0 +1,49 @@
+﻿== contracts/LineaRollupInit.sol ==
+   12: contract LineaRollupInit is LineaRollup {
+   13:   /**
+   14:    * @notice Reinitializes LineaRollup and underlying service dependencies.
+   15:    * @param _initialStateRootHash The initial hash at migration used for proof verification.
+   16:    * @param _initialL2BlockNumber The initial block number at migration.
+   17:    */
+   18:   function initializeV2(uint256 _initialL2BlockNumber, bytes32 _initialStateRootHash) external reinitializer(3) {
+   19:     currentL2BlockNumber = _initialL2BlockNumber;
+   20:     stateRootHashes[_initialL2BlockNumber] = _initialStateRootHash;
+   21:   }
+
+== scripts/upgrades/upgradeLineaRollup_no_reinitialisation.ts ==
+   26:   try {
+   27:     await upgrades.validateUpgrade(proxyAddress, newContract, {
+   28:       kind: "transparent",
+   29:     });
+   30: 
+   31:     await upgrades.upgradeProxy(proxyAddress, newContract, {
+   32:       kind: "transparent",
+   33:     });
+
+== scripts/upgrades/upgradeLineaRollup_with_reinitialisation.ts ==
+   29:     await upgrades.upgradeProxy(proxyAddress, newContract, {
+   30:       call: { fn: "initializeV2", args: [initialL2BlockNumber, initialStateRootHash] },
+   31:       kind: "transparent",
+   32:     });
+
+== scripts/gnosis/encodingTX.ts ==
+   30:   const upgradeCallUsingSecurityCouncil = ethers.concat([
+   31:     "0x99a88ec4",
+   32:     ethers.AbiCoder.defaultAbiCoder().encode(["address", "address"], [proxyContract, NewImplementation]),
+   33:   ]);
+   34: 
+   35:   console.log("Encoded Tx Schedule Upgrade from Security Council :", "\n", upgradeCallUsingSecurityCouncil);
+   57:   const upgradeCallWithReinitializationUsingSecurityCouncil = ethers.concat([
+   58:     "0x9623609d",
+   59:     ethers.AbiCoder.defaultAbiCoder().encode(
+   60:       ["address", "address", "bytes"],
+   61:       [
+   62:         proxyContract,
+   63:         NewImplementation,
+   64:         LineaRollupInit__factory.createInterface().encodeFunctionData("initializeV2", [
+   65:           initialL2BlockNumber,
+   66:           initialStateRootHash,
+   67:         ]),
+   68:       ],
+   69:     ),
+   70:   ]);

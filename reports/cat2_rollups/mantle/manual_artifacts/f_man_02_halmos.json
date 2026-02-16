@@ -1,0 +1,46 @@
+{
+    "exitcode": 1,
+    "test_results": {
+        "test/HalmosF2AssertionAutoConfirm.t.sol:HalmosF2AssertionAutoConfirm": [
+            {
+                "name": "check_new_assertion_requires_distinct_confirmation_step(bytes32,uint64)",
+                "exitcode": 1,
+                "num_models": 1,
+                "models": [
+                    {
+                        "model": {
+                            "p_inboxSize_uint64_1c636a9_00": {
+                                "full_name": "p_inboxSize_uint64_1c636a9_00",
+                                "variable_name": "inboxSize",
+                                "solidity_type": "uint64",
+                                "smt_type": "BitVec 256",
+                                "size_bits": 256,
+                                "value": 0
+                            },
+                            "p_vmHash_bytes32_f0fd5c1_00": {
+                                "full_name": "p_vmHash_bytes32_f0fd5c1_00",
+                                "variable_name": "vmHash",
+                                "solidity_type": "bytes32",
+                                "smt_type": "BitVec 256",
+                                "size_bits": 256,
+                                "value": 0
+                            }
+                        },
+                        "is_valid": true
+                    }
+                ],
+                "num_paths": [
+                    2,
+                    0,
+                    0
+                ],
+                "time": [
+                    0.16936749999877065,
+                    0.06803059999947436,
+                    0.10133259999929578
+                ],
+                "num_bounded_loops": 0
+            }
+        ]
+    }
+}

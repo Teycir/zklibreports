@@ -10,11 +10,15 @@ Primary closeout document:
 
 Security result:
 
-- Proven promoted vulnerability: `F-LINEA-01` (`Critical`)
-- No additional finding reached promotion threshold in this pass beyond the confirmed set.
+- Proven promoted vulnerabilities:
+  - `F-LINEA-01` (`Critical`)
+  - `F-LINEA-02` (`High`)
+  - `F-LINEA-03` (`High`)
+- No additional high-risk leads remained unpromoted in this pass.
 
 Evidence roots:
 
 - `reports/cat2_rollups/linea-contracts/manual_artifacts/`
 - `proof_harness/cat2_linea_f1_reinitializer_dos/`
-
+- `proof_harness/cat2_linea_f2_initv2_upgrade_gap/`
+- `proof_harness/cat2_linea_f3_custombridgedtoken_initv2_takeover/`

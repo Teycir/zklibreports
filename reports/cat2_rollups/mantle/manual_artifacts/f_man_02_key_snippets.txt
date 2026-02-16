@@ -1,0 +1,38 @@
+FILE: packages/contracts/contracts/L1/fraud-proof/Rollup.sol
+SNIPPET: createAssertion immediate confirmation path (F-MAN-02)
+
+   261:     function createAssertion(
+   262:         bytes32 vmHash,
+   263:         uint256 inboxSize
+   264:     ) public override operatorOnly {
+   265:         address stakerAddr = registers[msg.sender];
+   266:         require(stakers[stakerAddr].currentChallenge == address(0),"can not create assertion when staker in challenge");
+   267:         uint256 parentID = stakers[stakerAddr].assertionID;
+   268:         // Require that enough time has passed since the last assertion.
+   269:         if (block.number - assertions.getProposalTime(parentID) < minimumAssertionPeriod) {
+   270:             revert("MinimumAssertionPeriodNotPassed");
+   271:         }
+   272:         // Require that the assertion at least includes one transaction
+   273:         if (inboxSize <= assertions.getInboxSize(parentID)) {
+   274:             revert("EmptyAssertion");
+   275:         }
+   276: 
+   277:         // Initialize assertion.
+   278:         lastCreatedAssertionID++;
+   279:         emit AssertionCreated(lastCreatedAssertionID, msg.sender, vmHash, inboxSize);
+   280:         assertions.createAssertion(
+   281:             lastCreatedAssertionID, vmHash, inboxSize, parentID, newAssertionDeadline()
+   282:         );
+   283: 
+   284:         // Update stake.
+   285:         stakeOnAssertion(stakerAddr, lastCreatedAssertionID);
+   286:         // confirmed this assertion instantly
+   287:         lastResolvedAssertionID++;
+   288:         lastConfirmedAssertionID = lastResolvedAssertionID;
+   289:         emit AssertionConfirmed(lastResolvedAssertionID);
+   290:     }
+   291: 
+   292:     /// @inheritdoc IRollup
+   293:     function createAssertionWithStateBatch(
+   294:         bytes32 vmHash,
+   295:         uint256 inboxSize,

@@ -19,6 +19,11 @@ Witness artifacts:
 
 - `reports/cat2_rollups/mantle/manual_artifacts/f_man_01_echidna_30s.txt`
 - `reports/cat2_rollups/mantle/manual_artifacts/f_man_01_halmos.txt`
+- `reports/cat2_rollups/mantle/manual_artifacts/f_man_02_assertion_autoconfirm_forge_test.txt`
+- `reports/cat2_rollups/mantle/manual_artifacts/f_man_02_medusa_failfast_30s.txt`
+- `reports/cat2_rollups/mantle/manual_artifacts/f_man_02_echidna_30s.txt`
+- `reports/cat2_rollups/mantle/manual_artifacts/f_man_02_halmos.txt`
+- `reports/cat2_rollups/mantle/manual_artifacts/f_man_02_key_snippets.txt`
 - `reports/cat2_rollups/mantle/manual_artifacts/f_man_03_operator_gate_forge_test.txt`
 - `reports/cat2_rollups/mantle/manual_artifacts/f_man_03_medusa_failfast_30s.txt`
 - `reports/cat2_rollups/mantle/manual_artifacts/f_man_03_echidna_30s.txt`
@@ -28,6 +33,12 @@ Witness artifacts:
 - `reports/cat2_rollups/mantle/manual_artifacts/f_man_04_echidna_30s.txt`
 - `reports/cat2_rollups/mantle/manual_artifacts/f_man_04_halmos.txt`
 - `reports/cat2_rollups/mantle/manual_audit_intermediary.md`
+
+Specialist harness packages:
+
+- `proof_harness/cat2_mantle_f2_assertion_autoconfirm`
+- `proof_harness/cat2_mantle_f3_operator_gate`
+- `proof_harness/cat2_mantle_f4_challenge_binding`
 
 ## Not Promoted
 

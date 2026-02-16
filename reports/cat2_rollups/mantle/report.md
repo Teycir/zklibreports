@@ -85,6 +85,25 @@ Deterministic witness:
 - Type: source-level transaction trace witness.
 - Artifact: `reports/cat2_rollups/mantle/manual_audit_intermediary.md`
 
+Specialist fuzz witness:
+- Forge harness: `proof_harness/cat2_mantle_f2_assertion_autoconfirm/src/MantleF2AssertionAutoConfirmHarness.sol`
+- Forge test: `proof_harness/cat2_mantle_f2_assertion_autoconfirm/test/MantleF2AssertionAutoConfirm.t.sol`
+- Forge run: `forge test --match-path test/MantleF2AssertionAutoConfirm.t.sol -vv`
+- Forge artifact: `reports/cat2_rollups/mantle/manual_artifacts/f_man_02_assertion_autoconfirm_forge_test.txt`
+- Medusa harness: `proof_harness/cat2_mantle_f2_assertion_autoconfirm/src/MedusaF2AssertionAutoConfirmHarness.sol`
+- Medusa run: `medusa fuzz --config medusa.json --workers 4 --timeout 30`
+- Medusa artifact: `reports/cat2_rollups/mantle/manual_artifacts/f_man_02_medusa_failfast_30s.txt`
+- Medusa counterexample (minimized): one-call `action_create_assertion(bytes32,uint64)` falsifies `property_new_assertions_require_distinct_confirmation_step()`.
+- Echidna harness: `proof_harness/cat2_mantle_f2_assertion_autoconfirm/src/EchidnaF2AssertionAutoConfirmHarness.sol`
+- Echidna run: `echidna src/EchidnaF2AssertionAutoConfirmHarness.sol --contract EchidnaF2AssertionAutoConfirmHarness --format text --workers 4 --timeout 30 --test-limit 20000 --corpus-dir echidna-corpus-f-man-02`
+- Echidna artifact: `reports/cat2_rollups/mantle/manual_artifacts/f_man_02_echidna_30s.txt`
+- Echidna counterexample (minimized): single-step `action_create_assertion()` falsifies `echidna_new_assertions_require_distinct_confirmation_step()`.
+- Halmos harness: `proof_harness/cat2_mantle_f2_assertion_autoconfirm/test/HalmosF2AssertionAutoConfirm.t.sol`
+- Halmos run: `halmos --contract HalmosF2AssertionAutoConfirm --function check_new_assertion_requires_distinct_confirmation_step --json-output reports/cat2_rollups/mantle/manual_artifacts/f_man_02_halmos.json`
+- Halmos artifact: `reports/cat2_rollups/mantle/manual_artifacts/f_man_02_halmos.txt`
+- Halmos counterexample model: `p_vmHash_bytes32_* = 0x00`, `p_inboxSize_uint64_* = 0x00` falsifies `check_new_assertion_requires_distinct_confirmation_step(bytes32,uint64)`.
+- Source snippet artifact: `reports/cat2_rollups/mantle/manual_artifacts/f_man_02_key_snippets.txt`
+
 ## F-MAN-03: Challenge completion path requires non-default operator registration of challenge contract
 
 Severity: `High`
