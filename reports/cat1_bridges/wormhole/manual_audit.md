@@ -61,6 +61,44 @@ Token bridge redemption/mint/unlock:
 - `\\VBOXSVR\elements\Repos\zk0d\cat1_bridges\wormhole\ethereum\contracts\bridge\BridgeGovernance.sol`
 - `\\VBOXSVR\elements\Repos\zk0d\cat1_bridges\wormhole\ethereum\contracts\bridge\token\TokenImplementation.sol`
 
+## Entry Points Map (EVM)
+
+Core proxy + setup:
+- Proxy wrapper: `\\VBOXSVR\elements\Repos\zk0d\cat1_bridges\wormhole\ethereum\contracts\Wormhole.sol`
+- Initial setup: `\\VBOXSVR\elements\Repos\zk0d\cat1_bridges\wormhole\ethereum\contracts\Setup.sol`
+
+Core user entry points:
+- `publishMessage(uint32,bytes,uint8)` (fee-gated) in `\\VBOXSVR\elements\Repos\zk0d\cat1_bridges\wormhole\ethereum\contracts\Implementation.sol`
+- VAA parsing/verification helpers are callable by anyone and are used by downstream protocols:
+  - `parseVM(bytes)` / `verifyVM(VM)` / `parseAndVerifyVM(bytes)` in `\\VBOXSVR\elements\Repos\zk0d\cat1_bridges\wormhole\ethereum\contracts\Messages.sol`
+
+Core governance entry points (VAA-gated):
+- `submitContractUpgrade(bytes)` in `\\VBOXSVR\elements\Repos\zk0d\cat1_bridges\wormhole\ethereum\contracts\Governance.sol`
+- `submitNewGuardianSet(bytes)` in `\\VBOXSVR\elements\Repos\zk0d\cat1_bridges\wormhole\ethereum\contracts\Governance.sol`
+- `submitSetMessageFee(bytes)` in `\\VBOXSVR\elements\Repos\zk0d\cat1_bridges\wormhole\ethereum\contracts\Governance.sol`
+- `submitTransferFees(bytes)` in `\\VBOXSVR\elements\Repos\zk0d\cat1_bridges\wormhole\ethereum\contracts\Governance.sol`
+- `submitRecoverChainId(bytes)` (fork-only) in `\\VBOXSVR\elements\Repos\zk0d\cat1_bridges\wormhole\ethereum\contracts\Governance.sol`
+
+Token bridge proxy + setup:
+- Proxy wrapper: `\\VBOXSVR\elements\Repos\zk0d\cat1_bridges\wormhole\ethereum\contracts\bridge\TokenBridge.sol`
+- Initial setup: `\\VBOXSVR\elements\Repos\zk0d\cat1_bridges\wormhole\ethereum\contracts\bridge\BridgeSetup.sol`
+
+Token bridge user entry points:
+- Outbound:
+  - `transferTokens(...)` / `transferTokensWithPayload(...)` in `\\VBOXSVR\elements\Repos\zk0d\cat1_bridges\wormhole\ethereum\contracts\bridge\Bridge.sol`
+  - `wrapAndTransferETH(...)` / `wrapAndTransferETHWithPayload(...)` in `\\VBOXSVR\elements\Repos\zk0d\cat1_bridges\wormhole\ethereum\contracts\bridge\Bridge.sol`
+  - `attestToken(...)` in `\\VBOXSVR\elements\Repos\zk0d\cat1_bridges\wormhole\ethereum\contracts\bridge\Bridge.sol`
+- Inbound:
+  - `completeTransfer(...)` / `completeTransferAndUnwrapETH(...)` in `\\VBOXSVR\elements\Repos\zk0d\cat1_bridges\wormhole\ethereum\contracts\bridge\Bridge.sol`
+  - `completeTransferWithPayload(...)` / `completeTransferAndUnwrapETHWithPayload(...)` in `\\VBOXSVR\elements\Repos\zk0d\cat1_bridges\wormhole\ethereum\contracts\bridge\Bridge.sol`
+- Wrapped asset management:
+  - `createWrapped(bytes)` / `updateWrapped(bytes)` in `\\VBOXSVR\elements\Repos\zk0d\cat1_bridges\wormhole\ethereum\contracts\bridge\Bridge.sol`
+
+Token bridge governance entry points (VAA-gated):
+- `registerChain(bytes)` in `\\VBOXSVR\elements\Repos\zk0d\cat1_bridges\wormhole\ethereum\contracts\bridge\BridgeGovernance.sol`
+- `upgrade(bytes)` in `\\VBOXSVR\elements\Repos\zk0d\cat1_bridges\wormhole\ethereum\contracts\bridge\BridgeGovernance.sol`
+- `submitRecoverChainId(bytes)` (fork-only) in `\\VBOXSVR\elements\Repos\zk0d\cat1_bridges\wormhole\ethereum\contracts\bridge\BridgeGovernance.sol`
+
 ## Hypotheses (Ranked Leads To Validate)
 
 H1: Guardian-set rotation window risks
@@ -104,4 +142,3 @@ Halmos (symbolic / invariant testing):
 1) Build an “architecture map” section for EVM core + token bridge: list entrypoints and which storage keys they touch.
 2) Deep read the redemption and emitter verification paths (`_completeTransfer`, `verifyBridgeVM`, chain registration).
 3) Validate H2 with a concrete reentrancy harness (witness: failing test or counterexample).
-
