@@ -1,0 +1,219 @@
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\PolygonZkEVMBridge.sol:32:    // bytes4(keccak256(bytes("permit(address,address,uint256,uint256,uint8,bytes32,bytes32)")));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\PolygonZkEVMBridge.sol:35:    // bytes4(keccak256(bytes("permit(address,address,uint256,uint256,bool,uint8,bytes32,bytes32)")));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\PolygonZkEVMBridge.sol:144:     * @param permitData Raw data of the call `permit` of the token
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\PolygonZkEVMBridge.sol:152:        bytes calldata permitData
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\PolygonZkEVMBridge.sol:191:                // Use permit if any
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\PolygonZkEVMBridge.sol:192:                if (permitData.length != 0) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\PolygonZkEVMBridge.sol:193:                    _permit(token, amount, permitData);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\PolygonZkEVMBridge.sol:679:     * @notice Function to call token permit method of extended ERC20
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\PolygonZkEVMBridge.sol:682:     * @param permitData Raw data of the call `permit` of the token
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\PolygonZkEVMBridge.sol:684:    function _permit(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\PolygonZkEVMBridge.sol:687:        bytes calldata permitData
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\PolygonZkEVMBridge.sol:689:        bytes4 sig = bytes4(permitData[:4]);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\PolygonZkEVMBridge.sol:700:                    permitData[4:],
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\PolygonZkEVMBridge.sol:723:            // the following transferFrom should be fail. This prevents DoS attacks from using a signature
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\PolygonZkEVMBridge.sol:753:                    permitData[4:],
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\PolygonZkEVMBridge.sol:775:            // the following transferFrom should be fail. This prevents DoS attacks from using a signature
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\PolygonZkEVM.sol:29:     * @param transactions L2 ethereum transactions EIP-155 or pre-EIP-155 with signature:
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\PolygonZkEVM.sol:45:     * @param transactions L2 ethereum transactions EIP-155 or pre-EIP-155 with signature:
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\PolygonZkEVM.sol:113:    // In order to process the transaction, the data is approximately hashed twice for ecrecover:
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\PolygonZkEVM.sol:1015:     * @param transactions L2 ethereum transactions EIP-155 or pre-EIP-155 with signature:
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\sovereignChains\BridgeL2SovereignChain.sol:497:        bytes calldata permitData
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\sovereignChains\BridgeL2SovereignChain.sol:499:        // Use permit if any
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\sovereignChains\BridgeL2SovereignChain.sol:500:        if (permitData.length != 0) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\sovereignChains\BridgeL2SovereignChain.sol:501:            _permit(legacyTokenAddress, permitData);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\mocks\Uni.sol:273:    /// @notice The EIP-712 typehash for the permit struct used by the contract
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\mocks\Uni.sol:279:    /// @notice A record of states for signing / validating signatures
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\mocks\Uni.sol:433:     * @param deadline The time at which to expire the signature
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\mocks\Uni.sol:434:     * @param v The recovery byte of the signature
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\mocks\Uni.sol:435:     * @param r Half of the ECDSA signature pair
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\mocks\Uni.sol:436:     * @param s Half of the ECDSA signature pair
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\mocks\Uni.sol:438:    function permit(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\mocks\Uni.sol:451:            amount = safe96(rawAmount, "Uni::permit: amount exceeds 96 bits");
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\mocks\Uni.sol:475:        address signatory = ecrecover(digest, v, r, s);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\mocks\Uni.sol:476:        require(signatory != address(0), "Uni::permit: invalid signature");
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\mocks\Uni.sol:477:        require(signatory == owner, "Uni::permit: unauthorized");
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\mocks\Uni.sol:478:        require(now <= deadline, "Uni::permit: signature expired");
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\mocks\Uni.sol:554:     * @param nonce The contract state required to match the signature
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\mocks\Uni.sol:555:     * @param expiry The time at which to expire the signature
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\mocks\Uni.sol:556:     * @param v The recovery byte of the signature
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\mocks\Uni.sol:557:     * @param r Half of the ECDSA signature pair
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\mocks\Uni.sol:558:     * @param s Half of the ECDSA signature pair
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\mocks\Uni.sol:582:        address signatory = ecrecover(digest, v, r, s);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\mocks\Uni.sol:585:            "Uni::delegateBySig: invalid signature"
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\mocks\Uni.sol:591:        require(now <= expiry, "Uni::delegateBySig: signature expired");
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\mocks\PolygonZkEVMBridgeMock.sol:46:     * @param permitData Raw data of the call `permit` of the token
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\mocks\PolygonZkEVMBridgeMock.sol:54:        bytes calldata permitData
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\mocks\PolygonZkEVMBridgeMock.sol:66:            permitData
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\previousVersions\PolygonValidiumEtrogPrevious.sol:26:     * @param transactionsHash keccak256 hash of the L2 ethereum transactions EIP-155 or pre-EIP-155 with signature:
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\previousVersions\PolygonValidiumEtrogPrevious.sol:89:     * @param dataAvailabilityMessage Byte array containing the signatures and all the addresses of the committee in ascending order
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\previousVersions\PolygonValidiumEtrogPrevious.sol:90:     * [signature 0, ..., signature requiredAmountOfSignatures -1, address 0, ... address N]
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\previousVersions\PolygonValidiumEtrogPrevious.sol:91:     * note that each ECDSA signatures are used, therefore each one must be 65 bytes
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\mocks\ERC20PermitMock.sol:38:    // erc20 permit
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\mocks\ERC20PermitMock.sol:78:        address recoveredAddress = ecrecover(digest, v, r, s);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\mocks\ERC20PermitMock.sol:79:        // Explicitly disallow authorizations for address(0) as ecrecover returns address(0) on malformed messages
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\mocks\ERC20PermitMock.sol:92:    function permit(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\mocks\ERC20PermitMock.sol:101:        require(deadline >= block.timestamp, "HEZ::permit: AUTH_EXPIRED");
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\mocks\ERC20Decimals.sol:46:    // erc20 permit
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\mocks\ERC20Decimals.sol:86:        address recoveredAddress = ecrecover(digest, v, r, s);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\mocks\ERC20Decimals.sol:87:        // Explicitly disallow authorizations for address(0) as ecrecover returns address(0) on malformed messages
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\mocks\ERC20Decimals.sol:100:    function permit(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\mocks\ERC20Decimals.sol:109:        require(deadline >= block.timestamp, "HEZ::permit: AUTH_EXPIRED");
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\previousVersions\PolygonRollupBaseEtrogPrevious.sol:33:     * @param transactions L2 ethereum transactions EIP-155 or pre-EIP-155 with signature:
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\previousVersions\PolygonRollupBaseEtrogPrevious.sol:53:    // In order to process the transaction, the data is approximately hashed twice for ecrecover:
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\previousVersions\PolygonRollupBaseEtrogPrevious.sol:80:    // TxData bytes: 164 bytes data ( signature 4 bytes + 5 parameters*32bytes +
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\previousVersions\PolygonRollupBaseEtrogPrevious.sol:97:    // TxData empty metadata bytes: 164 bytes data ( signature 4 bytes + 5 parameters*32bytes +
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\previousVersions\PolygonRollupBaseEtrogPrevious.sol:115:    // V parameter of the initialize signature
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\previousVersions\PolygonRollupBaseEtrogPrevious.sol:118:    // R parameter of the initialize signature
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\previousVersions\PolygonRollupBaseEtrogPrevious.sol:122:    // S parameter of the initialize signature
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\previousVersions\PolygonRollupBaseEtrogPrevious.sol:583:     * @param transactions L2 ethereum transactions EIP-155 or pre-EIP-155 with signature:
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\previousVersions\PolygonRollupBaseEtrogPrevious.sol:910:        // Sanity check that the ecrecover will work
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\previousVersions\PolygonRollupBaseEtrogPrevious.sol:911:        // Should never happen that giving a valid signature, ecrecover "breaks"
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\previousVersions\PolygonRollupBaseEtrogPrevious.sol:912:        address signer = ecrecover(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\mocks\DaiMock.sol:135:    // --- Approve by signature ---
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\mocks\DaiMock.sol:136:    function permit(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\mocks\DaiMock.sol:164:        require(holder == ecrecover(digest, v, r, s), "Dai/invalid-permit");
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\mocks\DaiMock.sol:165:        require(expiry == 0 || now <= expiry, "Dai/permit-expired");
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\lib\TokenWrapped.sol:2:// Implementation of permit based on https://github.com/WETH10/WETH10/blob/main/contracts/WETH10.sol
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\lib\TokenWrapped.sol:70:    function permit(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\lib\TokenWrapped.sol:81:            "TokenWrapped::permit: Expired permit"
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\lib\TokenWrapped.sol:99:        address signer = ecrecover(digest, v, r, s);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\lib\TokenWrapped.sol:102:            "TokenWrapped::permit: Invalid signature"
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\previousVersions\pessimistic\PolygonZkEVMBridgeV2Pessimistic.sol:32:    // bytes4(keccak256(bytes("permit(address,address,uint256,uint256,uint8,bytes32,bytes32)")));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\previousVersions\pessimistic\PolygonZkEVMBridgeV2Pessimistic.sol:35:    // bytes4(keccak256(bytes("permit(address,address,uint256,uint256,bool,uint8,bytes32,bytes32)")));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\previousVersions\pessimistic\PolygonZkEVMBridgeV2Pessimistic.sol:210:     * @param permitData Raw data of the call `permit` of the token
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\previousVersions\pessimistic\PolygonZkEVMBridgeV2Pessimistic.sol:218:        bytes calldata permitData
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\previousVersions\pessimistic\PolygonZkEVMBridgeV2Pessimistic.sol:266:                    // Use permit if any
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\previousVersions\pessimistic\PolygonZkEVMBridgeV2Pessimistic.sol:267:                    if (permitData.length != 0) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\previousVersions\pessimistic\PolygonZkEVMBridgeV2Pessimistic.sol:268:                        _permit(token, amount, permitData);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\previousVersions\pessimistic\PolygonZkEVMBridgeV2Pessimistic.sol:952:     * @notice Function to call token permit method of extended ERC20
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\previousVersions\pessimistic\PolygonZkEVMBridgeV2Pessimistic.sol:955:     * @param permitData Raw data of the call `permit` of the token
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\previousVersions\pessimistic\PolygonZkEVMBridgeV2Pessimistic.sol:957:    function _permit(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\previousVersions\pessimistic\PolygonZkEVMBridgeV2Pessimistic.sol:960:        bytes calldata permitData
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\previousVersions\pessimistic\PolygonZkEVMBridgeV2Pessimistic.sol:962:        bytes4 sig = bytes4(permitData[:4]);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\previousVersions\pessimistic\PolygonZkEVMBridgeV2Pessimistic.sol:973:                    permitData[4:],
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\previousVersions\pessimistic\PolygonZkEVMBridgeV2Pessimistic.sol:996:            // the following transferFrom should be fail. This prevents DoS attacks from using a signature
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\previousVersions\pessimistic\PolygonZkEVMBridgeV2Pessimistic.sol:1026:                    permitData[4:],
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\previousVersions\pessimistic\PolygonZkEVMBridgeV2Pessimistic.sol:1048:            // the following transferFrom should be fail. This prevents DoS attacks from using a signature
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\interfaces\IPolygonZkEVMBridge.sol:52:     * @dev Thrown when the owner of permit does not match the sender
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\interfaces\IPolygonZkEVMBridge.sol:57:     * @dev Thrown when the spender of the permit does not match this contract address
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\interfaces\IPolygonZkEVMBridge.sol:62:     * @dev Thrown when the amount of the permit does not match
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\interfaces\IPolygonZkEVMBridge.sol:67:     * @dev Thrown when the permit data contains an invalid signature
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\interfaces\IPolygonZkEVMBridge.sol:77:        bytes calldata permitData
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\previousVersions\pessimistic\PolygonRollupBaseEtrogPessimistic.sol:32:     * @param transactions L2 ethereum transactions EIP-155 or pre-EIP-155 with signature:
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\previousVersions\pessimistic\PolygonRollupBaseEtrogPessimistic.sol:52:    // In order to process the transaction, the data is approximately hashed twice for ecrecover:
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\previousVersions\pessimistic\PolygonRollupBaseEtrogPessimistic.sol:79:    // TxData bytes: 164 bytes data ( signature 4 bytes + 5 parameters*32bytes +
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\previousVersions\pessimistic\PolygonRollupBaseEtrogPessimistic.sol:96:    // TxData empty metadata bytes: 164 bytes data ( signature 4 bytes + 5 parameters*32bytes +
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\previousVersions\pessimistic\PolygonRollupBaseEtrogPessimistic.sol:114:    // V parameter of the initialize signature
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\previousVersions\pessimistic\PolygonRollupBaseEtrogPessimistic.sol:117:    // R parameter of the initialize signature
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\previousVersions\pessimistic\PolygonRollupBaseEtrogPessimistic.sol:121:    // S parameter of the initialize signature
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\previousVersions\pessimistic\PolygonRollupBaseEtrogPessimistic.sol:520:     * @param transactions L2 ethereum transactions EIP-155 or pre-EIP-155 with signature:
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\previousVersions\pessimistic\PolygonRollupBaseEtrogPessimistic.sol:801:        // Sanity check that the ecrecover will work
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\previousVersions\pessimistic\PolygonRollupBaseEtrogPessimistic.sol:802:        // Should never happen that giving a valid signature, ecrecover "breaks"
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\previousVersions\pessimistic\PolygonRollupBaseEtrogPessimistic.sol:803:        address signer = ecrecover(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\previousVersions\pessimistic\IPolygonZkEVMBridgeV2Pessimistic.sol:48:     * @dev Thrown when the owner of permit does not match the sender
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\previousVersions\pessimistic\IPolygonZkEVMBridgeV2Pessimistic.sol:53:     * @dev Thrown when the spender of the permit does not match this contract address
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\previousVersions\pessimistic\IPolygonZkEVMBridgeV2Pessimistic.sol:58:     * @dev Thrown when the amount of the permit does not match
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\previousVersions\pessimistic\IPolygonZkEVMBridgeV2Pessimistic.sol:63:     * @dev Thrown when the permit data contains an invalid signature
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\previousVersions\pessimistic\IPolygonZkEVMBridgeV2Pessimistic.sol:73:     * @dev Thrown when the permit data contains an invalid signature
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\previousVersions\pessimistic\IPolygonZkEVMBridgeV2Pessimistic.sol:78:     * @dev Thrown when the permit data contains an invalid signature
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\previousVersions\pessimistic\IPolygonZkEVMBridgeV2Pessimistic.sol:83:     * @dev Thrown when the permit data contains an invalid signature
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\previousVersions\pessimistic\IPolygonZkEVMBridgeV2Pessimistic.sol:108:        bytes calldata permitData
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\periphery\ClaimCompressor.sol:23:    // 4 bytes signature
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\periphery\ClaimCompressor.sol:256:            //     4, // Memory offset, signature = 4 bytes
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\periphery\ClaimCompressor.sol:263:            //     add(4, _BYTE_LEN_CONSTANT_ARRAYS), // Memory offset, signature + smtProofLocalExitRoot = 32 * 32 bytes + 4 bytes
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\periphery\ClaimCompressor.sol:270:                add(4, mul(65, 32)), // Memory offset, signature + smtProofLocalExitRoot + smtProofRollupExitRoot + globalIndex = 65 * 32 bytes + 4 bytes
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\periphery\ClaimCompressor.sol:277:                add(4, mul(66, 32)), // Memory offset, signature + smtProofLocalExitRoot + smtProofRollupExitRoot + globalIndex + mainnetExitRoot = 66 * 32 bytes + 4 bytes
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\periphery\ClaimCompressor.sol:284:            // Memory offset, signature + smtProofLocalExitRoot + smtProofRollupExitRoot +
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\periphery\ClaimCompressor.sol:290:            // Memory offset, signature + smtProofLocalExitRoot + smtProofRollupExitRoot +
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\periphery\ClaimCompressor.sol:330:                    // Write asset signature
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\periphery\BatchL2DataCreatedRollup.sol:85:        // Sanity check that the ecrecover will work
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\periphery\BatchL2DataCreatedRollup.sol:86:        // Should never happen that giving a valid signature, ecrecover "breaks"
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\periphery\BatchL2DataCreatedRollup.sol:87:        address signer = ecrecover(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\previousVersions\pessimistic\BridgeL2SovereignChainPessimistic.sol:510:     * @notice Function to call token permit method of extended ERC20
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\previousVersions\pessimistic\BridgeL2SovereignChainPessimistic.sol:514:     * @param permitData Raw data of the call `permit` of the token
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\previousVersions\pessimistic\BridgeL2SovereignChainPessimistic.sol:516:    function _permit(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\previousVersions\pessimistic\BridgeL2SovereignChainPessimistic.sol:519:        bytes calldata permitData
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\previousVersions\pessimistic\BridgeL2SovereignChainPessimistic.sol:521:        bytes4 sig = bytes4(permitData[:4]);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\previousVersions\pessimistic\BridgeL2SovereignChainPessimistic.sol:532:                    permitData[4:],
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\previousVersions\pessimistic\BridgeL2SovereignChainPessimistic.sol:549:            // the following transferFrom should be fail. This prevents DoS attacks from using a signature
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\previousVersions\pessimistic\BridgeL2SovereignChainPessimistic.sol:579:                    permitData[4:],
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\previousVersions\pessimistic\BridgeL2SovereignChainPessimistic.sol:593:            // the following transferFrom should be fail. This prevents DoS attacks from using a signature
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\previousVersions\10.1.0\BridgeL2SovereignChainV1010.sol:572:        bytes calldata permitData
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\previousVersions\10.1.0\BridgeL2SovereignChainV1010.sol:574:        // Use permit if any
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\previousVersions\10.1.0\BridgeL2SovereignChainV1010.sol:575:        if (permitData.length != 0) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\previousVersions\10.1.0\BridgeL2SovereignChainV1010.sol:576:            _permit(legacyTokenAddress, permitData);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\PolygonZkEVMBridgeV2.sol:43:    // bytes4(keccak256(bytes("permit(address,address,uint256,uint256,uint8,bytes32,bytes32)")));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\PolygonZkEVMBridgeV2.sol:46:    // bytes4(keccak256(bytes("permit(address,address,uint256,uint256,bool,uint8,bytes32,bytes32)")));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\PolygonZkEVMBridgeV2.sol:307:     * @param permitData Raw data of the call `permit` of the token
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\PolygonZkEVMBridgeV2.sol:315:        bytes calldata permitData
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\PolygonZkEVMBridgeV2.sol:341:            // Use permit if any
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\PolygonZkEVMBridgeV2.sol:342:            if (permitData.length != 0) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\PolygonZkEVMBridgeV2.sol:343:                _permit(token, permitData);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\PolygonZkEVMBridgeV2.sol:1151:     * @notice Function to call token permit method of extended ERC20
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\PolygonZkEVMBridgeV2.sol:1153:     * @param permitData Raw data of the call `permit` of the token
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\PolygonZkEVMBridgeV2.sol:1155:    function _permit(address token, bytes calldata permitData) internal {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\PolygonZkEVMBridgeV2.sol:1156:        bytes4 sig = bytes4(permitData[:4]);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\PolygonZkEVMBridgeV2.sol:1167:                    permitData[4:],
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\PolygonZkEVMBridgeV2.sol:1192:            // the following transferFrom should be fail. This prevents DoS attacks from using a signature
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\PolygonZkEVMBridgeV2.sol:1222:                    permitData[4:],
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\PolygonZkEVMBridgeV2.sol:1244:            // the following transferFrom should be fail. This prevents DoS attacks from using a signature
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\lib\PolygonRollupBaseEtrog.sol:32:     * @param transactions L2 ethereum transactions EIP-155 or pre-EIP-155 with signature:
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\lib\PolygonRollupBaseEtrog.sol:52:    // In order to process the transaction, the data is approximately hashed twice for ecrecover:
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\lib\PolygonRollupBaseEtrog.sol:79:    // TxData bytes: 164 bytes data ( signature 4 bytes + 5 parameters*32bytes +
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\lib\PolygonRollupBaseEtrog.sol:96:    // TxData empty metadata bytes: 164 bytes data ( signature 4 bytes + 5 parameters*32bytes +
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\lib\PolygonRollupBaseEtrog.sol:114:    // V parameter of the initialize signature
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\lib\PolygonRollupBaseEtrog.sol:117:    // R parameter of the initialize signature
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\lib\PolygonRollupBaseEtrog.sol:121:    // S parameter of the initialize signature
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\lib\PolygonRollupBaseEtrog.sol:520:     * @param transactions L2 ethereum transactions EIP-155 or pre-EIP-155 with signature:
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\lib\PolygonRollupBaseEtrog.sol:801:        // Sanity check that the ecrecover will work
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\lib\PolygonRollupBaseEtrog.sol:802:        // Should never happen that giving a valid signature, ecrecover "breaks"
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\lib\PolygonRollupBaseEtrog.sol:803:        address signer = ecrecover(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\token-wrapped-bridge-compiled\TokenWrappedBridge.sol:2:// Implementation of permit based on https://github.com/WETH10/WETH10/blob/main/contracts/WETH10.sol
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\token-wrapped-bridge-compiled\TokenWrappedBridge.sol:73:    function permit(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\token-wrapped-bridge-compiled\TokenWrappedBridge.sol:84:            "TokenWrapped::permit: Expired permit"
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\token-wrapped-bridge-compiled\TokenWrappedBridge.sol:102:        address signer = ecrecover(digest, v, r, s);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\token-wrapped-bridge-compiled\TokenWrappedBridge.sol:105:            "TokenWrapped::permit: Invalid signature"
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\AggLayerGateway.sol:233:     * @dev First 2 bytes of the selector  are the 'verification key identifier', the last 2 bytes are the aggchain type (ex: FEP, ECDSA)
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\aggchains\AggchainFEP.sol:94:    ///         and a trustedSequencer signature is needed to do a state transition.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\aggchains\AggchainECDSA.sol:7: * @title AggchainECDSA
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\aggchains\AggchainECDSA.sol:8: * @notice Generic aggchain based on ECDSA signature.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\aggchains\AggchainECDSA.sol:13:contract AggchainECDSA is AggchainBase {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\aggchains\AggchainECDSA.sol:32:    event OnVerifyPessimisticECDSA(bytes32 newStateRoot);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\aggchains\AggchainECDSA.sol:85:     * @dev The reinitializer(2) is set to support the upgrade from PolygonPessimisticConsensus to AggchainECDSA, where PolygonPessimisticConsensus is already initialized
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\aggchains\AggchainECDSA.sol:141:            // Only need to initialize values that are specific for ECDSA because we are performing an upgrade from a Pessimistic chain
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\aggchains\AggchainECDSA.sol:234:        emit OnVerifyPessimisticECDSA(newStateRoot);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\consensus\validium\PolygonValidiumEtrog.sol:22:     * @param transactionsHash keccak256 hash of the L2 ethereum transactions EIP-155 or pre-EIP-155 with signature:
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\consensus\validium\PolygonValidiumEtrog.sol:86:     * @param dataAvailabilityMessage Byte array containing the signatures and all the addresses of the committee in ascending order
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\consensus\validium\PolygonValidiumEtrog.sol:87:     * [signature 0, ..., signature requiredAmountOfSignatures -1, address 0, ... address N]
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\consensus\validium\PolygonValidiumEtrog.sol:88:     * note that each ECDSA signatures are used, therefore each one must be 65 bytes
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\consensus\validium\PolygonDataCommittee.sol:7:import "@openzeppelin/contracts4/utils/cryptography/ECDSA.sol";
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\consensus\validium\PolygonDataCommittee.sol:31:    // Size of a signature in bytes
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\consensus\validium\PolygonDataCommittee.sol:37:    // Specifies the required amount of signatures from members in the data availability committee
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\consensus\validium\PolygonDataCommittee.sol:66:     * The system will require N / M signatures where N => _requiredAmountOfSignatures and M => urls.length
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\consensus\validium\PolygonDataCommittee.sol:69:     * @param _requiredAmountOfSignatures Required amount of signatures
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\consensus\validium\PolygonDataCommittee.sol:121:     * @param signaturesAndAddrs Byte array containing the signatures and all the addresses of the committee in ascending order
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\consensus\validium\PolygonDataCommittee.sol:122:     * [signature 0, ..., signature requiredAmountOfSignatures -1, address 0, ... address N]
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\consensus\validium\PolygonDataCommittee.sol:123:     * note that each ECDSA signatures are used, therefore each one must be 65 bytes
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\consensus\validium\PolygonDataCommittee.sol:127:        bytes calldata signaturesAndAddrs
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\consensus\validium\PolygonDataCommittee.sol:135:            signaturesAndAddrs.length < splitByte ||
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\consensus\validium\PolygonDataCommittee.sol:136:            (signaturesAndAddrs.length - splitByte) % _ADDR_SIZE != 0
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\consensus\validium\PolygonDataCommittee.sol:142:        if (keccak256(signaturesAndAddrs[splitByte:]) != committeeHash) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\consensus\validium\PolygonDataCommittee.sol:146:        // recover addresses from signatures and check that are part of the committee
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\consensus\validium\PolygonDataCommittee.sol:148:        uint256 addrsLen = (signaturesAndAddrs.length - splitByte) / _ADDR_SIZE;
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\consensus\validium\PolygonDataCommittee.sol:152:            // Recover currnet signer from the signature
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\consensus\validium\PolygonDataCommittee.sol:153:            address currentSigner = ECDSA.recover(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\consensus\validium\PolygonDataCommittee.sol:155:                signaturesAndAddrs[currentSignatureStartingByte:currentSignatureStartingByte +
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\consensus\validium\PolygonDataCommittee.sol:165:                        signaturesAndAddrs[currentAddresStartingByte:currentAddresStartingByte +
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\consensus\validium\PolygonDataCommittee.sol:176:            // If an address is not on the comittee, or not enough required signatures are provided
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\interfaces\IPolygonZkEVMBridgeV2.sol:48:     * @dev Thrown when the owner of permit does not match the sender
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\interfaces\IPolygonZkEVMBridgeV2.sol:53:     * @dev Thrown when the spender of the permit does not match this contract address
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\interfaces\IPolygonZkEVMBridgeV2.sol:58:     * @dev Thrown when the amount of the permit does not match
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\interfaces\IPolygonZkEVMBridgeV2.sol:63:     * @dev Thrown when the permit data contains an invalid signature
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\interfaces\IPolygonZkEVMBridgeV2.sol:73:     * @dev Thrown when the permit data contains an invalid signature
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\interfaces\IPolygonZkEVMBridgeV2.sol:78:     * @dev Thrown when the permit data contains an invalid signature
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\interfaces\IPolygonZkEVMBridgeV2.sol:83:     * @dev Thrown when the permit data contains an invalid signature
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\interfaces\IPolygonZkEVMBridgeV2.sol:148:        bytes calldata permitData
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\interfaces\IPolygonDataCommitteeErrors.sol:22:     * @dev Thrown when the required amount of signatures is greater than the amount of members
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\interfaces\IPolygonDataCommitteeErrors.sol:32:     * @dev Thrown when the signature of a DA hash doesn't belong to any member of the committee
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\interfaces\IPolygonDataCommitteeErrors.sol:37:     * @dev Thrown when the addresses and signatures byte array length has an unexpected size

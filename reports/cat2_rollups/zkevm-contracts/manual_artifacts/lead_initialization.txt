@@ -1,0 +1,124 @@
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\PolygonZkEVMBridge.sol:82:    ) external virtual initializer {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\PolygonZkEVMBridge.sol:88:        __ReentrancyGuard_init();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\PolygonZkEVM.sol:406:    ) external initializer {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\PolygonZkEVM.sol:441:        __Ownable_init_unchained();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\sovereignChains\GlobalExitRootManagerL2SovereignChain.sol:111:        _disableInitializers();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\sovereignChains\GlobalExitRootManagerL2SovereignChain.sol:123:    ) external virtual initializer {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\sovereignChains\BridgeL2SovereignChain.sol:45:    /// @dev Deprecated in favor of _initializerVersion at PolygonZkEVMBridgeV2
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\sovereignChains\BridgeL2SovereignChain.sol:46:    /// @custom:oz-renamed-from _initializerVersion
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\sovereignChains\BridgeL2SovereignChain.sol:47:    uint8 private _initializerVersionLegacy;
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\sovereignChains\BridgeL2SovereignChain.sol:163:     * Disable initializers on the implementation following the best practices
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\sovereignChains\BridgeL2SovereignChain.sol:166:        _disableInitializers();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\sovereignChains\BridgeL2SovereignChain.sol:170:     * @dev initializer function to set the initial values of the contract when the contract is deployed for the first time
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\sovereignChains\BridgeL2SovereignChain.sol:199:    ) public virtual reinitializer(3) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\sovereignChains\BridgeL2SovereignChain.sol:276:        __ReentrancyGuard_init();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\sovereignChains\BridgeL2SovereignChain.sol:280:     * @notice Override the function to prevent the contract from being initialized with this initializer
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\sovereignChains\BridgeL2SovereignChain.sol:292:        initializer
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\mocks\PolygonZkEVMBridgeMock.sol:21:    ) public override initializer {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\mocks\PolygonZkEVMBridgeMock.sol:29:        __Ownable_init_unchained();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\mocks\DepositContractMock.sol:15:    function initialize() public initializer {}
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\previousVersions\PolygonRollupManagerPreviousV1toV2.sol:370:        _disableInitializers();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\previousVersions\PolygonRollupManagerPreviousV1toV2.sol:396:    ) external virtual reinitializer(2) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\previousVersions\PolygonRollupManagerPreviousV1toV2.sol:406:        __AccessControl_init();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\previousVersions\PolygonRollupManagerPrevious.sol:380:        _disableInitializers();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\previousVersions\PolygonRollupBaseEtrogPrevious.sol:288:        _disableInitializers();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\previousVersions\PolygonRollupBaseEtrogPrevious.sol:307:    ) external virtual onlyRollupManager initializer {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\previousVersions\pessimistic\PolygonZkEVMGlobalExitRootV2Pessimistic.sol:59:        // disable initializers
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\previousVersions\pessimistic\PolygonZkEVMGlobalExitRootV2Pessimistic.sol:60:        _disableInitializers();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\previousVersions\pessimistic\PolygonZkEVMGlobalExitRootV2Pessimistic.sol:66:    function initialize() external virtual initializer {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\previousVersions\pessimistic\PolygonZkEVMExistentEtrogPessimistic.sol:70:     * note This initializer will be called instead of the PolygonRollupBase
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\previousVersions\pessimistic\PolygonZkEVMExistentEtrogPessimistic.sol:71:     * This is a especial initializer since the zkEVM it's an already created network
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\previousVersions\pessimistic\PolygonZkEVMExistentEtrogPessimistic.sol:84:    ) external onlyRollupManager initializer {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\previousVersions\pessimistic\PolygonZkEVMBridgeV2Pessimistic.sol:141:        _disableInitializers();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\previousVersions\pessimistic\PolygonZkEVMBridgeV2Pessimistic.sol:161:    ) external virtual initializer {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\previousVersions\pessimistic\PolygonZkEVMBridgeV2Pessimistic.sol:188:        __ReentrancyGuard_init();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\previousVersions\pessimistic\PolygonRollupManagerPessimistic.sol:407:        _disableInitializers();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\previousVersions\pessimistic\PolygonRollupManagerPessimistic.sol:413:    function initialize() external virtual reinitializer(3) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\previousVersions\pessimistic\PolygonRollupBaseEtrogPessimistic.sol:236:        initializer
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\previousVersions\pessimistic\PolygonConsensusBasePessimistic.sol:128:        // Disable initializers on the implementation following the best practices
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\previousVersions\pessimistic\PolygonConsensusBasePessimistic.sol:129:        _disableInitializers();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\previousVersions\pessimistic\PolygonConsensusBasePessimistic.sol:147:    ) external virtual onlyRollupManager initializer {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\previousVersions\pessimistic\GlobalExitRootManagerL2SovereignChainPessimistic.sol:50:        _disableInitializers();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\previousVersions\pessimistic\GlobalExitRootManagerL2SovereignChainPessimistic.sol:61:    ) external virtual initializer {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\previousVersions\pessimistic\BridgeL2SovereignChainPessimistic.sol:70:     * Disable initializers on the implementation following the best practices
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\previousVersions\pessimistic\BridgeL2SovereignChainPessimistic.sol:73:        _disableInitializers();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\previousVersions\pessimistic\BridgeL2SovereignChainPessimistic.sol:99:    ) public virtual initializer {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\previousVersions\pessimistic\BridgeL2SovereignChainPessimistic.sol:146:        __ReentrancyGuard_init();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\previousVersions\pessimistic\BridgeL2SovereignChainPessimistic.sol:150:     * @notice Override the function to prevent the contract from being initialized with this initializer
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\previousVersions\pessimistic\BridgeL2SovereignChainPessimistic.sol:165:        initializer
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\newDeployments\PolygonRollupManagerNotUpgraded.sol:33:    ) external reinitializer(5) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\newDeployments\PolygonRollupManagerNotUpgraded.sol:38:        __AccessControl_init();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\previousVersions\10.1.0\BridgeL2SovereignChainV1010.sol:45:    /// @dev Deprecated in favor of _initializerVersion at PolygonZkEVMBridgeV2
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\previousVersions\10.1.0\BridgeL2SovereignChainV1010.sol:46:    /// @custom:oz-renamed-from _initializerVersion
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\previousVersions\10.1.0\BridgeL2SovereignChainV1010.sol:47:    uint8 private _initializerVersionLegacy;
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\previousVersions\10.1.0\BridgeL2SovereignChainV1010.sol:171:     * Disable initializers on the implementation following the best practices
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\previousVersions\10.1.0\BridgeL2SovereignChainV1010.sol:174:        _disableInitializers();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\previousVersions\10.1.0\BridgeL2SovereignChainV1010.sol:178:     * @dev initializer function to set the initial values of the contract when the contract is deployed for the first time
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\previousVersions\10.1.0\BridgeL2SovereignChainV1010.sol:207:    ) public virtual getInitializedVersion reinitializer(3) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\previousVersions\10.1.0\BridgeL2SovereignChainV1010.sol:208:        if (_initializerVersion != 0) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\previousVersions\10.1.0\BridgeL2SovereignChainV1010.sol:288:        __ReentrancyGuard_init();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\previousVersions\10.1.0\BridgeL2SovereignChainV1010.sol:304:    ) public getInitializedVersion reinitializer(3) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\previousVersions\10.1.0\BridgeL2SovereignChainV1010.sol:305:        if (_initializerVersion == 0) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\previousVersions\10.1.0\BridgeL2SovereignChainV1010.sol:355:     * @notice Override the function to prevent the contract from being initialized with this initializer
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\previousVersions\10.1.0\BridgeL2SovereignChainV1010.sol:367:        initializer
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\PolygonZkEVMGlobalExitRootV2.sol:64:        // disable initializers
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\PolygonZkEVMGlobalExitRootV2.sol:65:        _disableInitializers();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\PolygonZkEVMGlobalExitRootV2.sol:71:    function initialize() external virtual initializer {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\PolygonZkEVMBridgeV2.sol:113:    ///         This mechanism is used to properly select the initializer
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\PolygonZkEVMBridgeV2.sol:114:    uint8 internal _initializerVersion;
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\PolygonZkEVMBridgeV2.sol:177:    /// @dev Modifier to retrieve initializer version value previous on using the reinitializer modifier, its used in the initialize function.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\PolygonZkEVMBridgeV2.sol:179:        _initializerVersion = _getInitializedVersion();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\PolygonZkEVMBridgeV2.sol:182:        _initializerVersion = 0;
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\PolygonZkEVMBridgeV2.sol:195:        // Disable initializers on the implementation following the best practices
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\PolygonZkEVMBridgeV2.sol:196:        _disableInitializers();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\PolygonZkEVMBridgeV2.sol:216:    ) external virtual getInitializedVersion reinitializer(2) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\PolygonZkEVMBridgeV2.sol:217:        if (_initializerVersion != 0) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\PolygonZkEVMBridgeV2.sol:250:        __ReentrancyGuard_init();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\PolygonZkEVMBridgeV2.sol:254:     * @notice initializer to set PolygonTimelock as proxiedTokensManager
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\PolygonZkEVMBridgeV2.sol:260:        reinitializer(2)
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\PolygonZkEVMBridgeV2.sol:262:        if (_initializerVersion == 0) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\PolygonRollupManager.sol:488:        // Disable initializers on the implementation following the best practices
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\PolygonRollupManager.sol:489:        _disableInitializers();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\PolygonRollupManager.sol:495:    function initialize() external virtual reinitializer(5) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\mocks\PolygonRollupManagerMock.sol:35:    ) external reinitializer(4) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\mocks\PolygonRollupManagerMock.sol:45:        __AccessControl_init();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\lib\TokenWrappedBridgeUpgradeable.sol:53:     * @dev Disable initializers on the implementation following the best practices.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\lib\TokenWrappedBridgeUpgradeable.sol:56:        // disable initializers for implementation contract
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\lib\TokenWrappedBridgeUpgradeable.sol:57:        _disableInitializers();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\lib\TokenWrappedBridgeUpgradeable.sol:67:    ) external initializer {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\lib\TokenWrappedBridgeUpgradeable.sol:69:        __ERC20_init(name, symbol);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\lib\TokenWrappedBridgeUpgradeable.sol:71:        __ERC20Permit_init(name);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\lib\PolygonRollupBaseEtrog.sol:236:        initializer
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\lib\PolygonConsensusBase.sol:130:        // Disable initializers on the implementation following the best practices
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\lib\PolygonConsensusBase.sol:131:        _disableInitializers();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\lib\PolygonConsensusBase.sol:149:    ) external virtual onlyRollupManager initializer {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\lib\PolygonAccessControlUpgradeable.sol:25:    function __AccessControl_init() internal onlyInitializing {}
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\lib\LegacyZKEVMStateVariables.sol:8: * The variables will be used by the RollupManager only for initialize the zkEVM inside the initializer function
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\lib\AggchainBase.sol:204:     * @notice Override the function to prevent the contract from being initialized with the initializer implemented at PolygonConsensusBase.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\consensus\zkEVM\PolygonZkEVMExistentEtrog.sol:68:     * note This initializer will be called instead of the PolygonRollupBase
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\consensus\zkEVM\PolygonZkEVMExistentEtrog.sol:69:     * This is a especial initializer since the zkEVM it's an already created network
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\consensus\zkEVM\PolygonZkEVMExistentEtrog.sol:82:    ) external onlyRollupManager initializer {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\aggchains\AggchainFEP.sol:48:    uint8 private transient _initializerVersion;
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\aggchains\AggchainFEP.sol:224:    /// @dev Modifier to retrieve initializer version value previous on using the reinitializer modifier, its used in the initialize function.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\aggchains\AggchainFEP.sol:226:        _initializerVersion = _getInitializedVersion();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\aggchains\AggchainFEP.sol:275:    ) external onlyAggchainManager getInitializedVersion reinitializer(2) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\aggchains\AggchainFEP.sol:277:        if (_initializerVersion == 0) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\aggchains\AggchainFEP.sol:332:        } else if (_initializerVersion == 1) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\aggchains\AggchainFEP.sol:367:            // This case should never happen because reinitializer is 2 so initializer version is 0 or 1, but it's here to avoid any possible future issue if the reinitializer version is increased
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\aggchains\AggchainECDSA.sol:17:    uint8 private transient _initializerVersion;
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\aggchains\AggchainECDSA.sol:43:    // @dev Modifier to retrieve initializer version value previous on using the reinitializer modifier, its used in the initialize function.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\aggchains\AggchainECDSA.sol:45:        // Get initializer version from OZ initializer smart contract
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\aggchains\AggchainECDSA.sol:46:        _initializerVersion = _getInitializedVersion();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\aggchains\AggchainECDSA.sol:85:     * @dev The reinitializer(2) is set to support the upgrade from PolygonPessimisticConsensus to AggchainECDSA, where PolygonPessimisticConsensus is already initialized
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\aggchains\AggchainECDSA.sol:89:    ) external onlyAggchainManager getInitializedVersion reinitializer(2) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\aggchains\AggchainECDSA.sol:90:        // If initializer version is 0, it means that the chain is being initialized for the first time, so the contract has just been deployed, is not an upgrade
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\aggchains\AggchainECDSA.sol:91:        if (_initializerVersion == 0) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\aggchains\AggchainECDSA.sol:140:        } else if (_initializerVersion == 1) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\aggchains\AggchainECDSA.sol:170:            // This case should never happen because reinitializer is 2 so initializer version is 0 or 1, but it's here to avoid any possible future issue if the reinitializer version is increased
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\consensus\validium\PolygonDataCommittee.sol:56:        _disableInitializers();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\consensus\validium\PolygonDataCommittee.sol:59:    function initialize() external initializer {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\consensus\validium\PolygonDataCommittee.sol:61:        __Ownable_init_unchained();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\AggLayerGateway.sol:61:     * @dev Disable initializers on the implementation following the best practices.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\AggLayerGateway.sol:64:        // disable initializers for implementation contract
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\AggLayerGateway.sol:65:        _disableInitializers();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\AggLayerGateway.sol:90:    ) external initializer {

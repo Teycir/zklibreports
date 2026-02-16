@@ -1,0 +1,9 @@
+﻿{
+    "generated_at_utc":  "2026-02-16 16:41:27 UTC",
+    "harness_contract":  "MedusaHyperlaneFeeTransferHarness",
+    "harness_source":  "src/MedusaHyperlaneFeeTransferHarness.sol",
+    "note":  "Echidna retry using single worker due intermittent MVar crash on default run.",
+    "echidna_retry_command":  "powershell -NoProfile -ExecutionPolicy Bypass -File ..\\..\\scripts\\echidna.ps1 src/MedusaHyperlaneFeeTransferHarness.sol --contract MedusaHyperlaneFeeTransferHarness --test-mode property --seq-len 10 --test-limit 20000 --timeout 30 --workers 1 --format text --corpus-dir echidna-corpus-h3-formal",
+    "artifact":  "reports/cat1_bridges/hyperlane-monorepo/manual_artifacts/h3_fee_transfer_sender_tax_formal_echidna_30s_retry_workers1.txt",
+    "exit_code":  1
+}

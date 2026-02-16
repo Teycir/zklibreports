@@ -12,3 +12,9 @@
 ## Notes
 - This is an automated baseline (no repo build steps executed). Treat findings as leads until reproduced.
 - Many security tools use non-zero exit codes to indicate findings; see raw JSON for details.
+
+## Manual Audit Progress
+- Manual report: `reports/cat1_bridges/connext-monorepo/manual_audit.md`
+- Pass status: in progress.
+- Proven (model + fuzz + specialist):
+  - F1 router liquidity withdrawal can undercollateralize remaining router balances under sender-tax payout token behavior.

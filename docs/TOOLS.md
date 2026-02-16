@@ -158,6 +158,18 @@ Concrete in-repo example (Category 1 / Nomad):
 - LayerZero-v2 full-source parity run artifacts: `reports/cat1_bridges/LayerZero-v2/manual_artifacts/h1_fullsource_parity_oft_adapter_forge_test.txt`, `reports/cat1_bridges/LayerZero-v2/manual_artifacts/h2_fullsource_parity_delegate_stale_forge_test.txt`, `reports/cat1_bridges/LayerZero-v2/manual_artifacts/h3_fullsource_lztoken_residual_sweep_forge_test.txt`
 - Hyperlane fee-on-transfer collateral harness: `proof_harness/cat1_hyperlane_f1_collateral_fee_on_transfer/src/MedusaHyperlaneCollateralFeeHarness.sol`
 - Hyperlane fee-on-transfer collateral run artifact: `reports/cat1_bridges/hyperlane-monorepo/manual_artifacts/h1_collateral_fee_on_transfer_formal_medusa_30s.txt`
+- Hyperlane LP-asset overstatement harness: `proof_harness/cat1_hyperlane_f1_collateral_fee_on_transfer/src/MedusaHyperlaneLpAssetsHarness.sol`
+- Hyperlane LP-asset overstatement run artifact: `reports/cat1_bridges/hyperlane-monorepo/manual_artifacts/h2_lp_assets_overstatement_formal_medusa_30s.txt`
+- Hyperlane fee-transfer sender-tax harness: `proof_harness/cat1_hyperlane_f1_collateral_fee_on_transfer/src/MedusaHyperlaneFeeTransferHarness.sol`
+- Hyperlane fee-transfer sender-tax run artifact: `reports/cat1_bridges/hyperlane-monorepo/manual_artifacts/h3_fee_transfer_sender_tax_formal_medusa_30s.txt`
+- Synapse deposit fee-on-transfer harness: `proof_harness/cat1_synapse_f1_deposit_fee_on_transfer/src/MedusaSynapseDepositFeeHarness.sol`
+- Synapse deposit fee-on-transfer run artifact: `reports/cat1_bridges/synapse-contracts/manual_artifacts/f1_deposit_fee_on_transfer_formal_medusa_30s.txt`
+- Synapse role-escalation blast-radius harness: `proof_harness/cat1_synapse_f2_f3_role_minout/src/MedusaSynapseRoleEscalationHarness.sol`
+- Synapse role-escalation blast-radius run artifact: `reports/cat1_bridges/synapse-contracts/manual_artifacts/f2_role_escalation_blast_radius_formal_medusa_30s.txt`
+- Synapse min-out receipt-mismatch harness: `proof_harness/cat1_synapse_f2_f3_role_minout/src/MedusaSynapseMinOutHarness.sol`
+- Synapse min-out receipt-mismatch run artifact: `reports/cat1_bridges/synapse-contracts/manual_artifacts/f3_min_out_receipt_mismatch_formal_medusa_30s.txt`
+- Connext router sender-tax harness: `proof_harness/cat1_connext_f1_router_sender_tax/src/MedusaConnextRouterSenderTaxHarness.sol`
+- Connext router sender-tax run artifact: `reports/cat1_bridges/connext-monorepo/manual_artifacts/f1_router_sender_tax_formal_medusa_30s.txt`
 
 ## ZK / Circom
 

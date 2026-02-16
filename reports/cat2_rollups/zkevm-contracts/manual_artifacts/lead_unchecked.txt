@@ -1,0 +1,13 @@
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\mocks\ERC20InvalidMetadata.sol:200:        unchecked {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\mocks\ERC20InvalidMetadata.sol:236:        unchecked {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\mocks\ERC20InvalidMetadata.sol:263:        unchecked {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\mocks\ERC20InvalidMetadata.sol:290:        unchecked {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\mocks\ERC20InvalidMetadata.sol:345:            unchecked {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\mocks\ERC20WeirdMetadata.sol:202:        unchecked {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\mocks\ERC20WeirdMetadata.sol:238:        unchecked {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\mocks\ERC20WeirdMetadata.sol:265:        unchecked {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\mocks\ERC20WeirdMetadata.sol:292:        unchecked {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\mocks\ERC20WeirdMetadata.sol:347:            unchecked {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\PolygonZkEVM.sol:961:        unchecked {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\previousVersions\PolygonRollupManagerPreviousV1toV2.sol:1432:        unchecked {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\previousVersions\PolygonRollupManagerPrevious.sol:1479:        unchecked {

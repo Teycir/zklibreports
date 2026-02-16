@@ -1,0 +1,80 @@
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\verifiers\v5.0.0\PlonkVerifier.sol:522:                let l_success := staticcall(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\verifiers\v5.0.0\PlonkVerifier.sol:549:                let l_success := staticcall(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\verifiers\v5.0.0\PlonkVerifier.sol:597:                let l_success := staticcall(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\verifiers\v5.0.0\PlonkVerifier.sol:630:                let l_success := staticcall(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\verifiers\v5.0.0\PlonkVerifier.sol:833:                let l_success := staticcall(gas(), SHA2, mPtr, 0x8f, mPtr, 0x20)
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\verifiers\v5.0.0\PlonkVerifier.sol:857:                l_success := staticcall(gas(), SHA2, mPtr, 0x2d, mPtr, 0x20)
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\verifiers\v5.0.0\PlonkVerifier.sol:884:                l_success := staticcall(gas(), SHA2, offset, 0x2d, offset, 0x20)
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\verifiers\v5.0.0\PlonkVerifier.sol:968:                let random := staticcall(gas(), SHA2, mPtr, 0x140, mPtr, 0x20)
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\verifiers\v5.0.0\PlonkVerifier.sol:1011:                let check_staticcall := staticcall(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\verifiers\v5.0.0\PlonkVerifier.sol:1019:                if iszero(check_staticcall) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\verifiers\v5.0.0\PlonkVerifier.sol:1092:                let l_success := staticcall(gas(), 8, mPtr, 0x180, 0x00, 0x20)
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\verifiers\v5.0.0\PlonkVerifier.sol:1277:                let check_staticcall := staticcall(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\verifiers\v5.0.0\PlonkVerifier.sol:1285:                if iszero(check_staticcall) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\verifiers\v5.0.0\PlonkVerifier.sol:1628:                let l_success := staticcall(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\verifiers\v5.0.0\PlonkVerifier.sol:1650:                let l_success := staticcall(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\verifiers\v5.0.0\PlonkVerifier.sol:1671:                let l_success := staticcall(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\verifiers\v5.0.0\PlonkVerifier.sol:1692:                let l_success := staticcall(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\verifiers\v5.0.0\PlonkVerifier.sol:1714:                let l_success := staticcall(gas(), 7, mPtr, 0x60, mPtr, 0x40)
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\verifiers\v5.0.0\PlonkVerifier.sol:1719:                    staticcall(gas(), EC_ADD, mPtr, 0x80, dst, 0x40)
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\verifiers\v5.0.0\PlonkVerifier.sol:1735:                let l_success := staticcall(gas(), 7, mPtr, 0x60, mPtr, 0x40)
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\verifiers\v5.0.0\PlonkVerifier.sol:1740:                    staticcall(gas(), EC_ADD, mPtr, 0x80, dst, 0x40)
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\verifiers\v5.0.0\PlonkVerifier.sol:1767:                let check_staticcall := staticcall(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\verifiers\v5.0.0\PlonkVerifier.sol:1775:                if eq(check_staticcall, 0) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\PolygonZkEVMBridge.sol:726:            address(token).call(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\PolygonZkEVMBridge.sol:778:            address(token).call(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\PolygonZkEVMBridge.sol:801:        (bool success, bytes memory data) = address(token).staticcall(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\PolygonZkEVMBridge.sol:812:        (bool success, bytes memory data) = address(token).staticcall(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\PolygonZkEVMBridge.sol:824:        (bool success, bytes memory data) = address(token).staticcall(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\verifiers\previousVerifiers\FflonkVerifierIncaberry.sol:1918:                let success := staticcall(sub(gas(), 2000), 6, mIn, 128, pR, 64)
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\verifiers\previousVerifiers\FflonkVerifierIncaberry.sol:1934:                success := staticcall(sub(gas(), 2000), 7, mIn, 96, mIn, 64)
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\verifiers\previousVerifiers\FflonkVerifierIncaberry.sol:1944:                success := staticcall(sub(gas(), 2000), 6, mIn, 128, pR, 64)
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\verifiers\previousVerifiers\FflonkVerifierIncaberry.sol:1960:                success := staticcall(sub(gas(), 2000), 7, mIn, 96, mIn, 64)
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\verifiers\previousVerifiers\FflonkVerifierIncaberry.sol:1970:                success := staticcall(sub(gas(), 2000), 6, mIn, 128, pR, 64)
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\verifiers\previousVerifiers\FflonkVerifierIncaberry.sol:2106:                let success := staticcall(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\verifiers\previousVerifiers\FflonkVerifierEtrog.sol:1918:                let success := staticcall(sub(gas(), 2000), 6, mIn, 128, pR, 64)
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\verifiers\previousVerifiers\FflonkVerifierEtrog.sol:1934:                success := staticcall(sub(gas(), 2000), 7, mIn, 96, mIn, 64)
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\verifiers\previousVerifiers\FflonkVerifierEtrog.sol:1944:                success := staticcall(sub(gas(), 2000), 6, mIn, 128, pR, 64)
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\verifiers\previousVerifiers\FflonkVerifierEtrog.sol:1960:                success := staticcall(sub(gas(), 2000), 7, mIn, 96, mIn, 64)
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\verifiers\previousVerifiers\FflonkVerifierEtrog.sol:1970:                success := staticcall(sub(gas(), 2000), 6, mIn, 128, pR, 64)
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\verifiers\previousVerifiers\FflonkVerifierEtrog.sol:2106:                let success := staticcall(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\verifiers\FflonkVerifier_13.sol:1918:                let success := staticcall(sub(gas(), 2000), 6, mIn, 128, pR, 64)
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\verifiers\FflonkVerifier_13.sol:1934:                success := staticcall(sub(gas(), 2000), 7, mIn, 96, mIn, 64)
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\verifiers\FflonkVerifier_13.sol:1944:                success := staticcall(sub(gas(), 2000), 6, mIn, 128, pR, 64)
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\verifiers\FflonkVerifier_13.sol:1960:                success := staticcall(sub(gas(), 2000), 7, mIn, 96, mIn, 64)
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\verifiers\FflonkVerifier_13.sol:1970:                success := staticcall(sub(gas(), 2000), 6, mIn, 128, pR, 64)
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\verifiers\FflonkVerifier_13.sol:2106:                let success := staticcall(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\verifiers\FflonkVerifier_12.sol:1918:                let success := staticcall(sub(gas(), 2000), 6, mIn, 128, pR, 64)
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\verifiers\FflonkVerifier_12.sol:1934:                success := staticcall(sub(gas(), 2000), 7, mIn, 96, mIn, 64)
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\verifiers\FflonkVerifier_12.sol:1944:                success := staticcall(sub(gas(), 2000), 6, mIn, 128, pR, 64)
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\verifiers\FflonkVerifier_12.sol:1960:                success := staticcall(sub(gas(), 2000), 7, mIn, 96, mIn, 64)
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\verifiers\FflonkVerifier_12.sol:1970:                success := staticcall(sub(gas(), 2000), 6, mIn, 128, pR, 64)
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\verifiers\FflonkVerifier_12.sol:2106:                let success := staticcall(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\verifiers\FflonkVerifier_11.sol:1918:                let success := staticcall(sub(gas(), 2000), 6, mIn, 128, pR, 64)
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\verifiers\FflonkVerifier_11.sol:1934:                success := staticcall(sub(gas(), 2000), 7, mIn, 96, mIn, 64)
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\verifiers\FflonkVerifier_11.sol:1944:                success := staticcall(sub(gas(), 2000), 6, mIn, 128, pR, 64)
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\verifiers\FflonkVerifier_11.sol:1960:                success := staticcall(sub(gas(), 2000), 7, mIn, 96, mIn, 64)
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\verifiers\FflonkVerifier_11.sol:1970:                success := staticcall(sub(gas(), 2000), 6, mIn, 128, pR, 64)
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\verifiers\FflonkVerifier_11.sol:2106:                let success := staticcall(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\verifiers\FflonkVerifier_10.sol:1918:                let success := staticcall(sub(gas(), 2000), 6, mIn, 128, pR, 64)
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\verifiers\FflonkVerifier_10.sol:1934:                success := staticcall(sub(gas(), 2000), 7, mIn, 96, mIn, 64)
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\verifiers\FflonkVerifier_10.sol:1944:                success := staticcall(sub(gas(), 2000), 6, mIn, 128, pR, 64)
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\verifiers\FflonkVerifier_10.sol:1960:                success := staticcall(sub(gas(), 2000), 7, mIn, 96, mIn, 64)
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\verifiers\FflonkVerifier_10.sol:1970:                success := staticcall(sub(gas(), 2000), 6, mIn, 128, pR, 64)
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\verifiers\FflonkVerifier_10.sol:2106:                let success := staticcall(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\mocks\SendData.sol:16:        destination.call(data);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\PolygonZkEVMBridgeV2.sol:776:            (success, ) = destinationAddress.call(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\PolygonZkEVMBridgeV2.sol:1195:            address(token).call(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\PolygonZkEVMBridgeV2.sol:1247:            address(token).call(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\PolygonZkEVMBridgeV2.sol:1324:        (bool success, bytes memory data) = address(token).staticcall(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\PolygonZkEVMBridgeV2.sol:1335:        (bool success, bytes memory data) = address(token).staticcall(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\PolygonZkEVMBridgeV2.sol:1347:        (bool success, bytes memory data) = address(token).staticcall(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\periphery\ClaimCompressor.sol:523:                let success := call(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\previousVersions\pessimistic\PolygonZkEVMBridgeV2Pessimistic.sol:665:            (success, ) = destinationAddress.call(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\previousVersions\pessimistic\PolygonZkEVMBridgeV2Pessimistic.sol:999:            address(token).call(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\previousVersions\pessimistic\PolygonZkEVMBridgeV2Pessimistic.sol:1051:            address(token).call(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\previousVersions\pessimistic\PolygonZkEVMBridgeV2Pessimistic.sol:1102:        (bool success, bytes memory data) = address(token).staticcall(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\previousVersions\pessimistic\PolygonZkEVMBridgeV2Pessimistic.sol:1113:        (bool success, bytes memory data) = address(token).staticcall(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\previousVersions\pessimistic\PolygonZkEVMBridgeV2Pessimistic.sol:1125:        (bool success, bytes memory data) = address(token).staticcall(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\previousVersions\pessimistic\BridgeL2SovereignChainPessimistic.sol:552:            address(token).call(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\previousVersions\pessimistic\BridgeL2SovereignChainPessimistic.sol:596:            address(token).call(

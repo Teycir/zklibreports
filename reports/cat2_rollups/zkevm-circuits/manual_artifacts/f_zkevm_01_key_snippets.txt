@@ -1,0 +1,39 @@
+F-ZKEVM-01 key snippets (source-level)
+
+[1] Panic-prone decoder implementation
+File: \\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-circuits\aggregator\src\aggregation\decoder.rs
+
+5443: pub fn decode_bytes(bytes: &[u8]) -> std::io::Result<Vec<u8>> {
+5444:     let enable_encoding = bytes[0].eq(&1);
+...
+5452:     let mut encoded_bytes = bytes[1..].to_vec();
+5453:     let mut encoded_len = encoded_bytes.len();
+...
+5467:     encoded_len -= 1;
+5468:     encoded_bytes.truncate(encoded_len);
+
+Crash conditions witnessed by harness:
+- bytes = []              -> panic: index out of bounds at line 5444
+- bytes = [1]             -> panic: subtract with overflow at line 5467
+
+[2] Prover call path expects recoverable error, but panic escapes
+File: \\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-circuits\prover\src\aggregator\prover.rs
+
+351:         let decoded_blob_bytes =
+352:             decode_bytes(&batch.blob_bytes).map_err(|e| BatchProverError::Custom(e.to_string()))?;
+
+This callsite assumes decode failures are returned as Result::Err; panic bypasses this error handling.
+
+[3] Task input surface carries attacker/queue-controlled blob bytes
+File: \\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-circuits\prover\src\types.rs
+
+64: pub struct BatchProvingTask {
+66:     pub chunk_proofs: Vec<ChunkProofV2>,
+70:     pub batch_header: BatchHeader<MAX_AGG_SNARKS>,
+74:     pub blob_bytes: Vec<u8>,
+75: }
+
+[4] Deterministic witness harness
+Harness: proof_harness/cat2_zkevm_circuits_f1_decode_bytes_panic/src/lib.rs
+Artifact: reports/cat2_rollups/zkevm-circuits/manual_artifacts/f_zkevm_01_decode_bytes_panic_cargo_test.txt
+Command: RUSTC_BOOTSTRAP=1 cargo test -- --nocapture

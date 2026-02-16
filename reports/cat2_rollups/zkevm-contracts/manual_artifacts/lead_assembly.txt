@@ -1,0 +1,18 @@
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\verifiers\v5.0.0\PlonkVerifier.sol:212:        assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\verifiers\previousVerifiers\FflonkVerifierIncaberry.sol:190:        assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\mocks\ERC20Decimals.sol:95:        assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\verifiers\previousVerifiers\FflonkVerifierEtrog.sol:190:        assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\verifiers\FflonkVerifier_13.sol:190:        assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\verifiers\FflonkVerifier_12.sol:190:        assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\verifiers\FflonkVerifier_11.sol:190:        assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\verifiers\FflonkVerifier_10.sol:190:        assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\mocks\ERC20PermitMock.sol:87:        assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\mocks\ERC20InvalidMetadata.sol:46:        assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\mocks\ERC20InvalidMetadata.sol:52:        assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\mocks\Uni.sol:786:        assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\testnet\PolygonZkEVMTestnetClearStorage.sol:50:        assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\periphery\ClaimCompressor.sol:216:        assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\previousVersions\pessimistic\PolygonZkEVMBridgeV2Pessimistic.sol:1083:        assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\PolygonZkEVMBridgeV2.sol:1282:        assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\mocks\BridgeReceiverMock.sol:132:        // assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts\contracts\v2\lib\TokenWrappedBridgeUpgradeable.sol:133:        assembly {
