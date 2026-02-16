@@ -1,0 +1,117 @@
+    1: // SPDX-License-Identifier: MIT
+    2: 
+    3: pragma solidity ^0.8.24;
+    4: 
+    5: import {OwnableUpgradeable} from "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
+    6: import {ReentrancyGuardUpgradeable} from "@openzeppelin/contracts-upgradeable/security/ReentrancyGuardUpgradeable.sol";
+    7: 
+    8: import {IScrollGateway} from "./IScrollGateway.sol";
+    9: import {IScrollMessenger} from "../IScrollMessenger.sol";
+   10: import {IScrollGatewayCallback} from "../callbacks/IScrollGatewayCallback.sol";
+   11: import {ScrollConstants} from "../constants/ScrollConstants.sol";
+   12: 
+   13: /// @title ScrollGatewayBase
+   14: /// @notice The `ScrollGatewayBase` is a base contract for gateway contracts used in both in L1 and L2.
+   15: abstract contract ScrollGatewayBase is ReentrancyGuardUpgradeable, OwnableUpgradeable, IScrollGateway {
+   16:     /*************
+   17:      * Constants *
+   18:      *************/
+   19: 
+   20:     /// @inheritdoc IScrollGateway
+   21:     address public immutable override counterpart;
+   22: 
+   23:     /// @inheritdoc IScrollGateway
+   24:     address public immutable override router;
+   25: 
+   26:     /// @inheritdoc IScrollGateway
+   27:     address public immutable override messenger;
+   28: 
+   29:     /*************
+   30:      * Variables *
+   31:      *************/
+   32: 
+   33:     /// @dev The storage slot used as counterpart gateway contract, which is deprecated now.
+   34:     address private __counterpart;
+   35: 
+   36:     /// @dev The storage slot used as gateway router contract, which is deprecated now.
+   37:     address private __router;
+   38: 
+   39:     /// @dev The storage slot used as scroll messenger contract, which is deprecated now.
+   40:     address private __messenger;
+   41: 
+   42:     /// @dev The storage slot used as token rate limiter contract, which is deprecated now.
+   43:     address private __rateLimiter;
+   44: 
+   45:     /// @dev The storage slots for future usage.
+   46:     uint256[46] private __gap;
+   47: 
+   48:     /**********************
+   49:      * Function Modifiers *
+   50:      **********************/
+   51: 
+   52:     modifier onlyCallByCounterpart() {
+   53:         // check caller is messenger
+   54:         if (_msgSender() != messenger) {
+   55:             revert ErrorCallerIsNotMessenger();
+   56:         }
+   57: 
+   58:         // check cross domain caller is counterpart gateway
+   59:         if (counterpart != IScrollMessenger(messenger).xDomainMessageSender()) {
+   60:             revert ErrorCallerIsNotCounterpartGateway();
+   61:         }
+   62:         _;
+   63:     }
+   64: 
+   65:     modifier onlyInDropContext() {
+   66:         // check caller is messenger
+   67:         if (_msgSender() != messenger) {
+   68:             revert ErrorCallerIsNotMessenger();
+   69:         }
+   70: 
+   71:         // check we are dropping message in ScrollMessenger.
+   72:         if (ScrollConstants.DROP_XDOMAIN_MESSAGE_SENDER != IScrollMessenger(messenger).xDomainMessageSender()) {
+   73:             revert ErrorNotInDropMessageContext();
+   74:         }
+   75:         _;
+   76:     }
+   77: 
+   78:     /***************
+   79:      * Constructor *
+   80:      ***************/
+   81: 
+   82:     constructor(
+   83:         address _counterpart,
+   84:         address _router,
+   85:         address _messenger
+   86:     ) {
+   87:         if (_counterpart == address(0) || _messenger == address(0)) {
+   88:             revert ErrorZeroAddress();
+   89:         }
+   90: 
+   91:         counterpart = _counterpart;
+   92:         router = _router;
+   93:         messenger = _messenger;
+   94:     }
+   95: 
+   96:     function _initialize(
+   97:         address,
+   98:         address,
+   99:         address
+  100:     ) internal {
+  101:         ReentrancyGuardUpgradeable.__ReentrancyGuard_init();
+  102:         OwnableUpgradeable.__Ownable_init();
+  103:     }
+  104: 
+  105:     /**********************
+  106:      * Internal Functions *
+  107:      **********************/
+  108: 
+  109:     /// @dev Internal function to forward calldata to target contract.
+  110:     /// @param _to The address of contract to call.
+  111:     /// @param _data The calldata passed to the contract.
+  112:     function _doCallback(address _to, bytes memory _data) internal {
+  113:         if (_data.length > 0 && _to.code.length > 0) {
+  114:             IScrollGatewayCallback(_to).onScrollGatewayCallback(_data);
+  115:         }
+  116:     }
+  117: }

@@ -1,0 +1,16 @@
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\trailblazers-season-2\TrailblazersBadgesS2.sol:84:    function initialize(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\trailblazers-season-2\BadgeRecruitment.sol:235:    function initialize(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\trailblazers-badges\TrailblazersBadges.sol:52:    function initialize(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\trailblazers-badges\ECDSAWhitelist.sol:63:    function initialize(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\taikoon\TaikoonToken.sol:31:    function initialize(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\taikoon\MerkleWhitelist.sol:49:    function initialize(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\snaefell\SnaefellToken.sol:29:    function initialize(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\snaefell\MerkleWhitelist.sol:49:    function initialize(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\profile\RegisterProfilePicture.sol:33:    function initialize() public initializer {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\party-ticket\TaikoPartyTicket.sol:63:    function initialize(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\eventRegister\EventRegister.sol:92:    function initialize() external initializer {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\shared\vault\BridgedERC20V2.sol:38:    /// `reinitializer(2)` instead of `initializer`.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\shared\vault\BridgedERC20V2.sol:50:        reinitializer(2)
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\shared\vault\BridgedERC20V2.sol:66:    function init2() external reinitializer(2) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\layer1\mainnet\TaikoToken.sol:37:    function init2() external reinitializer(2) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\shared\bridge\Bridge.sol:126:    function init2() external onlyOwner reinitializer(2) {

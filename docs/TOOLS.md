@@ -1,6 +1,7 @@
 # Tools
 
 This is a quick reference for the tools we run and what "proof" typically looks like for each one.
+Formal process reference: `docs/METHODOLOGY.md`.
 
 ## Secrets
 
@@ -90,12 +91,80 @@ bolero = "0.11"
   - Host note: installed at `C:\\Users\\vboxuser\\go\\bin\\medusa.exe` (Go toolchain install).
   - Run (example): `powershell -NoProfile -ExecutionPolicy Bypass -File scripts/medusa.ps1 --version`
 
+### Specialist Fuzzer Playbook (EVM)
+
+Use this when you want a reproducible, witness-grade stateful fuzz run (not just static leads).
+
+1) Build a stateful harness:
+- Add mutating action functions (`action_*`) and invariants (`property_*`) in a dedicated harness contract.
+
+2) Initialize Medusa config in the harness directory:
+- `powershell -NoProfile -ExecutionPolicy Bypass -File ..\\..\\scripts\\medusa.ps1 init`
+
+3) Run a bounded fail-fast campaign:
+- `powershell -NoProfile -ExecutionPolicy Bypass -File ..\\..\\scripts\\medusa.ps1 fuzz --compilation-target . --target-contracts <HarnessContract> --seq-len 8 --workers 4 --timeout 30 --fail-fast --no-color --log-level info`
+
+3b) Optional Echidna cross-check on the same harness:
+- `powershell -NoProfile -ExecutionPolicy Bypass -File ..\\..\\scripts\\echidna.ps1 src/<Harness>.sol --contract <HarnessContract> --test-mode property --seq-len 10 --test-limit 20000 --timeout 30 --format text --corpus-dir echidna-corpus-<finding>`
+
+4) Interpret results correctly:
+- Medusa exits non-zero when a property fails; that is expected for a successful vulnerability witness.
+- Echidna exits non-zero when a property is falsified; that is also expected for a successful vulnerability witness.
+- Preserve the minimized call sequence and execution trace as an artifact.
+
+5) Capture output to artifacts:
+- `powershell -NoProfile -ExecutionPolicy Bypass -File ..\\..\\scripts\\medusa.ps1 fuzz ... *>&1 | Tee-Object -FilePath reports/<category>/<repo>/manual_artifacts/<name>.txt`
+
+6) Preferred standardized runner:
+- `powershell -NoProfile -ExecutionPolicy Bypass -File scripts/evm_specialist_campaign.ps1 -HarnessDir <harness_dir> -HarnessContract <contract> -HarnessSource src/<harness>.sol -ArtifactDir reports/<category>/<repo>/manual_artifacts -ArtifactPrefix <finding_prefix> -EchidnaCorpusDir echidna-corpus-<finding>`
+- This writes:
+- Medusa output
+- Echidna output
+- campaign metadata JSON (commands, timestamps, exit codes)
+
+Concrete in-repo example (Category 1 / Nomad):
+- Harness: `proof_harness/cat1_nomad_f1_stale_replica/src/MedusaXcmF1Harness.sol`
+- Run output artifact: `reports/cat1_bridges/nomad-monorepo/manual_artifacts/f1_medusa_failfast_30s.txt`
+- Governance escalation harness: `proof_harness/cat1_nomad_f1_stale_replica/src/MedusaGovernanceTakeoverHarness.sol`
+- Governance run output artifact: `reports/cat1_bridges/nomad-monorepo/manual_artifacts/f4_medusa_governance_takeover_30s.txt`
+- Governance batch injection harness: `proof_harness/cat1_nomad_f1_stale_replica/src/MedusaGovernanceBatchInjectionHarness.sol`
+- Governance batch run output artifact: `reports/cat1_bridges/nomad-monorepo/manual_artifacts/f5_medusa_batch_injection_30s.txt`
+- Forged prefill dust-drain harness: `proof_harness/cat1_nomad_f1_stale_replica/src/MedusaBridgePrefillDustHarness.sol`
+- Forged prefill run output artifact: `reports/cat1_bridges/nomad-monorepo/manual_artifacts/f7_prefill_dust_formal_medusa_30s.txt`
+- Representation alias swap harness: `proof_harness/cat1_nomad_f1_stale_replica/src/MedusaTokenRegistryAliasHarness.sol`
+- Representation alias run output artifact: `reports/cat1_bridges/nomad-monorepo/manual_artifacts/f8_alias_swap_formal_medusa_30s.txt`
+- Governance domain-churn harness: `proof_harness/cat1_nomad_f1_stale_replica/src/MedusaGovernanceDomainChurnHarness.sol`
+- Governance domain-churn run output artifact: `reports/cat1_bridges/nomad-monorepo/manual_artifacts/f9_domain_churn_formal_medusa_30s.txt`
+- Governance domain-churn gas profile artifact: `reports/cat1_bridges/nomad-monorepo/manual_artifacts/f9_domain_churn_gas_profile_forge_test.txt`
+- Migrate-alias harness: `proof_harness/cat1_nomad_f1_stale_replica/src/MedusaTokenRegistryMigrateHarness.sol`
+- Migrate-alias run output artifact: `reports/cat1_bridges/nomad-monorepo/manual_artifacts/f10_migrate_alias_formal_medusa_30s.txt`
+- Wormhole metadata-method DoS harness: `proof_harness/cat1_wormhole_f1_metadata_dos/src/MedusaBridgeMetadataCompatHarness.sol`
+- Wormhole metadata-method DoS run output artifact: `reports/cat1_bridges/wormhole/manual_artifacts/w1_metadata_dos_formal_medusa_30s.txt`
+- Wormhole stale-guardian governance harness: `proof_harness/cat1_wormhole_f2_stale_guardian_governance/src/MedusaStaleGuardianGovernanceHarness.sol`
+- Wormhole stale-guardian governance run output artifact: `reports/cat1_bridges/wormhole/manual_artifacts/w2_stale_guardian_governance_formal_medusa_30s.txt`
+- Wormhole outbound sender-tax harness: `proof_harness/cat1_wormhole_f3_outbound_sender_tax_insolvency/src/MedusaOutboundSenderTaxHarness.sol`
+- Wormhole outbound sender-tax run output artifact: `reports/cat1_bridges/wormhole/manual_artifacts/w3_outbound_sender_tax_formal_medusa_30s.txt`
+- Wormhole reentrancy replay-guard harness: `proof_harness/cat1_wormhole_h2_reentrancy_replay_guard/src/MedusaReentrancyReplayHarness.sol`
+- Wormhole reentrancy replay-guard run output artifact: `reports/cat1_bridges/wormhole/manual_artifacts/h2_reentrancy_replay_guard_formal_medusa_30s.txt`
+- Nomad full-source parity harness: `proof_harness/cat1_nomad_parity_fullsource/test/NomadFullSourceParity.t.sol`
+- Nomad full-source parity run artifacts: `reports/cat1_bridges/nomad-monorepo/manual_artifacts/h1_fullsource_parity_forge_test.txt`, `reports/cat1_bridges/nomad-monorepo/manual_artifacts/h2_fullsource_parity_forge_test.txt`
+- LayerZero-v2 OFT lossless-assumption harness: `proof_harness/cat1_layerzero_v2_f1_oft_delegate/src/MedusaLz1OFTAdapterHarness.sol`
+- LayerZero-v2 OFT lossless-assumption run artifact: `reports/cat1_bridges/LayerZero-v2/manual_artifacts/lz1_oft_lossless_formal_medusa_30s.txt`
+- LayerZero-v2 stale-delegate persistence harness: `proof_harness/cat1_layerzero_v2_f1_oft_delegate/src/MedusaLz2DelegateHarness.sol`
+- LayerZero-v2 stale-delegate persistence run artifact: `reports/cat1_bridges/LayerZero-v2/manual_artifacts/lz2_stale_delegate_formal_medusa_30s.txt`
+- LayerZero-v2 residual-lzToken sweep harness: `proof_harness/cat1_layerzero_v2_f1_oft_delegate/src/MedusaLz3ResidualSweepHarness.sol`
+- LayerZero-v2 residual-lzToken sweep run artifact: `reports/cat1_bridges/LayerZero-v2/manual_artifacts/lz3_residual_sweep_formal_medusa_30s.txt`
+- LayerZero-v2 full-source parity harness: `proof_harness/cat1_layerzero_v2_parity_fullsource/test/LayerZeroV2FullSourceParity.t.sol`
+- LayerZero-v2 full-source parity run artifacts: `reports/cat1_bridges/LayerZero-v2/manual_artifacts/h1_fullsource_parity_oft_adapter_forge_test.txt`, `reports/cat1_bridges/LayerZero-v2/manual_artifacts/h2_fullsource_parity_delegate_stale_forge_test.txt`, `reports/cat1_bridges/LayerZero-v2/manual_artifacts/h3_fullsource_lztoken_residual_sweep_forge_test.txt`
+
 ## ZK / Circom
 
 - `circom`: circuit compiler.
   - Proof: not a vuln tool; used to produce artifacts for witness/proof verification and to reproduce circuit issues.
+  - Version on this host: `v2.2.3`.
 - `snarkjs`: proof generation/verification CLI (Groth16/Plonk tooling).
   - Proof: not a vuln tool; used to validate that a witness/proof is valid/invalid as claimed.
+  - Version on this host: `v0.7.6`.
   - Run (example): `powershell -NoProfile -ExecutionPolicy Bypass -File scripts/snarkjs.ps1 --help`
 
 ## ZK / Circuits
@@ -106,6 +175,14 @@ bolero = "0.11"
     - `C:\\Users\\vboxuser\\Desktop\\Repos\\smartcontractpatternfinder\\zkFuzz\\target\\release\\zkfuzz.exe`
   - Run (example): `powershell -NoProfile -ExecutionPolicy Bypass -File scripts/zkfuzz.ps1 --help`
   - Proof: a minimized failing witness (input + circuit/config) plus backend verification that the failure is real (not a tooling artifact).
+
+- `Picus`: ZK circuit analysis tool.
+  - Version on this host: `Latest`.
+  - Proof: analysis results showing circuit vulnerabilities or verification properties.
+
+- `Halo2`: ZK proof system library.
+  - Version on this host: `v0.3.2` (library).
+  - Proof: not a vuln tool; used for circuit development and proof generation/verification.
 
 ## C/C++ Verification (Optional)
 

@@ -1,0 +1,29 @@
+{
+    "exitcode": 1,
+    "test_results": {
+        "test/HalmosBaseF1InitializerHijack.t.sol:HalmosBaseF1InitializerHijack": [
+            {
+                "name": "check_non_admin_cannot_hijack_initialize()",
+                "exitcode": 1,
+                "num_models": 1,
+                "models": [
+                    {
+                        "model": {},
+                        "is_valid": true
+                    }
+                ],
+                "num_paths": [
+                    1,
+                    0,
+                    0
+                ],
+                "time": [
+                    0.1579252000010456,
+                    0.057463800003461074,
+                    0.10045830000308342
+                ],
+                "num_bounded_loops": 0
+            }
+        ]
+    }
+}

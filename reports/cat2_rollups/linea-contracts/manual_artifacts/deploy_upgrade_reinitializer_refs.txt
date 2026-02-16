@@ -1,0 +1,46 @@
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts\contracts\proxies\TransparentUpgradeableProxy.sol:497:  function _upgradeTo(address newImplementation) internal {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts\contracts\proxies\TransparentUpgradeableProxy.sol:507:  function _upgradeToAndCall(address newImplementation, bytes memory data, bool forceCall) internal {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts\contracts\proxies\TransparentUpgradeableProxy.sol:508:    _upgradeTo(newImplementation);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts\contracts\proxies\TransparentUpgradeableProxy.sol:519:  function _upgradeToAndCallUUPS(address newImplementation, bytes memory data, bool forceCall) internal {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts\contracts\proxies\TransparentUpgradeableProxy.sol:531:      _upgradeToAndCall(newImplementation, data, forceCall);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts\contracts\proxies\TransparentUpgradeableProxy.sol:715:    _upgradeToAndCall(_logic, _data, false);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts\contracts\proxies\TransparentUpgradeableProxy.sol:745:  function upgradeTo(address) external;
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts\contracts\proxies\TransparentUpgradeableProxy.sol:747:  function upgradeToAndCall(address, bytes memory) external payable;
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts\contracts\proxies\TransparentUpgradeableProxy.sol:814:      } else if (selector == ITransparentUpgradeableProxy.upgradeToAndCall.selector) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts\contracts\proxies\TransparentUpgradeableProxy.sol:882:    _upgradeToAndCall(newImplementation, bytes(""), false);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts\contracts\proxies\TransparentUpgradeableProxy.sol:894:    _upgradeToAndCall(newImplementation, data, true);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts\contracts\proxies\ProxyAdmin.sol:606:  function _upgradeTo(address newImplementation) internal {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts\contracts\proxies\ProxyAdmin.sol:616:  function _upgradeToAndCall(address newImplementation, bytes memory data, bool forceCall) internal {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts\contracts\proxies\ProxyAdmin.sol:617:    _upgradeTo(newImplementation);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts\contracts\proxies\ProxyAdmin.sol:628:  function _upgradeToAndCallUUPS(address newImplementation, bytes memory data, bool forceCall) internal {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts\contracts\proxies\ProxyAdmin.sol:640:      _upgradeToAndCall(newImplementation, data, forceCall);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts\contracts\proxies\ProxyAdmin.sol:824:    _upgradeToAndCall(_logic, _data, false);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts\contracts\proxies\ProxyAdmin.sol:854:  function upgradeTo(address) external;
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts\contracts\proxies\ProxyAdmin.sol:856:  function upgradeToAndCall(address, bytes memory) external payable;
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts\contracts\proxies\ProxyAdmin.sol:923:      } else if (selector == ITransparentUpgradeableProxy.upgradeToAndCall.selector) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts\contracts\proxies\ProxyAdmin.sol:991:    _upgradeToAndCall(newImplementation, bytes(""), false);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts\contracts\proxies\ProxyAdmin.sol:1003:    _upgradeToAndCall(newImplementation, data, true);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts\contracts\proxies\ProxyAdmin.sol:1086:    proxy.upgradeTo(implementation);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts\contracts\proxies\ProxyAdmin.sol:1091:   * {TransparentUpgradeableProxy-upgradeToAndCall}.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts\contracts\proxies\ProxyAdmin.sol:1097:  function upgradeAndCall(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts\contracts\proxies\ProxyAdmin.sol:1102:    proxy.upgradeToAndCall{ value: msg.value }(implementation, data);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts\contracts\LineaRollupInit.sol:18:  function initializeV2(uint256 _initialL2BlockNumber, bytes32 _initialStateRootHash) external reinitializer(3) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts\contracts\LineaRollup.sol:129:  function initializeParentShnarfsAndFinalizedState(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts\contracts\tokenBridge\CustomBridgedToken.sol:11:  function initializeV2(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts\test\LineaRollupInit.ts:72:        initializer: "initializeV2(uint256,bytes32)",
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts\test\LineaRollupInit.ts:89:        initializer: "initializeV2(uint256,bytes32)",
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts\test\LineaRollupInit.ts:94:        lineaRollupContract.initializeV2(l2BlockNumber, parentStateRootHash),
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts\test\LineaRollup.ts:223:      await lineaRollup.initializeParentShnarfsAndFinalizedState(shnarfs, finalBlockNumbers);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts\test\LineaRollup.ts:237:        lineaRollup.initializeParentShnarfsAndFinalizedState(shnarfs, finalBlockNumbers),
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts\test\LineaRollup.ts:247:      await lineaRollup.initializeParentShnarfsAndFinalizedState(shnarfs, finalBlockNumbers);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts\test\LineaRollup.ts:255:        lineaRollup.initializeParentShnarfsAndFinalizedState(shnarfs, finalBlockNumbers),
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts\test\tokenBridge\BridgedToken.ts:41:  await l2TokenBeacon.connect(admin).upgradeTo(newImplementation.getAddress());
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts\test\tokenBridge\BridgedToken.ts:110:    await l1TokenBeacon.connect(admin).upgradeTo(await newImplementation.getAddress());
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts\test\tokenBridge\BridgedToken.ts:135:    await expect(l1TokenBeacon.connect(unknown).upgradeTo(await newImplementation.getAddress())).to.be.revertedWith(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts\contracts\test-contracts\LineaRollupAlphaV3.sol:367: *     function initializeV2() reinitializer(2) public {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts\contracts\test-contracts\L2MessageServiceLineaMainnet.sol:366: *     function initializeV2() reinitializer(2) public {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts\deploy\V1\ZkEvmV2Cache\validations.json:2484:          "initializeV2(uint256,bytes32)"
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts\deploy\V1\L2MessageServiceV1Cache\validations.json:2484:          "initializeV2(uint256,bytes32)"
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts\deploy\11_deploy_CustomBridgedToken.ts:35:      initializer: "initializeV2(string,string,uint8,address)",
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts\scripts\gnosis\encodingTx2.ts:56:    "Encoded upgradeAndCall with systemMigrationBlock set at block number:",
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts\scripts\gnosis\encodingTx2.ts:91:    "Encoded upgradeAndCall (directly) with Reinitialization from Security Council :",

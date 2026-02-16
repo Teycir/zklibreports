@@ -1,0 +1,161 @@
+    1: // SPDX-License-Identifier: MIT
+    2: 
+    3: pragma solidity ^0.8.24;
+    4: 
+    5: import {IERC20Upgradeable} from "@openzeppelin/contracts-upgradeable/token/ERC20/IERC20Upgradeable.sol";
+    6: import {SafeERC20Upgradeable} from "@openzeppelin/contracts-upgradeable/token/ERC20/utils/SafeERC20Upgradeable.sol";
+    7: 
+    8: import {IL1ERC20Gateway} from "./IL1ERC20Gateway.sol";
+    9: import {IL1GatewayRouter} from "./IL1GatewayRouter.sol";
+   10: 
+   11: import {IL2ERC20Gateway} from "../../L2/gateways/IL2ERC20Gateway.sol";
+   12: import {ScrollGatewayBase} from "../../libraries/gateway/ScrollGatewayBase.sol";
+   13: 
+   14: /// @title L1ERC20Gateway
+   15: /// @notice The `L1ERC20Gateway` as a base contract for ERC20 gateways in L1.
+   16: /// It has implementation of common used functions for ERC20 gateways.
+   17: abstract contract L1ERC20Gateway is IL1ERC20Gateway, ScrollGatewayBase {
+   18:     using SafeERC20Upgradeable for IERC20Upgradeable;
+   19: 
+   20:     /*************
+   21:      * Variables *
+   22:      *************/
+   23: 
+   24:     /// @dev The storage slots for future usage.
+   25:     uint256[50] private __gap;
+   26: 
+   27:     /*****************************
+   28:      * Public Mutating Functions *
+   29:      *****************************/
+   30: 
+   31:     /// @inheritdoc IL1ERC20Gateway
+   32:     function depositERC20(
+   33:         address _token,
+   34:         uint256 _amount,
+   35:         uint256 _gasLimit
+   36:     ) external payable override {
+   37:         _deposit(_token, _msgSender(), _amount, new bytes(0), _gasLimit);
+   38:     }
+   39: 
+   40:     /// @inheritdoc IL1ERC20Gateway
+   41:     function depositERC20(
+   42:         address _token,
+   43:         address _to,
+   44:         uint256 _amount,
+   45:         uint256 _gasLimit
+   46:     ) external payable override {
+   47:         _deposit(_token, _to, _amount, new bytes(0), _gasLimit);
+   48:     }
+   49: 
+   50:     /// @inheritdoc IL1ERC20Gateway
+   51:     function depositERC20AndCall(
+   52:         address _token,
+   53:         address _to,
+   54:         uint256 _amount,
+   55:         bytes memory _data,
+   56:         uint256 _gasLimit
+   57:     ) external payable override {
+   58:         _deposit(_token, _to, _amount, _data, _gasLimit);
+   59:     }
+   60: 
+   61:     /// @inheritdoc IL1ERC20Gateway
+   62:     function finalizeWithdrawERC20(
+   63:         address _l1Token,
+   64:         address _l2Token,
+   65:         address _from,
+   66:         address _to,
+   67:         uint256 _amount,
+   68:         bytes calldata _data
+   69:     ) external payable virtual override onlyCallByCounterpart nonReentrant {
+   70:         _beforeFinalizeWithdrawERC20(_l1Token, _l2Token, _from, _to, _amount, _data);
+   71: 
+   72:         // @note can possible trigger reentrant call to this contract or messenger,
+   73:         // but it seems not a big problem.
+   74:         IERC20Upgradeable(_l1Token).safeTransfer(_to, _amount);
+   75: 
+   76:         _doCallback(_to, _data);
+   77: 
+   78:         emit FinalizeWithdrawERC20(_l1Token, _l2Token, _from, _to, _amount, _data);
+   79:     }
+   80: 
+   81:     /**********************
+   82:      * Internal Functions *
+   83:      **********************/
+   84: 
+   85:     /// @dev Internal function hook to perform checks and actions before finalizing the withdrawal.
+   86:     /// @param _l1Token The address of corresponding L1 token in L1.
+   87:     /// @param _l2Token The address of corresponding L2 token in L2.
+   88:     /// @param _from The address of account who withdraw the token in L2.
+   89:     /// @param _to The address of recipient in L1 to receive the token.
+   90:     /// @param _amount The amount of the token to withdraw.
+   91:     /// @param _data Optional data to forward to recipient's account.
+   92:     function _beforeFinalizeWithdrawERC20(
+   93:         address _l1Token,
+   94:         address _l2Token,
+   95:         address _from,
+   96:         address _to,
+   97:         uint256 _amount,
+   98:         bytes calldata _data
+   99:     ) internal virtual;
+  100: 
+  101:     /// @dev Internal function hook to perform checks and actions before dropping the message.
+  102:     /// @param _token The L1 token address.
+  103:     /// @param _receiver The recipient address on L1.
+  104:     /// @param _amount The amount of token to refund.
+  105:     function _beforeDropMessage(
+  106:         address _token,
+  107:         address _receiver,
+  108:         uint256 _amount
+  109:     ) internal virtual;
+  110: 
+  111:     /// @dev Internal function to transfer ERC20 token to this contract.
+  112:     /// @param _token The address of token to transfer.
+  113:     /// @param _amount The amount of token to transfer.
+  114:     /// @param _data The data passed by caller.
+  115:     function _transferERC20In(
+  116:         address _token,
+  117:         uint256 _amount,
+  118:         bytes memory _data
+  119:     )
+  120:         internal
+  121:         returns (
+  122:             address,
+  123:             uint256,
+  124:             bytes memory
+  125:         )
+  126:     {
+  127:         address _sender = _msgSender();
+  128:         address _from = _sender;
+  129:         if (router == _sender) {
+  130:             // Extract real sender if this call is from L1GatewayRouter.
+  131:             (_from, _data) = abi.decode(_data, (address, bytes));
+  132:             _amount = IL1GatewayRouter(_sender).requestERC20(_from, _token, _amount);
+  133:         } else {
+  134:             // common practice to handle fee on transfer token.
+  135:             uint256 _before = IERC20Upgradeable(_token).balanceOf(address(this));
+  136:             IERC20Upgradeable(_token).safeTransferFrom(_from, address(this), _amount);
+  137:             uint256 _after = IERC20Upgradeable(_token).balanceOf(address(this));
+  138:             // no unchecked here, since some weird token may return arbitrary balance.
+  139:             _amount = _after - _before;
+  140:         }
+  141:         // ignore weird fee on transfer token
+  142:         require(_amount > 0, "deposit zero amount");
+  143: 
+  144:         return (_from, _amount, _data);
+  145:     }
+  146: 
+  147:     /// @dev Internal function to do all the deposit operations.
+  148:     ///
+  149:     /// @param _token The token to deposit.
+  150:     /// @param _to The recipient address to recieve the token in L2.
+  151:     /// @param _amount The amount of token to deposit.
+  152:     /// @param _data Optional data to forward to recipient's account.
+  153:     /// @param _gasLimit Gas limit required to complete the deposit on L2.
+  154:     function _deposit(
+  155:         address _token,
+  156:         address _to,
+  157:         uint256 _amount,
+  158:         bytes memory _data,
+  159:         uint256 _gasLimit
+  160:     ) internal virtual;
+  161: }

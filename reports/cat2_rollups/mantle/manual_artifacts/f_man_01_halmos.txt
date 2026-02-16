@@ -1,0 +1,7 @@
+No files changed, compilation skipped
+
+Running 1 tests for test/HalmosF1WinnerFlip.t.sol:HalmosF1WinnerFlip
+[31mCounterexample: 
+    p_defenderResult_bool_2dbdef0_00 = 0x00[0m
+[31m[FAIL][0m check_challenger_win_cannot_be_rewritten(bool) (paths: 3, time: 0.27s, bounds: [])
+Symbolic test result: 0 passed; 1 failed; time: 0.34s

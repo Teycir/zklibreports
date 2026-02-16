@@ -1,0 +1,83 @@
+    1: // SPDX-License-Identifier: Apache-2.0
+    2: pragma solidity >=0.8.19 <=0.8.24;
+    3: 
+    4: import { Initializable } from "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
+    5: import { IMessageService } from "../interfaces/IMessageService.sol";
+    6: import { IGenericErrors } from "../interfaces/IGenericErrors.sol";
+    7: 
+    8: /**
+    9:  * @title Base contract to manage cross-chain messaging.
+   10:  * @author ConsenSys Software Inc.
+   11:  * @custom:security-contact security-report@linea.build
+   12:  */
+   13: abstract contract MessageServiceBase is Initializable, IGenericErrors {
+   14:   IMessageService public messageService;
+   15:   address public remoteSender;
+   16: 
+   17:   /// @dev Total contract storage is 12 slots with the gap below.
+   18:   /// @dev Keep 10 free storage slots for future implementation updates to avoid storage collision.
+   19:   uint256[10] private __base_gap;
+   20: 
+   21:   /**
+   22:    * @dev Thrown when the caller address is not the message service address
+   23:    */
+   24:   error CallerIsNotMessageService();
+   25: 
+   26:   /**
+   27:    * @dev Thrown when remote sender address is not authorized.
+   28:    */
+   29:   error SenderNotAuthorized();
+   30: 
+   31:   /**
+   32:    * @dev Modifier to make sure the caller is the known message service.
+   33:    *
+   34:    * Requirements:
+   35:    *
+   36:    * - The msg.sender must be the message service.
+   37:    */
+   38:   modifier onlyMessagingService() {
+   39:     if (msg.sender != address(messageService)) {
+   40:       revert CallerIsNotMessageService();
+   41:     }
+   42:     _;
+   43:   }
+   44: 
+   45:   /**
+   46:    * @dev Modifier to make sure the original sender is allowed.
+   47:    *
+   48:    * Requirements:
+   49:    *
+   50:    * - The original message sender via the message service must be a known sender.
+   51:    */
+   52:   modifier onlyAuthorizedRemoteSender() {
+   53:     if (messageService.sender() != remoteSender) {
+   54:       revert SenderNotAuthorized();
+   55:     }
+   56:     _;
+   57:   }
+   58: 
+   59:   /**
+   60:    * @notice Initializes the message service
+   61:    * @dev Must be initialized in the initialize function of the main contract or constructor
+   62:    * @param _messageService The message service address, cannot be empty.
+   63:    */
+   64:   function __MessageServiceBase_init(address _messageService) internal onlyInitializing {
+   65:     if (_messageService == address(0)) {
+   66:       revert ZeroAddressNotAllowed();
+   67:     }
+   68: 
+   69:     messageService = IMessageService(_messageService);
+   70:   }
+   71: 
+   72:   /**
+   73:    * @notice Sets the remote sender
+   74:    * @param _remoteSender The authorized remote sender address, cannot be empty.
+   75:    */
+   76:   function _setRemoteSender(address _remoteSender) internal {
+   77:     if (_remoteSender == address(0)) {
+   78:       revert ZeroAddressNotAllowed();
+   79:     }
+   80: 
+   81:     remoteSender = _remoteSender;
+   82:   }
+   83: }

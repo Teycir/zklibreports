@@ -1,0 +1,221 @@
+﻿{
+    "name":  "zkevm-circuits",
+    "source_path":  "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\zkevm-circuits",
+    "scanned_at_utc":  "2026-02-16 03:46:47 UTC",
+    "git":  {
+                "head":  "18f5bc268ca11988690c7cf59fc4615372ce99f2",
+                "branch":  "develop",
+                "remote_origin":  "https://github.com/scroll-tech/zkevm-circuits"
+            },
+    "stacks":  [
+                   "go",
+                   "rust",
+                   "solidity"
+               ],
+    "outputs":  {
+                    "gitleaks":  {
+                                     "name":  "gitleaks",
+                                     "file":  "gitleaks",
+                                     "args":  [
+                                                  "detect",
+                                                  "--source",
+                                                  "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\zkevm-circuits",
+                                                  "--report-format",
+                                                  "json",
+                                                  "--report-path",
+                                                  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\zkevm-circuits\\artifacts\\gitleaks.json",
+                                                  "--redact",
+                                                  "--no-banner",
+                                                  "--log-level",
+                                                  "error",
+                                                  "--timeout",
+                                                  "600"
+                                              ],
+                                     "arg_string":  "detect --source \\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\zkevm-circuits --report-format json --report-path C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\zkevm-circuits\\artifacts\\gitleaks.json --redact --no-banner --log-level error --timeout 600",
+                                     "runner":  "cmd.exe",
+                                     "runner_args":  [
+                                                         "/d",
+                                                         "/s",
+                                                         "/c",
+                                                         "gitleaks detect --source \\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\zkevm-circuits --report-format json --report-path C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\zkevm-circuits\\artifacts\\gitleaks.json --redact --no-banner --log-level error --timeout 600 1\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\zkevm-circuits\\artifacts\\gitleaks.stdout.log 2\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\zkevm-circuits\\artifacts\\gitleaks.stderr.log"
+                                                     ],
+                                     "cwd":  "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\zkevm-circuits",
+                                     "start_utc":  "2026-02-16 03:46:50 UTC",
+                                     "end_utc":  "2026-02-16 03:49:47 UTC",
+                                     "duration_sec":  178,
+                                     "timed_out":  false,
+                                     "exit_code":  1,
+                                     "stdout":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\zkevm-circuits\\artifacts\\gitleaks.stdout.log",
+                                     "stderr":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\zkevm-circuits\\artifacts\\gitleaks.stderr.log",
+                                     "report":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\zkevm-circuits\\artifacts\\gitleaks.json"
+                                 },
+                    "osv":  {
+                                "name":  "osv-scanner",
+                                "file":  "osv-scanner",
+                                "args":  [
+                                             "scan",
+                                             "source",
+                                             "-r",
+                                             "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\zkevm-circuits",
+                                             "-f",
+                                             "json",
+                                             "--output",
+                                             "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\zkevm-circuits\\artifacts\\osv.json",
+                                             "--allow-no-lockfiles",
+                                             "--verbosity",
+                                             "warn",
+                                             "--experimental-exclude",
+                                             "g:**/node_modules",
+                                             "--experimental-exclude",
+                                             "g:**/target",
+                                             "--experimental-exclude",
+                                             "g:**/.git",
+                                             "--experimental-exclude",
+                                             "g:**/dist",
+                                             "--experimental-exclude",
+                                             "g:**/build",
+                                             "--experimental-exclude",
+                                             "g:**/out"
+                                         ],
+                                "arg_string":  "scan source -r \\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\zkevm-circuits -f json --output C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\zkevm-circuits\\artifacts\\osv.json --allow-no-lockfiles --verbosity warn --experimental-exclude g:**/node_modules --experimental-exclude g:**/target --experimental-exclude g:**/.git --experimental-exclude g:**/dist --experimental-exclude g:**/build --experimental-exclude g:**/out",
+                                "runner":  "cmd.exe",
+                                "runner_args":  [
+                                                    "/d",
+                                                    "/s",
+                                                    "/c",
+                                                    "osv-scanner scan source -r \\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\zkevm-circuits -f json --output C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\zkevm-circuits\\artifacts\\osv.json --allow-no-lockfiles --verbosity warn --experimental-exclude g:**/node_modules --experimental-exclude g:**/target --experimental-exclude g:**/.git --experimental-exclude g:**/dist --experimental-exclude g:**/build --experimental-exclude g:**/out 1\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\zkevm-circuits\\artifacts\\osv.stdout.log 2\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\zkevm-circuits\\artifacts\\osv.stderr.log"
+                                                ],
+                                "cwd":  "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\zkevm-circuits",
+                                "start_utc":  "2026-02-16 03:49:47 UTC",
+                                "end_utc":  "2026-02-16 03:51:15 UTC",
+                                "duration_sec":  88,
+                                "timed_out":  false,
+                                "exit_code":  1,
+                                "stdout":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\zkevm-circuits\\artifacts\\osv.stdout.log",
+                                "stderr":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\zkevm-circuits\\artifacts\\osv.stderr.log",
+                                "report":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\zkevm-circuits\\artifacts\\osv.json"
+                            },
+                    "govulncheck":  {
+                                        "json":  {
+                                                     "name":  "govulncheck(json)",
+                                                     "file":  "govulncheck",
+                                                     "args":  [
+                                                                  "-C",
+                                                                  "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\zkevm-circuits",
+                                                                  "-format",
+                                                                  "json",
+                                                                  "./..."
+                                                              ],
+                                                     "arg_string":  "-C \\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\zkevm-circuits -format json ./...",
+                                                     "runner":  "cmd.exe",
+                                                     "runner_args":  [
+                                                                         "/d",
+                                                                         "/s",
+                                                                         "/c",
+                                                                         "govulncheck -C \\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\zkevm-circuits -format json ./... 1\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\zkevm-circuits\\artifacts\\govulncheck.json 2\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\zkevm-circuits\\artifacts\\govulncheck.json.stderr.log"
+                                                                     ],
+                                                     "cwd":  "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\zkevm-circuits",
+                                                     "start_utc":  "2026-02-16 03:51:15 UTC",
+                                                     "end_utc":  "2026-02-16 03:51:16 UTC",
+                                                     "duration_sec":  1,
+                                                     "timed_out":  false,
+                                                     "exit_code":  1,
+                                                     "stdout":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\zkevm-circuits\\artifacts\\govulncheck.json",
+                                                     "stderr":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\zkevm-circuits\\artifacts\\govulncheck.json.stderr.log"
+                                                 },
+                                        "text":  {
+                                                     "name":  "govulncheck(text)",
+                                                     "file":  "govulncheck",
+                                                     "args":  [
+                                                                  "-C",
+                                                                  "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\zkevm-circuits",
+                                                                  "-format",
+                                                                  "text",
+                                                                  "-show",
+                                                                  "traces",
+                                                                  "./..."
+                                                              ],
+                                                     "arg_string":  "-C \\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\zkevm-circuits -format text -show traces ./...",
+                                                     "runner":  "cmd.exe",
+                                                     "runner_args":  [
+                                                                         "/d",
+                                                                         "/s",
+                                                                         "/c",
+                                                                         "govulncheck -C \\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\zkevm-circuits -format text -show traces ./... 1\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\zkevm-circuits\\artifacts\\govulncheck.txt 2\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\zkevm-circuits\\artifacts\\govulncheck.txt.stderr.log"
+                                                                     ],
+                                                     "cwd":  "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\zkevm-circuits",
+                                                     "start_utc":  "2026-02-16 03:51:16 UTC",
+                                                     "end_utc":  "2026-02-16 03:51:16 UTC",
+                                                     "duration_sec":  0,
+                                                     "timed_out":  false,
+                                                     "exit_code":  1,
+                                                     "stdout":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\zkevm-circuits\\artifacts\\govulncheck.txt",
+                                                     "stderr":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\zkevm-circuits\\artifacts\\govulncheck.txt.stderr.log"
+                                                 }
+                                    },
+                    "gosec":  {
+                                  "name":  "gosec",
+                                  "file":  "gosec",
+                                  "args":  [
+                                               "-fmt=json",
+                                               "-out=C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\zkevm-circuits\\artifacts\\gosec.json",
+                                               "-confidence=high",
+                                               "-severity=medium",
+                                               "-exclude-generated",
+                                               "-quiet",
+                                               "./..."
+                                           ],
+                                  "arg_string":  "-fmt=json -out=C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\zkevm-circuits\\artifacts\\gosec.json -confidence=high -severity=medium -exclude-generated -quiet ./...",
+                                  "runner":  "cmd.exe",
+                                  "runner_args":  [
+                                                      "/d",
+                                                      "/s",
+                                                      "/c",
+                                                      "gosec -fmt=json -out=C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\zkevm-circuits\\artifacts\\gosec.json -confidence=high -severity=medium -exclude-generated -quiet ./... 1\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\zkevm-circuits\\artifacts\\gosec.stdout.log 2\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\zkevm-circuits\\artifacts\\gosec.stderr.log"
+                                                  ],
+                                  "cwd":  "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\zkevm-circuits",
+                                  "start_utc":  "2026-02-16 03:51:16 UTC",
+                                  "end_utc":  "2026-02-16 03:51:22 UTC",
+                                  "duration_sec":  6,
+                                  "timed_out":  false,
+                                  "exit_code":  1,
+                                  "stdout":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\zkevm-circuits\\artifacts\\gosec.stdout.log",
+                                  "stderr":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\zkevm-circuits\\artifacts\\gosec.stderr.log"
+                              },
+                    "cargo_audit":  [
+                                        {
+                                            "name":  "cargo-audit",
+                                            "file":  "cargo",
+                                            "args":  [
+                                                         "audit",
+                                                         "--json",
+                                                         "--file",
+                                                         "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\zkevm-circuits\\Cargo.lock"
+                                                     ],
+                                            "arg_string":  "audit --json --file \\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\zkevm-circuits\\Cargo.lock",
+                                            "runner":  "cmd.exe",
+                                            "runner_args":  [
+                                                                "/d",
+                                                                "/s",
+                                                                "/c",
+                                                                "cargo audit --json --file \\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\zkevm-circuits\\Cargo.lock 1\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\zkevm-circuits\\artifacts\\cargo-audit_Cargo.lock.json 2\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\zkevm-circuits\\artifacts\\cargo-audit_Cargo.lock.stderr.log"
+                                                            ],
+                                            "cwd":  "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\zkevm-circuits",
+                                            "start_utc":  "2026-02-16 03:51:23 UTC",
+                                            "end_utc":  "2026-02-16 03:51:29 UTC",
+                                            "duration_sec":  7,
+                                            "timed_out":  false,
+                                            "exit_code":  1,
+                                            "stdout":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\zkevm-circuits\\artifacts\\cargo-audit_Cargo.lock.json",
+                                            "stderr":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\zkevm-circuits\\artifacts\\cargo-audit_Cargo.lock.stderr.log",
+                                            "lockfile":  "Cargo.lock"
+                                        }
+                                    ]
+                },
+    "summary":  {
+                    "gitleaks_findings":  231,
+                    "osv_vulns":  119,
+                    "npm_audit_vulns":  null,
+                    "cargo_audit_vulns":  10
+                }
+}

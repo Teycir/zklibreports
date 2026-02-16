@@ -1,0 +1,16 @@
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\trailblazers-season-2\TrailblazersBadgesS2.sol:11:import "@openzeppelin/contracts/utils/cryptography/ECDSA.sol";
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\trailblazers-season-2\BadgeRecruitment.sol:11:import "@openzeppelin/contracts/utils/cryptography/ECDSA.sol";
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\trailblazers-season-2\BadgeRecruitment.sol:23:import { ECDSA } from "@openzeppelin/contracts/utils/cryptography/ECDSA.sol";
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\trailblazers-season-2\BadgeRecruitment.sol:409:        (address recovered_,,) = ECDSA.tryRecover(_hash, _v, _r, _s);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\trailblazers-season-2\BadgeRecruitment.sol:464:        (address recovered_,,) = ECDSA.tryRecover(_hash, _v, _r, _s);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\trailblazers-season-2\BadgeRecruitment.sol:565:        (address recovered_,,) = ECDSA.tryRecover(_hash, _v, _r, _s);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\trailblazers-season-2\BadgeRecruitment.sol:707:        (address recovered_,,) = ECDSA.tryRecover(_hash, _v, _r, _s);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\trailblazers-badges\ECDSAWhitelist.sol:11:import { ECDSA } from "@openzeppelin/contracts/utils/cryptography/ECDSA.sol";
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\trailblazers-badges\ECDSAWhitelist.sol:96:        (address _recovered,,) = ECDSA.tryRecover(_hash, _signature);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\shared\vault\BridgedERC20V2.sol:72:    function DOMAIN_SEPARATOR() external view override returns (bytes32) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\layer2\preconf\IPreconfSlasherL2.sol:20:    /// @notice A commitment message signed by a delegate's ECDSA key
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\layer1\verifiers\SgxVerifier.sol:7:import { ECDSA } from "@openzeppelin/contracts/utils/cryptography/ECDSA.sol";
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\layer1\verifiers\SgxVerifier.sol:41:    /// @dev One SGX instance is uniquely identified (on-chain) by its ECDSA public key
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\layer1\verifiers\SgxVerifier.sol:149:        require(instance == ECDSA.recover(signatureHash, signature), SGX_INVALID_PROOF());
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\layer1\preconf\impl\LookaheadStore.sol:6:import "@openzeppelin/contracts/utils/cryptography/ECDSA.sol";
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\layer1\preconf\impl\LookaheadStore.sol:559:        address committer = ECDSA.recover(keccak256(abi.encode(_commitment)), _commitmentSignature);

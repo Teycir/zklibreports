@@ -1,0 +1,14 @@
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\batch-bridge\L2BatchBridgeGateway.sol:242:            (success, returnData) = token.call(abi.encodeCall(IERC20Upgradeable.transfer, (receiver, amount)));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L1\gateways\usdc\draft-L1USDCGatewayCCTP.sol:89:        (bool _success, ) = messenger.call(_scrollMessage);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\libraries\verifier\ZkTrieVerifier.sol:76:                let success := staticcall(gas(), hasher, x, 0x64, 0x20, 0x20)
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\libraries\verifier\ZkEvmVerifierV2.sol:101:            success := staticcall(gas(), _verifier, p, add(bundleProof.length, 0x1a0), 0x00, 0x00)
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\libraries\verifier\ZkEvmVerifierV1.sol:58:            success := staticcall(gas(), _verifier, p, add(aggrProof.length, 0x400), 0x00, 0x00)
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\libraries\verifier\ZkEvmVerifierPostFeynman.sol:101:            success := staticcall(gas(), _verifier, p, add(bundleProof.length, 0x440), 0x00, 0x00)
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\libraries\verifier\ZkEvmVerifierPostEuclid.sol:94:            success := staticcall(gas(), _verifier, p, add(bundleProof.length, 0x440), 0x00, 0x00)
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\libraries\verifier\RollupVerifier.sol:24:            ret := staticcall(gas(), 8, add(input, 0x20), mul(length, 0x20), result, 0x20)
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\libraries\verifier\RollupVerifier.sol:49:            ret := staticcall(gas(), 0x05, input, 0xc0, result, 0x20)
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\libraries\verifier\RollupVerifier.sol:169:            ret := staticcall(gas(), 6, input_points, 0x80, r, 0x40)
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\libraries\verifier\RollupVerifier.sol:199:            ret := staticcall(gas(), 7, input, 0x60, r, 0x40)
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\libraries\verifier\RollupVerifier.sol:210:            ret := staticcall(gas(), 7, input, 0x60, add(input, 0x20), 0x40)
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\libraries\verifier\RollupVerifier.sol:215:            ret := staticcall(gas(), 6, add(input, 0x20), 0x80, add(input, 0x60), 0x40)
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\libraries\verifier\RollupVerifier.sol:296:            success := staticcall(sub(gas(), 2000), 2, absorbing, length, v, 32)

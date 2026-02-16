@@ -1,0 +1,6 @@
+prodcore_initialization=43
+prodcore_raw_calls=145
+prodcore_auth_controls=52
+prodcore_selfdestruct=2
+prodcore_txorigin=0
+prodcore_unchecked=15

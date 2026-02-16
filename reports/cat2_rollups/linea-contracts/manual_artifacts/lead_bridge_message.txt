@@ -1,0 +1,450 @@
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\LineaRollup.sol:5:import { L1MessageService } from "./messageService/l1/L1MessageService.sol";
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\LineaRollup.sol:7:import { ILineaRollup } from "./interfaces/l1/ILineaRollup.sol";
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\LineaRollup.sol:11: * @title Contract to manage cross-chain messaging on L1, L2 data submission, and rollup proof verification.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\LineaRollup.sol:60:  /// @dev Hash of the L2 computed L1 message number, rolling hash and finalized timestamp.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\LineaRollup.sol:77:   * @param _defaultVerifier The default verifier for rollup proofs.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\LineaRollup.sol:79:   * @param _operators The allowed rollup operators at initialization.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\LineaRollup.sol:82:   * @param _genesisTimestamp The L2 genesis timestamp for first finalization.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\LineaRollup.sol:343:   * @param _messageNumber Is the last L2 computed L1 message number in the finalization.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\LineaRollup.sol:344:   * @param _rollingHash Is the last L2 computed L1 rolling hash in the finalization.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\LineaRollup.sol:368:   * @param _dataEvaluationClaim The data evaluation claim.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\LineaRollup.sol:393:   * @param _dataEvaluationClaim The data evaluation claim.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\LineaRollup.sol:432:   * @notice Finalize compressed blocks with proof.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\LineaRollup.sol:479:   * @notice Finalize compressed blocks without proof.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\LineaRollup.sol:490:   * @notice Internal function to finalize compressed blocks.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\LineaRollup.sol:574:   * @notice Internal function to validate l1 rolling hash.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\LineaRollup.sol:575:   * @param _rollingHashMessageNumber Message number associated with the rolling hash as computed on L2.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\LineaRollup.sol:576:   * @param _rollingHash L1 rolling hash as computed on L2.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\messageService\MessageServiceBase.sol:22:   * @dev Thrown when the caller address is not the message service address
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\messageService\MessageServiceBase.sol:32:   * @dev Modifier to make sure the caller is the known message service.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\messageService\MessageServiceBase.sol:36:   * - The msg.sender must be the message service.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\messageService\MessageServiceBase.sol:50:   * - The original message sender via the message service must be a known sender.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\messageService\MessageServiceBase.sol:60:   * @notice Initializes the message service
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\messageService\MessageServiceBase.sol:62:   * @param _messageService The message service address, cannot be empty.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\ZkEvmV2.sol:6:import { L1MessageServiceV1 } from "./messageService/l1/v1/L1MessageServiceV1.sol";
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\ZkEvmV2.sol:7:import { IZkEvmV2 } from "./interfaces/l1/IZkEvmV2.sol";
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\ZkEvmV2.sol:8:import { IPlonkVerifier } from "./interfaces/l1/IPlonkVerifier.sol";
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\ZkEvmV2.sol:11: * @title Contract to manage cross-chain messaging on L1 and rollup proving.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\ZkEvmV2.sol:38:   * @param _finalizedL2BlockNumber The final L2 block number being finalized.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\interfaces\l2\IL2MessageManagerV1.sol:5: * @title Interface declaring pre-existing cross-chain messaging on L2 functions, events and errors.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\interfaces\l2\IL2MessageManagerV1.sol:11:   * @notice Emitted when L2 minimum fee is changed.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\interfaces\l2\IL2MessageManagerV1.sol:19:   * @notice Emitted when L1->L2 message hashes have been added to L2 storage.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\interfaces\l2\IL2MessageManagerV1.sol:20:   * @param messageHashes The message hashes that were added to L2 for claiming.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\interfaces\l2\IL2MessageManagerV1.sol:25:   * @dev Thrown when the message hashes list length is higher than one hundred.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\interfaces\l2\IL2MessageManagerV1.sol:30:   * @dev Thrown when the message does not exist or has already been claimed.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\interfaces\l2\IL2MessageManager.sol:5: * @title Interface declaring cross-chain messaging on L2 functions, events and errors.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\interfaces\l2\IL2MessageManager.sol:11:   * @notice Emitted after all messages are anchored on L2 and the latest message index rolling hash stored.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\interfaces\l2\IL2MessageManager.sol:12:   * @param messageNumber The unique L1 computed indexed message number for the message.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\interfaces\l2\IL2MessageManager.sol:13:   * @param rollingHash The indexed L1 rolling hash computed for the current message number.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\interfaces\l2\IL2MessageManager.sol:14:   * @dev NB: This event is used to provide data to the rollup. The last messageNumber and rollingHash,
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\interfaces\l2\IL2MessageManager.sol:15:   * emitted in a rollup will be used in the public input for validating the L1->L2 messaging state transition.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\interfaces\l2\IL2MessageManager.sol:20:   * @dev Reverts when message number synchronization is mismatched.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\interfaces\l2\IL2MessageManager.sol:41:   * @notice Anchor L1-> L2 message hashes with expected message number and rolling hash.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\interfaces\l2\IL2MessageManager.sol:42:   * @dev Reverts if computed rolling hash and ending message number don't match.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\interfaces\l2\IL2MessageManager.sol:43:   * @param _messageHashes New message hashes to anchor on L2.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\interfaces\l2\IL2MessageManager.sol:44:   * @param _startingMessageNumber The expected L1 message number to start when anchoring.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\interfaces\l2\IL2MessageManager.sol:45:   * @param _finalMessageNumber The expected L1 message number to end on when anchoring.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\interfaces\l2\IL2MessageManager.sol:46:   * @param _finalRollingHash The expected L1 rolling hash to end on when anchoring.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\messageService\lib\RateLimiter.sol:18:  uint256 public limitInWei; // max ether to withdraw per period.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\messageService\l2\v1\L2MessageServiceV1.sol:12: * @title Contract to manage cross-chain messaging on L2.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\messageService\l2\v1\L2MessageServiceV1.sol:54:   * @notice Initialises underlying message service dependencies.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\messageService\l2\v1\L2MessageServiceV1.sol:92:   * @notice Adds a message for sending cross-chain and emits a relevant event.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\messageService\l2\v1\L2MessageServiceV1.sol:93:   * @dev The message number is preset and only incremented at the end if successful for the next caller.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\messageService\l2\v1\L2MessageServiceV1.sol:94:   * @param _to The address the message is intended for.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\messageService\l2\v1\L2MessageServiceV1.sol:95:   * @param _fee The fee being paid for the message delivery.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\messageService\l2\v1\L2MessageServiceV1.sol:137:   * @notice Claims and delivers a cross-chain message.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\messageService\l2\v1\L2MessageServiceV1.sol:141:   * @param _to The address the message is intended for.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\messageService\l2\v1\L2MessageServiceV1.sol:142:   * @param _fee The fee being paid for the message delivery.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\messageService\l2\v1\L2MessageServiceV1.sol:146:   * @param _nonce The unique auto generated message number used when sending the message.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\messageService\l2\v1\L2MessageServiceV1.sol:161:    /// @dev Status check and revert is in the message manager.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\messageService\l2\v1\L2MessageServiceV1.sol:204:   * @param _to The recipient of the message and gas refund.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\messageService\l2\v1\L2MessageServiceV1.sol:205:   * @param _calldata The calldata of the message.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\interfaces\IMessageService.sol:11:   * @notice Emitted when a message is sent.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\interfaces\IMessageService.sol:12:   * @param _from The indexed sender address of the message (msg.sender).
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\interfaces\IMessageService.sol:13:   * @param _to The indexed intended recipient address of the message on the other layer.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\interfaces\IMessageService.sol:14:   * @param _fee The fee being being paid to deliver the message to the recipient in Wei.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\interfaces\IMessageService.sol:16:   * @param _nonce The unique message number.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\interfaces\IMessageService.sol:18:   * @param _messageHash The indexed hash of the message parameters.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\interfaces\IMessageService.sol:20:   * @dev We include the message hash to save hashing costs on the rollup.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\interfaces\IMessageService.sol:21:   * @dev This event is used on both L1 and L2.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\interfaces\IMessageService.sol:34:   * @notice Emitted when a message is claimed.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\interfaces\IMessageService.sol:35:   * @param _messageHash The indexed hash of the message that was claimed.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\interfaces\IMessageService.sol:61:   * @notice Sends a message for transporting from the given chain.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\interfaces\IMessageService.sol:64:   * @param _fee The message service fee on the origin chain.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\interfaces\IMessageService.sol:65:   * @param _calldata The calldata used by the destination message service to call the destination contract.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\interfaces\IMessageService.sol:70:   * @notice Deliver a message to the destination chain.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\interfaces\IMessageService.sol:72:   * @param _from The msg.sender calling the origin message service.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\interfaces\IMessageService.sol:75:   * @param _fee The message service fee on the origin chain.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\interfaces\IMessageService.sol:77:   * @param _calldata The calldata used by the destination message service to call/forward to the destination contract.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\interfaces\IMessageService.sol:78:   * @param _nonce Unique message number.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\interfaces\IMessageService.sol:91:   * @notice Returns the original sender of the message on the origin layer.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\interfaces\IMessageService.sol:92:   * @return The original sender of the message on the origin layer.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\messageService\l2\v1\L2MessageManagerV1.sol:5:import { IL2MessageManagerV1 } from "../../../interfaces/l2/IL2MessageManagerV1.sol";
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\messageService\l2\v1\L2MessageManagerV1.sol:9: * @title Contract to manage cross-chain message hashes storage and statuses on L2.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\messageService\l2\v1\L2MessageManagerV1.sol:21:   * @dev Mapping to store L1->L2 message hashes status.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\messageService\l2\v1\L2MessageManagerV1.sol:36:   * @notice Initialises L2 message manager contract.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\messageService\l2\v1\L2MessageManagerV1.sol:44:   * @notice Update the status of L1->L2 message when a user claims a message on L2.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\messageService\l2\v1\L2MessageManagerV1.sol:45:   * @param _messageHash Hash of the message.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\messageService\l2\L2MessageService.sol:9: * @title Contract to manage cross-chain messaging on L2.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\interfaces\l1\IL1MessageManagerV1.sol:5: * @title L1 Message manager V1 interface for pre-existing functions, events and errors.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\interfaces\l1\IL1MessageManagerV1.sol:11:   * @notice Emitted when L2->L1 message hashes have been added to L1 storage.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\interfaces\l1\IL1MessageManagerV1.sol:12:   * @param messageHash The indexed hash of the message parameters.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\interfaces\l1\IL1MessageManagerV1.sol:18:   * @notice Emitted when L1->L2 messages have been anchored on L2 and updated on L1.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\interfaces\l1\IL1MessageManagerV1.sol:19:   * @param messageHashes The collection of hashes indicating which messages were added on L2. of the message parameters.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\interfaces\l1\IL1MessageManagerV1.sol:25:   * @dev Thrown when the message has already been claimed.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\messageService\l2\L2MessageManager.sol:6:import { IL2MessageManager } from "../../interfaces/l2/IL2MessageManager.sol";
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\messageService\l2\L2MessageManager.sol:10: * @title Contract to manage cross-chain message hashes storage and statuses on L2.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\messageService\l2\L2MessageManager.sol:25:   * @notice Add cross-chain L1->L2 message hashes in storage.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\messageService\l2\L2MessageManager.sol:30:   * @param _messageHashes New message hashes to anchor on L2.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\messageService\l2\L2MessageManager.sol:31:   * @param _startingMessageNumber The expected L1 message number to start when anchoring.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\messageService\l2\L2MessageManager.sol:32:   * @param _finalMessageNumber The expected L1 message number to end on when anchoring.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\messageService\l2\L2MessageManager.sol:33:   * @param _finalRollingHash The expected L1 rolling hash to end on when anchoring.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\interfaces\l1\IL1MessageManager.sol:5: * @title L1 Message manager interface for current functions, events and errors.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\interfaces\l1\IL1MessageManager.sol:11:   * @notice Emitted when a new message is sent and the rolling hash updated.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\interfaces\l1\IL1MessageManager.sol:12:   * @param messageNumber The unique indexed message number for the message.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\interfaces\l1\IL1MessageManager.sol:13:   * @param rollingHash The indexed rolling hash computed for the current message number.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\interfaces\l1\IL1MessageManager.sol:14:   * @param messageHash The indexed hash of the message parameters.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\interfaces\l1\IL1MessageManager.sol:19:   * @notice Emitted when the L2 merkle root has been anchored on L1.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\interfaces\l1\IL1MessageManager.sol:20:   * @param l2MerkleRoot The indexed L2 Merkle root that has been anchored on L1 Ethereum.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\interfaces\l1\IL1MessageManager.sol:22:   * @dev There may be more than one of these in a finalization depending on the amount of L2->L1 messages in the finalization.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\interfaces\l1\IL1MessageManager.sol:27:   * @notice Emitted when the l2 block contains L2 messages during finalization.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\interfaces\l1\IL1MessageManager.sol:28:   * @param l2Block The indexed L2 block containing L2 to L1 messages.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\interfaces\l1\IL1MessageManager.sol:34:   * @dev Thrown when the message has already been claimed.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\interfaces\l1\IL1MessageManager.sol:39:   * @dev Thrown when the L2 merkle root has already been anchored on L1.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\interfaces\l1\IL1MessageManager.sol:44:   * @dev Thrown when the L2 messaging blocks offsets bytes length is not a multiple of 2.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\interfaces\l1\IL1MessageManager.sol:49:   * @notice Check if the L2->L1 message is claimed or not.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\interfaces\l1\IL1MessageManager.sol:50:   * @param _messageNumber The message number on L2.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\interfaces\l1\IZkEvmV2.sol:5: * @title ZkEvm rollup interface for pre-existing functions, events and errors.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\interfaces\l1\IZkEvmV2.sol:11:   * @notice Emitted when a L2 block has been finalized on L1.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\interfaces\l1\IZkEvmV2.sol:12:   * @param blockNumber The indexed L2 block number that is finalized in the finalization.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\interfaces\l1\IZkEvmV2.sol:13:   * @param stateRootHash The indexed state root hash for the L2 block.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\interfaces\l1\IZkEvmV2.sol:14:   * @param finalizedWithProof Indicates if the L2 block in the finalization is proven or not.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\interfaces\l1\IZkEvmV2.sol:20:   * @notice Emitted when a L2 blocks have been finalized on L1.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\interfaces\l1\IZkEvmV2.sol:21:   * @param lastBlockFinalized The indexed L2 block number the finalization is up until.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\interfaces\l1\IZkEvmV2.sol:23:   * @param finalRootHash The L2 block state root hash the finalization ended on.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\interfaces\l1\ILineaRollup.sol:16:   * @dev compressedData is the compressed transaction data. It contains ordered data for each L2 block - l2Timestamps, the encoded txData.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\interfaces\l1\ILineaRollup.sol:46:   * @dev dataEvaluationClaim is the data evaluation claim.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\interfaces\l1\ILineaRollup.sol:59:   * @dev dataEvaluationClaim The data evaluation claim.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\interfaces\l1\ILineaRollup.sol:79:   * @dev lastFinalizedL1RollingHash is the last stored L2 computed rolling hash used in finalization.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\interfaces\l1\ILineaRollup.sol:80:   * @dev l1RollingHash is the calculated rolling hash on L2 that is expected to match L1 at l1RollingHashMessageNumber.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\interfaces\l1\ILineaRollup.sol:81:   * This value will be used along with the stored last finalized L2 calculated rolling hash in the public input.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\interfaces\l1\ILineaRollup.sol:82:   * @dev lastFinalizedL1RollingHashMessageNumber is the last stored L2 computed message number used in finalization.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\interfaces\l1\ILineaRollup.sol:83:   * @dev l1RollingHashMessageNumber is the calculated message number on L2 that is expected to match the existing L1 rolling hash.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\interfaces\l1\ILineaRollup.sol:84:   * This value will be used along with the stored last finalized L2 calculated message number in the public input.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\interfaces\l1\ILineaRollup.sol:86:   * @dev l2MerkleRoots is an array of L2 message merkle roots of depth l2MerkleTreesDepth between last finalized block and finalSubmissionData.finalBlockInData.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\interfaces\l1\ILineaRollup.sol:87:   * @dev l2MessagingBlocksOffsets indicates by offset from currentL2BlockNumber which L2 blocks contain MessageSent events.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\interfaces\l1\ILineaRollup.sol:122:   * @notice Emitted when compressed data is being submitted and verified succesfully on L1.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\interfaces\l1\ILineaRollup.sol:124:   * @param startBlock The indexed L2 block number indicating which block the data starts from.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\interfaces\l1\ILineaRollup.sol:125:   * @param endBlock The indexed L2 block number indicating which block the data ends on.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\interfaces\l1\ILineaRollup.sol:131:   * @notice Emitted when L2 blocks have been finalized on L1.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\interfaces\l1\ILineaRollup.sol:132:   * @param lastBlockFinalized The indexed last L2 block that is finalized in the finalization.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\interfaces\l1\ILineaRollup.sol:133:   * @param startingRootHash The indexed initial (also last finalized) L2 state root hash that the finalization is from.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\interfaces\l1\ILineaRollup.sol:134:   * @param finalRootHash The indexed L2 state root hash that the current finalization is up until.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\interfaces\l1\ILineaRollup.sol:195:   * @dev Thrown when finalizationData.l1RollingHash does not exist on L1 (Feedback loop).
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\interfaces\l1\ILineaRollup.sol:225:   * @dev Thrown when final l2 block timestamp higher than current block.timestamp during finalization.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\interfaces\l1\ILineaRollup.sol:230:   * @dev Thrown when a rolling hash is provided without a corresponding message number.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\interfaces\l1\ILineaRollup.sol:235:   * @dev Thrown when a message number is provided without a corresponding rolling hash.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\interfaces\l1\ILineaRollup.sol:318:   * @notice Finalize compressed blocks without proof.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\interfaces\l1\ILineaRollup.sol:325:   * @notice Finalize compressed blocks with proof.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\interfaces\l1\IL1MessageService.sol:5: * @title L1 Message Service interface for pre-existing functions, events and errors.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\interfaces\l1\IL1MessageService.sol:12:   * @param proof The proof array related to the claimed message.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\interfaces\l1\IL1MessageService.sol:13:   * @param messageNumber The message number of the claimed message.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\interfaces\l1\IL1MessageService.sol:14:   * @param leafIndex The leaf index related to the merkle proof of the message.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\interfaces\l1\IL1MessageService.sol:16:   * @param to The address the message is intended for.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\interfaces\l1\IL1MessageService.sol:17:   * @param fee The fee being paid for the message delivery.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\interfaces\l1\IL1MessageService.sol:20:   * @param merkleRoot The merkle root of the claimed message.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\interfaces\l1\IL1MessageService.sol:37:   * @notice Emitted when initializing Linea Rollup contract with a system migration block.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\interfaces\l1\IL1MessageService.sol:41:   * @dev Thrown when L2 merkle root does not exist.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\messageService\l1\L1MessageService.sol:7:import { IL1MessageService } from "../../interfaces/l1/IL1MessageService.sol";
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\messageService\l1\L1MessageService.sol:13: * @title Contract to manage cross-chain messaging on L1.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\messageService\l1\L1MessageService.sol:35:   * @notice Initialises underlying message service dependencies.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\messageService\l1\L1MessageService.sol:68:   * @notice Adds a message for sending cross-chain and emits MessageSent.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\messageService\l1\L1MessageService.sol:69:   * @dev The message number is preset (nextMessageNumber) and only incremented at the end if successful for the next caller.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\messageService\l1\L1MessageService.sol:71:   * @param _to The address the message is intended for.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\messageService\l1\L1MessageService.sol:72:   * @param _fee The fee being paid for the message delivery.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\messageService\l1\L1MessageService.sol:99:   * @notice Claims and delivers a cross-chain message using merkle proof.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\messageService\l1\L1MessageService.sol:102:   * @param _params Collection of claim data with proof and supporting data.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\messageService\l1\L1MessageService.sol:158:   * @notice Claims and delivers a cross-chain message.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\messageService\l1\L1MessageService.sol:159:   * @dev The message sender address is set temporarily in the transient storage when claiming.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\messageService\l1\L1MessageService.sol:160:   * @return addr The message sender address that is stored temporarily in the transient storage when claiming.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\messageService\l1\v1\L1MessageServiceV1.sol:13: * @title Contract to manage cross-chain messaging on L1.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\messageService\l1\v1\L1MessageServiceV1.sol:39:    bytes32(uint256(keccak256("eip1967.message.sender.transient.key")) - 1);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\messageService\l1\v1\L1MessageServiceV1.sol:46:   * @param _to The recipient of the message and gas refund.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\messageService\l1\v1\L1MessageServiceV1.sol:47:   * @param _calldata The calldata of the message.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\messageService\l1\v1\L1MessageServiceV1.sol:96:   * @notice Claims and delivers a cross-chain message.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\messageService\l1\v1\L1MessageServiceV1.sol:101:   * @param _to The address the message is intended for.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\messageService\l1\v1\L1MessageServiceV1.sol:102:   * @param _fee The fee being paid for the message delivery.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\messageService\l1\v1\L1MessageServiceV1.sol:106:   * @param _nonce The unique auto generated nonce used when sending the message.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\messageService\l1\v1\L1MessageServiceV1.sol:124:    // @dev Status check and revert is in the message manager.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\messageService\l1\L1MessageManager.sol:6:import { IL1MessageManager } from "../../interfaces/l1/IL1MessageManager.sol";
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\messageService\l1\L1MessageManager.sol:10: * @title Contract to manage cross-chain message rolling hash computation and storage on L1.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\messageService\l1\L1MessageManager.sol:27:   * @notice Take an existing message hash, calculates the rolling hash and stores at the message number.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\messageService\l1\L1MessageManager.sol:28:   * @param _messageNumber The current message number being sent.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\messageService\l1\L1MessageManager.sol:29:   * @param _messageHash The hash of the message being sent.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\messageService\l1\L1MessageManager.sol:41:   * @notice Set the L2->L1 message as claimed when a user claims a message on L1.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\messageService\l1\L1MessageManager.sol:42:   * @param  _messageNumber The message number on L2.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\messageService\l1\L1MessageManager.sol:52:   * @notice Add the L2 merkle roots to the storage.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\messageService\l1\L1MessageManager.sol:56:   * @param _newRoots New L2 merkle roots.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\messageService\l1\L1MessageManager.sol:71:   * @notice Emit an event for each L2 block containing L2->L1 messages.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\messageService\l1\L1MessageManager.sol:73:   * @param _l2MessagingBlocksOffsets Is a sequence of uint16 values, where each value plus the last finalized L2 block number.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\messageService\l1\L1MessageManager.sol:74:   * indicates which L2 blocks have L2->L1 messages.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\messageService\l1\L1MessageManager.sol:75:   * @param _currentL2BlockNumber Last L2 block number finalized on L1.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\messageService\l1\L1MessageManager.sol:95:   * @notice Check if the L2->L1 message is claimed or not.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\messageService\l1\L1MessageManager.sol:96:   * @param _messageNumber The message number on L2.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\messageService\l1\v1\L1MessageManagerV1.sol:4:import { IL1MessageManagerV1 } from "../../../interfaces/l1/IL1MessageManagerV1.sol";
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\messageService\l1\v1\L1MessageManagerV1.sol:7: * @title Contract to manage cross-chain message hashes storage and status on L1.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\messageService\l1\v1\L1MessageManagerV1.sol:19:  /// @dev Mapping to store L1->L2 message hashes status.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\messageService\l1\v1\L1MessageManagerV1.sol:23:  /// @dev Mapping to store L2->L1 message hashes status.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\messageService\l1\v1\L1MessageManagerV1.sol:37:   * @notice Update the status of L2->L1 message when a user claims a message on L1.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\messageService\l1\v1\L1MessageManagerV1.sol:38:   * @dev The L2->L1 message is removed from storage.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\messageService\l1\v1\L1MessageManagerV1.sol:39:   * @dev Due to the nature of the rollup, we should not get a second entry of this.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\messageService\l1\v1\L1MessageManagerV1.sol:40:   * @param  _messageHash Hash of the message.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\LineaRollupInit.sol:7: * @title Contract to reinitialize cross-chain messaging on L1 and rollup proving.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\tokenBridge\TokenBridge.sol:20: * @title Linea Canonical Token Bridge
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\tokenBridge\TokenBridge.sol:131:   * @notice This function is the single entry point to bridge tokens to the
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\tokenBridge\TokenBridge.sol:133:   *   to bridge any ERC20. If the token is bridged for the first time an ERC20
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\tokenBridge\TokenBridge.sol:135:   * @dev User should first allow the bridge to transfer tokens on his behalf.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\tokenBridge\TokenBridge.sol:139:   *   Note that Linea can reserve some tokens (which use a dedicated bridge).
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\tokenBridge\TokenBridge.sol:142:   *   Linea can pause the bridge for security reason. In this case new bridge
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\tokenBridge\TokenBridge.sol:174:      // by the bridge will be minted on the target chain.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\tokenBridge\TokenBridge.sol:225:   * @dev It can only be called from the Message Service. To finalize the bridging
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\tokenBridge\TokenBridge.sol:227:   *   Message Service to trigger the transaction.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\tokenBridge\TokenBridge.sol:262:   * @dev Change the address of the Message Service.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\tokenBridge\TokenBridge.sol:263:   * @param _messageService The address of the new Message Service.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\tokenBridge\TokenBridge.sol:273:   *    Will call the method setDeployed on the other chain using the message Service
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\tokenBridge\TokenBridge.sol:296:   * @dev Change the status of tokens to DEPLOYED. New bridge transaction will not
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\tokenBridge\TokenBridge.sol:298:   *   Can only be called from the Message Service. A user or postman needs to use
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\tokenBridge\TokenBridge.sol:299:   *   the `claimMessage` function of the Message Service to trigger the transaction.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\tokenBridge\TokenBridge.sol:313:   * @dev Sets the address of the remote token bridge. Can only be called once.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\tokenBridge\TokenBridge.sol:314:   * @param _remoteTokenBridge The address of the remote token bridge to be set.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\L2MessageServiceLineaMainnet.sol:1152:   * with a standardized message including the required role.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\L2MessageServiceLineaMainnet.sol:1180:   * @dev Revert with a standard message if `_msgSender()` is missing `role`.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\L2MessageServiceLineaMainnet.sol:1183:   * Format of the revert message is described in {_checkRole}.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\L2MessageServiceLineaMainnet.sol:1192:   * @dev Revert with a standard message if `account` is missing `role`.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\L2MessageServiceLineaMainnet.sol:1445:   * @dev Emitted when L1->L2 message hashes have been added to L2 storage.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\L2MessageServiceLineaMainnet.sol:1450:   * @dev Thrown when the message hashes list length is higher than one hundred.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\L2MessageServiceLineaMainnet.sol:1455:   * @dev Thrown when the message hashes array is empty.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\L2MessageServiceLineaMainnet.sol:1460:   * @dev Thrown when the message does not exist or has already been claimed.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\L2MessageServiceLineaMainnet.sol:1465:   * @notice Anchor L1-> L2 message hashes.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\L2MessageServiceLineaMainnet.sol:1466:   * @param _messageHashes New message hashes to anchor on L2.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\L2MessageServiceLineaMainnet.sol:1586:// File contracts/messageService/l2/L2MessageManager.sol
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\L2MessageServiceLineaMainnet.sol:1592: * @title Contract to manage cross-chain message hashes storage and statuses on L2.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\L2MessageServiceLineaMainnet.sol:1604:   * @dev Mapping to store L1->L2 message hashes status.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\L2MessageServiceLineaMainnet.sol:1617:   * @notice Initialises L2 message manager contract.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\L2MessageServiceLineaMainnet.sol:1625:   * @notice Add a cross-chain L1->L2 message hashes in storage.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\L2MessageServiceLineaMainnet.sol:1627:   * @param _messageHashes Message hashes array.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\L2MessageServiceLineaMainnet.sol:1650:   * @notice Update the status of L1->L2 message when a user claims a message on L2.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\L2MessageServiceLineaMainnet.sol:1651:   * @param _messageHash Hash of the message.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\L2MessageServiceLineaMainnet.sol:1681:   * @dev Emitted when a message is sent.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\L2MessageServiceLineaMainnet.sol:1682:   * @dev We include the message hash to save hashing costs on the rollup.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\L2MessageServiceLineaMainnet.sol:1695:   * @dev Emitted when a message is claimed.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\L2MessageServiceLineaMainnet.sol:1726:   * @notice Sends a message for transporting from the given chain.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\L2MessageServiceLineaMainnet.sol:1729:   * @param _fee The message service fee on the origin chain.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\L2MessageServiceLineaMainnet.sol:1730:   * @param _calldata The calldata used by the destination message service to call the destination contract.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\L2MessageServiceLineaMainnet.sol:1735:   * @notice Deliver a message to the destination chain.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\L2MessageServiceLineaMainnet.sol:1737:   * @param _from The msg.sender calling the origin message service.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\L2MessageServiceLineaMainnet.sol:1740:   * @param _fee The message service fee on the origin chain.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\L2MessageServiceLineaMainnet.sol:1742:   * @param _calldata The calldata used by the destination message service to call/forward to the destination contract.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\L2MessageServiceLineaMainnet.sol:1743:   * @param _nonce Unique message number.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\L2MessageServiceLineaMainnet.sol:1756:   * @notice Returns the original sender of the message on the origin layer.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\L2MessageServiceLineaMainnet.sol:1757:   * @return The original sender of the message on the origin layer.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\L2MessageServiceLineaMainnet.sol:1826:  uint256 public limitInWei; // max ether to withdraw per period.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\L2MessageServiceLineaMainnet.sol:1924:// File contracts/messageService/l2/L2MessageService.sol
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\L2MessageServiceLineaMainnet.sol:1930: * @title Contract to manage cross-chain messaging on L2.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\L2MessageServiceLineaMainnet.sol:1968:   * @notice Initialises underlying message service dependencies.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\L2MessageServiceLineaMainnet.sol:2005:   * @notice Adds a message for sending cross-chain and emits a relevant event.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\L2MessageServiceLineaMainnet.sol:2006:   * @dev The message number is preset and only incremented at the end if successful for the next caller.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\L2MessageServiceLineaMainnet.sol:2007:   * @param _to The address the message is intended for.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\L2MessageServiceLineaMainnet.sol:2008:   * @param _fee The fee being paid for the message delivery.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\L2MessageServiceLineaMainnet.sol:2054:   * @notice Claims and delivers a cross-chain message.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\L2MessageServiceLineaMainnet.sol:2058:   * @param _to The address the message is intended for.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\L2MessageServiceLineaMainnet.sol:2059:   * @param _fee The fee being paid for the message delivery.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\L2MessageServiceLineaMainnet.sol:2063:   * @param _nonce The unique auto generated message number used when sending the message.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\L2MessageServiceLineaMainnet.sol:2079:    /// @dev Status check and revert is in the message manager.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\L2MessageServiceLineaMainnet.sol:2124:   * @param _to The recipient of the message and gas refund.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\L2MessageServiceLineaMainnet.sol:2125:   * @param _calldata The calldata of the message.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\TestL1MessageManager.sol:4:import { L1MessageManager } from "../messageService/l1/L1MessageManager.sol";
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\TestL1MessageManager.sol:8:   * @dev Thrown when the L1->L2 message has not been sent.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\TestL1MessageManager.sol:13:   * @dev Thrown when the message has already been received.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\TestL1MessageService.sol:4:import { L1MessageService } from "../messageService/l1/L1MessageService.sol";
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\TestL1MessageService.sol:8:   * @dev Thrown when the message has already been received.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:1151:   * with a standardized message including the required role.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:1182:   * @dev Revert with a standard message if `_msgSender()` is missing `role`.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:1185:   * Format of the revert message is described in {_checkRole}.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:1194:   * @dev Revert with a standard message if `account` is missing `role`.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:1440:// File contracts/interfaces/l1/ILineaRollup.sol
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:1459:   * @dev compressedData is the compressed transaction data. It contains ordered data for each L2 block - l2Timestamps, the encoded txData.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:1497:   * @dev l1RollingHash is the calculated rolling hash on L2 that is expected to match L1 at l1RollingHashMessageNumber.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:1498:   * This value will be used along with the stored last finalized L2 calculated rolling hash in the public input.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:1499:   * @dev l1RollingHashMessageNumber is the calculated message number on L2 that is expected to match the existing L1 rolling hash.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:1500:   * This value will be used along with the stored last finalized L2 calculated message number in the public input.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:1501:   * @dev l2MerkleRoots is an array of L2 message merkle roots of depth l2MerkleTreesDepth between last finalized block and finalBlockNumber.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:1503:   * @dev l2MessagingBlocksOffsets indicates by offset from currentL2BlockNumber which L2 blocks contain MessageSent events.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:1536:   * @notice Emitted when compressed data is being submitted and verified succesfully on L1.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:1538:   * @param startBlock The indexed L2 block number indicating which block the data starts from.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:1539:   * @param endBlock The indexed L2 block number indicating which block the data ends on.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:1544:   * @notice Emitted when L2 blocks have been finalized on L1.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:1545:   * @param lastBlockFinalized The indexed last L2 block that is finalized in the finalization.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:1546:   * @param startingRootHash The indexed initial (also last finalized) L2 state root hash that the finalization is from.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:1547:   * @param finalRootHash The indexed L2 state root hash that the current finalization is up until.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:1623:   * @dev Thrown when finalizationData.l1RollingHash does not exist on L1 (Feedback loop).
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:1668:   * @dev Thrown when final l2 block timestamp higher than current block.timestamp during finalization.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:1673:   * @dev Thrown when a rolling hash is provided without a corresponding message number.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:1678:   * @dev Thrown when a message number is provided without a corresponding rolling hash.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:1706:   * @param _dataEvaluationClaim The data evaluation claim.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:1725:   * @notice Finalize compressed blocks without proof.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:1732:   * @notice Finalize compressed blocks with proof.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:1762:// File contracts/interfaces/l1/IL1MessageService.sol
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:1768: * @title L1 Message Service interface for pre-existing functions, events and errors.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:1775:   * @param proof The proof array related to the claimed message.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:1776:   * @param messageNumber The message number of the claimed message.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:1777:   * @param leafIndex The leaf index related to the merkle proof of the message.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:1779:   * @param to The address the message is intended for.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:1780:   * @param fee The fee being paid for the message delivery.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:1783:   * @param merkleRoot The merkle root of the claimed message.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:1800:   * @notice Emitted when initializing Linea Rollup contract with a system migration block.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:1804:   * @dev Thrown when L2 merkle root does not exist.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:1873:// File contracts/interfaces/l1/IL1MessageManager.sol
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:1879: * @title L1 Message manager interface for current functions, events and errors.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:1885:   * @notice Emitted when a new message is sent and the rolling hash updated.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:1886:   * @param messageNumber The unique indexed message number for the message.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:1887:   * @param rollingHash The indexed rolling hash computed for the current message number.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:1888:   * @param messageHash The indexed hash of the message parameters.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:1893:   * @notice Emitted when the L2 merkle root has been anchored on L1.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:1894:   * @param l2MerkleRoot The indexed L2 Merkle root that has been anchored on L1 Ethereum.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:1896:   * @dev There may be more than one of these in a finalization depending on the amount of L2->L1 messages in the finalization.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:1901:   * @notice Emitted when the l2 block contains L2 messages during finalization.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:1902:   * @param l2Block The indexed L2 block containing L2 to L1 messages.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:1908:   * @dev Thrown when the message has already been claimed.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:1913:   * @dev Thrown when the L2 merkle root has already been anchored on L1.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:1918:   * @dev Thrown when the L2 messaging blocks offsets bytes length is not a multiple of 2.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:1923:   * @notice Check if the L2->L1 message is claimed or not.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:1924:   * @param _messageNumber The message number on L2.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:1950:// File contracts/interfaces/l1/IL1MessageManagerV1.sol
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:1956: * @title L1 Message manager V1 interface for pre-existing functions, events and errors.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:1962:   * @notice Emitted when L2->L1 message hashes have been added to L1 storage.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:1963:   * @param messageHash The indexed hash of the message parameters.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:1969:   * @notice Emitted when L1->L2 messages have been anchored on L2 and updated on L1.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:1970:   * @param messageHashes The collection of hashes indicating which messages were added on L2. of the message parameters.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:1976:   * @dev Thrown when the message has already been claimed.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:1981:   * @dev Thrown when the message has already been received.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:1986:   * @dev Thrown when the L1->L2 message has not been sent.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:1991:// File contracts/messageService/l1/v1/L1MessageManagerV1.sol
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:1997: * @title Contract to manage cross-chain message hashes storage and status on L1.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:2009:  /// @dev Mapping to store L1->L2 message hashes status.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:2013:  /// @dev Mapping to store L2->L1 message hashes status.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:2027:   * @notice Update the status of L2->L1 message when a user claims a message on L1.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:2028:   * @dev The L2->L1 message is removed from storage.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:2029:   * @dev Due to the nature of the rollup, we should not get a second entry of this.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:2030:   * @param  _messageHash Hash of the message.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:2041:// File contracts/messageService/l1/L1MessageManager.sol
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:2047: * @title Contract to manage cross-chain message rolling hash computation and storage on L1.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:2064:   * @notice Take an existing message hash, calculates the rolling hash and stores at the message number.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:2065:   * @param _messageNumber The current message number being sent.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:2066:   * @param _messageHash The hash of the message being sent.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:2078:   * @notice Set the L2->L1 message as claimed when a user claims a message on L1.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:2079:   * @param  _messageNumber The message number on L2.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:2089:   * @notice Add the L2 merkle roots to the storage.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:2091:   * @param _newRoots New L2 merkle roots.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:2106:   * @notice Emit an event for each L2 block containing L2->L1 messages.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:2108:   * @param _l2MessagingBlocksOffsets Is a sequence of uint16 values, where each value plus the last finalized L2 block number.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:2109:   * indicates which L2 blocks have L2->L1 messages.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:2110:   * @param _currentL2BlockNumber Last L2 block number finalized on L1.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:2130:   * @notice Check if the L2->L1 message is claimed or not.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:2131:   * @param _messageNumber The message number on L2.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:2150:   * @notice Emitted when a message is sent.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:2151:   * @param _from The indexed sender address of the message (msg.sender).
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:2152:   * @param _to The indexed intended recipient address of the message on the other layer.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:2153:   * @param _fee The fee being being paid to deliver the message to the recipient in Wei.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:2155:   * @param _nonce The unique message number.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:2157:   * @param _messageHash The indexed hash of the message parameters.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:2159:   * @dev We include the message hash to save hashing costs on the rollup.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:2160:   * @dev This event is used on both L1 and L2.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:2173:   * @notice Emitted when a message is claimed.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:2174:   * @param _messageHash The indexed hash of the message that was claimed.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:2200:   * @notice Sends a message for transporting from the given chain.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:2203:   * @param _fee The message service fee on the origin chain.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:2204:   * @param _calldata The calldata used by the destination message service to call the destination contract.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:2209:   * @notice Deliver a message to the destination chain.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:2211:   * @param _from The msg.sender calling the origin message service.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:2214:   * @param _fee The message service fee on the origin chain.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:2216:   * @param _calldata The calldata used by the destination message service to call/forward to the destination contract.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:2217:   * @param _nonce Unique message number.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:2230:   * @notice Returns the original sender of the message on the origin layer.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:2231:   * @return The original sender of the message on the origin layer.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:2473:  uint256 public limitInWei; // max ether to withdraw per period.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:2575:// File contracts/messageService/l1/v1/L1MessageServiceV1.sol
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:2581: * @title Contract to manage cross-chain messaging on L1.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:2610:   * @param _to The recipient of the message and gas refund.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:2611:   * @param _calldata The calldata of the message.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:2660:   * @notice Claims and delivers a cross-chain message.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:2665:   * @param _to The address the message is intended for.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:2666:   * @param _fee The fee being paid for the message delivery.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:2670:   * @param _nonce The unique auto generated nonce used when sending the message.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:2685:    // @dev Status check and revert is in the message manager.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:2760:// File contracts/messageService/l1/L1MessageService.sol
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:2766: * @title Contract to manage cross-chain messaging on L1.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:2787:   * @notice Initialises underlying message service dependencies.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:2821:   * @notice Adds a message for sending cross-chain and emits MessageSent.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:2822:   * @dev The message number is preset (nextMessageNumber) and only incremented at the end if successful for the next caller.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:2824:   * @param _to The address the message is intended for.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:2825:   * @param _fee The fee being paid for the message delivery.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:2852:   * @notice Claims and delivers a cross-chain message using merkle proof.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:2855:   * @param _params Collection of claim data with proof and supporting data.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:2911:   * @notice Claims and delivers a cross-chain message.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:2919:// File contracts/interfaces/l1/IPlonkVerifier.sol
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:2938:// File contracts/interfaces/l1/IZkEvmV2.sol
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:2944: * @title ZkEvm rollup interface for pre-existing functions, events and errors.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:2950:   * @notice Emitted when a L2 block has been finalized on L1.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:2951:   * @param blockNumber The indexed L2 block number that is finalized in the finalization.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:2952:   * @param stateRootHash The indexed state root hash for the L2 block.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:2953:   * @param finalizedWithProof Indicates if the L2 block in the finalization is proven or not.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:2959:   * @notice Emitted when a L2 blocks have been finalized on L1.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:2960:   * @param lastBlockFinalized The indexed L2 block number the finalization is up until.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:2962:   * @param finalRootHash The L2 block state root hash the finalization ended on.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:2993: * @title Contract to manage cross-chain messaging on L1 and rollup proving.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:3018:   * @param _finalizedL2BlockNumber The final L2 block number being finalized.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:3055: * @title Contract to manage cross-chain messaging on L1 and rollup proving.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:3094:   * @param _defaultVerifier The default verifier for rollup proofs.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:3096:   * @param _operators The allowed rollup operators at initialization.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:3099:   * @param _genesisTimestamp The L2 genesis timestamp for first finalization.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:3169:   * @param _dataEvaluationClaim The data evaluation claim.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:3235:   * @param _dataEvaluationClaim The data evaluation claim.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:3318:   * @param _dataEvaluationClaim The data evaluation claim.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:3357:   * @notice Finalize compressed blocks with proof.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:3424:   * @notice Finalize compressed blocks without proof.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:3437:   * @notice Internal function to finalize compressed blocks.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:3541:   * @notice Internal function to validate l1 rolling hash.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:3542:   * @param _rollingHashMessageNumber Message number associated with the rolling hash as computed on L2.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:3543:   * @param _rollingHash L1 rolling hash as computed on L2.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\TestL1MessageServiceMerkleProof.sol:4:import { L1MessageService } from "../messageService/l1/L1MessageService.sol";
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\TestL1MessageServiceMerkleProof.sol:5:import { IL1MessageService } from "../interfaces/l1/IL1MessageService.sol";
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\TestL1MessageServiceMerkleProof.sol:16:   * @dev Thrown when the message has already been received.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\TestL2MessageManager.sol:5:import { L2MessageManager } from "../messageService/l2/L2MessageManager.sol";
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\TestL2MessageService.sol:4:import { L2MessageService } from "../messageService/l2/L2MessageService.sol";
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\tokenBridge\interfaces\ITokenBridge.sol:5: * @title Interface declaring Canonical Token Bridge functions, events and errors.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\tokenBridge\interfaces\ITokenBridge.sol:70:   * @dev It can only be called from the Message Service. To finalize the bridging
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\tokenBridge\interfaces\ITokenBridge.sol:72:   *   Message Service to trigger the transaction.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\tokenBridge\interfaces\ITokenBridge.sol:89:   * @dev Change the address of the Message Service.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\tokenBridge\interfaces\ITokenBridge.sol:90:   * @param _messageService The address of the new Message Service.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\tokenBridge\interfaces\ITokenBridge.sol:95:   * @dev It can only be called from the Message Service. To change the status of
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\tokenBridge\interfaces\ITokenBridge.sol:98:   *   Message Service to trigger the transaction.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\tokenBridge\interfaces\ITokenBridge.sol:104:   * @dev Sets the address of the remote token bridge. Can only be called once.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\tokenBridge\interfaces\ITokenBridge.sol:105:   * @param _remoteTokenBridge The address of the remote token bridge to be set.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\tokenBridge\CustomBridgedToken.sol:19:    bridge = _bridge;
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\tokenBridge\BridgedToken.sol:12:  address public bridge;
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\tokenBridge\BridgedToken.sol:33:    bridge = msg.sender;
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\tokenBridge\BridgedToken.sol:37:  /// @dev Ensures call come from the bridge.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\tokenBridge\BridgedToken.sol:39:    if (msg.sender != bridge) revert OnlyBridge(bridge);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\tokenBridge\BridgedToken.sol:44:   * @dev Called by the bridge to mint tokens during a bridge transaction.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\tokenBridge\BridgedToken.sol:53:   * @dev Called by the bridge to burn tokens during a bridge transaction.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\tokenBridge\BridgedToken.sol:54:   * @dev User should first have allowed the bridge to spend tokens on their behalf.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\TestPublicInputVerifier.sol:4:import { IPlonkVerifier } from "../interfaces/l1/IPlonkVerifier.sol";
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\tokenBridge\mocks\Reentrancy\ReentrancyContract.sol:13:  // Counts how often we re-entered the bridge from `beforeTokenTransfer` below.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\tokenBridge\mocks\MockMessageService.sol:16:    // This is used to return the same revert message as the contract called returns it
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\tokenBridge\mocks\MessageBridgeV2\MockMessageServiceV2.sol:7:import { L1MessageManager } from "../../../messageService/l1/L1MessageManager.sol";
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\tokenBridge\mocks\MessageBridgeV2\MockMessageServiceV2.sol:14:   * @notice Adds a message for sending cross-chain and emits MessageSent.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\tokenBridge\mocks\MessageBridgeV2\MockMessageServiceV2.sol:15:   * @dev The message number is preset (nextMessageNumber) and only incremented at the end if successful for the next caller.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\tokenBridge\mocks\MessageBridgeV2\MockMessageServiceV2.sol:17:   * @param _to The address the message is intended for.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\tokenBridge\mocks\MessageBridgeV2\MockMessageServiceV2.sol:18:   * @param _fee The fee being paid for the message delivery.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\tokenBridge\mocks\MessageBridgeV2\MockMessageServiceV2.sol:39:    // @dev Status check and revert is in the message manager

@@ -1,0 +1,103 @@
+﻿{
+    "name":  "stone-prover",
+    "source_path":  "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\stone-prover",
+    "scanned_at_utc":  "2026-02-16 03:37:54 UTC",
+    "git":  {
+                "head":  "1414a545e4fb38a85391289abe91dd4467d268e1",
+                "branch":  "main",
+                "remote_origin":  "https://github.com/starkware-libs/stone-prover"
+            },
+    "stacks":  [
+
+               ],
+    "outputs":  {
+                    "gitleaks":  {
+                                     "name":  "gitleaks",
+                                     "file":  "gitleaks",
+                                     "args":  [
+                                                  "detect",
+                                                  "--source",
+                                                  "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\stone-prover",
+                                                  "--report-format",
+                                                  "json",
+                                                  "--report-path",
+                                                  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\stone-prover\\artifacts\\gitleaks.json",
+                                                  "--redact",
+                                                  "--no-banner",
+                                                  "--log-level",
+                                                  "error",
+                                                  "--timeout",
+                                                  "600"
+                                              ],
+                                     "arg_string":  "detect --source \\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\stone-prover --report-format json --report-path C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\stone-prover\\artifacts\\gitleaks.json --redact --no-banner --log-level error --timeout 600",
+                                     "runner":  "cmd.exe",
+                                     "runner_args":  [
+                                                         "/d",
+                                                         "/s",
+                                                         "/c",
+                                                         "gitleaks detect --source \\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\stone-prover --report-format json --report-path C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\stone-prover\\artifacts\\gitleaks.json --redact --no-banner --log-level error --timeout 600 1\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\stone-prover\\artifacts\\gitleaks.stdout.log 2\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\stone-prover\\artifacts\\gitleaks.stderr.log"
+                                                     ],
+                                     "cwd":  "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\stone-prover",
+                                     "start_utc":  "2026-02-16 03:37:58 UTC",
+                                     "end_utc":  "2026-02-16 03:38:03 UTC",
+                                     "duration_sec":  4,
+                                     "timed_out":  false,
+                                     "exit_code":  0,
+                                     "stdout":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\stone-prover\\artifacts\\gitleaks.stdout.log",
+                                     "stderr":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\stone-prover\\artifacts\\gitleaks.stderr.log",
+                                     "report":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\stone-prover\\artifacts\\gitleaks.json"
+                                 },
+                    "osv":  {
+                                "name":  "osv-scanner",
+                                "file":  "osv-scanner",
+                                "args":  [
+                                             "scan",
+                                             "source",
+                                             "-r",
+                                             "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\stone-prover",
+                                             "-f",
+                                             "json",
+                                             "--output",
+                                             "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\stone-prover\\artifacts\\osv.json",
+                                             "--allow-no-lockfiles",
+                                             "--verbosity",
+                                             "warn",
+                                             "--experimental-exclude",
+                                             "g:**/node_modules",
+                                             "--experimental-exclude",
+                                             "g:**/target",
+                                             "--experimental-exclude",
+                                             "g:**/.git",
+                                             "--experimental-exclude",
+                                             "g:**/dist",
+                                             "--experimental-exclude",
+                                             "g:**/build",
+                                             "--experimental-exclude",
+                                             "g:**/out"
+                                         ],
+                                "arg_string":  "scan source -r \\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\stone-prover -f json --output C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\stone-prover\\artifacts\\osv.json --allow-no-lockfiles --verbosity warn --experimental-exclude g:**/node_modules --experimental-exclude g:**/target --experimental-exclude g:**/.git --experimental-exclude g:**/dist --experimental-exclude g:**/build --experimental-exclude g:**/out",
+                                "runner":  "cmd.exe",
+                                "runner_args":  [
+                                                    "/d",
+                                                    "/s",
+                                                    "/c",
+                                                    "osv-scanner scan source -r \\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\stone-prover -f json --output C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\stone-prover\\artifacts\\osv.json --allow-no-lockfiles --verbosity warn --experimental-exclude g:**/node_modules --experimental-exclude g:**/target --experimental-exclude g:**/.git --experimental-exclude g:**/dist --experimental-exclude g:**/build --experimental-exclude g:**/out 1\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\stone-prover\\artifacts\\osv.stdout.log 2\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\stone-prover\\artifacts\\osv.stderr.log"
+                                                ],
+                                "cwd":  "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\stone-prover",
+                                "start_utc":  "2026-02-16 03:38:03 UTC",
+                                "end_utc":  "2026-02-16 03:38:11 UTC",
+                                "duration_sec":  6,
+                                "timed_out":  false,
+                                "exit_code":  0,
+                                "stdout":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\stone-prover\\artifacts\\osv.stdout.log",
+                                "stderr":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\stone-prover\\artifacts\\osv.stderr.log",
+                                "report":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\stone-prover\\artifacts\\osv.json"
+                            }
+                },
+    "summary":  {
+                    "gitleaks_findings":  0,
+                    "osv_vulns":  0,
+                    "npm_audit_vulns":  null,
+                    "cargo_audit_vulns":  null
+                }
+}

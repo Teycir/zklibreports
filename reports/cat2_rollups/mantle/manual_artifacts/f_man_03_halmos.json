@@ -1,0 +1,38 @@
+{
+    "exitcode": 1,
+    "test_results": {
+        "test/HalmosF3OperatorGate.t.sol:HalmosF3OperatorGate": [
+            {
+                "name": "check_settlement_progresses_without_hidden_registration(bool)",
+                "exitcode": 1,
+                "num_models": 1,
+                "models": [
+                    {
+                        "model": {
+                            "p_defenderResult_bool_bd1ab2d_00": {
+                                "full_name": "p_defenderResult_bool_bd1ab2d_00",
+                                "variable_name": "defenderResult",
+                                "solidity_type": "bool",
+                                "smt_type": "BitVec 256",
+                                "size_bits": 256,
+                                "value": 1
+                            }
+                        },
+                        "is_valid": true
+                    }
+                ],
+                "num_paths": [
+                    2,
+                    0,
+                    0
+                ],
+                "time": [
+                    0.2770507000022917,
+                    0.1757893999965745,
+                    0.10125569999945583
+                ],
+                "num_bounded_loops": 0
+            }
+        ]
+    }
+}

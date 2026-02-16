@@ -1,0 +1,184 @@
+<style> code { white-space: pre-wrap; display: block; background-color: #eee; }.executed { background-color: #afa; }.reverted { background-color: #ffa; }.unexecuted { background-color: #faa; }.neutral { background-color: #eee; }</style><b>C:/Users/vboxuser/Desktop/Repos/zklibreports/proof_harness/cat1_nomad_f1_stale_replica/src/MedusaReplicaBootstrapHarness.sol</b>
+<code>
+  1 |     | <span class='neutral'>// SPDX-License-Identifier: MIT</span>
+  2 |     | <span class='neutral'>pragma solidity ^0.8.24;</span>
+  3 |     | <span class='neutral'></span>
+  4 |     | <span class='neutral'>import {</span>
+  5 |     | <span class='neutral'>    MerkleBranchLite,</span>
+  6 |     | <span class='neutral'>    ReplicaBootstrapBug,</span>
+  7 |     | <span class='neutral'>    ReplicaBootstrapFixed</span>
+  8 |     | <span class='neutral'>} from &quot;./ReplicaBootstrapTimeoutHarness.sol&quot;;</span>
+  9 |     | <span class='neutral'></span>
+ 10 |     | <span class='neutral'>/// @notice Stateful harness for bootstrap-root timeout behavior.</span>
+ 11 | *   | <span class='executed'>contract MedusaReplicaBootstrapHarness {</span>
+ 12 |     | <span class='unexecuted'>    bytes32 public leaf;</span>
+ 13 |     | <span class='unexecuted'>    bytes32[32] public proof;</span>
+ 14 |     | <span class='unexecuted'>    uint256 public index;</span>
+ 15 |     | <span class='neutral'></span>
+ 16 |     | <span class='unexecuted'>    uint256 public bootstrapDeadline;</span>
+ 17 |     | <span class='unexecuted'>    ReplicaBootstrapBug public bug;</span>
+ 18 |     | <span class='unexecuted'>    ReplicaBootstrapFixed public fixedModel;</span>
+ 19 |     | <span class='neutral'></span>
+ 20 |     | <span class='unexecuted'>    bool public bugAcceptedEarly;</span>
+ 21 |     | <span class='unexecuted'>    bool public fixedAcceptedEarly;</span>
+ 22 |     | <span class='neutral'></span>
+ 23 | *   | <span class='executed'>    constructor() {</span>
+ 24 | *   | <span class='executed'>        leaf = keccak256(&quot;bootstrap-leaf&quot;);</span>
+ 25 | *   | <span class='executed'>        index = 0;</span>
+ 26 |     | <span class='neutral'></span>
+ 27 | *   | <span class='executed'>        uint256 timeoutSeconds = 365 days;</span>
+ 28 | *   | <span class='executed'>        bytes32 root = MerkleBranchLite.branchRoot(leaf, proof, index);</span>
+ 29 | *   | <span class='executed'>        bootstrapDeadline = block.timestamp + timeoutSeconds;</span>
+ 30 |     | <span class='neutral'></span>
+ 31 | *   | <span class='executed'>        bug = new ReplicaBootstrapBug(root, timeoutSeconds);</span>
+ 32 | *   | <span class='executed'>        fixedModel = new ReplicaBootstrapFixed(root, timeoutSeconds);</span>
+ 33 |     | <span class='neutral'>    }</span>
+ 34 |     | <span class='neutral'></span>
+ 35 | *   | <span class='executed'>    function action_tryProveBug() external {</span>
+ 36 | *   | <span class='executed'>        try bug.prove(leaf, proof, index) returns (bool ok) {</span>
+ 37 | *   | <span class='executed'>            if (ok &amp;&amp; block.timestamp &lt; bootstrapDeadline) {</span>
+ 38 | *   | <span class='executed'>                bugAcceptedEarly = true;</span>
+ 39 |     | <span class='neutral'>            }</span>
+ 40 |     | <span class='neutral'>        } catch {}</span>
+ 41 |     | <span class='neutral'>    }</span>
+ 42 |     | <span class='neutral'></span>
+ 43 | *   | <span class='executed'>    function action_tryProveFixed() external {</span>
+ 44 | *   | <span class='executed'>        try fixedModel.prove(leaf, proof, index) returns (bool ok) {</span>
+ 45 | *   | <span class='executed'>            if (ok &amp;&amp; block.timestamp &lt; bootstrapDeadline) {</span>
+ 46 |     | <span class='unexecuted'>                fixedAcceptedEarly = true;</span>
+ 47 |     | <span class='neutral'>            }</span>
+ 48 |     | <span class='neutral'>        } catch {}</span>
+ 49 |     | <span class='neutral'>    }</span>
+ 50 |     | <span class='neutral'></span>
+ 51 |     | <span class='neutral'>    /// @notice Bootstrap root should not be acceptable before timeout.</span>
+ 52 |     | <span class='unexecuted'>    function property_bootstrap_root_waits_timeout() external view returns (bool) {</span>
+ 53 |     | <span class='unexecuted'>        return !bugAcceptedEarly;</span>
+ 54 |     | <span class='neutral'>    }</span>
+ 55 |     | <span class='neutral'></span>
+ 56 |     | <span class='neutral'>    /// @notice Fixed model should also not be acceptable before timeout.</span>
+ 57 |     | <span class='unexecuted'>    function property_fixed_model_waits_timeout() external view returns (bool) {</span>
+ 58 |     | <span class='unexecuted'>        return !fixedAcceptedEarly;</span>
+ 59 |     | <span class='neutral'>    }</span>
+ 60 |     | <span class='neutral'></span>
+ 61 |     | <span class='neutral'>    /// @notice Echidna-compatible alias for bootstrap timeout property.</span>
+ 62 |     | <span class='unexecuted'>    function echidna_bootstrap_root_waits_timeout() external view returns (bool) {</span>
+ 63 |     | <span class='unexecuted'>        return !bugAcceptedEarly;</span>
+ 64 |     | <span class='neutral'>    }</span>
+ 65 |     | <span class='neutral'>}</span>
+ 66 |     | <span class='neutral'></span>
+ 67 |     | <span class='neutral'></span>
+
+</code>
+<br />
+
+<b>C:/Users/vboxuser/Desktop/Repos/zklibreports/proof_harness/cat1_nomad_f1_stale_replica/src/ReplicaBootstrapTimeoutHarness.sol</b>
+<code>
+   1 |     | <span class='neutral'>// SPDX-License-Identifier: MIT</span>
+   2 |     | <span class='neutral'>pragma solidity ^0.8.24;</span>
+   3 |     | <span class='neutral'></span>
+   4 |     | <span class='unexecuted'>library MerkleBranchLite {</span>
+   5 | *   | <span class='executed'>    function branchRoot(</span>
+   6 |     | <span class='neutral'>        bytes32 _leaf,</span>
+   7 |     | <span class='neutral'>        bytes32[32] memory _proof,</span>
+   8 |     | <span class='neutral'>        uint256 _index</span>
+   9 | *   | <span class='executed'>    ) internal pure returns (bytes32 _root) {</span>
+  10 | *   | <span class='executed'>        _root = _leaf;</span>
+  11 | *   | <span class='executed'>        for (uint256 i = 0; i &lt; 32; i++) {</span>
+  12 | *   | <span class='executed'>            bytes32 _sibling = _proof[i];</span>
+  13 | *   | <span class='executed'>            if ((_index &amp; 1) == 1) {</span>
+  14 |     | <span class='unexecuted'>                _root = keccak256(abi.encodePacked(_sibling, _root));</span>
+  15 |     | <span class='neutral'>            } else {</span>
+  16 | *   | <span class='executed'>                _root = keccak256(abi.encodePacked(_root, _sibling));</span>
+  17 |     | <span class='neutral'>            }</span>
+  18 | *   | <span class='executed'>            _index &gt;&gt;= 1;</span>
+  19 |     | <span class='neutral'>        }</span>
+  20 |     | <span class='neutral'>    }</span>
+  21 |     | <span class='neutral'>}</span>
+  22 |     | <span class='neutral'></span>
+  23 |     | <span class='neutral'>/// @notice Model of Replica root-acceptance behavior as implemented:</span>
+  24 |     | <span class='neutral'>/// bootstrap root is marked acceptable immediately with `confirmAt[root] = 1`.</span>
+  25 | *   | <span class='executed'>contract ReplicaBootstrapBug {</span>
+  26 |     | <span class='neutral'>    enum MessageStatus {</span>
+  27 |     | <span class='neutral'>        None,</span>
+  28 |     | <span class='neutral'>        Proven,</span>
+  29 |     | <span class='neutral'>        Processed</span>
+  30 |     | <span class='neutral'>    }</span>
+  31 |     | <span class='neutral'></span>
+  32 |     | <span class='unexecuted'>    uint256 public optimisticSeconds;</span>
+  33 |     | <span class='unexecuted'>    bytes32 public committedRoot;</span>
+  34 |     | <span class='unexecuted'>    mapping(bytes32 =&gt; uint256) public confirmAt;</span>
+  35 |     | <span class='unexecuted'>    mapping(bytes32 =&gt; MessageStatus) public messages;</span>
+  36 |     | <span class='neutral'></span>
+  37 | *   | <span class='executed'>    constructor(bytes32 _committedRoot, uint256 _optimisticSeconds) {</span>
+  38 | *   | <span class='executed'>        committedRoot = _committedRoot;</span>
+  39 | *   | <span class='executed'>        optimisticSeconds = _optimisticSeconds;</span>
+  40 | *   | <span class='executed'>        confirmAt[_committedRoot] = 1;</span>
+  41 |     | <span class='neutral'>    }</span>
+  42 |     | <span class='neutral'></span>
+  43 | *   | <span class='executed'>    function acceptableRoot(bytes32 _root) public view returns (bool) {</span>
+  44 | *   | <span class='executed'>        uint256 _time = confirmAt[_root];</span>
+  45 | *   | <span class='executed'>        if (_time == 0) return false;</span>
+  46 | *   | <span class='executed'>        return block.timestamp &gt;= _time;</span>
+  47 |     | <span class='neutral'>    }</span>
+  48 |     | <span class='neutral'></span>
+  49 | *   | <span class='executed'>    function prove(</span>
+  50 |     | <span class='neutral'>        bytes32 _leaf,</span>
+  51 |     | <span class='neutral'>        bytes32[32] calldata _proof,</span>
+  52 |     | <span class='neutral'>        uint256 _index</span>
+  53 | *   | <span class='executed'>    ) external returns (bool) {</span>
+  54 | *   | <span class='executed'>        require(messages[_leaf] == MessageStatus.None, &quot;!MessageStatus.None&quot;);</span>
+  55 | *   | <span class='executed'>        bytes32 _calculated = MerkleBranchLite.branchRoot(_leaf, _proof, _index);</span>
+  56 | *   | <span class='executed'>        if (acceptableRoot(_calculated)) {</span>
+  57 | *   | <span class='executed'>            messages[_leaf] = MessageStatus.Proven;</span>
+  58 | *   | <span class='executed'>            return true;</span>
+  59 |     | <span class='neutral'>        }</span>
+  60 | *   | <span class='executed'>        return false;</span>
+  61 |     | <span class='neutral'>    }</span>
+  62 |     | <span class='neutral'>}</span>
+  63 |     | <span class='neutral'></span>
+  64 |     | <span class='neutral'>/// @notice Reference fix model:</span>
+  65 |     | <span class='neutral'>/// bootstrap root respects optimistic timeout instead of instant acceptance.</span>
+  66 | *   | <span class='executed'>contract ReplicaBootstrapFixed {</span>
+  67 |     | <span class='neutral'>    enum MessageStatus {</span>
+  68 |     | <span class='neutral'>        None,</span>
+  69 |     | <span class='neutral'>        Proven,</span>
+  70 |     | <span class='neutral'>        Processed</span>
+  71 |     | <span class='neutral'>    }</span>
+  72 |     | <span class='neutral'></span>
+  73 |     | <span class='unexecuted'>    uint256 public optimisticSeconds;</span>
+  74 |     | <span class='unexecuted'>    bytes32 public committedRoot;</span>
+  75 |     | <span class='unexecuted'>    mapping(bytes32 =&gt; uint256) public confirmAt;</span>
+  76 |     | <span class='unexecuted'>    mapping(bytes32 =&gt; MessageStatus) public messages;</span>
+  77 |     | <span class='neutral'></span>
+  78 | *   | <span class='executed'>    constructor(bytes32 _committedRoot, uint256 _optimisticSeconds) {</span>
+  79 | *   | <span class='executed'>        committedRoot = _committedRoot;</span>
+  80 | *   | <span class='executed'>        optimisticSeconds = _optimisticSeconds;</span>
+  81 | *   | <span class='executed'>        confirmAt[_committedRoot] = block.timestamp + _optimisticSeconds;</span>
+  82 |     | <span class='neutral'>    }</span>
+  83 |     | <span class='neutral'></span>
+  84 | *   | <span class='executed'>    function acceptableRoot(bytes32 _root) public view returns (bool) {</span>
+  85 | *   | <span class='executed'>        uint256 _time = confirmAt[_root];</span>
+  86 | *   | <span class='executed'>        if (_time == 0) return false;</span>
+  87 | *   | <span class='executed'>        return block.timestamp &gt;= _time;</span>
+  88 |     | <span class='neutral'>    }</span>
+  89 |     | <span class='neutral'></span>
+  90 | *   | <span class='executed'>    function prove(</span>
+  91 |     | <span class='neutral'>        bytes32 _leaf,</span>
+  92 |     | <span class='neutral'>        bytes32[32] calldata _proof,</span>
+  93 |     | <span class='neutral'>        uint256 _index</span>
+  94 | *   | <span class='executed'>    ) external returns (bool) {</span>
+  95 | *   | <span class='executed'>        require(messages[_leaf] == MessageStatus.None, &quot;!MessageStatus.None&quot;);</span>
+  96 | *   | <span class='executed'>        bytes32 _calculated = MerkleBranchLite.branchRoot(_leaf, _proof, _index);</span>
+  97 | *   | <span class='executed'>        if (acceptableRoot(_calculated)) {</span>
+  98 | *   | <span class='executed'>            messages[_leaf] = MessageStatus.Proven;</span>
+  99 | *   | <span class='executed'>            return true;</span>
+ 100 |     | <span class='neutral'>        }</span>
+ 101 | *   | <span class='executed'>        return false;</span>
+ 102 |     | <span class='neutral'>    }</span>
+ 103 |     | <span class='neutral'>}</span>
+ 104 |     | <span class='neutral'></span>
+ 105 |     | <span class='neutral'></span>
+
+</code>
+<br />
+

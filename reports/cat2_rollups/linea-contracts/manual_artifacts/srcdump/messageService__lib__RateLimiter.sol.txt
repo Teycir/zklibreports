@@ -1,0 +1,118 @@
+    1: // SPDX-License-Identifier: AGPL-3.0
+    2: pragma solidity >=0.8.19 <=0.8.24;
+    3: 
+    4: import { Initializable } from "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
+    5: import { AccessControlUpgradeable } from "@openzeppelin/contracts-upgradeable/access/AccessControlUpgradeable.sol";
+    6: import { IRateLimiter } from "../../interfaces/IRateLimiter.sol";
+    7: 
+    8: /**
+    9:  * @title Rate Limiter by period and amount using the block timestamp.
+   10:  * @author ConsenSys Software Inc.
+   11:  * @notice You can use this control numeric limits over a period using timestamp.
+   12:  * @custom:security-contact security-report@linea.build
+   13:  */
+   14: contract RateLimiter is Initializable, IRateLimiter, AccessControlUpgradeable {
+   15:   bytes32 public constant RATE_LIMIT_SETTER_ROLE = keccak256("RATE_LIMIT_SETTER_ROLE");
+   16: 
+   17:   uint256 public periodInSeconds; // how much time before limit resets.
+   18:   uint256 public limitInWei; // max ether to withdraw per period.
+   19: 
+   20:   /// @dev Public for ease of consumption.
+   21:   /// @notice The time at which the current period ends at.
+   22:   uint256 public currentPeriodEnd;
+   23: 
+   24:   /// @dev Public for ease of consumption.
+   25:   /// @notice Amounts already withdrawn this period.
+   26:   uint256 public currentPeriodAmountInWei;
+   27: 
+   28:   /// @dev Total contract storage is 14 slots with the gap below.
+   29:   /// @dev Keep 10 free storage slots for future implementation updates to avoid storage collision.
+   30:   uint256[10] private __gap;
+   31: 
+   32:   /**
+   33:    * @notice Initialises the limits and period for the rate limiter.
+   34:    * @param _periodInSeconds The length of the period in seconds.
+   35:    * @param _limitInWei The limit allowed in the period in Wei.
+   36:    */
+   37:   function __RateLimiter_init(uint256 _periodInSeconds, uint256 _limitInWei) internal onlyInitializing {
+   38:     if (_periodInSeconds == 0) {
+   39:       revert PeriodIsZero();
+   40:     }
+   41: 
+   42:     if (_limitInWei == 0) {
+   43:       revert LimitIsZero();
+   44:     }
+   45: 
+   46:     periodInSeconds = _periodInSeconds;
+   47:     limitInWei = _limitInWei;
+   48:     currentPeriodEnd = block.timestamp + _periodInSeconds;
+   49: 
+   50:     emit RateLimitInitialized(periodInSeconds, limitInWei, currentPeriodEnd);
+   51:   }
+   52: 
+   53:   /**
+   54:    * @notice Increments the amount used in the period.
+   55:    * @dev The amount determining logic is external to this (e.g. fees are included when calling here).
+   56:    * @dev Reverts if the limit is breached.
+   57:    * @param _usedAmount The amount used to be added.
+   58:    */
+   59:   function _addUsedAmount(uint256 _usedAmount) internal {
+   60:     uint256 currentPeriodAmountTemp;
+   61: 
+   62:     if (currentPeriodEnd < block.timestamp) {
+   63:       currentPeriodEnd = block.timestamp + periodInSeconds;
+   64:       currentPeriodAmountTemp = _usedAmount;
+   65:     } else {
+   66:       currentPeriodAmountTemp = currentPeriodAmountInWei + _usedAmount;
+   67:     }
+   68: 
+   69:     if (currentPeriodAmountTemp > limitInWei) {
+   70:       revert RateLimitExceeded();
+   71:     }
+   72: 
+   73:     currentPeriodAmountInWei = currentPeriodAmountTemp;
+   74:   }
+   75: 
+   76:   /**
+   77:    * @notice Resets the rate limit amount.
+   78:    * @dev If the used amount is higher, it is set to the limit to avoid confusion/issues.
+   79:    * @dev Only the RATE_LIMIT_SETTER_ROLE is allowed to execute this function.
+   80:    * @dev Emits the LimitAmountChanged event.
+   81:    * @dev usedLimitAmountToSet will use the default value of zero if period has expired
+   82:    * @param _amount The amount to reset the limit to.
+   83:    */
+   84:   function resetRateLimitAmount(uint256 _amount) external onlyRole(RATE_LIMIT_SETTER_ROLE) {
+   85:     uint256 usedLimitAmountToSet;
+   86:     bool amountUsedLoweredToLimit;
+   87:     bool usedAmountResetToZero;
+   88: 
+   89:     if (currentPeriodEnd < block.timestamp) {
+   90:       currentPeriodEnd = block.timestamp + periodInSeconds;
+   91:       usedAmountResetToZero = true;
+   92:     } else {
+   93:       if (_amount < currentPeriodAmountInWei) {
+   94:         usedLimitAmountToSet = _amount;
+   95:         amountUsedLoweredToLimit = true;
+   96:       }
+   97:     }
+   98: 
+   99:     limitInWei = _amount;
+  100: 
+  101:     if (usedAmountResetToZero || amountUsedLoweredToLimit) {
+  102:       currentPeriodAmountInWei = usedLimitAmountToSet;
+  103:     }
+  104: 
+  105:     emit LimitAmountChanged(_msgSender(), _amount, amountUsedLoweredToLimit, usedAmountResetToZero);
+  106:   }
+  107: 
+  108:   /**
+  109:    * @notice Resets the amount used to zero.
+  110:    * @dev Only the RATE_LIMIT_SETTER_ROLE is allowed to execute this function.
+  111:    * @dev Emits the AmountUsedInPeriodReset event.
+  112:    */
+  113:   function resetAmountUsedInPeriod() external onlyRole(RATE_LIMIT_SETTER_ROLE) {
+  114:     currentPeriodAmountInWei = 0;
+  115: 
+  116:     emit AmountUsedInPeriodReset(_msgSender());
+  117:   }
+  118: }

@@ -1,0 +1,755 @@
+    1: // SPDX-License-Identifier: MIT
+    2: 
+    3: pragma solidity =0.8.24;
+    4: 
+    5: import {OwnableUpgradeable} from "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
+    6: import {PausableUpgradeable} from "@openzeppelin/contracts-upgradeable/security/PausableUpgradeable.sol";
+    7: 
+    8: import {IL1MessageQueueV1} from "./IL1MessageQueueV1.sol";
+    9: import {IL1MessageQueueV2} from "./IL1MessageQueueV2.sol";
+   10: import {IScrollChain} from "./IScrollChain.sol";
+   11: import {BatchHeaderV0Codec} from "../../libraries/codec/BatchHeaderV0Codec.sol";
+   12: import {BatchHeaderV1Codec} from "../../libraries/codec/BatchHeaderV1Codec.sol";
+   13: import {BatchHeaderV3Codec} from "../../libraries/codec/BatchHeaderV3Codec.sol";
+   14: import {BatchHeaderV7Codec} from "../../libraries/codec/BatchHeaderV7Codec.sol";
+   15: import {IRollupVerifier} from "../../libraries/verifier/IRollupVerifier.sol";
+   16: 
+   17: import {SystemConfig} from "../system-contract/SystemConfig.sol";
+   18: 
+   19: // solhint-disable no-inline-assembly
+   20: // solhint-disable reason-string
+   21: 
+   22: /// @title ScrollChain
+   23: /// @notice This contract maintains data for the Scroll rollup.
+   24: contract ScrollChain is OwnableUpgradeable, PausableUpgradeable, IScrollChain {
+   25:     /**********
+   26:      * Errors *
+   27:      **********/
+   28: 
+   29:     /// @dev Thrown when the given account is not EOA account.
+   30:     error ErrorAccountIsNotEOA();
+   31: 
+   32:     /// @dev Thrown when finalizing a verified batch.
+   33:     error ErrorBatchIsAlreadyVerified();
+   34: 
+   35:     /// @dev Thrown when committing empty batch (batch without chunks)
+   36:     error ErrorBatchIsEmpty();
+   37: 
+   38:     /// @dev Thrown when the caller is not prover.
+   39:     error ErrorCallerIsNotProver();
+   40: 
+   41:     /// @dev Thrown when the caller is not sequencer.
+   42:     error ErrorCallerIsNotSequencer();
+   43: 
+   44:     /// @dev Thrown when some fields are not zero in genesis batch.
+   45:     error ErrorGenesisBatchHasNonZeroField();
+   46: 
+   47:     /// @dev Thrown when importing genesis batch twice.
+   48:     error ErrorGenesisBatchImported();
+   49: 
+   50:     /// @dev Thrown when data hash in genesis batch is zero.
+   51:     error ErrorGenesisDataHashIsZero();
+   52: 
+   53:     /// @dev Thrown when the parent batch hash in genesis batch is zero.
+   54:     error ErrorGenesisParentBatchHashIsNonZero();
+   55: 
+   56:     /// @dev Thrown when the batch hash is incorrect.
+   57:     error ErrorIncorrectBatchHash();
+   58: 
+   59:     /// @dev Thrown when the batch version is incorrect.
+   60:     error ErrorIncorrectBatchVersion();
+   61: 
+   62:     /// @dev Thrown when reverting a finalized batch.
+   63:     error ErrorRevertFinalizedBatch();
+   64: 
+   65:     /// @dev Thrown when the given state root is zero.
+   66:     error ErrorStateRootIsZero();
+   67: 
+   68:     /// @dev Thrown when the given address is `address(0)`.
+   69:     error ErrorZeroAddress();
+   70: 
+   71:     /// @dev Thrown when we try to commit or finalize normal batch in enforced batch mode.
+   72:     error ErrorInEnforcedBatchMode();
+   73: 
+   74:     /// @dev Thrown when we try to commit enforced batch while not in enforced batch mode.
+   75:     error ErrorNotInEnforcedBatchMode();
+   76: 
+   77:     /// @dev Thrown when finalize v7 batches while some v1 messages still unfinalized.
+   78:     error ErrorNotAllV1MessagesAreFinalized();
+   79: 
+   80:     /// @dev Thrown when the committed batch hash doesn't match off-chain computed one.
+   81:     error InconsistentBatchHash(uint256 batchIndex, bytes32 expected, bytes32 actual);
+   82: 
+   83:     /// @dev Thrown when given batch is not committed before.
+   84:     error ErrorBatchNotCommitted();
+   85: 
+   86:     /// @dev Thrown when the function call is not the top-level call in the transaction.
+   87:     /// @dev This is checked so that indexers that need to decode calldata continue to work.
+   88:     error ErrorTopLevelCallRequired();
+   89: 
+   90:     /*************
+   91:      * Constants *
+   92:      *************/
+   93: 
+   94:     /// @dev offsets in miscData.flags
+   95:     uint256 private constant V1_MESSAGES_FINALIZED_OFFSET = 0;
+   96:     uint256 private constant ENFORCED_MODE_OFFSET = 1;
+   97: 
+   98:     /// @notice The chain id of the corresponding layer 2 chain.
+   99:     uint64 public immutable layer2ChainId;
+  100: 
+  101:     /// @notice The address of `L1MessageQueueV1`.
+  102:     address public immutable messageQueueV1;
+  103: 
+  104:     /// @notice The address of `L1MessageQueueV2`.
+  105:     address public immutable messageQueueV2;
+  106: 
+  107:     /// @notice The address of `MultipleVersionRollupVerifier`.
+  108:     address public immutable verifier;
+  109: 
+  110:     /// @notice The address of `SystemConfig`.
+  111:     address public immutable systemConfig;
+  112: 
+  113:     /***********
+  114:      * Structs *
+  115:      ***********/
+  116: 
+  117:     /// @param lastCommittedBatchIndex The index of the last committed batch.
+  118:     /// @param lastFinalizedBatchIndex The index of the last finalized batch.
+  119:     /// @param lastFinalizeTimestamp The timestamp of the last finalize transaction.
+  120:     /// @param flags Various flags for saving gas. It has 8 bits.
+  121:     ///        + bit 0 indicates whether all v1 messages are finalized, 1 means finalized and 0 means not.
+  122:     ///        + bit 1 indicates whether the enforced batch mode is enabled, 1 means enabled and 0 means disabled.
+  123:     /// @dev We use `32` bits for the timestamp, which works until `Feb 07 2106 06:28:15 GMT+0000`.
+  124:     struct ScrollChainMiscData {
+  125:         uint64 lastCommittedBatchIndex;
+  126:         uint64 lastFinalizedBatchIndex;
+  127:         uint32 lastFinalizeTimestamp;
+  128:         uint8 flags;
+  129:         uint88 reserved;
+  130:     }
+  131: 
+  132:     /*************
+  133:      * Variables *
+  134:      *************/
+  135: 
+  136:     /// @dev The maximum number of transactions allowed in each chunk.
+  137:     /// @custom:deprecated This is no longer used.
+  138:     uint256 private __maxNumTxInChunk;
+  139: 
+  140:     /// @dev The storage slot used as L1MessageQueue contract, which is deprecated now.
+  141:     /// @custom:deprecated This is no longer used.
+  142:     address private __messageQueue;
+  143: 
+  144:     /// @dev The storage slot used as RollupVerifier contract, which is deprecated now.
+  145:     /// @custom:deprecated This is no longer used.
+  146:     address private __verifier;
+  147: 
+  148:     /// @notice Whether an account is a sequencer.
+  149:     mapping(address => bool) public isSequencer;
+  150: 
+  151:     /// @notice Whether an account is a prover.
+  152:     mapping(address => bool) public isProver;
+  153: 
+  154:     /// @dev The storage slot used as `lastFinalizedBatchIndex`, which is deprecated now.
+  155:     /// @custom:deprecated This is no longer used.
+  156:     uint256 private __lastFinalizedBatchIndex;
+  157: 
+  158:     /// @inheritdoc IScrollChain
+  159:     /// @dev Starting from EuclidV2, this array is sparse: it only contains
+  160:     /// the last batch hash per commit transaction, and not intermediate ones.
+  161:     mapping(uint256 => bytes32) public override committedBatches;
+  162: 
+  163:     /// @inheritdoc IScrollChain
+  164:     /// @dev Starting from Darwin, this array is sparse: it only contains
+  165:     /// the last state root per finalized bundle, and not intermediate ones.
+  166:     mapping(uint256 => bytes32) public override finalizedStateRoots;
+  167: 
+  168:     /// @inheritdoc IScrollChain
+  169:     /// @dev Starting from Darwin, this array is sparse: it only contains
+  170:     /// the last withdraw root per finalized bundle, and not intermediate ones.
+  171:     mapping(uint256 => bytes32) public override withdrawRoots;
+  172: 
+  173:     /// @notice The index of first Euclid batch.
+  174:     uint256 public initialEuclidBatchIndex;
+  175: 
+  176:     /// @notice The misc data of ScrollChain.
+  177:     ScrollChainMiscData public miscData;
+  178: 
+  179:     /**********************
+  180:      * Function Modifiers *
+  181:      **********************/
+  182: 
+  183:     modifier OnlySequencer() {
+  184:         // @note In the decentralized mode, it should be only called by a list of validator.
+  185:         if (!isSequencer[_msgSender()]) revert ErrorCallerIsNotSequencer();
+  186:         _;
+  187:     }
+  188: 
+  189:     modifier OnlyProver() {
+  190:         if (!isProver[_msgSender()]) revert ErrorCallerIsNotProver();
+  191:         _;
+  192:     }
+  193: 
+  194:     modifier whenEnforcedBatchNotEnabled() {
+  195:         if (isEnforcedModeEnabled()) revert ErrorInEnforcedBatchMode();
+  196:         _;
+  197:     }
+  198: 
+  199:     modifier OnlyTopLevelCall() {
+  200:         // disallow contract accounts and delegated EOAs
+  201:         if (msg.sender != tx.origin || msg.sender.code.length != 0) {
+  202:             revert ErrorTopLevelCallRequired();
+  203:         }
+  204:         _;
+  205:     }
+  206: 
+  207:     /***************
+  208:      * Constructor *
+  209:      ***************/
+  210: 
+  211:     /// @notice Constructor for `ScrollChain` implementation contract.
+  212:     ///
+  213:     /// @param _chainId The chain id of L2.
+  214:     /// @param _messageQueueV1 The address of `L1MessageQueueV1`.
+  215:     /// @param _messageQueueV2 The address of `L1MessageQueueV2`.
+  216:     /// @param _verifier The address of `MultipleVersionRollupVerifier`.
+  217:     /// @param _systemConfig The address of `SystemConfig`.
+  218:     constructor(
+  219:         uint64 _chainId,
+  220:         address _messageQueueV1,
+  221:         address _messageQueueV2,
+  222:         address _verifier,
+  223:         address _systemConfig
+  224:     ) {
+  225:         if (
+  226:             _messageQueueV1 == address(0) ||
+  227:             _messageQueueV2 == address(0) ||
+  228:             _verifier == address(0) ||
+  229:             _systemConfig == address(0)
+  230:         ) {
+  231:             revert ErrorZeroAddress();
+  232:         }
+  233: 
+  234:         _disableInitializers();
+  235: 
+  236:         layer2ChainId = _chainId;
+  237:         messageQueueV1 = _messageQueueV1;
+  238:         messageQueueV2 = _messageQueueV2;
+  239:         verifier = _verifier;
+  240:         systemConfig = _systemConfig;
+  241:     }
+  242: 
+  243:     /// @notice Initialize the storage of ScrollChain.
+  244:     ///
+  245:     /// @dev The parameters `_messageQueue` and `_verifier` are no longer used.
+  246:     ///
+  247:     /// @param _messageQueue The address of `L1MessageQueue` contract.
+  248:     /// @param _verifier The address of zkevm verifier contract.
+  249:     /// @param _maxNumTxInChunk The maximum number of transactions allowed in each chunk.
+  250:     function initialize(
+  251:         address _messageQueue,
+  252:         address _verifier,
+  253:         uint256 _maxNumTxInChunk
+  254:     ) external initializer {
+  255:         OwnableUpgradeable.__Ownable_init();
+  256: 
+  257:         __maxNumTxInChunk = _maxNumTxInChunk;
+  258:         __verifier = _verifier;
+  259:         __messageQueue = _messageQueue;
+  260:     }
+  261: 
+  262:     function initializeV2() external reinitializer(2) {
+  263:         // binary search on lastCommittedBatchIndex
+  264:         uint256 index = __lastFinalizedBatchIndex;
+  265:         uint256 step = 1;
+  266:         unchecked {
+  267:             while (committedBatches[index + step] != bytes32(0)) {
+  268:                 step <<= 1;
+  269:             }
+  270:             step >>= 1;
+  271:             while (step > 0) {
+  272:                 if (committedBatches[index + step] != bytes32(0)) {
+  273:                     index += step;
+  274:                 }
+  275:                 step >>= 1;
+  276:             }
+  277:         }
+  278: 
+  279:         miscData = ScrollChainMiscData({
+  280:             lastCommittedBatchIndex: uint64(index),
+  281:             lastFinalizedBatchIndex: uint64(__lastFinalizedBatchIndex),
+  282:             lastFinalizeTimestamp: uint32(block.timestamp),
+  283:             flags: 0,
+  284:             reserved: 0
+  285:         });
+  286:     }
+  287: 
+  288:     /*************************
+  289:      * Public View Functions *
+  290:      *************************/
+  291: 
+  292:     /// @inheritdoc IScrollChain
+  293:     function isBatchFinalized(uint256 _batchIndex) external view override returns (bool) {
+  294:         return _batchIndex <= miscData.lastFinalizedBatchIndex;
+  295:     }
+  296: 
+  297:     /// @inheritdoc IScrollChain
+  298:     function lastFinalizedBatchIndex() external view returns (uint256) {
+  299:         return miscData.lastFinalizedBatchIndex;
+  300:     }
+  301: 
+  302:     /// @notice Return whether we are in enforced batch mode.
+  303:     function isEnforcedModeEnabled() public view returns (bool) {
+  304:         return _decodeBoolFromFlag(miscData.flags, ENFORCED_MODE_OFFSET);
+  305:     }
+  306: 
+  307:     /*****************************
+  308:      * Public Mutating Functions *
+  309:      *****************************/
+  310: 
+  311:     /// @notice Import layer 2 genesis block
+  312:     /// @param _batchHeader The header of the genesis batch.
+  313:     /// @param _stateRoot The state root of the genesis block.
+  314:     function importGenesisBatch(bytes calldata _batchHeader, bytes32 _stateRoot) external {
+  315:         // check genesis batch header length
+  316:         if (_stateRoot == bytes32(0)) revert ErrorStateRootIsZero();
+  317: 
+  318:         // check whether the genesis batch is imported
+  319:         if (finalizedStateRoots[0] != bytes32(0)) revert ErrorGenesisBatchImported();
+  320: 
+  321:         (uint256 memPtr, bytes32 _batchHash, , ) = _loadBatchHeader(_batchHeader, 0);
+  322: 
+  323:         // check all fields except `dataHash` and `lastBlockHash` are zero
+  324:         unchecked {
+  325:             uint256 sum = BatchHeaderV0Codec.getVersion(memPtr) +
+  326:                 BatchHeaderV0Codec.getBatchIndex(memPtr) +
+  327:                 BatchHeaderV0Codec.getL1MessagePopped(memPtr) +
+  328:                 BatchHeaderV0Codec.getTotalL1MessagePopped(memPtr);
+  329:             if (sum != 0) revert ErrorGenesisBatchHasNonZeroField();
+  330:         }
+  331:         if (BatchHeaderV0Codec.getDataHash(memPtr) == bytes32(0)) revert ErrorGenesisDataHashIsZero();
+  332:         if (BatchHeaderV0Codec.getParentBatchHash(memPtr) != bytes32(0)) revert ErrorGenesisParentBatchHashIsNonZero();
+  333: 
+  334:         committedBatches[0] = _batchHash;
+  335:         finalizedStateRoots[0] = _stateRoot;
+  336: 
+  337:         emit CommitBatch(0, _batchHash);
+  338:         emit FinalizeBatch(0, _batchHash, _stateRoot, bytes32(0));
+  339:     }
+  340: 
+  341:     /// @inheritdoc IScrollChain
+  342:     function commitBatches(
+  343:         uint8 version,
+  344:         bytes32 parentBatchHash,
+  345:         bytes32 lastBatchHash
+  346:     ) external override OnlySequencer whenNotPaused whenEnforcedBatchNotEnabled {
+  347:         _commitBatchesFromV7(version, parentBatchHash, lastBatchHash, false);
+  348:     }
+  349: 
+  350:     /// @inheritdoc IScrollChain
+  351:     /// @dev This function cannot revert V6 and V7 batches at the same time, so we will assume all batches are V7.
+  352:     /// If we need to revert V6 batches, we can downgrade the contract to the previous version and call this function.
+  353:     /// @dev During commit batch we only store the last batch hash into storage. As a result, we cannot revert intermediate batches.
+  354:     function revertBatch(bytes calldata batchHeader) external onlyOwner {
+  355:         uint256 lastBatchIndex = miscData.lastCommittedBatchIndex;
+  356:         (uint256 batchPtr, , uint256 startBatchIndex, ) = _loadBatchHeader(batchHeader, lastBatchIndex);
+  357:         // only revert v7 batches
+  358:         if (BatchHeaderV0Codec.getVersion(batchPtr) < 7) revert ErrorIncorrectBatchVersion();
+  359:         // check finalization
+  360:         if (startBatchIndex < miscData.lastFinalizedBatchIndex) revert ErrorRevertFinalizedBatch();
+  361: 
+  362:         // actual revert
+  363:         for (uint256 i = lastBatchIndex; i > startBatchIndex; --i) {
+  364:             bytes32 hash = committedBatches[i];
+  365:             if (hash != bytes32(0)) delete committedBatches[i];
+  366:         }
+  367:         emit RevertBatch(startBatchIndex + 1, lastBatchIndex);
+  368: 
+  369:         // update `lastCommittedBatchIndex`
+  370:         miscData.lastCommittedBatchIndex = uint64(startBatchIndex);
+  371:     }
+  372: 
+  373:     /// @inheritdoc IScrollChain
+  374:     function finalizeBundlePostEuclidV2(
+  375:         bytes calldata batchHeader,
+  376:         uint256 totalL1MessagesPoppedOverall,
+  377:         bytes32 postStateRoot,
+  378:         bytes32 withdrawRoot,
+  379:         bytes calldata aggrProof
+  380:     ) external override OnlyProver whenNotPaused whenEnforcedBatchNotEnabled {
+  381:         uint256 flags = miscData.flags;
+  382:         bool isV1MessageFinalized = _decodeBoolFromFlag(flags, V1_MESSAGES_FINALIZED_OFFSET);
+  383:         if (!isV1MessageFinalized) {
+  384:             if (
+  385:                 IL1MessageQueueV1(messageQueueV1).nextUnfinalizedQueueIndex() !=
+  386:                 IL1MessageQueueV2(messageQueueV2).firstCrossDomainMessageIndex()
+  387:             ) {
+  388:                 revert ErrorNotAllV1MessagesAreFinalized();
+  389:             }
+  390:             miscData.flags = uint8(_insertBoolToFlag(flags, V1_MESSAGES_FINALIZED_OFFSET, true));
+  391:         }
+  392: 
+  393:         _finalizeBundlePostEuclidV2(batchHeader, totalL1MessagesPoppedOverall, postStateRoot, withdrawRoot, aggrProof);
+  394:     }
+  395: 
+  396:     /// @inheritdoc IScrollChain
+  397:     /// @dev We only consider batch version >= 7 here.
+  398:     function commitAndFinalizeBatch(
+  399:         uint8 version,
+  400:         bytes32 parentBatchHash,
+  401:         FinalizeStruct calldata finalizeStruct
+  402:     ) external OnlyTopLevelCall {
+  403:         ScrollChainMiscData memory cachedMiscData = miscData;
+  404:         if (!isEnforcedModeEnabled()) {
+  405:             (uint256 maxDelayEnterEnforcedMode, uint256 maxDelayMessageQueue) = SystemConfig(systemConfig)
+  406:                 .enforcedBatchParameters();
+  407:             uint256 firstUnfinalizedMessageTime = IL1MessageQueueV2(messageQueueV2)
+  408:                 .getFirstUnfinalizedMessageEnqueueTime();
+  409:             if (
+  410:                 firstUnfinalizedMessageTime + maxDelayMessageQueue < block.timestamp ||
+  411:                 cachedMiscData.lastFinalizeTimestamp + maxDelayEnterEnforcedMode < block.timestamp
+  412:             ) {
+  413:                 if (cachedMiscData.lastFinalizedBatchIndex < cachedMiscData.lastCommittedBatchIndex) {
+  414:                     // be careful with the gas costs, maybe should call revertBatch first.
+  415:                     for (
+  416:                         uint256 i = cachedMiscData.lastCommittedBatchIndex;
+  417:                         i > cachedMiscData.lastFinalizedBatchIndex;
+  418:                         --i
+  419:                     ) {
+  420:                         bytes32 hash = committedBatches[i];
+  421:                         if (hash != bytes32(0)) delete committedBatches[i];
+  422:                     }
+  423:                     emit RevertBatch(
+  424:                         cachedMiscData.lastFinalizedBatchIndex + 1,
+  425:                         cachedMiscData.lastCommittedBatchIndex
+  426:                     );
+  427:                 }
+  428:                 // explicitly enable enforced batch mode
+  429:                 cachedMiscData.flags = uint8(_insertBoolToFlag(cachedMiscData.flags, ENFORCED_MODE_OFFSET, true));
+  430:                 // reset `lastCommittedBatchIndex`
+  431:                 cachedMiscData.lastCommittedBatchIndex = uint64(cachedMiscData.lastFinalizedBatchIndex);
+  432:                 miscData = cachedMiscData;
+  433:                 emit UpdateEnforcedBatchMode(true, cachedMiscData.lastCommittedBatchIndex);
+  434:             } else {
+  435:                 revert ErrorNotInEnforcedBatchMode();
+  436:             }
+  437:         }
+  438: 
+  439:         bytes32 batchHash = keccak256(finalizeStruct.batchHeader);
+  440:         _commitBatchesFromV7(version, parentBatchHash, batchHash, true);
+  441: 
+  442:         // finalize with zk proof
+  443:         _finalizeBundlePostEuclidV2(
+  444:             finalizeStruct.batchHeader,
+  445:             finalizeStruct.totalL1MessagesPoppedOverall,
+  446:             finalizeStruct.postStateRoot,
+  447:             finalizeStruct.withdrawRoot,
+  448:             finalizeStruct.zkProof
+  449:         );
+  450:     }
+  451: 
+  452:     /************************
+  453:      * Restricted Functions *
+  454:      ************************/
+  455: 
+  456:     /// @notice Add an account to the sequencer list.
+  457:     /// @param _account The address of account to add.
+  458:     function addSequencer(address _account) external onlyOwner {
+  459:         // @note Currently many external services rely on EOA sequencer to decode metadata directly from tx.calldata.
+  460:         // So we explicitly make sure the account is EOA.
+  461:         if (_account.code.length > 0) revert ErrorAccountIsNotEOA();
+  462: 
+  463:         isSequencer[_account] = true;
+  464: 
+  465:         emit UpdateSequencer(_account, true);
+  466:     }
+  467: 
+  468:     /// @notice Remove an account from the sequencer list.
+  469:     /// @param _account The address of account to remove.
+  470:     function removeSequencer(address _account) external onlyOwner {
+  471:         isSequencer[_account] = false;
+  472: 
+  473:         emit UpdateSequencer(_account, false);
+  474:     }
+  475: 
+  476:     /// @notice Add an account to the prover list.
+  477:     /// @param _account The address of account to add.
+  478:     function addProver(address _account) external onlyOwner {
+  479:         // @note Currently many external services rely on EOA prover to decode metadata directly from tx.calldata.
+  480:         // So we explicitly make sure the account is EOA.
+  481:         if (_account.code.length > 0) revert ErrorAccountIsNotEOA();
+  482:         isProver[_account] = true;
+  483: 
+  484:         emit UpdateProver(_account, true);
+  485:     }
+  486: 
+  487:     /// @notice Add an account from the prover list.
+  488:     /// @param _account The address of account to remove.
+  489:     function removeProver(address _account) external onlyOwner {
+  490:         isProver[_account] = false;
+  491: 
+  492:         emit UpdateProver(_account, false);
+  493:     }
+  494: 
+  495:     /// @notice Pause the contract
+  496:     /// @param _status The pause status to update.
+  497:     function setPause(bool _status) external onlyOwner {
+  498:         if (_status) {
+  499:             _pause();
+  500:         } else {
+  501:             _unpause();
+  502:         }
+  503:     }
+  504: 
+  505:     /// @notice Exit from enforced batch mode.
+  506:     function disableEnforcedBatchMode() external onlyOwner {
+  507:         miscData.flags = uint8(_insertBoolToFlag(miscData.flags, ENFORCED_MODE_OFFSET, false));
+  508:         emit UpdateEnforcedBatchMode(false, miscData.lastCommittedBatchIndex);
+  509:     }
+  510: 
+  511:     /**********************
+  512:      * Internal Functions *
+  513:      **********************/
+  514: 
+  515:     /// @dev Caller should make sure bit is smaller than 256.
+  516:     function _decodeBoolFromFlag(uint256 flag, uint256 bit) internal pure returns (bool) {
+  517:         return (flag >> bit) & 1 == 1;
+  518:     }
+  519: 
+  520:     /// @dev Caller should make sure bit is smaller than 256.
+  521:     function _insertBoolToFlag(
+  522:         uint256 flag,
+  523:         uint256 bit,
+  524:         bool value
+  525:     ) internal pure returns (uint256) {
+  526:         flag = flag ^ (flag & (1 << bit)); // reset value at bit
+  527:         if (value) {
+  528:             flag |= (1 << bit);
+  529:         }
+  530:         return flag;
+  531:     }
+  532: 
+  533:     /// @dev Internal function to do common actions before actual batch finalization.
+  534:     function _beforeFinalizeBatch(bytes calldata batchHeader, bytes32 postStateRoot)
+  535:         internal
+  536:         view
+  537:         returns (
+  538:             uint256 version,
+  539:             bytes32 batchHash,
+  540:             uint256 batchIndex,
+  541:             uint256 totalL1MessagesPoppedOverall,
+  542:             uint256 prevBatchIndex
+  543:         )
+  544:     {
+  545:         if (postStateRoot == bytes32(0)) revert ErrorStateRootIsZero();
+  546: 
+  547:         ScrollChainMiscData memory cachedMiscData = miscData;
+  548:         uint256 batchPtr;
+  549:         // compute pending batch hash and verify
+  550:         (batchPtr, batchHash, batchIndex, totalL1MessagesPoppedOverall) = _loadBatchHeader(
+  551:             batchHeader,
+  552:             cachedMiscData.lastCommittedBatchIndex
+  553:         );
+  554: 
+  555:         // make sure don't finalize batch multiple times
+  556:         prevBatchIndex = cachedMiscData.lastFinalizedBatchIndex;
+  557:         if (batchIndex <= prevBatchIndex) revert ErrorBatchIsAlreadyVerified();
+  558: 
+  559:         version = BatchHeaderV0Codec.getVersion(batchPtr);
+  560:     }
+  561: 
+  562:     /// @dev Internal function to do common actions after actual batch finalization.
+  563:     function _afterFinalizeBatch(
+  564:         uint256 batchIndex,
+  565:         bytes32 batchHash,
+  566:         uint256 totalL1MessagesPoppedOverall,
+  567:         bytes32 postStateRoot,
+  568:         bytes32 withdrawRoot,
+  569:         bool isV1
+  570:     ) internal {
+  571:         ScrollChainMiscData memory cachedMiscData = miscData;
+  572:         cachedMiscData.lastFinalizedBatchIndex = uint64(batchIndex);
+  573:         cachedMiscData.lastFinalizeTimestamp = uint32(block.timestamp);
+  574:         miscData = cachedMiscData;
+  575:         // @note we do not store intermediate finalized roots
+  576:         finalizedStateRoots[batchIndex] = postStateRoot;
+  577:         withdrawRoots[batchIndex] = withdrawRoot;
+  578: 
+  579:         // Pop finalized and non-skipped message from L1MessageQueue.
+  580:         _finalizePoppedL1Messages(totalL1MessagesPoppedOverall, isV1);
+  581: 
+  582:         emit FinalizeBatch(batchIndex, batchHash, postStateRoot, withdrawRoot);
+  583:     }
+  584: 
+  585:     /// @dev Internal function to get the blob versioned hash.
+  586:     /// @return _blobVersionedHash The retrieved blob versioned hash.
+  587:     function _getBlobVersionedHash(uint256 index) internal virtual returns (bytes32 _blobVersionedHash) {
+  588:         // Get blob's versioned hash
+  589:         assembly {
+  590:             _blobVersionedHash := blobhash(index)
+  591:         }
+  592:     }
+  593: 
+  594:     /// @dev Internal function to commit one ore more batches after the EuclidV2 upgrade.
+  595:     /// @param version The version of the batches (version >= 7).
+  596:     /// @param parentBatchHash The hash of parent batch.
+  597:     /// @param lastBatchHash The hash of the last committed batch after this call.
+  598:     /// @param onlyOne If true, we will only process the first blob.
+  599:     function _commitBatchesFromV7(
+  600:         uint8 version,
+  601:         bytes32 parentBatchHash,
+  602:         bytes32 lastBatchHash,
+  603:         bool onlyOne
+  604:     ) internal {
+  605:         if (version < 7) {
+  606:             // only accept version >= 7
+  607:             revert ErrorIncorrectBatchVersion();
+  608:         }
+  609: 
+  610:         uint256 lastCommittedBatchIndex = miscData.lastCommittedBatchIndex;
+  611:         if (parentBatchHash != committedBatches[lastCommittedBatchIndex]) revert ErrorIncorrectBatchHash();
+  612:         for (uint256 i = 0; ; i++) {
+  613:             bytes32 blobVersionedHash = _getBlobVersionedHash(i);
+  614:             if (blobVersionedHash == bytes32(0)) {
+  615:                 if (i == 0) revert ErrorBatchIsEmpty();
+  616:                 break;
+  617:             }
+  618: 
+  619:             lastCommittedBatchIndex += 1;
+  620:             // see comments in `src/libraries/codec/BatchHeaderV7Codec.sol` for encodings
+  621:             uint256 batchPtr = BatchHeaderV7Codec.allocate();
+  622:             BatchHeaderV0Codec.storeVersion(batchPtr, version);
+  623:             BatchHeaderV0Codec.storeBatchIndex(batchPtr, lastCommittedBatchIndex);
+  624:             BatchHeaderV7Codec.storeParentBatchHash(batchPtr, parentBatchHash);
+  625:             BatchHeaderV7Codec.storeBlobVersionedHash(batchPtr, blobVersionedHash);
+  626:             bytes32 batchHash = BatchHeaderV0Codec.computeBatchHash(
+  627:                 batchPtr,
+  628:                 BatchHeaderV7Codec.BATCH_HEADER_FIXED_LENGTH
+  629:             );
+  630:             emit CommitBatch(lastCommittedBatchIndex, batchHash);
+  631:             parentBatchHash = batchHash;
+  632:             if (onlyOne) break;
+  633:         }
+  634: 
+  635:         // Make sure that the batch hash matches the one computed by the batch committer off-chain.
+  636:         // This check can fail if:
+  637:         // 1. faulty batch producers commit a wrong batch or the local computation is wrong.
+  638:         // 2. unexpected `parentBatch` in case commit transactions get reordered
+  639:         // 3. two batch producers commit at the same time with the same `parentBatch`.
+  640:         if (parentBatchHash != lastBatchHash) {
+  641:             revert InconsistentBatchHash(lastCommittedBatchIndex, lastBatchHash, parentBatchHash);
+  642:         }
+  643:         // only store last batch hash in storage
+  644:         committedBatches[lastCommittedBatchIndex] = parentBatchHash;
+  645:         miscData.lastCommittedBatchIndex = uint64(lastCommittedBatchIndex);
+  646:     }
+  647: 
+  648:     /// @dev Internal function to finalize a bundle after the EuclidV2 upgrade.
+  649:     /// @param batchHeader The header of the last batch in this bundle.
+  650:     /// @param totalL1MessagesPoppedOverall The number of messages processed after this bundle.
+  651:     /// @param postStateRoot The state root after this bundle.
+  652:     /// @param withdrawRoot The withdraw trie root after this bundle.
+  653:     /// @param aggrProof The bundle proof for this bundle.
+  654:     function _finalizeBundlePostEuclidV2(
+  655:         bytes calldata batchHeader,
+  656:         uint256 totalL1MessagesPoppedOverall,
+  657:         bytes32 postStateRoot,
+  658:         bytes32 withdrawRoot,
+  659:         bytes calldata aggrProof
+  660:     ) internal {
+  661:         // actions before verification
+  662:         (uint256 version, bytes32 batchHash, uint256 batchIndex, , uint256 prevBatchIndex) = _beforeFinalizeBatch(
+  663:             batchHeader,
+  664:             postStateRoot
+  665:         );
+  666: 
+  667:         // L1 message hashes are chained,
+  668:         // this hash commits to the whole queue up to and including `totalL1MessagesPoppedOverall-1`
+  669:         bytes32 messageQueueHash = totalL1MessagesPoppedOverall == 0
+  670:             ? bytes32(0)
+  671:             : IL1MessageQueueV2(messageQueueV2).getMessageRollingHash(totalL1MessagesPoppedOverall - 1);
+  672: 
+  673:         bytes memory publicInputs = abi.encodePacked(
+  674:             layer2ChainId,
+  675:             messageQueueHash,
+  676:             uint32(batchIndex - prevBatchIndex), // numBatches
+  677:             finalizedStateRoots[prevBatchIndex], // _prevStateRoot
+  678:             committedBatches[prevBatchIndex], // _prevBatchHash
+  679:             postStateRoot,
+  680:             batchHash,
+  681:             withdrawRoot
+  682:         );
+  683: 
+  684:         // verify bundle, choose the correct verifier based on the last batch
+  685:         // our off-chain service will make sure all unfinalized batches have the same batch version.
+  686:         IRollupVerifier(verifier).verifyBundleProof(version, batchIndex, aggrProof, publicInputs);
+  687: 
+  688:         // actions after verification
+  689:         _afterFinalizeBatch(batchIndex, batchHash, totalL1MessagesPoppedOverall, postStateRoot, withdrawRoot, false);
+  690:     }
+  691: 
+  692:     /// @dev Internal function to load batch header from calldata to memory.
+  693:     /// @param _batchHeader The batch header in calldata.
+  694:     /// @param _lastCommittedBatchIndex The index of the last committed batch.
+  695:     /// @return batchPtr The start memory offset of loaded batch header.
+  696:     /// @return _batchHash The hash of the loaded batch header.
+  697:     /// @return _batchIndex The index of this batch.
+  698:     /// @return _totalL1MessagesPoppedOverall The number of L1 messages popped after this batch.
+  699:     /// @dev This function only works with batches whose hashes are stored in `committedBatches`.
+  700:     function _loadBatchHeader(bytes calldata _batchHeader, uint256 _lastCommittedBatchIndex)
+  701:         internal
+  702:         view
+  703:         virtual
+  704:         returns (
+  705:             uint256 batchPtr,
+  706:             bytes32 _batchHash,
+  707:             uint256 _batchIndex,
+  708:             uint256 _totalL1MessagesPoppedOverall
+  709:         )
+  710:     {
+  711:         // load version from batch header, it is always the first byte.
+  712:         uint256 version;
+  713:         assembly {
+  714:             version := shr(248, calldataload(_batchHeader.offset))
+  715:         }
+  716: 
+  717:         uint256 _length;
+  718:         if (version == 0) {
+  719:             (batchPtr, _length) = BatchHeaderV0Codec.loadAndValidate(_batchHeader);
+  720:         } else if (version <= 2) {
+  721:             (batchPtr, _length) = BatchHeaderV1Codec.loadAndValidate(_batchHeader);
+  722:         } else if (version <= 6) {
+  723:             (batchPtr, _length) = BatchHeaderV3Codec.loadAndValidate(_batchHeader);
+  724:         } else {
+  725:             (batchPtr, _length) = BatchHeaderV7Codec.loadAndValidate(_batchHeader);
+  726:         }
+  727: 
+  728:         // the code for compute batch hash is the same for V0~V6
+  729:         // also the `_batchIndex` and `_totalL1MessagesPoppedOverall`.
+  730:         _batchHash = BatchHeaderV0Codec.computeBatchHash(batchPtr, _length);
+  731:         _batchIndex = BatchHeaderV0Codec.getBatchIndex(batchPtr);
+  732:         // we don't have totalL1MessagesPoppedOverall in V7~
+  733:         if (version <= 6) {
+  734:             _totalL1MessagesPoppedOverall = BatchHeaderV0Codec.getTotalL1MessagePopped(batchPtr);
+  735:         }
+  736: 
+  737:         if (_batchIndex > _lastCommittedBatchIndex) revert ErrorBatchNotCommitted();
+  738: 
+  739:         // only check when genesis is imported
+  740:         if (committedBatches[_batchIndex] != _batchHash && finalizedStateRoots[0] != bytes32(0)) {
+  741:             revert ErrorIncorrectBatchHash();
+  742:         }
+  743:     }
+  744: 
+  745:     /// @param totalL1MessagesPoppedOverall The total number of L1 messages popped in all batches including current batch.
+  746:     function _finalizePoppedL1Messages(uint256 totalL1MessagesPoppedOverall, bool isV1) internal {
+  747:         if (totalL1MessagesPoppedOverall > 0) {
+  748:             if (isV1) {
+  749:                 IL1MessageQueueV1(messageQueueV1).finalizePoppedCrossDomainMessage(totalL1MessagesPoppedOverall);
+  750:             } else {
+  751:                 IL1MessageQueueV2(messageQueueV2).finalizePoppedCrossDomainMessage(totalL1MessagesPoppedOverall);
+  752:             }
+  753:         }
+  754:     }
+  755: }

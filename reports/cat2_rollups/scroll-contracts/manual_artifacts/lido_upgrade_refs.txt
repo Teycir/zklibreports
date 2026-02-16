@@ -1,0 +1,182 @@
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/hardhat-test\GasOptimizationUpgrade.spec.ts:117:      await queue.initializeV2();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/hardhat-test\GasOptimizationUpgrade.spec.ts:329:    it.skip("should succeed on L1LidoGateway", async () => {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/hardhat-test\GasOptimizationUpgrade.spec.ts:334:      const L1LidoGateway = await ethers.getContractFactory("L1LidoGateway", deployer);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/hardhat-test\GasOptimizationUpgrade.spec.ts:335:      const impl = await L1LidoGateway.deploy(L1_WSTETH, L2_WSTETH, L2_GATEWAY, L1_ROUTER, L1_MESSENGER);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/hardhat-test\GasOptimizationUpgrade.spec.ts:336:      const gateway = await ethers.getContractAt("L1LidoGateway", L1_GATEWAY, deployer);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/hardhat-test\GasOptimizationUpgrade.spec.ts:347:        "L1LidoGateway.depositERC20 wstETH before upgrade"
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/hardhat-test\GasOptimizationUpgrade.spec.ts:356:      await gateway.initializeV2(deployer.address, deployer.address, deployer.address, deployer.address);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/hardhat-test\GasOptimizationUpgrade.spec.ts:361:        "L1LidoGateway.depositERC20 wstETH after upgrade"
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/hardhat-test\GasOptimizationUpgrade.spec.ts:622:    it.skip("should succeed on L2LidoGateway", async () => {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/hardhat-test\GasOptimizationUpgrade.spec.ts:627:      const L2LidoGateway = await ethers.getContractFactory("L2LidoGateway", deployer);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/hardhat-test\GasOptimizationUpgrade.spec.ts:628:      const impl = await L2LidoGateway.deploy(L1_WSTETH, L2_WSTETH, L1_GATEWAY, L2_ROUTER, L2_MESSENGER);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/hardhat-test\GasOptimizationUpgrade.spec.ts:629:      const gateway = await ethers.getContractAt("L2LidoGateway", L2_GATEWAY, deployer);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/hardhat-test\GasOptimizationUpgrade.spec.ts:639:        "L2LidoGateway.withdrawERC20 wstETH before upgrade"
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/hardhat-test\GasOptimizationUpgrade.spec.ts:648:      await gateway.initializeV2(deployer.address, deployer.address, deployer.address, deployer.address);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/hardhat-test\GasOptimizationUpgrade.spec.ts:653:        "L2LidoGateway.withdrawERC20 wstETH after upgrade"
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/hardhat-test\EnforcedTxGateway.spec.ts:20:  const deployProxy = async (name: string, admin: string, args: any[]): Promise<string> => {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/hardhat-test\EnforcedTxGateway.spec.ts:44:      await deployProxy("SystemConfig", await admin.getAddress(), []),
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/scripts\foundry\InitializeL2ScrollOwner.s.sol:132:        _selectors[1] = ProxyAdmin.upgradeAndCall.selector;
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/scripts\foundry\InitializeL2BridgeContracts.s.sol:70:        // note: we use call upgrade(...) and initialize(...) instead of upgradeAndCall(...),
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/scripts\foundry\InitializeL1ScrollOwner.s.sol:141:        _selectors[1] = ProxyAdmin.upgradeAndCall.selector;
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/scripts\foundry\InitializeL1BridgeContracts.s.sol:90:        // note: we use call upgrade(...) and initialize(...) instead of upgradeAndCall(...),
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/scripts\foundry\InitializeL1BridgeContracts.s.sol:125:        ScrollChain(L1_SCROLL_CHAIN_PROXY_ADDR).initializeV2();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/scripts\foundry\DeployL1BridgeProxyPlaceholder.s.sol:26:        deployProxyAdmin();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/scripts\foundry\DeployL1BridgeProxyPlaceholder.s.sol:42:    function deployProxyAdmin() internal {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/scripts\foundry\DeployLidoGateway.s.sol:7:import {L1LidoGateway} from "../../src/lido/L1LidoGateway.sol";
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/scripts\foundry\DeployLidoGateway.s.sol:8:import {L2LidoGateway} from "../../src/lido/L2LidoGateway.sol";
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/scripts\foundry\DeployLidoGateway.s.sol:37:            L1LidoGateway gateway = new L1LidoGateway(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/scripts\foundry\DeployLidoGateway.s.sol:47:            L2LidoGateway gateway = new L2LidoGateway(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/scripts\foundry\DeployL2BridgeProxyPlaceholder.s.sol:27:        deployProxyAdmin();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/scripts\foundry\DeployL2BridgeProxyPlaceholder.s.sol:40:    function deployProxyAdmin() internal {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\validium\ValidiumTestBase.t.sol:78:        systemConfig = SystemConfig(_deployProxy(address(0)));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\validium\ValidiumTestBase.t.sol:79:        l1Messenger = L1ScrollMessengerValidium(payable(_deployProxy(address(0))));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\validium\ValidiumTestBase.t.sol:81:        messageQueueV2 = L1MessageQueueV2(_deployProxy(address(0)));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\validium\ValidiumTestBase.t.sol:82:        rollup = ScrollChainValidiumMock(_deployProxy(address(0)));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\validium\ValidiumTestBase.t.sol:87:        l2Messenger = L2ScrollMessenger(payable(_deployProxy(address(0))));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\validium\L1WETHGatewayValidium.t.sol:151:        _gateway = L1ERC20GatewayValidium(_deployProxy(address(0)));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\validium\L1ERC20GatewayValidium.t.sol:449:        _gateway = L1ERC20GatewayValidium(_deployProxy(address(0)));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\validium\FastWithdrawVault.t.sol:261:        _gateway = L1ERC20GatewayValidium(_deployProxy(address(0)));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\validium\FastWithdrawVault.t.sol:278:        _vault = FastWithdrawVaultHelper(payable(_deployProxy(address(0))));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\L1WETHGateway.t.sol:59:        router = L1GatewayRouter(_deployProxy(address(new L1GatewayRouter())));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\L1WETHGateway.t.sol:599:        _gateway = L1WETHGateway(payable(_deployProxy(address(0))));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\L1ETHGateway.t.sol:36:        router = L1GatewayRouter(_deployProxy(address(new L1GatewayRouter())));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\L1ETHGateway.t.sol:475:        _gateway = L1ETHGateway(_deployProxy(address(0)));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\SystemConfig.t.sol:17:        system = SystemConfig(_deployProxy(address(0)));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\L1USDCGateway.t.sol:57:        router = L1GatewayRouter(_deployProxy(address(new L1GatewayRouter())));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\L1USDCGateway.t.sol:523:        _gateway = L1USDCGateway(_deployProxy(address(0)));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\L1ERC721Gateway.t.sol:836:        _gateway = L1ERC721Gateway(_deployProxy(address(0)));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\ScrollTestBase.t.sol:22:    function _deployProxy(address _logic) internal returns (address) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\L1StandardERC20Gateway.t.sol:71:        router = L1GatewayRouter(_deployProxy(address(new L1GatewayRouter())));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\L1StandardERC20Gateway.t.sol:637:        _gateway = L1StandardERC20Gateway(_deployProxy(address(0)));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\L1ERC1155Gateway.t.sol:940:        _gateway = L1ERC1155Gateway(_deployProxy(address(0)));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\L1CustomERC20Gateway.t.sol:60:        router = L1GatewayRouter(_deployProxy(address(new L1GatewayRouter())));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\L1CustomERC20Gateway.t.sol:590:        _gateway = L1CustomERC20Gateway(_deployProxy(address(0)));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\L1ReverseCustomERC20Gateway.t.sol:83:        router = L1GatewayRouter(_deployProxy(address(new L1GatewayRouter())));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\L1ReverseCustomERC20Gateway.t.sol:359:        _gateway = MockL1ReverseCustomERC20Gateway(_deployProxy(address(0)));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\ScrollChain.t.sol:57:        system = SystemConfig(_deployProxy(address(0)));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\ScrollChain.t.sol:58:        messageQueueV1 = L1MessageQueueV1(_deployProxy(address(0)));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\ScrollChain.t.sol:59:        messageQueueV2 = L1MessageQueueV2(_deployProxy(address(0)));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\ScrollChain.t.sol:60:        rollup = ScrollChain(_deployProxy(address(0)));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\ScrollChain.t.sol:134:        rollup.initializeV2();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\ScrollChain.t.sol:193:        rollup.initializeV2();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\ScrollChain.t.sol:313:        rollup.initializeV2();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\ScrollChain.t.sol:463:        rollup.initializeV2();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\ScrollChain.t.sol:543:        rollup.initializeV2();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\ScrollChain.t.sol:752:    function _deployProxy(address _logic) internal returns (address) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\L1MessageQueueWithGasPriceOracle.t.sol:28:        queue = L1MessageQueueV1WithGasPriceOracle(_deployProxy(address(0)));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\L1MessageQueueWithGasPriceOracle.t.sol:29:        gasOracle = L2GasPriceOracle(_deployProxy(address(new L2GasPriceOracle())));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\L1MessageQueueWithGasPriceOracle.t.sol:47:        queue.initializeV2();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\L1MessageQueueV2.t.sol:43:        system = SystemConfig(_deployProxy(address(0)));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\L1MessageQueueV2.t.sol:44:        queueV1 = L1MessageQueueV1(_deployProxy(address(0)));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\L1MessageQueueV2.t.sol:45:        queueV2 = L1MessageQueueV2(_deployProxy(address(0)));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\L1MessageQueueV1.t.sol:44:        queue = L1MessageQueueV1(_deployProxy(address(0)));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\L1MessageQueueV1.t.sol:45:        gasOracle = L2GasPriceOracle(_deployProxy(address(new L2GasPriceOracle())));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\L1GatewayTestBase.t.sol:92:        system = SystemConfig(_deployProxy(address(0)));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\L1GatewayTestBase.t.sol:93:        l1Messenger = L1ScrollMessenger(payable(_deployProxy(address(0))));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\L1GatewayTestBase.t.sol:94:        messageQueueV1 = L1MessageQueueV1WithGasPriceOracle(_deployProxy(address(0)));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\L1GatewayTestBase.t.sol:95:        messageQueueV2 = L1MessageQueueV2(_deployProxy(address(0)));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\L1GatewayTestBase.t.sol:96:        rollup = ScrollChainMockBlob(_deployProxy(address(0)));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\L1GatewayTestBase.t.sol:98:            _deployProxy(address(new EnforcedTxGateway(address(messageQueueV2), address(0))))
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\L1GatewayTestBase.t.sol:100:        gasOracle = L2GasPriceOracle(_deployProxy(address(new L2GasPriceOracle())));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\L1GatewayTestBase.t.sol:105:        l2Messenger = L2ScrollMessenger(payable(_deployProxy(address(0))));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\L1GatewayTestBase.t.sol:147:        messageQueueV1.initializeV2();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\L1GatewayTestBase.t.sol:178:        rollup.initializeV2();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\L1GatewayRouter.t.sol:52:        l1StandardERC20Gateway = L1StandardERC20Gateway(_deployProxy(address(0)));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\L1GatewayRouter.t.sol:53:        l1ETHGateway = L1ETHGateway(_deployProxy(address(0)));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\L1GatewayRouter.t.sol:54:        router = L1GatewayRouter(_deployProxy(address(new L1GatewayRouter())));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\integration\LidoGatewayIntegration.t.sol:11:import {L1LidoGateway} from "../../lido/L1LidoGateway.sol";
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\integration\LidoGatewayIntegration.t.sol:12:import {L2LidoGateway} from "../../lido/L2LidoGateway.sol";
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\integration\LidoGatewayIntegration.t.sol:46:            address(new L1LidoGateway(L1_WSTETH, L2_WSTETH, L2_LIDO_GATEWAY, L1_GATEWAY_ROUTER, L1_SCROLL_MESSENGER))
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\integration\LidoGatewayIntegration.t.sol:48:        L1LidoGateway(L1_LIDO_GATEWAY).initializeV2(address(0), address(0), address(0), address(0));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\integration\LidoGatewayIntegration.t.sol:54:            address(new L2LidoGateway(L1_WSTETH, L2_WSTETH, L1_LIDO_GATEWAY, L2_GATEWAY_ROUTER, L2_SCROLL_MESSENGER))
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\integration\LidoGatewayIntegration.t.sol:56:        L2LidoGateway(L2_LIDO_GATEWAY).initializeV2(address(0), address(0), address(0), address(0));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\L2StandardERC20Gateway.t.sol:71:        router = L2GatewayRouter(_deployProxy(address(new L2GatewayRouter())));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\L2StandardERC20Gateway.t.sol:587:        _gateway = L2StandardERC20Gateway(_deployProxy(address(0)));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\L2ReverseCustomERC20Gateway.t.sol:79:        router = L2GatewayRouter(_deployProxy(address(new L2GatewayRouter())));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\L2ReverseCustomERC20Gateway.t.sol:387:        // should emit WithdrawERC20 from L2LidoGateway
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\L2ReverseCustomERC20Gateway.t.sol:429:        _gateway = MockL2ReverseCustomERC20Gateway(_deployProxy(address(0)));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\L2GatewayTestBase.t.sol:66:        l1Messenger = L1ScrollMessenger(payable(_deployProxy(address(0))));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\L2GatewayTestBase.t.sol:73:        l2Messenger = L2ScrollMessenger(payable(_deployProxy(address(0))));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\L2GatewayTestBase.t.sol:98:    function _deployProxy(address _logic) internal returns (address) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\batch-bridge\L2BatchBridgeGateway.t.sol:62:        batch = L2BatchBridgeGateway(payable(_deployProxy(address(0))));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\L2GatewayRouter.t.sol:60:        l2StandardERC20Gateway = L2StandardERC20Gateway(_deployProxy(address(0)));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\L2GatewayRouter.t.sol:61:        l2ETHGateway = L2ETHGateway(_deployProxy(address(0)));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\L2GatewayRouter.t.sol:62:        router = L2GatewayRouter(_deployProxy(address(new L2GatewayRouter())));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\batch-bridge\L1BatchBridgeGateway.t.sol:71:        router = L1GatewayRouter(_deployProxy(address(new L1GatewayRouter())));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\batch-bridge\L1BatchBridgeGateway.t.sol:72:        gateway = L1CustomERC20Gateway(_deployProxy(address(0)));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\batch-bridge\L1BatchBridgeGateway.t.sol:73:        batch = L1BatchBridgeGateway(payable(_deployProxy(address(0))));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\L2CustomERC20Gateway.t.sol:56:        router = L2GatewayRouter(_deployProxy(address(new L2GatewayRouter())));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\L2CustomERC20Gateway.t.sol:580:        _gateway = L2CustomERC20Gateway(_deployProxy(address(0)));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\L2ETHGateway.t.sol:34:        router = L2GatewayRouter(_deployProxy(address(new L2GatewayRouter())));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\L2ETHGateway.t.sol:452:        _gateway = L2ETHGateway(_deployProxy(address(0)));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\mocks\MockL2LidoGateway.sol:5:import {L2LidoGateway} from "../../lido/L2LidoGateway.sol";
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\mocks\MockL2LidoGateway.sol:7:contract MockL2LidoGateway is L2LidoGateway {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\mocks\MockL2LidoGateway.sol:14:    ) L2LidoGateway(_l1Token, _l2Token, _counterpart, _router, _messenger) {}
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\mocks\MockL1LidoGateway.sol:5:import {L1LidoGateway} from "../../lido/L1LidoGateway.sol";
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\mocks\MockL1LidoGateway.sol:7:contract MockL1LidoGateway is L1LidoGateway {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\mocks\MockL1LidoGateway.sol:14:    ) L1LidoGateway(_l1Token, _l2Token, _counterpart, _router, _messenger) {}
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\lido\L2LidoGateway.t.sol:15:import {L1LidoGateway} from "../../lido/L1LidoGateway.sol";
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\lido\L2LidoGateway.t.sol:19:import {MockL2LidoGateway} from "../mocks/MockL2LidoGateway.sol";
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\lido\L2LidoGateway.t.sol:22:contract L2LidoGatewayTest is L2GatewayTestBase {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\lido\L2LidoGateway.t.sol:23:    // events from L2LidoGateway
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\lido\L2LidoGateway.t.sol:47:    // errors from L2LidoGateway
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\lido\L2LidoGateway.t.sol:63:    MockL2LidoGateway private gateway;
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\lido\L2LidoGateway.t.sol:66:    L1LidoGateway private counterpartGateway;
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\lido\L2LidoGateway.t.sol:78:        counterpartGateway = new L1LidoGateway(address(l1Token), address(l2Token), address(1), address(1), address(1));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\lido\L2LidoGateway.t.sol:81:        router = L2GatewayRouter(_deployProxy(address(new L2GatewayRouter())));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\lido\L2LidoGateway.t.sol:86:        gateway.initializeV2(address(0), address(0), address(0), address(0));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\lido\L2LidoGateway.t.sol:116:        // state in L2LidoGateway
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\lido\L2LidoGateway.t.sol:124:        gateway.initializeV2(address(0), address(0), address(0), address(0));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\lido\L2LidoGateway.t.sol:275:     * Functions from L2LidoGateway *
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\lido\L2LidoGateway.t.sol:345:        MockL2LidoGateway mockGateway = _deployGateway(address(mockMessenger));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\lido\L2LidoGateway.t.sol:347:        mockGateway.initializeV2(address(0), address(0), address(0), address(0));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\lido\L2LidoGateway.t.sol:410:        // should emit FinalizeDepositERC20 from L2LidoGateway
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\lido\L2LidoGateway.t.sol:512:        // should emit WithdrawERC20 from L2LidoGateway
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\lido\L2LidoGateway.t.sol:553:    function _deployGateway(address messenger) internal returns (MockL2LidoGateway _gateway) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\lido\L2LidoGateway.t.sol:554:        _gateway = MockL2LidoGateway(_deployProxy(address(0)));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\lido\L2LidoGateway.t.sol:559:                new MockL2LidoGateway(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\lido\L1LidoGateway.t.sol:16:import {L2LidoGateway} from "../../lido/L2LidoGateway.sol";
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\lido\L1LidoGateway.t.sol:19:import {MockL1LidoGateway} from "../mocks/MockL1LidoGateway.sol";
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\lido\L1LidoGateway.t.sol:23:contract L1LidoGatewayTest is L1GatewayTestBase {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\lido\L1LidoGateway.t.sol:24:    // events from L1LidoGateway
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\lido\L1LidoGateway.t.sol:49:    // errors from L1LidoGateway
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\lido\L1LidoGateway.t.sol:65:    MockL1LidoGateway private gateway;
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\lido\L1LidoGateway.t.sol:68:    L2LidoGateway private counterpartGateway;
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\lido\L1LidoGateway.t.sol:81:        counterpartGateway = new L2LidoGateway(address(l1Token), address(l2Token), address(1), address(1), address(1));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\lido\L1LidoGateway.t.sol:84:        router = L1GatewayRouter(_deployProxy(address(new L1GatewayRouter())));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\lido\L1LidoGateway.t.sol:89:        gateway.initializeV2(address(0), address(0), address(0), address(0));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\lido\L1LidoGateway.t.sol:113:        // state in L1LidoGateway
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\lido\L1LidoGateway.t.sol:120:        gateway.initializeV2(address(0), address(0), address(0), address(0));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\lido\L1LidoGateway.t.sol:276:     * Functions from L1LidoGateway *
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\lido\L1LidoGateway.t.sol:344:        gateway.depositERC20(address(l1Token), amount, defaultGasLimit); // deposit some token to L1LidoGateway
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\lido\L1LidoGateway.t.sol:347:        MockL1LidoGateway mockGateway = _deployGateway(address(mockMessenger));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\lido\L1LidoGateway.t.sol:349:        mockGateway.initializeV2(address(0), address(0), address(0), address(0));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\lido\L1LidoGateway.t.sol:615:    function _deployGateway(address messenger) internal returns (MockL1LidoGateway _gateway) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\lido\L1LidoGateway.t.sol:616:        _gateway = MockL1LidoGateway(_deployProxy(address(0)));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\lido\L1LidoGateway.t.sol:621:                new MockL1LidoGateway(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\L2WETHGateway.t.sol:57:        router = L2GatewayRouter(_deployProxy(address(new L2GatewayRouter())));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\L2WETHGateway.t.sol:556:        _gateway = L2WETHGateway(payable(_deployProxy(address(0))));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\L2USDCGateway.t.sol:58:        router = L2GatewayRouter(_deployProxy(address(new L2GatewayRouter())));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\test\L2USDCGateway.t.sol:528:        _gateway = L2USDCGateway(_deployProxy(address(0)));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\lido\L1LidoGateway.sol:14:contract L1LidoGateway is L1ERC20Gateway, LidoBridgeableTokens, LidoGatewayManager {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\lido\L1LidoGateway.sol:29:    /// @dev The initial version of `L1LidoGateway` use `L1CustomERC20Gateway`. We keep the storage
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\lido\L1LidoGateway.sol:37:    /// @notice Constructor for `L1LidoGateway` implementation contract.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\lido\L1LidoGateway.sol:41:    /// @param _counterpart The address of `L2LidoGateway` contract in L2.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\lido\L1LidoGateway.sol:58:    /// @notice Initialize the storage of L1LidoGateway v1.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\lido\L1LidoGateway.sol:62:    /// @param _counterpart The address of `L2LidoGateway` contract in L2.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\lido\L1LidoGateway.sol:73:    /// @notice Initialize the storage of L1LidoGateway v2.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\lido\L1LidoGateway.sol:78:    function initializeV2(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\lido\L1LidoGateway.sol:107:    /// @dev The length of `_data` always be zero, which guarantee by `L2LidoGateway`.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\lido\L1LidoGateway.sol:143:        // 2. Generate message passed to L2LidoGateway.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\lido\L2LidoGateway.sol:15:contract L2LidoGateway is L2ERC20Gateway, LidoBridgeableTokens, LidoGatewayManager {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\lido\L2LidoGateway.sol:30:    /// @dev The initial version of `L2LidoGateway` use `L2CustomERC20Gateway`. We keep the storage
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\lido\L2LidoGateway.sol:38:    /// @notice Constructor for `L2LidoGateway` implementation contract.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\lido\L2LidoGateway.sol:42:    /// @param _counterpart The address of `L1LidoGateway` contract in L1.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\lido\L2LidoGateway.sol:59:    /// @notice Initialize the storage of L2LidoGateway v1.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\lido\L2LidoGateway.sol:63:    /// @param _counterpart The address of `L1LidoGateway` contract in L1.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\lido\L2LidoGateway.sol:74:    /// @notice Initialize the storage of L2LidoGateway v2.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\lido\L2LidoGateway.sol:79:    function initializeV2(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\lido\L2LidoGateway.sol:119:    /// @dev The length of `_data` always be zero, which guarantee by `L1LidoGateway`.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\lido\L2LidoGateway.sol:176:        // 3. Generate message passed to L1LidoGateway.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\L1\rollup\L1MessageQueueV1WithGasPriceOracle.sol:50:    function initializeV2() external reinitializer(2) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts/src\L1\rollup\ScrollChain.sol:262:    function initializeV2() external reinitializer(2) {

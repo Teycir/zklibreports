@@ -1,0 +1,191 @@
+﻿{
+    "name":  "base-contracts",
+    "source_path":  "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\base-contracts",
+    "scanned_at_utc":  "2026-02-16 02:59:05 UTC",
+    "git":  {
+                "head":  "f87cacbfbba6d11dc29e11c60d8956610011edcc",
+                "branch":  "main",
+                "remote_origin":  "https://github.com/base-org/contracts"
+            },
+    "stacks":  [
+                   "go",
+                   "solidity"
+               ],
+    "outputs":  {
+                    "gitleaks":  {
+                                     "name":  "gitleaks",
+                                     "file":  "gitleaks",
+                                     "args":  [
+                                                  "detect",
+                                                  "--source",
+                                                  "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\base-contracts",
+                                                  "--report-format",
+                                                  "json",
+                                                  "--report-path",
+                                                  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\base-contracts\\artifacts\\gitleaks.json",
+                                                  "--redact",
+                                                  "--no-banner",
+                                                  "--log-level",
+                                                  "error",
+                                                  "--timeout",
+                                                  "600"
+                                              ],
+                                     "arg_string":  "detect --source \\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\base-contracts --report-format json --report-path C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\base-contracts\\artifacts\\gitleaks.json --redact --no-banner --log-level error --timeout 600",
+                                     "runner":  "cmd.exe",
+                                     "runner_args":  [
+                                                         "/d",
+                                                         "/s",
+                                                         "/c",
+                                                         "gitleaks detect --source \\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\base-contracts --report-format json --report-path C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\base-contracts\\artifacts\\gitleaks.json --redact --no-banner --log-level error --timeout 600 1\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\base-contracts\\artifacts\\gitleaks.stdout.log 2\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\base-contracts\\artifacts\\gitleaks.stderr.log"
+                                                     ],
+                                     "cwd":  "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\base-contracts",
+                                     "start_utc":  "2026-02-16 02:59:06 UTC",
+                                     "end_utc":  "2026-02-16 02:59:08 UTC",
+                                     "duration_sec":  1,
+                                     "timed_out":  false,
+                                     "exit_code":  0,
+                                     "stdout":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\base-contracts\\artifacts\\gitleaks.stdout.log",
+                                     "stderr":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\base-contracts\\artifacts\\gitleaks.stderr.log",
+                                     "report":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\base-contracts\\artifacts\\gitleaks.json"
+                                 },
+                    "osv":  {
+                                "name":  "osv-scanner",
+                                "file":  "osv-scanner",
+                                "args":  [
+                                             "scan",
+                                             "source",
+                                             "-r",
+                                             "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\base-contracts",
+                                             "-f",
+                                             "json",
+                                             "--output",
+                                             "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\base-contracts\\artifacts\\osv.json",
+                                             "--allow-no-lockfiles",
+                                             "--verbosity",
+                                             "warn",
+                                             "--experimental-exclude",
+                                             "g:**/node_modules",
+                                             "--experimental-exclude",
+                                             "g:**/target",
+                                             "--experimental-exclude",
+                                             "g:**/.git",
+                                             "--experimental-exclude",
+                                             "g:**/dist",
+                                             "--experimental-exclude",
+                                             "g:**/build",
+                                             "--experimental-exclude",
+                                             "g:**/out"
+                                         ],
+                                "arg_string":  "scan source -r \\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\base-contracts -f json --output C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\base-contracts\\artifacts\\osv.json --allow-no-lockfiles --verbosity warn --experimental-exclude g:**/node_modules --experimental-exclude g:**/target --experimental-exclude g:**/.git --experimental-exclude g:**/dist --experimental-exclude g:**/build --experimental-exclude g:**/out",
+                                "runner":  "cmd.exe",
+                                "runner_args":  [
+                                                    "/d",
+                                                    "/s",
+                                                    "/c",
+                                                    "osv-scanner scan source -r \\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\base-contracts -f json --output C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\base-contracts\\artifacts\\osv.json --allow-no-lockfiles --verbosity warn --experimental-exclude g:**/node_modules --experimental-exclude g:**/target --experimental-exclude g:**/.git --experimental-exclude g:**/dist --experimental-exclude g:**/build --experimental-exclude g:**/out 1\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\base-contracts\\artifacts\\osv.stdout.log 2\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\base-contracts\\artifacts\\osv.stderr.log"
+                                                ],
+                                "cwd":  "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\base-contracts",
+                                "start_utc":  "2026-02-16 02:59:08 UTC",
+                                "end_utc":  "2026-02-16 03:00:07 UTC",
+                                "duration_sec":  59,
+                                "timed_out":  false,
+                                "exit_code":  1,
+                                "stdout":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\base-contracts\\artifacts\\osv.stdout.log",
+                                "stderr":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\base-contracts\\artifacts\\osv.stderr.log",
+                                "report":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\base-contracts\\artifacts\\osv.json"
+                            },
+                    "govulncheck":  {
+                                        "json":  {
+                                                     "name":  "govulncheck(json)",
+                                                     "file":  "govulncheck",
+                                                     "args":  [
+                                                                  "-C",
+                                                                  "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\base-contracts",
+                                                                  "-format",
+                                                                  "json",
+                                                                  "./..."
+                                                              ],
+                                                     "arg_string":  "-C \\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\base-contracts -format json ./...",
+                                                     "runner":  "cmd.exe",
+                                                     "runner_args":  [
+                                                                         "/d",
+                                                                         "/s",
+                                                                         "/c",
+                                                                         "govulncheck -C \\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\base-contracts -format json ./... 1\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\base-contracts\\artifacts\\govulncheck.json 2\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\base-contracts\\artifacts\\govulncheck.json.stderr.log"
+                                                                     ],
+                                                     "cwd":  "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\base-contracts",
+                                                     "start_utc":  "2026-02-16 03:00:07 UTC",
+                                                     "end_utc":  "2026-02-16 03:00:08 UTC",
+                                                     "duration_sec":  1,
+                                                     "timed_out":  false,
+                                                     "exit_code":  1,
+                                                     "stdout":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\base-contracts\\artifacts\\govulncheck.json",
+                                                     "stderr":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\base-contracts\\artifacts\\govulncheck.json.stderr.log"
+                                                 },
+                                        "text":  {
+                                                     "name":  "govulncheck(text)",
+                                                     "file":  "govulncheck",
+                                                     "args":  [
+                                                                  "-C",
+                                                                  "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\base-contracts",
+                                                                  "-format",
+                                                                  "text",
+                                                                  "-show",
+                                                                  "traces",
+                                                                  "./..."
+                                                              ],
+                                                     "arg_string":  "-C \\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\base-contracts -format text -show traces ./...",
+                                                     "runner":  "cmd.exe",
+                                                     "runner_args":  [
+                                                                         "/d",
+                                                                         "/s",
+                                                                         "/c",
+                                                                         "govulncheck -C \\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\base-contracts -format text -show traces ./... 1\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\base-contracts\\artifacts\\govulncheck.txt 2\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\base-contracts\\artifacts\\govulncheck.txt.stderr.log"
+                                                                     ],
+                                                     "cwd":  "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\base-contracts",
+                                                     "start_utc":  "2026-02-16 03:00:08 UTC",
+                                                     "end_utc":  "2026-02-16 03:00:09 UTC",
+                                                     "duration_sec":  1,
+                                                     "timed_out":  false,
+                                                     "exit_code":  1,
+                                                     "stdout":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\base-contracts\\artifacts\\govulncheck.txt",
+                                                     "stderr":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\base-contracts\\artifacts\\govulncheck.txt.stderr.log"
+                                                 }
+                                    },
+                    "gosec":  {
+                                  "name":  "gosec",
+                                  "file":  "gosec",
+                                  "args":  [
+                                               "-fmt=json",
+                                               "-out=C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\base-contracts\\artifacts\\gosec.json",
+                                               "-confidence=high",
+                                               "-severity=medium",
+                                               "-exclude-generated",
+                                               "-quiet",
+                                               "./..."
+                                           ],
+                                  "arg_string":  "-fmt=json -out=C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\base-contracts\\artifacts\\gosec.json -confidence=high -severity=medium -exclude-generated -quiet ./...",
+                                  "runner":  "cmd.exe",
+                                  "runner_args":  [
+                                                      "/d",
+                                                      "/s",
+                                                      "/c",
+                                                      "gosec -fmt=json -out=C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\base-contracts\\artifacts\\gosec.json -confidence=high -severity=medium -exclude-generated -quiet ./... 1\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\base-contracts\\artifacts\\gosec.stdout.log 2\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\base-contracts\\artifacts\\gosec.stderr.log"
+                                                  ],
+                                  "cwd":  "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\base-contracts",
+                                  "start_utc":  "2026-02-16 03:00:09 UTC",
+                                  "end_utc":  "2026-02-16 03:00:24 UTC",
+                                  "duration_sec":  16,
+                                  "timed_out":  false,
+                                  "exit_code":  1,
+                                  "stdout":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\base-contracts\\artifacts\\gosec.stdout.log",
+                                  "stderr":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\base-contracts\\artifacts\\gosec.stderr.log"
+                              }
+                },
+    "summary":  {
+                    "gitleaks_findings":  0,
+                    "osv_vulns":  32,
+                    "npm_audit_vulns":  null,
+                    "cargo_audit_vulns":  null
+                }
+}

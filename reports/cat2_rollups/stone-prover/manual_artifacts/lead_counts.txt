@@ -1,0 +1,10 @@
+lead_unsafe_mem=6
+lead_asserts=4169
+lead_deserialization=41
+lead_crypto_verify=780
+lead_syscalls=1
+lead_file_io=11
+lead_network=0
+lead_randomness=39
+lead_integer_casts=21
+lead_todo_fixme=0

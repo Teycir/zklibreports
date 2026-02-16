@@ -1,0 +1,6 @@
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\crypt_tools\keccak_256.inl:75:      memcpy(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\crypt_tools\keccak_256.inl:85:    memcpy(&lane_data, lane, sizeof(uint64_t));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\crypt_tools\keccak_256.inl:86:    memcpy(&input_data, bytes, sizeof(uint64_t));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\crypt_tools\keccak_256.inl:88:    memcpy(lane, &lane_data, sizeof(uint64_t));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\crypt_tools\blake2s.inl:43:  memcpy(data.data(), &val1, kDigestNumBytes);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\crypt_tools\blake2s.inl:44:  memcpy(&data[kDigestNumBytes], &val2, kDigestNumBytes);

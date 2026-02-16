@@ -1,0 +1,495 @@
+    1: // SPDX-License-Identifier: MIT
+    2: 
+    3: pragma solidity =0.8.24;
+    4: 
+    5: import {OwnableUpgradeable} from "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
+    6: import {BitMapsUpgradeable} from "@openzeppelin/contracts-upgradeable/utils/structs/BitMapsUpgradeable.sol";
+    7: 
+    8: import {IL2GasPriceOracle} from "./IL2GasPriceOracle.sol";
+    9: import {IL1MessageQueueV1} from "./IL1MessageQueueV1.sol";
+   10: 
+   11: import {AddressAliasHelper} from "../../libraries/common/AddressAliasHelper.sol";
+   12: 
+   13: // solhint-disable no-empty-blocks
+   14: // solhint-disable no-inline-assembly
+   15: // solhint-disable reason-string
+   16: 
+   17: /// @title L1MessageQueue
+   18: /// @notice This contract will hold all L1 to L2 messages.
+   19: /// Each appended message is assigned with a unique and increasing `uint256` index.
+   20: /// @custom:deprecated This contract is no longer used in production.
+   21: contract L1MessageQueueV1 is OwnableUpgradeable, IL1MessageQueueV1 {
+   22:     using BitMapsUpgradeable for BitMapsUpgradeable.BitMap;
+   23: 
+   24:     /*************
+   25:      * Constants *
+   26:      *************/
+   27: 
+   28:     /// @notice The address of L1ScrollMessenger contract.
+   29:     address public immutable messenger;
+   30: 
+   31:     /// @notice The address of ScrollChain contract.
+   32:     address public immutable scrollChain;
+   33: 
+   34:     /// @notice The address EnforcedTxGateway contract.
+   35:     address public immutable enforcedTxGateway;
+   36: 
+   37:     /*************
+   38:      * Variables *
+   39:      *************/
+   40: 
+   41:     /// @dev The storage slot used as L1ScrollMessenger contract, which is deprecated now.
+   42:     address private __messenger;
+   43: 
+   44:     /// @dev The storage slot used as ScrollChain contract, which is deprecated now.
+   45:     address private __scrollChain;
+   46: 
+   47:     /// @dev The storage slot used as EnforcedTxGateway contract, which is deprecated now.
+   48:     address private __enforcedTxGateway;
+   49: 
+   50:     /// @notice The address of GasOracle contract.
+   51:     address public gasOracle;
+   52: 
+   53:     /// @notice The list of queued cross domain messages.
+   54:     bytes32[] public messageQueue;
+   55: 
+   56:     /// @inheritdoc IL1MessageQueueV1
+   57:     uint256 public pendingQueueIndex;
+   58: 
+   59:     /// @notice The max gas limit of L1 transactions.
+   60:     uint256 public maxGasLimit;
+   61: 
+   62:     /// @dev The bitmap for dropped messages, where `droppedMessageBitmap[i]` keeps the bits from `[i*256, (i+1)*256)`.
+   63:     BitMapsUpgradeable.BitMap private droppedMessageBitmap;
+   64: 
+   65:     /// @dev The bitmap for skipped messages, where `skippedMessageBitmap[i]` keeps the bits from `[i*256, (i+1)*256)`.
+   66:     mapping(uint256 => uint256) private skippedMessageBitmap;
+   67: 
+   68:     /// @inheritdoc IL1MessageQueueV1
+   69:     uint256 public nextUnfinalizedQueueIndex;
+   70: 
+   71:     /// @dev The storage slots for future usage.
+   72:     uint256[40] private __gap;
+   73: 
+   74:     /**********************
+   75:      * Function Modifiers *
+   76:      **********************/
+   77: 
+   78:     modifier onlyMessenger() {
+   79:         require(_msgSender() == messenger, "Only callable by the L1ScrollMessenger");
+   80:         _;
+   81:     }
+   82: 
+   83:     modifier onlyScrollChain() {
+   84:         require(_msgSender() == scrollChain, "Only callable by the ScrollChain");
+   85:         _;
+   86:     }
+   87: 
+   88:     /***************
+   89:      * Constructor *
+   90:      ***************/
+   91: 
+   92:     /// @notice Constructor for `L1MessageQueue` implementation contract.
+   93:     ///
+   94:     /// @param _messenger The address of `L1ScrollMessenger` contract.
+   95:     /// @param _scrollChain The address of `ScrollChain` contract.
+   96:     /// @param _enforcedTxGateway The address of `EnforcedTxGateway` contract.
+   97:     constructor(
+   98:         address _messenger,
+   99:         address _scrollChain,
+  100:         address _enforcedTxGateway
+  101:     ) {
+  102:         if (_messenger == address(0) || _scrollChain == address(0) || _enforcedTxGateway == address(0)) {
+  103:             revert ErrorZeroAddress();
+  104:         }
+  105: 
+  106:         _disableInitializers();
+  107: 
+  108:         messenger = _messenger;
+  109:         scrollChain = _scrollChain;
+  110:         enforcedTxGateway = _enforcedTxGateway;
+  111:     }
+  112: 
+  113:     /// @notice Initialize the storage of L1MessageQueue.
+  114:     ///
+  115:     /// @dev The parameters `_messenger`, `_scrollChain` and `_enforcedTxGateway` are no longer used.
+  116:     ///
+  117:     /// @param _messenger The address of `L1ScrollMessenger` contract.
+  118:     /// @param _scrollChain The address of `ScrollChain` contract.
+  119:     /// @param _enforcedTxGateway The address of `EnforcedTxGateway` contract.
+  120:     /// @param _gasOracle The address of `GasOracle` contract.
+  121:     /// @param _maxGasLimit The maximum gas limit allowed in single transaction.
+  122:     function initialize(
+  123:         address _messenger,
+  124:         address _scrollChain,
+  125:         address _enforcedTxGateway,
+  126:         address _gasOracle,
+  127:         uint256 _maxGasLimit
+  128:     ) external initializer {
+  129:         OwnableUpgradeable.__Ownable_init();
+  130:         gasOracle = _gasOracle;
+  131:         maxGasLimit = _maxGasLimit;
+  132: 
+  133:         __messenger = _messenger;
+  134:         __scrollChain = _scrollChain;
+  135:         __enforcedTxGateway = _enforcedTxGateway;
+  136:     }
+  137: 
+  138:     /*************************
+  139:      * Public View Functions *
+  140:      *************************/
+  141: 
+  142:     /// @inheritdoc IL1MessageQueueV1
+  143:     function nextCrossDomainMessageIndex() external view returns (uint256) {
+  144:         return messageQueue.length;
+  145:     }
+  146: 
+  147:     /// @inheritdoc IL1MessageQueueV1
+  148:     function getCrossDomainMessage(uint256 _queueIndex) external view returns (bytes32) {
+  149:         return messageQueue[_queueIndex];
+  150:     }
+  151: 
+  152:     /// @inheritdoc IL1MessageQueueV1
+  153:     function estimateCrossDomainMessageFee(uint256 _gasLimit) external view virtual override returns (uint256) {
+  154:         address _oracle = gasOracle;
+  155:         if (_oracle == address(0)) return 0;
+  156:         return IL2GasPriceOracle(_oracle).estimateCrossDomainMessageFee(_gasLimit);
+  157:     }
+  158: 
+  159:     /// @inheritdoc IL1MessageQueueV1
+  160:     function calculateIntrinsicGasFee(bytes calldata _calldata) public view virtual override returns (uint256) {
+  161:         address _oracle = gasOracle;
+  162:         if (_oracle == address(0)) return 0;
+  163:         return IL2GasPriceOracle(_oracle).calculateIntrinsicGasFee(_calldata);
+  164:     }
+  165: 
+  166:     /// @inheritdoc IL1MessageQueueV1
+  167:     function computeTransactionHash(
+  168:         address _sender,
+  169:         uint256 _queueIndex,
+  170:         uint256 _value,
+  171:         address _target,
+  172:         uint256 _gasLimit,
+  173:         bytes calldata _data
+  174:     ) public pure override returns (bytes32) {
+  175:         // We use EIP-2718 to encode the L1 message, and the encoding of the message is
+  176:         //      `TransactionType || TransactionPayload`
+  177:         // where
+  178:         //  1. `TransactionType` is 0x7E
+  179:         //  2. `TransactionPayload` is `rlp([queueIndex, gasLimit, to, value, data, sender])`
+  180:         //
+  181:         // The spec of rlp: https://ethereum.org/en/developers/docs/data-structures-and-encoding/rlp/
+  182:         uint256 transactionType = 0x7E;
+  183:         bytes32 hash;
+  184:         assembly {
+  185:             function get_uint_bytes(v) -> len {
+  186:                 if eq(v, 0) {
+  187:                     len := 1
+  188:                     leave
+  189:                 }
+  190:                 for {
+  191: 
+  192:                 } gt(v, 0) {
+  193: 
+  194:                 } {
+  195:                     len := add(len, 1)
+  196:                     v := shr(8, v)
+  197:                 }
+  198:             }
+  199: 
+  200:             // This is used for both store uint and single byte.
+  201:             // Integer zero is special handled by geth to encode as `0x80`
+  202:             function store_uint_or_byte(_ptr, v, is_uint) -> ptr {
+  203:                 ptr := _ptr
+  204:                 switch lt(v, 128)
+  205:                 case 1 {
+  206:                     switch and(iszero(v), is_uint)
+  207:                     case 1 {
+  208:                         // integer 0
+  209:                         mstore8(ptr, 0x80)
+  210:                     }
+  211:                     default {
+  212:                         // single byte in the [0x00, 0x7f]
+  213:                         mstore8(ptr, v)
+  214:                     }
+  215:                     ptr := add(ptr, 1)
+  216:                 }
+  217:                 default {
+  218:                     // 1-32 bytes long
+  219:                     let len := get_uint_bytes(v)
+  220:                     mstore8(ptr, add(len, 0x80))
+  221:                     ptr := add(ptr, 1)
+  222:                     mstore(ptr, shl(mul(8, sub(32, len)), v))
+  223:                     ptr := add(ptr, len)
+  224:                 }
+  225:             }
+  226: 
+  227:             function store_address(_ptr, v) -> ptr {
+  228:                 ptr := _ptr
+  229:                 // 20 bytes long
+  230:                 mstore8(ptr, 0x94) // 0x80 + 0x14
+  231:                 ptr := add(ptr, 1)
+  232:                 mstore(ptr, shl(96, v))
+  233:                 ptr := add(ptr, 0x14)
+  234:             }
+  235: 
+  236:             // 1 byte for TransactionType
+  237:             // 4 byte for list payload length
+  238:             let start_ptr := add(mload(0x40), 5)
+  239:             let ptr := start_ptr
+  240:             ptr := store_uint_or_byte(ptr, _queueIndex, 1)
+  241:             ptr := store_uint_or_byte(ptr, _gasLimit, 1)
+  242:             ptr := store_address(ptr, _target)
+  243:             ptr := store_uint_or_byte(ptr, _value, 1)
+  244: 
+  245:             switch eq(_data.length, 1)
+  246:             case 1 {
+  247:                 // single byte
+  248:                 ptr := store_uint_or_byte(ptr, byte(0, calldataload(_data.offset)), 0)
+  249:             }
+  250:             default {
+  251:                 switch lt(_data.length, 56)
+  252:                 case 1 {
+  253:                     // a string is 0-55 bytes long
+  254:                     mstore8(ptr, add(0x80, _data.length))
+  255:                     ptr := add(ptr, 1)
+  256:                     calldatacopy(ptr, _data.offset, _data.length)
+  257:                     ptr := add(ptr, _data.length)
+  258:                 }
+  259:                 default {
+  260:                     // a string is more than 55 bytes long
+  261:                     let len_bytes := get_uint_bytes(_data.length)
+  262:                     mstore8(ptr, add(0xb7, len_bytes))
+  263:                     ptr := add(ptr, 1)
+  264:                     mstore(ptr, shl(mul(8, sub(32, len_bytes)), _data.length))
+  265:                     ptr := add(ptr, len_bytes)
+  266:                     calldatacopy(ptr, _data.offset, _data.length)
+  267:                     ptr := add(ptr, _data.length)
+  268:                 }
+  269:             }
+  270:             ptr := store_address(ptr, _sender)
+  271: 
+  272:             let payload_len := sub(ptr, start_ptr)
+  273:             let value
+  274:             let value_bytes
+  275:             switch lt(payload_len, 56)
+  276:             case 1 {
+  277:                 // the total payload of a list is 0-55 bytes long
+  278:                 value := add(0xc0, payload_len)
+  279:                 value_bytes := 1
+  280:             }
+  281:             default {
+  282:                 // If the total payload of a list is more than 55 bytes long
+  283:                 let len_bytes := get_uint_bytes(payload_len)
+  284:                 value_bytes := add(len_bytes, 1)
+  285:                 value := add(0xf7, len_bytes)
+  286:                 value := shl(mul(len_bytes, 8), value)
+  287:                 value := or(value, payload_len)
+  288:             }
+  289:             value := or(value, shl(mul(8, value_bytes), transactionType))
+  290:             value_bytes := add(value_bytes, 1)
+  291:             let value_bits := mul(8, value_bytes)
+  292:             value := or(shl(sub(256, value_bits), value), shr(value_bits, mload(start_ptr)))
+  293:             start_ptr := sub(start_ptr, value_bytes)
+  294:             mstore(start_ptr, value)
+  295:             hash := keccak256(start_ptr, sub(ptr, start_ptr))
+  296:         }
+  297:         return hash;
+  298:     }
+  299: 
+  300:     /// @inheritdoc IL1MessageQueueV1
+  301:     function isMessageSkipped(uint256 _queueIndex) external view returns (bool) {
+  302:         if (_queueIndex >= pendingQueueIndex) return false;
+  303: 
+  304:         return _isMessageSkipped(_queueIndex);
+  305:     }
+  306: 
+  307:     /// @inheritdoc IL1MessageQueueV1
+  308:     function isMessageDropped(uint256 _queueIndex) external view returns (bool) {
+  309:         // it should be a skipped message first.
+  310:         return _isMessageSkipped(_queueIndex) && droppedMessageBitmap.get(_queueIndex);
+  311:     }
+  312: 
+  313:     /*****************************
+  314:      * Public Mutating Functions *
+  315:      *****************************/
+  316: 
+  317:     /// @inheritdoc IL1MessageQueueV1
+  318:     function appendCrossDomainMessage(
+  319:         address _target,
+  320:         uint256 _gasLimit,
+  321:         bytes calldata _data
+  322:     ) external override onlyMessenger {
+  323:         // validate gas limit
+  324:         _validateGasLimit(_gasLimit, _data);
+  325: 
+  326:         // do address alias to avoid replay attack in L2.
+  327:         address _sender = AddressAliasHelper.applyL1ToL2Alias(_msgSender());
+  328: 
+  329:         _queueTransaction(_sender, _target, 0, _gasLimit, _data);
+  330:     }
+  331: 
+  332:     /// @inheritdoc IL1MessageQueueV1
+  333:     function appendEnforcedTransaction(
+  334:         address _sender,
+  335:         address _target,
+  336:         uint256 _value,
+  337:         uint256 _gasLimit,
+  338:         bytes calldata _data
+  339:     ) external override {
+  340:         require(_msgSender() == enforcedTxGateway, "Only callable by the EnforcedTxGateway");
+  341:         // We will check it in EnforcedTxGateway, just in case.
+  342:         require(_sender.code.length == 0, "only EOA");
+  343: 
+  344:         // validate gas limit
+  345:         _validateGasLimit(_gasLimit, _data);
+  346: 
+  347:         _queueTransaction(_sender, _target, _value, _gasLimit, _data);
+  348:     }
+  349: 
+  350:     /// @inheritdoc IL1MessageQueueV1
+  351:     function popCrossDomainMessage(
+  352:         uint256 _startIndex,
+  353:         uint256 _count,
+  354:         uint256 _skippedBitmap
+  355:     ) external override onlyScrollChain {
+  356:         require(_count <= 256, "pop too many messages");
+  357:         require(pendingQueueIndex == _startIndex, "start index mismatch");
+  358: 
+  359:         unchecked {
+  360:             // clear extra bits in `_skippedBitmap`, and if _count = 256, it's designed to overflow.
+  361:             uint256 mask = (1 << _count) - 1;
+  362:             _skippedBitmap &= mask;
+  363: 
+  364:             uint256 bucket = _startIndex >> 8;
+  365:             uint256 offset = _startIndex & 0xff;
+  366:             skippedMessageBitmap[bucket] |= _skippedBitmap << offset;
+  367:             if (offset + _count > 256) {
+  368:                 skippedMessageBitmap[bucket + 1] = _skippedBitmap >> (256 - offset);
+  369:             }
+  370: 
+  371:             pendingQueueIndex = _startIndex + _count;
+  372:         }
+  373: 
+  374:         emit DequeueTransaction(_startIndex, _count, _skippedBitmap);
+  375:     }
+  376: 
+  377:     /// @inheritdoc IL1MessageQueueV1
+  378:     /// @dev Caller should make sure `_startIndex < pendingQueueIndex` to reduce unnecessary contract call.
+  379:     function resetPoppedCrossDomainMessage(uint256 _startIndex) external override onlyScrollChain {
+  380:         uint256 cachedPendingQueueIndex = pendingQueueIndex;
+  381:         if (_startIndex == cachedPendingQueueIndex) return;
+  382: 
+  383:         require(_startIndex >= nextUnfinalizedQueueIndex, "reset finalized messages");
+  384:         require(_startIndex < cachedPendingQueueIndex, "reset pending messages");
+  385: 
+  386:         unchecked {
+  387:             uint256 count = cachedPendingQueueIndex - _startIndex;
+  388:             uint256 bucket = _startIndex >> 8;
+  389:             uint256 offset = _startIndex & 0xff;
+  390:             skippedMessageBitmap[bucket] &= (1 << offset) - 1;
+  391:             uint256 numResetMessages = 256 - offset;
+  392:             while (numResetMessages < count) {
+  393:                 bucket += 1;
+  394:                 uint256 bitmap = skippedMessageBitmap[bucket];
+  395:                 if (bitmap > 0) skippedMessageBitmap[bucket] = 0;
+  396:                 numResetMessages += 256;
+  397:             }
+  398:         }
+  399: 
+  400:         pendingQueueIndex = _startIndex;
+  401:         emit ResetDequeuedTransaction(_startIndex);
+  402:     }
+  403: 
+  404:     /// @inheritdoc IL1MessageQueueV1
+  405:     function finalizePoppedCrossDomainMessage(uint256 _newFinalizedQueueIndexPlusOne)
+  406:         external
+  407:         override
+  408:         onlyScrollChain
+  409:     {
+  410:         uint256 cachedFinalizedQueueIndexPlusOne = nextUnfinalizedQueueIndex;
+  411:         if (_newFinalizedQueueIndexPlusOne == cachedFinalizedQueueIndexPlusOne) return;
+  412:         require(_newFinalizedQueueIndexPlusOne > cachedFinalizedQueueIndexPlusOne, "finalized index too small");
+  413:         require(_newFinalizedQueueIndexPlusOne <= pendingQueueIndex, "finalized index too large");
+  414: 
+  415:         nextUnfinalizedQueueIndex = _newFinalizedQueueIndexPlusOne;
+  416:         unchecked {
+  417:             emit FinalizedDequeuedTransaction(_newFinalizedQueueIndexPlusOne - 1);
+  418:         }
+  419:     }
+  420: 
+  421:     /// @inheritdoc IL1MessageQueueV1
+  422:     function dropCrossDomainMessage(uint256 _index) external onlyMessenger {
+  423:         require(_index < nextUnfinalizedQueueIndex, "cannot drop pending message");
+  424: 
+  425:         require(_isMessageSkipped(_index), "drop non-skipped message");
+  426:         require(!droppedMessageBitmap.get(_index), "message already dropped");
+  427:         droppedMessageBitmap.set(_index);
+  428: 
+  429:         emit DropTransaction(_index);
+  430:     }
+  431: 
+  432:     /************************
+  433:      * Restricted Functions *
+  434:      ************************/
+  435: 
+  436:     /// @notice Update the address of gas oracle.
+  437:     /// @dev This function can only called by contract owner.
+  438:     /// @param _newGasOracle The address to update.
+  439:     function updateGasOracle(address _newGasOracle) external onlyOwner {
+  440:         address _oldGasOracle = gasOracle;
+  441:         gasOracle = _newGasOracle;
+  442: 
+  443:         emit UpdateGasOracle(_oldGasOracle, _newGasOracle);
+  444:     }
+  445: 
+  446:     /// @notice Update the max gas limit.
+  447:     /// @dev This function can only called by contract owner.
+  448:     /// @param _newMaxGasLimit The new max gas limit.
+  449:     function updateMaxGasLimit(uint256 _newMaxGasLimit) external onlyOwner {
+  450:         uint256 _oldMaxGasLimit = maxGasLimit;
+  451:         maxGasLimit = _newMaxGasLimit;
+  452: 
+  453:         emit UpdateMaxGasLimit(_oldMaxGasLimit, _newMaxGasLimit);
+  454:     }
+  455: 
+  456:     /**********************
+  457:      * Internal Functions *
+  458:      **********************/
+  459: 
+  460:     /// @dev Internal function to queue a L1 transaction.
+  461:     /// @param _sender The address of sender who will initiate this transaction in L2.
+  462:     /// @param _target The address of target contract to call in L2.
+  463:     /// @param _value The value passed
+  464:     /// @param _gasLimit The maximum gas should be used for this transaction in L2.
+  465:     /// @param _data The calldata passed to target contract.
+  466:     function _queueTransaction(
+  467:         address _sender,
+  468:         address _target,
+  469:         uint256 _value,
+  470:         uint256 _gasLimit,
+  471:         bytes calldata _data
+  472:     ) internal {
+  473:         // compute transaction hash
+  474:         uint256 _queueIndex = messageQueue.length;
+  475:         bytes32 _hash = computeTransactionHash(_sender, _queueIndex, _value, _target, _gasLimit, _data);
+  476:         messageQueue.push(_hash);
+  477: 
+  478:         // emit event
+  479:         emit QueueTransaction(_sender, _target, _value, uint64(_queueIndex), _gasLimit, _data);
+  480:     }
+  481: 
+  482:     function _validateGasLimit(uint256 _gasLimit, bytes calldata _calldata) internal view {
+  483:         require(_gasLimit <= maxGasLimit, "Gas limit must not exceed maxGasLimit");
+  484:         // check if the gas limit is above intrinsic gas
+  485:         uint256 intrinsicGas = calculateIntrinsicGasFee(_calldata);
+  486:         require(_gasLimit >= intrinsicGas, "Insufficient gas limit, must be above intrinsic gas");
+  487:     }
+  488: 
+  489:     /// @dev Returns whether the bit at `index` is set.
+  490:     function _isMessageSkipped(uint256 index) internal view returns (bool) {
+  491:         uint256 bucket = index >> 8;
+  492:         uint256 mask = 1 << (index & 0xff);
+  493:         return skippedMessageBitmap[bucket] & mask != 0;
+  494:     }
+  495: }

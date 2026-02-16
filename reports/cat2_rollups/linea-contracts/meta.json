@@ -1,0 +1,104 @@
+﻿{
+    "name":  "linea-contracts",
+    "source_path":  "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\linea-contracts",
+    "scanned_at_utc":  "2026-02-16 03:08:29 UTC",
+    "git":  {
+                "head":  "b64fe259195f00e840d1e2a3f08b8e95e7c90918",
+                "branch":  "main",
+                "remote_origin":  "https://github.com/Consensys/linea-contracts"
+            },
+    "stacks":  [
+                   "node",
+                   "solidity"
+               ],
+    "outputs":  {
+                    "gitleaks":  {
+                                     "name":  "gitleaks",
+                                     "file":  "gitleaks",
+                                     "args":  [
+                                                  "detect",
+                                                  "--source",
+                                                  "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\linea-contracts",
+                                                  "--report-format",
+                                                  "json",
+                                                  "--report-path",
+                                                  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\linea-contracts\\artifacts\\gitleaks.json",
+                                                  "--redact",
+                                                  "--no-banner",
+                                                  "--log-level",
+                                                  "error",
+                                                  "--timeout",
+                                                  "600"
+                                              ],
+                                     "arg_string":  "detect --source \\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\linea-contracts --report-format json --report-path C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\linea-contracts\\artifacts\\gitleaks.json --redact --no-banner --log-level error --timeout 600",
+                                     "runner":  "cmd.exe",
+                                     "runner_args":  [
+                                                         "/d",
+                                                         "/s",
+                                                         "/c",
+                                                         "gitleaks detect --source \\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\linea-contracts --report-format json --report-path C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\linea-contracts\\artifacts\\gitleaks.json --redact --no-banner --log-level error --timeout 600 1\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\linea-contracts\\artifacts\\gitleaks.stdout.log 2\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\linea-contracts\\artifacts\\gitleaks.stderr.log"
+                                                     ],
+                                     "cwd":  "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\linea-contracts",
+                                     "start_utc":  "2026-02-16 03:08:31 UTC",
+                                     "end_utc":  "2026-02-16 03:08:37 UTC",
+                                     "duration_sec":  6,
+                                     "timed_out":  false,
+                                     "exit_code":  1,
+                                     "stdout":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\linea-contracts\\artifacts\\gitleaks.stdout.log",
+                                     "stderr":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\linea-contracts\\artifacts\\gitleaks.stderr.log",
+                                     "report":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\linea-contracts\\artifacts\\gitleaks.json"
+                                 },
+                    "osv":  {
+                                "name":  "osv-scanner",
+                                "file":  "osv-scanner",
+                                "args":  [
+                                             "scan",
+                                             "source",
+                                             "-r",
+                                             "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\linea-contracts",
+                                             "-f",
+                                             "json",
+                                             "--output",
+                                             "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\linea-contracts\\artifacts\\osv.json",
+                                             "--allow-no-lockfiles",
+                                             "--verbosity",
+                                             "warn",
+                                             "--experimental-exclude",
+                                             "g:**/node_modules",
+                                             "--experimental-exclude",
+                                             "g:**/target",
+                                             "--experimental-exclude",
+                                             "g:**/.git",
+                                             "--experimental-exclude",
+                                             "g:**/dist",
+                                             "--experimental-exclude",
+                                             "g:**/build",
+                                             "--experimental-exclude",
+                                             "g:**/out"
+                                         ],
+                                "arg_string":  "scan source -r \\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\linea-contracts -f json --output C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\linea-contracts\\artifacts\\osv.json --allow-no-lockfiles --verbosity warn --experimental-exclude g:**/node_modules --experimental-exclude g:**/target --experimental-exclude g:**/.git --experimental-exclude g:**/dist --experimental-exclude g:**/build --experimental-exclude g:**/out",
+                                "runner":  "cmd.exe",
+                                "runner_args":  [
+                                                    "/d",
+                                                    "/s",
+                                                    "/c",
+                                                    "osv-scanner scan source -r \\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\linea-contracts -f json --output C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\linea-contracts\\artifacts\\osv.json --allow-no-lockfiles --verbosity warn --experimental-exclude g:**/node_modules --experimental-exclude g:**/target --experimental-exclude g:**/.git --experimental-exclude g:**/dist --experimental-exclude g:**/build --experimental-exclude g:**/out 1\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\linea-contracts\\artifacts\\osv.stdout.log 2\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\linea-contracts\\artifacts\\osv.stderr.log"
+                                                ],
+                                "cwd":  "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\linea-contracts",
+                                "start_utc":  "2026-02-16 03:08:37 UTC",
+                                "end_utc":  "2026-02-16 03:08:42 UTC",
+                                "duration_sec":  5,
+                                "timed_out":  false,
+                                "exit_code":  1,
+                                "stdout":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\linea-contracts\\artifacts\\osv.stdout.log",
+                                "stderr":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\linea-contracts\\artifacts\\osv.stderr.log",
+                                "report":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\linea-contracts\\artifacts\\osv.json"
+                            }
+                },
+    "summary":  {
+                    "gitleaks_findings":  28,
+                    "osv_vulns":  70,
+                    "npm_audit_vulns":  null,
+                    "cargo_audit_vulns":  null
+                }
+}

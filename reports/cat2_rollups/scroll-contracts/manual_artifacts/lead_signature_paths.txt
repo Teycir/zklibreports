@@ -1,0 +1,14 @@
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L1\gateways\EnforcedTxGateway.sol:86:    function DOMAIN_SEPARATOR() external view returns (bytes32) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L1\gateways\EnforcedTxGateway.sol:140:        uint256 _nonce = nonces[_sender];
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L1\gateways\EnforcedTxGateway.sol:145:            nonces[_sender] = _nonce + 1;
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\WithdrawTrieVerifier.t.sol:27:        nonces[0] = 0;
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\WithdrawTrieVerifier.t.sol:32:        nonces[1] = 1;
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\WithdrawTrieVerifier.t.sol:37:        nonces[2] = 2;
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\WithdrawTrieVerifier.t.sol:44:        nonces[3] = 3;
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\WithdrawTrieVerifier.t.sol:51:                WithdrawTrieVerifier.verifyMerkleProof(roots[i], hashes[i], nonces[i], proofs[i]) == true,
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\validium\FastWithdrawVault.t.sol:130:        hevm.expectRevert("ECDSA: invalid signature length");
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\validium\FastWithdrawVault.t.sol:132:        hevm.expectRevert("ECDSA: invalid signature");
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\lido\L2WstETHToken.t.sol:40:        token.permit(address(this), address(counterpart), 1, timestamp - 1, 0, 0, 0);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\lido\L2WstETHToken.t.sol:46:        token.permit(address(this), address(counterpart), 1, timestamp, 0, 0, 0);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\lido\L2WstETHToken.t.sol:52:        token.permit(address(this), address(counterpart), 1, timestamp, 0, 0, 0);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\lido\L2WstETHToken.t.sol:58:        token.permit(address(this), address(counterpart), amount, timestamp, 0, 0, 0);

@@ -1,0 +1,1104 @@
+    1: // Sources flattened with hardhat v2.14.0 https://hardhat.org
+    2: 
+    3: // File contracts/utils/Context.sol
+    4: 
+    5: // SPDX-License-Identifier: MIT
+    6: // OpenZeppelin Contracts v4.4.1 (utils/Context.sol)
+    7: 
+    8: pragma solidity ^0.8.0;
+    9: 
+   10: /**
+   11:  * @dev Provides information about the current execution context, including the
+   12:  * sender of the transaction and its data. While these are generally available
+   13:  * via msg.sender and msg.data, they should not be accessed in such a direct
+   14:  * manner, since when dealing with meta-transactions the account sending and
+   15:  * paying for execution may not be the actual sender (as far as an application
+   16:  * is concerned).
+   17:  *
+   18:  * This contract is only required for intermediate, library-like contracts.
+   19:  */
+   20: abstract contract Context {
+   21:   function _msgSender() internal view virtual returns (address) {
+   22:     return msg.sender;
+   23:   }
+   24: 
+   25:   function _msgData() internal view virtual returns (bytes calldata) {
+   26:     return msg.data;
+   27:   }
+   28: }
+   29: 
+   30: // File contracts/access/Ownable.sol
+   31: 
+   32: // OpenZeppelin Contracts (last updated v4.9.0) (access/Ownable.sol)
+   33: 
+   34: pragma solidity ^0.8.0;
+   35: 
+   36: /**
+   37:  * @dev Contract module which provides a basic access control mechanism, where
+   38:  * there is an account (an owner) that can be granted exclusive access to
+   39:  * specific functions.
+   40:  *
+   41:  * By default, the owner account will be the one that deploys the contract. This
+   42:  * can later be changed with {transferOwnership}.
+   43:  *
+   44:  * This module is used through inheritance. It will make available the modifier
+   45:  * `onlyOwner`, which can be applied to your functions to restrict their use to
+   46:  * the owner.
+   47:  */
+   48: abstract contract Ownable is Context {
+   49:   address private _owner;
+   50: 
+   51:   event OwnershipTransferred(address indexed previousOwner, address indexed newOwner);
+   52: 
+   53:   /**
+   54:    * @dev Initializes the contract setting the deployer as the initial owner.
+   55:    */
+   56:   constructor() {
+   57:     _transferOwnership(_msgSender());
+   58:   }
+   59: 
+   60:   /**
+   61:    * @dev Throws if called by any account other than the owner.
+   62:    */
+   63:   modifier onlyOwner() {
+   64:     _checkOwner();
+   65:     _;
+   66:   }
+   67: 
+   68:   /**
+   69:    * @dev Returns the address of the current owner.
+   70:    */
+   71:   function owner() public view virtual returns (address) {
+   72:     return _owner;
+   73:   }
+   74: 
+   75:   /**
+   76:    * @dev Throws if the sender is not the owner.
+   77:    */
+   78:   function _checkOwner() internal view virtual {
+   79:     require(owner() == _msgSender(), "Ownable: caller is not the owner");
+   80:   }
+   81: 
+   82:   /**
+   83:    * @dev Leaves the contract without owner. It will not be possible to call
+   84:    * `onlyOwner` functions. Can only be called by the current owner.
+   85:    *
+   86:    * NOTE: Renouncing ownership will leave the contract without an owner,
+   87:    * thereby disabling any functionality that is only available to the owner.
+   88:    */
+   89:   function renounceOwnership() public virtual onlyOwner {
+   90:     _transferOwnership(address(0));
+   91:   }
+   92: 
+   93:   /**
+   94:    * @dev Transfers ownership of the contract to a new account (`newOwner`).
+   95:    * Can only be called by the current owner.
+   96:    */
+   97:   function transferOwnership(address newOwner) public virtual onlyOwner {
+   98:     require(newOwner != address(0), "Ownable: new owner is the zero address");
+   99:     _transferOwnership(newOwner);
+  100:   }
+  101: 
+  102:   /**
+  103:    * @dev Transfers ownership of the contract to a new account (`newOwner`).
+  104:    * Internal function without access restriction.
+  105:    */
+  106:   function _transferOwnership(address newOwner) internal virtual {
+  107:     address oldOwner = _owner;
+  108:     _owner = newOwner;
+  109:     emit OwnershipTransferred(oldOwner, newOwner);
+  110:   }
+  111: }
+  112: 
+  113: // File contracts/interfaces/draft-IERC1822.sol
+  114: 
+  115: // OpenZeppelin Contracts (last updated v4.5.0) (interfaces/draft-IERC1822.sol)
+  116: 
+  117: pragma solidity ^0.8.0;
+  118: 
+  119: /**
+  120:  * @dev ERC1822: Universal Upgradeable Proxy Standard (UUPS) documents a method for upgradeability through a simplified
+  121:  * proxy whose upgrades are fully controlled by the current implementation.
+  122:  */
+  123: interface IERC1822Proxiable {
+  124:   /**
+  125:    * @dev Returns the storage slot that the proxiable contract assumes is being used to store the implementation
+  126:    * address.
+  127:    *
+  128:    * IMPORTANT: A proxy pointing at a proxiable contract should not be considered proxiable itself, because this risks
+  129:    * bricking a proxy that upgrades to it, by delegating to itself until out of gas. Thus it is critical that this
+  130:    * function revert if invoked through a proxy.
+  131:    */
+  132:   function proxiableUUID() external view returns (bytes32);
+  133: }
+  134: 
+  135: // File contracts/interfaces/IERC1967.sol
+  136: 
+  137: // OpenZeppelin Contracts (last updated v4.9.0) (interfaces/IERC1967.sol)
+  138: 
+  139: pragma solidity ^0.8.0;
+  140: 
+  141: /**
+  142:  * @dev ERC-1967: Proxy Storage Slots. This interface contains the events defined in the ERC.
+  143:  *
+  144:  * _Available since v4.8.3._
+  145:  */
+  146: interface IERC1967 {
+  147:   /**
+  148:    * @dev Emitted when the implementation is upgraded.
+  149:    */
+  150:   event Upgraded(address indexed implementation);
+  151: 
+  152:   /**
+  153:    * @dev Emitted when the admin account has changed.
+  154:    */
+  155:   event AdminChanged(address previousAdmin, address newAdmin);
+  156: 
+  157:   /**
+  158:    * @dev Emitted when the beacon is changed.
+  159:    */
+  160:   event BeaconUpgraded(address indexed beacon);
+  161: }
+  162: 
+  163: // File contracts/proxy/beacon/IBeacon.sol
+  164: 
+  165: // OpenZeppelin Contracts v4.4.1 (proxy/beacon/IBeacon.sol)
+  166: 
+  167: pragma solidity ^0.8.0;
+  168: 
+  169: /**
+  170:  * @dev This is the interface that {BeaconProxy} expects of its beacon.
+  171:  */
+  172: interface IBeacon {
+  173:   /**
+  174:    * @dev Must return an address that can be used as a delegate call target.
+  175:    *
+  176:    * {BeaconProxy} will check that this address is a contract.
+  177:    */
+  178:   function implementation() external view returns (address);
+  179: }
+  180: 
+  181: // File contracts/utils/Address.sol
+  182: 
+  183: // OpenZeppelin Contracts (last updated v4.9.0) (utils/Address.sol)
+  184: 
+  185: pragma solidity ^0.8.1;
+  186: 
+  187: /**
+  188:  * @dev Collection of functions related to the address type
+  189:  */
+  190: library Address {
+  191:   /**
+  192:    * @dev Returns true if `account` is a contract.
+  193:    *
+  194:    * [IMPORTANT]
+  195:    * ====
+  196:    * It is unsafe to assume that an address for which this function returns
+  197:    * false is an externally-owned account (EOA) and not a contract.
+  198:    *
+  199:    * Among others, `isContract` will return false for the following
+  200:    * types of addresses:
+  201:    *
+  202:    *  - an externally-owned account
+  203:    *  - a contract in construction
+  204:    *  - an address where a contract will be created
+  205:    *  - an address where a contract lived, but was destroyed
+  206:    *
+  207:    * Furthermore, `isContract` will also return true if the target contract within
+  208:    * the same transaction is already scheduled for destruction by `SELFDESTRUCT`,
+  209:    * which only has an effect at the end of a transaction.
+  210:    * ====
+  211:    *
+  212:    * [IMPORTANT]
+  213:    * ====
+  214:    * You shouldn't rely on `isContract` to protect against flash loan attacks!
+  215:    *
+  216:    * Preventing calls from contracts is highly discouraged. It breaks composability, breaks support for smart wallets
+  217:    * like Gnosis Safe, and does not provide security since it can be circumvented by calling from a contract
+  218:    * constructor.
+  219:    * ====
+  220:    */
+  221:   function isContract(address account) internal view returns (bool) {
+  222:     // This method relies on extcodesize/address.code.length, which returns 0
+  223:     // for contracts in construction, since the code is only stored at the end
+  224:     // of the constructor execution.
+  225: 
+  226:     return account.code.length > 0;
+  227:   }
+  228: 
+  229:   /**
+  230:    * @dev Replacement for Solidity's `transfer`: sends `amount` wei to
+  231:    * `recipient`, forwarding all available gas and reverting on errors.
+  232:    *
+  233:    * https://eips.ethereum.org/EIPS/eip-1884[EIP1884] increases the gas cost
+  234:    * of certain opcodes, possibly making contracts go over the 2300 gas limit
+  235:    * imposed by `transfer`, making them unable to receive funds via
+  236:    * `transfer`. {sendValue} removes this limitation.
+  237:    *
+  238:    * https://consensys.net/diligence/blog/2019/09/stop-using-soliditys-transfer-now/[Learn more].
+  239:    *
+  240:    * IMPORTANT: because control is transferred to `recipient`, care must be
+  241:    * taken to not create reentrancy vulnerabilities. Consider using
+  242:    * {ReentrancyGuard} or the
+  243:    * https://solidity.readthedocs.io/en/v0.8.0/security-considerations.html#use-the-checks-effects-interactions-pattern[checks-effects-interactions pattern].
+  244:    */
+  245:   function sendValue(address payable recipient, uint256 amount) internal {
+  246:     require(address(this).balance >= amount, "Address: insufficient balance");
+  247: 
+  248:     (bool success, ) = recipient.call{ value: amount }("");
+  249:     require(success, "Address: unable to send value, recipient may have reverted");
+  250:   }
+  251: 
+  252:   /**
+  253:    * @dev Performs a Solidity function call using a low level `call`. A
+  254:    * plain `call` is an unsafe replacement for a function call: use this
+  255:    * function instead.
+  256:    *
+  257:    * If `target` reverts with a revert reason, it is bubbled up by this
+  258:    * function (like regular Solidity function calls).
+  259:    *
+  260:    * Returns the raw returned data. To convert to the expected return value,
+  261:    * use https://solidity.readthedocs.io/en/latest/units-and-global-variables.html?highlight=abi.decode#abi-encoding-and-decoding-functions[`abi.decode`].
+  262:    *
+  263:    * Requirements:
+  264:    *
+  265:    * - `target` must be a contract.
+  266:    * - calling `target` with `data` must not revert.
+  267:    *
+  268:    * _Available since v3.1._
+  269:    */
+  270:   function functionCall(address target, bytes memory data) internal returns (bytes memory) {
+  271:     return functionCallWithValue(target, data, 0, "Address: low-level call failed");
+  272:   }
+  273: 
+  274:   /**
+  275:    * @dev Same as {xref-Address-functionCall-address-bytes-}[`functionCall`], but with
+  276:    * `errorMessage` as a fallback revert reason when `target` reverts.
+  277:    *
+  278:    * _Available since v3.1._
+  279:    */
+  280:   function functionCall(address target, bytes memory data, string memory errorMessage) internal returns (bytes memory) {
+  281:     return functionCallWithValue(target, data, 0, errorMessage);
+  282:   }
+  283: 
+  284:   /**
+  285:    * @dev Same as {xref-Address-functionCall-address-bytes-}[`functionCall`],
+  286:    * but also transferring `value` wei to `target`.
+  287:    *
+  288:    * Requirements:
+  289:    *
+  290:    * - the calling contract must have an ETH balance of at least `value`.
+  291:    * - the called Solidity function must be `payable`.
+  292:    *
+  293:    * _Available since v3.1._
+  294:    */
+  295:   function functionCallWithValue(address target, bytes memory data, uint256 value) internal returns (bytes memory) {
+  296:     return functionCallWithValue(target, data, value, "Address: low-level call with value failed");
+  297:   }
+  298: 
+  299:   /**
+  300:    * @dev Same as {xref-Address-functionCallWithValue-address-bytes-uint256-}[`functionCallWithValue`], but
+  301:    * with `errorMessage` as a fallback revert reason when `target` reverts.
+  302:    *
+  303:    * _Available since v3.1._
+  304:    */
+  305:   function functionCallWithValue(
+  306:     address target,
+  307:     bytes memory data,
+  308:     uint256 value,
+  309:     string memory errorMessage
+  310:   ) internal returns (bytes memory) {
+  311:     require(address(this).balance >= value, "Address: insufficient balance for call");
+  312:     (bool success, bytes memory returndata) = target.call{ value: value }(data);
+  313:     return verifyCallResultFromTarget(target, success, returndata, errorMessage);
+  314:   }
+  315: 
+  316:   /**
+  317:    * @dev Same as {xref-Address-functionCall-address-bytes-}[`functionCall`],
+  318:    * but performing a static call.
+  319:    *
+  320:    * _Available since v3.3._
+  321:    */
+  322:   function functionStaticCall(address target, bytes memory data) internal view returns (bytes memory) {
+  323:     return functionStaticCall(target, data, "Address: low-level static call failed");
+  324:   }
+  325: 
+  326:   /**
+  327:    * @dev Same as {xref-Address-functionCall-address-bytes-string-}[`functionCall`],
+  328:    * but performing a static call.
+  329:    *
+  330:    * _Available since v3.3._
+  331:    */
+  332:   function functionStaticCall(
+  333:     address target,
+  334:     bytes memory data,
+  335:     string memory errorMessage
+  336:   ) internal view returns (bytes memory) {
+  337:     (bool success, bytes memory returndata) = target.staticcall(data);
+  338:     return verifyCallResultFromTarget(target, success, returndata, errorMessage);
+  339:   }
+  340: 
+  341:   /**
+  342:    * @dev Same as {xref-Address-functionCall-address-bytes-}[`functionCall`],
+  343:    * but performing a delegate call.
+  344:    *
+  345:    * _Available since v3.4._
+  346:    */
+  347:   function functionDelegateCall(address target, bytes memory data) internal returns (bytes memory) {
+  348:     return functionDelegateCall(target, data, "Address: low-level delegate call failed");
+  349:   }
+  350: 
+  351:   /**
+  352:    * @dev Same as {xref-Address-functionCall-address-bytes-string-}[`functionCall`],
+  353:    * but performing a delegate call.
+  354:    *
+  355:    * _Available since v3.4._
+  356:    */
+  357:   function functionDelegateCall(
+  358:     address target,
+  359:     bytes memory data,
+  360:     string memory errorMessage
+  361:   ) internal returns (bytes memory) {
+  362:     (bool success, bytes memory returndata) = target.delegatecall(data);
+  363:     return verifyCallResultFromTarget(target, success, returndata, errorMessage);
+  364:   }
+  365: 
+  366:   /**
+  367:    * @dev Tool to verify that a low level call to smart-contract was successful, and revert (either by bubbling
+  368:    * the revert reason or using the provided one) in case of unsuccessful call or if target was not a contract.
+  369:    *
+  370:    * _Available since v4.8._
+  371:    */
+  372:   function verifyCallResultFromTarget(
+  373:     address target,
+  374:     bool success,
+  375:     bytes memory returndata,
+  376:     string memory errorMessage
+  377:   ) internal view returns (bytes memory) {
+  378:     if (success) {
+  379:       if (returndata.length == 0) {
+  380:         // only check isContract if the call was successful and the return data is empty
+  381:         // otherwise we already know that it was a contract
+  382:         require(isContract(target), "Address: call to non-contract");
+  383:       }
+  384:       return returndata;
+  385:     } else {
+  386:       _revert(returndata, errorMessage);
+  387:     }
+  388:   }
+  389: 
+  390:   /**
+  391:    * @dev Tool to verify that a low level call was successful, and revert if it wasn't, either by bubbling the
+  392:    * revert reason or using the provided one.
+  393:    *
+  394:    * _Available since v4.3._
+  395:    */
+  396:   function verifyCallResult(
+  397:     bool success,
+  398:     bytes memory returndata,
+  399:     string memory errorMessage
+  400:   ) internal pure returns (bytes memory) {
+  401:     if (success) {
+  402:       return returndata;
+  403:     } else {
+  404:       _revert(returndata, errorMessage);
+  405:     }
+  406:   }
+  407: 
+  408:   function _revert(bytes memory returndata, string memory errorMessage) private pure {
+  409:     // Look for revert reason and bubble it up if present
+  410:     if (returndata.length > 0) {
+  411:       // The easiest way to bubble the revert reason is using memory via assembly
+  412:       /// @solidity memory-safe-assembly
+  413:       assembly {
+  414:         let returndata_size := mload(returndata)
+  415:         revert(add(32, returndata), returndata_size)
+  416:       }
+  417:     } else {
+  418:       revert(errorMessage);
+  419:     }
+  420:   }
+  421: }
+  422: 
+  423: // File contracts/utils/StorageSlot.sol
+  424: 
+  425: // OpenZeppelin Contracts (last updated v4.9.0) (utils/StorageSlot.sol)
+  426: // This file was procedurally generated from scripts/generate/templates/StorageSlot.js.
+  427: 
+  428: pragma solidity ^0.8.0;
+  429: 
+  430: /**
+  431:  * @dev Library for reading and writing primitive types to specific storage slots.
+  432:  *
+  433:  * Storage slots are often used to avoid storage conflict when dealing with upgradeable contracts.
+  434:  * This library helps with reading and writing to such slots without the need for inline assembly.
+  435:  *
+  436:  * The functions in this library return Slot structs that contain a `value` member that can be used to read or write.
+  437:  *
+  438:  * Example usage to set ERC1967 implementation slot:
+  439:  * ```solidity
+  440:  * contract ERC1967 {
+  441:  *     bytes32 internal constant _IMPLEMENTATION_SLOT = 0x360894a13ba1a3210667c828492db98dca3e2076cc3735a920a3ca505d382bbc;
+  442:  *
+  443:  *     function _getImplementation() internal view returns (address) {
+  444:  *         return StorageSlot.getAddressSlot(_IMPLEMENTATION_SLOT).value;
+  445:  *     }
+  446:  *
+  447:  *     function _setImplementation(address newImplementation) internal {
+  448:  *         require(Address.isContract(newImplementation), "ERC1967: new implementation is not a contract");
+  449:  *         StorageSlot.getAddressSlot(_IMPLEMENTATION_SLOT).value = newImplementation;
+  450:  *     }
+  451:  * }
+  452:  * ```
+  453:  *
+  454:  * _Available since v4.1 for `address`, `bool`, `bytes32`, `uint256`._
+  455:  * _Available since v4.9 for `string`, `bytes`._
+  456:  */
+  457: library StorageSlot {
+  458:   struct AddressSlot {
+  459:     address value;
+  460:   }
+  461: 
+  462:   struct BooleanSlot {
+  463:     bool value;
+  464:   }
+  465: 
+  466:   struct Bytes32Slot {
+  467:     bytes32 value;
+  468:   }
+  469: 
+  470:   struct Uint256Slot {
+  471:     uint256 value;
+  472:   }
+  473: 
+  474:   struct StringSlot {
+  475:     string value;
+  476:   }
+  477: 
+  478:   struct BytesSlot {
+  479:     bytes value;
+  480:   }
+  481: 
+  482:   /**
+  483:    * @dev Returns an `AddressSlot` with member `value` located at `slot`.
+  484:    */
+  485:   function getAddressSlot(bytes32 slot) internal pure returns (AddressSlot storage r) {
+  486:     /// @solidity memory-safe-assembly
+  487:     assembly {
+  488:       r.slot := slot
+  489:     }
+  490:   }
+  491: 
+  492:   /**
+  493:    * @dev Returns an `BooleanSlot` with member `value` located at `slot`.
+  494:    */
+  495:   function getBooleanSlot(bytes32 slot) internal pure returns (BooleanSlot storage r) {
+  496:     /// @solidity memory-safe-assembly
+  497:     assembly {
+  498:       r.slot := slot
+  499:     }
+  500:   }
+  501: 
+  502:   /**
+  503:    * @dev Returns an `Bytes32Slot` with member `value` located at `slot`.
+  504:    */
+  505:   function getBytes32Slot(bytes32 slot) internal pure returns (Bytes32Slot storage r) {
+  506:     /// @solidity memory-safe-assembly
+  507:     assembly {
+  508:       r.slot := slot
+  509:     }
+  510:   }
+  511: 
+  512:   /**
+  513:    * @dev Returns an `Uint256Slot` with member `value` located at `slot`.
+  514:    */
+  515:   function getUint256Slot(bytes32 slot) internal pure returns (Uint256Slot storage r) {
+  516:     /// @solidity memory-safe-assembly
+  517:     assembly {
+  518:       r.slot := slot
+  519:     }
+  520:   }
+  521: 
+  522:   /**
+  523:    * @dev Returns an `StringSlot` with member `value` located at `slot`.
+  524:    */
+  525:   function getStringSlot(bytes32 slot) internal pure returns (StringSlot storage r) {
+  526:     /// @solidity memory-safe-assembly
+  527:     assembly {
+  528:       r.slot := slot
+  529:     }
+  530:   }
+  531: 
+  532:   /**
+  533:    * @dev Returns an `StringSlot` representation of the string storage pointer `store`.
+  534:    */
+  535:   function getStringSlot(string storage store) internal pure returns (StringSlot storage r) {
+  536:     /// @solidity memory-safe-assembly
+  537:     assembly {
+  538:       r.slot := store.slot
+  539:     }
+  540:   }
+  541: 
+  542:   /**
+  543:    * @dev Returns an `BytesSlot` with member `value` located at `slot`.
+  544:    */
+  545:   function getBytesSlot(bytes32 slot) internal pure returns (BytesSlot storage r) {
+  546:     /// @solidity memory-safe-assembly
+  547:     assembly {
+  548:       r.slot := slot
+  549:     }
+  550:   }
+  551: 
+  552:   /**
+  553:    * @dev Returns an `BytesSlot` representation of the bytes storage pointer `store`.
+  554:    */
+  555:   function getBytesSlot(bytes storage store) internal pure returns (BytesSlot storage r) {
+  556:     /// @solidity memory-safe-assembly
+  557:     assembly {
+  558:       r.slot := store.slot
+  559:     }
+  560:   }
+  561: }
+  562: 
+  563: // File contracts/proxy/ERC1967/ERC1967Upgrade.sol
+  564: 
+  565: // OpenZeppelin Contracts (last updated v4.9.0) (proxy/ERC1967/ERC1967Upgrade.sol)
+  566: 
+  567: pragma solidity ^0.8.2;
+  568: 
+  569: /**
+  570:  * @dev This abstract contract provides getters and event emitting update functions for
+  571:  * https://eips.ethereum.org/EIPS/eip-1967[EIP1967] slots.
+  572:  *
+  573:  * _Available since v4.1._
+  574:  */
+  575: abstract contract ERC1967Upgrade is IERC1967 {
+  576:   // This is the keccak-256 hash of "eip1967.proxy.rollback" subtracted by 1
+  577:   bytes32 private constant _ROLLBACK_SLOT = 0x4910fdfa16fed3260ed0e7147f7cc6da11a60208b5b9406d12a635614ffd9143;
+  578: 
+  579:   /**
+  580:    * @dev Storage slot with the address of the current implementation.
+  581:    * This is the keccak-256 hash of "eip1967.proxy.implementation" subtracted by 1, and is
+  582:    * validated in the constructor.
+  583:    */
+  584:   bytes32 internal constant _IMPLEMENTATION_SLOT = 0x360894a13ba1a3210667c828492db98dca3e2076cc3735a920a3ca505d382bbc;
+  585: 
+  586:   /**
+  587:    * @dev Returns the current implementation address.
+  588:    */
+  589:   function _getImplementation() internal view returns (address) {
+  590:     return StorageSlot.getAddressSlot(_IMPLEMENTATION_SLOT).value;
+  591:   }
+  592: 
+  593:   /**
+  594:    * @dev Stores a new address in the EIP1967 implementation slot.
+  595:    */
+  596:   function _setImplementation(address newImplementation) private {
+  597:     require(Address.isContract(newImplementation), "ERC1967: new implementation is not a contract");
+  598:     StorageSlot.getAddressSlot(_IMPLEMENTATION_SLOT).value = newImplementation;
+  599:   }
+  600: 
+  601:   /**
+  602:    * @dev Perform implementation upgrade
+  603:    *
+  604:    * Emits an {Upgraded} event.
+  605:    */
+  606:   function _upgradeTo(address newImplementation) internal {
+  607:     _setImplementation(newImplementation);
+  608:     emit Upgraded(newImplementation);
+  609:   }
+  610: 
+  611:   /**
+  612:    * @dev Perform implementation upgrade with additional setup call.
+  613:    *
+  614:    * Emits an {Upgraded} event.
+  615:    */
+  616:   function _upgradeToAndCall(address newImplementation, bytes memory data, bool forceCall) internal {
+  617:     _upgradeTo(newImplementation);
+  618:     if (data.length > 0 || forceCall) {
+  619:       Address.functionDelegateCall(newImplementation, data);
+  620:     }
+  621:   }
+  622: 
+  623:   /**
+  624:    * @dev Perform implementation upgrade with security checks for UUPS proxies, and additional setup call.
+  625:    *
+  626:    * Emits an {Upgraded} event.
+  627:    */
+  628:   function _upgradeToAndCallUUPS(address newImplementation, bytes memory data, bool forceCall) internal {
+  629:     // Upgrades from old implementations will perform a rollback test. This test requires the new
+  630:     // implementation to upgrade back to the old, non-ERC1822 compliant, implementation. Removing
+  631:     // this special case will break upgrade paths from old UUPS implementation to new ones.
+  632:     if (StorageSlot.getBooleanSlot(_ROLLBACK_SLOT).value) {
+  633:       _setImplementation(newImplementation);
+  634:     } else {
+  635:       try IERC1822Proxiable(newImplementation).proxiableUUID() returns (bytes32 slot) {
+  636:         require(slot == _IMPLEMENTATION_SLOT, "ERC1967Upgrade: unsupported proxiableUUID");
+  637:       } catch {
+  638:         revert("ERC1967Upgrade: new implementation is not UUPS");
+  639:       }
+  640:       _upgradeToAndCall(newImplementation, data, forceCall);
+  641:     }
+  642:   }
+  643: 
+  644:   /**
+  645:    * @dev Storage slot with the admin of the contract.
+  646:    * This is the keccak-256 hash of "eip1967.proxy.admin" subtracted by 1, and is
+  647:    * validated in the constructor.
+  648:    */
+  649:   bytes32 internal constant _ADMIN_SLOT = 0xb53127684a568b3173ae13b9f8a6016e243e63b6e8ee1178d6a717850b5d6103;
+  650: 
+  651:   /**
+  652:    * @dev Returns the current admin.
+  653:    */
+  654:   function _getAdmin() internal view returns (address) {
+  655:     return StorageSlot.getAddressSlot(_ADMIN_SLOT).value;
+  656:   }
+  657: 
+  658:   /**
+  659:    * @dev Stores a new address in the EIP1967 admin slot.
+  660:    */
+  661:   function _setAdmin(address newAdmin) private {
+  662:     require(newAdmin != address(0), "ERC1967: new admin is the zero address");
+  663:     StorageSlot.getAddressSlot(_ADMIN_SLOT).value = newAdmin;
+  664:   }
+  665: 
+  666:   /**
+  667:    * @dev Changes the admin of the proxy.
+  668:    *
+  669:    * Emits an {AdminChanged} event.
+  670:    */
+  671:   function _changeAdmin(address newAdmin) internal {
+  672:     emit AdminChanged(_getAdmin(), newAdmin);
+  673:     _setAdmin(newAdmin);
+  674:   }
+  675: 
+  676:   /**
+  677:    * @dev The storage slot of the UpgradeableBeacon contract which defines the implementation for this proxy.
+  678:    * This is bytes32(uint256(keccak256('eip1967.proxy.beacon')) - 1)) and is validated in the constructor.
+  679:    */
+  680:   bytes32 internal constant _BEACON_SLOT = 0xa3f0ad74e5423aebfd80d3ef4346578335a9a72aeaee59ff6cb3582b35133d50;
+  681: 
+  682:   /**
+  683:    * @dev Returns the current beacon.
+  684:    */
+  685:   function _getBeacon() internal view returns (address) {
+  686:     return StorageSlot.getAddressSlot(_BEACON_SLOT).value;
+  687:   }
+  688: 
+  689:   /**
+  690:    * @dev Stores a new beacon in the EIP1967 beacon slot.
+  691:    */
+  692:   function _setBeacon(address newBeacon) private {
+  693:     require(Address.isContract(newBeacon), "ERC1967: new beacon is not a contract");
+  694:     require(
+  695:       Address.isContract(IBeacon(newBeacon).implementation()),
+  696:       "ERC1967: beacon implementation is not a contract"
+  697:     );
+  698:     StorageSlot.getAddressSlot(_BEACON_SLOT).value = newBeacon;
+  699:   }
+  700: 
+  701:   /**
+  702:    * @dev Perform beacon upgrade with additional setup call. Note: This upgrades the address of the beacon, it does
+  703:    * not upgrade the implementation contained in the beacon (see {UpgradeableBeacon-_setImplementation} for that).
+  704:    *
+  705:    * Emits a {BeaconUpgraded} event.
+  706:    */
+  707:   function _upgradeBeaconToAndCall(address newBeacon, bytes memory data, bool forceCall) internal {
+  708:     _setBeacon(newBeacon);
+  709:     emit BeaconUpgraded(newBeacon);
+  710:     if (data.length > 0 || forceCall) {
+  711:       Address.functionDelegateCall(IBeacon(newBeacon).implementation(), data);
+  712:     }
+  713:   }
+  714: }
+  715: 
+  716: // File contracts/proxy/Proxy.sol
+  717: 
+  718: // OpenZeppelin Contracts (last updated v4.6.0) (proxy/Proxy.sol)
+  719: 
+  720: pragma solidity ^0.8.0;
+  721: 
+  722: /**
+  723:  * @dev This abstract contract provides a fallback function that delegates all calls to another contract using the EVM
+  724:  * instruction `delegatecall`. We refer to the second contract as the _implementation_ behind the proxy, and it has to
+  725:  * be specified by overriding the virtual {_implementation} function.
+  726:  *
+  727:  * Additionally, delegation to the implementation can be triggered manually through the {_fallback} function, or to a
+  728:  * different contract through the {_delegate} function.
+  729:  *
+  730:  * The success and return data of the delegated call will be returned back to the caller of the proxy.
+  731:  */
+  732: abstract contract Proxy {
+  733:   /**
+  734:    * @dev Delegates the current call to `implementation`.
+  735:    *
+  736:    * This function does not return to its internal call site, it will return directly to the external caller.
+  737:    */
+  738:   function _delegate(address implementation) internal virtual {
+  739:     assembly {
+  740:       // Copy msg.data. We take full control of memory in this inline assembly
+  741:       // block because it will not return to Solidity code. We overwrite the
+  742:       // Solidity scratch pad at memory position 0.
+  743:       calldatacopy(0, 0, calldatasize())
+  744: 
+  745:       // Call the implementation.
+  746:       // out and outsize are 0 because we don't know the size yet.
+  747:       let result := delegatecall(gas(), implementation, 0, calldatasize(), 0, 0)
+  748: 
+  749:       // Copy the returned data.
+  750:       returndatacopy(0, 0, returndatasize())
+  751: 
+  752:       switch result
+  753:       // delegatecall returns 0 on error.
+  754:       case 0 {
+  755:         revert(0, returndatasize())
+  756:       }
+  757:       default {
+  758:         return(0, returndatasize())
+  759:       }
+  760:     }
+  761:   }
+  762: 
+  763:   /**
+  764:    * @dev This is a virtual function that should be overridden so it returns the address to which the fallback function
+  765:    * and {_fallback} should delegate.
+  766:    */
+  767:   function _implementation() internal view virtual returns (address);
+  768: 
+  769:   /**
+  770:    * @dev Delegates the current call to the address returned by `_implementation()`.
+  771:    *
+  772:    * This function does not return to its internal call site, it will return directly to the external caller.
+  773:    */
+  774:   function _fallback() internal virtual {
+  775:     _beforeFallback();
+  776:     _delegate(_implementation());
+  777:   }
+  778: 
+  779:   /**
+  780:    * @dev Fallback function that delegates calls to the address returned by `_implementation()`. Will run if no other
+  781:    * function in the contract matches the call data.
+  782:    */
+  783:   fallback() external payable virtual {
+  784:     _fallback();
+  785:   }
+  786: 
+  787:   /**
+  788:    * @dev Fallback function that delegates calls to the address returned by `_implementation()`. Will run if call data
+  789:    * is empty.
+  790:    */
+  791:   receive() external payable virtual {
+  792:     _fallback();
+  793:   }
+  794: 
+  795:   /**
+  796:    * @dev Hook that is called before falling back to the implementation. Can happen as part of a manual `_fallback`
+  797:    * call, or as part of the Solidity `fallback` or `receive` functions.
+  798:    *
+  799:    * If overridden should call `super._beforeFallback()`.
+  800:    */
+  801:   function _beforeFallback() internal virtual {}
+  802: }
+  803: 
+  804: // File contracts/proxy/ERC1967/ERC1967Proxy.sol
+  805: 
+  806: // OpenZeppelin Contracts (last updated v4.7.0) (proxy/ERC1967/ERC1967Proxy.sol)
+  807: 
+  808: pragma solidity ^0.8.0;
+  809: 
+  810: /**
+  811:  * @dev This contract implements an upgradeable proxy. It is upgradeable because calls are delegated to an
+  812:  * implementation address that can be changed. This address is stored in storage in the location specified by
+  813:  * https://eips.ethereum.org/EIPS/eip-1967[EIP1967], so that it doesn't conflict with the storage layout of the
+  814:  * implementation behind the proxy.
+  815:  */
+  816: contract ERC1967Proxy is Proxy, ERC1967Upgrade {
+  817:   /**
+  818:    * @dev Initializes the upgradeable proxy with an initial implementation specified by `_logic`.
+  819:    *
+  820:    * If `_data` is nonempty, it's used as data in a delegate call to `_logic`. This will typically be an encoded
+  821:    * function call, and allows initializing the storage of the proxy like a Solidity constructor.
+  822:    */
+  823:   constructor(address _logic, bytes memory _data) payable {
+  824:     _upgradeToAndCall(_logic, _data, false);
+  825:   }
+  826: 
+  827:   /**
+  828:    * @dev Returns the current implementation address.
+  829:    */
+  830:   function _implementation() internal view virtual override returns (address impl) {
+  831:     return ERC1967Upgrade._getImplementation();
+  832:   }
+  833: }
+  834: 
+  835: // File contracts/proxy/transparent/TransparentUpgradeableProxy.sol
+  836: 
+  837: // OpenZeppelin Contracts (last updated v4.9.0) (proxy/transparent/TransparentUpgradeableProxy.sol)
+  838: 
+  839: pragma solidity ^0.8.0;
+  840: 
+  841: /**
+  842:  * @dev Interface for {TransparentUpgradeableProxy}. In order to implement transparency, {TransparentUpgradeableProxy}
+  843:  * does not implement this interface directly, and some of its functions are implemented by an internal dispatch
+  844:  * mechanism. The compiler is unaware that these functions are implemented by {TransparentUpgradeableProxy} and will not
+  845:  * include them in the ABI so this interface must be used to interact with it.
+  846:  */
+  847: interface ITransparentUpgradeableProxy is IERC1967 {
+  848:   function admin() external view returns (address);
+  849: 
+  850:   function implementation() external view returns (address);
+  851: 
+  852:   function changeAdmin(address) external;
+  853: 
+  854:   function upgradeTo(address) external;
+  855: 
+  856:   function upgradeToAndCall(address, bytes memory) external payable;
+  857: }
+  858: 
+  859: /**
+  860:  * @dev This contract implements a proxy that is upgradeable by an admin.
+  861:  *
+  862:  * To avoid https://medium.com/nomic-labs-blog/malicious-backdoors-in-ethereum-proxies-62629adf3357[proxy selector
+  863:  * clashing], which can potentially be used in an attack, this contract uses the
+  864:  * https://blog.openzeppelin.com/the-transparent-proxy-pattern/[transparent proxy pattern]. This pattern implies two
+  865:  * things that go hand in hand:
+  866:  *
+  867:  * 1. If any account other than the admin calls the proxy, the call will be forwarded to the implementation, even if
+  868:  * that call matches one of the admin functions exposed by the proxy itself.
+  869:  * 2. If the admin calls the proxy, it can access the admin functions, but its calls will never be forwarded to the
+  870:  * implementation. If the admin tries to call a function on the implementation it will fail with an error that says
+  871:  * "admin cannot fallback to proxy target".
+  872:  *
+  873:  * These properties mean that the admin account can only be used for admin actions like upgrading the proxy or changing
+  874:  * the admin, so it's best if it's a dedicated account that is not used for anything else. This will avoid headaches due
+  875:  * to sudden errors when trying to call a function from the proxy implementation.
+  876:  *
+  877:  * Our recommendation is for the dedicated account to be an instance of the {ProxyAdmin} contract. If set up this way,
+  878:  * you should think of the `ProxyAdmin` instance as the real administrative interface of your proxy.
+  879:  *
+  880:  * NOTE: The real interface of this proxy is that defined in `ITransparentUpgradeableProxy`. This contract does not
+  881:  * inherit from that interface, and instead the admin functions are implicitly implemented using a custom dispatch
+  882:  * mechanism in `_fallback`. Consequently, the compiler will not produce an ABI for this contract. This is necessary to
+  883:  * fully implement transparency without decoding reverts caused by selector clashes between the proxy and the
+  884:  * implementation.
+  885:  *
+  886:  * WARNING: It is not recommended to extend this contract to add additional external functions. If you do so, the compiler
+  887:  * will not check that there are no selector conflicts, due to the note above. A selector clash between any new function
+  888:  * and the functions declared in {ITransparentUpgradeableProxy} will be resolved in favor of the new one. This could
+  889:  * render the admin operations inaccessible, which could prevent upgradeability. Transparency may also be compromised.
+  890:  */
+  891: contract TransparentUpgradeableProxy is ERC1967Proxy {
+  892:   /**
+  893:    * @dev Initializes an upgradeable proxy managed by `_admin`, backed by the implementation at `_logic`, and
+  894:    * optionally initialized with `_data` as explained in {ERC1967Proxy-constructor}.
+  895:    */
+  896:   constructor(address _logic, address admin_, bytes memory _data) payable ERC1967Proxy(_logic, _data) {
+  897:     _changeAdmin(admin_);
+  898:   }
+  899: 
+  900:   /**
+  901:    * @dev Modifier used internally that will delegate the call to the implementation unless the sender is the admin.
+  902:    *
+  903:    * CAUTION: This modifier is deprecated, as it could cause issues if the modified function has arguments, and the
+  904:    * implementation provides a function with the same selector.
+  905:    */
+  906:   modifier ifAdmin() {
+  907:     if (msg.sender == _getAdmin()) {
+  908:       _;
+  909:     } else {
+  910:       _fallback();
+  911:     }
+  912:   }
+  913: 
+  914:   /**
+  915:    * @dev If caller is the admin process the call internally, otherwise transparently fallback to the proxy behavior
+  916:    */
+  917:   function _fallback() internal virtual override {
+  918:     if (msg.sender == _getAdmin()) {
+  919:       bytes memory ret;
+  920:       bytes4 selector = msg.sig;
+  921:       if (selector == ITransparentUpgradeableProxy.upgradeTo.selector) {
+  922:         ret = _dispatchUpgradeTo();
+  923:       } else if (selector == ITransparentUpgradeableProxy.upgradeToAndCall.selector) {
+  924:         ret = _dispatchUpgradeToAndCall();
+  925:       } else if (selector == ITransparentUpgradeableProxy.changeAdmin.selector) {
+  926:         ret = _dispatchChangeAdmin();
+  927:       } else if (selector == ITransparentUpgradeableProxy.admin.selector) {
+  928:         ret = _dispatchAdmin();
+  929:       } else if (selector == ITransparentUpgradeableProxy.implementation.selector) {
+  930:         ret = _dispatchImplementation();
+  931:       } else {
+  932:         revert("TransparentUpgradeableProxy: admin cannot fallback to proxy target");
+  933:       }
+  934:       assembly {
+  935:         return(add(ret, 0x20), mload(ret))
+  936:       }
+  937:     } else {
+  938:       super._fallback();
+  939:     }
+  940:   }
+  941: 
+  942:   /**
+  943:    * @dev Returns the current admin.
+  944:    *
+  945:    * TIP: To get this value clients can read directly from the storage slot shown below (specified by EIP1967) using the
+  946:    * https://eth.wiki/json-rpc/API#eth_getstorageat[`eth_getStorageAt`] RPC call.
+  947:    * `0xb53127684a568b3173ae13b9f8a6016e243e63b6e8ee1178d6a717850b5d6103`
+  948:    */
+  949:   function _dispatchAdmin() private returns (bytes memory) {
+  950:     _requireZeroValue();
+  951: 
+  952:     address admin = _getAdmin();
+  953:     return abi.encode(admin);
+  954:   }
+  955: 
+  956:   /**
+  957:    * @dev Returns the current implementation.
+  958:    *
+  959:    * TIP: To get this value clients can read directly from the storage slot shown below (specified by EIP1967) using the
+  960:    * https://eth.wiki/json-rpc/API#eth_getstorageat[`eth_getStorageAt`] RPC call.
+  961:    * `0x360894a13ba1a3210667c828492db98dca3e2076cc3735a920a3ca505d382bbc`
+  962:    */
+  963:   function _dispatchImplementation() private returns (bytes memory) {
+  964:     _requireZeroValue();
+  965: 
+  966:     address implementation = _implementation();
+  967:     return abi.encode(implementation);
+  968:   }
+  969: 
+  970:   /**
+  971:    * @dev Changes the admin of the proxy.
+  972:    *
+  973:    * Emits an {AdminChanged} event.
+  974:    */
+  975:   function _dispatchChangeAdmin() private returns (bytes memory) {
+  976:     _requireZeroValue();
+  977: 
+  978:     address newAdmin = abi.decode(msg.data[4:], (address));
+  979:     _changeAdmin(newAdmin);
+  980: 
+  981:     return "";
+  982:   }
+  983: 
+  984:   /**
+  985:    * @dev Upgrade the implementation of the proxy.
+  986:    */
+  987:   function _dispatchUpgradeTo() private returns (bytes memory) {
+  988:     _requireZeroValue();
+  989: 
+  990:     address newImplementation = abi.decode(msg.data[4:], (address));
+  991:     _upgradeToAndCall(newImplementation, bytes(""), false);
+  992: 
+  993:     return "";
+  994:   }
+  995: 
+  996:   /**
+  997:    * @dev Upgrade the implementation of the proxy, and then call a function from the new implementation as specified
+  998:    * by `data`, which should be an encoded function call. This is useful to initialize new storage variables in the
+  999:    * proxied contract.
+ 1000:    */
+ 1001:   function _dispatchUpgradeToAndCall() private returns (bytes memory) {
+ 1002:     (address newImplementation, bytes memory data) = abi.decode(msg.data[4:], (address, bytes));
+ 1003:     _upgradeToAndCall(newImplementation, data, true);
+ 1004: 
+ 1005:     return "";
+ 1006:   }
+ 1007: 
+ 1008:   /**
+ 1009:    * @dev Returns the current admin.
+ 1010:    *
+ 1011:    * CAUTION: This function is deprecated. Use {ERC1967Upgrade-_getAdmin} instead.
+ 1012:    */
+ 1013:   function _admin() internal view virtual returns (address) {
+ 1014:     return _getAdmin();
+ 1015:   }
+ 1016: 
+ 1017:   /**
+ 1018:    * @dev To keep this contract fully transparent, all `ifAdmin` functions must be payable. This helper is here to
+ 1019:    * emulate some proxy functions being non-payable while still allowing value to pass through.
+ 1020:    */
+ 1021:   function _requireZeroValue() private {
+ 1022:     require(msg.value == 0);
+ 1023:   }
+ 1024: }
+ 1025: 
+ 1026: // File contracts/proxy/transparent/ProxyAdmin.sol
+ 1027: 
+ 1028: // OpenZeppelin Contracts (last updated v4.8.3) (proxy/transparent/ProxyAdmin.sol)
+ 1029: 
+ 1030: pragma solidity ^0.8.0;
+ 1031: 
+ 1032: /**
+ 1033:  * @dev This is an auxiliary contract meant to be assigned as the admin of a {TransparentUpgradeableProxy}. For an
+ 1034:  * explanation of why you would want to use this see the documentation for {TransparentUpgradeableProxy}.
+ 1035:  */
+ 1036: contract ProxyAdmin is Ownable {
+ 1037:   /**
+ 1038:    * @dev Returns the current implementation of `proxy`.
+ 1039:    *
+ 1040:    * Requirements:
+ 1041:    *
+ 1042:    * - This contract must be the admin of `proxy`.
+ 1043:    */
+ 1044:   function getProxyImplementation(ITransparentUpgradeableProxy proxy) public view virtual returns (address) {
+ 1045:     // We need to manually run the static call since the getter cannot be flagged as view
+ 1046:     // bytes4(keccak256("implementation()")) == 0x5c60da1b
+ 1047:     (bool success, bytes memory returndata) = address(proxy).staticcall(hex"5c60da1b");
+ 1048:     require(success);
+ 1049:     return abi.decode(returndata, (address));
+ 1050:   }
+ 1051: 
+ 1052:   /**
+ 1053:    * @dev Returns the current admin of `proxy`.
+ 1054:    *
+ 1055:    * Requirements:
+ 1056:    *
+ 1057:    * - This contract must be the admin of `proxy`.
+ 1058:    */
+ 1059:   function getProxyAdmin(ITransparentUpgradeableProxy proxy) public view virtual returns (address) {
+ 1060:     // We need to manually run the static call since the getter cannot be flagged as view
+ 1061:     // bytes4(keccak256("admin()")) == 0xf851a440
+ 1062:     (bool success, bytes memory returndata) = address(proxy).staticcall(hex"f851a440");
+ 1063:     require(success);
+ 1064:     return abi.decode(returndata, (address));
+ 1065:   }
+ 1066: 
+ 1067:   /**
+ 1068:    * @dev Changes the admin of `proxy` to `newAdmin`.
+ 1069:    *
+ 1070:    * Requirements:
+ 1071:    *
+ 1072:    * - This contract must be the current admin of `proxy`.
+ 1073:    */
+ 1074:   function changeProxyAdmin(ITransparentUpgradeableProxy proxy, address newAdmin) public virtual onlyOwner {
+ 1075:     proxy.changeAdmin(newAdmin);
+ 1076:   }
+ 1077: 
+ 1078:   /**
+ 1079:    * @dev Upgrades `proxy` to `implementation`. See {TransparentUpgradeableProxy-upgradeTo}.
+ 1080:    *
+ 1081:    * Requirements:
+ 1082:    *
+ 1083:    * - This contract must be the admin of `proxy`.
+ 1084:    */
+ 1085:   function upgrade(ITransparentUpgradeableProxy proxy, address implementation) public virtual onlyOwner {
+ 1086:     proxy.upgradeTo(implementation);
+ 1087:   }
+ 1088: 
+ 1089:   /**
+ 1090:    * @dev Upgrades `proxy` to `implementation` and calls a function on the new implementation. See
+ 1091:    * {TransparentUpgradeableProxy-upgradeToAndCall}.
+ 1092:    *
+ 1093:    * Requirements:
+ 1094:    *
+ 1095:    * - This contract must be the admin of `proxy`.
+ 1096:    */
+ 1097:   function upgradeAndCall(
+ 1098:     ITransparentUpgradeableProxy proxy,
+ 1099:     address implementation,
+ 1100:     bytes memory data
+ 1101:   ) public payable virtual onlyOwner {
+ 1102:     proxy.upgradeToAndCall{ value: msg.value }(implementation, data);
+ 1103:   }
+ 1104: }

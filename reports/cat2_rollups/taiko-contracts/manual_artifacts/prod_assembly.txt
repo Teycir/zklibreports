@@ -1,0 +1,53 @@
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\shared\signal\SignalService.sol:209:        assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\shared\signal\SignalService.sol:224:        assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\shared\libs\LibBytes.sol:39:        assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\shared\libs\LibAddress.sol:32:        // by assembly calling "handle" function
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\shared\libs\LibAddress.sol:33:        // we call via assembly to avoid memcopying a very large returndata
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\shared\libs\LibAddress.sol:35:        assembly ("memory-safe") {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\shared\fork-router\ForkRouter.sol:55:        assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\shared\bridge\Bridge.sol:489:        assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\shared\bridge\Bridge.sol:670:            // / @solidity memory-safe-assembly
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\shared\bridge\Bridge.sol:671:            assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\layer2\core\Anchor.sol:286:        assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\layer2\core\Anchor.sol:294:        assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\layer1\preconf\libs\LibBLS12381.sol:200:        assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\layer1\preconf\libs\LibBLS12381.sol:229:        assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\layer1\preconf\libs\LibBLS12381.sol:292:        assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\layer1\preconf\libs\LibBLS12381.sol:370:        assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\layer1\preconf\libs\LibBeaconMerkleUtils.sol:13:        // TODO: reuse word with assembly
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\layer1\preconf\impl\UnifiedSlasher.sol:61:                assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\layer1\preconf\impl\UnifiedSlasher.sol:73:                assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\layer1\preconf\impl\UnifiedSlasher.sol:92:            assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\layer1\preconf\impl\LookaheadSlasher.sol:99:        assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\layer1\preconf\impl\LookaheadSlasher.sol:143:        assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\layer1\preconf\impl\LookaheadSlasher.sol:176:        assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\layer1\preconf\impl\LookaheadSlasher.sol:220:        assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\layer1\preconf\impl\LookaheadSlasher.sol:263:        assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\layer1\mainnet\MainnetBridge.sol:48:        assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\layer1\mainnet\MainnetBridge.sol:60:        assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\layer1\mainnet\LibFasterReentryLock.sol:16:        assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\layer1\mainnet\LibFasterReentryLock.sol:22:        assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\layer1\core\libs\LibPackUnpack.sol:6:/// using inline assembly for maximum gas efficiency.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\layer1\core\libs\LibPackUnpack.sol:43:        assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\layer1\core\libs\LibPackUnpack.sol:55:        assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\layer1\core\libs\LibPackUnpack.sol:72:        assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\layer1\core\libs\LibPackUnpack.sol:89:        assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\layer1\core\libs\LibPackUnpack.sol:107:        assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\layer1\core\libs\LibPackUnpack.sol:131:        assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\layer1\core\libs\LibPackUnpack.sol:150:        assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\layer1\core\libs\LibPackUnpack.sol:170:        assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\layer1\core\libs\LibPackUnpack.sol:193:        assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\layer1\core\libs\LibPackUnpack.sol:206:        assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\layer1\core\libs\LibPackUnpack.sol:219:        assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\layer1\core\libs\LibPackUnpack.sol:232:        assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\layer1\core\libs\LibPackUnpack.sol:245:        assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\layer1\core\libs\LibPackUnpack.sol:258:        assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\layer1\core\libs\LibPackUnpack.sol:270:        assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\layer1\core\libs\LibPackUnpack.sol:283:        assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\layer1\core\libs\LibPackUnpack.sol:303:        assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\layer1\automata-attestation\utils\SHA1.sol:12:        assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\layer1\automata-attestation\utils\BytesUtils.sol:32:        assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\layer1\automata-attestation\utils\BytesUtils.sol:78:        assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\layer1\automata-attestation\utils\BytesUtils.sol:101:        assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\layer1\automata-attestation\utils\BytesUtils.sol:108:        assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\layer1\automata-attestation\utils\BytesUtils.sol:134:        assembly {

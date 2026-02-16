@@ -1,0 +1,29 @@
+{
+    "exitcode": 1,
+    "test_results": {
+        "test/HalmosOptimismF1ProtocolVersionsInitHijack.t.sol:HalmosOptimismF1ProtocolVersionsInitHijack": [
+            {
+                "name": "check_non_admin_cannot_take_protocol_owner()",
+                "exitcode": 1,
+                "num_models": 1,
+                "models": [
+                    {
+                        "model": {},
+                        "is_valid": true
+                    }
+                ],
+                "num_paths": [
+                    1,
+                    0,
+                    0
+                ],
+                "time": [
+                    0.142226899995876,
+                    0.041848699998809025,
+                    0.10037480000028154
+                ],
+                "num_bounded_loops": 0
+            }
+        ]
+    }
+}

@@ -1,0 +1,29 @@
+{
+    "exitcode": 1,
+    "test_results": {
+        "test/HalmosEraContractsF1ChainRegistrarInitHijack.t.sol:HalmosEraContractsF1ChainRegistrarInitHijack": [
+            {
+                "name": "check_attacker_cannot_drain_proposer_topups_via_initialize_hijack()",
+                "exitcode": 1,
+                "num_models": 1,
+                "models": [
+                    {
+                        "model": {},
+                        "is_valid": true
+                    }
+                ],
+                "num_paths": [
+                    1,
+                    0,
+                    0
+                ],
+                "time": [
+                    0.19795449999946868,
+                    0.09733430000051158,
+                    0.1006169999964186
+                ],
+                "num_bounded_loops": 0
+            }
+        ]
+    }
+}

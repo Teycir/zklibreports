@@ -1,0 +1,242 @@
+<style> code { white-space: pre-wrap; display: block; background-color: #eee; }.executed { background-color: #afa; }.reverted { background-color: #ffa; }.unexecuted { background-color: #faa; }.neutral { background-color: #eee; }</style><b>C:/Users/vboxuser/Desktop/Repos/zklibreports/proof_harness/cat2_mantle_f4_challenge_binding/src/EchidnaF4ChallengeBindingHarness.sol</b>
+<code>
+  1 |     | <span class='neutral'>// SPDX-License-Identifier: MIT</span>
+  2 |     | <span class='neutral'>pragma solidity 0.8.24;</span>
+  3 |     | <span class='neutral'></span>
+  4 |     | <span class='neutral'>import {ChallengeBindingRollupHarness, ChallengeBindingStub} from &quot;./MantleF4ChallengeBindingHarness.sol&quot;;</span>
+  5 |     | <span class='neutral'></span>
+  6 |     | <span class='neutral'>/// @notice Echidna property harness for F-MAN-04.</span>
+  7 | *   | <span class='executed'>contract EchidnaF4ChallengeBindingHarness {</span>
+  8 |     | <span class='unexecuted'>    ChallengeBindingRollupHarness public rollup;</span>
+  9 |     | <span class='neutral'></span>
+ 10 |     | <span class='unexecuted'>    address public attackerOperator;</span>
+ 11 |     | <span class='unexecuted'>    address public victimOperator;</span>
+ 12 |     | <span class='unexecuted'>    address public attackerStaker;</span>
+ 13 |     | <span class='unexecuted'>    address public victimStaker;</span>
+ 14 |     | <span class='unexecuted'>    address public syntheticChallengeStaker;</span>
+ 15 |     | <span class='unexecuted'>    address public challengeAddr;</span>
+ 16 |     | <span class='neutral'></span>
+ 17 |     | <span class='unexecuted'>    bool public opened;</span>
+ 18 |     | <span class='neutral'></span>
+ 19 | *   | <span class='executed'>    constructor() {</span>
+ 20 | *   | <span class='executed'>        rollup = new ChallengeBindingRollupHarness();</span>
+ 21 | *   | <span class='executed'>        rollup.seedAssertion(10, 1);</span>
+ 22 | *   | <span class='executed'>        rollup.seedAssertion(11, 1);</span>
+ 23 | *   | <span class='executed'>        rollup.setLastConfirmedAssertionID(0);</span>
+ 24 |     | <span class='neutral'></span>
+ 25 | *   | <span class='executed'>        attackerOperator = address(this);</span>
+ 26 | *   | <span class='executed'>        victimOperator = address(0xBEEF);</span>
+ 27 | *   | <span class='executed'>        attackerStaker = address(0xA001);</span>
+ 28 | *   | <span class='executed'>        victimStaker = address(0xA002);</span>
+ 29 | *   | <span class='executed'>        syntheticChallengeStaker = address(0xA003);</span>
+ 30 |     | <span class='neutral'></span>
+ 31 | *   | <span class='executed'>        rollup.seedStaker(attackerOperator, attackerStaker, 42, 2 ether);</span>
+ 32 | *   | <span class='executed'>        rollup.seedStaker(victimOperator, victimStaker, 43, 1 ether);</span>
+ 33 |     | <span class='neutral'>    }</span>
+ 34 |     | <span class='neutral'></span>
+ 35 | *   | <span class='executed'>    function action_open_mismatched_challenge() public {</span>
+ 36 | *   | <span class='executed'>        if (opened) return;</span>
+ 37 | *   | <span class='executed'>        address[2] memory players = [victimOperator, attackerOperator];</span>
+ 38 | *   | <span class='executed'>        uint256[2] memory assertionIDs = [uint256(10), uint256(11)];</span>
+ 39 | *   | <span class='executed'>        challengeAddr = rollup.challengeAssertion(players, assertionIDs);</span>
+ 40 | *   | <span class='executed'>        opened = true;</span>
+ 41 |     | <span class='neutral'>    }</span>
+ 42 |     | <span class='neutral'></span>
+ 43 | *   | <span class='executed'>    function action_register_challenge_operator() public {</span>
+ 44 | *   | <span class='executed'>        if (!opened) return;</span>
+ 45 | *   | <span class='executed'>        rollup.seedStaker(challengeAddr, syntheticChallengeStaker, 99, 1 ether);</span>
+ 46 |     | <span class='neutral'>    }</span>
+ 47 |     | <span class='neutral'></span>
+ 48 | *   | <span class='executed'>    function action_settle() public {</span>
+ 49 | *   | <span class='executed'>        if (!opened) return;</span>
+ 50 | *   | <span class='executed'>        try ChallengeBindingStub(challengeAddr).settle(attackerOperator, victimOperator) {} catch {}</span>
+ 51 |     | <span class='neutral'>    }</span>
+ 52 |     | <span class='neutral'></span>
+ 53 |     | <span class='unexecuted'>    function echidna_victim_not_forced_into_unrelated_challenge() public view returns (bool) {</span>
+ 54 |     | <span class='unexecuted'>        (,,, , address victimCurrentChallenge) = rollup.stakers(victimStaker);</span>
+ 55 |     | <span class='unexecuted'>        return victimCurrentChallenge == address(0);</span>
+ 56 |     | <span class='neutral'>    }</span>
+ 57 |     | <span class='neutral'></span>
+ 58 |     | <span class='unexecuted'>    function echidna_victim_not_slashed_by_unrelated_assertions() public view returns (bool) {</span>
+ 59 |     | <span class='unexecuted'>        (bool victimStaked,,,,) = rollup.stakers(victimStaker);</span>
+ 60 |     | <span class='unexecuted'>        return victimStaked;</span>
+ 61 |     | <span class='neutral'>    }</span>
+ 62 |     | <span class='neutral'>}</span>
+ 63 |     | <span class='neutral'></span>
+
+</code>
+<br />
+
+<b>C:/Users/vboxuser/Desktop/Repos/zklibreports/proof_harness/cat2_mantle_f4_challenge_binding/src/MantleF4ChallengeBindingHarness.sol</b>
+<code>
+   1 |     | <span class='neutral'>// SPDX-License-Identifier: MIT</span>
+   2 |     | <span class='neutral'>pragma solidity 0.8.24;</span>
+   3 |     | <span class='neutral'></span>
+   4 | *   | <span class='executed'>contract ChallengeBindingRollupHarness {</span>
+   5 |     | <span class='neutral'>    struct Staker {</span>
+   6 |     | <span class='neutral'>        bool isStaked;</span>
+   7 |     | <span class='neutral'>        uint256 amountStaked;</span>
+   8 |     | <span class='neutral'>        uint256 assertionID;</span>
+   9 |     | <span class='neutral'>        address operator;</span>
+  10 |     | <span class='neutral'>        address currentChallenge;</span>
+  11 |     | <span class='neutral'>    }</span>
+  12 |     | <span class='neutral'></span>
+  13 |     | <span class='neutral'>    struct ChallengeCtx {</span>
+  14 |     | <span class='neutral'>        bool completed;</span>
+  15 |     | <span class='neutral'>        address challengeAddress;</span>
+  16 |     | <span class='neutral'>        address defenderAddress;</span>
+  17 |     | <span class='neutral'>        address challengerAddress;</span>
+  18 |     | <span class='neutral'>        uint256 defenderAssertionID;</span>
+  19 |     | <span class='neutral'>        uint256 challengerAssertionID;</span>
+  20 |     | <span class='neutral'>    }</span>
+  21 |     | <span class='neutral'></span>
+  22 |     | <span class='unexecuted'>    mapping(address =&gt; Staker) public stakers; // staker -&gt; state</span>
+  23 |     | <span class='unexecuted'>    mapping(address =&gt; address) public registers; // operator -&gt; staker</span>
+  24 |     | <span class='unexecuted'>    mapping(uint256 =&gt; uint256) public assertionParent; // assertion id -&gt; parent id</span>
+  25 |     | <span class='unexecuted'>    mapping(address =&gt; uint256) public withdrawableFunds; // staker -&gt; withdrawable amount</span>
+  26 |     | <span class='neutral'></span>
+  27 | *   | <span class='executed'>    uint256 public baseStakeAmount = 1 ether;</span>
+  28 |     | <span class='unexecuted'>    uint256 public lastCreatedAssertionID;</span>
+  29 |     | <span class='unexecuted'>    uint256 public lastConfirmedAssertionID;</span>
+  30 |     | <span class='unexecuted'>    ChallengeCtx public challengeCtx;</span>
+  31 |     | <span class='neutral'></span>
+  32 | *   | <span class='executed'>    function seedAssertion(uint256 assertionID, uint256 parentID) external {</span>
+  33 | *   | <span class='executed'>        assertionParent[assertionID] = parentID;</span>
+  34 | *   | <span class='executed'>        if (assertionID &gt; lastCreatedAssertionID) {</span>
+  35 | *   | <span class='executed'>            lastCreatedAssertionID = assertionID;</span>
+  36 |     | <span class='neutral'>        }</span>
+  37 |     | <span class='neutral'>    }</span>
+  38 |     | <span class='neutral'></span>
+  39 | *   | <span class='executed'>    function setLastConfirmedAssertionID(uint256 id) external {</span>
+  40 | *   | <span class='executed'>        lastConfirmedAssertionID = id;</span>
+  41 |     | <span class='neutral'>    }</span>
+  42 |     | <span class='neutral'></span>
+  43 | *   | <span class='executed'>    function seedStaker(address operator, address staker, uint256 assertionID, uint256 amount) external {</span>
+  44 | *   | <span class='executed'>        registers[operator] = staker;</span>
+  45 | *   | <span class='executed'>        stakers[staker] =</span>
+  46 | *   | <span class='executed'>            Staker({isStaked: true, amountStaked: amount, assertionID: assertionID, operator: operator, currentChallenge: address(0)});</span>
+  47 |     | <span class='neutral'>    }</span>
+  48 |     | <span class='neutral'></span>
+  49 |     | <span class='neutral'>    modifier operatorOnly() {</span>
+  50 | *   | <span class='executed'>        if (registers[msg.sender] == address(0)) {</span>
+  51 |     | <span class='unexecuted'>            revert(&quot;NotOperator&quot;);</span>
+  52 |     | <span class='neutral'>        }</span>
+  53 |     | <span class='neutral'>        _;</span>
+  54 |     | <span class='neutral'>    }</span>
+  55 |     | <span class='neutral'></span>
+  56 | *   | <span class='executed'>    function challengeAssertion(address[2] calldata players, uint256[2] calldata assertionIDs)</span>
+  57 |     | <span class='neutral'>        external</span>
+  58 |     | <span class='neutral'>        operatorOnly</span>
+  59 | *   | <span class='executed'>        returns (address)</span>
+  60 |     | <span class='neutral'>    {</span>
+  61 | *   | <span class='executed'>        uint256 defenderAssertionID = assertionIDs[0];</span>
+  62 | *   | <span class='executed'>        uint256 challengerAssertionID = assertionIDs[1];</span>
+  63 |     | <span class='neutral'></span>
+  64 | *   | <span class='executed'>        if (defenderAssertionID &gt;= challengerAssertionID) {</span>
+  65 |     | <span class='unexecuted'>            revert(&quot;WrongOrder&quot;);</span>
+  66 |     | <span class='neutral'>        }</span>
+  67 | *   | <span class='executed'>        if (challengerAssertionID &gt; lastCreatedAssertionID) {</span>
+  68 |     | <span class='unexecuted'>            revert(&quot;UnproposedAssertion&quot;);</span>
+  69 |     | <span class='neutral'>        }</span>
+  70 | *   | <span class='executed'>        if (lastConfirmedAssertionID &gt;= defenderAssertionID) {</span>
+  71 |     | <span class='unexecuted'>            revert(&quot;AssertionAlreadyResolved&quot;);</span>
+  72 |     | <span class='neutral'>        }</span>
+  73 | *   | <span class='executed'>        uint256 parentID = assertionParent[defenderAssertionID];</span>
+  74 | *   | <span class='executed'>        if (parentID != assertionParent[challengerAssertionID]) {</span>
+  75 |     | <span class='unexecuted'>            revert(&quot;DifferentParent&quot;);</span>
+  76 |     | <span class='neutral'>        }</span>
+  77 |     | <span class='neutral'></span>
+  78 | *   | <span class='executed'>        address defender = players[0];</span>
+  79 | *   | <span class='executed'>        address challenger = players[1];</span>
+  80 | *   | <span class='executed'>        require(defender != challenger, &quot;defender and challenge must not equal&quot;);</span>
+  81 |     | <span class='neutral'></span>
+  82 | *   | <span class='executed'>        address defenderStaker = registers[defender];</span>
+  83 | *   | <span class='executed'>        address challengerStaker = registers[challenger];</span>
+  84 | *   | <span class='executed'>        _requireUnchallengedStaker(defenderStaker);</span>
+  85 | *   | <span class='executed'>        _requireUnchallengedStaker(challengerStaker);</span>
+  86 |     | <span class='neutral'></span>
+  87 |     | <span class='neutral'>        // BUG PARITY: no check that stakers are actually staked on defenderAssertionID/challengerAssertionID.</span>
+  88 | *   | <span class='executed'>        ChallengeBindingStub challenge = new ChallengeBindingStub(address(this));</span>
+  89 | *   | <span class='executed'>        address challengeAddr = address(challenge);</span>
+  90 | *   | <span class='executed'>        stakers[challengerStaker].currentChallenge = challengeAddr;</span>
+  91 | *   | <span class='executed'>        stakers[defenderStaker].currentChallenge = challengeAddr;</span>
+  92 |     | <span class='neutral'></span>
+  93 | *   | <span class='executed'>        challengeCtx = ChallengeCtx({</span>
+  94 | *   | <span class='executed'>            completed: false,</span>
+  95 | *   | <span class='executed'>            challengeAddress: challengeAddr,</span>
+  96 | *   | <span class='executed'>            defenderAddress: defender,</span>
+  97 | *   | <span class='executed'>            challengerAddress: challenger,</span>
+  98 | *   | <span class='executed'>            defenderAssertionID: defenderAssertionID,</span>
+  99 | *   | <span class='executed'>            challengerAssertionID: challengerAssertionID</span>
+ 100 |     | <span class='neutral'>        });</span>
+ 101 | *   | <span class='executed'>        return challengeAddr;</span>
+ 102 |     | <span class='neutral'>    }</span>
+ 103 |     | <span class='neutral'></span>
+ 104 | *   | <span class='executed'>    function completeChallenge(address winnerOperator, address loserOperator) external operatorOnly {</span>
+ 105 | *   | <span class='executed'>        address winnerStaker = registers[winnerOperator];</span>
+ 106 | *   | <span class='executed'>        address loserStaker = registers[loserOperator];</span>
+ 107 | *   | <span class='executed'>        _requireStaked(loserStaker);</span>
+ 108 |     | <span class='neutral'></span>
+ 109 | *   | <span class='executed'>        address challenge = _getChallenge(winnerStaker, loserStaker);</span>
+ 110 | *   | <span class='executed'>        if (msg.sender != challenge) {</span>
+ 111 |     | <span class='unexecuted'>            revert(&quot;NotChallenge&quot;);</span>
+ 112 |     | <span class='neutral'>        }</span>
+ 113 |     | <span class='neutral'></span>
+ 114 | *   | <span class='executed'>        uint256 loserStake = stakers[loserStaker].amountStaked;</span>
+ 115 | *   | <span class='executed'>        uint256 amountWon;</span>
+ 116 | *   | <span class='executed'>        if (loserStake &gt; baseStakeAmount) {</span>
+ 117 |     | <span class='unexecuted'>            withdrawableFunds[loserStaker] += (loserStake - baseStakeAmount);</span>
+ 118 |     | <span class='unexecuted'>            amountWon = baseStakeAmount;</span>
+ 119 |     | <span class='neutral'>        } else {</span>
+ 120 | *   | <span class='executed'>            amountWon = loserStake;</span>
+ 121 |     | <span class='neutral'>        }</span>
+ 122 |     | <span class='neutral'></span>
+ 123 | *   | <span class='executed'>        stakers[winnerStaker].amountStaked += amountWon;</span>
+ 124 | *   | <span class='executed'>        stakers[winnerStaker].currentChallenge = address(0);</span>
+ 125 |     | <span class='neutral'></span>
+ 126 | *   | <span class='executed'>        delete registers[stakers[loserStaker].operator];</span>
+ 127 | *   | <span class='executed'>        delete stakers[loserStaker];</span>
+ 128 | *   | <span class='executed'>        challengeCtx.completed = true;</span>
+ 129 |     | <span class='neutral'>    }</span>
+ 130 |     | <span class='neutral'></span>
+ 131 | *   | <span class='executed'>    function _requireStaked(address stakerAddress) private view {</span>
+ 132 | *   | <span class='executed'>        if (!stakers[stakerAddress].isStaked) {</span>
+ 133 | *   | <span class='executed'>            revert(&quot;NotStaked&quot;);</span>
+ 134 |     | <span class='neutral'>        }</span>
+ 135 |     | <span class='neutral'>    }</span>
+ 136 |     | <span class='neutral'></span>
+ 137 | *   | <span class='executed'>    function _requireUnchallengedStaker(address stakerAddress) private view {</span>
+ 138 | *   | <span class='executed'>        _requireStaked(stakerAddress);</span>
+ 139 | *   | <span class='executed'>        if (stakers[stakerAddress].currentChallenge != address(0)) {</span>
+ 140 |     | <span class='unexecuted'>            revert(&quot;ChallengedStaker&quot;);</span>
+ 141 |     | <span class='neutral'>        }</span>
+ 142 |     | <span class='neutral'>    }</span>
+ 143 |     | <span class='neutral'></span>
+ 144 | *   | <span class='executed'>    function _getChallenge(address staker1Address, address staker2Address) private view returns (address) {</span>
+ 145 | *   | <span class='executed'>        address challenge = stakers[staker1Address].currentChallenge;</span>
+ 146 | *   | <span class='executed'>        if (challenge == address(0)) {</span>
+ 147 |     | <span class='unexecuted'>            revert(&quot;NotInChallenge&quot;);</span>
+ 148 |     | <span class='neutral'>        }</span>
+ 149 | *   | <span class='executed'>        if (challenge != stakers[staker2Address].currentChallenge) {</span>
+ 150 |     | <span class='unexecuted'>            revert(&quot;InDifferentChallenge&quot;);</span>
+ 151 |     | <span class='neutral'>        }</span>
+ 152 | *   | <span class='executed'>        return challenge;</span>
+ 153 |     | <span class='neutral'>    }</span>
+ 154 |     | <span class='neutral'>}</span>
+ 155 |     | <span class='neutral'></span>
+ 156 | *   | <span class='executed'>contract ChallengeBindingStub {</span>
+ 157 |     | <span class='unexecuted'>    ChallengeBindingRollupHarness public immutable rollup;</span>
+ 158 |     | <span class='neutral'></span>
+ 159 | *   | <span class='executed'>    constructor(address rollupAddress) {</span>
+ 160 | *   | <span class='executed'>        rollup = ChallengeBindingRollupHarness(rollupAddress);</span>
+ 161 |     | <span class='neutral'>    }</span>
+ 162 |     | <span class='neutral'></span>
+ 163 | *   | <span class='executed'>    function settle(address winnerOperator, address loserOperator) external {</span>
+ 164 | *   | <span class='executed'>        rollup.completeChallenge(winnerOperator, loserOperator);</span>
+ 165 |     | <span class='neutral'>    }</span>
+ 166 |     | <span class='neutral'>}</span>
+ 167 |     | <span class='neutral'></span>
+
+</code>
+<br />
+

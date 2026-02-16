@@ -1,0 +1,118 @@
+Tool health check
+generated_utc=2026-02-16T10:45:44.497Z
+
+[git]
+git version 2.52.0.windows.1
+status=ok
+
+[gitleaks]
+8.30.0
+status=ok
+
+[osv-scanner]
+osv-scanner version: 2.3.3
+osv-scalibr version: 0.4.2
+commit: n/a
+built at: n/a
+status=ok
+
+[go]
+go version go1.26.0 windows/amd64
+status=ok
+
+[govulncheck]
+Go: go1.26.0
+Scanner: govulncheck@v1.1.4
+DB: https://vuln.go.dev
+DB updated: 2026-02-05 17:23:17 +0000 UTC
+
+No vulnerabilities found.
+status=ok
+
+[gosec]
+Version: dev
+Git tag: 
+Build date: 
+status=ok
+
+[rustc]
+rustc 1.93.0 (254b59607 2026-01-19)
+status=ok
+
+[cargo]
+cargo 1.93.0 (083ac5135 2025-12-15)
+status=ok
+
+[cargo-audit]
+cargo-audit-audit 0.22.1
+status=ok
+
+[npm]
+11.6.2
+status=ok
+
+[solc]
+solc, the solidity compiler commandline interface
+Version: 0.8.33+commit.64118f21.Windows.msvc
+status=ok
+
+[slither]
+0.11.5
+status=ok
+
+[halmos]
+halmos 0.3.3
+status=ok
+
+[forge]
+forge Version: 1.6.0-v1.6.0-rc1
+Commit SHA: b272ce3366987406406e9eb1b82596653a3ad628
+Build Timestamp: 2026-01-22T15:23:42.262041000Z (1769095422)
+Build Profile: dist
+status=ok
+
+[cast]
+cast Version: 1.6.0-v1.6.0-rc1
+Commit SHA: b272ce3366987406406e9eb1b82596653a3ad628
+Build Timestamp: 2026-01-22T15:23:42.262041000Z (1769095422)
+Build Profile: dist
+status=ok
+
+[anvil]
+anvil Version: 1.6.0-v1.6.0-rc1
+Commit SHA: b272ce3366987406406e9eb1b82596653a3ad628
+Build Timestamp: 2026-01-22T15:23:42.262041000Z (1769095422)
+Build Profile: dist
+status=ok
+
+[echidna]
+Echidna 2.3.1
+status=ok
+
+[medusa]
+medusa version 1.5.0
+status=ok
+
+[semgrep]
+1.151.0
+status=ok
+
+[circom]
+circom compiler 2.2.3
+status=ok
+
+[snarkjs]
+snarkjs@0.7.6
+        Copyright (C) 2018  0kims association
+        This program comes with ABSOLUTELY NO WARRANTY;
+        This is free software, and you are welcome to redistribute it
+        under certain conditions; see the COPYING file in the official
+        repo directory at  https://github.com/iden3/snarkjs 
+
+Verify a zk Proof
+Usage: 
+        snarkjs groth16 verify [verification_key.json] [public.json] [proof.json]
+   or   snarkjs g16v [verification_key.json] [public.json] [proof.json]
+
+status=ok
+

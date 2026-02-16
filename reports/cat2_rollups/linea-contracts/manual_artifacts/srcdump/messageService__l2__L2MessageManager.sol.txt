@@ -1,0 +1,87 @@
+    1: // SPDX-License-Identifier: AGPL-3.0
+    2: pragma solidity 0.8.19;
+    3: 
+    4: import { AccessControlUpgradeable } from "@openzeppelin/contracts-upgradeable/access/AccessControlUpgradeable.sol";
+    5: import { L2MessageManagerV1 } from "./v1/L2MessageManagerV1.sol";
+    6: import { IL2MessageManager } from "../../interfaces/l2/IL2MessageManager.sol";
+    7: import { Utils } from "../../lib/Utils.sol";
+    8: 
+    9: /**
+   10:  * @title Contract to manage cross-chain message hashes storage and statuses on L2.
+   11:  * @author ConsenSys Software Inc.
+   12:  * @custom:security-contact security-report@linea.build
+   13:  */
+   14: abstract contract L2MessageManager is AccessControlUpgradeable, IL2MessageManager, L2MessageManagerV1 {
+   15:   using Utils for *;
+   16: 
+   17:   uint256 public lastAnchoredL1MessageNumber;
+   18:   mapping(uint256 messageNumber => bytes32 rollingHash) public l1RollingHashes;
+   19: 
+   20:   /// @dev Total contract storage is 52 slots including the gap below.
+   21:   /// @dev Keep 50 free storage slots for future implementation updates to avoid storage collision.
+   22:   uint256[50] private __gap_L2MessageManager;
+   23: 
+   24:   /**
+   25:    * @notice Add cross-chain L1->L2 message hashes in storage.
+   26:    * @dev Only address that has the role 'L1_L2_MESSAGE_SETTER_ROLE' are allowed to call this function.
+   27:    * @dev NB: In the unlikely event of a duplicate anchoring, the lastAnchoredL1MessageNumber MUST NOT be incremented
+   28:    * @dev and the rolling hash not calculated, else synchronisation will break.
+   29:    * @dev If starting number is zero, an underflow error is expected.
+   30:    * @param _messageHashes New message hashes to anchor on L2.
+   31:    * @param _startingMessageNumber The expected L1 message number to start when anchoring.
+   32:    * @param _finalMessageNumber The expected L1 message number to end on when anchoring.
+   33:    * @param _finalRollingHash The expected L1 rolling hash to end on when anchoring.
+   34:    */
+   35:   function anchorL1L2MessageHashes(
+   36:     bytes32[] calldata _messageHashes,
+   37:     uint256 _startingMessageNumber,
+   38:     uint256 _finalMessageNumber,
+   39:     bytes32 _finalRollingHash
+   40:   ) external whenTypeNotPaused(GENERAL_PAUSE_TYPE) onlyRole(L1_L2_MESSAGE_SETTER_ROLE) {
+   41:     uint256 messageHashesLength = _messageHashes.length;
+   42: 
+   43:     if (messageHashesLength > 100) {
+   44:       revert MessageHashesListLengthHigherThanOneHundred(messageHashesLength);
+   45:     }
+   46: 
+   47:     if (_finalRollingHash == 0x0) {
+   48:       revert FinalRollingHashIsZero();
+   49:     }
+   50: 
+   51:     uint256 currentL1MessageNumber = lastAnchoredL1MessageNumber;
+   52: 
+   53:     if (_startingMessageNumber - 1 != currentL1MessageNumber) {
+   54:       revert L1MessageNumberSynchronizationWrong(_startingMessageNumber - 1, currentL1MessageNumber);
+   55:     }
+   56: 
+   57:     bytes32 rollingHash = l1RollingHashes[currentL1MessageNumber];
+   58: 
+   59:     bytes32 messageHash;
+   60:     for (uint256 i; i < messageHashesLength; ++i) {
+   61:       messageHash = _messageHashes[i];
+   62:       if (inboxL1L2MessageStatus[messageHash] == INBOX_STATUS_UNKNOWN) {
+   63:         inboxL1L2MessageStatus[messageHash] = INBOX_STATUS_RECEIVED;
+   64: 
+   65:         rollingHash = Utils._efficientKeccak(rollingHash, messageHash);
+   66: 
+   67:         ++currentL1MessageNumber;
+   68:       }
+   69:     }
+   70: 
+   71:     if (currentL1MessageNumber != _finalMessageNumber) {
+   72:       revert L1MessageNumberSynchronizationWrong(_finalMessageNumber, currentL1MessageNumber);
+   73:     }
+   74: 
+   75:     if (_finalRollingHash != rollingHash) {
+   76:       revert L1RollingHashSynchronizationWrong(_finalRollingHash, rollingHash);
+   77:     }
+   78: 
+   79:     if (currentL1MessageNumber != lastAnchoredL1MessageNumber) {
+   80:       lastAnchoredL1MessageNumber = currentL1MessageNumber;
+   81:       l1RollingHashes[currentL1MessageNumber] = rollingHash;
+   82: 
+   83:       emit L1L2MessageHashesAddedToInbox(_messageHashes);
+   84:       emit RollingHashUpdated(currentL1MessageNumber, rollingHash);
+   85:     }
+   86:   }
+   87: }

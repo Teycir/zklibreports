@@ -1,0 +1,8 @@
+prod_initialization=53
+prod_auth_controls=160
+prod_raw_calls=71
+prod_txorigin=0
+prod_selfdestruct=0
+prod_assembly=47
+prod_signature_paths=101
+prod_unchecked=23

@@ -1,0 +1,43 @@
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts\contracts\LineaRollup.sol:67:    _disableInitializers();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts\contracts\LineaRollup.sol:84:  function initialize(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts\contracts\LineaRollup.sol:93:  ) external initializer {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts\contracts\LineaRollup.sol:108:    __MessageService_init(_securityCouncil, _securityCouncil, _rateLimitPeriodInSeconds, _rateLimitAmountInWei);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts\contracts\LineaRollup.sol:132:  ) external reinitializer(5) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts\contracts\proxies\TransparentUpgradeableProxy.sol:889:   * by `data`, which should be an encoded function call. This is useful to initialize new storage variables in the
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts\contracts\proxies\ProxyAdmin.sol:998:   * by `data`, which should be an encoded function call. This is useful to initialize new storage variables in the
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts\contracts\messageService\MessageServiceBase.sol:61:   * @dev Must be initialized in the initialize function of the main contract or constructor
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts\contracts\messageService\MessageServiceBase.sol:64:  function __MessageServiceBase_init(address _messageService) internal onlyInitializing {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts\contracts\tokenBridge\TokenBridge.sol:93:    _disableInitializers();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts\contracts\tokenBridge\TokenBridge.sol:104:  function initialize(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts\contracts\tokenBridge\TokenBridge.sol:111:  ) external nonZeroAddress(_securityCouncil) nonZeroAddress(_messageService) nonZeroAddress(_tokenBeacon) initializer {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts\contracts\tokenBridge\TokenBridge.sol:112:    __Pausable_init();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts\contracts\tokenBridge\TokenBridge.sol:113:    __Ownable2Step_init();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts\contracts\tokenBridge\TokenBridge.sol:114:    __MessageServiceBase_init(_messageService);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts\contracts\tokenBridge\TokenBridge.sol:115:    __ReentrancyGuard_init();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts\contracts\tokenBridge\TokenBridge.sol:343:    BridgedToken(bridgedTokenAddress).initialize(name, symbol, decimals);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts\contracts\messageService\lib\RateLimiter.sol:37:  function __RateLimiter_init(uint256 _periodInSeconds, uint256 _limitInWei) internal onlyInitializing {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts\contracts\LineaRollupInit.sol:9: * @dev Init indicates it is an initializer contract
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts\contracts\LineaRollupInit.sol:18:  function initializeV2(uint256 _initialL2BlockNumber, bytes32 _initialStateRootHash) external reinitializer(3) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts\contracts\tokenBridge\CustomBridgedToken.sol:16:  ) public reinitializer(2) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts\contracts\tokenBridge\CustomBridgedToken.sol:17:    __ERC20_init(_tokenName, _tokenSymbol);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts\contracts\tokenBridge\CustomBridgedToken.sol:18:    __ERC20Permit_init(_tokenName);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts\contracts\tokenBridge\BridgedToken.sol:16:   * @dev Disables OpenZeppelin's initializer mechanism for safety.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts\contracts\tokenBridge\BridgedToken.sol:27:    _disableInitializers();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts\contracts\tokenBridge\BridgedToken.sol:30:  function initialize(string memory _tokenName, string memory _tokenSymbol, uint8 _tokenDecimals) external initializer {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts\contracts\tokenBridge\BridgedToken.sol:31:    __ERC20_init(_tokenName, _tokenSymbol);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts\contracts\tokenBridge\BridgedToken.sol:32:    __ERC20Permit_init(_tokenName);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts\contracts\messageService\l2\v1\L2MessageServiceV1.sol:50:    _disableInitializers();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts\contracts\messageService\l2\v1\L2MessageServiceV1.sol:60:  function initialize(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts\contracts\messageService\l2\v1\L2MessageServiceV1.sol:65:  ) external initializer {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts\contracts\messageService\l2\v1\L2MessageServiceV1.sol:74:    __ERC165_init();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts\contracts\messageService\l2\v1\L2MessageServiceV1.sol:75:    __Context_init();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts\contracts\messageService\l2\v1\L2MessageServiceV1.sol:76:    __AccessControl_init();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts\contracts\messageService\l2\v1\L2MessageServiceV1.sol:77:    __RateLimiter_init(_rateLimitPeriod, _rateLimitAmount);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts\contracts\messageService\l2\v1\L2MessageServiceV1.sol:78:    __L2MessageManager_init(_l1l2MessageSetter);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts\contracts\messageService\l2\v1\L2MessageServiceV1.sol:79:    __ReentrancyGuard_init();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts\contracts\messageService\l2\v1\L2MessageManagerV1.sol:39:  function __L2MessageManager_init(address _l1l2MessageSetter) internal onlyInitializing {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts\contracts\messageService\l1\L1MessageService.sol:42:  function __MessageService_init(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts\contracts\messageService\l1\L1MessageService.sol:56:    __ERC165_init();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts\contracts\messageService\l1\L1MessageService.sol:57:    __Context_init();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts\contracts\messageService\l1\L1MessageService.sol:58:    __AccessControl_init();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts\contracts\messageService\l1\L1MessageService.sol:59:    __RateLimiter_init(_rateLimitPeriod, _rateLimitAmount);

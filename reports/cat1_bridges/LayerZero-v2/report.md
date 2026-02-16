@@ -15,3 +15,6 @@
 ## Notes
 - This is an automated baseline (no repo build steps executed). Treat findings as leads until reproduced.
 - Many security tools use non-zero exit codes to indicate findings; see raw JSON for details.
+- Manual witness-backed audit (current pass): `reports/cat1_bridges/LayerZero-v2/manual_audit.md`.
+- Full-source parity witness artifacts captured for `H1/H2/H3` in `reports/cat1_bridges/LayerZero-v2/manual_artifacts/`.
+- Specialist-fuzzer + fuzz artifacts for `LZ3` residual-sweep path captured in `reports/cat1_bridges/LayerZero-v2/manual_artifacts/`.

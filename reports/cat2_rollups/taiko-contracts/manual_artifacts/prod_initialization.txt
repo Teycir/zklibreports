@@ -1,0 +1,132 @@
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\trailblazers-season-2\TrailblazersBadgesS2.sol:84:    function initialize(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\trailblazers-season-2\TrailblazersBadgesS2.sol:90:        initializer
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\trailblazers-season-2\TrailblazersBadgesS2.sol:92:        __ERC1155_init("");
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\trailblazers-season-2\TrailblazersBadgesS2.sol:93:        __ERC1155Supply_init();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\trailblazers-season-2\TrailblazersBadgesS2.sol:95:        __Context_init();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\trailblazers-season-2\BadgeRecruitment.sol:230:    /// @notice Contract initializer
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\trailblazers-season-2\BadgeRecruitment.sol:235:    function initialize(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\trailblazers-season-2\BadgeRecruitment.sol:242:        initializer
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\trailblazers-season-2\BadgeRecruitment.sol:245:        __Context_init();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\trailblazers-badges\TrailblazersBadges.sol:47:    /// @notice Contract initializer
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\trailblazers-badges\TrailblazersBadges.sol:52:    function initialize(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\trailblazers-badges\TrailblazersBadges.sol:59:        initializer
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\trailblazers-badges\TrailblazersBadges.sol:61:        __ERC721_init("Trailblazers Badges", "TBB");
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\trailblazers-badges\TrailblazersBadges.sol:63:        __ECDSAWhitelist_init(_owner, _mintSigner, _blacklistAddress);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\trailblazers-badges\ECDSAWhitelist.sol:36:        _disableInitializers();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\trailblazers-badges\ECDSAWhitelist.sol:59:    /// @notice Contract initializer
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\trailblazers-badges\ECDSAWhitelist.sol:63:    function initialize(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\trailblazers-badges\ECDSAWhitelist.sol:69:        initializer
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\trailblazers-badges\ECDSAWhitelist.sol:71:        __ECDSAWhitelist_init(_owner, _mintSigner, _blacklist);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\trailblazers-badges\ECDSAWhitelist.sol:120:    /// @notice Internal initializer
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\trailblazers-badges\ECDSAWhitelist.sol:124:    function __ECDSAWhitelist_init(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\trailblazers-badges\ECDSAWhitelist.sol:132:        __Context_init();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\trailblazers-airdrop\MerkleClaimable.sol:80:    function __MerkleClaimable_init(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\trailblazers-airdrop\MerkleClaimable.sol:88:        __Context_init();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\trailblazers-airdrop\ERC20Airdrop.sol:55:        initializer
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\trailblazers-airdrop\ERC20Airdrop.sol:57:        __ReentrancyGuard_init();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\trailblazers-airdrop\ERC20Airdrop.sol:58:        __Pausable_init();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\trailblazers-airdrop\ERC20Airdrop.sol:59:        __MerkleClaimable_init(_claimStart, _claimEnd, _merkleRoot);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\taikoon\TaikoonToken.sol:28:    /// @notice Contract initializer
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\taikoon\TaikoonToken.sol:31:    function initialize(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\taikoon\TaikoonToken.sol:38:        initializer
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\taikoon\TaikoonToken.sol:40:        __ERC721_init("Taikoon", "TKOON");
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\taikoon\TaikoonToken.sol:41:        __MerkleWhitelist_init(_owner, _merkleRoot, _blacklistAddress);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\taikoon\MerkleWhitelist.sol:37:        _disableInitializers();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\taikoon\MerkleWhitelist.sol:47:    /// @notice Contract initializer
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\taikoon\MerkleWhitelist.sol:49:    function initialize(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\taikoon\MerkleWhitelist.sol:55:        initializer
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\taikoon\MerkleWhitelist.sol:57:        __MerkleWhitelist_init(_owner, _root, _blacklist);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\taikoon\MerkleWhitelist.sol:78:    /// @notice Internal initializer
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\taikoon\MerkleWhitelist.sol:80:    function __MerkleWhitelist_init(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\taikoon\MerkleWhitelist.sol:86:        initializer
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\taikoon\MerkleWhitelist.sol:89:        __Context_init();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\snaefell\SnaefellToken.sol:26:    /// @notice Contract initializer
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\snaefell\SnaefellToken.sol:29:    function initialize(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\snaefell\SnaefellToken.sol:36:        initializer
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\snaefell\SnaefellToken.sol:38:        __ERC721_init("SnaefellToken", "SNF");
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\snaefell\SnaefellToken.sol:39:        __MerkleWhitelist_init(_owner, _merkleRoot, _blacklistAddress);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\snaefell\MerkleWhitelist.sol:37:        _disableInitializers();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\snaefell\MerkleWhitelist.sol:47:    /// @notice Contract initializer
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\snaefell\MerkleWhitelist.sol:49:    function initialize(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\snaefell\MerkleWhitelist.sol:55:        initializer
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\snaefell\MerkleWhitelist.sol:57:        __MerkleWhitelist_init(_owner, _root, _blacklist);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\snaefell\MerkleWhitelist.sol:78:    /// @notice Internal initializer
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\snaefell\MerkleWhitelist.sol:80:    function __MerkleWhitelist_init(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\snaefell\MerkleWhitelist.sol:86:        initializer
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\snaefell\MerkleWhitelist.sol:89:        __Context_init();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\profile\RegisterProfilePicture.sol:32:    /// @notice Contract initializer
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\profile\RegisterProfilePicture.sol:33:    function initialize() public initializer {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\party-ticket\TaikoPartyTicket.sol:58:    /// @notice Contract initializer
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\party-ticket\TaikoPartyTicket.sol:63:    function initialize(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\party-ticket\TaikoPartyTicket.sol:70:        initializer
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\party-ticket\TaikoPartyTicket.sol:72:        __ERC721_init("TaikoPartyTicket", "TPT");
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\party-ticket\TaikoPartyTicket.sol:73:        __Context_init();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\eventRegister\EventRegister.sol:87:     * @notice Contract initializer
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\eventRegister\EventRegister.sol:92:    function initialize() external initializer {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\eventRegister\EventRegister.sol:93:        __Context_init();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\shared\vault\ERC721Vault.sol:27:    function init(address _owner) external initializer {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\shared\vault\ERC721Vault.sol:28:        __Essential_init(_owner);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\shared\vault\ERC721Vault.sol:244:    /// @dev Deploy a new BridgedNFT contract and initialize it.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\shared\vault\ERC20Vault.sol:167:    function init(address _owner) external initializer {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\shared\vault\ERC20Vault.sol:168:        __Essential_init(_owner);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\shared\vault\ERC20Vault.sol:430:    /// @dev Deploy a new BridgedERC20 contract and initialize it.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\shared\vault\ERC1155Vault.sol:27:    function init(address _owner) external initializer {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\shared\vault\ERC1155Vault.sol:28:        __Essential_init(_owner);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\shared\vault\ERC1155Vault.sol:29:        __ERC1155Receiver_init();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\shared\vault\ERC1155Vault.sol:290:    /// @dev Deploy a new BridgedNFT contract and initialize it.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\shared\vault\BridgedERC721.sol:46:        initializer
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\shared\vault\BridgedERC721.sol:50:        __Essential_init(_owner);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\shared\vault\BridgedERC721.sol:51:        __ERC721_init(_name, _symbol);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\shared\vault\BridgedERC20V2.sol:38:    /// `reinitializer(2)` instead of `initializer`.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\shared\vault\BridgedERC20V2.sol:50:        reinitializer(2)
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\shared\vault\BridgedERC20V2.sol:54:        __Essential_init(_owner);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\shared\vault\BridgedERC20V2.sol:55:        __ERC20_init(_name, _symbol);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\shared\vault\BridgedERC20V2.sol:66:    function init2() external reinitializer(2) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\shared\vault\BridgedERC20.sol:79:        initializer
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\shared\vault\BridgedERC20.sol:83:        __Essential_init(_owner);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\shared\vault\BridgedERC20.sol:84:        __ERC20_init(_name, _symbol);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\shared\vault\BridgedERC1155.sol:52:        initializer
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\shared\vault\BridgedERC1155.sol:58:        __Essential_init(_owner);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\shared\vault\BridgedERC1155.sol:62:        __ERC1155_init(LibBridgedToken.buildURI(_srcToken, _srcChainId, ""));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\shared\bridge\Bridge.sol:121:    function init(address _owner) external initializer {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\shared\bridge\Bridge.sol:122:        __Essential_init(_owner);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\shared\bridge\Bridge.sol:126:    function init2() external onlyOwner reinitializer(2) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\shared\signal\SignalService.sol:76:    function init(address _owner) external initializer {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\shared\signal\SignalService.sol:78:        __Essential_init(_owner);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\layer2\preconf\PreconfSlasherL2.sol:29:    function init(address _owner) external initializer {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\layer2\preconf\PreconfSlasherL2.sol:30:        __Essential_init(_owner);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\layer2\mainnet\BridgedTaikoToken.sol:22:    function init(address _owner) external initializer {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\layer2\mainnet\BridgedTaikoToken.sol:23:        __Essential_init(_owner);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\layer2\mainnet\BridgedTaikoToken.sol:24:        __ERC20_init("Taiko Token", "TAIKO");
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\layer2\mainnet\BridgedTaikoToken.sol:25:        __ERC20Votes_init();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\layer2\mainnet\BridgedTaikoToken.sol:26:        __ERC20Permit_init("Taiko Token");
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\layer2\governance\DelegateController.sol:35:    function init() external initializer {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\layer2\governance\DelegateController.sol:36:        __Essential_init(address(this));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\shared\fork-router\ForkRouter.sol:37:        _disableInitializers();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\layer2\core\Anchor.sol:142:    function init(address _owner) external initializer {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\layer2\core\Anchor.sol:143:        __Essential_init(_owner);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\shared\common\DefaultResolver.sol:29:    function init(address _owner) external initializer {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\shared\common\DefaultResolver.sol:30:        __Essential_init(_owner);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\shared\common\EssentialContract.sol:135:        _disableInitializers();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\shared\common\EssentialContract.sol:186:    function __Essential_init(address _owner) internal virtual onlyInitializing {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\shared\common\EssentialContract.sol:187:        __Context_init();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\layer1\preconf\impl\UnifiedSlasher.sol:34:    function init(address _owner) external initializer {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\layer1\preconf\impl\UnifiedSlasher.sol:35:        __Essential_init(_owner);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\layer1\preconf\impl\PreconfWhitelist.sol:69:    function init(address _owner) external initializer {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\layer1\preconf\impl\PreconfWhitelist.sol:70:        __Essential_init(_owner);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\layer1\preconf\impl\LookaheadStore.sol:49:    function init(address _owner) external initializer {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\layer1\preconf\impl\LookaheadStore.sol:50:        __Essential_init(_owner);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\layer1\mainnet\TaikoToken.sol:28:    function init(address _owner, address _recipient) public initializer {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\layer1\mainnet\TaikoToken.sol:29:        __Essential_init(_owner);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\layer1\mainnet\TaikoToken.sol:30:        __ERC20_init("Taiko Token", "TAIKO");
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\layer1\mainnet\TaikoToken.sol:31:        __ERC20Votes_init();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\layer1\mainnet\TaikoToken.sol:32:        __ERC20Permit_init("Taiko Token");
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\layer1\mainnet\TaikoToken.sol:37:    function init2() external reinitializer(2) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\layer1\core\impl\ProverWhitelist.sol:40:    function init(address _owner) external initializer {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\layer1\core\impl\ProverWhitelist.sol:41:        __Essential_init(_owner);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\layer1\mainnet\MainnetDAOController.sol:18:    function init(address _taikoDAO) external initializer {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\layer1\mainnet\MainnetDAOController.sol:19:        __Essential_init(_taikoDAO);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\layer1\core\impl\Inbox.sol:178:    function init(address _owner) external initializer {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\layer1\core\impl\Inbox.sol:179:        __Essential_init(_owner);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\layer1\automata-attestation\AutomataDcapV3Attestation.sol:71:        initializer
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\layer1\automata-attestation\AutomataDcapV3Attestation.sol:73:        __Essential_init(owner);

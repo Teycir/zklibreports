@@ -1,0 +1,17 @@
+    1: // SPDX-License-Identifier: AGPL-3.0
+    2: pragma solidity 0.8.19;
+    3: 
+    4: import { AccessControlUpgradeable } from "@openzeppelin/contracts-upgradeable/access/AccessControlUpgradeable.sol";
+    5: import { L2MessageServiceV1 } from "./v1/L2MessageServiceV1.sol";
+    6: import { L2MessageManager } from "./L2MessageManager.sol";
+    7: 
+    8: /**
+    9:  * @title Contract to manage cross-chain messaging on L2.
+   10:  * @author ConsenSys Software Inc.
+   11:  * @custom:security-contact security-report@linea.build
+   12:  */
+   13: contract L2MessageService is AccessControlUpgradeable, L2MessageServiceV1, L2MessageManager {
+   14:   /// @dev Total contract storage is 50 slots with the gap below.
+   15:   /// @dev Keep 50 free storage slots for future implementation updates to avoid storage collision.
+   16:   uint256[50] private __gap_L2MessageService;
+   17: }

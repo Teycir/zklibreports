@@ -1,0 +1,136 @@
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\shared\vault\ERC721Vault.sol:39:        whenNotPaused
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\shared\vault\ERC721Vault.sol:94:    function onMessageInvocation(bytes calldata _data) external payable whenNotPaused nonReentrant {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\shared\vault\ERC721Vault.sol:129:        onlyFromNamed(LibNames.B_BRIDGE)
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\shared\vault\ERC721Vault.sol:130:        whenNotPaused
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\shared\vault\ERC20Vault.sol:180:        onlyOwner
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\shared\vault\ERC20Vault.sol:248:        whenNotPaused
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\shared\vault\ERC20Vault.sol:292:    function onMessageInvocation(bytes calldata _data) public payable whenNotPaused nonReentrant {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\shared\vault\ERC20Vault.sol:326:        onlyFromNamed(LibNames.B_BRIDGE)
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\shared\vault\ERC20Vault.sol:327:        whenNotPaused
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\shared\vault\ERC1155Vault.sol:40:        whenNotPaused
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\shared\vault\ERC1155Vault.sol:99:    function onMessageInvocation(bytes calldata data) external payable whenNotPaused nonReentrant {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\shared\vault\ERC1155Vault.sol:140:        onlyFromNamed(LibNames.B_BRIDGE)
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\shared\vault\ERC1155Vault.sol:141:        whenNotPaused
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\shared\vault\BridgedERC721.sol:63:        whenNotPaused
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\shared\vault\BridgedERC721.sol:71:    function burn(uint256 _tokenId) external whenNotPaused onlyFrom(erc721Vault) nonReentrant {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\shared\vault\BridgedERC721.sol:107:        whenNotPaused
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\shared\vault\BridgedERC20.sol:98:        whenNotPaused
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\shared\vault\BridgedERC20.sol:112:    function mint(address _account, uint256 _amount) external whenNotPaused nonReentrant {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\shared\vault\BridgedERC20.sol:129:    function burn(uint256 _amount) external whenNotPaused nonReentrant {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\shared\vault\BridgedERC20.sol:175:        whenNotPaused
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\shared\vault\BridgedERC1155.sol:77:        whenNotPaused
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\shared\vault\BridgedERC1155.sol:90:        whenNotPaused
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\shared\vault\BridgedERC1155.sol:120:        whenNotPaused
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\shared\vault\BaseVault.sol:56:        onlyFromNamed(LibNames.B_BRIDGE)
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\shared\signal\SignalService.sol:100:        whenNotPaused
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\shared\signal\SignalService.sol:119:        whenNotPaused
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\shared\fork-router\ForkRouter.sol:66:    function _authorizeUpgrade(address) internal virtual override onlyOwner { }
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\shared\common\EssentialResolverContract.sol:22:    modifier onlyFromNamed(bytes32 _name) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\shared\common\EssentialContract.sol:82:    modifier whenNotPaused() {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\shared\common\EssentialContract.sol:143:    function pause() public whenNotPaused {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\shared\common\EssentialContract.sol:200:    function _authorizeUpgrade(address) internal virtual override onlyOwner { }
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\shared\common\EssentialContract.sol:202:    function _authorizePause(address, bool) internal virtual onlyOwner { }
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\shared\common\DefaultResolver.sol:44:        onlyOwner
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\shared\bridge\IBridge.sol:164:    /// @dev This method should be guarded with `onlyFromNamed("bridge")`.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\shared\bridge\Bridge.sol:126:    function init2() external onlyOwner reinitializer(2) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\shared\bridge\Bridge.sol:142:        whenNotPaused
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\shared\bridge\Bridge.sol:182:        whenNotPaused
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\shared\bridge\Bridge.sol:226:        whenNotPaused
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\shared\bridge\Bridge.sol:323:        whenNotPaused
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\shared\bridge\Bridge.sol:357:        whenNotPaused
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\layer2\mainnet\BridgedTaikoToken.sol:35:        whenNotPaused
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\layer2\mainnet\BridgedTaikoToken.sol:45:        whenNotPaused
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\layer2\core\Anchor.sol:180:    function withdraw(address _token, address _to) external onlyOwner nonReentrant {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\layer1\verifiers\SP1Verifier.sol:44:    function setProgramTrusted(bytes32 _programVKey, bool _trusted) external onlyOwner {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\layer1\verifiers\SgxVerifier.sol:91:        onlyOwner
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\layer1\verifiers\SgxVerifier.sol:99:    function deleteInstances(uint256[] calldata _ids) external onlyOwner {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\layer1\verifiers\Risc0Verifier.sol:43:    function setImageIdTrusted(bytes32 _imageId, bool _trusted) external onlyOwner {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\layer1\preconf\impl\PreconfWhitelist.sol:95:    function setEjecter(address _ejecter, bool _isEjecter) external onlyOwner {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\layer1\preconf\impl\LookaheadStore.sol:309:    function addOverseers(address[] calldata _overseers) external override onlyOwner {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\layer1\preconf\impl\LookaheadStore.sol:319:    function removeOverseers(address[] calldata _overseers) external override onlyOwner {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\trailblazers-season-2\TrailblazersS1BadgesV5.sol:25:    function setRecruitmentContractV2(address _recruitmentContractV2) public onlyOwner {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\snaefell\SnaefellToken.sol:45:    function updateRoot(bytes32 _root) external onlyOwner {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\snaefell\SnaefellToken.sol:70:    function mint(address _to, uint256 _amount) external onlyOwner returns (uint256[] memory) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\snaefell\SnaefellToken.sol:129:    function updateBaseURI(string memory _rootURI) public onlyOwner {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\trailblazers-season-2\TrailblazersS1BadgesV4.sol:49:    function setRecruitmentContract(address _recruitmentContract) public onlyOwner {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\trailblazers-season-2\TrailblazersS1BadgesV4.sol:56:    function setRecruitmentLockDuration(uint256 _duration) public onlyOwner {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\snaefell\MerkleWhitelist.sol:42:    function updateBlacklist(IMinimalBlacklist _blacklist) external onlyOwner {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\snaefell\MerkleWhitelist.sol:113:    function _authorizeUpgrade(address) internal virtual override onlyOwner { }
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\trailblazers-season-2\TrailblazersBadgesS2.sol:15:import "@openzeppelin/contracts/access/AccessControl.sol";
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\trailblazers-season-2\TrailblazersBadgesS2.sol:96:        _grantRole(DEFAULT_ADMIN_ROLE, _msgSender());
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\trailblazers-season-2\TrailblazersBadgesS2.sol:105:    function setMinter(address _minter) external virtual onlyRole(DEFAULT_ADMIN_ROLE) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\trailblazers-season-2\TrailblazersBadgesS2.sol:122:        onlyRole(MINTER_ROLE)
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\trailblazers-season-2\TrailblazersBadgesS2.sol:200:    function _authorizeUpgrade(address) internal virtual override onlyOwner { }
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\trailblazers-season-2\TrailblazersBadgesS2.sol:208:    function setUri(string memory __uri) public onlyRole(DEFAULT_ADMIN_ROLE) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\trailblazers-season-2\BadgeRecruitmentV2.sol:45:        onlyRole(S1_BADGES_ROLE)
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\trailblazers-season-2\BadgeRecruitmentV2.sol:59:    function forceDisableAllRecruitments() external virtual onlyRole(DEFAULT_ADMIN_ROLE) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\trailblazers-season-2\BadgeRecruitmentV2.sol:95:        onlyRole(S1_BADGES_ROLE)
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\trailblazers-season-2\BadgeRecruitmentV2.sol:138:    function setS2BadgesContract(address _s2Badges) external virtual onlyRole(DEFAULT_ADMIN_ROLE) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\profile\RegisterProfilePicture.sol:96:    function _authorizeUpgrade(address) internal virtual override onlyOwner { }
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\trailblazers-season-2\BadgeRecruitment.sol:14:import "@openzeppelin/contracts/access/AccessControl.sol";
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\trailblazers-season-2\BadgeRecruitment.sol:246:        _grantRole(DEFAULT_ADMIN_ROLE, _msgSender());
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\trailblazers-season-2\BadgeRecruitment.sol:256:    function setConfig(Config memory _config) external onlyRole(DEFAULT_ADMIN_ROLE) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\trailblazers-season-2\BadgeRecruitment.sol:268:    function forceDisableRecruitments() internal onlyRole(DEFAULT_ADMIN_ROLE) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\trailblazers-season-2\BadgeRecruitment.sol:311:        onlyRole(DEFAULT_ADMIN_ROLE)
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\trailblazers-season-2\BadgeRecruitment.sol:329:        onlyRole(DEFAULT_ADMIN_ROLE)
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\trailblazers-season-2\BadgeRecruitment.sol:490:        onlyRole(S1_BADGES_ROLE)
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\trailblazers-season-2\BadgeRecruitment.sol:744:    function _authorizeUpgrade(address) internal virtual override onlyOwner { }
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\party-ticket\TaikoPartyTicket.sol:7:import "@openzeppelin/contracts/access/AccessControl.sol";
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\party-ticket\TaikoPartyTicket.sol:79:        _grantRole(DEFAULT_ADMIN_ROLE, _msgSender());
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\party-ticket\TaikoPartyTicket.sol:93:    function updateBlacklist(IMinimalBlacklist _blacklist) external onlyRole(DEFAULT_ADMIN_ROLE) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\party-ticket\TaikoPartyTicket.sol:135:        onlyRole(DEFAULT_ADMIN_ROLE)
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\party-ticket\TaikoPartyTicket.sol:145:    function setBaseURI(string memory _baseURI) external onlyRole(DEFAULT_ADMIN_ROLE) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\party-ticket\TaikoPartyTicket.sol:151:    function setWinnerURI(string memory _winnerBaseURI) external onlyRole(DEFAULT_ADMIN_ROLE) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\party-ticket\TaikoPartyTicket.sol:158:    function mint() external payable whenNotPaused notBlacklisted(_msgSender()) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\party-ticket\TaikoPartyTicket.sol:168:    function mint(uint256 amount) external payable whenNotPaused notBlacklisted(_msgSender()) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\party-ticket\TaikoPartyTicket.sol:182:        whenNotPaused
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\party-ticket\TaikoPartyTicket.sol:183:        onlyRole(DEFAULT_ADMIN_ROLE)
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\party-ticket\TaikoPartyTicket.sol:193:    function mintWinner(address to) public onlyRole(DEFAULT_ADMIN_ROLE) notBlacklisted(to) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\party-ticket\TaikoPartyTicket.sol:201:    function revokeWinner(uint256 tokenId) public onlyRole(DEFAULT_ADMIN_ROLE) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\party-ticket\TaikoPartyTicket.sol:215:    function revokeWinners(uint256[] calldata tokenIds) external onlyRole(DEFAULT_ADMIN_ROLE) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\party-ticket\TaikoPartyTicket.sol:229:        onlyRole(DEFAULT_ADMIN_ROLE)
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\party-ticket\TaikoPartyTicket.sol:239:    function pause() public onlyRole(DEFAULT_ADMIN_ROLE) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\party-ticket\TaikoPartyTicket.sol:245:    function unpause() public onlyRole(DEFAULT_ADMIN_ROLE) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\party-ticket\TaikoPartyTicket.sol:251:    function updatePayoutAddress(address _payoutAddress) external onlyRole(DEFAULT_ADMIN_ROLE) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\party-ticket\TaikoPartyTicket.sol:258:    function payout() external whenPaused onlyRole(DEFAULT_ADMIN_ROLE) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\party-ticket\TaikoPartyTicket.sol:297:    function _authorizeUpgrade(address) internal virtual override onlyOwner { }
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\trailblazers-badges\TrailblazersBadges.sol:87:    function setUri(string memory _uri) public onlyOwner {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\trailblazers-badges\TrailblazersBadges.sol:117:    function mint(bytes memory _signature, address _minter, uint256 _badgeId) public onlyOwner {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\trailblazers-badges\TrailblazersBadges.sol:148:    function setMovement(address _user, uint256 _movementId) public onlyOwner {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\trailblazers-badges\ECDSAWhitelist.sol:47:    function updateBlacklist(IMinimalBlacklist _blacklist) external onlyOwner {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\trailblazers-badges\ECDSAWhitelist.sol:54:    function updateMintSigner(address _mintSigner) public onlyOwner {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\trailblazers-badges\ECDSAWhitelist.sol:148:    function _authorizeUpgrade(address) internal virtual override onlyOwner { }
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\trailblazers-airdrop\MerkleClaimable.sol:71:        onlyOwner
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\trailblazers-airdrop\MerkleClaimable.sol:146:    function _authorizeUpgrade(address) internal virtual override onlyOwner { }
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\eventRegister\EventRegister.sol:12: * @dev Utilizes OpenZeppelin's AccessControl for role management. The contract does not hold any
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\eventRegister\EventRegister.sol:100:     * @dev The deployer of the contract is granted the DEFAULT_ADMIN_ROLE, allowing them to manage
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\eventRegister\EventRegister.sol:104:        _grantRole(DEFAULT_ADMIN_ROLE, _msgSender());
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\eventRegister\EventRegister.sol:109:     * @dev Only accounts with the DEFAULT_ADMIN_ROLE can call this function.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\eventRegister\EventRegister.sol:114:     * - The caller must have the DEFAULT_ADMIN_ROLE.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\eventRegister\EventRegister.sol:116:    function grantEventManagerRole(address account) external onlyRole(DEFAULT_ADMIN_ROLE) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\eventRegister\EventRegister.sol:122:     * @dev Only accounts with the DEFAULT_ADMIN_ROLE can call this function.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\eventRegister\EventRegister.sol:127:     * - The caller must have the DEFAULT_ADMIN_ROLE.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\eventRegister\EventRegister.sol:129:    function revokeEventManagerRole(address account) external onlyRole(DEFAULT_ADMIN_ROLE) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\eventRegister\EventRegister.sol:143:    function createEvent(string memory _name) external onlyRole(EVENT_MANAGER_ROLE) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\eventRegister\EventRegister.sol:163:    function openRegistration(uint256 _eventId) external onlyRole(EVENT_MANAGER_ROLE) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\eventRegister\EventRegister.sol:183:    function closeRegistration(uint256 _eventId) external onlyRole(EVENT_MANAGER_ROLE) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\eventRegister\EventRegister.sol:224:    function unregister(uint256 _eventId, address _user) external onlyRole(EVENT_MANAGER_ROLE) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\trailblazers-airdrop\ERC20Airdrop.sol:88:    function withdrawERC20(IERC20 _token) external onlyOwner {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\trailblazers-airdrop\ERC20Airdrop.sol:100:    function updateBlacklist(address _blacklist) external onlyOwner {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\trailblazers-airdrop\ERC20Airdrop.sol:106:    function _authorizeUpgrade(address) internal virtual override onlyOwner { }
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\layer1\mainnet\MainnetDAOController.sol:28:        onlyOwner
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\taikoon\TaikoonToken.sol:47:    function updateRoot(bytes32 _root) external onlyOwner {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\taikoon\TaikoonToken.sol:72:    function mint(address _to, uint256 _amount) external onlyOwner returns (uint256[] memory) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\taikoon\TaikoonToken.sol:121:    function updateBaseURI(string memory _rootURI) public onlyOwner {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\taikoon\MerkleWhitelist.sol:42:    function updateBlacklist(IMinimalBlacklist _blacklist) external onlyOwner {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\nfts\contracts\taikoon\MerkleWhitelist.sol:113:    function _authorizeUpgrade(address) internal virtual override onlyOwner { }
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\supplementary-contracts\contracts\blacklist\Blacklist.sol:48:        _setupRole(DEFAULT_ADMIN_ROLE, _admin);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\layer1\automata-attestation\AutomataDcapV3Attestation.sol:78:    function setMrSigner(bytes32 _mrSigner, bool _trusted) external onlyOwner {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\layer1\automata-attestation\AutomataDcapV3Attestation.sol:83:    function setMrEnclave(bytes32 _mrEnclave, bool _trusted) external onlyOwner {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\layer1\automata-attestation\AutomataDcapV3Attestation.sol:93:        onlyOwner
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\layer1\automata-attestation\AutomataDcapV3Attestation.sol:110:        onlyOwner
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\layer1\automata-attestation\AutomataDcapV3Attestation.sol:127:        onlyOwner
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\layer1\automata-attestation\AutomataDcapV3Attestation.sol:136:        onlyOwner
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\layer1\automata-attestation\AutomataDcapV3Attestation.sol:143:    function toggleLocalReportCheck() external onlyOwner {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\layer1\core\impl\ProverWhitelist.sol:47:    function whitelistProver(address _prover, bool _enabled) external onlyOwner {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\layer1\core\impl\Inbox.sol:185:    function activate(bytes32 _lastPacayaBlockHash) external onlyOwner {

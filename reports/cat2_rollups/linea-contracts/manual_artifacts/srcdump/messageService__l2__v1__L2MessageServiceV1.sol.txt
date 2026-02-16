@@ -1,0 +1,252 @@
+    1: // SPDX-License-Identifier: AGPL-3.0
+    2: pragma solidity 0.8.19;
+    3: 
+    4: import { Initializable } from "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
+    5: import { ReentrancyGuardUpgradeable } from "@openzeppelin/contracts-upgradeable/security/ReentrancyGuardUpgradeable.sol";
+    6: import { IMessageService } from "../../../interfaces/IMessageService.sol";
+    7: import { IGenericErrors } from "../../../interfaces/IGenericErrors.sol";
+    8: import { RateLimiter } from "../../lib/RateLimiter.sol";
+    9: import { L2MessageManagerV1 } from "./L2MessageManagerV1.sol";
+   10: 
+   11: /**
+   12:  * @title Contract to manage cross-chain messaging on L2.
+   13:  * @author ConsenSys Software Inc.
+   14:  * @custom:security-contact security-report@linea.build
+   15:  */
+   16: abstract contract L2MessageServiceV1 is
+   17:   Initializable,
+   18:   RateLimiter,
+   19:   L2MessageManagerV1,
+   20:   ReentrancyGuardUpgradeable,
+   21:   IMessageService,
+   22:   IGenericErrors
+   23: {
+   24:   /**
+   25:    * @dev Keep 50 free storage slots for future implementation updates to avoid storage collision.
+   26:    * NB: Take note that this is at the beginning of the file where other storage gaps,
+   27:    * are at the end of files. Be careful with how storage is adjusted on upgrades.
+   28:    */
+   29:   uint256[50] private __gap_L2MessageService;
+   30: 
+   31:   bytes32 public constant MINIMUM_FEE_SETTER_ROLE = keccak256("MINIMUM_FEE_SETTER_ROLE");
+   32: 
+   33:   address internal _messageSender;
+   34: 
+   35:   // @dev initialise to save user cost with existing slot.
+   36:   uint256 public nextMessageNumber;
+   37: 
+   38:   // @dev initialise minimumFeeInWei variable.
+   39:   uint256 public minimumFeeInWei;
+   40: 
+   41:   // @dev adding these should not affect storage as they are constants and are stored in bytecode.
+   42:   uint256 internal constant REFUND_OVERHEAD_IN_GAS = 44596;
+   43: 
+   44:   address internal constant DEFAULT_SENDER_ADDRESS = address(123456789);
+   45: 
+   46:   /// @dev Total contract storage is 53 slots including the gap above. NB: Above!
+   47: 
+   48:   /// @custom:oz-upgrades-unsafe-allow constructor
+   49:   constructor() {
+   50:     _disableInitializers();
+   51:   }
+   52: 
+   53:   /**
+   54:    * @notice Initialises underlying message service dependencies.
+   55:    * @param _securityCouncil The address owning the security council role.
+   56:    * @param _l1l2MessageSetter The address owning the add L1L2MessageHashes functionality.
+   57:    * @param _rateLimitPeriod The period to rate limit against.
+   58:    * @param _rateLimitAmount The limit allowed for withdrawing the period.
+   59:    */
+   60:   function initialize(
+   61:     address _securityCouncil,
+   62:     address _l1l2MessageSetter,
+   63:     uint256 _rateLimitPeriod,
+   64:     uint256 _rateLimitAmount
+   65:   ) external initializer {
+   66:     if (_securityCouncil == address(0)) {
+   67:       revert ZeroAddressNotAllowed();
+   68:     }
+   69: 
+   70:     if (_l1l2MessageSetter == address(0)) {
+   71:       revert ZeroAddressNotAllowed();
+   72:     }
+   73: 
+   74:     __ERC165_init();
+   75:     __Context_init();
+   76:     __AccessControl_init();
+   77:     __RateLimiter_init(_rateLimitPeriod, _rateLimitAmount);
+   78:     __L2MessageManager_init(_l1l2MessageSetter);
+   79:     __ReentrancyGuard_init();
+   80: 
+   81:     nextMessageNumber = 1;
+   82: 
+   83:     _grantRole(DEFAULT_ADMIN_ROLE, _securityCouncil);
+   84:     _grantRole(MINIMUM_FEE_SETTER_ROLE, _securityCouncil);
+   85:     _grantRole(RATE_LIMIT_SETTER_ROLE, _securityCouncil);
+   86:     _grantRole(PAUSE_MANAGER_ROLE, _securityCouncil);
+   87: 
+   88:     _messageSender = DEFAULT_SENDER_ADDRESS;
+   89:   }
+   90: 
+   91:   /**
+   92:    * @notice Adds a message for sending cross-chain and emits a relevant event.
+   93:    * @dev The message number is preset and only incremented at the end if successful for the next caller.
+   94:    * @param _to The address the message is intended for.
+   95:    * @param _fee The fee being paid for the message delivery.
+   96:    * @param _calldata The calldata to pass to the recipient.
+   97:    */
+   98:   function sendMessage(address _to, uint256 _fee, bytes calldata _calldata) external payable {
+   99:     _requireTypeAndGeneralNotPaused(L2_L1_PAUSE_TYPE);
+  100: 
+  101:     if (_to == address(0)) {
+  102:       revert ZeroAddressNotAllowed();
+  103:     }
+  104: 
+  105:     if (_fee > msg.value) {
+  106:       revert ValueSentTooLow();
+  107:     }
+  108: 
+  109:     uint256 coinbaseFee = minimumFeeInWei;
+  110: 
+  111:     if (_fee < coinbaseFee) {
+  112:       revert FeeTooLow();
+  113:     }
+  114: 
+  115:     uint256 postmanFee;
+  116:     uint256 valueSent;
+  117: 
+  118:     postmanFee = _fee - coinbaseFee;
+  119:     valueSent = msg.value - _fee;
+  120: 
+  121:     uint256 messageNumber = nextMessageNumber++;
+  122: 
+  123:     /// @dev Rate limit and revert is in the rate limiter.
+  124:     _addUsedAmount(valueSent + postmanFee);
+  125: 
+  126:     bytes32 messageHash = keccak256(abi.encode(msg.sender, _to, postmanFee, valueSent, messageNumber, _calldata));
+  127: 
+  128:     emit MessageSent(msg.sender, _to, postmanFee, valueSent, messageNumber, _calldata, messageHash);
+  129: 
+  130:     (bool success, ) = block.coinbase.call{ value: coinbaseFee }("");
+  131:     if (!success) {
+  132:       revert FeePaymentFailed(block.coinbase);
+  133:     }
+  134:   }
+  135: 
+  136:   /**
+  137:    * @notice Claims and delivers a cross-chain message.
+  138:    * @dev _feeRecipient Can be set to address(0) to receive as msg.sender.
+  139:    * @dev messageSender Is set temporarily when claiming and reset post.
+  140:    * @param _from The address of the original sender.
+  141:    * @param _to The address the message is intended for.
+  142:    * @param _fee The fee being paid for the message delivery.
+  143:    * @param _value The value to be transferred to the destination address.
+  144:    * @param _feeRecipient The recipient for the fee.
+  145:    * @param _calldata The calldata to pass to the recipient.
+  146:    * @param _nonce The unique auto generated message number used when sending the message.
+  147:    */
+  148:   function claimMessage(
+  149:     address _from,
+  150:     address _to,
+  151:     uint256 _fee,
+  152:     uint256 _value,
+  153:     address payable _feeRecipient,
+  154:     bytes calldata _calldata,
+  155:     uint256 _nonce
+  156:   ) external nonReentrant distributeFees(_fee, _to, _calldata, _feeRecipient) {
+  157:     _requireTypeAndGeneralNotPaused(L1_L2_PAUSE_TYPE);
+  158: 
+  159:     bytes32 messageHash = keccak256(abi.encode(_from, _to, _fee, _value, _nonce, _calldata));
+  160: 
+  161:     /// @dev Status check and revert is in the message manager.
+  162:     _updateL1L2MessageStatusToClaimed(messageHash);
+  163: 
+  164:     _messageSender = _from;
+  165: 
+  166:     (bool callSuccess, bytes memory returnData) = _to.call{ value: _value }(_calldata);
+  167:     if (!callSuccess) {
+  168:       if (returnData.length > 0) {
+  169:         assembly {
+  170:           let data_size := mload(returnData)
+  171:           revert(add(32, returnData), data_size)
+  172:         }
+  173:       } else {
+  174:         revert MessageSendingFailed(_to);
+  175:       }
+  176:     }
+  177: 
+  178:     _messageSender = DEFAULT_SENDER_ADDRESS;
+  179:     emit MessageClaimed(messageHash);
+  180:   }
+  181: 
+  182:   /**
+  183:    * @notice The Fee Manager sets a minimum fee to address DOS protection.
+  184:    * @param _feeInWei New minimum fee in Wei.
+  185:    */
+  186:   function setMinimumFee(uint256 _feeInWei) external onlyRole(MINIMUM_FEE_SETTER_ROLE) {
+  187:     uint256 previousMinimumFee = minimumFeeInWei;
+  188:     minimumFeeInWei = _feeInWei;
+  189: 
+  190:     emit MinimumFeeChanged(previousMinimumFee, minimumFeeInWei, msg.sender);
+  191:   }
+  192: 
+  193:   /**
+  194:    * @dev The _messageSender address is set temporarily when claiming.
+  195:    * @return _messageSender address.
+  196:    */
+  197:   function sender() external view returns (address) {
+  198:     return _messageSender;
+  199:   }
+  200: 
+  201:   /**
+  202:    * @notice The unspent fee is refunded if applicable.
+  203:    * @param _feeInWei The fee paid for delivery in Wei.
+  204:    * @param _to The recipient of the message and gas refund.
+  205:    * @param _calldata The calldata of the message.
+  206:    */
+  207:   modifier distributeFees(
+  208:     uint256 _feeInWei,
+  209:     address _to,
+  210:     bytes calldata _calldata,
+  211:     address _feeRecipient
+  212:   ) {
+  213:     //pre-execution
+  214:     uint256 startingGas = gasleft();
+  215:     _;
+  216:     //post-execution
+  217: 
+  218:     // we have a fee
+  219:     if (_feeInWei > 0) {
+  220:       // default postman fee
+  221:       uint256 deliveryFee = _feeInWei;
+  222: 
+  223:       // do we have empty calldata?
+  224:       if (_calldata.length == 0) {
+  225:         bool isDestinationEOA;
+  226: 
+  227:         assembly {
+  228:           isDestinationEOA := iszero(extcodesize(_to))
+  229:         }
+  230: 
+  231:         // are we calling an EOA
+  232:         if (isDestinationEOA) {
+  233:           // initial + cost to call and refund minus gasleft
+  234:           deliveryFee = (startingGas + REFUND_OVERHEAD_IN_GAS - gasleft()) * tx.gasprice;
+  235: 
+  236:           if (_feeInWei > deliveryFee) {
+  237:             payable(_to).send(_feeInWei - deliveryFee);
+  238:           } else {
+  239:             deliveryFee = _feeInWei;
+  240:           }
+  241:         }
+  242:       }
+  243: 
+  244:       address feeReceiver = _feeRecipient == address(0) ? msg.sender : _feeRecipient;
+  245: 
+  246:       bool callSuccess = payable(feeReceiver).send(deliveryFee);
+  247:       if (!callSuccess) {
+  248:         revert FeePaymentFailed(feeReceiver);
+  249:       }
+  250:     }
+  251:   }
+  252: }

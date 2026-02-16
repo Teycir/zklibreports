@@ -1,0 +1,54 @@
+    1: // SPDX-License-Identifier: AGPL-3.0
+    2: pragma solidity 0.8.19;
+    3: 
+    4: import { Initializable } from "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
+    5: import { IL2MessageManagerV1 } from "../../../interfaces/l2/IL2MessageManagerV1.sol";
+    6: import { PauseManager } from "../../lib/PauseManager.sol";
+    7: 
+    8: /**
+    9:  * @title Contract to manage cross-chain message hashes storage and statuses on L2.
+   10:  * @author ConsenSys Software Inc.
+   11:  * @custom:security-contact security-report@linea.build
+   12:  */
+   13: abstract contract L2MessageManagerV1 is Initializable, PauseManager, IL2MessageManagerV1 {
+   14:   uint8 public constant INBOX_STATUS_UNKNOWN = 0;
+   15:   uint8 public constant INBOX_STATUS_RECEIVED = 1;
+   16:   uint8 public constant INBOX_STATUS_CLAIMED = 2;
+   17: 
+   18:   bytes32 public constant L1_L2_MESSAGE_SETTER_ROLE = keccak256("L1_L2_MESSAGE_SETTER_ROLE");
+   19: 
+   20:   /**
+   21:    * @dev Mapping to store L1->L2 message hashes status.
+   22:    * @dev messageHash => messageStatus (0: unknown, 1: received, 2: claimed).
+   23:    */
+   24:   mapping(bytes32 messageHash => uint256 messageStatus) public inboxL1L2MessageStatus;
+   25: 
+   26:   /// @dev Keep free storage slots for future implementation updates to avoid storage collision.
+   27:   // *******************************************************************************************
+   28:   // NB: THIS GAP HAS BEEN PUSHED OUT IN FAVOUR OF THE GAP INSIDE THE REENTRANCY CODE
+   29:   //uint256[50] private __gap;
+   30:   // NB: DO NOT USE THIS GAP
+   31:   // *******************************************************************************************
+   32: 
+   33:   /// @dev Total contract storage is 1 slot.
+   34: 
+   35:   /**
+   36:    * @notice Initialises L2 message manager contract.
+   37:    * @param _l1l2MessageSetter The address owning the L1_L2_MESSAGE_SETTER_ROLE role.
+   38:    */
+   39:   function __L2MessageManager_init(address _l1l2MessageSetter) internal onlyInitializing {
+   40:     _grantRole(L1_L2_MESSAGE_SETTER_ROLE, _l1l2MessageSetter);
+   41:   }
+   42: 
+   43:   /**
+   44:    * @notice Update the status of L1->L2 message when a user claims a message on L2.
+   45:    * @param _messageHash Hash of the message.
+   46:    */
+   47:   function _updateL1L2MessageStatusToClaimed(bytes32 _messageHash) internal {
+   48:     if (inboxL1L2MessageStatus[_messageHash] != INBOX_STATUS_RECEIVED) {
+   49:       revert MessageDoesNotExistOrHasAlreadyBeenClaimed(_messageHash);
+   50:     }
+   51: 
+   52:     inboxL1L2MessageStatus[_messageHash] = INBOX_STATUS_CLAIMED;
+   53:   }
+   54: }

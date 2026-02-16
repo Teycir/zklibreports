@@ -1,0 +1,306 @@
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\batch-bridge\L2BatchBridgeGateway.sol:115:        _disableInitializers();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\batch-bridge\L2BatchBridgeGateway.sol:122:    function initialize() external initializer {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\batch-bridge\L2BatchBridgeGateway.sol:123:        __Context_init(); // from ContextUpgradeable
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\batch-bridge\L2BatchBridgeGateway.sol:124:        __ERC165_init(); // from ERC165Upgradeable
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\batch-bridge\L2BatchBridgeGateway.sol:125:        __AccessControl_init(); // from AccessControlUpgradeable
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\batch-bridge\L2BatchBridgeGateway.sol:126:        __AccessControlEnumerable_init(); // from AccessControlEnumerableUpgradeable
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\batch-bridge\L1BatchBridgeGateway.sol:179:        _disableInitializers();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\batch-bridge\L1BatchBridgeGateway.sol:189:    function initialize(address _feeVault) external initializer {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\batch-bridge\L1BatchBridgeGateway.sol:190:        __Context_init(); // from ContextUpgradeable
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\batch-bridge\L1BatchBridgeGateway.sol:191:        __ERC165_init(); // from ERC165Upgradeable
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\batch-bridge\L1BatchBridgeGateway.sol:192:        __AccessControl_init(); // from AccessControlUpgradeable
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\batch-bridge\L1BatchBridgeGateway.sol:193:        __AccessControlEnumerable_init(); // from AccessControlEnumerableUpgradeable
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\batch-bridge\L1BatchBridgeGateway.sol:194:        __ReentrancyGuard_init(); // from ReentrancyGuardUpgradeable
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L1\system-contract\SystemConfig.sol:70:        _disableInitializers();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L1\system-contract\SystemConfig.sol:73:    function initialize(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L1\system-contract\SystemConfig.sol:78:    ) external initializer {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L1\system-contract\SystemConfig.sol:79:        __Ownable_init();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\misc\PauseController.sol:85:        _disableInitializers();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\misc\PauseController.sol:88:    function initialize(uint256 _pauseCooldownPeriod) external initializer {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\misc\PauseController.sol:89:        __Ownable_init();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\validium\ScrollChainValidium.sol:132:        _disableInitializers();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\validium\ScrollChainValidium.sol:141:    function initialize(address _admin) external initializer {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\validium\ScrollChainValidium.sol:142:        __Context_init();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\validium\ScrollChainValidium.sol:143:        __ERC165_init();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\validium\ScrollChainValidium.sol:144:        __AccessControl_init();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\validium\ScrollChainValidium.sol:145:        __Pausable_init();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\validium\L1ScrollMessengerValidium.sol:39:        _disableInitializers();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L1\L1ScrollMessenger.sol:122:        _disableInitializers();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L1\L1ScrollMessenger.sol:138:    function initialize(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L1\L1ScrollMessenger.sol:143:    ) public initializer {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L1\L1ScrollMessenger.sol:144:        ScrollMessengerBase.__ScrollMessengerBase_init(_counterpart, _feeVault);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\validium\L1ERC20GatewayValidium.sol:77:        _disableInitializers();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\validium\L1ERC20GatewayValidium.sol:85:    function initialize() external initializer {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\validium\FastWithdrawVault.sol:88:        _disableInitializers();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\validium\FastWithdrawVault.sol:94:    function initialize(address _admin, address _sequencer) external initializer {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\validium\FastWithdrawVault.sol:95:        __Context_init();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\validium\FastWithdrawVault.sol:96:        __ERC165_init();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\validium\FastWithdrawVault.sol:97:        __AccessControl_init();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\validium\FastWithdrawVault.sol:98:        __ReentrancyGuard_init();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\validium\FastWithdrawVault.sol:99:        __EIP712_init("FastWithdrawVault", "1");
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L1\rollup\ScrollChain.sol:234:        _disableInitializers();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L1\rollup\ScrollChain.sol:250:    function initialize(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L1\rollup\ScrollChain.sol:254:    ) external initializer {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L1\rollup\ScrollChain.sol:255:        OwnableUpgradeable.__Ownable_init();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L1\rollup\ScrollChain.sol:262:    function initializeV2() external reinitializer(2) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\lido\LidoGatewayManager.sol:134:    function __LidoGatewayManager_init(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L1\rollup\L2GasPriceOracle.sol:65:        _disableInitializers();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L1\rollup\L2GasPriceOracle.sol:68:    function initialize(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L1\rollup\L2GasPriceOracle.sol:73:    ) external initializer {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L1\rollup\L2GasPriceOracle.sol:74:        OwnableUpgradeable.__Ownable_init();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L1\rollup\L1MessageQueueV2.sol:126:        _disableInitializers();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L1\rollup\L1MessageQueueV2.sol:136:    function initialize() external initializer {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L1\rollup\L1MessageQueueV2.sol:137:        OwnableUpgradeable.__Ownable_init();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L1\rollup\L1MessageQueueV1WithGasPriceOracle.sol:50:    function initializeV2() external reinitializer(2) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L1\rollup\L1MessageQueueV1WithGasPriceOracle.sol:55:    function initializeV3() external reinitializer(3) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\lido\L2LidoGateway.sol:56:        _disableInitializers();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\lido\L2LidoGateway.sol:66:    function initialize(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\lido\L2LidoGateway.sol:70:    ) external initializer {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\lido\L2LidoGateway.sol:84:    ) external reinitializer(2) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\lido\L2LidoGateway.sol:85:        __LidoGatewayManager_init(_depositsEnabler, _depositsDisabler, _withdrawalsEnabler, _withdrawalsDisabler);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L1\rollup\L1MessageQueueV1.sol:106:        _disableInitializers();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L1\rollup\L1MessageQueueV1.sol:122:    function initialize(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L1\rollup\L1MessageQueueV1.sol:128:    ) external initializer {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L1\rollup\L1MessageQueueV1.sol:129:        OwnableUpgradeable.__Ownable_init();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\lido\L1LidoGateway.sol:55:        _disableInitializers();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\lido\L1LidoGateway.sol:65:    function initialize(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\lido\L1LidoGateway.sol:69:    ) external initializer {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\lido\L1LidoGateway.sol:83:    ) external reinitializer(2) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\lido\L1LidoGateway.sol:84:        __LidoGatewayManager_init(_depositsEnabler, _depositsDisabler, _withdrawalsEnabler, _withdrawalsDisabler);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L1\gateways\usdc\L1USDCGateway.sol:70:        _disableInitializers();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L1\gateways\usdc\L1USDCGateway.sol:83:    function initialize(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L1\gateways\usdc\L1USDCGateway.sol:87:    ) external initializer {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L1\gateways\usdc\draft-L1USDCGatewayCCTP.sol:34:        _disableInitializers();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L1\gateways\usdc\draft-L1USDCGatewayCCTP.sol:46:    function initialize(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L1\gateways\usdc\draft-L1USDCGatewayCCTP.sol:52:    ) external initializer {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L1\gateways\L1WETHGateway.sol:54:        _disableInitializers();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L1\gateways\L1WETHGateway.sol:67:    function initialize(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L1\gateways\L1WETHGateway.sol:71:    ) external initializer {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L1\gateways\L1StandardERC20Gateway.sol:70:        _disableInitializers();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L1\gateways\L1StandardERC20Gateway.sol:84:    function initialize(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L1\gateways\L1StandardERC20Gateway.sol:90:    ) external initializer {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L1\gateways\L1ReverseCustomERC20Gateway.sol:38:        _disableInitializers();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L1\gateways\L1GatewayRouter.sol:57:        _disableInitializers();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L1\gateways\L1GatewayRouter.sol:63:    function initialize(address _ethGateway, address _defaultERC20Gateway) external initializer {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L1\gateways\L1GatewayRouter.sol:64:        OwnableUpgradeable.__Ownable_init();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L1\gateways\L1ETHGateway.sol:35:        _disableInitializers();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L1\gateways\L1ETHGateway.sol:45:    function initialize(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L1\gateways\L1ETHGateway.sol:49:    ) external initializer {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L1\gateways\L1ERC721Gateway.sol:48:        _disableInitializers();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L1\gateways\L1ERC721Gateway.sol:57:    function initialize(address _counterpart, address _messenger) external initializer {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L1\gateways\L1ERC721Gateway.sol:58:        ERC721HolderUpgradeable.__ERC721Holder_init();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L1\gateways\L1ERC1155Gateway.sol:48:        _disableInitializers();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L1\gateways\L1ERC1155Gateway.sol:54:    function initialize(address _counterpart, address _messenger) external initializer {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L1\gateways\L1ERC1155Gateway.sol:55:        ERC1155HolderUpgradeable.__ERC1155Holder_init();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L1\gateways\L1ERC1155Gateway.sol:56:        ERC1155ReceiverUpgradeable.__ERC1155Receiver_init();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L1\gateways\L1CustomERC20Gateway.sol:55:        _disableInitializers();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L1\gateways\L1CustomERC20Gateway.sol:65:    function initialize(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L1\gateways\L1CustomERC20Gateway.sol:69:    ) external initializer {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L1\gateways\EnforcedTxGateway.sol:67:        _disableInitializers();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L1\gateways\EnforcedTxGateway.sol:73:    function initialize() external initializer {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L1\gateways\EnforcedTxGateway.sol:74:        OwnableUpgradeable.__Ownable_init();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L1\gateways\EnforcedTxGateway.sol:75:        ReentrancyGuardUpgradeable.__ReentrancyGuard_init();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L1\gateways\EnforcedTxGateway.sol:76:        PausableUpgradeable.__Pausable_init();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L1\gateways\EnforcedTxGateway.sol:77:        EIP712Upgradeable.__EIP712_init("EnforcedTxGateway", "1");
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\libraries\token\ScrollStandardERC20.sol:14:/// to use the `initialize` function from the `ERC20PermitUpgradeable` to initialize the ERC20
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\libraries\token\ScrollStandardERC20.sol:32:        _disableInitializers();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\libraries\token\ScrollStandardERC20.sol:35:    function initialize(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\libraries\token\ScrollStandardERC20.sol:41:    ) external initializer {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\libraries\token\ScrollStandardERC20.sol:42:        __ERC20Permit_init(_name);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\libraries\token\ScrollStandardERC20.sol:43:        __ERC20_init(_name, _symbol);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L2\predeploys\L2MessageQueue.sol:40:    /// @dev You are not allowed to initialize when there are some messages appended.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L2\predeploys\L2MessageQueue.sol:42:    function initialize(address _messenger) external onlyOwner {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L2\predeploys\L2MessageQueue.sol:43:        require(nextMessageIndex == 0, "cannot initialize");
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\validium\ValidiumTestBase.t.sol:89:        // Upgrade the SystemConfig implementation and initialize
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\validium\ValidiumTestBase.t.sol:91:        systemConfig.initialize(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\validium\ValidiumTestBase.t.sol:98:        // Upgrade the L1ScrollMessengerValidium implementation and initialize
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\validium\ValidiumTestBase.t.sol:110:        l1Messenger.initialize(address(0), feeVault, address(0), address(0));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\validium\ValidiumTestBase.t.sol:112:        // Upgrade the L1MessageQueueV2 implementation and initialize
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\validium\ValidiumTestBase.t.sol:125:        messageQueueV2.initialize();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\validium\ValidiumTestBase.t.sol:127:        // Upgrade the ScrollChain implementation and initialize
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\validium\ValidiumTestBase.t.sol:132:        rollup.initialize(address(this));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L2\predeploys\L1BlockContainer.sol:63:    function initialize(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\validium\L1WETHGatewayValidium.t.sol:71:        gateway.initialize();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\validium\L1ERC20GatewayValidium.t.sol:72:        gateway.initialize();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\validium\L1ERC20GatewayValidium.t.sol:105:        gateway.initialize();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\validium\L1ERC20GatewayValidium.t.sol:219:        gateway.initialize();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L2\L2SystemConfig.sol:43:        _disableInitializers();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L2\L2SystemConfig.sol:46:    function initialize(address _owner) external initializer {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L2\L2SystemConfig.sol:47:        __Ownable_init();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\validium\FastWithdrawVault.t.sol:82:        gateway.initialize();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\validium\FastWithdrawVault.t.sol:83:        vault.initialize(vaultAdmin, sequencer);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L2\L2ScrollMessenger.sol:56:        _disableInitializers();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L2\L2ScrollMessenger.sol:61:    function initialize(address) external initializer {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L2\L2ScrollMessenger.sol:62:        ScrollMessengerBase.__ScrollMessengerBase_init(address(0), address(0));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\SystemConfig.t.sol:19:        // Upgrade the SystemConfig implementation and initialize
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\SystemConfig.t.sol:21:        system.initialize(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\SystemConfig.t.sol:41:        system.initialize(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\libraries\ScrollMessengerBase.sol:79:    function __ScrollMessengerBase_init(address, address _feeVault) internal onlyInitializing {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\libraries\ScrollMessengerBase.sol:80:        OwnableUpgradeable.__Ownable_init();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\libraries\ScrollMessengerBase.sol:81:        PausableUpgradeable.__Pausable_init();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\libraries\ScrollMessengerBase.sol:82:        ReentrancyGuardUpgradeable.__ReentrancyGuard_init();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\libraries\ScrollMessengerBase.sol:84:        // initialize to a nonzero value
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\ScrollChain.t.sol:63:        // Upgrade the SystemConfig implementation and initialize
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\ScrollChain.t.sol:65:        system.initialize(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\ScrollChain.t.sol:72:        // Upgrade the L1MessageQueueV1 implementation and initialize
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\ScrollChain.t.sol:77:        messageQueueV1.initialize(address(this), address(rollup), address(0), address(0), 10000000);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\ScrollChain.t.sol:93:        // Upgrade the ScrollChain implementation and initialize
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\ScrollChain.t.sol:106:        rollup.initialize(address(messageQueueV1), address(verifier), 100);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\ScrollChain.t.sol:118:        rollup.initialize(address(messageQueueV1), address(0), 100);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\ScrollChain.t.sol:192:        messageQueueV2.initialize();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\ScrollChain.t.sol:312:        messageQueueV2.initialize();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\ScrollChain.t.sol:462:        messageQueueV2.initialize();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\ScrollChain.t.sol:542:        messageQueueV2.initialize();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L2\gateways\usdc\L2USDCGateway.sol:71:        _disableInitializers();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L2\gateways\usdc\L2USDCGateway.sol:84:    function initialize(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L2\gateways\usdc\L2USDCGateway.sol:88:    ) external initializer {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\libraries\gateway\ScrollGatewayBase.sol:101:        ReentrancyGuardUpgradeable.__ReentrancyGuard_init();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\libraries\gateway\ScrollGatewayBase.sol:102:        OwnableUpgradeable.__Ownable_init();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L2\gateways\usdc\draft-L2USDCGatewayCCTP.sol:38:        _disableInitializers();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L2\gateways\usdc\draft-L2USDCGatewayCCTP.sol:50:    function initialize(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L2\gateways\usdc\draft-L2USDCGatewayCCTP.sol:56:    ) external initializer {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L2\gateways\L2WETHGateway.sol:57:        _disableInitializers();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L2\gateways\L2WETHGateway.sol:70:    function initialize(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L2\gateways\L2WETHGateway.sol:74:    ) external initializer {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L2\gateways\L2StandardERC20Gateway.sol:59:        _disableInitializers();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L2\gateways\L2StandardERC20Gateway.sol:71:    function initialize(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L2\gateways\L2StandardERC20Gateway.sol:76:    ) external initializer {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L2\gateways\L2StandardERC20Gateway.sol:190:        ScrollStandardERC20(_l2Token).initialize(_name, _symbol, _decimals, address(this), _l1Token);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L2\gateways\L2ReverseCustomERC20Gateway.sol:55:        _disableInitializers();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\L2ERC1155Gateway.t.sol:41:        gateway.initialize(address(counterpart), address(messenger));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\L2ERC1155Gateway.t.sol:54:        gateway.initialize(address(1), address(messenger));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L2\gateways\L2GatewayRouter.sol:36:        _disableInitializers();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L2\gateways\L2GatewayRouter.sol:39:    function initialize(address _ethGateway, address _defaultERC20Gateway) external initializer {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L2\gateways\L2GatewayRouter.sol:40:        OwnableUpgradeable.__Ownable_init();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\L1WETHGateway.t.sol:63:        gateway.initialize(address(counterpartGateway), address(router), address(l1Messenger));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\L1WETHGateway.t.sol:64:        router.initialize(address(0), address(gateway));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\L1WETHGateway.t.sol:81:        gateway.initialize(address(counterpartGateway), address(router), address(l1Messenger));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\L1WETHGateway.t.sol:160:        gateway.initialize(address(counterpartGateway), address(router), address(mockMessenger));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L2\gateways\L2ETHGateway.sol:33:        _disableInitializers();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L2\gateways\L2ETHGateway.sol:43:    function initialize(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L2\gateways\L2ETHGateway.sol:47:    ) external initializer {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\L1USDCGateway.t.sol:61:        gateway.initialize(address(counterpartGateway), address(router), address(l1Messenger));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\L1USDCGateway.t.sol:62:        router.initialize(address(0), address(gateway));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\L1USDCGateway.t.sol:80:        gateway.initialize(address(counterpartGateway), address(router), address(l1Messenger));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\L1USDCGateway.t.sol:162:        gateway.initialize(address(counterpartGateway), address(router), address(mockMessenger));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L2\gateways\L2ERC721Gateway.sol:48:        _disableInitializers();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L2\gateways\L2ERC721Gateway.sol:57:    function initialize(address _counterpart, address _messenger) external initializer {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L2\gateways\L2ERC721Gateway.sol:58:        ERC721HolderUpgradeable.__ERC721Holder_init();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\L1StandardERC20Gateway.t.sol:75:        gateway.initialize(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\L1StandardERC20Gateway.t.sol:82:        router.initialize(address(0), address(gateway));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\L1StandardERC20Gateway.t.sol:107:        gateway.initialize(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\L1StandardERC20Gateway.t.sol:235:        gateway.initialize(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\L1ETHGateway.t.sol:40:        gateway.initialize(address(counterpartGateway), address(router), address(l1Messenger));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\L1ETHGateway.t.sol:41:        router.initialize(address(gateway), address(0));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\L1ETHGateway.t.sol:50:        gateway.initialize(address(counterpartGateway), address(router), address(l1Messenger));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\L1ETHGateway.t.sol:121:        gateway.initialize(address(counterpartGateway), address(router), address(mockMessenger));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L2\gateways\L2ERC1155Gateway.sol:48:        _disableInitializers();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L2\gateways\L2ERC1155Gateway.sol:57:    function initialize(address _counterpart, address _messenger) external initializer {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L2\gateways\L2ERC1155Gateway.sol:58:        ERC1155HolderUpgradeable.__ERC1155Holder_init();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L2\gateways\L2ERC1155Gateway.sol:59:        ERC1155ReceiverUpgradeable.__ERC1155Receiver_init();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\L1ReverseCustomERC20Gateway.t.sol:87:        gateway.initialize(address(counterpartGateway), address(router), address(l1Messenger));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\L1ReverseCustomERC20Gateway.t.sol:88:        router.initialize(address(0), address(gateway));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\L1ERC721Gateway.t.sol:77:        gateway.initialize(address(counterpartGateway), address(l1Messenger));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\L1ERC721Gateway.t.sol:96:        gateway.initialize(address(1), address(l1Messenger));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\L1ERC721Gateway.t.sol:167:        gateway.initialize(address(counterpartGateway), address(mockMessenger));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\L1ERC721Gateway.t.sol:337:        gateway.initialize(address(counterpartGateway), address(mockMessenger));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\L1ERC721Gateway.t.sol:511:        gateway.initialize(address(counterpartGateway), address(mockMessenger));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L2\gateways\L2CustomERC20Gateway.sol:51:        _disableInitializers();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L2\gateways\L2CustomERC20Gateway.sol:61:    function initialize(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L2\gateways\L2CustomERC20Gateway.sol:65:    ) external initializer {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\L1MessageQueueWithGasPriceOracle.t.sol:32:        // initialize L2GasPriceOracle
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\L1MessageQueueWithGasPriceOracle.t.sol:33:        gasOracle.initialize(1, 2, 1, 1);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\L1MessageQueueWithGasPriceOracle.t.sol:41:        // Upgrade the L1MessageQueueV1WithGasPriceOracle implementation and initialize
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\L1MessageQueueWithGasPriceOracle.t.sol:46:        queue.initialize(address(1), address(1), address(1), address(gasOracle), 10000000);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\L1ERC1155Gateway.t.sol:83:        gateway.initialize(address(counterpartGateway), address(l1Messenger));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\L1ERC1155Gateway.t.sol:102:        gateway.initialize(address(1), address(l1Messenger));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\L1ERC1155Gateway.t.sol:178:        gateway.initialize(address(counterpartGateway), address(mockMessenger));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\L1ERC1155Gateway.t.sol:363:        gateway.initialize(address(counterpartGateway), address(mockMessenger));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\L1ERC1155Gateway.t.sol:559:        gateway.initialize(address(counterpartGateway), address(mockMessenger));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\L1MessageQueueV2.t.sol:47:        // Upgrade the SystemConfig implementation and initialize
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\L1MessageQueueV2.t.sol:49:        system.initialize(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\L1MessageQueueV2.t.sol:56:        // Upgrade the L1MessageQueueV1 implementation and initialize
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\L1MessageQueueV2.t.sol:61:        queueV1.initialize(address(1), address(1), address(1), address(0), 10000000);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\L1MessageQueueV2.t.sol:70:        // Upgrade the L1MessageQueueV2 implementation and initialize
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\L1MessageQueueV2.t.sol:77:        queueV2.initialize();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\L1MessageQueueV2.t.sol:90:        queueV2.initialize();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\L1CustomERC20Gateway.t.sol:64:        gateway.initialize(address(counterpartGateway), address(router), address(l1Messenger));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\L1CustomERC20Gateway.t.sol:65:        router.initialize(address(0), address(gateway));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\L1CustomERC20Gateway.t.sol:82:        gateway.initialize(address(counterpartGateway), address(router), address(l1Messenger));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\L1CustomERC20Gateway.t.sol:147:        gateway.initialize(address(counterpartGateway), address(router), address(mockMessenger));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\L1MessageQueueV1.t.sol:47:        // Upgrade the L1MessageQueueV1 implementation and initialize
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\L1MessageQueueV1.t.sol:52:        gasOracle.initialize(21000, 50000, 8, 16);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\L1MessageQueueV1.t.sol:53:        queue.initialize(address(1), address(1), address(1), address(gasOracle), 10000000);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\L1MessageQueueV1.t.sol:65:        queue.initialize(address(0), address(0), address(0), address(0), 0);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\L1GatewayTestBase.t.sol:107:        // Upgrade the SystemConfig implementation and initialize
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\L1GatewayTestBase.t.sol:109:        system.initialize(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\L1GatewayTestBase.t.sol:116:        // Upgrade the L1ScrollMessenger implementation and initialize
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\L1GatewayTestBase.t.sol:129:        l1Messenger.initialize(address(l2Messenger), feeVault, address(rollup), address(messageQueueV1));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\L1GatewayTestBase.t.sol:131:        // initialize L2GasPriceOracle
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\L1GatewayTestBase.t.sol:132:        gasOracle.initialize(1, 2, 1, 1);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\L1GatewayTestBase.t.sol:135:        // Upgrade the L1MessageQueueV1WithGasPriceOracle implementation and initialize
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\L1GatewayTestBase.t.sol:140:        messageQueueV1.initialize(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\L1GatewayTestBase.t.sol:149:        // Upgrade the L1MessageQueueV2 implementation and initialize
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\L1GatewayTestBase.t.sol:162:        messageQueueV2.initialize();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\L1GatewayTestBase.t.sol:164:        // Upgrade the ScrollChain implementation and initialize
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\L1GatewayTestBase.t.sol:177:        rollup.initialize(address(messageQueueV1), address(0), 44);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\L1GatewayRouter.t.sol:73:        l1StandardERC20Gateway.initialize(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\L1GatewayRouter.t.sol:80:        l1ETHGateway.initialize(address(l2ETHGateway), address(router), address(l1Messenger));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\L1GatewayRouter.t.sol:81:        router.initialize(address(l1ETHGateway), address(l1StandardERC20Gateway));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\L1GatewayRouter.t.sol:97:        router.initialize(address(l1ETHGateway), address(l1StandardERC20Gateway));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\L2SystemConfig.t.sol:30:        l2SystemConfig.initialize(owner);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\L2SystemConfig.t.sol:37:        // revert when initialize again
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\L2SystemConfig.t.sol:39:        l2SystemConfig.initialize(owner);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\L2StandardERC20Gateway.t.sol:76:        gateway.initialize(address(counterpartGateway), address(router), address(l2Messenger), address(factory));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\L2StandardERC20Gateway.t.sol:77:        router.initialize(address(0), address(gateway));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\L2StandardERC20Gateway.t.sol:108:        gateway.initialize(address(counterpartGateway), address(router), address(l1Messenger), address(factory));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\L2StandardERC20Gateway.t.sol:183:        gateway.initialize(address(counterpartGateway), address(router), address(mockMessenger), address(factory));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\batch-bridge\L2BatchBridgeGateway.t.sol:69:        batch.initialize();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\batch-bridge\L2BatchBridgeGateway.t.sol:78:        batch.initialize();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\L2ScrollMessenger.t.sol:48:        l2Messenger.initialize(address(l1Messenger));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\L2ScrollMessenger.t.sol:49:        l2MessageQueue.initialize(address(l2Messenger));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\batch-bridge\L1BatchBridgeGateway.t.sol:80:        gateway.initialize(address(counterpartGateway), address(router), address(l1Messenger));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\batch-bridge\L1BatchBridgeGateway.t.sol:92:        batch.initialize(batchFeeVault);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\batch-bridge\L1BatchBridgeGateway.t.sol:93:        router.initialize(address(0), address(gateway));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\batch-bridge\L1BatchBridgeGateway.t.sol:110:        batch.initialize(address(0));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\L2ReverseCustomERC20Gateway.t.sol:83:        gateway.initialize(address(counterpartGateway), address(router), address(l2Messenger));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\L2ReverseCustomERC20Gateway.t.sol:84:        router.initialize(address(0), address(gateway));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\L2ReverseCustomERC20Gateway.t.sol:147:        gateway.initialize(address(counterpartGateway), address(router), address(mockMessenger));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\L2GatewayRouter.t.sol:82:        l2StandardERC20Gateway.initialize(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\L2GatewayRouter.t.sol:88:        l2ETHGateway.initialize(address(l1ETHGateway), address(router), address(l2Messenger));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\L2GatewayRouter.t.sol:89:        router.initialize(address(l2ETHGateway), address(l2StandardERC20Gateway));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\L2GatewayRouter.t.sol:125:        router.initialize(address(l2ETHGateway), address(l2StandardERC20Gateway));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\L2MessageQueue.t.sol:14:        queue.initialize(address(this));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\L2GasPriceOracle.t.sol:27:        oracle.initialize(1, 2, 1, 1);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\L2CustomERC20Gateway.t.sol:60:        gateway.initialize(address(counterpartGateway), address(router), address(l2Messenger));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\L2CustomERC20Gateway.t.sol:61:        router.initialize(address(0), address(gateway));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\L2CustomERC20Gateway.t.sol:80:        gateway.initialize(address(counterpartGateway), address(router), address(l2Messenger));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\L2CustomERC20Gateway.t.sol:175:        gateway.initialize(address(counterpartGateway), address(router), address(mockMessenger));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\L2ETHGateway.t.sol:38:        gateway.initialize(address(counterpartGateway), address(router), address(l2Messenger));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\L2ETHGateway.t.sol:39:        router.initialize(address(gateway), address(0));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\L2ETHGateway.t.sol:48:        gateway.initialize(address(counterpartGateway), address(router), address(l2Messenger));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\L2ETHGateway.t.sol:119:        gateway.initialize(address(counterpartGateway), address(router), address(mockMessenger));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\L2GatewayTestBase.t.sol:75:        // Upgrade the L2ScrollMessenger implementation and initialize
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\L2GatewayTestBase.t.sol:80:        l2Messenger.initialize(address(l1Messenger));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\L2GatewayTestBase.t.sol:83:        l2MessageQueue.initialize(address(l2Messenger));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\L2WETHGateway.t.sol:61:        gateway.initialize(address(counterpartGateway), address(router), address(l2Messenger));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\L2WETHGateway.t.sol:62:        router.initialize(address(0), address(gateway));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\L2WETHGateway.t.sol:79:        gateway.initialize(address(counterpartGateway), address(router), address(l2Messenger));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\L2WETHGateway.t.sol:158:        gateway.initialize(address(counterpartGateway), address(router), address(mockMessenger));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\L2ERC721Gateway.t.sol:41:        gateway.initialize(address(counterpart), address(messenger));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\L2ERC721Gateway.t.sol:54:        gateway.initialize(address(1), address(messenger));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\L2USDCGateway.t.sol:62:        gateway.initialize(address(counterpartGateway), address(router), address(l2Messenger));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\L2USDCGateway.t.sol:63:        router.initialize(address(0), address(gateway));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\L2USDCGateway.t.sol:82:        gateway.initialize(address(counterpartGateway), address(router), address(l2Messenger));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\L2USDCGateway.t.sol:191:        gateway.initialize(address(counterpartGateway), address(router), address(mockMessenger));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\misc\PauseController.t.sol:49:            abi.encodeCall(PauseController.initialize, (PAUSE_COOLDOWN_PERIOD))
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\lido\L1LidoGateway.t.sol:88:        gateway.initialize(address(counterpartGateway), address(router), address(l1Messenger));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\lido\L1LidoGateway.t.sol:90:        router.initialize(address(0), address(gateway));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\lido\L1LidoGateway.t.sol:117:        gateway.initialize(address(counterpartGateway), address(router), address(l1Messenger));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\lido\L1LidoGateway.t.sol:348:        mockGateway.initialize(address(counterpartGateway), address(router), address(mockMessenger));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\lido\L2WstETHToken.t.sol:25:        token.initialize("Wrapped liquid staked Ether 2.0", "wstETH", 18, address(this), address(counterpart));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\lido\L2LidoGateway.t.sol:85:        gateway.initialize(address(counterpartGateway), address(router), address(l2Messenger));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\lido\L2LidoGateway.t.sol:87:        router.initialize(address(0), address(gateway));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\lido\L2LidoGateway.t.sol:88:        l2Token.initialize("Mock L2", "ML2", 18, address(gateway), address(l1Token));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\lido\L2LidoGateway.t.sol:121:        gateway.initialize(address(counterpartGateway), address(router), address(l2Messenger));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\lido\L2LidoGateway.t.sol:346:        mockGateway.initialize(address(counterpartGateway), address(router), address(mockMessenger));

@@ -1,0 +1,15 @@
+[profile.default]
+src = "src"
+test = "test"
+out = "out"
+cache_path = "cache"
+solc_version = "0.7.6"
+libs = ["lib"]
+remappings = [
+  "@nomad-xyz/nomad-core-sol/=src/external/nomad-core/",
+  "@nomad-xyz/nomad-xapps-sol/=src/external/nomad-xapps/",
+  "@openzeppelin/contracts/=lib/openzeppelin-contracts/contracts/",
+  "@openzeppelin/contracts-upgradeable/=lib/openzeppelin-contracts-upgradeable/contracts/",
+  "@summa-tx/memview-sol/=lib/memview-sol/",
+  "hardhat/=src/hardhat/"
+]

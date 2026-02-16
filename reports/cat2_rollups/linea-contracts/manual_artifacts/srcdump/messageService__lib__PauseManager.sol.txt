@@ -1,0 +1,119 @@
+    1: // SPDX-License-Identifier: AGPL-3.0
+    2: pragma solidity >=0.8.19 <=0.8.24;
+    3: 
+    4: import { Initializable } from "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
+    5: import { AccessControlUpgradeable } from "@openzeppelin/contracts-upgradeable/access/AccessControlUpgradeable.sol";
+    6: import { IPauseManager } from "../../interfaces/IPauseManager.sol";
+    7: 
+    8: /**
+    9:  * @title Contract to manage cross-chain function pausing.
+   10:  * @author ConsenSys Software Inc.
+   11:  * @custom:security-contact security-report@linea.build
+   12:  */
+   13: abstract contract PauseManager is Initializable, IPauseManager, AccessControlUpgradeable {
+   14:   bytes32 public constant PAUSE_MANAGER_ROLE = keccak256("PAUSE_MANAGER_ROLE");
+   15: 
+   16:   uint8 public constant GENERAL_PAUSE_TYPE = 1;
+   17:   uint8 public constant L1_L2_PAUSE_TYPE = 2;
+   18:   uint8 public constant L2_L1_PAUSE_TYPE = 3;
+   19:   uint8 public constant PROVING_SYSTEM_PAUSE_TYPE = 4;
+   20: 
+   21:   // @dev DEPRECATED. USE _pauseTypeStatusesBitMap INSTEAD
+   22:   mapping(bytes32 pauseType => bool pauseStatus) public pauseTypeStatuses;
+   23: 
+   24:   uint256 private _pauseTypeStatusesBitMap;
+   25: 
+   26:   /// @dev Total contract storage is 11 slots with the gap below.
+   27:   /// @dev Keep 9 free storage slots for future implementation updates to avoid storage collision.
+   28:   /// @dev Note: This was reduced previously to cater for new functionality.
+   29:   uint256[9] private __gap;
+   30: 
+   31:   /**
+   32:    * @dev Modifier to make a function callable only when the specific and general types are not paused.
+   33:    * @param _pauseType The pause type value being checked.
+   34:    * Requirements:
+   35:    *
+   36:    * - The type must not be paused.
+   37:    */
+   38:   modifier whenTypeAndGeneralNotPaused(uint8 _pauseType) {
+   39:     _requireTypeAndGeneralNotPaused(_pauseType);
+   40:     _;
+   41:   }
+   42: 
+   43:   /**
+   44:    * @dev Modifier to make a function callable only when the type is not paused.
+   45:    * @param _pauseType The pause type value being checked.
+   46:    * Requirements:
+   47:    *
+   48:    * - The type must not be paused.
+   49:    */
+   50:   modifier whenTypeNotPaused(uint8 _pauseType) {
+   51:     _requireTypeNotPaused(_pauseType);
+   52:     _;
+   53:   }
+   54: 
+   55:   /**
+   56:    * @dev Throws if the specific or general types are paused.
+   57:    * @dev Checks the specific and general pause types.
+   58:    * @param _pauseType The pause type value being checked.
+   59:    */
+   60:   function _requireTypeAndGeneralNotPaused(uint8 _pauseType) internal view virtual {
+   61:     uint256 pauseBitMap = _pauseTypeStatusesBitMap;
+   62: 
+   63:     if (pauseBitMap & (1 << uint256(_pauseType)) != 0) {
+   64:       revert IsPaused(_pauseType);
+   65:     }
+   66: 
+   67:     if (pauseBitMap & (1 << uint256(GENERAL_PAUSE_TYPE)) != 0) {
+   68:       revert IsPaused(GENERAL_PAUSE_TYPE);
+   69:     }
+   70:   }
+   71: 
+   72:   /**
+   73:    * @dev Throws if the type is paused.
+   74:    * @dev Checks the specific pause type.
+   75:    * @param _pauseType The pause type value being checked.
+   76:    */
+   77:   function _requireTypeNotPaused(uint8 _pauseType) internal view virtual {
+   78:     if (isPaused(_pauseType)) {
+   79:       revert IsPaused(_pauseType);
+   80:     }
+   81:   }
+   82: 
+   83:   /**
+   84:    * @notice Pauses functionality by specific type.
+   85:    * @dev Requires PAUSE_MANAGER_ROLE.
+   86:    * @param _pauseType The pause type value.
+   87:    */
+   88:   function pauseByType(uint8 _pauseType) external onlyRole(PAUSE_MANAGER_ROLE) {
+   89:     if (isPaused(_pauseType)) {
+   90:       revert IsPaused(_pauseType);
+   91:     }
+   92: 
+   93:     _pauseTypeStatusesBitMap |= 1 << uint256(_pauseType);
+   94:     emit Paused(_msgSender(), _pauseType);
+   95:   }
+   96: 
+   97:   /**
+   98:    * @notice Unpauses functionality by specific type.
+   99:    * @dev Requires PAUSE_MANAGER_ROLE.
+  100:    * @param _pauseType The pause type value.
+  101:    */
+  102:   function unPauseByType(uint8 _pauseType) external onlyRole(PAUSE_MANAGER_ROLE) {
+  103:     if (!isPaused(_pauseType)) {
+  104:       revert IsNotPaused(_pauseType);
+  105:     }
+  106: 
+  107:     _pauseTypeStatusesBitMap &= ~(1 << uint256(_pauseType));
+  108:     emit UnPaused(_msgSender(), _pauseType);
+  109:   }
+  110: 
+  111:   /**
+  112:    * @notice Check if a pause type is enabled.
+  113:    * @param _pauseType The pause type value.
+  114:    * @return boolean True if the pause type if enabled, false otherwise.
+  115:    */
+  116:   function isPaused(uint8 _pauseType) public view returns (bool) {
+  117:     return (_pauseTypeStatusesBitMap & (1 << uint256(_pauseType))) != 0;
+  118:   }
+  119: }

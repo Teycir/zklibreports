@@ -1,0 +1,51 @@
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\LineaRollup.sol:325:    unchecked {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\lib\SparseMerkleProof.sol:195:      unchecked {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:672:    unchecked {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:687:        // The surrounding unchecked block does not change this fact.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:688:        // See https://docs.soliditylang.org/en/latest/control-structures.html#checked-or-unchecked-arithmetic.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:789:    unchecked {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:805:    unchecked {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:817:    unchecked {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:858:    unchecked {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:870:    unchecked {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:907:    unchecked {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:921:    unchecked {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:950:    unchecked {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:996:    unchecked {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:997:      // must be unchecked in order to support `n = type(int256).min`
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:1021:    unchecked {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:1053:    unchecked {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:2069:    unchecked {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:2118:    unchecked {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:3491:    unchecked {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:3502:      unchecked {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\L2MessageServiceLineaMainnet.sol:669:    unchecked {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\L2MessageServiceLineaMainnet.sol:684:        // The surrounding unchecked block does not change this fact.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\L2MessageServiceLineaMainnet.sol:685:        // See https://docs.soliditylang.org/en/latest/control-structures.html#checked-or-unchecked-arithmetic.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\L2MessageServiceLineaMainnet.sol:786:    unchecked {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\L2MessageServiceLineaMainnet.sol:802:    unchecked {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\L2MessageServiceLineaMainnet.sol:814:    unchecked {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\L2MessageServiceLineaMainnet.sol:855:    unchecked {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\L2MessageServiceLineaMainnet.sol:867:    unchecked {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\L2MessageServiceLineaMainnet.sol:904:    unchecked {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\L2MessageServiceLineaMainnet.sol:918:    unchecked {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\L2MessageServiceLineaMainnet.sol:947:    unchecked {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\L2MessageServiceLineaMainnet.sol:993:    unchecked {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\L2MessageServiceLineaMainnet.sol:994:      // must be unchecked in order to support `n = type(int256).min`
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\L2MessageServiceLineaMainnet.sol:1018:    unchecked {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\L2MessageServiceLineaMainnet.sol:1050:    unchecked {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\L2MessageServiceLineaMainnet.sol:1641:      unchecked {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\L2MessageServiceLineaMainnet.sol:2032:    unchecked {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\tokenBridge\TokenBridge.sol:120:    unchecked {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\tokenBridge\TokenBridge.sol:303:    unchecked {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\tokenBridge\TokenBridge.sol:465:    unchecked {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\tokenBridge\TokenBridge.sol:477:    unchecked {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\token\LineaSurgeXP.sol:56:      unchecked {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\token\LineaSurgeXP.sol:74:      unchecked {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\token\TokenMintingRateLimiter.sol:124:      unchecked {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\token\MyToken.sol:25:      unchecked {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\token\MyToken.sol:37:      unchecked {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\token\LineaVoyageXP.sol:42:      unchecked {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\token\LineaVoyageXP.sol:60:      unchecked {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\messageService\l1\L1MessageManager.sol:32:    unchecked {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\messageService\l1\L1MessageManager.sol:83:    unchecked {

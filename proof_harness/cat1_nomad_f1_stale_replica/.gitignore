@@ -1,0 +1,6 @@
+cache/
+out/
+crytic-export/
+echidna-corpus/
+.medusa-artifact-hash
+slither_results.json

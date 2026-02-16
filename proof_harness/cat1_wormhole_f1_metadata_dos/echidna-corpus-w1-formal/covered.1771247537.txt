@@ -1,0 +1,320 @@
+C:/Users/vboxuser/Desktop/Repos/zklibreports/proof_harness/cat1_wormhole_f1_metadata_dos/src/BridgeMetadataCompatHarness.sol
+   1 |     | // SPDX-License-Identifier: MIT
+   2 |     | pragma solidity ^0.8.24;
+   3 |     | 
+   4 |     | /// @notice ERC20-like token that intentionally omits decimals/symbol/name.
+   5 | *   | contract MockNoMetadataTokenW {
+   6 |     |     mapping(address => uint256) public balanceOf;
+   7 |     |     mapping(address => mapping(address => uint256)) public allowance;
+   8 |     | 
+   9 | *   |     function mint(address _to, uint256 _amount) external {
+  10 | *   |         balanceOf[_to] += _amount;
+  11 |     |     }
+  12 |     | 
+  13 |     |     function approve(address _spender, uint256 _amount) external returns (bool) {
+  14 |     |         allowance[msg.sender][_spender] = _amount;
+  15 |     |         return true;
+  16 |     |     }
+  17 |     | 
+  18 |     |     function transfer(address _to, uint256 _amount) external returns (bool) {
+  19 |     |         uint256 _bal = balanceOf[msg.sender];
+  20 |     |         require(_bal >= _amount, "!balance");
+  21 |     |         unchecked {
+  22 |     |             balanceOf[msg.sender] = _bal - _amount;
+  23 |     |         }
+  24 |     |         balanceOf[_to] += _amount;
+  25 |     |         return true;
+  26 |     |     }
+  27 |     | 
+  28 |     |     function transferFrom(address _from, address _to, uint256 _amount)
+  29 |     |         external
+  30 |     |         returns (bool)
+  31 |     |     {
+  32 |     |         uint256 _allowed = allowance[_from][msg.sender];
+  33 |     |         require(_allowed >= _amount, "!allowance");
+  34 |     |         uint256 _bal = balanceOf[_from];
+  35 |     |         require(_bal >= _amount, "!balance");
+  36 |     |         unchecked {
+  37 |     |             allowance[_from][msg.sender] = _allowed - _amount;
+  38 |     |             balanceOf[_from] = _bal - _amount;
+  39 |     |         }
+  40 |     |         balanceOf[_to] += _amount;
+  41 |     |         return true;
+  42 |     |     }
+  43 |     | }
+  44 |     | 
+  45 |     | /// @notice Metadata-compliant token control.
+  46 | *   | contract MockMetadataTokenW is MockNoMetadataTokenW {
+  47 |     |     function decimals() external pure returns (uint8) {
+  48 |     |         return 18;
+  49 |     |     }
+  50 |     | 
+  51 |     |     function symbol() external pure returns (string memory) {
+  52 |     |         return "META";
+  53 |     |     }
+  54 |     | 
+  55 |     |     function name() external pure returns (string memory) {
+  56 |     |         return "Metadata Token";
+  57 |     |     }
+  58 |     | }
+  59 |     | 
+  60 |     | /// @notice Model mirroring Wormhole Bridge metadata reads:
+  61 |     | /// staticcall + abi.decode without checking call success.
+  62 | *   | contract BridgeMetadataBugModel {
+  63 | *   |     function attestToken(address _token)
+  64 |     |         external
+  65 |     |         view
+  66 | *   |         returns (uint8 _decimals, bytes32 _symbol, bytes32 _name)
+  67 |     |     {
+  68 | *   |         (, bytes memory queriedDecimals) =
+  69 | *   |             _token.staticcall(abi.encodeWithSignature("decimals()"));
+  70 | *   |         (, bytes memory queriedSymbol) =
+  71 | *   |             _token.staticcall(abi.encodeWithSignature("symbol()"));
+  72 | *   |         (, bytes memory queriedName) =
+  73 | *   |             _token.staticcall(abi.encodeWithSignature("name()"));
+  74 |     | 
+  75 | *   |         _decimals = abi.decode(queriedDecimals, (uint8));
+  76 |     |         string memory symbolString = abi.decode(queriedSymbol, (string));
+  77 |     |         string memory nameString = abi.decode(queriedName, (string));
+  78 |     | 
+  79 |     |         assembly {
+  80 |     |             _symbol := mload(add(symbolString, 32))
+  81 |     |             _name := mload(add(nameString, 32))
+  82 |     |         }
+  83 |     |     }
+  84 |     | 
+  85 | *   |     function transferTokens(address _token, uint256 _amount)
+  86 |     |         external
+  87 |     |         view
+  88 | *   |         returns (uint256 _normalized)
+  89 |     |     {
+  90 | *   |         (, bytes memory queriedDecimals) =
+  91 | *   |             _token.staticcall(abi.encodeWithSignature("decimals()"));
+  92 | *   |         uint8 decimals = abi.decode(queriedDecimals, (uint8));
+  93 |     |         _normalized = _deNormalize(_normalize(_amount, decimals), decimals);
+  94 |     |     }
+  95 |     | 
+  96 |     |     function _normalize(uint256 _amount, uint8 _decimals)
+  97 |     |         internal
+  98 |     |         pure
+  99 |     |         returns (uint256)
+ 100 |     |     {
+ 101 |     |         if (_decimals > 8) {
+ 102 |     |             return _amount / (10 ** (_decimals - 8));
+ 103 |     |         }
+ 104 |     |         return _amount;
+ 105 |     |     }
+ 106 |     | 
+ 107 |     |     function _deNormalize(uint256 _amount, uint8 _decimals)
+ 108 |     |         internal
+ 109 |     |         pure
+ 110 |     |         returns (uint256)
+ 111 |     |     {
+ 112 |     |         if (_decimals > 8) {
+ 113 |     |             return _amount * (10 ** (_decimals - 8));
+ 114 |     |         }
+ 115 |     |         return _amount;
+ 116 |     |     }
+ 117 |     | }
+ 118 |     | 
+ 119 |     | /// @notice Reference fix model:
+ 120 |     | /// tolerate missing metadata methods by falling back to safe defaults.
+ 121 | *   | contract BridgeMetadataFixedModel {
+ 122 | *   |     bytes32 internal constant UNKNOWN = bytes32("UNKNOWN");
+ 123 |     | 
+ 124 | *   |     function attestToken(address _token)
+ 125 |     |         external
+ 126 |     |         view
+ 127 | *   |         returns (uint8 _decimals, bytes32 _symbol, bytes32 _name)
+ 128 |     |     {
+ 129 | *   |         _decimals = _safeDecimals(_token);
+ 130 | *   |         _symbol = _safeSymbol(_token);
+ 131 | *   |         _name = _safeName(_token);
+ 132 |     |     }
+ 133 |     | 
+ 134 | *   |     function transferTokens(address _token, uint256 _amount)
+ 135 |     |         external
+ 136 |     |         view
+ 137 | *   |         returns (uint256 _normalized)
+ 138 | *   |     {
+ 139 | *   |         uint8 decimals = _safeDecimals(_token);
+ 140 | *   |         _normalized = _deNormalize(_normalize(_amount, decimals), decimals);
+ 141 |     |     }
+ 142 |     | 
+ 143 | *   |     function _safeDecimals(address _token) internal view returns (uint8) {
+ 144 | *   |         (bool ok, bytes memory data) =
+ 145 | *   |             _token.staticcall(abi.encodeWithSignature("decimals()"));
+ 146 | *   |         if (!ok || data.length < 32) return 18;
+ 147 |     |         return abi.decode(data, (uint8));
+ 148 |     |     }
+ 149 |     | 
+ 150 | *   |     function _safeSymbol(address _token) internal view returns (bytes32 out) {
+ 151 | *   |         (bool ok, bytes memory data) =
+ 152 | *   |             _token.staticcall(abi.encodeWithSignature("symbol()"));
+ 153 | *   |         if (!ok || data.length < 64) return UNKNOWN;
+ 154 |     |         try this.decodeString(data) returns (string memory s) {
+ 155 |     |             assembly {
+ 156 |     |                 out := mload(add(s, 32))
+ 157 |     |             }
+ 158 |     |         } catch {
+ 159 |     |             out = UNKNOWN;
+ 160 |     |         }
+ 161 |     |     }
+ 162 |     | 
+ 163 | *   |     function _safeName(address _token) internal view returns (bytes32 out) {
+ 164 | *   |         (bool ok, bytes memory data) =
+ 165 | *   |             _token.staticcall(abi.encodeWithSignature("name()"));
+ 166 | *   |         if (!ok || data.length < 64) return UNKNOWN;
+ 167 |     |         try this.decodeString(data) returns (string memory s) {
+ 168 |     |             assembly {
+ 169 |     |                 out := mload(add(s, 32))
+ 170 |     |             }
+ 171 |     |         } catch {
+ 172 |     |             out = UNKNOWN;
+ 173 |     |         }
+ 174 |     |     }
+ 175 |     | 
+ 176 |     |     function decodeString(bytes memory data) external pure returns (string memory) {
+ 177 |     |         return abi.decode(data, (string));
+ 178 |     |     }
+ 179 |     | 
+ 180 | *   |     function _normalize(uint256 _amount, uint8 _decimals)
+ 181 |     |         internal
+ 182 |     |         pure
+ 183 | *   |         returns (uint256)
+ 184 |     |     {
+ 185 | *   |         if (_decimals > 8) {
+ 186 | *   |             return _amount / (10 ** (_decimals - 8));
+ 187 |     |         }
+ 188 |     |         return _amount;
+ 189 |     |     }
+ 190 |     | 
+ 191 | *   |     function _deNormalize(uint256 _amount, uint8 _decimals)
+ 192 |     |         internal
+ 193 |     |         pure
+ 194 | *   |         returns (uint256)
+ 195 |     |     {
+ 196 | *   |         if (_decimals > 8) {
+ 197 | *   |             return _amount * (10 ** (_decimals - 8));
+ 198 |     |         }
+ 199 |     |         return _amount;
+ 200 |     |     }
+ 201 |     | }
+ 202 |     | 
+ 203 |     | 
+
+C:/Users/vboxuser/Desktop/Repos/zklibreports/proof_harness/cat1_wormhole_f1_metadata_dos/src/MedusaBridgeMetadataCompatHarness.sol
+   1 |     | // SPDX-License-Identifier: MIT
+   2 |     | pragma solidity ^0.8.24;
+   3 |     | 
+   4 |     | import {
+   5 |     |     BridgeMetadataBugModel,
+   6 |     |     BridgeMetadataFixedModel,
+   7 |     |     MockMetadataTokenW,
+   8 |     |     MockNoMetadataTokenW
+   9 |     | } from "./BridgeMetadataCompatHarness.sol";
+  10 |     | 
+  11 |     | /// @notice Stateful specialist-fuzz harness for metadata-method compatibility.
+  12 | *   | contract MedusaBridgeMetadataCompatHarness {
+  13 |     |     BridgeMetadataBugModel public bug;
+  14 |     |     BridgeMetadataFixedModel public fixedModel;
+  15 |     |     MockNoMetadataTokenW public noMeta;
+  16 |     |     MockMetadataTokenW public withMeta;
+  17 |     | 
+  18 |     |     bool public bugNoMetaAttestFailed;
+  19 |     |     bool public bugNoMetaTransferFailed;
+  20 |     |     bool public fixedNoMetaFailed;
+  21 |     | 
+  22 | *   |     constructor() {
+  23 | *   |         bug = new BridgeMetadataBugModel();
+  24 | *   |         fixedModel = new BridgeMetadataFixedModel();
+  25 | *   |         noMeta = new MockNoMetadataTokenW();
+  26 | *   |         withMeta = new MockMetadataTokenW();
+  27 | *   |         noMeta.mint(address(this), 1_000_000 ether);
+  28 | *   |         withMeta.mint(address(this), 1_000_000 ether);
+  29 |     |     }
+  30 |     | 
+  31 | *   |     function _amount(uint256 _seed) internal pure returns (uint256) {
+  32 | *   |         return (_seed % 10_000 ether) + 1;
+  33 |     |     }
+  34 |     | 
+  35 | *   |     function action_probeBugAttestNoMetadata() external {
+  36 | *   |         try bug.attestToken(address(noMeta)) returns (uint8, bytes32, bytes32) {
+  37 |     |             // should not happen in bug model for non-metadata token
+  38 |     |         } catch {
+  39 | *   |             bugNoMetaAttestFailed = true;
+  40 |     |         }
+  41 |     |     }
+  42 |     | 
+  43 | *   |     function action_probeBugTransferNoMetadata(uint96 _amountSeed) external {
+  44 | *   |         uint256 amount = _amount(_amountSeed);
+  45 | *   |         try bug.transferTokens(address(noMeta), amount) returns (uint256) {
+  46 |     |             // should not happen in bug model for non-metadata token
+  47 |     |         } catch {
+  48 | *   |             bugNoMetaTransferFailed = true;
+  49 |     |         }
+  50 |     |     }
+  51 |     | 
+  52 | *   |     function action_probeFixedNoMetadata(uint96 _amountSeed) external {
+  53 | *   |         uint256 amount = _amount(_amountSeed);
+  54 | *   |         try fixedModel.attestToken(address(noMeta)) returns (uint8, bytes32, bytes32) {
+  55 | *   |             try fixedModel.transferTokens(address(noMeta), amount) returns (uint256) {
+  56 |     |                 // expected pass
+  57 |     |             } catch {
+  58 |     |                 fixedNoMetaFailed = true;
+  59 |     |             }
+  60 |     |         } catch {
+  61 |     |             fixedNoMetaFailed = true;
+  62 |     |         }
+  63 |     |     }
+  64 |     | 
+  65 |     |     function action_probeBugAndFixedWithMetadata(uint96 _amountSeed) external {
+  66 |     |         uint256 amount = _amount(_amountSeed);
+  67 |     |         // Control path: both models should handle metadata-compliant token.
+  68 |     |         try bug.attestToken(address(withMeta)) returns (uint8, bytes32, bytes32) {
+  69 |     |             try bug.transferTokens(address(withMeta), amount) returns (uint256) {} catch {}
+  70 |     |         } catch {}
+  71 |     |         try fixedModel.attestToken(address(withMeta)) returns (uint8, bytes32, bytes32) {
+  72 |     |             try fixedModel.transferTokens(address(withMeta), amount) returns (uint256) {} catch {}
+  73 |     |         } catch {}
+  74 |     |     }
+  75 |     | 
+  76 |     |     /// @notice Nonstandard tokens should not break attestation path.
+  77 |     |     function property_nonstandard_token_attest_should_not_fail()
+  78 |     |         external
+  79 |     |         view
+  80 |     |         returns (bool)
+  81 |     |     {
+  82 |     |         return !bugNoMetaAttestFailed;
+  83 |     |     }
+  84 |     | 
+  85 |     |     /// @notice Nonstandard tokens should not break transfer path.
+  86 |     |     function property_nonstandard_token_transfer_should_not_fail()
+  87 |     |         external
+  88 |     |         view
+  89 |     |         returns (bool)
+  90 |     |     {
+  91 |     |         return !bugNoMetaTransferFailed;
+  92 |     |     }
+  93 |     | 
+  94 |     |     /// @notice Fixed model must tolerate missing metadata methods.
+  95 |     |     function property_fixed_model_tolerates_missing_metadata()
+  96 |     |         external
+  97 |     |         view
+  98 |     |         returns (bool)
+  99 |     |     {
+ 100 |     |         return !fixedNoMetaFailed;
+ 101 |     |     }
+ 102 |     | 
+ 103 |     |     /// @notice Echidna-compatible alias.
+ 104 |     |     function echidna_nonstandard_token_attest_should_not_fail()
+ 105 |     |         external
+ 106 |     |         view
+ 107 |     |         returns (bool)
+ 108 |     |     {
+ 109 |     |         return !bugNoMetaAttestFailed;
+ 110 |     |     }
+ 111 |     | }
+ 112 |     | 
+ 113 |     | 
+

@@ -1,0 +1,9 @@
+Compiling 1 files with Solc 0.8.24
+Solc 0.8.24 finished in 92.86ms
+Compiler run successful!
+
+Running 1 tests for test/HalmosF3OperatorGate.t.sol:HalmosF3OperatorGate
+[31mCounterexample: 
+    p_defenderResult_bool_bd1ab2d_00 = 0x01[0m
+[31m[FAIL][0m check_settlement_progresses_without_hidden_registration(bool) (paths: 2, time: 0.28s, bounds: [])
+Symbolic test result: 0 passed; 1 failed; time: 0.28s

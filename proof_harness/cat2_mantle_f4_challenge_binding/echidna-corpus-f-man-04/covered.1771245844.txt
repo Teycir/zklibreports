@@ -1,0 +1,234 @@
+C:/Users/vboxuser/Desktop/Repos/zklibreports/proof_harness/cat2_mantle_f4_challenge_binding/src/EchidnaF4ChallengeBindingHarness.sol
+  1 |     | // SPDX-License-Identifier: MIT
+  2 |     | pragma solidity 0.8.24;
+  3 |     | 
+  4 |     | import {ChallengeBindingRollupHarness, ChallengeBindingStub} from "./MantleF4ChallengeBindingHarness.sol";
+  5 |     | 
+  6 |     | /// @notice Echidna property harness for F-MAN-04.
+  7 | *   | contract EchidnaF4ChallengeBindingHarness {
+  8 |     |     ChallengeBindingRollupHarness public rollup;
+  9 |     | 
+ 10 |     |     address public attackerOperator;
+ 11 |     |     address public victimOperator;
+ 12 |     |     address public attackerStaker;
+ 13 |     |     address public victimStaker;
+ 14 |     |     address public syntheticChallengeStaker;
+ 15 |     |     address public challengeAddr;
+ 16 |     | 
+ 17 |     |     bool public opened;
+ 18 |     | 
+ 19 | *   |     constructor() {
+ 20 | *   |         rollup = new ChallengeBindingRollupHarness();
+ 21 | *   |         rollup.seedAssertion(10, 1);
+ 22 | *   |         rollup.seedAssertion(11, 1);
+ 23 | *   |         rollup.setLastConfirmedAssertionID(0);
+ 24 |     | 
+ 25 | *   |         attackerOperator = address(this);
+ 26 | *   |         victimOperator = address(0xBEEF);
+ 27 | *   |         attackerStaker = address(0xA001);
+ 28 | *   |         victimStaker = address(0xA002);
+ 29 | *   |         syntheticChallengeStaker = address(0xA003);
+ 30 |     | 
+ 31 | *   |         rollup.seedStaker(attackerOperator, attackerStaker, 42, 2 ether);
+ 32 | *   |         rollup.seedStaker(victimOperator, victimStaker, 43, 1 ether);
+ 33 |     |     }
+ 34 |     | 
+ 35 | *   |     function action_open_mismatched_challenge() public {
+ 36 | *   |         if (opened) return;
+ 37 | *   |         address[2] memory players = [victimOperator, attackerOperator];
+ 38 | *   |         uint256[2] memory assertionIDs = [uint256(10), uint256(11)];
+ 39 | *   |         challengeAddr = rollup.challengeAssertion(players, assertionIDs);
+ 40 | *   |         opened = true;
+ 41 |     |     }
+ 42 |     | 
+ 43 | *   |     function action_register_challenge_operator() public {
+ 44 | *   |         if (!opened) return;
+ 45 | *   |         rollup.seedStaker(challengeAddr, syntheticChallengeStaker, 99, 1 ether);
+ 46 |     |     }
+ 47 |     | 
+ 48 | *   |     function action_settle() public {
+ 49 | *   |         if (!opened) return;
+ 50 | *   |         try ChallengeBindingStub(challengeAddr).settle(attackerOperator, victimOperator) {} catch {}
+ 51 |     |     }
+ 52 |     | 
+ 53 |     |     function echidna_victim_not_forced_into_unrelated_challenge() public view returns (bool) {
+ 54 |     |         (,,, , address victimCurrentChallenge) = rollup.stakers(victimStaker);
+ 55 |     |         return victimCurrentChallenge == address(0);
+ 56 |     |     }
+ 57 |     | 
+ 58 |     |     function echidna_victim_not_slashed_by_unrelated_assertions() public view returns (bool) {
+ 59 |     |         (bool victimStaked,,,,) = rollup.stakers(victimStaker);
+ 60 |     |         return victimStaked;
+ 61 |     |     }
+ 62 |     | }
+ 63 |     | 
+
+C:/Users/vboxuser/Desktop/Repos/zklibreports/proof_harness/cat2_mantle_f4_challenge_binding/src/MantleF4ChallengeBindingHarness.sol
+   1 |     | // SPDX-License-Identifier: MIT
+   2 |     | pragma solidity 0.8.24;
+   3 |     | 
+   4 | *   | contract ChallengeBindingRollupHarness {
+   5 |     |     struct Staker {
+   6 |     |         bool isStaked;
+   7 |     |         uint256 amountStaked;
+   8 |     |         uint256 assertionID;
+   9 |     |         address operator;
+  10 |     |         address currentChallenge;
+  11 |     |     }
+  12 |     | 
+  13 |     |     struct ChallengeCtx {
+  14 |     |         bool completed;
+  15 |     |         address challengeAddress;
+  16 |     |         address defenderAddress;
+  17 |     |         address challengerAddress;
+  18 |     |         uint256 defenderAssertionID;
+  19 |     |         uint256 challengerAssertionID;
+  20 |     |     }
+  21 |     | 
+  22 |     |     mapping(address => Staker) public stakers; // staker -> state
+  23 |     |     mapping(address => address) public registers; // operator -> staker
+  24 |     |     mapping(uint256 => uint256) public assertionParent; // assertion id -> parent id
+  25 |     |     mapping(address => uint256) public withdrawableFunds; // staker -> withdrawable amount
+  26 |     | 
+  27 | *   |     uint256 public baseStakeAmount = 1 ether;
+  28 |     |     uint256 public lastCreatedAssertionID;
+  29 |     |     uint256 public lastConfirmedAssertionID;
+  30 |     |     ChallengeCtx public challengeCtx;
+  31 |     | 
+  32 | *   |     function seedAssertion(uint256 assertionID, uint256 parentID) external {
+  33 | *   |         assertionParent[assertionID] = parentID;
+  34 | *   |         if (assertionID > lastCreatedAssertionID) {
+  35 | *   |             lastCreatedAssertionID = assertionID;
+  36 |     |         }
+  37 |     |     }
+  38 |     | 
+  39 | *   |     function setLastConfirmedAssertionID(uint256 id) external {
+  40 | *   |         lastConfirmedAssertionID = id;
+  41 |     |     }
+  42 |     | 
+  43 | *   |     function seedStaker(address operator, address staker, uint256 assertionID, uint256 amount) external {
+  44 | *   |         registers[operator] = staker;
+  45 | *   |         stakers[staker] =
+  46 | *   |             Staker({isStaked: true, amountStaked: amount, assertionID: assertionID, operator: operator, currentChallenge: address(0)});
+  47 |     |     }
+  48 |     | 
+  49 |     |     modifier operatorOnly() {
+  50 | *   |         if (registers[msg.sender] == address(0)) {
+  51 |     |             revert("NotOperator");
+  52 |     |         }
+  53 |     |         _;
+  54 |     |     }
+  55 |     | 
+  56 | *   |     function challengeAssertion(address[2] calldata players, uint256[2] calldata assertionIDs)
+  57 |     |         external
+  58 |     |         operatorOnly
+  59 | *   |         returns (address)
+  60 |     |     {
+  61 | *   |         uint256 defenderAssertionID = assertionIDs[0];
+  62 | *   |         uint256 challengerAssertionID = assertionIDs[1];
+  63 |     | 
+  64 | *   |         if (defenderAssertionID >= challengerAssertionID) {
+  65 |     |             revert("WrongOrder");
+  66 |     |         }
+  67 | *   |         if (challengerAssertionID > lastCreatedAssertionID) {
+  68 |     |             revert("UnproposedAssertion");
+  69 |     |         }
+  70 | *   |         if (lastConfirmedAssertionID >= defenderAssertionID) {
+  71 |     |             revert("AssertionAlreadyResolved");
+  72 |     |         }
+  73 | *   |         uint256 parentID = assertionParent[defenderAssertionID];
+  74 | *   |         if (parentID != assertionParent[challengerAssertionID]) {
+  75 |     |             revert("DifferentParent");
+  76 |     |         }
+  77 |     | 
+  78 | *   |         address defender = players[0];
+  79 | *   |         address challenger = players[1];
+  80 | *   |         require(defender != challenger, "defender and challenge must not equal");
+  81 |     | 
+  82 | *   |         address defenderStaker = registers[defender];
+  83 | *   |         address challengerStaker = registers[challenger];
+  84 | *   |         _requireUnchallengedStaker(defenderStaker);
+  85 | *   |         _requireUnchallengedStaker(challengerStaker);
+  86 |     | 
+  87 |     |         // BUG PARITY: no check that stakers are actually staked on defenderAssertionID/challengerAssertionID.
+  88 | *   |         ChallengeBindingStub challenge = new ChallengeBindingStub(address(this));
+  89 | *   |         address challengeAddr = address(challenge);
+  90 | *   |         stakers[challengerStaker].currentChallenge = challengeAddr;
+  91 | *   |         stakers[defenderStaker].currentChallenge = challengeAddr;
+  92 |     | 
+  93 | *   |         challengeCtx = ChallengeCtx({
+  94 | *   |             completed: false,
+  95 | *   |             challengeAddress: challengeAddr,
+  96 | *   |             defenderAddress: defender,
+  97 | *   |             challengerAddress: challenger,
+  98 | *   |             defenderAssertionID: defenderAssertionID,
+  99 | *   |             challengerAssertionID: challengerAssertionID
+ 100 |     |         });
+ 101 | *   |         return challengeAddr;
+ 102 |     |     }
+ 103 |     | 
+ 104 | *   |     function completeChallenge(address winnerOperator, address loserOperator) external operatorOnly {
+ 105 | *   |         address winnerStaker = registers[winnerOperator];
+ 106 | *   |         address loserStaker = registers[loserOperator];
+ 107 | *   |         _requireStaked(loserStaker);
+ 108 |     | 
+ 109 | *   |         address challenge = _getChallenge(winnerStaker, loserStaker);
+ 110 | *   |         if (msg.sender != challenge) {
+ 111 |     |             revert("NotChallenge");
+ 112 |     |         }
+ 113 |     | 
+ 114 | *   |         uint256 loserStake = stakers[loserStaker].amountStaked;
+ 115 | *   |         uint256 amountWon;
+ 116 | *   |         if (loserStake > baseStakeAmount) {
+ 117 |     |             withdrawableFunds[loserStaker] += (loserStake - baseStakeAmount);
+ 118 |     |             amountWon = baseStakeAmount;
+ 119 |     |         } else {
+ 120 | *   |             amountWon = loserStake;
+ 121 |     |         }
+ 122 |     | 
+ 123 | *   |         stakers[winnerStaker].amountStaked += amountWon;
+ 124 | *   |         stakers[winnerStaker].currentChallenge = address(0);
+ 125 |     | 
+ 126 | *   |         delete registers[stakers[loserStaker].operator];
+ 127 | *   |         delete stakers[loserStaker];
+ 128 | *   |         challengeCtx.completed = true;
+ 129 |     |     }
+ 130 |     | 
+ 131 | *   |     function _requireStaked(address stakerAddress) private view {
+ 132 | *   |         if (!stakers[stakerAddress].isStaked) {
+ 133 | *   |             revert("NotStaked");
+ 134 |     |         }
+ 135 |     |     }
+ 136 |     | 
+ 137 | *   |     function _requireUnchallengedStaker(address stakerAddress) private view {
+ 138 | *   |         _requireStaked(stakerAddress);
+ 139 | *   |         if (stakers[stakerAddress].currentChallenge != address(0)) {
+ 140 |     |             revert("ChallengedStaker");
+ 141 |     |         }
+ 142 |     |     }
+ 143 |     | 
+ 144 | *   |     function _getChallenge(address staker1Address, address staker2Address) private view returns (address) {
+ 145 | *   |         address challenge = stakers[staker1Address].currentChallenge;
+ 146 | *   |         if (challenge == address(0)) {
+ 147 |     |             revert("NotInChallenge");
+ 148 |     |         }
+ 149 | *   |         if (challenge != stakers[staker2Address].currentChallenge) {
+ 150 |     |             revert("InDifferentChallenge");
+ 151 |     |         }
+ 152 | *   |         return challenge;
+ 153 |     |     }
+ 154 |     | }
+ 155 |     | 
+ 156 | *   | contract ChallengeBindingStub {
+ 157 |     |     ChallengeBindingRollupHarness public immutable rollup;
+ 158 |     | 
+ 159 | *   |     constructor(address rollupAddress) {
+ 160 | *   |         rollup = ChallengeBindingRollupHarness(rollupAddress);
+ 161 |     |     }
+ 162 |     | 
+ 163 | *   |     function settle(address winnerOperator, address loserOperator) external {
+ 164 | *   |         rollup.completeChallenge(winnerOperator, loserOperator);
+ 165 |     |     }
+ 166 |     | }
+ 167 |     | 
+

@@ -1,0 +1,27 @@
+﻿{
+    "generated_at_utc":  "2026-02-16 14:43:49 UTC",
+    "repo_root":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports",
+    "harness_dir":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\proof_harness\\cat1_layerzero_v2_f1_oft_delegate",
+    "harness_contract":  "MedusaLz2DelegateHarness",
+    "harness_source":  "src/MedusaLz2DelegateHarness.sol",
+    "seq_len":  10,
+    "workers":  4,
+    "timeout_sec":  30,
+    "echidna_test_limit":  20000,
+    "echidna_corpus_dir":  "echidna-corpus-lz2-formal",
+    "medusa":  {
+                   "command":  "powershell -NoProfile -ExecutionPolicy Bypass -File ..\\..\\scripts\\medusa.ps1 fuzz --compilation-target . --target-contracts MedusaLz2DelegateHarness --seq-len 10 --workers 4 --timeout 30 --fail-fast --no-color --log-level info",
+                   "outfile":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\LayerZero-v2\\manual_artifacts\\lz2_stale_delegate_formal_medusa_30s.txt",
+                   "start_utc":  "2026-02-16 14:43:35 UTC",
+                   "end_utc":  "2026-02-16 14:43:41 UTC",
+                   "exit_code":  1
+               },
+    "echidna":  {
+                    "command":  "powershell -NoProfile -ExecutionPolicy Bypass -File ..\\..\\scripts\\echidna.ps1 src/MedusaLz2DelegateHarness.sol --contract MedusaLz2DelegateHarness --test-mode property --seq-len 10 --test-limit 20000 --timeout 30 --format text --corpus-dir echidna-corpus-lz2-formal",
+                    "outfile":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\LayerZero-v2\\manual_artifacts\\lz2_stale_delegate_formal_echidna_30s.txt",
+                    "start_utc":  "2026-02-16 14:43:41 UTC",
+                    "end_utc":  "2026-02-16 14:43:49 UTC",
+                    "exit_code":  1
+                },
+    "note":  "Non-zero exits can be expected when properties are falsified."
+}

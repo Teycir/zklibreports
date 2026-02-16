@@ -1,0 +1,118 @@
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\LineaRollup.sol:342:   * @dev Using assembly this way is cheaper gas wise.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\LineaRollup.sol:352:    assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\LineaRollup.sol:363:   * @dev Using assembly this way is cheaper gas wise.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\LineaRollup.sol:377:    assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\LineaRollup.sol:404:    assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\LineaRollup.sol:422:    assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\LineaRollup.sol:611:    assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\LineaRollup.sol:635:   * @dev Using assembly this way is cheaper gas wise.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\LineaRollup.sol:689:    assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\lib\Utils.sol:11:    /// @solidity memory-safe-assembly
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\lib\Utils.sol:12:    assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\lib\SparseMerkleProof.sol:169:    assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\lib\SparseMerkleProof.sol:221:    assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\lib\Mimc.sol:52:    assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\proxies\TransparentUpgradeableProxy.sol:302:      // The easiest way to bubble the revert reason is using memory via assembly
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\proxies\TransparentUpgradeableProxy.sol:303:      /// @solidity memory-safe-assembly
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\proxies\TransparentUpgradeableProxy.sol:304:      assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\proxies\TransparentUpgradeableProxy.sol:325: * This library helps with reading and writing to such slots without the need for inline assembly.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\proxies\TransparentUpgradeableProxy.sol:377:    /// @solidity memory-safe-assembly
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\proxies\TransparentUpgradeableProxy.sol:378:    assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\proxies\TransparentUpgradeableProxy.sol:387:    /// @solidity memory-safe-assembly
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\proxies\TransparentUpgradeableProxy.sol:388:    assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\proxies\TransparentUpgradeableProxy.sol:397:    /// @solidity memory-safe-assembly
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\proxies\TransparentUpgradeableProxy.sol:398:    assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\proxies\TransparentUpgradeableProxy.sol:407:    /// @solidity memory-safe-assembly
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\proxies\TransparentUpgradeableProxy.sol:408:    assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\proxies\TransparentUpgradeableProxy.sol:417:    /// @solidity memory-safe-assembly
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\proxies\TransparentUpgradeableProxy.sol:418:    assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\proxies\TransparentUpgradeableProxy.sol:427:    /// @solidity memory-safe-assembly
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\proxies\TransparentUpgradeableProxy.sol:428:    assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\proxies\TransparentUpgradeableProxy.sol:437:    /// @solidity memory-safe-assembly
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\proxies\TransparentUpgradeableProxy.sol:438:    assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\proxies\TransparentUpgradeableProxy.sol:447:    /// @solidity memory-safe-assembly
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\proxies\TransparentUpgradeableProxy.sol:448:    assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\proxies\TransparentUpgradeableProxy.sol:630:    assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\proxies\TransparentUpgradeableProxy.sol:631:      // Copy msg.data. We take full control of memory in this inline assembly
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\proxies\TransparentUpgradeableProxy.sol:825:      assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\proxies\ProxyAdmin.sol:411:      // The easiest way to bubble the revert reason is using memory via assembly
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\proxies\ProxyAdmin.sol:412:      /// @solidity memory-safe-assembly
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\proxies\ProxyAdmin.sol:413:      assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\proxies\ProxyAdmin.sol:434: * This library helps with reading and writing to such slots without the need for inline assembly.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\proxies\ProxyAdmin.sol:486:    /// @solidity memory-safe-assembly
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\proxies\ProxyAdmin.sol:487:    assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\proxies\ProxyAdmin.sol:496:    /// @solidity memory-safe-assembly
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\proxies\ProxyAdmin.sol:497:    assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\proxies\ProxyAdmin.sol:506:    /// @solidity memory-safe-assembly
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\proxies\ProxyAdmin.sol:507:    assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\proxies\ProxyAdmin.sol:516:    /// @solidity memory-safe-assembly
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\proxies\ProxyAdmin.sol:517:    assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\proxies\ProxyAdmin.sol:526:    /// @solidity memory-safe-assembly
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\proxies\ProxyAdmin.sol:527:    assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\proxies\ProxyAdmin.sol:536:    /// @solidity memory-safe-assembly
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\proxies\ProxyAdmin.sol:537:    assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\proxies\ProxyAdmin.sol:546:    /// @solidity memory-safe-assembly
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\proxies\ProxyAdmin.sol:547:    assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\proxies\ProxyAdmin.sol:556:    /// @solidity memory-safe-assembly
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\proxies\ProxyAdmin.sol:557:    assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\proxies\ProxyAdmin.sol:739:    assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\proxies\ProxyAdmin.sol:740:      // Copy msg.data. We take full control of memory in this inline assembly
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\proxies\ProxyAdmin.sol:934:      assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\verifiers\PlonkVerifierDev.sol:177:    assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\verifiers\PlonkVerifier.sol:176:    assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\verifiers\Utils.sol:41:    assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\interfaces\l1\ILineaRollup.sol:241:   * @dev This is used explicitly with the four bytes in assembly 0x729eebce.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\messageService\lib\TransientStorageHelpers.sol:16:    assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\messageService\lib\TransientStorageHelpers.sol:27:    assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\messageService\lib\TransientStorageHelpers.sol:38:    assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\messageService\lib\TransientStorageHelpers.sol:49:    assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\messageService\lib\SparseMerkleTreeVerifier.sol:41:    assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\verifiers\test\TestPlonkVerifierForDataAggregation.sol:177:    assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\verifiers\PlonkVerifierFullLarge.sol:176:    assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\verifiers\PlonkVerifierFull.sol:176:    assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\verifiers\PlonkVerifierForMultiTypeDataAggregation.sol:177:    assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\messageService\l2\v1\L2MessageServiceV1.sol:169:        assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\messageService\l2\v1\L2MessageServiceV1.sol:227:        assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\verifiers\PlonkVerifierForDataAggregation.sol:175:    assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\token\LineaSurgeXP.sol:125:    assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\tokenBridge\mocks\MockMessageService.sol:18:      assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\messageService\l1\v1\L1MessageServiceV1.sol:69:        assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\messageService\l1\v1\L1MessageServiceV1.sol:132:        assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\messageService\l1\L1MessageService.sol:143:        assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\messageService\l1\L1MessageManager.sol:85:        assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:327:      // The easiest way to bubble the revert reason is using memory via assembly
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:328:      /// @solidity memory-safe-assembly
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:329:      assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:678:      assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:701:      assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:715:      assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:1025:      /// @solidity memory-safe-assembly
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:1026:      assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:1031:        /// @solidity memory-safe-assembly
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:1032:        assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:1684:   * @dev This is used explicitly with the four bytes in assembly 0x729eebce.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:1941:    /// @solidity memory-safe-assembly
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:1942:    assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:2120:        assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:2633:        assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:2695:        assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:2752:    assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:2896:        assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:3329:    assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:3347:    assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:3410:    assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:3578:    assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\TestL2MessageService.sol:57:          assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\L2MessageServiceLineaMainnet.sol:326:      // The easiest way to bubble the revert reason is using memory via assembly
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\L2MessageServiceLineaMainnet.sol:327:      /// @solidity memory-safe-assembly
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\L2MessageServiceLineaMainnet.sol:328:      assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\L2MessageServiceLineaMainnet.sol:675:      assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\L2MessageServiceLineaMainnet.sol:698:      assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\L2MessageServiceLineaMainnet.sol:712:      assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\L2MessageServiceLineaMainnet.sol:1022:      /// @solidity memory-safe-assembly
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\L2MessageServiceLineaMainnet.sol:1023:      assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\L2MessageServiceLineaMainnet.sol:1028:        /// @solidity memory-safe-assembly
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\L2MessageServiceLineaMainnet.sol:1029:        assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\L2MessageServiceLineaMainnet.sol:2087:        assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\L2MessageServiceLineaMainnet.sol:2147:        assembly {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\TestL1MessageService.sol:83:          assembly {

@@ -1,0 +1,29 @@
+{
+    "exitcode": 1,
+    "test_results": {
+        "test/HalmosScrollF1ScrollChainInitHijack.t.sol:HalmosScrollF1ScrollChainInitHijack": [
+            {
+                "name": "check_non_admin_cannot_take_scrollchain_owner()",
+                "exitcode": 1,
+                "num_models": 1,
+                "models": [
+                    {
+                        "model": {},
+                        "is_valid": true
+                    }
+                ],
+                "num_paths": [
+                    1,
+                    0,
+                    0
+                ],
+                "time": [
+                    0.16800380000495352,
+                    0.03948829999717418,
+                    0.12851239999872632
+                ],
+                "num_bounded_loops": 0
+            }
+        ]
+    }
+}

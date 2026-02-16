@@ -1,0 +1,165 @@
+    1: // SPDX-License-Identifier: AGPL-3.0
+    2: pragma solidity 0.8.24;
+    3: 
+    4: import { AccessControlUpgradeable } from "@openzeppelin/contracts-upgradeable/access/AccessControlUpgradeable.sol";
+    5: import { L1MessageServiceV1 } from "./v1/L1MessageServiceV1.sol";
+    6: import { L1MessageManager } from "./L1MessageManager.sol";
+    7: import { IL1MessageService } from "../../interfaces/l1/IL1MessageService.sol";
+    8: import { IGenericErrors } from "../../interfaces/IGenericErrors.sol";
+    9: import { SparseMerkleTreeVerifier } from "../lib/SparseMerkleTreeVerifier.sol";
+   10: import { TransientStorageHelpers } from "../lib/TransientStorageHelpers.sol";
+   11: 
+   12: /**
+   13:  * @title Contract to manage cross-chain messaging on L1.
+   14:  * @author ConsenSys Software Inc.
+   15:  * @custom:security-contact security-report@linea.build
+   16:  */
+   17: abstract contract L1MessageService is
+   18:   AccessControlUpgradeable,
+   19:   L1MessageServiceV1,
+   20:   L1MessageManager,
+   21:   IL1MessageService,
+   22:   IGenericErrors
+   23: {
+   24:   using SparseMerkleTreeVerifier for *;
+   25:   using TransientStorageHelpers for *;
+   26: 
+   27:   /// @dev This is currently not in use, but is reserved for future upgrades.
+   28:   uint256 public systemMigrationBlock;
+   29: 
+   30:   /// @dev Total contract storage is 51 slots including the gap below.
+   31:   /// @dev Keep 50 free storage slots for future implementation updates to avoid storage collision.
+   32:   uint256[50] private __gap_L1MessageService;
+   33: 
+   34:   /**
+   35:    * @notice Initialises underlying message service dependencies.
+   36:    * @dev _messageSender is initialised to a non-zero value for gas efficiency on claiming.
+   37:    * @param _limitManagerAddress The address owning the rate limiting management role.
+   38:    * @param _pauseManagerAddress The address owning the pause management role.
+   39:    * @param _rateLimitPeriod The period to rate limit against.
+   40:    * @param _rateLimitAmount The limit allowed for withdrawing the period.
+   41:    */
+   42:   function __MessageService_init(
+   43:     address _limitManagerAddress,
+   44:     address _pauseManagerAddress,
+   45:     uint256 _rateLimitPeriod,
+   46:     uint256 _rateLimitAmount
+   47:   ) internal onlyInitializing {
+   48:     if (_limitManagerAddress == address(0)) {
+   49:       revert ZeroAddressNotAllowed();
+   50:     }
+   51: 
+   52:     if (_pauseManagerAddress == address(0)) {
+   53:       revert ZeroAddressNotAllowed();
+   54:     }
+   55: 
+   56:     __ERC165_init();
+   57:     __Context_init();
+   58:     __AccessControl_init();
+   59:     __RateLimiter_init(_rateLimitPeriod, _rateLimitAmount);
+   60: 
+   61:     _grantRole(RATE_LIMIT_SETTER_ROLE, _limitManagerAddress);
+   62:     _grantRole(PAUSE_MANAGER_ROLE, _pauseManagerAddress);
+   63: 
+   64:     nextMessageNumber = 1;
+   65:   }
+   66: 
+   67:   /**
+   68:    * @notice Adds a message for sending cross-chain and emits MessageSent.
+   69:    * @dev The message number is preset (nextMessageNumber) and only incremented at the end if successful for the next caller.
+   70:    * @dev This function should be called with a msg.value = _value + _fee. The fee will be paid on the destination chain.
+   71:    * @param _to The address the message is intended for.
+   72:    * @param _fee The fee being paid for the message delivery.
+   73:    * @param _calldata The calldata to pass to the recipient.
+   74:    */
+   75:   function sendMessage(
+   76:     address _to,
+   77:     uint256 _fee,
+   78:     bytes calldata _calldata
+   79:   ) external payable whenTypeAndGeneralNotPaused(L1_L2_PAUSE_TYPE) {
+   80:     if (_to == address(0)) {
+   81:       revert ZeroAddressNotAllowed();
+   82:     }
+   83: 
+   84:     if (_fee > msg.value) {
+   85:       revert ValueSentTooLow();
+   86:     }
+   87: 
+   88:     uint256 messageNumber = nextMessageNumber++;
+   89:     uint256 valueSent = msg.value - _fee;
+   90: 
+   91:     bytes32 messageHash = keccak256(abi.encode(msg.sender, _to, _fee, valueSent, messageNumber, _calldata));
+   92: 
+   93:     _addRollingHash(messageNumber, messageHash);
+   94: 
+   95:     emit MessageSent(msg.sender, _to, _fee, valueSent, messageNumber, _calldata, messageHash);
+   96:   }
+   97: 
+   98:   /**
+   99:    * @notice Claims and delivers a cross-chain message using merkle proof.
+  100:    * @dev if merkle depth is empty, it will revert with L2MerkleRootDoesNotExist.
+  101:    * @dev if merkle depth is different than proof size, it will revert with ProofLengthDifferentThanMerkleDepth.
+  102:    * @param _params Collection of claim data with proof and supporting data.
+  103:    */
+  104:   function claimMessageWithProof(
+  105:     ClaimMessageWithProofParams calldata _params
+  106:   ) external nonReentrant distributeFees(_params.fee, _params.to, _params.data, _params.feeRecipient) {
+  107:     _requireTypeAndGeneralNotPaused(L2_L1_PAUSE_TYPE);
+  108: 
+  109:     uint256 merkleDepth = l2MerkleRootsDepths[_params.merkleRoot];
+  110: 
+  111:     if (merkleDepth == 0) {
+  112:       revert L2MerkleRootDoesNotExist();
+  113:     }
+  114: 
+  115:     if (merkleDepth != _params.proof.length) {
+  116:       revert ProofLengthDifferentThanMerkleDepth(merkleDepth, _params.proof.length);
+  117:     }
+  118: 
+  119:     _setL2L1MessageToClaimed(_params.messageNumber);
+  120: 
+  121:     _addUsedAmount(_params.fee + _params.value);
+  122: 
+  123:     bytes32 messageLeafHash = keccak256(
+  124:       abi.encode(_params.from, _params.to, _params.fee, _params.value, _params.messageNumber, _params.data)
+  125:     );
+  126: 
+  127:     if (
+  128:       !SparseMerkleTreeVerifier._verifyMerkleProof(
+  129:         messageLeafHash,
+  130:         _params.proof,
+  131:         _params.leafIndex,
+  132:         _params.merkleRoot
+  133:       )
+  134:     ) {
+  135:       revert InvalidMerkleProof();
+  136:     }
+  137: 
+  138:     TransientStorageHelpers.tstoreAddress(MESSAGE_SENDER_TRANSIENT_KEY, _params.from);
+  139: 
+  140:     (bool callSuccess, bytes memory returnData) = _params.to.call{ value: _params.value }(_params.data);
+  141:     if (!callSuccess) {
+  142:       if (returnData.length > 0) {
+  143:         assembly {
+  144:           let data_size := mload(returnData)
+  145:           revert(add(32, returnData), data_size)
+  146:         }
+  147:       } else {
+  148:         revert MessageSendingFailed(_params.to);
+  149:       }
+  150:     }
+  151: 
+  152:     TransientStorageHelpers.tstoreAddress(MESSAGE_SENDER_TRANSIENT_KEY, DEFAULT_MESSAGE_SENDER_TRANSIENT_VALUE);
+  153: 
+  154:     emit MessageClaimed(messageLeafHash);
+  155:   }
+  156: 
+  157:   /**
+  158:    * @notice Claims and delivers a cross-chain message.
+  159:    * @dev The message sender address is set temporarily in the transient storage when claiming.
+  160:    * @return addr The message sender address that is stored temporarily in the transient storage when claiming.
+  161:    */
+  162:   function sender() external view returns (address addr) {
+  163:     return TransientStorageHelpers.tloadAddress(MESSAGE_SENDER_TRANSIENT_KEY);
+  164:   }
+  165: }

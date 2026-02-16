@@ -1,0 +1,42 @@
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\LineaRollup.sol:409:      abi.encodePacked(_currentDataHash, _dataEvaluationPoint, _dataEvaluationClaim, _kzgCommitment, _kzgProof)
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\LineaRollup.sol:652:   *         abi.encodePacked(_finalizationData.l2MerkleRoots)
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\lib\SparseMerkleProof.sol:135:    return Mimc.hash(abi.encodePacked(lsb, msb));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\lib\SparseMerkleProof.sol:147:    return abi.decode(_encodedLeaf, (Leaf));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\lib\SparseMerkleProof.sol:159:    return abi.decode(_value, (Account));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\lib\SparseMerkleProof.sol:263:      if ((currentIndex >> height) & 1 == 1) computedHash = Mimc.hash(abi.encodePacked(_proof[height], computedHash));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\lib\SparseMerkleProof.sol:264:      else computedHash = Mimc.hash(abi.encodePacked(computedHash, _proof[height]));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\lib\SparseMerkleProof.sol:267:    return Mimc.hash(abi.encodePacked(_nextFreeNode, computedHash)) == _root;
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\tokenBridge\TokenBridge.sol:342:    (string memory name, string memory symbol, uint8 decimals) = abi.decode(_tokenMetadata, (string, string, uint8));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\tokenBridge\TokenBridge.sol:446:      return abi.decode(data, (uint8));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\tokenBridge\TokenBridge.sol:458:      return abi.decode(_data, (string));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\tokenBridge\TokenBridge.sol:504:    (address owner, address spender, uint256 amount, uint256 deadline, uint8 v, bytes32 r, bytes32 s) = abi.decode(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\verifiers\test\TestPlonkVerifier.sol:106:    res = abi.encodePacked(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\verifiers\test\TestPlonkVerifier.sol:120:    res = abi.encodePacked(res, proof.proof_l_at_zeta, proof.proof_r_at_zeta, proof.proof_o_at_zeta);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\verifiers\test\TestPlonkVerifier.sol:121:    res = abi.encodePacked(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\verifiers\test\TestPlonkVerifier.sol:131:    res = abi.encodePacked(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\TestEIP4844.sol:18:      abi.encodePacked(h, compressedDataComputedX, _y, _kzgCommitment, _kzgProof)
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:177:   * use https://solidity.readthedocs.io/en/latest/units-and-global-variables.html?highlight=abi.decode#abi-encoding-and-decoding-functions[`abi.decode`].
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:1046:    return string(abi.encodePacked(value < 0 ? "-" : "", toString(SignedMathUpgradeable.abs(value))));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:1204:          abi.encodePacked(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:3334:      abi.encodePacked(_currentDataHash, _dataEvaluationPoint, _dataEvaluationClaim, _kzgCommitment, _kzgProof)
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:3404:            keccak256(abi.encodePacked(_finalizationData.l2MerkleRoots))
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\L2MessageServiceLineaMainnet.sol:176:   * use https://solidity.readthedocs.io/en/latest/units-and-global-variables.html?highlight=abi.decode#abi-encoding-and-decoding-functions[`abi.decode`].
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\L2MessageServiceLineaMainnet.sol:1043:    return string(abi.encodePacked(value < 0 ? "-" : "", toString(SignedMathUpgradeable.abs(value))));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\L2MessageServiceLineaMainnet.sol:1202:          abi.encodePacked(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\TestL1MessageServiceMerkleProof.sol:55:      originalSender = abi.decode(data, (address));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\TestL1MessageServiceMerkleProof.sol:73:      originalAddress = abi.decode(data, (address));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\TestL1MessageService.sol:50:      originalSender = abi.decode(data, (address));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\TestL1MessageService.sol:63:      originalAddress = abi.decode(data, (address));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\proxies\TransparentUpgradeableProxy.sol:152:   * use https://solidity.readthedocs.io/en/latest/units-and-global-variables.html?highlight=abi.decode#abi-encoding-and-decoding-functions[`abi.decode`].
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\proxies\TransparentUpgradeableProxy.sol:869:    address newAdmin = abi.decode(msg.data[4:], (address));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\proxies\TransparentUpgradeableProxy.sol:881:    address newImplementation = abi.decode(msg.data[4:], (address));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\proxies\TransparentUpgradeableProxy.sol:893:    (address newImplementation, bytes memory data) = abi.decode(msg.data[4:], (address, bytes));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\TestL2MessageService.sol:21:      originalSender = abi.decode(data, (address));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\TestL2MessageService.sol:37:      originalAddress = abi.decode(data, (address));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\proxies\ProxyAdmin.sol:261:   * use https://solidity.readthedocs.io/en/latest/units-and-global-variables.html?highlight=abi.decode#abi-encoding-and-decoding-functions[`abi.decode`].
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\proxies\ProxyAdmin.sol:978:    address newAdmin = abi.decode(msg.data[4:], (address));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\proxies\ProxyAdmin.sol:990:    address newImplementation = abi.decode(msg.data[4:], (address));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\proxies\ProxyAdmin.sol:1002:    (address newImplementation, bytes memory data) = abi.decode(msg.data[4:], (address, bytes));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\proxies\ProxyAdmin.sol:1049:    return abi.decode(returndata, (address));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\proxies\ProxyAdmin.sol:1064:    return abi.decode(returndata, (address));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\TestSparseMerkleTreeVerifier.sol:30:    return keccak256(abi.encodePacked(_from, _to, _fee, _value, _messageNumber, _calldata));

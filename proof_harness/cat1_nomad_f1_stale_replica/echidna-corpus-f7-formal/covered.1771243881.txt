@@ -1,0 +1,417 @@
+C:/Users/vboxuser/Desktop/Repos/zklibreports/proof_harness/cat1_nomad_f1_stale_replica/src/BridgePrefillDustDrainHarness.sol
+   1 |     | // SPDX-License-Identifier: MIT
+   2 |     | pragma solidity ^0.8.24;
+   3 |     | 
+   4 |     | interface IERC20Like {
+   5 |     |     function transfer(address _to, uint256 _amount) external returns (bool);
+   6 |     |     function transferFrom(address _from, address _to, uint256 _amount)
+   7 |     |         external
+   8 |     |         returns (bool);
+   9 |     |     function approve(address _spender, uint256 _amount) external returns (bool);
+  10 |     |     function balanceOf(address _account) external view returns (uint256);
+  11 |     | }
+  12 |     | 
+  13 |     | /// @notice Minimal ERC20 used to exercise zero-amount transferFrom behavior.
+  14 | *   | contract MockZeroAwareToken {
+  15 |     |     string public constant name = "Zero Aware";
+  16 |     |     string public constant symbol = "ZERO";
+  17 |     |     uint8 public constant decimals = 18;
+  18 |     | 
+  19 |     |     mapping(address => uint256) public balanceOf;
+  20 |     |     mapping(address => mapping(address => uint256)) public allowance;
+  21 |     | 
+  22 |     |     function mint(address _to, uint256 _amount) external {
+  23 |     |         balanceOf[_to] += _amount;
+  24 |     |     }
+  25 |     | 
+  26 |     |     function approve(address _spender, uint256 _amount) external returns (bool) {
+  27 |     |         allowance[msg.sender][_spender] = _amount;
+  28 |     |         return true;
+  29 |     |     }
+  30 |     | 
+  31 |     |     function transfer(address _to, uint256 _amount) external returns (bool) {
+  32 |     |         uint256 _bal = balanceOf[msg.sender];
+  33 |     |         require(_bal >= _amount, "!balance");
+  34 |     |         unchecked {
+  35 |     |             balanceOf[msg.sender] = _bal - _amount;
+  36 |     |         }
+  37 |     |         balanceOf[_to] += _amount;
+  38 |     |         return true;
+  39 |     |     }
+  40 |     | 
+  41 | *   |     function transferFrom(address _from, address _to, uint256 _amount)
+  42 |     |         external
+  43 | *   |         returns (bool)
+  44 |     |     {
+  45 | *   |         uint256 _allowed = allowance[_from][msg.sender];
+  46 | *   |         require(_allowed >= _amount, "!allowance");
+  47 | *   |         uint256 _bal = balanceOf[_from];
+  48 | *   |         require(_bal >= _amount, "!balance");
+  49 |     |         unchecked {
+  50 | *   |             allowance[_from][msg.sender] = _allowed - _amount;
+  51 | *   |             balanceOf[_from] = _bal - _amount;
+  52 |     |         }
+  53 | *   |         balanceOf[_to] += _amount;
+  54 | *   |         return true;
+  55 |     |     }
+  56 |     | }
+  57 |     | 
+  58 |     | /// @notice Recipient contract that accepts 2300-gas stipend dust transfers.
+  59 | *   | contract DustReceiver {
+  60 |     |     receive() external payable {}
+  61 |     | }
+  62 |     | 
+  63 |     | /// @notice Minimal token lookup model for preFill.
+  64 | *   | contract TokenRegistryPrefillModel {
+  65 |     |     uint32 public immutable localDomain;
+  66 |     |     mapping(bytes32 => address) public canonicalToRepresentation;
+  67 |     | 
+  68 | *   |     constructor(uint32 _localDomain) {
+  69 | *   |         localDomain = _localDomain;
+  70 |     |     }
+  71 |     | 
+  72 |     |     function setRepresentation(uint32 _domain, bytes32 _id, address _token)
+  73 |     |         external
+  74 |     |     {
+  75 |     |         canonicalToRepresentation[keccak256(abi.encodePacked(_domain, _id))] =
+  76 |     |             _token;
+  77 |     |     }
+  78 |     | 
+  79 | *   |     function mustHaveLocalToken(uint32 _domain, bytes32 _id)
+  80 |     |         external
+  81 |     |         view
+  82 | *   |         returns (address _token)
+  83 |     |     {
+  84 | *   |         if (_domain == localDomain) {
+  85 | *   |             _token = address(uint160(uint256(_id)));
+  86 |     |         } else {
+  87 |     |             _token = canonicalToRepresentation[
+  88 |     |                 keccak256(abi.encodePacked(_domain, _id))
+  89 |     |             ];
+  90 |     |         }
+  91 | *   |         require(_token != address(0), "!token");
+  92 |     |     }
+  93 |     | }
+  94 |     | 
+  95 |     | /// @notice Bug model mirroring Nomad preFill behavior relevant to forged-message and dust-drain risk.
+  96 | *   | contract BridgeRouterPrefillDustBugModel {
+  97 | *   |     uint256 public constant PRE_FILL_FEE_NUMERATOR = 9995;
+  98 | *   |     uint256 public constant PRE_FILL_FEE_DENOMINATOR = 10000;
+  99 | *   |     uint256 public constant DUST_AMOUNT = 0.06 ether;
+ 100 |     | 
+ 101 |     |     TokenRegistryPrefillModel public immutable tokenRegistry;
+ 102 |     |     mapping(bytes32 => address) public liquidityProvider;
+ 103 |     |     uint256 public dustPoolWei;
+ 104 | *   |     mapping(address => uint256) public dustedWei;
+ 105 |     | 
+ 106 | *   |     constructor(address _tokenRegistry) {
+ 107 | *   |         tokenRegistry = TokenRegistryPrefillModel(_tokenRegistry);
+ 108 |     |     }
+ 109 |     | 
+ 110 | *   |     function seedDustPool(uint256 _amount) external {
+ 111 | *   |         dustPoolWei += _amount;
+ 112 |     |     }
+ 113 |     | 
+ 114 | *   |     function preFill(
+ 115 |     |         uint32 _origin,
+ 116 |     |         uint32 _nonce,
+ 117 |     |         uint32 _tokenDomain,
+ 118 |     |         bytes32 _tokenId,
+ 119 |     |         address _recipient,
+ 120 |     |         uint256 _amount,
+ 121 |     |         bool _isFastTransfer
+ 122 | *   |     ) external {
+ 123 | *   |         require(_isFastTransfer, "!fast transfer");
+ 124 |     | 
+ 125 | *   |         bytes32 _id = _preFillId(
+ 126 | *   |             _origin,
+ 127 | *   |             _nonce,
+ 128 | *   |             _tokenDomain,
+ 129 | *   |             _tokenId,
+ 130 | *   |             _recipient,
+ 131 | *   |             _amount,
+ 132 | *   |             _isFastTransfer
+ 133 |     |         );
+ 134 | *   |         require(liquidityProvider[_id] == address(0), "!unfilled");
+ 135 | *   |         liquidityProvider[_id] = msg.sender;
+ 136 |     | 
+ 137 | *   |         address _token = tokenRegistry.mustHaveLocalToken(_tokenDomain, _tokenId);
+ 138 | *   |         uint256 _afterFee = _applyPreFillFee(_amount);
+ 139 | *   |         require(
+ 140 | *   |             IERC20Like(_token).transferFrom(msg.sender, _recipient, _afterFee),
+ 141 |     |             "!transferFrom"
+ 142 |     |         );
+ 143 | *   |         _dust(_recipient);
+ 144 |     |     }
+ 145 |     | 
+ 146 | *   |     function _preFillId(
+ 147 |     |         uint32 _origin,
+ 148 |     |         uint32 _nonce,
+ 149 |     |         uint32 _tokenDomain,
+ 150 |     |         bytes32 _tokenId,
+ 151 |     |         address _recipient,
+ 152 |     |         uint256 _amount,
+ 153 |     |         bool _isFastTransfer
+ 154 | *   |     ) internal pure returns (bytes32) {
+ 155 | *   |         return
+ 156 | *   |             keccak256(
+ 157 | *   |                 abi.encodePacked(
+ 158 | *   |                     _origin,
+ 159 | *   |                     _nonce,
+ 160 | *   |                     _tokenDomain,
+ 161 | *   |                     _tokenId,
+ 162 | *   |                     _recipient,
+ 163 | *   |                     _amount,
+ 164 | *   |                     _isFastTransfer
+ 165 |     |                 )
+ 166 |     |             );
+ 167 |     |     }
+ 168 |     | 
+ 169 | *   |     function _applyPreFillFee(uint256 _amount)
+ 170 |     |         internal
+ 171 |     |         pure
+ 172 | *   |         returns (uint256)
+ 173 |     |     {
+ 174 | *   |         return (_amount * PRE_FILL_FEE_NUMERATOR) / PRE_FILL_FEE_DENOMINATOR;
+ 175 |     |     }
+ 176 |     | 
+ 177 | *   |     function _dust(address _recipient) internal {
+ 178 | *   |         if (dustedWei[_recipient] < DUST_AMOUNT && dustPoolWei >= DUST_AMOUNT) {
+ 179 | *   |             dustPoolWei -= DUST_AMOUNT;
+ 180 | *   |             dustedWei[_recipient] += DUST_AMOUNT;
+ 181 |     |         }
+ 182 |     |     }
+ 183 |     | }
+ 184 |     | 
+ 185 |     | /// @notice Reference fix model: only explicitly approved transfer IDs can be prefilled.
+ 186 | *   | contract BridgeRouterPrefillDustFixedModel {
+ 187 |     |     uint256 public constant PRE_FILL_FEE_NUMERATOR = 9995;
+ 188 |     |     uint256 public constant PRE_FILL_FEE_DENOMINATOR = 10000;
+ 189 |     |     uint256 public constant DUST_AMOUNT = 0.06 ether;
+ 190 |     | 
+ 191 |     |     TokenRegistryPrefillModel public immutable tokenRegistry;
+ 192 |     |     mapping(bytes32 => address) public liquidityProvider;
+ 193 |     |     mapping(bytes32 => bool) public approvedPrefill;
+ 194 |     |     uint256 public dustPoolWei;
+ 195 |     |     mapping(address => uint256) public dustedWei;
+ 196 |     | 
+ 197 | *   |     constructor(address _tokenRegistry) {
+ 198 | *   |         tokenRegistry = TokenRegistryPrefillModel(_tokenRegistry);
+ 199 |     |     }
+ 200 |     | 
+ 201 | *   |     function seedDustPool(uint256 _amount) external {
+ 202 | *   |         dustPoolWei += _amount;
+ 203 |     |     }
+ 204 |     | 
+ 205 |     |     function approvePrefill(
+ 206 |     |         uint32 _origin,
+ 207 |     |         uint32 _nonce,
+ 208 |     |         uint32 _tokenDomain,
+ 209 |     |         bytes32 _tokenId,
+ 210 |     |         address _recipient,
+ 211 |     |         uint256 _amount,
+ 212 |     |         bool _isFastTransfer
+ 213 |     |     ) external {
+ 214 |     |         bytes32 _id = _preFillId(
+ 215 |     |             _origin,
+ 216 |     |             _nonce,
+ 217 |     |             _tokenDomain,
+ 218 |     |             _tokenId,
+ 219 |     |             _recipient,
+ 220 |     |             _amount,
+ 221 |     |             _isFastTransfer
+ 222 |     |         );
+ 223 |     |         approvedPrefill[_id] = true;
+ 224 |     |     }
+ 225 |     | 
+ 226 | *   |     function preFill(
+ 227 |     |         uint32 _origin,
+ 228 |     |         uint32 _nonce,
+ 229 |     |         uint32 _tokenDomain,
+ 230 |     |         bytes32 _tokenId,
+ 231 |     |         address _recipient,
+ 232 |     |         uint256 _amount,
+ 233 |     |         bool _isFastTransfer
+ 234 |     |     ) external {
+ 235 | *   |         require(_isFastTransfer, "!fast transfer");
+ 236 | *   |         require(_amount > 0, "!amount");
+ 237 |     | 
+ 238 |     |         bytes32 _id = _preFillId(
+ 239 |     |             _origin,
+ 240 |     |             _nonce,
+ 241 |     |             _tokenDomain,
+ 242 |     |             _tokenId,
+ 243 |     |             _recipient,
+ 244 |     |             _amount,
+ 245 |     |             _isFastTransfer
+ 246 |     |         );
+ 247 |     |         require(approvedPrefill[_id], "!approved");
+ 248 |     |         require(liquidityProvider[_id] == address(0), "!unfilled");
+ 249 |     |         liquidityProvider[_id] = msg.sender;
+ 250 |     |         delete approvedPrefill[_id];
+ 251 |     | 
+ 252 |     |         address _token = tokenRegistry.mustHaveLocalToken(_tokenDomain, _tokenId);
+ 253 |     |         uint256 _afterFee = _applyPreFillFee(_amount);
+ 254 |     |         require(
+ 255 |     |             IERC20Like(_token).transferFrom(msg.sender, _recipient, _afterFee),
+ 256 |     |             "!transferFrom"
+ 257 |     |         );
+ 258 |     |         _dust(_recipient);
+ 259 |     |     }
+ 260 |     | 
+ 261 |     |     function _preFillId(
+ 262 |     |         uint32 _origin,
+ 263 |     |         uint32 _nonce,
+ 264 |     |         uint32 _tokenDomain,
+ 265 |     |         bytes32 _tokenId,
+ 266 |     |         address _recipient,
+ 267 |     |         uint256 _amount,
+ 268 |     |         bool _isFastTransfer
+ 269 |     |     ) internal pure returns (bytes32) {
+ 270 |     |         return
+ 271 |     |             keccak256(
+ 272 |     |                 abi.encodePacked(
+ 273 |     |                     _origin,
+ 274 |     |                     _nonce,
+ 275 |     |                     _tokenDomain,
+ 276 |     |                     _tokenId,
+ 277 |     |                     _recipient,
+ 278 |     |                     _amount,
+ 279 |     |                     _isFastTransfer
+ 280 |     |                 )
+ 281 |     |             );
+ 282 |     |     }
+ 283 |     | 
+ 284 |     |     function _applyPreFillFee(uint256 _amount)
+ 285 |     |         internal
+ 286 |     |         pure
+ 287 |     |         returns (uint256)
+ 288 |     |     {
+ 289 |     |         return (_amount * PRE_FILL_FEE_NUMERATOR) / PRE_FILL_FEE_DENOMINATOR;
+ 290 |     |     }
+ 291 |     | 
+ 292 |     |     function _dust(address _recipient) internal {
+ 293 |     |         if (dustedWei[_recipient] < DUST_AMOUNT && dustPoolWei >= DUST_AMOUNT) {
+ 294 |     |             dustPoolWei -= DUST_AMOUNT;
+ 295 |     |             dustedWei[_recipient] += DUST_AMOUNT;
+ 296 |     |         }
+ 297 |     |     }
+ 298 |     | }
+ 299 |     | 
+
+C:/Users/vboxuser/Desktop/Repos/zklibreports/proof_harness/cat1_nomad_f1_stale_replica/src/MedusaBridgePrefillDustHarness.sol
+   1 |     | // SPDX-License-Identifier: MIT
+   2 |     | pragma solidity ^0.8.24;
+   3 |     | 
+   4 |     | import {
+   5 |     |     BridgeRouterPrefillDustBugModel,
+   6 |     |     BridgeRouterPrefillDustFixedModel,
+   7 |     |     DustReceiver,
+   8 |     |     MockZeroAwareToken,
+   9 |     |     TokenRegistryPrefillModel
+  10 |     | } from "./BridgePrefillDustDrainHarness.sol";
+  11 |     | 
+  12 |     | /// @notice Stateful harness for forged preFill dust-drain behavior.
+  13 | *   | contract MedusaBridgePrefillDustHarness {
+  14 | *   |     uint32 internal constant LOCAL_DOMAIN = 2000;
+  15 | *   |     uint32 internal constant ORIGIN_DOMAIN = 1000;
+  16 |     | 
+  17 |     |     TokenRegistryPrefillModel public bugRegistry;
+  18 |     |     TokenRegistryPrefillModel public fixedRegistry;
+  19 |     |     BridgeRouterPrefillDustBugModel public bugRouter;
+  20 |     |     BridgeRouterPrefillDustFixedModel public fixedRouter;
+  21 |     |     MockZeroAwareToken public bugToken;
+  22 |     |     MockZeroAwareToken public fixedToken;
+  23 |     | 
+  24 |     |     bool public bugDustDrainObserved;
+  25 |     |     bool public fixedDustDrainObserved;
+  26 |     | 
+  27 | *   |     constructor() {
+  28 | *   |         bugRegistry = new TokenRegistryPrefillModel(LOCAL_DOMAIN);
+  29 | *   |         fixedRegistry = new TokenRegistryPrefillModel(LOCAL_DOMAIN);
+  30 | *   |         bugRouter = new BridgeRouterPrefillDustBugModel(address(bugRegistry));
+  31 | *   |         fixedRouter = new BridgeRouterPrefillDustFixedModel(
+  32 | *   |             address(fixedRegistry)
+  33 |     |         );
+  34 | *   |         bugToken = new MockZeroAwareToken();
+  35 | *   |         fixedToken = new MockZeroAwareToken();
+  36 | *   |         bugRouter.seedDustPool(1 ether);
+  37 | *   |         fixedRouter.seedDustPool(1 ether);
+  38 |     |     }
+  39 |     | 
+  40 | *   |     function _tokenId(address _token) internal pure returns (bytes32) {
+  41 | *   |         return bytes32(uint256(uint160(_token)));
+  42 |     |     }
+  43 |     | 
+  44 | *   |     function action_tryForgedBugPrefill(uint32 _nonce) external {
+  45 | *   |         DustReceiver _receiver = new DustReceiver();
+  46 | *   |         try
+  47 | *   |             bugRouter.preFill(
+  48 |     |                 ORIGIN_DOMAIN,
+  49 | *   |                 _nonce,
+  50 |     |                 LOCAL_DOMAIN,
+  51 | *   |                 _tokenId(address(bugToken)),
+  52 | *   |                 address(_receiver),
+  53 | *   |                 0,
+  54 | *   |                 true
+  55 |     |             )
+  56 |     |         {
+  57 | *   |             if (
+  58 | *   |                 bugRouter.dustedWei(address(_receiver)) == bugRouter.DUST_AMOUNT()
+  59 |     |             ) {
+  60 | *   |                 bugDustDrainObserved = true;
+  61 |     |             }
+  62 |     |         } catch {}
+  63 |     |     }
+  64 |     | 
+  65 | *   |     function action_tryForgedFixedPrefill(uint32 _nonce) external {
+  66 | *   |         DustReceiver _receiver = new DustReceiver();
+  67 | *   |         try
+  68 | *   |             fixedRouter.preFill(
+  69 |     |                 ORIGIN_DOMAIN,
+  70 | *   |                 _nonce,
+  71 |     |                 LOCAL_DOMAIN,
+  72 | *   |                 _tokenId(address(fixedToken)),
+  73 | *   |                 address(_receiver),
+  74 | *   |                 0,
+  75 | *   |                 true
+  76 |     |             )
+  77 |     |         {
+  78 |     |             if (
+  79 |     |                 fixedRouter.dustedWei(address(_receiver)) ==
+  80 |     |                 fixedRouter.DUST_AMOUNT()
+  81 |     |             ) {
+  82 |     |                 fixedDustDrainObserved = true;
+  83 |     |             }
+  84 |     |         } catch {}
+  85 |     |     }
+  86 |     | 
+  87 |     |     /// @notice Forged zero-amount preFill should never drain dust.
+  88 |     |     function property_forged_prefill_cannot_drain_dust()
+  89 |     |         external
+  90 |     |         view
+  91 |     |         returns (bool)
+  92 |     |     {
+  93 |     |         return !bugDustDrainObserved;
+  94 |     |     }
+  95 |     | 
+  96 |     |     /// @notice Fixed model blocks forged preFill path.
+  97 |     |     function property_fixed_model_blocks_forged_prefill()
+  98 |     |         external
+  99 |     |         view
+ 100 |     |         returns (bool)
+ 101 |     |     {
+ 102 |     |         return !fixedDustDrainObserved;
+ 103 |     |     }
+ 104 |     | 
+ 105 |     |     /// @notice Echidna-compatible alias for forged preFill dust-drain property.
+ 106 |     |     function echidna_forged_prefill_cannot_drain_dust()
+ 107 |     |         external
+ 108 |     |         view
+ 109 |     |         returns (bool)
+ 110 |     |     {
+ 111 |     |         return !bugDustDrainObserved;
+ 112 |     |     }
+ 113 |     | }
+ 114 |     | 
+

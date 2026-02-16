@@ -1,0 +1,145 @@
+    1: // SPDX-License-Identifier: AGPL-3.0
+    2: pragma solidity 0.8.24;
+    3: 
+    4: import { Initializable } from "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
+    5: import { PauseManager } from "../../lib/PauseManager.sol";
+    6: import { RateLimiter } from "../../lib/RateLimiter.sol";
+    7: import { L1MessageManagerV1 } from "./L1MessageManagerV1.sol";
+    8: import { TransientStorageReentrancyGuardUpgradeable } from "../TransientStorageReentrancyGuardUpgradeable.sol";
+    9: import { IMessageService } from "../../../interfaces/IMessageService.sol";
+   10: import { TransientStorageHelpers } from "../../lib/TransientStorageHelpers.sol";
+   11: 
+   12: /**
+   13:  * @title Contract to manage cross-chain messaging on L1.
+   14:  * @author ConsenSys Software Inc.
+   15:  * @custom:security-contact security-report@linea.build
+   16:  */
+   17: abstract contract L1MessageServiceV1 is
+   18:   Initializable,
+   19:   RateLimiter,
+   20:   L1MessageManagerV1,
+   21:   TransientStorageReentrancyGuardUpgradeable,
+   22:   PauseManager,
+   23:   IMessageService
+   24: {
+   25:   // @dev This is initialised to save user cost with existing slot.
+   26:   uint256 public nextMessageNumber;
+   27: 
+   28:   /// @dev DEPRECATED in favor of new transient storage with `MESSAGE_SENDER_TRANSIENT_KEY` key.
+   29:   address internal _messageSender;
+   30: 
+   31:   /// @dev Total contract storage is 52 slots including the gap below.
+   32:   /// @dev Keep 50 free storage slots for future implementation updates to avoid storage collision.
+   33:   uint256[50] private __gap;
+   34: 
+   35:   /// @dev adding these should not affect storage as they are constants and are stored in bytecode.
+   36:   uint256 internal constant REFUND_OVERHEAD_IN_GAS = 48252;
+   37: 
+   38:   bytes32 internal constant MESSAGE_SENDER_TRANSIENT_KEY =
+   39:     bytes32(uint256(keccak256("eip1967.message.sender.transient.key")) - 1);
+   40: 
+   41:   address internal constant DEFAULT_MESSAGE_SENDER_TRANSIENT_VALUE = address(0);
+   42: 
+   43:   /**
+   44:    * @notice The unspent fee is refunded if applicable.
+   45:    * @param _feeInWei The fee paid for delivery in Wei.
+   46:    * @param _to The recipient of the message and gas refund.
+   47:    * @param _calldata The calldata of the message.
+   48:    */
+   49:   modifier distributeFees(
+   50:     uint256 _feeInWei,
+   51:     address _to,
+   52:     bytes calldata _calldata,
+   53:     address _feeRecipient
+   54:   ) {
+   55:     //pre-execution
+   56:     uint256 startingGas = gasleft();
+   57:     _;
+   58:     //post-execution
+   59: 
+   60:     // we have a fee
+   61:     if (_feeInWei > 0) {
+   62:       // default postman fee
+   63:       uint256 deliveryFee = _feeInWei;
+   64: 
+   65:       // do we have empty calldata?
+   66:       if (_calldata.length == 0) {
+   67:         bool isDestinationEOA;
+   68: 
+   69:         assembly {
+   70:           isDestinationEOA := iszero(extcodesize(_to))
+   71:         }
+   72: 
+   73:         // are we calling an EOA
+   74:         if (isDestinationEOA) {
+   75:           // initial + cost to call and refund minus gasleft
+   76:           deliveryFee = (startingGas + REFUND_OVERHEAD_IN_GAS - gasleft()) * tx.gasprice;
+   77: 
+   78:           if (_feeInWei > deliveryFee) {
+   79:             payable(_to).send(_feeInWei - deliveryFee);
+   80:           } else {
+   81:             deliveryFee = _feeInWei;
+   82:           }
+   83:         }
+   84:       }
+   85: 
+   86:       address feeReceiver = _feeRecipient == address(0) ? msg.sender : _feeRecipient;
+   87: 
+   88:       bool callSuccess = payable(feeReceiver).send(deliveryFee);
+   89:       if (!callSuccess) {
+   90:         revert FeePaymentFailed(feeReceiver);
+   91:       }
+   92:     }
+   93:   }
+   94: 
+   95:   /**
+   96:    * @notice Claims and delivers a cross-chain message.
+   97:    * @dev _feeRecipient can be set to address(0) to receive as msg.sender.
+   98:    * @dev _messageSender is set temporarily when claiming and reset post. Used in sender().
+   99:    * @dev _messageSender is reset to DEFAULT_SENDER_ADDRESS to be more gas efficient.
+  100:    * @param _from The address of the original sender.
+  101:    * @param _to The address the message is intended for.
+  102:    * @param _fee The fee being paid for the message delivery.
+  103:    * @param _value The value to be transferred to the destination address.
+  104:    * @param _feeRecipient The recipient for the fee.
+  105:    * @param _calldata The calldata to pass to the recipient.
+  106:    * @param _nonce The unique auto generated nonce used when sending the message.
+  107:    */
+  108:   function claimMessage(
+  109:     address _from,
+  110:     address _to,
+  111:     uint256 _fee,
+  112:     uint256 _value,
+  113:     address payable _feeRecipient,
+  114:     bytes calldata _calldata,
+  115:     uint256 _nonce
+  116:   ) external nonReentrant distributeFees(_fee, _to, _calldata, _feeRecipient) {
+  117:     _requireTypeAndGeneralNotPaused(L2_L1_PAUSE_TYPE);
+  118: 
+  119:     /// @dev This is placed earlier to fix the stack issue by using these two earlier on.
+  120:     TransientStorageHelpers.tstoreAddress(MESSAGE_SENDER_TRANSIENT_KEY, _from);
+  121: 
+  122:     bytes32 messageHash = keccak256(abi.encode(_from, _to, _fee, _value, _nonce, _calldata));
+  123: 
+  124:     // @dev Status check and revert is in the message manager.
+  125:     _updateL2L1MessageStatusToClaimed(messageHash);
+  126: 
+  127:     _addUsedAmount(_fee + _value);
+  128: 
+  129:     (bool callSuccess, bytes memory returnData) = _to.call{ value: _value }(_calldata);
+  130:     if (!callSuccess) {
+  131:       if (returnData.length > 0) {
+  132:         assembly {
+  133:           let data_size := mload(returnData)
+  134:           revert(add(32, returnData), data_size)
+  135:         }
+  136:       } else {
+  137:         revert MessageSendingFailed(_to);
+  138:       }
+  139:     }
+  140: 
+  141:     TransientStorageHelpers.tstoreAddress(MESSAGE_SENDER_TRANSIENT_KEY, DEFAULT_MESSAGE_SENDER_TRANSIENT_VALUE);
+  142: 
+  143:     emit MessageClaimed(messageHash);
+  144:   }
+  145: }

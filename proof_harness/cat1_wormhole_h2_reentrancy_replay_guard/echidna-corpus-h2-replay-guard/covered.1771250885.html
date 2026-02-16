@@ -1,0 +1,291 @@
+<style> code { white-space: pre-wrap; display: block; background-color: #eee; }.executed { background-color: #afa; }.reverted { background-color: #ffa; }.unexecuted { background-color: #faa; }.neutral { background-color: #eee; }</style><b>C:/Users/vboxuser/Desktop/Repos/zklibreports/proof_harness/cat1_wormhole_h2_reentrancy_replay_guard/src/MedusaReentrancyReplayHarness.sol</b>
+<code>
+   1 |     | <span class='unexecuted'>// SPDX-License-Identifier: MIT</span>
+   2 |     | <span class='neutral'>pragma solidity ^0.8.24;</span>
+   3 |     | <span class='neutral'></span>
+   4 |     | <span class='neutral'>import {</span>
+   5 |     | <span class='neutral'>    BridgeReplayBugModel,</span>
+   6 |     | <span class='neutral'>    BridgeReplayGuardModel,</span>
+   7 |     | <span class='neutral'>    MockReentrantToken</span>
+   8 |     | <span class='neutral'>} from &quot;./ReentrancyReplayHarness.sol&quot;;</span>
+   9 |     | <span class='neutral'></span>
+  10 |     | <span class='neutral'>/// @notice Stateful specialist-fuzz harness for same-VM redemption reentrancy.</span>
+  11 | *r  | <span class='executed'>contract MedusaReentrancyReplayHarness {</span>
+  12 | *   | <span class='executed'>    uint256 internal constant INITIAL_MINT = 1_000_000 ether;</span>
+  13 | *   | <span class='executed'>    uint256 internal constant MAX_STEP = 1_000 ether;</span>
+  14 |     | <span class='neutral'></span>
+  15 | *   | <span class='executed'>    BridgeReplayBugModel public bugModel;</span>
+  16 | *   | <span class='executed'>    BridgeReplayGuardModel public guardModel;</span>
+  17 | *   | <span class='executed'>    MockReentrantToken public bugToken;</span>
+  18 | *   | <span class='executed'>    MockReentrantToken public guardToken;</span>
+  19 |     | <span class='neutral'></span>
+  20 | *   | <span class='executed'>    uint256 public vmNonce;</span>
+  21 |     | <span class='unexecuted'>    bool public bugDoubleRedeemObserved;</span>
+  22 | *   | <span class='executed'>    bool public guardDoubleRedeemObserved;</span>
+  23 |     | <span class='neutral'></span>
+  24 | *   | <span class='executed'>    constructor() {</span>
+  25 | *   | <span class='executed'>        bugModel = new BridgeReplayBugModel();</span>
+  26 | *   | <span class='executed'>        guardModel = new BridgeReplayGuardModel();</span>
+  27 | *   | <span class='executed'>        bugToken = new MockReentrantToken(address(bugModel));</span>
+  28 | *   | <span class='executed'>        guardToken = new MockReentrantToken(address(guardModel));</span>
+  29 |     | <span class='neutral'></span>
+  30 | *   | <span class='executed'>        bugToken.mint(address(this), INITIAL_MINT);</span>
+  31 | *   | <span class='executed'>        guardToken.mint(address(this), INITIAL_MINT);</span>
+  32 |     | <span class='neutral'></span>
+  33 | *   | <span class='executed'>        bugToken.approve(address(bugModel), type(uint256).max);</span>
+  34 | *   | <span class='executed'>        guardToken.approve(address(guardModel), type(uint256).max);</span>
+  35 |     | <span class='neutral'>    }</span>
+  36 |     | <span class='neutral'></span>
+  37 | *   | <span class='executed'>    function _amount(uint256 seed) internal pure returns (uint256) {</span>
+  38 | *   | <span class='executed'>        return (seed % MAX_STEP) + 1;</span>
+  39 |     | <span class='neutral'>    }</span>
+  40 |     | <span class='neutral'></span>
+  41 | *   | <span class='executed'>    function _newVmHash(string memory tag, uint256 seed) internal returns (bytes32) {</span>
+  42 | *   | <span class='executed'>        vmNonce += 1;</span>
+  43 | *   | <span class='executed'>        return keccak256(abi.encodePacked(tag, seed, vmNonce));</span>
+  44 |     | <span class='neutral'>    }</span>
+  45 |     | <span class='neutral'></span>
+  46 | *   | <span class='executed'>    function action_bug_same_vm_reentry(uint96 amountSeed) external {</span>
+  47 | *   | <span class='executed'>        uint256 amount = _amount(amountSeed);</span>
+  48 | *   | <span class='executed'>        bugModel.seed(address(bugToken), address(this), amount * 2);</span>
+  49 |     | <span class='neutral'></span>
+  50 | *   | <span class='executed'>        bytes32 vmHash = _newVmHash(&quot;bug&quot;, amountSeed);</span>
+  51 | *   | <span class='executed'>        bugModel.registerTransfer(vmHash, address(bugToken), address(this), amount);</span>
+  52 | *   | <span class='executed'>        bugToken.configureHook(vmHash, true);</span>
+  53 |     | <span class='neutral'></span>
+  54 | *   | <span class='executed'>        try bugModel.completeTransfer(vmHash) {} catch {}</span>
+  55 | *   | <span class='executed'>        if (bugModel.redeemCount(vmHash) &gt; 1) {</span>
+  56 | *   | <span class='executed'>            bugDoubleRedeemObserved = true;</span>
+  57 |     | <span class='neutral'>        }</span>
+  58 |     | <span class='neutral'>    }</span>
+  59 |     | <span class='neutral'></span>
+  60 | *   | <span class='executed'>    function action_guard_same_vm_reentry(uint96 amountSeed) external {</span>
+  61 | *   | <span class='executed'>        uint256 amount = _amount(amountSeed);</span>
+  62 | *   | <span class='executed'>        guardModel.seed(address(guardToken), address(this), amount * 2);</span>
+  63 |     | <span class='neutral'></span>
+  64 | *   | <span class='executed'>        bytes32 vmHash = _newVmHash(&quot;guard&quot;, amountSeed);</span>
+  65 | *   | <span class='executed'>        guardModel.registerTransfer(vmHash, address(guardToken), address(this), amount);</span>
+  66 | *   | <span class='executed'>        guardToken.configureHook(vmHash, true);</span>
+  67 |     | <span class='neutral'></span>
+  68 | *   | <span class='executed'>        try guardModel.completeTransfer(vmHash) {} catch {}</span>
+  69 | *   | <span class='executed'>        if (guardModel.redeemCount(vmHash) &gt; 1) {</span>
+  70 |     | <span class='unexecuted'>            guardDoubleRedeemObserved = true;</span>
+  71 |     | <span class='neutral'>        }</span>
+  72 |     | <span class='neutral'>    }</span>
+  73 |     | <span class='neutral'></span>
+  74 |     | <span class='neutral'>    /// @notice Negative-control property: expected to fail in bug model.</span>
+  75 | *   | <span class='executed'>    function property_bug_model_same_vm_reentry_should_not_double_redeem()</span>
+  76 |     | <span class='neutral'>        external</span>
+  77 |     | <span class='neutral'>        view</span>
+  78 | *   | <span class='executed'>        returns (bool)</span>
+  79 |     | <span class='neutral'>    {</span>
+  80 | *   | <span class='executed'>        return !bugDoubleRedeemObserved;</span>
+  81 |     | <span class='neutral'>    }</span>
+  82 |     | <span class='neutral'></span>
+  83 |     | <span class='neutral'>    /// @notice Target property: guard ordering should block same-VM double redeem.</span>
+  84 |     | <span class='unexecuted'>    function property_guard_model_same_vm_reentry_should_not_double_redeem()</span>
+  85 |     | <span class='neutral'>        external</span>
+  86 |     | <span class='neutral'>        view</span>
+  87 |     | <span class='unexecuted'>        returns (bool)</span>
+  88 |     | <span class='neutral'>    {</span>
+  89 |     | <span class='unexecuted'>        return !guardDoubleRedeemObserved;</span>
+  90 |     | <span class='neutral'>    }</span>
+  91 |     | <span class='neutral'></span>
+  92 |     | <span class='neutral'>    /// @notice Echidna-compatible alias for target property.</span>
+  93 |     | <span class='unexecuted'>    function echidna_guard_model_same_vm_reentry_should_not_double_redeem()</span>
+  94 |     | <span class='neutral'>        external</span>
+  95 |     | <span class='neutral'>        view</span>
+  96 |     | <span class='unexecuted'>        returns (bool)</span>
+  97 |     | <span class='neutral'>    {</span>
+  98 |     | <span class='unexecuted'>        return !guardDoubleRedeemObserved;</span>
+  99 |     | <span class='neutral'>    }</span>
+ 100 |     | <span class='neutral'>}</span>
+ 101 |     | <span class='neutral'></span>
+ 102 |     | <span class='neutral'></span>
+
+</code>
+<br />
+
+<b>C:/Users/vboxuser/Desktop/Repos/zklibreports/proof_harness/cat1_wormhole_h2_reentrancy_replay_guard/src/ReentrancyReplayHarness.sol</b>
+<code>
+   1 |     | <span class='neutral'>// SPDX-License-Identifier: MIT</span>
+   2 |     | <span class='neutral'>pragma solidity ^0.8.24;</span>
+   3 |     | <span class='neutral'></span>
+   4 |     | <span class='neutral'>interface IBridgeRedeemer {</span>
+   5 |     | <span class='neutral'>    function completeTransfer(bytes32 vmHash) external;</span>
+   6 |     | <span class='neutral'>}</span>
+   7 |     | <span class='neutral'></span>
+   8 |     | <span class='neutral'>interface IERC20LikeR {</span>
+   9 |     | <span class='neutral'>    function balanceOf(address account) external view returns (uint256);</span>
+  10 |     | <span class='neutral'>    function transfer(address to, uint256 amount) external returns (bool);</span>
+  11 |     | <span class='neutral'>    function transferFrom(address from, address to, uint256 amount) external returns (bool);</span>
+  12 |     | <span class='neutral'>}</span>
+  13 |     | <span class='neutral'></span>
+  14 |     | <span class='neutral'>struct ReplayTransfer {</span>
+  15 |     | <span class='neutral'>    address token;</span>
+  16 |     | <span class='neutral'>    address recipient;</span>
+  17 |     | <span class='neutral'>    uint256 amount;</span>
+  18 |     | <span class='neutral'>    bool valid;</span>
+  19 |     | <span class='neutral'>}</span>
+  20 |     | <span class='neutral'></span>
+  21 |     | <span class='neutral'>/// @notice Token that can reenter bridge redemption once during bridge-originated transfer.</span>
+  22 | *   | <span class='executed'>contract MockReentrantToken {</span>
+  23 |     | <span class='unexecuted'>    string public constant name = &quot;Reentrant Token&quot;;</span>
+  24 |     | <span class='unexecuted'>    string public constant symbol = &quot;RNT&quot;;</span>
+  25 |     | <span class='unexecuted'>    uint8 public constant decimals = 18;</span>
+  26 |     | <span class='neutral'></span>
+  27 |     | <span class='unexecuted'>    address public immutable bridge;</span>
+  28 |     | <span class='neutral'></span>
+  29 |     | <span class='unexecuted'>    mapping(address =&gt; uint256) public balanceOf;</span>
+  30 |     | <span class='unexecuted'>    mapping(address =&gt; mapping(address =&gt; uint256)) public allowance;</span>
+  31 |     | <span class='neutral'></span>
+  32 |     | <span class='unexecuted'>    bool public hookEnabled;</span>
+  33 |     | <span class='unexecuted'>    bool public entered;</span>
+  34 |     | <span class='unexecuted'>    bytes32 public hookVmHash;</span>
+  35 |     | <span class='neutral'></span>
+  36 | *   | <span class='executed'>    constructor(address _bridge) {</span>
+  37 | *   | <span class='executed'>        require(_bridge != address(0), &quot;bridge=0&quot;);</span>
+  38 | *   | <span class='executed'>        bridge = _bridge;</span>
+  39 |     | <span class='neutral'>    }</span>
+  40 |     | <span class='neutral'></span>
+  41 | *   | <span class='executed'>    function mint(address to, uint256 amount) external {</span>
+  42 | *   | <span class='executed'>        balanceOf[to] += amount;</span>
+  43 |     | <span class='neutral'>    }</span>
+  44 |     | <span class='neutral'></span>
+  45 | *   | <span class='executed'>    function approve(address spender, uint256 amount) external returns (bool) {</span>
+  46 | *   | <span class='executed'>        allowance[msg.sender][spender] = amount;</span>
+  47 | *   | <span class='executed'>        return true;</span>
+  48 |     | <span class='neutral'>    }</span>
+  49 |     | <span class='neutral'></span>
+  50 | *   | <span class='executed'>    function configureHook(bytes32 vmHash, bool enabled) external {</span>
+  51 | *   | <span class='executed'>        hookVmHash = vmHash;</span>
+  52 | *   | <span class='executed'>        hookEnabled = enabled;</span>
+  53 | *   | <span class='executed'>        entered = false;</span>
+  54 |     | <span class='neutral'>    }</span>
+  55 |     | <span class='neutral'></span>
+  56 | *   | <span class='executed'>    function transfer(address to, uint256 amount) external returns (bool) {</span>
+  57 | *   | <span class='executed'>        _move(msg.sender, to, amount);</span>
+  58 | *   | <span class='executed'>        return true;</span>
+  59 |     | <span class='neutral'>    }</span>
+  60 |     | <span class='neutral'></span>
+  61 | *   | <span class='executed'>    function transferFrom(address from, address to, uint256 amount)</span>
+  62 |     | <span class='neutral'>        external</span>
+  63 | *   | <span class='executed'>        returns (bool)</span>
+  64 |     | <span class='neutral'>    {</span>
+  65 | *   | <span class='executed'>        if (msg.sender != from) {</span>
+  66 | *   | <span class='executed'>            uint256 allowed = allowance[from][msg.sender];</span>
+  67 | *   | <span class='executed'>            require(allowed &gt;= amount, &quot;!allowance&quot;);</span>
+  68 |     | <span class='neutral'>            unchecked {</span>
+  69 | *   | <span class='executed'>                allowance[from][msg.sender] = allowed - amount;</span>
+  70 |     | <span class='neutral'>            }</span>
+  71 |     | <span class='neutral'>        }</span>
+  72 | *   | <span class='executed'>        _move(from, to, amount);</span>
+  73 | *   | <span class='executed'>        return true;</span>
+  74 |     | <span class='neutral'>    }</span>
+  75 |     | <span class='neutral'></span>
+  76 | *   | <span class='executed'>    function _move(address from, address to, uint256 amount) internal {</span>
+  77 | *   | <span class='executed'>        uint256 bal = balanceOf[from];</span>
+  78 | *   | <span class='executed'>        require(bal &gt;= amount, &quot;!balance&quot;);</span>
+  79 |     | <span class='neutral'>        unchecked {</span>
+  80 | *   | <span class='executed'>            balanceOf[from] = bal - amount;</span>
+  81 |     | <span class='neutral'>        }</span>
+  82 | *   | <span class='executed'>        balanceOf[to] += amount;</span>
+  83 |     | <span class='neutral'></span>
+  84 | *   | <span class='executed'>        if (from == bridge &amp;&amp; hookEnabled &amp;&amp; !entered) {</span>
+  85 | *   | <span class='executed'>            entered = true;</span>
+  86 |     | <span class='neutral'>            // Reentrancy trigger is intentionally swallowed if rejected.</span>
+  87 | *   | <span class='executed'>            try IBridgeRedeemer(bridge).completeTransfer(hookVmHash) {} catch {}</span>
+  88 |     | <span class='neutral'>        }</span>
+  89 |     | <span class='neutral'>    }</span>
+  90 |     | <span class='neutral'>}</span>
+  91 |     | <span class='neutral'></span>
+  92 |     | <span class='neutral'>/// @notice Control bug model: marks transfer completed after external token transfer.</span>
+  93 |     | <span class='neutral'>/// This ordering is intentionally vulnerable to same-VM reentrancy double redemption.</span>
+  94 | *   | <span class='executed'>contract BridgeReplayBugModel is IBridgeRedeemer {</span>
+  95 |     | <span class='unexecuted'>    mapping(address =&gt; uint256) public outstanding;</span>
+  96 |     | <span class='unexecuted'>    mapping(bytes32 =&gt; bool) public completed;</span>
+  97 | *   | <span class='executed'>    mapping(bytes32 =&gt; uint256) public redeemCount;</span>
+  98 |     | <span class='unexecuted'>    mapping(bytes32 =&gt; ReplayTransfer) public transfers;</span>
+  99 |     | <span class='neutral'></span>
+ 100 | *   | <span class='executed'>    function seed(address token, address from, uint256 amount) external {</span>
+ 101 | *   | <span class='executed'>        require(IERC20LikeR(token).transferFrom(from, address(this), amount), &quot;seed transferFrom failed&quot;);</span>
+ 102 | *   | <span class='executed'>        outstanding[token] += amount;</span>
+ 103 |     | <span class='neutral'>    }</span>
+ 104 |     | <span class='neutral'></span>
+ 105 | *   | <span class='executed'>    function registerTransfer(</span>
+ 106 |     | <span class='neutral'>        bytes32 vmHash,</span>
+ 107 |     | <span class='neutral'>        address token,</span>
+ 108 |     | <span class='neutral'>        address recipient,</span>
+ 109 |     | <span class='neutral'>        uint256 amount</span>
+ 110 |     | <span class='neutral'>    ) external {</span>
+ 111 | *   | <span class='executed'>        transfers[vmHash] = ReplayTransfer({</span>
+ 112 | *   | <span class='executed'>            token: token,</span>
+ 113 | *   | <span class='executed'>            recipient: recipient,</span>
+ 114 | *   | <span class='executed'>            amount: amount,</span>
+ 115 | *   | <span class='executed'>            valid: true</span>
+ 116 |     | <span class='neutral'>        });</span>
+ 117 |     | <span class='neutral'>    }</span>
+ 118 |     | <span class='neutral'></span>
+ 119 | *   | <span class='executed'>    function completeTransfer(bytes32 vmHash) external override {</span>
+ 120 | *   | <span class='executed'>        ReplayTransfer memory t = transfers[vmHash];</span>
+ 121 | *   | <span class='executed'>        require(t.valid, &quot;invalid vm&quot;);</span>
+ 122 | *   | <span class='executed'>        require(!completed[vmHash], &quot;transfer already completed&quot;);</span>
+ 123 | *   | <span class='executed'>        require(outstanding[t.token] &gt;= t.amount, &quot;insufficient outstanding&quot;);</span>
+ 124 |     | <span class='neutral'></span>
+ 125 | *   | <span class='executed'>        require(IERC20LikeR(t.token).transfer(t.recipient, t.amount), &quot;transfer failed&quot;);</span>
+ 126 |     | <span class='neutral'></span>
+ 127 | *   | <span class='executed'>        completed[vmHash] = true;</span>
+ 128 |     | <span class='neutral'>        unchecked {</span>
+ 129 | *   | <span class='executed'>            outstanding[t.token] -= t.amount;</span>
+ 130 |     | <span class='neutral'>        }</span>
+ 131 | *   | <span class='executed'>        redeemCount[vmHash] += 1;</span>
+ 132 |     | <span class='neutral'>    }</span>
+ 133 |     | <span class='neutral'>}</span>
+ 134 |     | <span class='neutral'></span>
+ 135 |     | <span class='neutral'>/// @notice Guard model matching Wormhole&#39;s key safety ordering:</span>
+ 136 |     | <span class='neutral'>/// mark completed and update accounting before external token transfer.</span>
+ 137 | *   | <span class='executed'>contract BridgeReplayGuardModel is IBridgeRedeemer {</span>
+ 138 |     | <span class='unexecuted'>    mapping(address =&gt; uint256) public outstanding;</span>
+ 139 |     | <span class='unexecuted'>    mapping(bytes32 =&gt; bool) public completed;</span>
+ 140 | *   | <span class='executed'>    mapping(bytes32 =&gt; uint256) public redeemCount;</span>
+ 141 |     | <span class='unexecuted'>    mapping(bytes32 =&gt; ReplayTransfer) public transfers;</span>
+ 142 |     | <span class='neutral'></span>
+ 143 | *   | <span class='executed'>    function seed(address token, address from, uint256 amount) external {</span>
+ 144 | *   | <span class='executed'>        require(IERC20LikeR(token).transferFrom(from, address(this), amount), &quot;seed transferFrom failed&quot;);</span>
+ 145 | *   | <span class='executed'>        outstanding[token] += amount;</span>
+ 146 |     | <span class='neutral'>    }</span>
+ 147 |     | <span class='neutral'></span>
+ 148 | *   | <span class='executed'>    function registerTransfer(</span>
+ 149 |     | <span class='neutral'>        bytes32 vmHash,</span>
+ 150 |     | <span class='neutral'>        address token,</span>
+ 151 |     | <span class='neutral'>        address recipient,</span>
+ 152 |     | <span class='neutral'>        uint256 amount</span>
+ 153 |     | <span class='neutral'>    ) external {</span>
+ 154 | *   | <span class='executed'>        transfers[vmHash] = ReplayTransfer({</span>
+ 155 | *   | <span class='executed'>            token: token,</span>
+ 156 | *   | <span class='executed'>            recipient: recipient,</span>
+ 157 | *   | <span class='executed'>            amount: amount,</span>
+ 158 | *   | <span class='executed'>            valid: true</span>
+ 159 |     | <span class='neutral'>        });</span>
+ 160 |     | <span class='neutral'>    }</span>
+ 161 |     | <span class='neutral'></span>
+ 162 | *   | <span class='executed'>    function completeTransfer(bytes32 vmHash) external override {</span>
+ 163 | *   | <span class='executed'>        ReplayTransfer memory t = transfers[vmHash];</span>
+ 164 | *   | <span class='executed'>        require(t.valid, &quot;invalid vm&quot;);</span>
+ 165 | *   | <span class='executed'>        require(!completed[vmHash], &quot;transfer already completed&quot;);</span>
+ 166 | *   | <span class='executed'>        completed[vmHash] = true;</span>
+ 167 | *   | <span class='executed'>        require(outstanding[t.token] &gt;= t.amount, &quot;insufficient outstanding&quot;);</span>
+ 168 |     | <span class='neutral'>        unchecked {</span>
+ 169 | *   | <span class='executed'>            outstanding[t.token] -= t.amount;</span>
+ 170 |     | <span class='neutral'>        }</span>
+ 171 |     | <span class='neutral'></span>
+ 172 | *   | <span class='executed'>        require(IERC20LikeR(t.token).transfer(t.recipient, t.amount), &quot;transfer failed&quot;);</span>
+ 173 | *   | <span class='executed'>        redeemCount[vmHash] += 1;</span>
+ 174 |     | <span class='neutral'>    }</span>
+ 175 |     | <span class='neutral'>}</span>
+ 176 |     | <span class='neutral'></span>
+ 177 |     | <span class='neutral'></span>
+
+</code>
+<br />
+

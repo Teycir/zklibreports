@@ -1,0 +1,38 @@
+{
+    "exitcode": 1,
+    "test_results": {
+        "test/HalmosF1WinnerFlip.t.sol:HalmosF1WinnerFlip": [
+            {
+                "name": "check_challenger_win_cannot_be_rewritten(bool)",
+                "exitcode": 1,
+                "num_models": 1,
+                "models": [
+                    {
+                        "model": {
+                            "p_defenderResult_bool_2dbdef0_00": {
+                                "full_name": "p_defenderResult_bool_2dbdef0_00",
+                                "variable_name": "defenderResult",
+                                "solidity_type": "bool",
+                                "smt_type": "BitVec 256",
+                                "size_bits": 256,
+                                "value": 0
+                            }
+                        },
+                        "is_valid": true
+                    }
+                ],
+                "num_paths": [
+                    3,
+                    1,
+                    0
+                ],
+                "time": [
+                    0.2675466000000597,
+                    0.06551719999697525,
+                    0.20202509999944596
+                ],
+                "num_bounded_loops": 0
+            }
+        ]
+    }
+}

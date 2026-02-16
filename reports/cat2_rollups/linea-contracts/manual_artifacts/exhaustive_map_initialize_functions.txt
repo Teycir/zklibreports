@@ -1,0 +1,7 @@
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts\contracts\LineaRollup.sol:84:  function initialize(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts\contracts\LineaRollup.sol:129:  function initializeParentShnarfsAndFinalizedState(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts\contracts\LineaRollupInit.sol:18:  function initializeV2(uint256 _initialL2BlockNumber, bytes32 _initialStateRootHash) external reinitializer(3) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts\contracts\tokenBridge\TokenBridge.sol:104:  function initialize(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts\contracts\messageService\l2\v1\L2MessageServiceV1.sol:60:  function initialize(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts\contracts\tokenBridge\CustomBridgedToken.sol:11:  function initializeV2(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts\contracts\tokenBridge\BridgedToken.sol:30:  function initialize(string memory _tokenName, string memory _tokenSymbol, uint8 _tokenDecimals) external initializer {

@@ -1,0 +1,51 @@
+{
+    "exitcode": 1,
+    "test_results": {
+        "test/HalmosTaikoF1GetBadgeBoundary.t.sol:HalmosTaikoF1GetBadgeBoundary": [
+            {
+                "name": "check_old_minted_token_must_be_readable()",
+                "exitcode": 1,
+                "num_models": 1,
+                "models": [
+                    {
+                        "model": {},
+                        "is_valid": true
+                    }
+                ],
+                "num_paths": [
+                    1,
+                    0,
+                    0
+                ],
+                "time": [
+                    0.14101029999437742,
+                    0.04060459999891464,
+                    0.10040220000519184
+                ],
+                "num_bounded_loops": 0
+            },
+            {
+                "name": "check_unminted_token_must_revert()",
+                "exitcode": 1,
+                "num_models": 1,
+                "models": [
+                    {
+                        "model": {},
+                        "is_valid": true
+                    }
+                ],
+                "num_paths": [
+                    1,
+                    0,
+                    0
+                ],
+                "time": [
+                    0.12137069999880623,
+                    0.02021249999961583,
+                    0.1011549999966519
+                ],
+                "num_bounded_loops": 0
+            }
+        ]
+    }
+}

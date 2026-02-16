@@ -1,0 +1,41 @@
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\cairo\lang\vm\cpp\trace_utils.inl:21:CpuMemory<FieldElementT> CpuMemory<FieldElementT>::ReadFile(std::istream* file) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\cairo\lang\vm\cpp\trace_utils.inl:29:    file->read(buffer_span.data(), buffer_span.size());
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\cairo\lang\vm\cpp\trace_utils.inl:40:    value = FieldElementT::FromBigInt(::starkware::Deserialize<FieldValueType>(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\cairo\lang\vm\cpp\trace_utils.inl:51:TraceEntry<FieldElementT> TraceEntry<FieldElementT>::Deserialize(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\cairo\lang\vm\cpp\trace_utils.inl:66:std::vector<TraceEntry<FieldElementT>> TraceEntry<FieldElementT>::ReadFile(std::istream* file) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\cairo\lang\vm\cpp\trace_utils.inl:71:    file->read(buffer_span.data(), buffer_span.size());
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\cairo\lang\vm\cpp\trace_utils.inl:82:    trace.push_back(Deserialize(buffer));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\cairo\lang\vm\cpp\trace_utils.h:42:  static CpuMemory<FieldElementT> ReadFile(std::istream* file);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\cairo\lang\vm\cpp\trace_utils.h:77:  static TraceEntry Deserialize(gsl::span<const std::byte> input);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\cairo\lang\vm\cpp\trace_utils.h:82:  static std::vector<TraceEntry> ReadFile(std::istream* file);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\randomness\hash_chain.cc:84:  auto big_int = Deserialize<BigInt<4>>(hash_.GetDigest());
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\utils\serialization_test.cc:54:    auto b = Deserialize<TypeParam>(buf);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\utils\serialization.inl:54:  static uint16_t Deserialize(const gsl::span<const std::byte> span) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\utils\serialization.inl:76:  static uint32_t Deserialize(const gsl::span<const std::byte> span) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\utils\serialization.inl:98:  static uint64_t Deserialize(const gsl::span<const std::byte> span) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\utils\serialization.inl:121:  static BigInt<N> Deserialize(const gsl::span<const std::byte> span) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\utils\serialization.inl:127:      value.at(index) = SerializationImpl<uint64_t, BigEndianSerialization>::Deserialize(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\utils\serialization.inl:140:T Deserialize(gsl::span<const std::byte> span) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\utils\serialization.inl:141:  return Deserialize<T>(span, UseBigEndianSerialization());
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\utils\serialization.inl:156:T Deserialize(const gsl::span<const std::byte> span, bool use_big_endian) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\utils\serialization.inl:158:    return SerializationImpl<T, true>::Deserialize(span);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\utils\serialization.inl:160:  return SerializationImpl<T, false>::Deserialize(span);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\utils\serialization.inl:177:  return Deserialize<BigInt<N>>(bytes, /*use_big_endian=*/true);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\utils\serialization.h:29:T Deserialize(gsl::span<const std::byte> span);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\utils\serialization.h:35:T Deserialize(gsl::span<const std::byte> span, bool use_big_endian);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\air\cpu\component\cpu_component.h:19:#include <istream>
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\utils\json.cc:34:    THROW_STARKWARE_EXCEPTION("Failed to parse JSON file: \"" + filename + "\"");
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\statement\cpu\cpu_air_statement.h:18:#include <istream>
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\statement\cpu\cpu_air_statement.h:68:      std::istream* trace_file, std::istream* memory_file) const;
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\statement\cpu\cpu_air_statement.cc:263:    std::istream* trace_file, std::istream* memory_file) const {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\algebra\fields\test_field_element.cc:38:    deserialization = Deserialize<uint32_t>(bytes);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\algebra\fields\test_field_element.cc:49:  uint32_t element = Deserialize<uint32_t>(bytes, use_big_endian);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\algebra\fields\test_field_element.cc:57:  return TestFieldElement(Deserialize<uint32_t>(as_bytes, /*use_big_endian=*/true));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\algebra\fields\long_field_element.cc:45:      Deserialize<uint64_t>(as_bytes, /*use_big_endian=*/true),
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\algebra\fields\long_field_element.cc:71:    deserialization = Deserialize<uint64_t>(bytes) & kReleventBits;
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\algebra\big_int.inl:252:  return Deserialize<BigInt>(bytes, use_big_endian);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\algebra\big_int.inl:265:  return Deserialize<BigInt>(as_bytes, /*use_big_endian=*/true);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\air\components\keccak\keccak.inl:52:  // Parse inputs and outputs to diluted form.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\noninteractive_channel_utils.cc:32:  uint64_t number = Deserialize<uint64_t>(raw_bytes);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\proof_of_work.inl:57:    const uint64_t digest_word = Deserialize<uint64_t>(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\proof_of_work.inl:137:  const uint64_t digest_word = Deserialize<uint64_t>(

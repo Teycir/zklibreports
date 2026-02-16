@@ -1,0 +1,22 @@
+    1: // SPDX-License-Identifier: AGPL-3.0
+    2: pragma solidity 0.8.24;
+    3: 
+    4: import { LineaRollup } from "./LineaRollup.sol";
+    5: 
+    6: /**
+    7:  * @title Contract to reinitialize cross-chain messaging on L1 and rollup proving.
+    8:  * @author ConsenSys Software Inc.
+    9:  * @dev Init indicates it is an initializer contract
+   10:  * @custom:security-contact security-report@linea.build
+   11:  */
+   12: contract LineaRollupInit is LineaRollup {
+   13:   /**
+   14:    * @notice Reinitializes LineaRollup and underlying service dependencies.
+   15:    * @param _initialStateRootHash The initial hash at migration used for proof verification.
+   16:    * @param _initialL2BlockNumber The initial block number at migration.
+   17:    */
+   18:   function initializeV2(uint256 _initialL2BlockNumber, bytes32 _initialStateRootHash) external reinitializer(3) {
+   19:     currentL2BlockNumber = _initialL2BlockNumber;
+   20:     stateRootHashes[_initialL2BlockNumber] = _initialStateRootHash;
+   21:   }
+   22: }

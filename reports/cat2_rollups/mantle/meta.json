@@ -1,0 +1,192 @@
+﻿{
+    "name":  "mantle",
+    "source_path":  "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\mantle",
+    "scanned_at_utc":  "2026-02-16 03:08:42 UTC",
+    "git":  {
+                "head":  "5cda5f811f73d9f331e6168617f87d3e19e6db6b",
+                "branch":  "main",
+                "remote_origin":  "https://github.com/mantlenetworkio/mantle"
+            },
+    "stacks":  [
+                   "go",
+                   "node",
+                   "solidity"
+               ],
+    "outputs":  {
+                    "gitleaks":  {
+                                     "name":  "gitleaks",
+                                     "file":  "gitleaks",
+                                     "args":  [
+                                                  "detect",
+                                                  "--source",
+                                                  "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\mantle",
+                                                  "--report-format",
+                                                  "json",
+                                                  "--report-path",
+                                                  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\mantle\\artifacts\\gitleaks.json",
+                                                  "--redact",
+                                                  "--no-banner",
+                                                  "--log-level",
+                                                  "error",
+                                                  "--timeout",
+                                                  "600"
+                                              ],
+                                     "arg_string":  "detect --source \\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\mantle --report-format json --report-path C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\mantle\\artifacts\\gitleaks.json --redact --no-banner --log-level error --timeout 600",
+                                     "runner":  "cmd.exe",
+                                     "runner_args":  [
+                                                         "/d",
+                                                         "/s",
+                                                         "/c",
+                                                         "gitleaks detect --source \\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\mantle --report-format json --report-path C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\mantle\\artifacts\\gitleaks.json --redact --no-banner --log-level error --timeout 600 1\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\mantle\\artifacts\\gitleaks.stdout.log 2\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\mantle\\artifacts\\gitleaks.stderr.log"
+                                                     ],
+                                     "cwd":  "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\mantle",
+                                     "start_utc":  "2026-02-16 03:08:51 UTC",
+                                     "end_utc":  "2026-02-16 03:10:34 UTC",
+                                     "duration_sec":  103,
+                                     "timed_out":  false,
+                                     "exit_code":  1,
+                                     "stdout":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\mantle\\artifacts\\gitleaks.stdout.log",
+                                     "stderr":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\mantle\\artifacts\\gitleaks.stderr.log",
+                                     "report":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\mantle\\artifacts\\gitleaks.json"
+                                 },
+                    "osv":  {
+                                "name":  "osv-scanner",
+                                "file":  "osv-scanner",
+                                "args":  [
+                                             "scan",
+                                             "source",
+                                             "-r",
+                                             "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\mantle",
+                                             "-f",
+                                             "json",
+                                             "--output",
+                                             "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\mantle\\artifacts\\osv.json",
+                                             "--allow-no-lockfiles",
+                                             "--verbosity",
+                                             "warn",
+                                             "--experimental-exclude",
+                                             "g:**/node_modules",
+                                             "--experimental-exclude",
+                                             "g:**/target",
+                                             "--experimental-exclude",
+                                             "g:**/.git",
+                                             "--experimental-exclude",
+                                             "g:**/dist",
+                                             "--experimental-exclude",
+                                             "g:**/build",
+                                             "--experimental-exclude",
+                                             "g:**/out"
+                                         ],
+                                "arg_string":  "scan source -r \\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\mantle -f json --output C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\mantle\\artifacts\\osv.json --allow-no-lockfiles --verbosity warn --experimental-exclude g:**/node_modules --experimental-exclude g:**/target --experimental-exclude g:**/.git --experimental-exclude g:**/dist --experimental-exclude g:**/build --experimental-exclude g:**/out",
+                                "runner":  "cmd.exe",
+                                "runner_args":  [
+                                                    "/d",
+                                                    "/s",
+                                                    "/c",
+                                                    "osv-scanner scan source -r \\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\mantle -f json --output C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\mantle\\artifacts\\osv.json --allow-no-lockfiles --verbosity warn --experimental-exclude g:**/node_modules --experimental-exclude g:**/target --experimental-exclude g:**/.git --experimental-exclude g:**/dist --experimental-exclude g:**/build --experimental-exclude g:**/out 1\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\mantle\\artifacts\\osv.stdout.log 2\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\mantle\\artifacts\\osv.stderr.log"
+                                                ],
+                                "cwd":  "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\mantle",
+                                "start_utc":  "2026-02-16 03:10:34 UTC",
+                                "end_utc":  "2026-02-16 03:13:30 UTC",
+                                "duration_sec":  175,
+                                "timed_out":  false,
+                                "exit_code":  1,
+                                "stdout":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\mantle\\artifacts\\osv.stdout.log",
+                                "stderr":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\mantle\\artifacts\\osv.stderr.log",
+                                "report":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\mantle\\artifacts\\osv.json"
+                            },
+                    "govulncheck":  {
+                                        "json":  {
+                                                     "name":  "govulncheck(json)",
+                                                     "file":  "govulncheck",
+                                                     "args":  [
+                                                                  "-C",
+                                                                  "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\mantle",
+                                                                  "-format",
+                                                                  "json",
+                                                                  "./..."
+                                                              ],
+                                                     "arg_string":  "-C \\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\mantle -format json ./...",
+                                                     "runner":  "cmd.exe",
+                                                     "runner_args":  [
+                                                                         "/d",
+                                                                         "/s",
+                                                                         "/c",
+                                                                         "govulncheck -C \\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\mantle -format json ./... 1\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\mantle\\artifacts\\govulncheck.json 2\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\mantle\\artifacts\\govulncheck.json.stderr.log"
+                                                                     ],
+                                                     "cwd":  "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\mantle",
+                                                     "start_utc":  "2026-02-16 03:13:30 UTC",
+                                                     "end_utc":  "2026-02-16 03:13:31 UTC",
+                                                     "duration_sec":  1,
+                                                     "timed_out":  false,
+                                                     "exit_code":  1,
+                                                     "stdout":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\mantle\\artifacts\\govulncheck.json",
+                                                     "stderr":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\mantle\\artifacts\\govulncheck.json.stderr.log"
+                                                 },
+                                        "text":  {
+                                                     "name":  "govulncheck(text)",
+                                                     "file":  "govulncheck",
+                                                     "args":  [
+                                                                  "-C",
+                                                                  "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\mantle",
+                                                                  "-format",
+                                                                  "text",
+                                                                  "-show",
+                                                                  "traces",
+                                                                  "./..."
+                                                              ],
+                                                     "arg_string":  "-C \\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\mantle -format text -show traces ./...",
+                                                     "runner":  "cmd.exe",
+                                                     "runner_args":  [
+                                                                         "/d",
+                                                                         "/s",
+                                                                         "/c",
+                                                                         "govulncheck -C \\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\mantle -format text -show traces ./... 1\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\mantle\\artifacts\\govulncheck.txt 2\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\mantle\\artifacts\\govulncheck.txt.stderr.log"
+                                                                     ],
+                                                     "cwd":  "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\mantle",
+                                                     "start_utc":  "2026-02-16 03:13:31 UTC",
+                                                     "end_utc":  "2026-02-16 03:13:31 UTC",
+                                                     "duration_sec":  1,
+                                                     "timed_out":  false,
+                                                     "exit_code":  1,
+                                                     "stdout":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\mantle\\artifacts\\govulncheck.txt",
+                                                     "stderr":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\mantle\\artifacts\\govulncheck.txt.stderr.log"
+                                                 }
+                                    },
+                    "gosec":  {
+                                  "name":  "gosec",
+                                  "file":  "gosec",
+                                  "args":  [
+                                               "-fmt=json",
+                                               "-out=C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\mantle\\artifacts\\gosec.json",
+                                               "-confidence=high",
+                                               "-severity=medium",
+                                               "-exclude-generated",
+                                               "-quiet",
+                                               "./..."
+                                           ],
+                                  "arg_string":  "-fmt=json -out=C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\mantle\\artifacts\\gosec.json -confidence=high -severity=medium -exclude-generated -quiet ./...",
+                                  "runner":  "cmd.exe",
+                                  "runner_args":  [
+                                                      "/d",
+                                                      "/s",
+                                                      "/c",
+                                                      "gosec -fmt=json -out=C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\mantle\\artifacts\\gosec.json -confidence=high -severity=medium -exclude-generated -quiet ./... 1\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\mantle\\artifacts\\gosec.stdout.log 2\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\mantle\\artifacts\\gosec.stderr.log"
+                                                  ],
+                                  "cwd":  "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\mantle",
+                                  "start_utc":  "2026-02-16 03:13:31 UTC",
+                                  "end_utc":  "2026-02-16 03:13:42 UTC",
+                                  "duration_sec":  11,
+                                  "timed_out":  false,
+                                  "exit_code":  1,
+                                  "stdout":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\mantle\\artifacts\\gosec.stdout.log",
+                                  "stderr":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\mantle\\artifacts\\gosec.stderr.log"
+                              }
+                },
+    "summary":  {
+                    "gitleaks_findings":  87,
+                    "osv_vulns":  1567,
+                    "npm_audit_vulns":  null,
+                    "cargo_audit_vulns":  null
+                }
+}

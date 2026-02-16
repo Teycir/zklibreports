@@ -1,0 +1,8 @@
+56:    "Encoded upgradeAndCall with systemMigrationBlock set at block number:",
+65:  const upgradeCallUsingSecurityCouncil = ethers.concat([
+66:    "0x99a88ec4",
+70:  console.log("Encoded Upgrade call (directly) from Security Council :", "\n", upgradeCallUsingSecurityCouncil);
+82:        LineaRollupInit__factory.createInterface().encodeFunctionData("initializeV2", [
+91:    "Encoded upgradeAndCall (directly) with Reinitialization from Security Council :",
+162:      [proxyAdminContract, 0, upgradeCallUsingSecurityCouncil, ethers.ZeroHash, ethers.ZeroHash, timelockDelay],
+183:      [proxyAdminContract, 0, upgradeCallUsingSecurityCouncil, ethers.ZeroHash, ethers.ZeroHash],

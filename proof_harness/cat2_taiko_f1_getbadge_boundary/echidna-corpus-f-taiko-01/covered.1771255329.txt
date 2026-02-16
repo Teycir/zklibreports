@@ -1,0 +1,91 @@
+C:/Users/vboxuser/Desktop/Repos/zklibreports/proof_harness/cat2_taiko_f1_getbadge_boundary/src/EchidnaTaikoF1GetBadgeBoundaryHarness.sol
+  1 |     | // SPDX-License-Identifier: MIT
+  2 |     | pragma solidity 0.8.24;
+  3 |     | 
+  4 |     | import { TrailblazersBadgesS2Like } from "./TaikoF1GetBadgeBoundaryHarness.sol";
+  5 |     | 
+  6 |     | /// @notice Echidna harness for TrailblazersBadgesS2.getBadge boundary logic.
+  7 | *   | contract EchidnaTaikoF1GetBadgeBoundaryHarness is TrailblazersBadgesS2Like {
+  8 | *   |     function action_mint(uint8 _badgeType, uint8 _movementType) public {
+  9 | *   |         if (totalSupply() >= 8) return;
+ 10 | *   |         mintMock(_badgeType, _movementType);
+ 11 |     |     }
+ 12 |     | 
+ 13 |     |     function echidna_unminted_token_must_revert() public returns (bool) {
+ 14 |     |         uint256 unmintedId = totalSupply() + 1;
+ 15 |     |         try this.getBadge(unmintedId) returns (Badge memory) {
+ 16 |     |             return false;
+ 17 |     |         } catch {
+ 18 |     |             return true;
+ 19 |     |         }
+ 20 |     |     }
+ 21 |     | 
+ 22 |     |     function echidna_first_minted_token_must_be_readable() public returns (bool) {
+ 23 |     |         if (totalSupply() == 0) {
+ 24 |     |             return true;
+ 25 |     |         }
+ 26 |     | 
+ 27 |     |         try this.getBadge(1) returns (Badge memory badge) {
+ 28 |     |             return badge.tokenId == 1;
+ 29 |     |         } catch {
+ 30 |     |             return false;
+ 31 |     |         }
+ 32 |     |     }
+ 33 |     | }
+
+C:/Users/vboxuser/Desktop/Repos/zklibreports/proof_harness/cat2_taiko_f1_getbadge_boundary/src/TaikoF1GetBadgeBoundaryHarness.sol
+  1 |     | // SPDX-License-Identifier: MIT
+  2 |     | pragma solidity 0.8.24;
+  3 |     | 
+  4 |     | /// @notice Bug-parity model for TrailblazersBadgesS2.getBadge boundary checks.
+  5 |     | contract TrailblazersBadgesS2Like {
+  6 |     |     enum BadgeType {
+  7 |     |         Ravers,
+  8 |     |         Robots,
+  9 |     |         Bouncers,
+ 10 |     |         Masters,
+ 11 |     |         Monks,
+ 12 |     |         Androids,
+ 13 |     |         Drummers,
+ 14 |     |         Shinto
+ 15 |     |     }
+ 16 |     | 
+ 17 |     |     enum MovementType {
+ 18 |     |         Undefined,
+ 19 |     |         Whale,
+ 20 |     |         Minnow
+ 21 |     |     }
+ 22 |     | 
+ 23 |     |     struct Badge {
+ 24 |     |         uint256 tokenId;
+ 25 |     |         BadgeType badgeType;
+ 26 |     |         MovementType movementType;
+ 27 |     |     }
+ 28 |     | 
+ 29 |     |     mapping(uint256 tokenId => Badge badge) internal badges;
+ 30 |     |     uint256 internal _totalSupply;
+ 31 |     | 
+ 32 |     |     error TOKEN_NOT_MINTED();
+ 33 |     | 
+ 34 | *   |     function mintMock(uint8 _badgeType, uint8 _movementType) public returns (uint256 tokenId_) {
+ 35 | *   |         tokenId_ = ++_totalSupply;
+ 36 | *   |         badges[tokenId_] = Badge({
+ 37 | *   |             tokenId: tokenId_,
+ 38 | *   |             badgeType: BadgeType(uint256(_badgeType) % 8),
+ 39 | *   |             movementType: MovementType(uint256(_movementType) % 3)
+ 40 |     |         });
+ 41 |     |     }
+ 42 |     | 
+ 43 | *   |     function totalSupply() public view returns (uint256) {
+ 44 | *   |         return _totalSupply;
+ 45 |     |     }
+ 46 |     | 
+ 47 |     |     function getBadge(uint256 _tokenId) external view returns (Badge memory) {
+ 48 |     |         // Bug parity with TrailblazersBadgesS2.sol:180
+ 49 |     |         if (_tokenId < totalSupply()) {
+ 50 |     |             revert TOKEN_NOT_MINTED();
+ 51 |     |         }
+ 52 |     |         return badges[_tokenId];
+ 53 |     |     }
+ 54 |     | }
+

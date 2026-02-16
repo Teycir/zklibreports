@@ -1,0 +1,11 @@
+Compiling 2 files with Solc 0.8.24
+Solc 0.8.24 finished in 67.95ms
+Compiler run successful!
+[2m2026-02-16T12:20:39.105606Z[0m [33m WARN[0m [2mevm::traces::external[0m[2m:[0m etherscan config not found
+
+Ran 2 tests for test/MantleF3OperatorGate.t.sol:MantleF3OperatorGateTest
+[PASS] test_reverts_when_challenge_contract_is_not_registered_operator() (gas: 1488435)
+[PASS] test_succeeds_only_after_registering_challenge_contract_as_operator() (gas: 1552830)
+Suite result: ok. 2 passed; 0 failed; 0 skipped; finished in 803.30µs (620.30µs CPU time)
+
+Ran 1 test suite in 16.12ms (803.30µs CPU time): 2 tests passed, 0 failed, 0 skipped (2 total tests)

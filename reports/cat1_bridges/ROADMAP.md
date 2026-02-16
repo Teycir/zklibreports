@@ -7,6 +7,13 @@ This roadmap is for **manual** audits first, then **tool-backed validation** (pr
 - No vulnerability claim without a witness: PoC / failing test / concrete transaction sequence / symbolic counterexample / reachability trace.
 - Tool output is triage input only.
 - Start with on-chain critical paths; expand to off-chain agents/relayers only when an on-chain hypothesis depends on them.
+- Repo progression rule: when a repo is exhausted (all high/medium hypotheses proved or falsified with artifacts), move to the next repo in this roadmap immediately.
+
+## Repo Exhaustion Criteria
+
+- High/medium hypotheses have explicit status and artifact-backed outcome.
+- At least one specialist-fuzzer or equivalent witness run was attempted for top hypotheses where applicable.
+- Remaining hypotheses are low-priority or blocked, with blockers documented in `manual_audit.md`.
 
 ## Common Deliverables (Per Repo)
 
@@ -100,4 +107,3 @@ Validation:
 ## Next Step
 
 Start with `wormhole` and produce the first `manual_audit.md` with a minimal architecture map + 10–20 ranked hypotheses, then validate top 3–5 with tools.
-

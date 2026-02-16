@@ -1,0 +1,29 @@
+{
+    "exitcode": 1,
+    "test_results": {
+        "test/HalmosF4ChallengeBinding.t.sol:HalmosF4ChallengeBinding": [
+            {
+                "name": "check_victim_cannot_be_forced_into_unrelated_challenge()",
+                "exitcode": 1,
+                "num_models": 1,
+                "models": [
+                    {
+                        "model": {},
+                        "is_valid": true
+                    }
+                ],
+                "num_paths": [
+                    1,
+                    0,
+                    0
+                ],
+                "time": [
+                    0.22380089999933261,
+                    0.12258670000301208,
+                    0.1012103000030038
+                ],
+                "num_bounded_loops": 0
+            }
+        ]
+    }
+}

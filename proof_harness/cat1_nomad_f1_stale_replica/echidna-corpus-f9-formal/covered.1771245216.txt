@@ -1,0 +1,209 @@
+C:/Users/vboxuser/Desktop/Repos/zklibreports/proof_harness/cat1_nomad_f1_stale_replica/src/GovernanceDomainChurnHarness.sol
+   1 |     | // SPDX-License-Identifier: MIT
+   2 |     | pragma solidity ^0.8.24;
+   3 |     | 
+   4 |     | /// @notice Bug model mirroring GovernanceRouter domain list behavior:
+   5 |     | /// domain removal deletes array slot (hole), iteration scans full historical length.
+   6 | *   | contract GovernanceDomainChurnBugModel {
+   7 |     |     mapping(uint32 => bytes32) public routers;
+   8 |     |     uint32[] public domains;
+   9 |     | 
+  10 | *   |     uint256 public lastScanCount;
+  11 |     |     uint256 public lastDispatchCount;
+  12 |     | 
+  13 | *   |     function setRouterLocal(uint32 _domain, bytes32 _router) external {
+  14 | *   |         bytes32 _prev = routers[_domain];
+  15 | *   |         if (_router == bytes32(0)) {
+  16 | *   |             _removeDomain(_domain);
+  17 | *   |             delete routers[_domain];
+  18 |     |         } else {
+  19 | *   |             if (_prev == bytes32(0)) {
+  20 | *   |                 domains.push(_domain);
+  21 |     |             }
+  22 | *   |             routers[_domain] = _router;
+  23 |     |         }
+  24 |     |     }
+  25 |     | 
+  26 | *   |     function dispatchAll() external {
+  27 | *   |         uint256 _scan;
+  28 | *   |         uint256 _dispatch;
+  29 | *   |         for (uint256 i = 0; i < domains.length; i++) {
+  30 | *   |             _scan++;
+  31 | *   |             uint32 _d = domains[i];
+  32 | *   |             if (_d != 0 && routers[_d] != bytes32(0)) {
+  33 | *   |                 _dispatch++;
+  34 |     |             }
+  35 |     |         }
+  36 | *   |         lastScanCount = _scan;
+  37 | *   |         lastDispatchCount = _dispatch;
+  38 |     |     }
+  39 |     | 
+  40 | *   |     function activeDomainCount() public view returns (uint256 _active) {
+  41 | *   |         for (uint256 i = 0; i < domains.length; i++) {
+  42 | *   |             uint32 _d = domains[i];
+  43 | *   |             if (_d != 0 && routers[_d] != bytes32(0)) {
+  44 | *   |                 _active++;
+  45 |     |             }
+  46 |     |         }
+  47 |     |     }
+  48 |     | 
+  49 |     |     function domainsLength() external view returns (uint256) {
+  50 |     |         return domains.length;
+  51 |     |     }
+  52 |     | 
+  53 | *   |     function _removeDomain(uint32 _domain) internal {
+  54 | *   |         for (uint256 i = 0; i < domains.length; i++) {
+  55 | *   |             if (domains[i] == _domain) {
+  56 | *   |                 delete domains[i];
+  57 | *   |                 return;
+  58 |     |             }
+  59 |     |         }
+  60 |     |     }
+  61 |     | }
+  62 |     | 
+  63 |     | /// @notice Reference fix model using dense array + index mapping (swap-and-pop).
+  64 | *   | contract GovernanceDomainChurnFixedModel {
+  65 |     |     mapping(uint32 => bytes32) public routers;
+  66 |     |     uint32[] public domains;
+  67 |     |     mapping(uint32 => uint256) public domainIndexPlusOne;
+  68 |     | 
+  69 | *   |     uint256 public lastScanCount;
+  70 |     |     uint256 public lastDispatchCount;
+  71 |     | 
+  72 | *   |     function setRouterLocal(uint32 _domain, bytes32 _router) external {
+  73 | *   |         bytes32 _prev = routers[_domain];
+  74 | *   |         if (_router == bytes32(0)) {
+  75 | *   |             if (_prev != bytes32(0)) {
+  76 | *   |                 _removeDense(_domain);
+  77 | *   |                 delete routers[_domain];
+  78 |     |             }
+  79 |     |         } else {
+  80 | *   |             if (_prev == bytes32(0)) {
+  81 | *   |                 domains.push(_domain);
+  82 | *   |                 domainIndexPlusOne[_domain] = domains.length;
+  83 |     |             }
+  84 | *   |             routers[_domain] = _router;
+  85 |     |         }
+  86 |     |     }
+  87 |     | 
+  88 | *   |     function dispatchAll() external {
+  89 | *   |         uint256 _scan;
+  90 | *   |         uint256 _dispatch;
+  91 | *   |         for (uint256 i = 0; i < domains.length; i++) {
+  92 | *   |             _scan++;
+  93 | *   |             uint32 _d = domains[i];
+  94 | *   |             if (routers[_d] != bytes32(0)) {
+  95 | *   |                 _dispatch++;
+  96 |     |             }
+  97 |     |         }
+  98 | *   |         lastScanCount = _scan;
+  99 | *   |         lastDispatchCount = _dispatch;
+ 100 |     |     }
+ 101 |     | 
+ 102 | *   |     function activeDomainCount() public view returns (uint256 _active) {
+ 103 | *   |         for (uint256 i = 0; i < domains.length; i++) {
+ 104 | *   |             if (routers[domains[i]] != bytes32(0)) {
+ 105 | *   |                 _active++;
+ 106 |     |             }
+ 107 |     |         }
+ 108 |     |     }
+ 109 |     | 
+ 110 |     |     function domainsLength() external view returns (uint256) {
+ 111 |     |         return domains.length;
+ 112 |     |     }
+ 113 |     | 
+ 114 | *   |     function _removeDense(uint32 _domain) internal {
+ 115 | *   |         uint256 _idxPlus = domainIndexPlusOne[_domain];
+ 116 | *   |         if (_idxPlus == 0) return;
+ 117 | *   |         uint256 _idx = _idxPlus - 1;
+ 118 | *   |         uint256 _last = domains.length - 1;
+ 119 | *   |         if (_idx != _last) {
+ 120 |     |             uint32 _moved = domains[_last];
+ 121 |     |             domains[_idx] = _moved;
+ 122 |     |             domainIndexPlusOne[_moved] = _idx + 1;
+ 123 |     |         }
+ 124 | *   |         domains.pop();
+ 125 | *   |         delete domainIndexPlusOne[_domain];
+ 126 |     |     }
+ 127 |     | }
+ 128 |     | 
+
+C:/Users/vboxuser/Desktop/Repos/zklibreports/proof_harness/cat1_nomad_f1_stale_replica/src/MedusaGovernanceDomainChurnHarness.sol
+  1 |     | // SPDX-License-Identifier: MIT
+  2 |     | pragma solidity ^0.8.24;
+  3 |     | 
+  4 |     | import {
+  5 |     |     GovernanceDomainChurnBugModel,
+  6 |     |     GovernanceDomainChurnFixedModel
+  7 |     | } from "./GovernanceDomainChurnHarness.sol";
+  8 |     | 
+  9 |     | /// @notice Stateful harness for domain-churn scan-overhead behavior.
+ 10 | *   | contract MedusaGovernanceDomainChurnHarness {
+ 11 |     |     GovernanceDomainChurnBugModel public bug;
+ 12 |     |     GovernanceDomainChurnFixedModel public fixedModel;
+ 13 |     | 
+ 14 | *   |     uint32 public constant DOMAIN = 1111;
+ 15 | *   |     bytes32 public constant ROUTER = bytes32(uint256(0xA11CE));
+ 16 |     | 
+ 17 |     |     bool public bugScanOverheadObserved;
+ 18 |     |     bool public fixedScanOverheadObserved;
+ 19 |     | 
+ 20 | *   |     constructor() {
+ 21 | *   |         bug = new GovernanceDomainChurnBugModel();
+ 22 | *   |         fixedModel = new GovernanceDomainChurnFixedModel();
+ 23 | *   |         bug.setRouterLocal(DOMAIN, ROUTER);
+ 24 | *   |         fixedModel.setRouterLocal(DOMAIN, ROUTER);
+ 25 |     |     }
+ 26 |     | 
+ 27 | *   |     function action_churn(uint8 _loopsSeed) external {
+ 28 | *   |         uint256 loops = (_loopsSeed % 40) + 1;
+ 29 | *   |         for (uint256 i = 0; i < loops; i++) {
+ 30 | *   |             bug.setRouterLocal(DOMAIN, bytes32(0));
+ 31 | *   |             bug.setRouterLocal(DOMAIN, ROUTER);
+ 32 |     | 
+ 33 | *   |             fixedModel.setRouterLocal(DOMAIN, bytes32(0));
+ 34 | *   |             fixedModel.setRouterLocal(DOMAIN, ROUTER);
+ 35 |     |         }
+ 36 |     |     }
+ 37 |     | 
+ 38 | *   |     function action_dispatch() external {
+ 39 | *   |         bug.dispatchAll();
+ 40 | *   |         fixedModel.dispatchAll();
+ 41 |     | 
+ 42 | *   |         if (bug.lastScanCount() > bug.activeDomainCount()) {
+ 43 | *   |             bugScanOverheadObserved = true;
+ 44 |     |         }
+ 45 | *   |         if (fixedModel.lastScanCount() > fixedModel.activeDomainCount()) {
+ 46 |     |             fixedScanOverheadObserved = true;
+ 47 |     |         }
+ 48 |     |     }
+ 49 |     | 
+ 50 |     |     /// @notice Dispatch scans should track active domains (not historical holes).
+ 51 |     |     function property_dispatch_scan_tracks_active_domains()
+ 52 |     |         external
+ 53 |     |         view
+ 54 |     |         returns (bool)
+ 55 |     |     {
+ 56 |     |         return !bugScanOverheadObserved;
+ 57 |     |     }
+ 58 |     | 
+ 59 |     |     /// @notice Fixed model should not accumulate scan overhead from churn.
+ 60 |     |     function property_fixed_model_avoids_scan_overhead()
+ 61 |     |         external
+ 62 |     |         view
+ 63 |     |         returns (bool)
+ 64 |     |     {
+ 65 |     |         return !fixedScanOverheadObserved;
+ 66 |     |     }
+ 67 |     | 
+ 68 |     |     /// @notice Echidna-compatible alias.
+ 69 |     |     function echidna_dispatch_scan_tracks_active_domains()
+ 70 |     |         external
+ 71 |     |         view
+ 72 |     |         returns (bool)
+ 73 |     |     {
+ 74 |     |         return !bugScanOverheadObserved;
+ 75 |     |     }
+ 76 |     | }
+ 77 |     | 
+

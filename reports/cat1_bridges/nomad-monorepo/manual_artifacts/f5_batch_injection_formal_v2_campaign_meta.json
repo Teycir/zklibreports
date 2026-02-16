@@ -1,0 +1,20 @@
+﻿{
+    "generated_at_utc":  "2026-02-16 11:40:20 UTC",
+    "repo_root":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports",
+    "harness_dir":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\proof_harness\\cat1_nomad_f1_stale_replica",
+    "harness_contract":  "MedusaGovernanceBatchInjectionHarness",
+    "harness_source":  "src/MedusaGovernanceBatchInjectionHarness.sol",
+    "seq_len":  10,
+    "workers":  4,
+    "timeout_sec":  8,
+    "echidna_test_limit":  20000,
+    "medusa":  {
+                   "command":  "powershell -NoProfile -ExecutionPolicy Bypass -File ..\\..\\scripts\\medusa.ps1 fuzz --compilation-target . --target-contracts MedusaGovernanceBatchInjectionHarness --seq-len 10 --workers 4 --timeout 8 --fail-fast --no-color --log-level info",
+                   "outfile":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\nomad-monorepo\\manual_artifacts\\f5_batch_injection_formal_v2_medusa_8s.txt",
+                   "start_utc":  "2026-02-16 11:40:12 UTC",
+                   "end_utc":  "2026-02-16 11:40:20 UTC",
+                   "exit_code":  1
+               },
+    "echidna":  null,
+    "note":  "Non-zero exits can be expected when properties are falsified."
+}

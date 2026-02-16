@@ -1,0 +1,21 @@
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\air\cpu\component\cpu_component.inl:60:      static_cast<size_t>(res_add) + static_cast<size_t>(res_mul) + static_cast<size_t>(pc_jnz);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\utils\json_builder.h:36:    return ValueReference(&((*value_)[static_cast<int>(idx)]));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\algebra\lde\cached_lde_manager_test.cc:244:        prng_.UniformInt(0, 4), prng_.UniformInt(0, static_cast<int>(coset_size_ - 1)));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\algebra\lde\cached_lde_manager_test.cc:270:        prng_.UniformInt(0, 4), prng_.UniformInt(0, static_cast<int>(coset_size_ - 1)));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\algebra\lde\cached_lde_manager_test.cc:322:        prng_.UniformInt(0, 4), prng_.UniformInt(0, static_cast<int>(coset_size_ - 1)));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\algebra\lde\cached_lde_manager_test.cc:384:        prng_.UniformInt(0, 4), prng_.UniformInt(0, static_cast<int>(coset_size_ - 1)));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\fri\fri_folder.cc:71:        static_cast<size_t>(std::max<int64_t>(domain.BasisSize() - min_log_n_fri_task_size, 0));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\algebra\fft\multiplicative_fft.inl:79:      (n_layers <= static_cast<int>(bases.NumLayers())) && (n_layers >= -1),
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\algebra\fft\multiplicative_fft.inl:142:    const size_t log_n_ifft_tasks = static_cast<size_t>(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\algebra\big_int.inl:97:      carry = gsl::narrow_cast<uint64_t>(res >> 64);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\algebra\big_int.inl:98:      final_res[i + j] = gsl::narrow_cast<uint64_t>(res);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\algebra\big_int.inl:457:    res[j] = gsl::narrow_cast<uint64_t>(temp);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\algebra\big_int.inl:458:    carry = gsl::narrow_cast<uint64_t>(temp >> 64);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\algebra\big_int.inl:484:    uint64_t u_i = gsl::narrow_cast<uint64_t>(temp) * montgomery_mprime;
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\algebra\big_int.inl:515:      uint64_t low = carry1 + gsl::narrow_cast<uint64_t>(temp);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\algebra\big_int.inl:516:      carry1 = gsl::narrow_cast<uint64_t>(temp >> 64) + static_cast<uint64_t>(low < carry1);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\algebra\big_int.inl:520:      res[j] = low + gsl::narrow_cast<uint64_t>(temp);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\algebra\big_int.inl:521:      carry2 = gsl::narrow_cast<uint64_t>(temp >> 64) + static_cast<uint64_t>(res[j] < low);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\composition_polynomial\composition_polynomial.inl:232:        neighbors_iter += static_cast<size_t>(initial_point_idx);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\packer_hasher.cc:41:  return static_cast<size_t>(std::min(Pow2(Log2Ceil(elements_fit_in_package)), max_n_elements));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\merkle\merkle_test.cc:105:  size_t num_queries = prng.UniformInt(static_cast<size_t>(1), std::min<size_t>(10, data_length));

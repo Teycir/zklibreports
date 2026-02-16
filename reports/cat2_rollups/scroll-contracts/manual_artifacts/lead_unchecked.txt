@@ -1,0 +1,35 @@
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\batch-bridge\L1BatchBridgeGateway.sol:335:        unchecked {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\batch-bridge\L1BatchBridgeGateway.sol:342:        unchecked {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\batch-bridge\L1BatchBridgeGateway.sol:376:        unchecked {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L1\L1ScrollMessenger.sol:257:        unchecked {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L1\L1ScrollMessenger.sol:267:        unchecked {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L1\L1ScrollMessenger.sol:273:        unchecked {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L1\L1ScrollMessenger.sol:318:        unchecked {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\validium\L1ERC20GatewayValidium.sol:184:        // no unchecked here, since some weird token may return arbitrary balance.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L1\rollup\ScrollChain.sol:266:        unchecked {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L1\rollup\ScrollChain.sol:324:        unchecked {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L1\rollup\MultipleVersionRollupVerifier.sol:91:            unchecked {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L1\rollup\L1MessageQueueV2.sol:170:        // this is unlikely to overflow, use unchecked here. It is because the type of `overhead` and `scalar`
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L1\rollup\L1MessageQueueV2.sol:172:        unchecked {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L1\rollup\L1MessageQueueV2.sol:185:        unchecked {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L1\rollup\L1MessageQueueV2.sol:370:        unchecked {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L1\rollup\L1MessageQueueV2.sol:395:        unchecked {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L1\rollup\L1MessageQueueV1WithGasPriceOracle.sol:81:        unchecked {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L1\rollup\L1MessageQueueV1.sol:359:        unchecked {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L1\rollup\L1MessageQueueV1.sol:386:        unchecked {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L1\rollup\L1MessageQueueV1.sol:416:        unchecked {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L1\gateways\L1ERC20Gateway.sol:138:            // no unchecked here, since some weird token may return arbitrary balance.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L1\gateways\EnforcedTxGateway.sol:144:        unchecked {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L1\gateways\EnforcedTxGateway.sol:204:        unchecked {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\libraries\common\AppendOnlyMerkleTree.sol:48:            unchecked {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\libraries\common\AppendOnlyMerkleTree.sol:58:        unchecked {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\libraries\common\AddressAliasHelper.sol:14:        unchecked {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\libraries\common\AddressAliasHelper.sol:24:        unchecked {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\libraries\codec\ChunkCodecV0.sol:57:        unchecked {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\libraries\codec\BatchHeaderV1Codec.sol:53:        unchecked {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\libraries\codec\BatchHeaderV0Codec.sol:46:        unchecked {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L2\predeploys\L2TxFeeVault.sol:116:        unchecked {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L2\predeploys\L1GasPriceOracle.sol:303:        unchecked {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\mocks\tokens\RevertOnTransferToken.sol:37:        unchecked {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\mocks\tokens\FeeOnTransferToken.sol:30:        unchecked {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\mocks\tokens\FeeOnTransferToken.sol:55:        unchecked {

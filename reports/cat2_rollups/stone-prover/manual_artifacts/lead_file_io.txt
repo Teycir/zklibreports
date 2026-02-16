@@ -1,0 +1,11 @@
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\stark\utils.cc:25:  std::ifstream proof_file(file_name, std::ios::binary);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\stark\stark_test.cc:389:  std::ofstream ofs("/tmp/stark_test.proof.txt");
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\utils\json.cc:27:  std::ifstream file(filename);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\utils\json.cc:49:  std::ofstream file(filename);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\utils\flag_validators.cc:25:  std::ifstream ifile(filename);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\utils\flag_validators.cc:30:  std::ifstream file(file_name);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\utils\flag_validators.cc:36:  std::ofstream file(file_name, std::ofstream::app);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\main\verifier_main_helper_impl.cc:150:      std::ofstream annotation_file(annotation_file_name);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\main\verifier_main_helper_impl.cc:155:      std::ofstream extra_output_file(extra_output_file_name);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\statement\cpu\cpu_air_statement.cc:254:  std::ifstream trace_file(trace_path, std::ios::binary);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\statement\cpu\cpu_air_statement.cc:256:  std::ifstream memory_file(memory_path, std::ios::binary);

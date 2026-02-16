@@ -1,0 +1,30 @@
+# TrailblazersBadgesS2.getBadge boundary check (taiko-mono)
+# File: packages/nfts/contracts/trailblazers-season-2/TrailblazersBadgesS2.sol
+    /// @notice Retrieve the URI for a badge given the token ID
+    /// @param _tokenId The token ID
+    /// @return The URI
+    function uri(uint256 _tokenId) public view virtual override returns (string memory) {
+        if (_tokenId > totalSupply()) {
+            revert TOKEN_NOT_MINTED();
+        }
+        Badge memory badge_ = badges[_tokenId];
+        return _uri(badge_.badgeType, badge_.movementType);
+    }
+
+    /// @notice Retrieve a badge
+    /// @param _tokenId The token ID
+    /// @return The badge
+    function getBadge(uint256 _tokenId) external view virtual returns (Badge memory) {
+        if (_tokenId < totalSupply()) {
+            revert TOKEN_NOT_MINTED();
+        }
+        return badges[_tokenId];
+    }
+
+    /// @notice supportsInterface implementation
+    /// @param _interfaceId The interface ID
+    /// @return Whether the interface is supported
+
+# Source parity check with taiko-contracts mirror
+taiko-mono sha256=1D403CDC4A6A9075DD9FBB25569DF42C5078644992808973E672AE1F760232D8
+taiko-contracts sha256=1D403CDC4A6A9075DD9FBB25569DF42C5078644992808973E672AE1F760232D8

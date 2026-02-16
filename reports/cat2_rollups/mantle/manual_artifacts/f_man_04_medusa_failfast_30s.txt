@@ -1,0 +1,68 @@
+warn [1mUnable to find the config file at C:\Users\vboxuser\Desktop\Repos\zklibreports\proof_harness\cat2_mantle_f4_challenge_binding\medusa.json, will use the default project configuration for the crytic-compile compilation platform instead[0m
+⇾ Compiling targets with crytic-compile
+⇾ Running command:
+C:\Users\vboxuser\AppData\Local\Programs\Python\Python314\Scripts\crytic-compile.exe . --export-format solc
+⇾ Finished compiling targets in 2s
+⇾ artifacts: Medusa is running against a new set of build artifacts
+⇾ No Slither cached results found at slither_results.json
+⇾ Running Slither:
+C:\Users\vboxuser\AppData\Local\Programs\Python\Python314\Scripts\slither.exe . --ignore-compile --print echidna --json -
+⇾ Finished running Slither in 1s
+⇾ Running with a timeout of 30 seconds
+⇾ Setting up test chain
+⇾ Finished setting up test chain
+⇾ Creating corpus...
+⇾ Fuzzing with 4 workers
+⇾ [NOT STARTED] Property Test: MedusaF4ChallengeBindingHarness.property_victim_not_forced_into_unrelated_challenge()
+⇾ [NOT STARTED] Property Test: MedusaF4ChallengeBindingHarness.property_victim_not_slashed_by_unrelated_assertions()
+⇾ [NOT STARTED] Assertion Test: MedusaF4ChallengeBindingHarness.settled()
+⇾ [NOT STARTED] Assertion Test: MedusaF4ChallengeBindingHarness.syntheticChallengeStaker()
+⇾ [NOT STARTED] Assertion Test: MedusaF4ChallengeBindingHarness.victimStaker()
+⇾ [NOT STARTED] Assertion Test: MedusaF4ChallengeBindingHarness.action_register_challenge_as_operator()
+⇾ [NOT STARTED] Assertion Test: MedusaF4ChallengeBindingHarness.action_settle()
+⇾ [NOT STARTED] Assertion Test: MedusaF4ChallengeBindingHarness.attackerOperator()
+⇾ [NOT STARTED] Assertion Test: MedusaF4ChallengeBindingHarness.challengeAddr()
+⇾ [NOT STARTED] Assertion Test: MedusaF4ChallengeBindingHarness.opened()
+⇾ [NOT STARTED] Assertion Test: MedusaF4ChallengeBindingHarness.victimOperator()
+⇾ [NOT STARTED] Assertion Test: MedusaF4ChallengeBindingHarness.action_open_mismatched_challenge()
+⇾ [NOT STARTED] Assertion Test: MedusaF4ChallengeBindingHarness.attackerStaker()
+⇾ [NOT STARTED] Assertion Test: MedusaF4ChallengeBindingHarness.rollup()
+⇾ fuzz: elapsed:       0s, calls:          0 (     0/sec), seq/s:      0, branches:    186, corpus:     0, failures: 0/0, gas/s:            0
+⇾ [Worker 3] Shrinking call sequence for Property Test: MedusaF4ChallengeBindingHarness.property_victim_not_forced_into_unrelated_challenge() with 1 call(s)
+⇾ [Worker 3] Shrinking complete after 0 attempts (limit: 5000)
+⇾ Fuzzer stopped, test results follow below ...
+⇾ [PASSED] Assertion Test: MedusaF4ChallengeBindingHarness.action_open_mismatched_challenge()
+⇾ [PASSED] Assertion Test: MedusaF4ChallengeBindingHarness.action_register_challenge_as_operator()
+⇾ [PASSED] Assertion Test: MedusaF4ChallengeBindingHarness.action_settle()
+⇾ [PASSED] Assertion Test: MedusaF4ChallengeBindingHarness.attackerOperator()
+⇾ [PASSED] Assertion Test: MedusaF4ChallengeBindingHarness.attackerStaker()
+⇾ [PASSED] Assertion Test: MedusaF4ChallengeBindingHarness.challengeAddr()
+⇾ [PASSED] Assertion Test: MedusaF4ChallengeBindingHarness.opened()
+⇾ [PASSED] Assertion Test: MedusaF4ChallengeBindingHarness.rollup()
+⇾ [PASSED] Assertion Test: MedusaF4ChallengeBindingHarness.settled()
+⇾ [PASSED] Assertion Test: MedusaF4ChallengeBindingHarness.syntheticChallengeStaker()
+⇾ [PASSED] Assertion Test: MedusaF4ChallengeBindingHarness.victimOperator()
+⇾ [PASSED] Assertion Test: MedusaF4ChallengeBindingHarness.victimStaker()
+⇾ [PASSED] Property Test: MedusaF4ChallengeBindingHarness.property_victim_not_slashed_by_unrelated_assertions()
+⇾ [FAILED] Property Test: MedusaF4ChallengeBindingHarness.property_victim_not_forced_into_unrelated_challenge()
+Test for method "MedusaF4ChallengeBindingHarness.property_victim_not_forced_into_unrelated_challenge()" failed after the following call sequence:
+[Call Sequence]
+1) MedusaF4ChallengeBindingHarness.action_open_mismatched_challenge()() (block=50917, time=368555, gas=12500000, gasprice=1, value=0, sender=0x30000)
+[Execution Trace]
+ => [call] MedusaF4ChallengeBindingHarness.action_open_mismatched_challenge()() (addr=0xA647ff3c36cFab592509E13860ab8c4F28781a66, value=0, sender=0x30000)
+	 => [call] ChallengeBindingRollupHarness.challengeAssertion(address[2],uint256[2])([0xbEEF, 0xA647ff3c36cFab592509E13860ab8c4F28781a66], [10, 11]) (addr=0x54919A19522Ce7c842E25735a9cFEcef1c0a06dA, value=0, sender=0xA647ff3c36cFab592509E13860ab8c4F28781a66)
+		 => [creation] ChallengeBindingStub.constructor(0x54919A19522Ce7c842E25735a9cFEcef1c0a06dA) (addr=0x8085Fe5dF5e137F474201f8E79b65FcB9D4334ED, value=0, sender=0x54919A19522Ce7c842E25735a9cFEcef1c0a06dA)
+			 => [return ()]
+		 => [return (0x8085Fe5dF5e137F474201f8E79b65FcB9D4334ED)]
+	 => [return ()]
+
+[Property Test Execution Trace]
+[Execution Trace]
+ => [call] MedusaF4ChallengeBindingHarness.property_victim_not_forced_into_unrelated_challenge()() (addr=0xA647ff3c36cFab592509E13860ab8c4F28781a66, value=0, sender=0x10000)
+	 => [call] ChallengeBindingRollupHarness.stakers(address)(0xA002) (addr=0x54919A19522Ce7c842E25735a9cFEcef1c0a06dA, value=<nil>, sender=0xA647ff3c36cFab592509E13860ab8c4F28781a66)
+		 => [return (true, 1000000000000000000, 43, 0xbEEF, 0x8085Fe5dF5e137F474201f8E79b65FcB9D4334ED)]
+	 => [return (false)]
+
+⇾ Test summary: 13 test(s) passed, 1 test(s) failed
+⇾ html report(s) saved to: crytic-export\coverage\coverage_report.html
+⇾ lcov report(s) saved to: crytic-export\coverage\lcov.info

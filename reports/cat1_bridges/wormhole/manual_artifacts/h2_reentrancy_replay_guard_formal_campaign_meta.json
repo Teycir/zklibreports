@@ -1,0 +1,27 @@
+﻿{
+    "generated_at_utc":  "2026-02-16 14:08:05 UTC",
+    "repo_root":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports",
+    "harness_dir":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\proof_harness\\cat1_wormhole_h2_reentrancy_replay_guard",
+    "harness_contract":  "MedusaReentrancyReplayHarness",
+    "harness_source":  "src/MedusaReentrancyReplayHarness.sol",
+    "seq_len":  10,
+    "workers":  4,
+    "timeout_sec":  30,
+    "echidna_test_limit":  20000,
+    "echidna_corpus_dir":  "echidna-corpus-h2-replay-guard",
+    "medusa":  {
+                   "command":  "powershell -NoProfile -ExecutionPolicy Bypass -File ..\\..\\scripts\\medusa.ps1 fuzz --compilation-target . --target-contracts MedusaReentrancyReplayHarness --seq-len 10 --workers 4 --timeout 30 --fail-fast --no-color --log-level info",
+                   "outfile":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\wormhole\\manual_artifacts\\h2_reentrancy_replay_guard_formal_medusa_30s.txt",
+                   "start_utc":  "2026-02-16 14:07:39 UTC",
+                   "end_utc":  "2026-02-16 14:07:42 UTC",
+                   "exit_code":  1
+               },
+    "echidna":  {
+                    "command":  "powershell -NoProfile -ExecutionPolicy Bypass -File ..\\..\\scripts\\echidna.ps1 src/MedusaReentrancyReplayHarness.sol --contract MedusaReentrancyReplayHarness --test-mode property --seq-len 10 --test-limit 20000 --timeout 30 --format text --corpus-dir echidna-corpus-h2-replay-guard",
+                    "outfile":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\wormhole\\manual_artifacts\\h2_reentrancy_replay_guard_formal_echidna_30s.txt",
+                    "start_utc":  "2026-02-16 14:07:42 UTC",
+                    "end_utc":  "2026-02-16 14:08:05 UTC",
+                    "exit_code":  0
+                },
+    "note":  "Non-zero exits can be expected when properties are falsified."
+}

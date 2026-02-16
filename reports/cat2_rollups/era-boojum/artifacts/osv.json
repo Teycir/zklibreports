@@ -1,0 +1,423 @@
+{
+  "results": [
+    {
+      "source": {
+        "path": "//VBOXSVR/elements/Repos/zk0d/cat2_rollups/era-boojum/profiling-target/Cargo.lock",
+        "type": "lockfile"
+      },
+      "packages": [
+        {
+          "package": {
+            "name": "bincode",
+            "version": "1.3.3",
+            "ecosystem": "crates.io"
+          },
+          "groups": [
+            {
+              "ids": [
+                "RUSTSEC-2025-0141"
+              ],
+              "aliases": [
+                "RUSTSEC-2025-0141"
+              ],
+              "max_severity": ""
+            }
+          ],
+          "vulnerabilities": [
+            {
+              "affected": [
+                {
+                  "database_specific": {
+                    "categories": [],
+                    "cvss": null,
+                    "informational": "unmaintained",
+                    "source": "https://github.com/rustsec/advisory-db/blob/osv/crates/RUSTSEC-2025-0141.json"
+                  },
+                  "ecosystem_specific": {
+                    "affected_functions": null,
+                    "affects": {
+                      "arch": [],
+                      "functions": [],
+                      "os": []
+                    }
+                  },
+                  "package": {
+                    "ecosystem": "crates.io",
+                    "name": "bincode",
+                    "purl": "pkg:cargo/bincode"
+                  },
+                  "ranges": [
+                    {
+                      "events": [
+                        {
+                          "introduced": "0.0.0-0"
+                        }
+                      ],
+                      "type": "SEMVER"
+                    }
+                  ]
+                }
+              ],
+              "database_specific": {
+                "license": "CC0-1.0"
+              },
+              "details": "Due to a doxxing and harassment incident, the bincode team has taken the decision to cease development permanently.\n\nThe team considers version 1.3.3 a complete version of bincode that is not in need of any updates.\n\n## Alternatives to consider\n\n* [wincode](https://crates.io/crates/wincode)\n* [postcard](https://crates.io/crates/postcard)\n* [bitcode](https://crates.io/crates/bitcode)\n* [rkyv](https://crates.io/crates/rkyv)",
+              "id": "RUSTSEC-2025-0141",
+              "modified": "2026-01-16T11:07:28.867553Z",
+              "published": "2025-12-16T12:00:00Z",
+              "references": [
+                {
+                  "type": "PACKAGE",
+                  "url": "https://crates.io/crates/bincode"
+                },
+                {
+                  "type": "ADVISORY",
+                  "url": "https://rustsec.org/advisories/RUSTSEC-2025-0141.html"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://git.sr.ht/~stygianentity/bincode/tree/v3.0/item/README.md"
+                }
+              ],
+              "schema_version": "1.7.3",
+              "summary": "Bincode is unmaintained"
+            }
+          ]
+        },
+        {
+          "package": {
+            "name": "bytes",
+            "version": "1.4.0",
+            "ecosystem": "crates.io"
+          },
+          "groups": [
+            {
+              "ids": [
+                "RUSTSEC-2026-0007",
+                "GHSA-434x-w66g-qw3r"
+              ],
+              "aliases": [
+                "CVE-2026-25541",
+                "GHSA-434x-w66g-qw3r",
+                "RUSTSEC-2026-0007"
+              ],
+              "max_severity": "5.5"
+            }
+          ],
+          "vulnerabilities": [
+            {
+              "affected": [
+                {
+                  "database_specific": {
+                    "categories": [
+                      "memory-corruption"
+                    ],
+                    "cvss": null,
+                    "informational": null,
+                    "source": "https://github.com/rustsec/advisory-db/blob/osv/crates/RUSTSEC-2026-0007.json"
+                  },
+                  "ecosystem_specific": {
+                    "affected_functions": null,
+                    "affects": {
+                      "arch": [],
+                      "functions": [],
+                      "os": []
+                    }
+                  },
+                  "package": {
+                    "ecosystem": "crates.io",
+                    "name": "bytes",
+                    "purl": "pkg:cargo/bytes"
+                  },
+                  "ranges": [
+                    {
+                      "events": [
+                        {
+                          "introduced": "1.2.1"
+                        },
+                        {
+                          "fixed": "1.11.1"
+                        }
+                      ],
+                      "type": "SEMVER"
+                    }
+                  ]
+                }
+              ],
+              "aliases": [
+                "CVE-2026-25541",
+                "GHSA-434x-w66g-qw3r"
+              ],
+              "database_specific": {
+                "license": "CC-BY-4.0"
+              },
+              "details": "In the unique reclaim path of `BytesMut::reserve`, the condition\n```rs\nif v_capacity \u003e= new_cap + offset\n```\nuses an unchecked addition. When `new_cap + offset` overflows `usize` in release builds, this condition may incorrectly pass, causing `self.cap` to be set to a value that exceeds the actual allocated capacity. Subsequent APIs such as `spare_capacity_mut()` then trust this corrupted `cap` value and may create out-of-bounds slices, leading to UB.\n\nThis behavior is observable in release builds (integer overflow wraps), whereas debug builds panic due to overflow checks.\n\n## PoC\n\n```rs\nuse bytes::*;\n\nfn main() {\n    let mut a = BytesMut::from(\u0026b\"hello world\"[..]);\n    let mut b = a.split_off(5);\n\n    // Ensure b becomes the unique owner of the backing storage\n    drop(a);\n\n    // Trigger overflow in new_cap + offset inside reserve\n    b.reserve(usize::MAX - 6);\n\n    // This call relies on the corrupted cap and may cause UB \u0026 HBO\n    b.put_u8(b'h');\n}\n```\n\n# Workarounds\n\nUsers of `BytesMut::reserve` are only affected if integer overflow checks are configured to wrap. When integer overflow is configured to panic, this issue does not apply.",
+              "id": "RUSTSEC-2026-0007",
+              "modified": "2026-02-04T06:56:11Z",
+              "published": "2026-02-03T12:00:00Z",
+              "references": [
+                {
+                  "type": "PACKAGE",
+                  "url": "https://crates.io/crates/bytes"
+                },
+                {
+                  "type": "ADVISORY",
+                  "url": "https://rustsec.org/advisories/RUSTSEC-2026-0007.html"
+                },
+                {
+                  "type": "ADVISORY",
+                  "url": "https://github.com/advisories/GHSA-434x-w66g-qw3r"
+                }
+              ],
+              "schema_version": "1.7.3",
+              "summary": "Integer overflow in `BytesMut::reserve`"
+            },
+            {
+              "affected": [
+                {
+                  "database_specific": {
+                    "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2026/02/GHSA-434x-w66g-qw3r/GHSA-434x-w66g-qw3r.json"
+                  },
+                  "package": {
+                    "ecosystem": "crates.io",
+                    "name": "bytes",
+                    "purl": "pkg:cargo/bytes"
+                  },
+                  "ranges": [
+                    {
+                      "events": [
+                        {
+                          "introduced": "1.2.1"
+                        },
+                        {
+                          "fixed": "1.11.1"
+                        }
+                      ],
+                      "type": "SEMVER"
+                    }
+                  ]
+                }
+              ],
+              "aliases": [
+                "CVE-2026-25541",
+                "RUSTSEC-2026-0007"
+              ],
+              "database_specific": {
+                "cwe_ids": [
+                  "CWE-680"
+                ],
+                "github_reviewed": true,
+                "github_reviewed_at": "2026-02-03T19:17:46Z",
+                "nvd_published_at": "2026-02-04T22:16:00Z",
+                "severity": "MODERATE"
+              },
+              "details": "# Details\n\nIn the unique reclaim path of `BytesMut::reserve`, the condition\n```rs\nif v_capacity \u003e= new_cap + offset\n```\nuses an unchecked addition. When `new_cap + offset` overflows `usize` in release builds, this condition may incorrectly pass, causing `self.cap` to be set to a value that exceeds the actual allocated capacity. Subsequent APIs such as `spare_capacity_mut()` then trust this corrupted `cap` value and may create out-of-bounds slices, leading to UB.\n\nThis behavior is observable in release builds (integer overflow wraps), whereas debug builds panic due to overflow checks.\n\n## PoC\n\n```rs\nuse bytes::*;\n\nfn main() {\n    let mut a = BytesMut::from(\u0026b\"hello world\"[..]);\n    let mut b = a.split_off(5);\n\n    // Ensure b becomes the unique owner of the backing storage\n    drop(a);\n\n    // Trigger overflow in new_cap + offset inside reserve\n    b.reserve(usize::MAX - 6);\n\n    // This call relies on the corrupted cap and may cause UB \u0026 HBO\n    b.put_u8(b'h');\n}\n```\n\n# Workarounds\n\nUsers of `BytesMut::reserve` are only affected if integer overflow checks are configured to wrap. When integer overflow is configured to panic, this issue does not apply.\n\nThis vulnerability is also known as [RUSTSEC-2026-0007](https://rustsec.org/advisories/RUSTSEC-2026-0007.html).",
+              "id": "GHSA-434x-w66g-qw3r",
+              "modified": "2026-02-05T00:37:18Z",
+              "published": "2026-02-03T19:17:46Z",
+              "references": [
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/tokio-rs/bytes/security/advisories/GHSA-434x-w66g-qw3r"
+                },
+                {
+                  "type": "ADVISORY",
+                  "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-25541"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/tokio-rs/bytes/commit/d0293b0e35838123c51ca5dfdf468ecafee4398f"
+                },
+                {
+                  "type": "PACKAGE",
+                  "url": "https://github.com/tokio-rs/bytes"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/tokio-rs/bytes/releases/tag/v1.11.1"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://rustsec.org/advisories/RUSTSEC-2026-0007.html"
+                }
+              ],
+              "related": [
+                "CGA-2c89-jq5r-gvjq"
+              ],
+              "schema_version": "1.7.3",
+              "severity": [
+                {
+                  "score": "CVSS:4.0/AV:L/AC:L/AT:N/PR:N/UI:N/VC:N/VI:N/VA:H/SC:N/SI:N/SA:N/E:P",
+                  "type": "CVSS_V4"
+                }
+              ],
+              "summary": "bytes has integer overflow in BytesMut::reserve"
+            }
+          ]
+        },
+        {
+          "package": {
+            "name": "derivative",
+            "version": "2.2.0",
+            "ecosystem": "crates.io"
+          },
+          "groups": [
+            {
+              "ids": [
+                "RUSTSEC-2024-0388"
+              ],
+              "aliases": [
+                "RUSTSEC-2024-0388"
+              ],
+              "max_severity": ""
+            }
+          ],
+          "vulnerabilities": [
+            {
+              "affected": [
+                {
+                  "database_specific": {
+                    "categories": [],
+                    "cvss": null,
+                    "informational": "unmaintained",
+                    "source": "https://github.com/rustsec/advisory-db/blob/osv/crates/RUSTSEC-2024-0388.json"
+                  },
+                  "ecosystem_specific": {
+                    "affected_functions": null,
+                    "affects": {
+                      "arch": [],
+                      "functions": [],
+                      "os": []
+                    }
+                  },
+                  "package": {
+                    "ecosystem": "crates.io",
+                    "name": "derivative",
+                    "purl": "pkg:cargo/derivative"
+                  },
+                  "ranges": [
+                    {
+                      "events": [
+                        {
+                          "introduced": "0.0.0-0"
+                        }
+                      ],
+                      "type": "SEMVER"
+                    }
+                  ]
+                }
+              ],
+              "database_specific": {
+                "license": "CC0-1.0"
+              },
+              "details": "The [`derivative`](https://crates.io/crates/derivative) crate is no longer maintained.\nConsider using any alternative, for instance:\n- [derive_more](https://crates.io/crates/derive_more)\n- [derive-where](https://crates.io/crates/derive-where)\n- [educe](https://crates.io/crates/educe)",
+              "id": "RUSTSEC-2024-0388",
+              "modified": "2024-11-10T13:34:40Z",
+              "published": "2024-06-26T12:00:00Z",
+              "references": [
+                {
+                  "type": "PACKAGE",
+                  "url": "https://crates.io/crates/derivative"
+                },
+                {
+                  "type": "ADVISORY",
+                  "url": "https://rustsec.org/advisories/RUSTSEC-2024-0388.html"
+                },
+                {
+                  "type": "REPORT",
+                  "url": "https://github.com/mcarton/rust-derivative/issues/117"
+                }
+              ],
+              "schema_version": "1.7.3",
+              "summary": "`derivative` is unmaintained; consider using an alternative"
+            }
+          ]
+        },
+        {
+          "package": {
+            "name": "proc-macro-error",
+            "version": "1.0.4",
+            "ecosystem": "crates.io"
+          },
+          "groups": [
+            {
+              "ids": [
+                "RUSTSEC-2024-0370"
+              ],
+              "aliases": [
+                "RUSTSEC-2024-0370"
+              ],
+              "max_severity": ""
+            }
+          ],
+          "vulnerabilities": [
+            {
+              "affected": [
+                {
+                  "database_specific": {
+                    "categories": [],
+                    "cvss": null,
+                    "informational": "unmaintained",
+                    "source": "https://github.com/rustsec/advisory-db/blob/osv/crates/RUSTSEC-2024-0370.json"
+                  },
+                  "ecosystem_specific": {
+                    "affected_functions": null,
+                    "affects": {
+                      "arch": [],
+                      "functions": [],
+                      "os": []
+                    }
+                  },
+                  "package": {
+                    "ecosystem": "crates.io",
+                    "name": "proc-macro-error",
+                    "purl": "pkg:cargo/proc-macro-error"
+                  },
+                  "ranges": [
+                    {
+                      "events": [
+                        {
+                          "introduced": "0.0.0-0"
+                        }
+                      ],
+                      "type": "SEMVER"
+                    }
+                  ]
+                }
+              ],
+              "database_specific": {
+                "license": "CC0-1.0"
+              },
+              "details": "proc-macro-error's maintainer seems to be unreachable, with no commits for 2 years, no releases pushed for 4 years, and no activity on the GitLab repo or response to email.\n\nproc-macro-error also depends on `syn 1.x`, which may be bringing duplicate dependencies into dependant build trees.\n\n## Possible Alternative(s)\n\n- [manyhow](https://crates.io/crates/manyhow)\n- [proc-macro-error2](https://crates.io/crates/proc-macro-error2)\n- [proc-macro2-diagnostics](https://github.com/SergioBenitez/proc-macro2-diagnostics)",
+              "id": "RUSTSEC-2024-0370",
+              "modified": "2024-09-09T12:08:37Z",
+              "published": "2024-09-01T12:00:00Z",
+              "references": [
+                {
+                  "type": "PACKAGE",
+                  "url": "https://crates.io/crates/proc-macro-error"
+                },
+                {
+                  "type": "ADVISORY",
+                  "url": "https://rustsec.org/advisories/RUSTSEC-2024-0370.html"
+                },
+                {
+                  "type": "REPORT",
+                  "url": "https://gitlab.com/CreepySkeleton/proc-macro-error/-/issues/20"
+                }
+              ],
+              "schema_version": "1.7.3",
+              "summary": "proc-macro-error is unmaintained"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "experimental_config": {
+    "licenses": {
+      "summary": false,
+      "allowlist": null
+    }
+  }
+}

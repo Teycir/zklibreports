@@ -1,0 +1,115 @@
+    1: // SPDX-License-Identifier: MIT
+    2: 
+    3: pragma solidity =0.8.24;
+    4: 
+    5: import {IWhitelist} from "../../libraries/common/IWhitelist.sol";
+    6: import {IL1MessageQueueV1} from "./IL1MessageQueueV1.sol";
+    7: import {IL1MessageQueueWithGasPriceOracle} from "./IL1MessageQueueWithGasPriceOracle.sol";
+    8: import {IL2GasPriceOracle} from "./IL2GasPriceOracle.sol";
+    9: 
+   10: import {L1MessageQueueV1} from "./L1MessageQueueV1.sol";
+   11: 
+   12: /// @custom:deprecated This contract is no longer used in production.
+   13: contract L1MessageQueueV1WithGasPriceOracle is L1MessageQueueV1, IL1MessageQueueWithGasPriceOracle {
+   14:     /*************
+   15:      * Constants *
+   16:      *************/
+   17: 
+   18:     /// @notice The intrinsic gas for transaction.
+   19:     uint256 private constant INTRINSIC_GAS_TX = 21000;
+   20: 
+   21:     /// @notice The appropriate intrinsic gas for each byte.
+   22:     uint256 private constant APPROPRIATE_INTRINSIC_GAS_PER_BYTE = 16;
+   23: 
+   24:     /*************
+   25:      * Variables *
+   26:      *************/
+   27: 
+   28:     /// @inheritdoc IL1MessageQueueWithGasPriceOracle
+   29:     uint256 public override l2BaseFee;
+   30: 
+   31:     /// @inheritdoc IL1MessageQueueWithGasPriceOracle
+   32:     address public override whitelistChecker;
+   33: 
+   34:     /***************
+   35:      * Constructor *
+   36:      ***************/
+   37: 
+   38:     /// @notice Constructor for `L1MessageQueueWithGasPriceOracle` implementation contract.
+   39:     ///
+   40:     /// @param _messenger The address of `L1ScrollMessenger` contract.
+   41:     /// @param _scrollChain The address of `ScrollChain` contract.
+   42:     /// @param _enforcedTxGateway The address of `EnforcedTxGateway` contract.
+   43:     constructor(
+   44:         address _messenger,
+   45:         address _scrollChain,
+   46:         address _enforcedTxGateway
+   47:     ) L1MessageQueueV1(_messenger, _scrollChain, _enforcedTxGateway) {}
+   48: 
+   49:     /// @notice Initialize the storage of L1MessageQueueWithGasPriceOracle.
+   50:     function initializeV2() external reinitializer(2) {
+   51:         l2BaseFee = IL2GasPriceOracle(gasOracle).l2BaseFee();
+   52:         whitelistChecker = IL2GasPriceOracle(gasOracle).whitelist();
+   53:     }
+   54: 
+   55:     function initializeV3() external reinitializer(3) {
+   56:         nextUnfinalizedQueueIndex = pendingQueueIndex;
+   57:     }
+   58: 
+   59:     /*************************
+   60:      * Public View Functions *
+   61:      *************************/
+   62: 
+   63:     /// @inheritdoc IL1MessageQueueV1
+   64:     function estimateCrossDomainMessageFee(uint256 _gasLimit)
+   65:         external
+   66:         view
+   67:         override(IL1MessageQueueV1, L1MessageQueueV1)
+   68:         returns (uint256)
+   69:     {
+   70:         return _gasLimit * l2BaseFee;
+   71:     }
+   72: 
+   73:     /// @inheritdoc IL1MessageQueueV1
+   74:     function calculateIntrinsicGasFee(bytes calldata _calldata)
+   75:         public
+   76:         pure
+   77:         override(IL1MessageQueueV1, L1MessageQueueV1)
+   78:         returns (uint256)
+   79:     {
+   80:         // no way this can overflow `uint256`
+   81:         unchecked {
+   82:             return INTRINSIC_GAS_TX + _calldata.length * APPROPRIATE_INTRINSIC_GAS_PER_BYTE;
+   83:         }
+   84:     }
+   85: 
+   86:     /*****************************
+   87:      * Public Mutating Functions *
+   88:      *****************************/
+   89: 
+   90:     /// @notice Allows whitelistCheckered caller to modify the l2 base fee.
+   91:     /// @param _newL2BaseFee The new l2 base fee.
+   92:     function setL2BaseFee(uint256 _newL2BaseFee) external {
+   93:         if (!IWhitelist(whitelistChecker).isSenderAllowed(_msgSender())) {
+   94:             revert ErrorNotWhitelistedSender();
+   95:         }
+   96: 
+   97:         uint256 _oldL2BaseFee = l2BaseFee;
+   98:         l2BaseFee = _newL2BaseFee;
+   99: 
+  100:         emit UpdateL2BaseFee(_oldL2BaseFee, _newL2BaseFee);
+  101:     }
+  102: 
+  103:     /************************
+  104:      * Restricted Functions *
+  105:      ************************/
+  106: 
+  107:     /// @notice Update whitelist checker contract.
+  108:     /// @dev This function can only called by contract owner.
+  109:     /// @param _newWhitelistChecker The address of new whitelist checker contract.
+  110:     function updateWhitelistChecker(address _newWhitelistChecker) external onlyOwner {
+  111:         address _oldWhitelistChecker = whitelistChecker;
+  112:         whitelistChecker = _newWhitelistChecker;
+  113:         emit UpdateWhitelistChecker(_oldWhitelistChecker, _newWhitelistChecker);
+  114:     }
+  115: }

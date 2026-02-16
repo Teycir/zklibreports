@@ -1,0 +1,45 @@
+[2026-02-16 13:26:51.60] Compiling src\EchidnaMantleHarnesses.sol... Done! (2.3682215s)
+Analyzing contract: C:/Users/vboxuser/Desktop/Repos/zklibreports/proof_harness/cat2_mantle_f3_operator_gate/src/EchidnaMantleHarnesses.sol:EchidnaF1WinnerFlipHarness
+[2026-02-16 13:26:54.01] Running slither on src\EchidnaMantleHarnesses.sol... Done! (2.2708557s)
+Loaded 0 transaction sequences from echidna-corpus-f-man-01\reproducers
+Loaded 0 transaction sequences from echidna-corpus-f-man-01\coverage
+[2026-02-16 13:26:56.30] [Worker 1] Test echidna_challenger_win_cannot_be_rewritten falsified!
+  Call sequence:
+/Users/vboxuser/Desktop/Repos/zklibreports/proof_harness/cat2_mantle_f3_operator_gate/src/EchidnaMantleHarnesses.sol.action_defender_settles_false() Time delay: 322374 seconds Block delay: 34272
+
+[2026-02-16 13:26:56.30] [Worker 0] Test echidna_challenger_win_cannot_be_rewritten falsified!
+  Call sequence:
+/Users/vboxuser/Desktop/Repos/zklibreports/proof_harness/cat2_mantle_f3_operator_gate/src/EchidnaMantleHarnesses.sol.action_defender_settles_false() Time delay: 117472 seconds Block delay: 49415
+
+[2026-02-16 13:26:56.31] [Worker 2] New coverage: 2128 instr, 4 contracts, 1 seqs in corpus
+[2026-02-16 13:26:56.31] [Worker 2] Test limit reached. Stopping.
+[2026-02-16 13:26:56.31] [Worker 0] New coverage: 2128 instr, 4 contracts, 2 seqs in corpus
+[2026-02-16 13:26:56.31]  Saved reproducer to echidna-corpus-f-man-01\reproducers-unshrunk\6723733856374456271.txt
+[2026-02-16 13:26:56.31]  Saved reproducer to echidna-corpus-f-man-01\reproducers-unshrunk\4490364703697411573.txt
+[2026-02-16 13:26:56.32]  Saved reproducer to echidna-corpus-f-man-01\coverage\2053020385483153581.txt
+[2026-02-16 13:26:56.32] [Worker 1] New coverage: 2128 instr, 4 contracts, 3 seqs in corpus
+[2026-02-16 13:26:56.32]  Saved reproducer to echidna-corpus-f-man-01\coverage\3460468469182822720.txt
+[2026-02-16 13:26:56.32]  Saved reproducer to echidna-corpus-f-man-01\coverage\6022818409439249958.txt
+[2026-02-16 13:26:56.33] [Worker 0] Test limit reached. Stopping.
+[2026-02-16 13:26:56.33] [Worker 1] Test limit reached. Stopping.
+[2026-02-16 13:26:56.33] [Worker 3] Test limit reached. Stopping.
+[2026-02-16 13:26:56.33] [status] tests: 1/1, fuzzing: 44/20000, values: [], cov: 2128, corpus: 3
+echidna_challenger_win_cannot_be_rewritten: failed!?  
+  Call sequence:
+    /Users/vboxuser/Desktop/Repos/zklibreports/proof_harness/cat2_mantle_f3_operator_gate/src/EchidnaMantleHarnesses.sol.action_defender_settles_false()
+
+Traces: 
+call [1m/Users/vboxuser/Desktop/Repos/zklibreports/proof_harness/cat2_mantle_f3_operator_gate/src/MantleF3Harness.sol[0m::winner()() [1m(C:/Users/vboxuser/Desktop/Repos/zklibreports/proof_harness/cat2_mantle_f3_operator_gate/src/EchidnaMantleHarnesses.sol:53)[0m
+ À?? ([1m/Users/vboxuser/Desktop/Repos/zklibreports/proof_harness/cat2_mantle_f3_operator_gate/src/MantleF3Harness.sol[0m)
+
+
+
+Unique instructions: 2128
+Unique codehashes: 4
+Corpus size: 3
+Seed: 7091269389201621520
+Total calls: 44
+
+[2026-02-16 13:26:56.33] Saving test reproducers... Done! (0.0014937s)
+[2026-02-16 13:26:56.34] Saving corpus... Done! (0.0066989s)
+[2026-02-16 13:26:56.34] Saving coverage... Done! (0.0786057s)

@@ -1,0 +1,273 @@
+C:/Users/vboxuser/Desktop/Repos/zklibreports/proof_harness/cat1_wormhole_f2_stale_guardian_governance/src/MedusaStaleGuardianGovernanceHarness.sol
+   1 |     | // SPDX-License-Identifier: MIT
+   2 |     | pragma solidity ^0.8.24;
+   3 |     | 
+   4 |     | import {
+   5 |     |     BridgeGovernanceBugModel,
+   6 |     |     BridgeGovernanceFixedModel,
+   7 |     |     CoreGovernanceModel,
+   8 |     |     MiniVM,
+   9 |     |     WormholeVerificationModel
+  10 |     | } from "./StaleGuardianGovernanceHarness.sol";
+  11 |     | 
+  12 |     | /// @notice Stateful specialist-fuzz harness for stale guardian-set governance acceptance.
+  13 | *r  | contract MedusaStaleGuardianGovernanceHarness {
+  14 | *   |     uint32 internal constant CURRENT_SET = 7;
+  15 | *   |     uint32 internal constant STALE_SET = 6;
+  16 | *   |     uint16 internal constant GOVERNANCE_CHAIN = 1;
+  17 | *   |     bytes32 internal constant GOVERNANCE_CONTRACT = bytes32(uint256(4));
+  18 |     | 
+  19 |     |     WormholeVerificationModel public wormhole;
+  20 |     |     CoreGovernanceModel public core;
+  21 |     |     BridgeGovernanceBugModel public bridgeBug;
+  22 |     |     BridgeGovernanceFixedModel public bridgeFixed;
+  23 |     | 
+  24 |     |     bool public bugAcceptedStaleSet;
+  25 |     |     bool public coreAcceptedStaleSet;
+  26 |     |     bool public fixedAcceptedStaleSet;
+  27 |     | 
+  28 | *   |     constructor() {
+  29 | *   |         wormhole = new WormholeVerificationModel();
+  30 | *   |         wormhole.setGuardianSet(STALE_SET, block.timestamp + 1 days);
+  31 | *   |         wormhole.setGuardianSet(CURRENT_SET, type(uint256).max);
+  32 | *   |         wormhole.setCurrentGuardianSetIndex(CURRENT_SET);
+  33 |     | 
+  34 | *   |         core = new CoreGovernanceModel(
+  35 | *   |             wormhole, GOVERNANCE_CHAIN, GOVERNANCE_CONTRACT
+  36 |     |         );
+  37 | *   |         bridgeBug = new BridgeGovernanceBugModel(
+  38 | *   |             wormhole, GOVERNANCE_CHAIN, GOVERNANCE_CONTRACT
+  39 |     |         );
+  40 | *   |         bridgeFixed = new BridgeGovernanceFixedModel(
+  41 | *   |             wormhole, GOVERNANCE_CHAIN, GOVERNANCE_CONTRACT
+  42 |     |         );
+  43 |     |     }
+  44 |     | 
+  45 | *   |     function _staleVm(bytes32 _hash) internal pure returns (bytes memory) {
+  46 | *   |         MiniVM memory vm = MiniVM({
+  47 |     |             guardianSetIndex: STALE_SET,
+  48 |     |             emitterChainId: GOVERNANCE_CHAIN,
+  49 |     |             emitterAddress: GOVERNANCE_CONTRACT,
+  50 | *   |             hash: _hash
+  51 |     |         });
+  52 | *   |         return abi.encode(vm);
+  53 |     |     }
+  54 |     | 
+  55 | *   |     function action_attemptBugUpgradeWithStaleSet(uint96 _seed) external {
+  56 | *   |         bytes32 h = keccak256(abi.encodePacked("bug-stale", _seed));
+  57 | *   |         try bridgeBug.upgrade(_staleVm(h)) {
+  58 | *   |             bugAcceptedStaleSet = true;
+  59 |     |         } catch {}
+  60 |     |     }
+  61 |     | 
+  62 | *   |     function action_attemptCoreUpgradeWithStaleSet(uint96 _seed) external {
+  63 | *   |         bytes32 h = keccak256(abi.encodePacked("core-stale", _seed));
+  64 | *   |         try core.submitContractUpgrade(_staleVm(h)) {
+  65 |     |             coreAcceptedStaleSet = true;
+  66 |     |         } catch {}
+  67 |     |     }
+  68 |     | 
+  69 | *   |     function action_attemptFixedUpgradeWithStaleSet(uint96 _seed) external {
+  70 | *   |         bytes32 h = keccak256(abi.encodePacked("fixed-stale", _seed));
+  71 | *   |         try bridgeFixed.upgrade(_staleVm(h)) {
+  72 |     |             fixedAcceptedStaleSet = true;
+  73 |     |         } catch {}
+  74 |     |     }
+  75 |     | 
+  76 |     |     /// @notice Desired invariant: stale guardian set should never authorize bridge governance.
+  77 |     |     function property_stale_set_must_not_authorize_bridge_governance()
+  78 |     |         external
+  79 |     |         view
+  80 |     |         returns (bool)
+  81 |     |     {
+  82 |     |         return !bugAcceptedStaleSet;
+  83 |     |     }
+  84 |     | 
+  85 |     |     /// @notice Control invariant: core governance should reject stale guardian sets.
+  86 |     |     function property_core_rejects_stale_guardian_set()
+  87 |     |         external
+  88 |     |         view
+  89 |     |         returns (bool)
+  90 |     |     {
+  91 |     |         return !coreAcceptedStaleSet;
+  92 |     |     }
+  93 |     | 
+  94 |     |     /// @notice Control invariant: fixed bridge model should reject stale guardian sets.
+  95 |     |     function property_fixed_bridge_rejects_stale_guardian_set()
+  96 |     |         external
+  97 |     |         view
+  98 |     |         returns (bool)
+  99 |     |     {
+ 100 |     |         return !fixedAcceptedStaleSet;
+ 101 |     |     }
+ 102 |     | 
+ 103 |     |     /// @notice Echidna-compatible alias.
+ 104 |     |     function echidna_stale_set_must_not_authorize_bridge_governance()
+ 105 |     |         external
+ 106 |     |         view
+ 107 |     |         returns (bool)
+ 108 |     |     {
+ 109 |     |         return !bugAcceptedStaleSet;
+ 110 |     |     }
+ 111 |     | }
+ 112 |     | 
+ 113 |     | 
+
+C:/Users/vboxuser/Desktop/Repos/zklibreports/proof_harness/cat1_wormhole_f2_stale_guardian_governance/src/StaleGuardianGovernanceHarness.sol
+   1 |     | // SPDX-License-Identifier: MIT
+   2 |     | pragma solidity ^0.8.24;
+   3 |     | 
+   4 |     | struct MiniVM {
+   5 |     |     uint32 guardianSetIndex;
+   6 |     |     uint16 emitterChainId;
+   7 |     |     bytes32 emitterAddress;
+   8 |     |     bytes32 hash;
+   9 |     | }
+  10 |     | 
+  11 |     | /// @notice Model of Wormhole VM verification behavior relevant to guardian-set expiry.
+  12 | *   | contract WormholeVerificationModel {
+  13 | *   |     uint32 public currentGuardianSetIndex;
+  14 |     |     mapping(uint32 => bool) public guardianSetExists;
+  15 |     |     mapping(uint32 => uint256) public guardianSetExpiration;
+  16 |     | 
+  17 | *   |     function setGuardianSet(uint32 _index, uint256 _expiration) external {
+  18 | *   |         guardianSetExists[_index] = true;
+  19 | *   |         guardianSetExpiration[_index] = _expiration;
+  20 |     |     }
+  21 |     | 
+  22 | *   |     function setCurrentGuardianSetIndex(uint32 _index) external {
+  23 | *   |         require(guardianSetExists[_index], "unknown set");
+  24 | *   |         currentGuardianSetIndex = _index;
+  25 |     |     }
+  26 |     | 
+  27 | *   |     function parseAndVerifyVM(bytes memory _encodedVm)
+  28 |     |         external
+  29 |     |         view
+  30 | *   |         returns (MiniVM memory _vm, bool _valid, string memory _reason)
+  31 |     |     {
+  32 | *   |         _vm = abi.decode(_encodedVm, (MiniVM));
+  33 |     | 
+  34 | *   |         if (!guardianSetExists[_vm.guardianSetIndex]) {
+  35 |     |             return (_vm, false, "invalid guardian set");
+  36 |     |         }
+  37 |     | 
+  38 | *   |         if (
+  39 | *   |             _vm.guardianSetIndex != currentGuardianSetIndex
+  40 | *   |                 && guardianSetExpiration[_vm.guardianSetIndex] < block.timestamp
+  41 |     |         ) {
+  42 | *   |             return (_vm, false, "guardian set has expired");
+  43 |     |         }
+  44 |     | 
+  45 | *   |         return (_vm, true, "");
+  46 |     |     }
+  47 |     | }
+  48 |     | 
+  49 |     | /// @notice Core governance model that enforces "current guardian set only".
+  50 | *   | contract CoreGovernanceModel {
+  51 |     |     WormholeVerificationModel public immutable wormhole;
+  52 |     |     uint16 public immutable governanceChainId;
+  53 |     |     bytes32 public immutable governanceContract;
+  54 |     | 
+  55 |     |     mapping(bytes32 => bool) public governanceActionConsumed;
+  56 |     |     bool public upgraded;
+  57 |     | 
+  58 | *   |     constructor(
+  59 |     |         WormholeVerificationModel _wormhole,
+  60 |     |         uint16 _governanceChainId,
+  61 |     |         bytes32 _governanceContract
+  62 |     |     ) {
+  63 | *   |         wormhole = _wormhole;
+  64 | *   |         governanceChainId = _governanceChainId;
+  65 | *   |         governanceContract = _governanceContract;
+  66 |     |     }
+  67 |     | 
+  68 | *   |     function submitContractUpgrade(bytes memory _encodedVm) external {
+  69 | *   |         (MiniVM memory vm, bool valid, string memory reason) =
+  70 | *   |             wormhole.parseAndVerifyVM(_encodedVm);
+  71 |     | 
+  72 | *   |         require(valid, reason);
+  73 | *   |         require(
+  74 | *   |             vm.guardianSetIndex == wormhole.currentGuardianSetIndex(),
+  75 |     |             "not signed by current guardian set"
+  76 |     |         );
+  77 |     |         require(vm.emitterChainId == governanceChainId, "wrong governance chain");
+  78 |     |         require(vm.emitterAddress == governanceContract, "wrong governance contract");
+  79 |     |         require(!governanceActionConsumed[vm.hash], "governance action already consumed");
+  80 |     | 
+  81 |     |         governanceActionConsumed[vm.hash] = true;
+  82 |     |         upgraded = true;
+  83 |     |     }
+  84 |     | }
+  85 |     | 
+  86 |     | /// @notice Token bridge governance model with the observed stale-set acceptance gap.
+  87 | *   | contract BridgeGovernanceBugModel {
+  88 |     |     WormholeVerificationModel public immutable wormhole;
+  89 |     |     uint16 public immutable governanceChainId;
+  90 |     |     bytes32 public immutable governanceContract;
+  91 |     | 
+  92 |     |     mapping(bytes32 => bool) public governanceActionConsumed;
+  93 |     |     bool public upgraded;
+  94 |     | 
+  95 | *   |     constructor(
+  96 |     |         WormholeVerificationModel _wormhole,
+  97 |     |         uint16 _governanceChainId,
+  98 |     |         bytes32 _governanceContract
+  99 |     |     ) {
+ 100 | *   |         wormhole = _wormhole;
+ 101 | *   |         governanceChainId = _governanceChainId;
+ 102 | *   |         governanceContract = _governanceContract;
+ 103 |     |     }
+ 104 |     | 
+ 105 | *   |     function upgrade(bytes memory _encodedVm) external {
+ 106 | *   |         (MiniVM memory vm, bool valid, string memory reason) =
+ 107 | *   |             wormhole.parseAndVerifyVM(_encodedVm);
+ 108 |     | 
+ 109 | *   |         require(valid, reason);
+ 110 | *   |         require(vm.emitterChainId == governanceChainId, "wrong governance chain");
+ 111 | *   |         require(vm.emitterAddress == governanceContract, "wrong governance contract");
+ 112 | *   |         require(!governanceActionConsumed[vm.hash], "governance action already consumed");
+ 113 |     | 
+ 114 | *   |         governanceActionConsumed[vm.hash] = true;
+ 115 | *   |         upgraded = true;
+ 116 |     |     }
+ 117 |     | }
+ 118 |     | 
+ 119 |     | /// @notice Reference fix model: add "current guardian set only" check to bridge governance.
+ 120 | *   | contract BridgeGovernanceFixedModel {
+ 121 |     |     WormholeVerificationModel public immutable wormhole;
+ 122 |     |     uint16 public immutable governanceChainId;
+ 123 |     |     bytes32 public immutable governanceContract;
+ 124 |     | 
+ 125 |     |     mapping(bytes32 => bool) public governanceActionConsumed;
+ 126 |     |     bool public upgraded;
+ 127 |     | 
+ 128 | *   |     constructor(
+ 129 |     |         WormholeVerificationModel _wormhole,
+ 130 |     |         uint16 _governanceChainId,
+ 131 |     |         bytes32 _governanceContract
+ 132 |     |     ) {
+ 133 | *   |         wormhole = _wormhole;
+ 134 | *   |         governanceChainId = _governanceChainId;
+ 135 | *   |         governanceContract = _governanceContract;
+ 136 |     |     }
+ 137 |     | 
+ 138 | *   |     function upgrade(bytes memory _encodedVm) external {
+ 139 | *   |         (MiniVM memory vm, bool valid, string memory reason) =
+ 140 | *   |             wormhole.parseAndVerifyVM(_encodedVm);
+ 141 |     | 
+ 142 | *   |         require(valid, reason);
+ 143 | *   |         require(
+ 144 | *   |             vm.guardianSetIndex == wormhole.currentGuardianSetIndex(),
+ 145 |     |             "not signed by current guardian set"
+ 146 |     |         );
+ 147 |     |         require(vm.emitterChainId == governanceChainId, "wrong governance chain");
+ 148 |     |         require(vm.emitterAddress == governanceContract, "wrong governance contract");
+ 149 |     |         require(!governanceActionConsumed[vm.hash], "governance action already consumed");
+ 150 |     | 
+ 151 |     |         governanceActionConsumed[vm.hash] = true;
+ 152 |     |         upgraded = true;
+ 153 |     |     }
+ 154 |     | }
+ 155 |     | 
+ 156 |     | 
+

@@ -1,0 +1,132 @@
+﻿{
+    "name":  "zkevm-contracts",
+    "source_path":  "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\zkevm-contracts",
+    "scanned_at_utc":  "2026-02-16 03:51:29 UTC",
+    "git":  {
+                "head":  "e468f9b0967334403069aa650d9f1164b1731ebb",
+                "branch":  "main",
+                "remote_origin":  "https://github.com/0xPolygonHermez/zkevm-contracts"
+            },
+    "stacks":  [
+                   "node",
+                   "solidity"
+               ],
+    "outputs":  {
+                    "gitleaks":  {
+                                     "name":  "gitleaks",
+                                     "file":  "gitleaks",
+                                     "args":  [
+                                                  "detect",
+                                                  "--source",
+                                                  "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\zkevm-contracts",
+                                                  "--report-format",
+                                                  "json",
+                                                  "--report-path",
+                                                  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\zkevm-contracts\\artifacts\\gitleaks.json",
+                                                  "--redact",
+                                                  "--no-banner",
+                                                  "--log-level",
+                                                  "error",
+                                                  "--timeout",
+                                                  "600"
+                                              ],
+                                     "arg_string":  "detect --source \\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\zkevm-contracts --report-format json --report-path C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\zkevm-contracts\\artifacts\\gitleaks.json --redact --no-banner --log-level error --timeout 600",
+                                     "runner":  "cmd.exe",
+                                     "runner_args":  [
+                                                         "/d",
+                                                         "/s",
+                                                         "/c",
+                                                         "gitleaks detect --source \\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\zkevm-contracts --report-format json --report-path C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\zkevm-contracts\\artifacts\\gitleaks.json --redact --no-banner --log-level error --timeout 600 1\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\zkevm-contracts\\artifacts\\gitleaks.stdout.log 2\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\zkevm-contracts\\artifacts\\gitleaks.stderr.log"
+                                                     ],
+                                     "cwd":  "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\zkevm-contracts",
+                                     "start_utc":  "2026-02-16 03:51:33 UTC",
+                                     "end_utc":  "2026-02-16 03:51:38 UTC",
+                                     "duration_sec":  5,
+                                     "timed_out":  false,
+                                     "exit_code":  1,
+                                     "stdout":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\zkevm-contracts\\artifacts\\gitleaks.stdout.log",
+                                     "stderr":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\zkevm-contracts\\artifacts\\gitleaks.stderr.log",
+                                     "report":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\zkevm-contracts\\artifacts\\gitleaks.json"
+                                 },
+                    "osv":  {
+                                "name":  "osv-scanner",
+                                "file":  "osv-scanner",
+                                "args":  [
+                                             "scan",
+                                             "source",
+                                             "-r",
+                                             "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\zkevm-contracts",
+                                             "-f",
+                                             "json",
+                                             "--output",
+                                             "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\zkevm-contracts\\artifacts\\osv.json",
+                                             "--allow-no-lockfiles",
+                                             "--verbosity",
+                                             "warn",
+                                             "--experimental-exclude",
+                                             "g:**/node_modules",
+                                             "--experimental-exclude",
+                                             "g:**/target",
+                                             "--experimental-exclude",
+                                             "g:**/.git",
+                                             "--experimental-exclude",
+                                             "g:**/dist",
+                                             "--experimental-exclude",
+                                             "g:**/build",
+                                             "--experimental-exclude",
+                                             "g:**/out"
+                                         ],
+                                "arg_string":  "scan source -r \\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\zkevm-contracts -f json --output C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\zkevm-contracts\\artifacts\\osv.json --allow-no-lockfiles --verbosity warn --experimental-exclude g:**/node_modules --experimental-exclude g:**/target --experimental-exclude g:**/.git --experimental-exclude g:**/dist --experimental-exclude g:**/build --experimental-exclude g:**/out",
+                                "runner":  "cmd.exe",
+                                "runner_args":  [
+                                                    "/d",
+                                                    "/s",
+                                                    "/c",
+                                                    "osv-scanner scan source -r \\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\zkevm-contracts -f json --output C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\zkevm-contracts\\artifacts\\osv.json --allow-no-lockfiles --verbosity warn --experimental-exclude g:**/node_modules --experimental-exclude g:**/target --experimental-exclude g:**/.git --experimental-exclude g:**/dist --experimental-exclude g:**/build --experimental-exclude g:**/out 1\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\zkevm-contracts\\artifacts\\osv.stdout.log 2\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\zkevm-contracts\\artifacts\\osv.stderr.log"
+                                                ],
+                                "cwd":  "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\zkevm-contracts",
+                                "start_utc":  "2026-02-16 03:51:38 UTC",
+                                "end_utc":  "2026-02-16 03:51:45 UTC",
+                                "duration_sec":  7,
+                                "timed_out":  false,
+                                "exit_code":  1,
+                                "stdout":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\zkevm-contracts\\artifacts\\osv.stdout.log",
+                                "stderr":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\zkevm-contracts\\artifacts\\osv.stderr.log",
+                                "report":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\zkevm-contracts\\artifacts\\osv.json"
+                            },
+                    "npm_audit":  [
+                                      {
+                                          "name":  "npm-audit",
+                                          "file":  "npm.cmd",
+                                          "args":  [
+                                                       "audit",
+                                                       "--package-lock-only",
+                                                       "--json"
+                                                   ],
+                                          "arg_string":  "audit --package-lock-only --json",
+                                          "runner":  "cmd.exe",
+                                          "runner_args":  [
+                                                              "/d",
+                                                              "/s",
+                                                              "/c",
+                                                              "npm.cmd audit --package-lock-only --json 1\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\zkevm-contracts\\artifacts\\npm-audit_package-lock.json.json 2\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\zkevm-contracts\\artifacts\\npm-audit_package-lock.json.stderr.log"
+                                                          ],
+                                          "cwd":  "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\zkevm-contracts",
+                                          "start_utc":  "2026-02-16 03:51:46 UTC",
+                                          "end_utc":  "2026-02-16 03:51:46 UTC",
+                                          "duration_sec":  1,
+                                          "timed_out":  false,
+                                          "exit_code":  1,
+                                          "stdout":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\zkevm-contracts\\artifacts\\npm-audit_package-lock.json.json",
+                                          "stderr":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\zkevm-contracts\\artifacts\\npm-audit_package-lock.json.stderr.log",
+                                          "lockfile":  "package-lock.json"
+                                      }
+                                  ]
+                },
+    "summary":  {
+                    "gitleaks_findings":  83,
+                    "osv_vulns":  111,
+                    "npm_audit_vulns":  0,
+                    "cargo_audit_vulns":  null
+                }
+}

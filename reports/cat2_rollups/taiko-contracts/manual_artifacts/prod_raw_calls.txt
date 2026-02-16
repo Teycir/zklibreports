@@ -1,0 +1,22 @@
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\shared\vault\ERC20Vault.sol:457:            address(_token).staticcall(abi.encodeCall(IERC20Metadata.decimals, ()));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\shared\vault\BaseVault.sol:76:            address(_token).staticcall(abi.encodeCall(INameSymbol.symbol, ()));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\shared\vault\BaseVault.sol:82:            address(_token).staticcall(abi.encodeCall(INameSymbol.name, ()));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\shared\libs\LibAddress.sol:73:            _addr.staticcall(abi.encodeCall(IERC165.supportsInterface, (_interfaceId)));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\shared\fork-router\ForkRouter.sol:12:/// @notice Routes calls between the legacy and new fork implementations using delegatecall.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\shared\fork-router\ForkRouter.sol:19:/// to avoid collisions. This is because calls are made via `delegatecall`, which means they this
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\shared\fork-router\ForkRouter.sol:57:            let result := delegatecall(gas(), fork, 0, calldatasize(), 0, 0)
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\layer1\verifiers\SP1Verifier.sol:76:        (bool success,) = sp1RemoteVerifier.staticcall(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\layer1\verifiers\Risc0Verifier.sol:77:        (bool success,) = riscoGroth16Verifier.staticcall(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\layer1\preconf\libs\LibPreconfUtils.sol:62:            LibPreconfConstants.BEACON_BLOCK_ROOT_CONTRACT.staticcall(abi.encode(timestamp));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\layer1\preconf\libs\LibBLS12381.sol:202:                staticcall(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\layer1\preconf\libs\LibBLS12381.sol:231:                staticcall(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\layer1\preconf\libs\LibBLS12381.sol:294:                staticcall(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\layer1\preconf\libs\LibBLS12381.sol:409:                staticcall(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\layer1\preconf\impl\UnifiedSlasher.sol:55:            (bool success, bytes memory data) = preconfSlasherL1.delegatecall(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\layer1\preconf\impl\UnifiedSlasher.sol:69:            (bool success, bytes memory data) = lookaheadSlasher.delegatecall(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\layer1\preconf\impl\UnifiedSlasher.sol:86:        // We only delegatecall to preconfSlasherL1, as only preconfirmation faults use message
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\layer1\preconf\impl\UnifiedSlasher.sol:88:        (bool success,) = preconfSlasherL1.delegatecall(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\layer1\preconf\impl\PreconfSlasherL1.sol:15:/// @dev This is a stateless contract intended to be delegatecall-ed to by the `UnifiedSlasher`
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\layer1\preconf\impl\LookaheadSlasher.sol:13:/// @dev This is a stateless contract intended to be delegatecall-ed to by the `UnifiedSlasher`
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\layer1\core\libs\LibInboxSetup.sol:10:///      of the main contract at the cost of a small runtime gas overhead for the DELEGATECALL.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts\packages\protocol\contracts\layer1\automata-attestation\utils\SigVerifyLib.sol:44:        (bool success, bytes memory ret) = __es256Verifier.staticcall(args);

@@ -1,0 +1,358 @@
+﻿{
+    "name":  "taiko-contracts",
+    "source_path":  "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\taiko-contracts",
+    "scanned_at_utc":  "2026-02-16 03:38:11 UTC",
+    "git":  {
+                "head":  "ce8c3e96c6374564ed338e494bd0ad8a6da5a54b",
+                "branch":  "main",
+                "remote_origin":  "https://github.com/taikoxyz/taiko-mono"
+            },
+    "stacks":  [
+                   "go",
+                   "node",
+                   "rust",
+                   "solidity"
+               ],
+    "outputs":  {
+                    "gitleaks":  {
+                                     "name":  "gitleaks",
+                                     "file":  "gitleaks",
+                                     "args":  [
+                                                  "detect",
+                                                  "--source",
+                                                  "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\taiko-contracts",
+                                                  "--report-format",
+                                                  "json",
+                                                  "--report-path",
+                                                  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\taiko-contracts\\artifacts\\gitleaks.json",
+                                                  "--redact",
+                                                  "--no-banner",
+                                                  "--log-level",
+                                                  "error",
+                                                  "--timeout",
+                                                  "600"
+                                              ],
+                                     "arg_string":  "detect --source \\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\taiko-contracts --report-format json --report-path C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\taiko-contracts\\artifacts\\gitleaks.json --redact --no-banner --log-level error --timeout 600",
+                                     "runner":  "cmd.exe",
+                                     "runner_args":  [
+                                                         "/d",
+                                                         "/s",
+                                                         "/c",
+                                                         "gitleaks detect --source \\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\taiko-contracts --report-format json --report-path C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\taiko-contracts\\artifacts\\gitleaks.json --redact --no-banner --log-level error --timeout 600 1\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\taiko-contracts\\artifacts\\gitleaks.stdout.log 2\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\taiko-contracts\\artifacts\\gitleaks.stderr.log"
+                                                     ],
+                                     "cwd":  "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\taiko-contracts",
+                                     "start_utc":  "2026-02-16 03:38:14 UTC",
+                                     "end_utc":  "2026-02-16 03:38:33 UTC",
+                                     "duration_sec":  13,
+                                     "timed_out":  false,
+                                     "exit_code":  1,
+                                     "stdout":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\taiko-contracts\\artifacts\\gitleaks.stdout.log",
+                                     "stderr":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\taiko-contracts\\artifacts\\gitleaks.stderr.log",
+                                     "report":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\taiko-contracts\\artifacts\\gitleaks.json"
+                                 },
+                    "osv":  {
+                                "name":  "osv-scanner",
+                                "file":  "osv-scanner",
+                                "args":  [
+                                             "scan",
+                                             "source",
+                                             "-r",
+                                             "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\taiko-contracts",
+                                             "-f",
+                                             "json",
+                                             "--output",
+                                             "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\taiko-contracts\\artifacts\\osv.json",
+                                             "--allow-no-lockfiles",
+                                             "--verbosity",
+                                             "warn",
+                                             "--experimental-exclude",
+                                             "g:**/node_modules",
+                                             "--experimental-exclude",
+                                             "g:**/target",
+                                             "--experimental-exclude",
+                                             "g:**/.git",
+                                             "--experimental-exclude",
+                                             "g:**/dist",
+                                             "--experimental-exclude",
+                                             "g:**/build",
+                                             "--experimental-exclude",
+                                             "g:**/out"
+                                         ],
+                                "arg_string":  "scan source -r \\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\taiko-contracts -f json --output C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\taiko-contracts\\artifacts\\osv.json --allow-no-lockfiles --verbosity warn --experimental-exclude g:**/node_modules --experimental-exclude g:**/target --experimental-exclude g:**/.git --experimental-exclude g:**/dist --experimental-exclude g:**/build --experimental-exclude g:**/out",
+                                "runner":  "cmd.exe",
+                                "runner_args":  [
+                                                    "/d",
+                                                    "/s",
+                                                    "/c",
+                                                    "osv-scanner scan source -r \\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\taiko-contracts -f json --output C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\taiko-contracts\\artifacts\\osv.json --allow-no-lockfiles --verbosity warn --experimental-exclude g:**/node_modules --experimental-exclude g:**/target --experimental-exclude g:**/.git --experimental-exclude g:**/dist --experimental-exclude g:**/build --experimental-exclude g:**/out 1\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\taiko-contracts\\artifacts\\osv.stdout.log 2\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\taiko-contracts\\artifacts\\osv.stderr.log"
+                                                ],
+                                "cwd":  "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\taiko-contracts",
+                                "start_utc":  "2026-02-16 03:38:33 UTC",
+                                "end_utc":  "2026-02-16 03:42:11 UTC",
+                                "duration_sec":  223,
+                                "timed_out":  false,
+                                "exit_code":  1,
+                                "stdout":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\taiko-contracts\\artifacts\\osv.stdout.log",
+                                "stderr":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\taiko-contracts\\artifacts\\osv.stderr.log",
+                                "report":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\taiko-contracts\\artifacts\\osv.json"
+                            },
+                    "govulncheck":  {
+                                        "json":  {
+                                                     "name":  "govulncheck(json)",
+                                                     "file":  "govulncheck",
+                                                     "args":  [
+                                                                  "-C",
+                                                                  "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\taiko-contracts",
+                                                                  "-format",
+                                                                  "json",
+                                                                  "./..."
+                                                              ],
+                                                     "arg_string":  "-C \\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\taiko-contracts -format json ./...",
+                                                     "runner":  "cmd.exe",
+                                                     "runner_args":  [
+                                                                         "/d",
+                                                                         "/s",
+                                                                         "/c",
+                                                                         "govulncheck -C \\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\taiko-contracts -format json ./... 1\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\taiko-contracts\\artifacts\\govulncheck.json 2\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\taiko-contracts\\artifacts\\govulncheck.json.stderr.log"
+                                                                     ],
+                                                     "cwd":  "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\taiko-contracts",
+                                                     "start_utc":  "2026-02-16 03:42:11 UTC",
+                                                     "end_utc":  "2026-02-16 03:42:42 UTC",
+                                                     "duration_sec":  32,
+                                                     "timed_out":  false,
+                                                     "exit_code":  1,
+                                                     "stdout":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\taiko-contracts\\artifacts\\govulncheck.json",
+                                                     "stderr":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\taiko-contracts\\artifacts\\govulncheck.json.stderr.log"
+                                                 },
+                                        "text":  {
+                                                     "name":  "govulncheck(text)",
+                                                     "file":  "govulncheck",
+                                                     "args":  [
+                                                                  "-C",
+                                                                  "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\taiko-contracts",
+                                                                  "-format",
+                                                                  "text",
+                                                                  "-show",
+                                                                  "traces",
+                                                                  "./..."
+                                                              ],
+                                                     "arg_string":  "-C \\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\taiko-contracts -format text -show traces ./...",
+                                                     "runner":  "cmd.exe",
+                                                     "runner_args":  [
+                                                                         "/d",
+                                                                         "/s",
+                                                                         "/c",
+                                                                         "govulncheck -C \\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\taiko-contracts -format text -show traces ./... 1\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\taiko-contracts\\artifacts\\govulncheck.txt 2\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\taiko-contracts\\artifacts\\govulncheck.txt.stderr.log"
+                                                                     ],
+                                                     "cwd":  "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\taiko-contracts",
+                                                     "start_utc":  "2026-02-16 03:42:42 UTC",
+                                                     "end_utc":  "2026-02-16 03:43:14 UTC",
+                                                     "duration_sec":  32,
+                                                     "timed_out":  false,
+                                                     "exit_code":  1,
+                                                     "stdout":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\taiko-contracts\\artifacts\\govulncheck.txt",
+                                                     "stderr":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\taiko-contracts\\artifacts\\govulncheck.txt.stderr.log"
+                                                 }
+                                    },
+                    "gosec":  {
+                                  "name":  "gosec",
+                                  "file":  "gosec",
+                                  "args":  [
+                                               "-fmt=json",
+                                               "-out=C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\taiko-contracts\\artifacts\\gosec.json",
+                                               "-confidence=high",
+                                               "-severity=medium",
+                                               "-exclude-generated",
+                                               "-quiet",
+                                               "./..."
+                                           ],
+                                  "arg_string":  "-fmt=json -out=C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\taiko-contracts\\artifacts\\gosec.json -confidence=high -severity=medium -exclude-generated -quiet ./...",
+                                  "runner":  "cmd.exe",
+                                  "runner_args":  [
+                                                      "/d",
+                                                      "/s",
+                                                      "/c",
+                                                      "gosec -fmt=json -out=C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\taiko-contracts\\artifacts\\gosec.json -confidence=high -severity=medium -exclude-generated -quiet ./... 1\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\taiko-contracts\\artifacts\\gosec.stdout.log 2\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\taiko-contracts\\artifacts\\gosec.stderr.log"
+                                                  ],
+                                  "cwd":  "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\taiko-contracts",
+                                  "start_utc":  "2026-02-16 03:43:14 UTC",
+                                  "end_utc":  "2026-02-16 03:43:20 UTC",
+                                  "duration_sec":  6,
+                                  "timed_out":  false,
+                                  "exit_code":  1,
+                                  "stdout":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\taiko-contracts\\artifacts\\gosec.stdout.log",
+                                  "stderr":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\taiko-contracts\\artifacts\\gosec.stderr.log"
+                              },
+                    "cargo_audit":  [
+                                        {
+                                            "name":  "cargo-audit",
+                                            "file":  "cargo",
+                                            "args":  [
+                                                         "audit",
+                                                         "--json",
+                                                         "--file",
+                                                         "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\taiko-contracts\\packages\\ejector\\Cargo.lock"
+                                                     ],
+                                            "arg_string":  "audit --json --file \\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\taiko-contracts\\packages\\ejector\\Cargo.lock",
+                                            "runner":  "cmd.exe",
+                                            "runner_args":  [
+                                                                "/d",
+                                                                "/s",
+                                                                "/c",
+                                                                "cargo audit --json --file \\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\taiko-contracts\\packages\\ejector\\Cargo.lock 1\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\taiko-contracts\\artifacts\\cargo-audit_packages_ejector_Cargo.lock.json 2\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\taiko-contracts\\artifacts\\cargo-audit_packages_ejector_Cargo.lock.stderr.log"
+                                                            ],
+                                            "cwd":  "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\taiko-contracts",
+                                            "start_utc":  "2026-02-16 03:43:21 UTC",
+                                            "end_utc":  "2026-02-16 03:43:30 UTC",
+                                            "duration_sec":  8,
+                                            "timed_out":  false,
+                                            "exit_code":  1,
+                                            "stdout":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\taiko-contracts\\artifacts\\cargo-audit_packages_ejector_Cargo.lock.json",
+                                            "stderr":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\taiko-contracts\\artifacts\\cargo-audit_packages_ejector_Cargo.lock.stderr.log",
+                                            "lockfile":  "packages\\ejector\\Cargo.lock"
+                                        },
+                                        {
+                                            "name":  "cargo-audit",
+                                            "file":  "cargo",
+                                            "args":  [
+                                                         "audit",
+                                                         "--json",
+                                                         "--file",
+                                                         "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\taiko-contracts\\packages\\overseer-rs\\Cargo.lock"
+                                                     ],
+                                            "arg_string":  "audit --json --file \\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\taiko-contracts\\packages\\overseer-rs\\Cargo.lock",
+                                            "runner":  "cmd.exe",
+                                            "runner_args":  [
+                                                                "/d",
+                                                                "/s",
+                                                                "/c",
+                                                                "cargo audit --json --file \\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\taiko-contracts\\packages\\overseer-rs\\Cargo.lock 1\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\taiko-contracts\\artifacts\\cargo-audit_packages_overseer-rs_Cargo.lock.json 2\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\taiko-contracts\\artifacts\\cargo-audit_packages_overseer-rs_Cargo.lock.stderr.log"
+                                                            ],
+                                            "cwd":  "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\taiko-contracts",
+                                            "start_utc":  "2026-02-16 03:43:30 UTC",
+                                            "end_utc":  "2026-02-16 03:43:34 UTC",
+                                            "duration_sec":  4,
+                                            "timed_out":  false,
+                                            "exit_code":  1,
+                                            "stdout":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\taiko-contracts\\artifacts\\cargo-audit_packages_overseer-rs_Cargo.lock.json",
+                                            "stderr":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\taiko-contracts\\artifacts\\cargo-audit_packages_overseer-rs_Cargo.lock.stderr.log",
+                                            "lockfile":  "packages\\overseer-rs\\Cargo.lock"
+                                        },
+                                        {
+                                            "name":  "cargo-audit",
+                                            "file":  "cargo",
+                                            "args":  [
+                                                         "audit",
+                                                         "--json",
+                                                         "--file",
+                                                         "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\taiko-contracts\\packages\\preconfirmation-p2p\\Cargo.lock"
+                                                     ],
+                                            "arg_string":  "audit --json --file \\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\taiko-contracts\\packages\\preconfirmation-p2p\\Cargo.lock",
+                                            "runner":  "cmd.exe",
+                                            "runner_args":  [
+                                                                "/d",
+                                                                "/s",
+                                                                "/c",
+                                                                "cargo audit --json --file \\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\taiko-contracts\\packages\\preconfirmation-p2p\\Cargo.lock 1\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\taiko-contracts\\artifacts\\cargo-audit_packages_preconfirmation-p2p_Cargo.lock.json 2\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\taiko-contracts\\artifacts\\cargo-audit_packages_preconfirmation-p2p_Cargo.lock.stderr.log"
+                                                            ],
+                                            "cwd":  "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\taiko-contracts",
+                                            "start_utc":  "2026-02-16 03:43:34 UTC",
+                                            "end_utc":  "2026-02-16 03:43:39 UTC",
+                                            "duration_sec":  5,
+                                            "timed_out":  false,
+                                            "exit_code":  1,
+                                            "stdout":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\taiko-contracts\\artifacts\\cargo-audit_packages_preconfirmation-p2p_Cargo.lock.json",
+                                            "stderr":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\taiko-contracts\\artifacts\\cargo-audit_packages_preconfirmation-p2p_Cargo.lock.stderr.log",
+                                            "lockfile":  "packages\\preconfirmation-p2p\\Cargo.lock"
+                                        },
+                                        {
+                                            "name":  "cargo-audit",
+                                            "file":  "cargo",
+                                            "args":  [
+                                                         "audit",
+                                                         "--json",
+                                                         "--file",
+                                                         "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\taiko-contracts\\packages\\taiko-client-rs\\Cargo.lock"
+                                                     ],
+                                            "arg_string":  "audit --json --file \\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\taiko-contracts\\packages\\taiko-client-rs\\Cargo.lock",
+                                            "runner":  "cmd.exe",
+                                            "runner_args":  [
+                                                                "/d",
+                                                                "/s",
+                                                                "/c",
+                                                                "cargo audit --json --file \\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\taiko-contracts\\packages\\taiko-client-rs\\Cargo.lock 1\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\taiko-contracts\\artifacts\\cargo-audit_packages_taiko-client-rs_Cargo.lock.json 2\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\taiko-contracts\\artifacts\\cargo-audit_packages_taiko-client-rs_Cargo.lock.stderr.log"
+                                                            ],
+                                            "cwd":  "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\taiko-contracts",
+                                            "start_utc":  "2026-02-16 03:43:39 UTC",
+                                            "end_utc":  "2026-02-16 03:43:43 UTC",
+                                            "duration_sec":  5,
+                                            "timed_out":  false,
+                                            "exit_code":  1,
+                                            "stdout":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\taiko-contracts\\artifacts\\cargo-audit_packages_taiko-client-rs_Cargo.lock.json",
+                                            "stderr":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\taiko-contracts\\artifacts\\cargo-audit_packages_taiko-client-rs_Cargo.lock.stderr.log",
+                                            "lockfile":  "packages\\taiko-client-rs\\Cargo.lock"
+                                        },
+                                        {
+                                            "name":  "cargo-audit",
+                                            "file":  "cargo",
+                                            "args":  [
+                                                         "audit",
+                                                         "--json",
+                                                         "--file",
+                                                         "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\taiko-contracts\\packages\\urcindexer-rs\\Cargo.lock"
+                                                     ],
+                                            "arg_string":  "audit --json --file \\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\taiko-contracts\\packages\\urcindexer-rs\\Cargo.lock",
+                                            "runner":  "cmd.exe",
+                                            "runner_args":  [
+                                                                "/d",
+                                                                "/s",
+                                                                "/c",
+                                                                "cargo audit --json --file \\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\taiko-contracts\\packages\\urcindexer-rs\\Cargo.lock 1\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\taiko-contracts\\artifacts\\cargo-audit_packages_urcindexer-rs_Cargo.lock.json 2\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\taiko-contracts\\artifacts\\cargo-audit_packages_urcindexer-rs_Cargo.lock.stderr.log"
+                                                            ],
+                                            "cwd":  "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\taiko-contracts",
+                                            "start_utc":  "2026-02-16 03:43:43 UTC",
+                                            "end_utc":  "2026-02-16 03:43:47 UTC",
+                                            "duration_sec":  3,
+                                            "timed_out":  false,
+                                            "exit_code":  1,
+                                            "stdout":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\taiko-contracts\\artifacts\\cargo-audit_packages_urcindexer-rs_Cargo.lock.json",
+                                            "stderr":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\taiko-contracts\\artifacts\\cargo-audit_packages_urcindexer-rs_Cargo.lock.stderr.log",
+                                            "lockfile":  "packages\\urcindexer-rs\\Cargo.lock"
+                                        }
+                                    ],
+                    "npm_audit":  [
+                                      {
+                                          "name":  "npm-audit",
+                                          "file":  "npm.cmd",
+                                          "args":  [
+                                                       "audit",
+                                                       "--package-lock-only",
+                                                       "--json"
+                                                   ],
+                                          "arg_string":  "audit --package-lock-only --json",
+                                          "runner":  "cmd.exe",
+                                          "runner_args":  [
+                                                              "/d",
+                                                              "/s",
+                                                              "/c",
+                                                              "npm.cmd audit --package-lock-only --json 1\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\taiko-contracts\\artifacts\\npm-audit_packages_tools_bridged-token-scanner_package-lock.json.json 2\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\taiko-contracts\\artifacts\\npm-audit_packages_tools_bridged-token-scanner_package-lock.json.stderr.log"
+                                                          ],
+                                          "cwd":  "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\taiko-contracts\\packages\\tools\\bridged-token-scanner",
+                                          "start_utc":  "2026-02-16 03:43:48 UTC",
+                                          "end_utc":  "2026-02-16 03:43:49 UTC",
+                                          "duration_sec":  1,
+                                          "timed_out":  false,
+                                          "exit_code":  1,
+                                          "stdout":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\taiko-contracts\\artifacts\\npm-audit_packages_tools_bridged-token-scanner_package-lock.json.json",
+                                          "stderr":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\taiko-contracts\\artifacts\\npm-audit_packages_tools_bridged-token-scanner_package-lock.json.stderr.log",
+                                          "lockfile":  "packages\\tools\\bridged-token-scanner\\package-lock.json"
+                                      }
+                                  ]
+                },
+    "summary":  {
+                    "gitleaks_findings":  61,
+                    "osv_vulns":  205,
+                    "npm_audit_vulns":  0,
+                    "cargo_audit_vulns":  15
+                }
+}

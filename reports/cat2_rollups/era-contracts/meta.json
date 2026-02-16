@@ -1,0 +1,161 @@
+﻿{
+    "name":  "era-contracts",
+    "source_path":  "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\era-contracts",
+    "scanned_at_utc":  "2026-02-16 03:00:41 UTC",
+    "git":  {
+                "head":  "920501207baed3f33c66914039409c49f2dea1bb",
+                "branch":  "main",
+                "remote_origin":  "https://github.com/matter-labs/era-contracts"
+            },
+    "stacks":  [
+                   "node",
+                   "rust",
+                   "solidity"
+               ],
+    "outputs":  {
+                    "gitleaks":  {
+                                     "name":  "gitleaks",
+                                     "file":  "gitleaks",
+                                     "args":  [
+                                                  "detect",
+                                                  "--source",
+                                                  "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\era-contracts",
+                                                  "--report-format",
+                                                  "json",
+                                                  "--report-path",
+                                                  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\era-contracts\\artifacts\\gitleaks.json",
+                                                  "--redact",
+                                                  "--no-banner",
+                                                  "--log-level",
+                                                  "error",
+                                                  "--timeout",
+                                                  "600"
+                                              ],
+                                     "arg_string":  "detect --source \\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\era-contracts --report-format json --report-path C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\era-contracts\\artifacts\\gitleaks.json --redact --no-banner --log-level error --timeout 600",
+                                     "runner":  "cmd.exe",
+                                     "runner_args":  [
+                                                         "/d",
+                                                         "/s",
+                                                         "/c",
+                                                         "gitleaks detect --source \\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\era-contracts --report-format json --report-path C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\era-contracts\\artifacts\\gitleaks.json --redact --no-banner --log-level error --timeout 600 1\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\era-contracts\\artifacts\\gitleaks.stdout.log 2\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\era-contracts\\artifacts\\gitleaks.stderr.log"
+                                                     ],
+                                     "cwd":  "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\era-contracts",
+                                     "start_utc":  "2026-02-16 03:00:46 UTC",
+                                     "end_utc":  "2026-02-16 03:07:56 UTC",
+                                     "duration_sec":  430,
+                                     "timed_out":  false,
+                                     "exit_code":  1,
+                                     "stdout":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\era-contracts\\artifacts\\gitleaks.stdout.log",
+                                     "stderr":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\era-contracts\\artifacts\\gitleaks.stderr.log",
+                                     "report":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\era-contracts\\artifacts\\gitleaks.json"
+                                 },
+                    "osv":  {
+                                "name":  "osv-scanner",
+                                "file":  "osv-scanner",
+                                "args":  [
+                                             "scan",
+                                             "source",
+                                             "-r",
+                                             "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\era-contracts",
+                                             "-f",
+                                             "json",
+                                             "--output",
+                                             "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\era-contracts\\artifacts\\osv.json",
+                                             "--allow-no-lockfiles",
+                                             "--verbosity",
+                                             "warn",
+                                             "--experimental-exclude",
+                                             "g:**/node_modules",
+                                             "--experimental-exclude",
+                                             "g:**/target",
+                                             "--experimental-exclude",
+                                             "g:**/.git",
+                                             "--experimental-exclude",
+                                             "g:**/dist",
+                                             "--experimental-exclude",
+                                             "g:**/build",
+                                             "--experimental-exclude",
+                                             "g:**/out"
+                                         ],
+                                "arg_string":  "scan source -r \\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\era-contracts -f json --output C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\era-contracts\\artifacts\\osv.json --allow-no-lockfiles --verbosity warn --experimental-exclude g:**/node_modules --experimental-exclude g:**/target --experimental-exclude g:**/.git --experimental-exclude g:**/dist --experimental-exclude g:**/build --experimental-exclude g:**/out",
+                                "runner":  "cmd.exe",
+                                "runner_args":  [
+                                                    "/d",
+                                                    "/s",
+                                                    "/c",
+                                                    "osv-scanner scan source -r \\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\era-contracts -f json --output C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\era-contracts\\artifacts\\osv.json --allow-no-lockfiles --verbosity warn --experimental-exclude g:**/node_modules --experimental-exclude g:**/target --experimental-exclude g:**/.git --experimental-exclude g:**/dist --experimental-exclude g:**/build --experimental-exclude g:**/out 1\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\era-contracts\\artifacts\\osv.stdout.log 2\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\era-contracts\\artifacts\\osv.stderr.log"
+                                                ],
+                                "cwd":  "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\era-contracts",
+                                "start_utc":  "2026-02-16 03:07:56 UTC",
+                                "end_utc":  "2026-02-16 03:08:08 UTC",
+                                "duration_sec":  12,
+                                "timed_out":  false,
+                                "exit_code":  1,
+                                "stdout":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\era-contracts\\artifacts\\osv.stdout.log",
+                                "stderr":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\era-contracts\\artifacts\\osv.stderr.log",
+                                "report":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\era-contracts\\artifacts\\osv.json"
+                            },
+                    "cargo_audit":  [
+                                        {
+                                            "name":  "cargo-audit",
+                                            "file":  "cargo",
+                                            "args":  [
+                                                         "audit",
+                                                         "--json",
+                                                         "--file",
+                                                         "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\era-contracts\\system-contracts\\bootloader\\test_infra\\Cargo.lock"
+                                                     ],
+                                            "arg_string":  "audit --json --file \\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\era-contracts\\system-contracts\\bootloader\\test_infra\\Cargo.lock",
+                                            "runner":  "cmd.exe",
+                                            "runner_args":  [
+                                                                "/d",
+                                                                "/s",
+                                                                "/c",
+                                                                "cargo audit --json --file \\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\era-contracts\\system-contracts\\bootloader\\test_infra\\Cargo.lock 1\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\era-contracts\\artifacts\\cargo-audit_system-contracts_bootloader_test_infra_Cargo.lock.json 2\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\era-contracts\\artifacts\\cargo-audit_system-contracts_bootloader_test_infra_Cargo.lock.stderr.log"
+                                                            ],
+                                            "cwd":  "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\era-contracts",
+                                            "start_utc":  "2026-02-16 03:08:09 UTC",
+                                            "end_utc":  "2026-02-16 03:08:21 UTC",
+                                            "duration_sec":  11,
+                                            "timed_out":  false,
+                                            "exit_code":  1,
+                                            "stdout":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\era-contracts\\artifacts\\cargo-audit_system-contracts_bootloader_test_infra_Cargo.lock.json",
+                                            "stderr":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\era-contracts\\artifacts\\cargo-audit_system-contracts_bootloader_test_infra_Cargo.lock.stderr.log",
+                                            "lockfile":  "system-contracts\\bootloader\\test_infra\\Cargo.lock"
+                                        },
+                                        {
+                                            "name":  "cargo-audit",
+                                            "file":  "cargo",
+                                            "args":  [
+                                                         "audit",
+                                                         "--json",
+                                                         "--file",
+                                                         "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\era-contracts\\tools\\Cargo.lock"
+                                                     ],
+                                            "arg_string":  "audit --json --file \\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\era-contracts\\tools\\Cargo.lock",
+                                            "runner":  "cmd.exe",
+                                            "runner_args":  [
+                                                                "/d",
+                                                                "/s",
+                                                                "/c",
+                                                                "cargo audit --json --file \\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\era-contracts\\tools\\Cargo.lock 1\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\era-contracts\\artifacts\\cargo-audit_tools_Cargo.lock.json 2\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\era-contracts\\artifacts\\cargo-audit_tools_Cargo.lock.stderr.log"
+                                                            ],
+                                            "cwd":  "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat2_rollups\\era-contracts",
+                                            "start_utc":  "2026-02-16 03:08:21 UTC",
+                                            "end_utc":  "2026-02-16 03:08:27 UTC",
+                                            "duration_sec":  7,
+                                            "timed_out":  false,
+                                            "exit_code":  1,
+                                            "stdout":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\era-contracts\\artifacts\\cargo-audit_tools_Cargo.lock.json",
+                                            "stderr":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat2_rollups\\era-contracts\\artifacts\\cargo-audit_tools_Cargo.lock.stderr.log",
+                                            "lockfile":  "tools\\Cargo.lock"
+                                        }
+                                    ]
+                },
+    "summary":  {
+                    "gitleaks_findings":  376,
+                    "osv_vulns":  125,
+                    "npm_audit_vulns":  null,
+                    "cargo_audit_vulns":  12
+                }
+}

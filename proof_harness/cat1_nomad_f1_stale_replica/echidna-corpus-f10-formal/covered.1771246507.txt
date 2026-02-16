@@ -1,0 +1,586 @@
+C:/Users/vboxuser/Desktop/Repos/zklibreports/proof_harness/cat1_nomad_f1_stale_replica/src/MedusaTokenRegistryMigrateHarness.sol
+   1 |     | // SPDX-License-Identifier: MIT
+   2 |     | pragma solidity ^0.8.24;
+   3 |     | 
+   4 |     | import {
+   5 |     |     BridgeRouterMigrateAliasModel
+   6 |     | } from "./TokenRegistryMigrateAliasHarness.sol";
+   7 |     | import {
+   8 |     |     MockCanonicalBridgeToken,
+   9 |     |     MockRepresentationBridgeToken,
+  10 |     |     TokenRegistryAliasBugModel,
+  11 |     |     TokenRegistryAliasFixedModel
+  12 |     | } from "./TokenRegistryAliasSwapHarness.sol";
+  13 |     | 
+  14 |     | /// @notice Stateful harness for migrate + alias-overwrite cross-asset swap behavior.
+  15 | *   | contract MedusaTokenRegistryMigrateHarness {
+  16 | *   |     uint32 internal constant REMOTE_DOMAIN = 1000;
+  17 | *   |     uint32 internal constant LOCAL_DOMAIN = 2000;
+  18 |     | 
+  19 |     |     TokenRegistryAliasBugModel public bugLocalRegistry;
+  20 |     |     TokenRegistryAliasBugModel public bugRemoteRegistry;
+  21 |     |     BridgeRouterMigrateAliasModel public bugLocalRouter;
+  22 |     |     BridgeRouterMigrateAliasModel public bugRemoteRouter;
+  23 |     |     MockCanonicalBridgeToken public bugTokenA;
+  24 |     |     MockCanonicalBridgeToken public bugTokenB;
+  25 |     |     MockRepresentationBridgeToken public bugCustomB;
+  26 |     | 
+  27 |     |     TokenRegistryAliasFixedModel public fixedLocalRegistry;
+  28 |     |     TokenRegistryAliasFixedModel public fixedRemoteRegistry;
+  29 |     |     BridgeRouterMigrateAliasModel public fixedLocalRouter;
+  30 |     |     BridgeRouterMigrateAliasModel public fixedRemoteRouter;
+  31 |     |     MockCanonicalBridgeToken public fixedTokenA;
+  32 |     |     MockCanonicalBridgeToken public fixedTokenB;
+  33 |     |     MockRepresentationBridgeToken public fixedCustomA;
+  34 |     | 
+  35 |     |     bytes32 public bugIdA;
+  36 |     |     bytes32 public bugIdB;
+  37 |     |     bytes32 public fixedIdA;
+  38 |     |     bytes32 public fixedIdB;
+  39 |     | 
+  40 |     |     address public fixedLegacyARepr;
+  41 |     |     bool public fixedAliasCheckAttempted;
+  42 |     |     bool public fixedAliasBlocked;
+  43 |     | 
+  44 |     |     bool public bugMigrateSwapObserved;
+  45 |     |     bool public fixedViolationObserved;
+  46 |     | 
+  47 | *   |     constructor() {
+  48 | *   |         bugLocalRegistry = new TokenRegistryAliasBugModel(LOCAL_DOMAIN);
+  49 | *   |         bugRemoteRegistry = new TokenRegistryAliasBugModel(REMOTE_DOMAIN);
+  50 | *   |         bugLocalRouter = new BridgeRouterMigrateAliasModel(address(bugLocalRegistry));
+  51 | *   |         bugRemoteRouter = new BridgeRouterMigrateAliasModel(address(bugRemoteRegistry));
+  52 | *   |         bugLocalRouter.setRemote(address(bugRemoteRouter));
+  53 | *   |         bugRemoteRouter.setRemote(address(bugLocalRouter));
+  54 |     | 
+  55 | *   |         fixedLocalRegistry = new TokenRegistryAliasFixedModel(LOCAL_DOMAIN);
+  56 | *   |         fixedRemoteRegistry = new TokenRegistryAliasFixedModel(REMOTE_DOMAIN);
+  57 | *   |         fixedLocalRouter = new BridgeRouterMigrateAliasModel(
+  58 | *   |             address(fixedLocalRegistry)
+  59 |     |         );
+  60 | *   |         fixedRemoteRouter = new BridgeRouterMigrateAliasModel(
+  61 | *   |             address(fixedRemoteRegistry)
+  62 |     |         );
+  63 | *   |         fixedLocalRouter.setRemote(address(fixedRemoteRouter));
+  64 | *   |         fixedRemoteRouter.setRemote(address(fixedLocalRouter));
+  65 |     | 
+  66 | *   |         bugTokenA = new MockCanonicalBridgeToken();
+  67 | *   |         bugTokenB = new MockCanonicalBridgeToken();
+  68 | *   |         fixedTokenA = new MockCanonicalBridgeToken();
+  69 | *   |         fixedTokenB = new MockCanonicalBridgeToken();
+  70 |     | 
+  71 | *   |         bugIdA = _id(address(bugTokenA));
+  72 | *   |         bugIdB = _id(address(bugTokenB));
+  73 | *   |         fixedIdA = _id(address(fixedTokenA));
+  74 | *   |         fixedIdB = _id(address(fixedTokenB));
+  75 |     | 
+  76 | *   |         bugCustomB = new MockRepresentationBridgeToken(address(bugLocalRouter));
+  77 | *   |         fixedCustomA = new MockRepresentationBridgeToken(address(fixedLocalRouter));
+  78 |     | 
+  79 | *   |         uint256 _escrowSeed = 5_000_000 ether;
+  80 | *   |         bugRemoteRouter.seedCanonicalEscrow(address(bugTokenA), _escrowSeed);
+  81 | *   |         bugRemoteRouter.seedCanonicalEscrow(address(bugTokenB), _escrowSeed);
+  82 | *   |         fixedRemoteRouter.seedCanonicalEscrow(address(fixedTokenA), _escrowSeed);
+  83 | *   |         fixedRemoteRouter.seedCanonicalEscrow(address(fixedTokenB), _escrowSeed);
+  84 |     | 
+  85 | *   |         bugTokenA.mint(address(this), _escrowSeed);
+  86 | *   |         fixedTokenA.mint(address(this), _escrowSeed);
+  87 | *   |         bugTokenA.approve(address(bugRemoteRouter), type(uint256).max);
+  88 | *   |         fixedTokenA.approve(address(fixedRemoteRouter), type(uint256).max);
+  89 |     |     }
+  90 |     | 
+  91 | *   |     function _id(address _token) internal pure returns (bytes32) {
+  92 | *   |         return bytes32(uint256(uint160(_token)));
+  93 |     |     }
+  94 |     | 
+  95 | *   |     function _amount(uint256 _seed) internal pure returns (uint256) {
+  96 | *   |         return (_seed % 1000 ether) + 1;
+  97 |     |     }
+  98 |     | 
+  99 | *   |     function action_tryBugMigrateAliasSwap(uint96 _amountSeed) external {
+ 100 | *   |         uint256 _amnt = _amount(_amountSeed);
+ 101 | *   |         uint256 _aBefore = bugTokenA.balanceOf(address(this));
+ 102 | *   |         uint256 _bBefore = bugTokenB.balanceOf(address(this));
+ 103 |     | 
+ 104 | *   |         try bugRemoteRouter.send(address(bugTokenA), _amnt, address(this)) {
+ 105 | *   |             address _legacyARepr =
+ 106 | *   |                 bugLocalRegistry.getRepresentationAddress(REMOTE_DOMAIN, bugIdA);
+ 107 | *   |             if (_legacyARepr == address(0)) return;
+ 108 |     | 
+ 109 |     |             // Alias overwrite sequence: legacy A repr -> canonical B; then rotate current B repr.
+ 110 | *   |             bugLocalRegistry.enrollCustom(REMOTE_DOMAIN, bugIdB, _legacyARepr);
+ 111 | *   |             bugLocalRegistry.enrollCustom(
+ 112 | *   |                 REMOTE_DOMAIN, bugIdB, address(bugCustomB)
+ 113 |     |             );
+ 114 |     | 
+ 115 | *   |             bugLocalRouter.migrate(_legacyARepr);
+ 116 | *   |             bugLocalRouter.send(address(bugCustomB), _amnt, address(this));
+ 117 |     | 
+ 118 | *   |             uint256 _aAfter = bugTokenA.balanceOf(address(this));
+ 119 | *   |             uint256 _bAfter = bugTokenB.balanceOf(address(this));
+ 120 | *   |             if (_bAfter == _bBefore + _amnt && _aAfter + _amnt == _aBefore) {
+ 121 | *   |                 bugMigrateSwapObserved = true;
+ 122 |     |             }
+ 123 |     |         } catch {}
+ 124 |     |     }
+ 125 |     | 
+ 126 | *   |     function action_tryFixedMigrateInvariant(uint96 _amountSeed) external {
+ 127 | *   |         uint256 _amnt = _amount(_amountSeed);
+ 128 | *   |         uint256 _aBefore = fixedTokenA.balanceOf(address(this));
+ 129 | *   |         uint256 _bBefore = fixedTokenB.balanceOf(address(this));
+ 130 |     | 
+ 131 | *   |         try fixedRemoteRouter.send(address(fixedTokenA), _amnt, address(this)) {
+ 132 | *   |             if (fixedLegacyARepr == address(0)) {
+ 133 | *   |                 fixedLegacyARepr = fixedLocalRegistry.getRepresentationAddress(
+ 134 | *   |                     REMOTE_DOMAIN, fixedIdA
+ 135 |     |                 );
+ 136 | *   |                 if (fixedLegacyARepr == address(0)) {
+ 137 |     |                     fixedViolationObserved = true;
+ 138 |     |                     return;
+ 139 |     |                 }
+ 140 |     | 
+ 141 |     |                 // Legit migrate path for same canonical tokenA.
+ 142 | *   |                 fixedLocalRegistry.enrollCustom(
+ 143 | *   |                     REMOTE_DOMAIN, fixedIdA, address(fixedCustomA)
+ 144 |     |                 );
+ 145 |     |             }
+ 146 |     | 
+ 147 |     |             // Attempt alias overwrite should always be blocked in fixed model.
+ 148 | *   |             fixedAliasCheckAttempted = true;
+ 149 | *   |             try
+ 150 | *   |                 fixedLocalRegistry.enrollCustom(
+ 151 |     |                     REMOTE_DOMAIN,
+ 152 | *   |                     fixedIdB,
+ 153 | *   |                     fixedLegacyARepr
+ 154 |     |                 )
+ 155 |     |             {
+ 156 |     |                 fixedViolationObserved = true;
+ 157 |     |                 return;
+ 158 |     |             } catch {
+ 159 | *   |                 fixedAliasBlocked = true;
+ 160 |     |             }
+ 161 |     | 
+ 162 | *   |             try fixedLocalRouter.migrate(fixedLegacyARepr) {
+ 163 | *   |                 try
+ 164 | *   |                     fixedLocalRouter.send(
+ 165 | *   |                         address(fixedCustomA), _amnt, address(this)
+ 166 |     |                     )
+ 167 | *   |                 {
+ 168 | *   |                     uint256 _aAfter = fixedTokenA.balanceOf(address(this));
+ 169 | *   |                     uint256 _bAfter = fixedTokenB.balanceOf(address(this));
+ 170 | *   |                     if (_aAfter != _aBefore || _bAfter != _bBefore) {
+ 171 |     |                         fixedViolationObserved = true;
+ 172 |     |                     }
+ 173 |     |                 } catch {
+ 174 |     |                     fixedViolationObserved = true;
+ 175 |     |                 }
+ 176 |     |             } catch {
+ 177 |     |                 fixedViolationObserved = true;
+ 178 |     |             }
+ 179 |     |         } catch {}
+ 180 |     |     }
+ 181 |     | 
+ 182 |     |     /// @notice migrate path should never allow canonical A->B conversion.
+ 183 |     |     function property_migrate_cannot_swap_canonical_asset()
+ 184 |     |         external
+ 185 |     |         view
+ 186 |     |         returns (bool)
+ 187 |     |     {
+ 188 |     |         return !bugMigrateSwapObserved;
+ 189 |     |     }
+ 190 |     | 
+ 191 |     |     /// @notice fixed model must block alias overwrite and preserve canonical settlement.
+ 192 |     |     function property_fixed_model_blocks_migrate_alias_swap()
+ 193 |     |         external
+ 194 |     |         view
+ 195 |     |         returns (bool)
+ 196 |     |     {
+ 197 |     |         if (fixedViolationObserved) return false;
+ 198 |     |         if (!fixedAliasCheckAttempted) return true;
+ 199 |     |         return fixedAliasBlocked;
+ 200 |     |     }
+ 201 |     | 
+ 202 |     |     /// @notice Echidna-compatible alias for bug property.
+ 203 |     |     function echidna_migrate_cannot_swap_canonical_asset()
+ 204 |     |         external
+ 205 |     |         view
+ 206 |     |         returns (bool)
+ 207 |     |     {
+ 208 |     |         return !bugMigrateSwapObserved;
+ 209 |     |     }
+ 210 |     | }
+ 211 |     | 
+ 212 |     | 
+
+C:/Users/vboxuser/Desktop/Repos/zklibreports/proof_harness/cat1_nomad_f1_stale_replica/src/TokenRegistryAliasSwapHarness.sol
+   1 |     | // SPDX-License-Identifier: MIT
+   2 |     | pragma solidity ^0.8.24;
+   3 |     | 
+   4 |     | interface IBridgeAssetLike {
+   5 |     |     function transfer(address _to, uint256 _amount) external returns (bool);
+   6 |     |     function transferFrom(address _from, address _to, uint256 _amount)
+   7 |     |         external
+   8 |     |         returns (bool);
+   9 |     |     function approve(address _spender, uint256 _amount) external returns (bool);
+  10 |     |     function balanceOf(address _account) external view returns (uint256);
+  11 |     |     function mint(address _to, uint256 _amount) external;
+  12 |     |     function burn(address _from, uint256 _amount) external;
+  13 |     | }
+  14 |     | 
+  15 |     | /// @notice Minimal ERC20-like canonical token.
+  16 | *   | contract MockCanonicalBridgeToken {
+  17 |     |     string public constant name = "Canonical";
+  18 |     |     string public constant symbol = "CAN";
+  19 |     |     uint8 public constant decimals = 18;
+  20 |     | 
+  21 | *   |     mapping(address => uint256) public balanceOf;
+  22 |     |     mapping(address => mapping(address => uint256)) public allowance;
+  23 |     | 
+  24 | *   |     function mint(address _to, uint256 _amount) external {
+  25 | *   |         balanceOf[_to] += _amount;
+  26 |     |     }
+  27 |     | 
+  28 |     |     function burn(address _from, uint256 _amount) external {
+  29 |     |         uint256 _bal = balanceOf[_from];
+  30 |     |         require(_bal >= _amount, "!balance");
+  31 |     |         unchecked {
+  32 |     |             balanceOf[_from] = _bal - _amount;
+  33 |     |         }
+  34 |     |     }
+  35 |     | 
+  36 | *   |     function approve(address _spender, uint256 _amount) external returns (bool) {
+  37 | *   |         allowance[msg.sender][_spender] = _amount;
+  38 | *   |         return true;
+  39 |     |     }
+  40 |     | 
+  41 | *   |     function transfer(address _to, uint256 _amount) external returns (bool) {
+  42 | *   |         uint256 _bal = balanceOf[msg.sender];
+  43 | *   |         require(_bal >= _amount, "!balance");
+  44 |     |         unchecked {
+  45 | *   |             balanceOf[msg.sender] = _bal - _amount;
+  46 |     |         }
+  47 | *   |         balanceOf[_to] += _amount;
+  48 | *   |         return true;
+  49 |     |     }
+  50 |     | 
+  51 | *   |     function transferFrom(address _from, address _to, uint256 _amount)
+  52 |     |         external
+  53 | *   |         returns (bool)
+  54 |     |     {
+  55 | *   |         uint256 _allowed = allowance[_from][msg.sender];
+  56 | *   |         require(_allowed >= _amount, "!allowance");
+  57 | *   |         uint256 _bal = balanceOf[_from];
+  58 | *   |         require(_bal >= _amount, "!balance");
+  59 |     |         unchecked {
+  60 | *   |             allowance[_from][msg.sender] = _allowed - _amount;
+  61 | *   |             balanceOf[_from] = _bal - _amount;
+  62 |     |         }
+  63 | *   |         balanceOf[_to] += _amount;
+  64 | *   |         return true;
+  65 |     |     }
+  66 |     | }
+  67 |     | 
+  68 |     | /// @notice Representation token with router-owned mint/burn.
+  69 | *   | contract MockRepresentationBridgeToken {
+  70 |     |     address public immutable owner;
+  71 |     | 
+  72 | *   |     mapping(address => uint256) public balanceOf;
+  73 |     |     mapping(address => mapping(address => uint256)) public allowance;
+  74 |     | 
+  75 | *   |     constructor(address _owner) {
+  76 | *   |         owner = _owner;
+  77 |     |     }
+  78 |     | 
+  79 |     |     modifier onlyOwner() {
+  80 | *   |         require(msg.sender == owner, "!owner");
+  81 |     |         _;
+  82 |     |     }
+  83 |     | 
+  84 | *   |     function mint(address _to, uint256 _amount) external onlyOwner {
+  85 | *   |         balanceOf[_to] += _amount;
+  86 |     |     }
+  87 |     | 
+  88 | *   |     function burn(address _from, uint256 _amount) external onlyOwner {
+  89 | *   |         uint256 _bal = balanceOf[_from];
+  90 | *   |         require(_bal >= _amount, "!balance");
+  91 |     |         unchecked {
+  92 | *   |             balanceOf[_from] = _bal - _amount;
+  93 |     |         }
+  94 |     |     }
+  95 |     | 
+  96 |     |     function approve(address _spender, uint256 _amount) external returns (bool) {
+  97 |     |         allowance[msg.sender][_spender] = _amount;
+  98 |     |         return true;
+  99 |     |     }
+ 100 |     | 
+ 101 |     |     function transfer(address _to, uint256 _amount) external returns (bool) {
+ 102 |     |         uint256 _bal = balanceOf[msg.sender];
+ 103 |     |         require(_bal >= _amount, "!balance");
+ 104 |     |         unchecked {
+ 105 |     |             balanceOf[msg.sender] = _bal - _amount;
+ 106 |     |         }
+ 107 |     |         balanceOf[_to] += _amount;
+ 108 |     |         return true;
+ 109 |     |     }
+ 110 |     | 
+ 111 |     |     function transferFrom(address _from, address _to, uint256 _amount)
+ 112 |     |         external
+ 113 |     |         returns (bool)
+ 114 |     |     {
+ 115 |     |         uint256 _allowed = allowance[_from][msg.sender];
+ 116 |     |         require(_allowed >= _amount, "!allowance");
+ 117 |     |         uint256 _bal = balanceOf[_from];
+ 118 |     |         require(_bal >= _amount, "!balance");
+ 119 |     |         unchecked {
+ 120 |     |             allowance[_from][msg.sender] = _allowed - _amount;
+ 121 |     |             balanceOf[_from] = _bal - _amount;
+ 122 |     |         }
+ 123 |     |         balanceOf[_to] += _amount;
+ 124 |     |         return true;
+ 125 |     |     }
+ 126 |     | }
+ 127 |     | 
+ 128 |     | struct CanonicalTokenIdAlias {
+ 129 |     |     uint32 domain;
+ 130 |     |     bytes32 id;
+ 131 |     | }
+ 132 |     | 
+ 133 |     | abstract contract TokenRegistryAliasBaseModel {
+ 134 |     |     uint32 public immutable localDomain;
+ 135 |     | 
+ 136 |     |     mapping(address => CanonicalTokenIdAlias) public representationToCanonical;
+ 137 |     |     mapping(bytes32 => address) public canonicalToRepresentation;
+ 138 |     | 
+ 139 | *   |     constructor(uint32 _localDomain) {
+ 140 | *   |         localDomain = _localDomain;
+ 141 |     |     }
+ 142 |     | 
+ 143 | *   |     function _hashTokenId(uint32 _domain, bytes32 _id)
+ 144 |     |         internal
+ 145 |     |         pure
+ 146 | *   |         returns (bytes32)
+ 147 |     |     {
+ 148 | *   |         return keccak256(abi.encodePacked(_domain, _id));
+ 149 |     |     }
+ 150 |     | 
+ 151 | *   |     function _setRepresentationToCanonical(
+ 152 |     |         uint32 _domain,
+ 153 |     |         bytes32 _id,
+ 154 |     |         address _representation
+ 155 |     |     ) internal {
+ 156 | *   |         representationToCanonical[_representation] = CanonicalTokenIdAlias(
+ 157 | *   |             _domain,
+ 158 | *   |             _id
+ 159 |     |         );
+ 160 |     |     }
+ 161 |     | 
+ 162 | *   |     function _setCanonicalToRepresentation(
+ 163 |     |         uint32 _domain,
+ 164 |     |         bytes32 _id,
+ 165 |     |         address _representation
+ 166 |     |     ) internal {
+ 167 | *   |         canonicalToRepresentation[_hashTokenId(_domain, _id)] = _representation;
+ 168 |     |     }
+ 169 |     | 
+ 170 |     |     function enrollCustom(uint32 _domain, bytes32 _id, address _custom)
+ 171 |     |         external
+ 172 |     |         virtual;
+ 173 |     | 
+ 174 | *   |     function getRepresentationAddress(uint32 _domain, bytes32 _id)
+ 175 |     |         public
+ 176 |     |         view
+ 177 | *   |         returns (address)
+ 178 |     |     {
+ 179 | *   |         return canonicalToRepresentation[_hashTokenId(_domain, _id)];
+ 180 |     |     }
+ 181 |     | 
+ 182 | *   |     function getLocalAddress(uint32 _domain, bytes32 _id)
+ 183 |     |         public
+ 184 |     |         view
+ 185 | *   |         returns (address _local)
+ 186 |     |     {
+ 187 | *   |         if (_domain == localDomain) {
+ 188 | *   |             _local = address(uint160(uint256(_id)));
+ 189 |     |         } else {
+ 190 | *   |             _local = getRepresentationAddress(_domain, _id);
+ 191 |     |         }
+ 192 |     |     }
+ 193 |     | 
+ 194 | *   |     function ensureLocalToken(uint32 _domain, bytes32 _id)
+ 195 |     |         external
+ 196 | *   |         returns (address _local)
+ 197 |     |     {
+ 198 | *   |         _local = getLocalAddress(_domain, _id);
+ 199 | *   |         if (_local == address(0)) {
+ 200 | *   |             require(_domain != localDomain, "!local");
+ 201 | *   |             MockRepresentationBridgeToken _repr =
+ 202 | *   |                 new MockRepresentationBridgeToken(msg.sender);
+ 203 | *   |             _local = address(_repr);
+ 204 | *   |             _setRepresentationToCanonical(_domain, _id, _local);
+ 205 | *   |             _setCanonicalToRepresentation(_domain, _id, _local);
+ 206 |     |         }
+ 207 |     |     }
+ 208 |     | 
+ 209 | *   |     function getTokenId(address _local)
+ 210 |     |         external
+ 211 |     |         view
+ 212 | *   |         returns (uint32 _domain, bytes32 _id)
+ 213 | *   |     {
+ 214 | *   |         CanonicalTokenIdAlias memory _canonical =
+ 215 | *   |             representationToCanonical[_local];
+ 216 | *   |         if (_canonical.domain == 0) {
+ 217 | *   |             _domain = localDomain;
+ 218 | *   |             _id = bytes32(uint256(uint160(_local)));
+ 219 |     |         } else {
+ 220 | *   |             _domain = _canonical.domain;
+ 221 | *   |             _id = _canonical.id;
+ 222 |     |         }
+ 223 |     |     }
+ 224 |     | 
+ 225 | *   |     function oldReprToCurrentRepr(address _oldRepr)
+ 226 |     |         external
+ 227 |     |         view
+ 228 | *   |         returns (address _currentRepr)
+ 229 | *   |     {
+ 230 | *   |         CanonicalTokenIdAlias memory _canonical =
+ 231 | *   |             representationToCanonical[_oldRepr];
+ 232 | *   |         require(_canonical.domain != 0, "!repr");
+ 233 | *   |         _currentRepr = getRepresentationAddress(_canonical.domain, _canonical.id);
+ 234 |     |     }
+ 235 |     | 
+ 236 | *   |     function isLocalOrigin(address _token) public view returns (bool) {
+ 237 | *   |         if (representationToCanonical[_token].domain != 0) return false;
+ 238 | *   |         uint256 _size;
+ 239 |     |         assembly {
+ 240 | *   |             _size := extcodesize(_token)
+ 241 |     |         }
+ 242 | *   |         return _size != 0;
+ 243 |     |     }
+ 244 |     | }
+ 245 |     | 
+ 246 |     | /// @notice Bug model: allows one custom representation to be enrolled for multiple canonical IDs.
+ 247 | *   | contract TokenRegistryAliasBugModel is TokenRegistryAliasBaseModel {
+ 248 | *   |     constructor(uint32 _localDomain) TokenRegistryAliasBaseModel(_localDomain) {}
+ 249 |     | 
+ 250 | *   |     function enrollCustom(uint32 _domain, bytes32 _id, address _custom)
+ 251 |     |         external
+ 252 |     |         override
+ 253 |     |     {
+ 254 | *   |         _setRepresentationToCanonical(_domain, _id, _custom);
+ 255 | *   |         _setCanonicalToRepresentation(_domain, _id, _custom);
+ 256 |     |     }
+ 257 |     | }
+ 258 |     | 
+ 259 |     | /// @notice Reference fix model: reject aliasing one custom representation across different canonical IDs.
+ 260 | *   | contract TokenRegistryAliasFixedModel is TokenRegistryAliasBaseModel {
+ 261 | *   |     constructor(uint32 _localDomain) TokenRegistryAliasBaseModel(_localDomain) {}
+ 262 |     | 
+ 263 | *   |     function enrollCustom(uint32 _domain, bytes32 _id, address _custom)
+ 264 |     |         external
+ 265 |     |         override
+ 266 | *   |     {
+ 267 | *   |         CanonicalTokenIdAlias memory _existing =
+ 268 | *   |             representationToCanonical[_custom];
+ 269 | *   |         if (_existing.domain != 0) {
+ 270 | *   |             require(
+ 271 | *   |                 _existing.domain == _domain && _existing.id == _id,
+ 272 |     |                 "!custom alias"
+ 273 |     |             );
+ 274 |     |         }
+ 275 | *   |         _setRepresentationToCanonical(_domain, _id, _custom);
+ 276 | *   |         _setCanonicalToRepresentation(_domain, _id, _custom);
+ 277 |     |     }
+ 278 |     | }
+ 279 |     | 
+ 280 |     | /// @notice Minimal cross-chain router model for token ID forwarding behavior.
+ 281 |     | contract BridgeRouterAliasModel {
+ 282 |     |     TokenRegistryAliasBaseModel public immutable tokenRegistry;
+ 283 |     |     BridgeRouterAliasModel public remoteRouter;
+ 284 |     | 
+ 285 |     |     mapping(address => uint256) public escrowed;
+ 286 |     | 
+ 287 | *   |     constructor(address _tokenRegistry) {
+ 288 | *   |         tokenRegistry = TokenRegistryAliasBaseModel(_tokenRegistry);
+ 289 |     |     }
+ 290 |     | 
+ 291 | *   |     function setRemote(address _remote) external {
+ 292 | *   |         remoteRouter = BridgeRouterAliasModel(_remote);
+ 293 |     |     }
+ 294 |     | 
+ 295 | *   |     function seedCanonicalEscrow(address _token, uint256 _amount) external {
+ 296 | *   |         IBridgeAssetLike(_token).mint(address(this), _amount);
+ 297 | *   |         escrowed[_token] += _amount;
+ 298 |     |     }
+ 299 |     | 
+ 300 | *   |     function send(address _token, uint256 _amount, address _recipient) external {
+ 301 | *   |         require(_amount > 0, "!amount");
+ 302 | *   |         require(address(remoteRouter) != address(0), "!remote");
+ 303 |     | 
+ 304 | *   |         if (tokenRegistry.isLocalOrigin(_token)) {
+ 305 | *   |             require(
+ 306 | *   |                 IBridgeAssetLike(_token).transferFrom(
+ 307 | *   |                     msg.sender, address(this), _amount
+ 308 |     |                 ),
+ 309 |     |                 "!transferFrom"
+ 310 |     |             );
+ 311 | *   |             escrowed[_token] += _amount;
+ 312 |     |         } else {
+ 313 | *   |             IBridgeAssetLike(_token).burn(msg.sender, _amount);
+ 314 |     |         }
+ 315 |     | 
+ 316 | *   |         (uint32 _domain, bytes32 _id) = tokenRegistry.getTokenId(_token);
+ 317 | *   |         remoteRouter.receiveToken(_domain, _id, _amount, _recipient);
+ 318 |     |     }
+ 319 |     | 
+ 320 | *   |     function receiveToken(
+ 321 |     |         uint32 _domain,
+ 322 |     |         bytes32 _id,
+ 323 |     |         uint256 _amount,
+ 324 |     |         address _recipient
+ 325 | *   |     ) external {
+ 326 | *   |         require(msg.sender == address(remoteRouter), "!remote sender");
+ 327 | *   |         address _local = tokenRegistry.ensureLocalToken(_domain, _id);
+ 328 | *   |         if (tokenRegistry.isLocalOrigin(_local)) {
+ 329 | *   |             uint256 _escrow = escrowed[_local];
+ 330 | *   |             require(_escrow >= _amount, "!escrow");
+ 331 |     |             unchecked {
+ 332 | *   |                 escrowed[_local] = _escrow - _amount;
+ 333 |     |             }
+ 334 | *   |             require(
+ 335 | *   |                 IBridgeAssetLike(_local).transfer(_recipient, _amount),
+ 336 |     |                 "!transfer"
+ 337 |     |             );
+ 338 |     |         } else {
+ 339 | *   |             IBridgeAssetLike(_local).mint(_recipient, _amount);
+ 340 |     |         }
+ 341 |     |     }
+ 342 |     | }
+ 343 |     | 
+
+C:/Users/vboxuser/Desktop/Repos/zklibreports/proof_harness/cat1_nomad_f1_stale_replica/src/TokenRegistryMigrateAliasHarness.sol
+  1 |     | // SPDX-License-Identifier: MIT
+  2 |     | pragma solidity ^0.8.24;
+  3 |     | 
+  4 |     | import {
+  5 |     |     IBridgeAssetLike,
+  6 |     |     BridgeRouterAliasModel,
+  7 |     |     TokenRegistryAliasBaseModel
+  8 |     | } from "./TokenRegistryAliasSwapHarness.sol";
+  9 |     | 
+ 10 |     | /// @notice BridgeRouter model including migrate behavior from Nomad BridgeRouter.
+ 11 | *   | contract BridgeRouterMigrateAliasModel is BridgeRouterAliasModel {
+ 12 | *   |     constructor(address _tokenRegistry) BridgeRouterAliasModel(_tokenRegistry) {}
+ 13 |     | 
+ 14 | *   |     function migrate(address _oldRepr) external {
+ 15 | *   |         address _currentRepr = tokenRegistry.oldReprToCurrentRepr(_oldRepr);
+ 16 | *   |         require(_currentRepr != _oldRepr, "!different");
+ 17 |     | 
+ 18 | *   |         IBridgeAssetLike _old = IBridgeAssetLike(_oldRepr);
+ 19 | *   |         uint256 _bal = _old.balanceOf(msg.sender);
+ 20 | *   |         _old.burn(msg.sender, _bal);
+ 21 | *   |         IBridgeAssetLike(_currentRepr).mint(msg.sender, _bal);
+ 22 |     |     }
+ 23 |     | }
+ 24 |     | 
+ 25 |     | 
+

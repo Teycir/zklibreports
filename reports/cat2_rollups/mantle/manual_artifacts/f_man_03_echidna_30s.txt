@@ -1,0 +1,39 @@
+[2026-02-16 13:26:51.91] Compiling src\EchidnaMantleHarnesses.sol... Done! (2.3816644s)
+Analyzing contract: C:/Users/vboxuser/Desktop/Repos/zklibreports/proof_harness/cat2_mantle_f3_operator_gate/src/EchidnaMantleHarnesses.sol:EchidnaF3OperatorGateHarness
+[2026-02-16 13:26:54.34] Running slither on src\EchidnaMantleHarnesses.sol... Done! (2.0724821s)
+Loaded 0 transaction sequences from echidna-corpus-f-man-03\reproducers
+Loaded 0 transaction sequences from echidna-corpus-f-man-03\coverage
+[2026-02-16 13:26:56.43] [Worker 3] Test echidna_settlement_progresses_without_hidden_registration falsified!
+  Call sequence:
+/Users/vboxuser/Desktop/Repos/zklibreports/proof_harness/cat2_mantle_f3_operator_gate/src/EchidnaMantleHarnesses.sol.action_attempt_settlement(true) Time delay: 390247 seconds Block delay: 32767
+
+[2026-02-16 13:26:56.44] [Worker 3] New coverage: 3188 instr, 4 contracts, 1 seqs in corpus
+[2026-02-16 13:26:56.45] [Worker 2] New coverage: 3188 instr, 4 contracts, 2 seqs in corpus
+[2026-02-16 13:26:56.45] [Worker 2] Test limit reached. Stopping.
+[2026-02-16 13:26:56.45] [Worker 1] New coverage: 3191 instr, 4 contracts, 3 seqs in corpus
+[2026-02-16 13:26:56.45]  Saved reproducer to echidna-corpus-f-man-03\reproducers-unshrunk\3262743399593599913.txt
+[2026-02-16 13:26:56.46] [Worker 3] Test limit reached. Stopping.
+[2026-02-16 13:26:56.45] [Worker 1] Test limit reached. Stopping.
+[2026-02-16 13:26:56.46]  Saved reproducer to echidna-corpus-f-man-03\coverage\7822401552599591441.txt
+[2026-02-16 13:26:56.47]  Saved reproducer to echidna-corpus-f-man-03\coverage\1754593794065174933.txt
+[2026-02-16 13:26:56.47] [Worker 0] Test limit reached. Stopping.
+[2026-02-16 13:26:56.47] [status] tests: 1/1, fuzzing: 44/20000, values: [], cov: 3191, corpus: 3
+echidna_settlement_progresses_without_hidden_registration: failed!💥  
+  Call sequence:
+    /Users/vboxuser/Desktop/Repos/zklibreports/proof_harness/cat2_mantle_f3_operator_gate/src/EchidnaMantleHarnesses.sol.action_attempt_settlement(false)
+
+Traces: 
+call [1m/Users/vboxuser/Desktop/Repos/zklibreports/proof_harness/cat2_mantle_f3_operator_gate/src/MantleF3Harness.sol[0m::challengeCompleted()() [1m(C:/Users/vboxuser/Desktop/Repos/zklibreports/proof_harness/cat2_mantle_f3_operator_gate/src/EchidnaMantleHarnesses.sol:109)[0m
+ └╴← (false)
+
+
+
+Unique instructions: 3191
+Unique codehashes: 4
+Corpus size: 3
+Seed: 6670681613651132742
+Total calls: 44
+
+[2026-02-16 13:26:56.48] Saving test reproducers... Done! (0.0014946s)
+[2026-02-16 13:26:56.48] Saving corpus... Done! (0.0038305s)
+[2026-02-16 13:26:56.48] Saving coverage... Done! (0.0658811s)

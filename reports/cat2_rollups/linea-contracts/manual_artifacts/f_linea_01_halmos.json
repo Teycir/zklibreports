@@ -1,0 +1,29 @@
+{
+    "exitcode": 1,
+    "test_results": {
+        "test/HalmosLineaF1ReinitializerDos.t.sol:HalmosLineaF1ReinitializerDos": [
+            {
+                "name": "check_attacker_cannot_brick_genesis_submission()",
+                "exitcode": 1,
+                "num_models": 1,
+                "models": [
+                    {
+                        "model": {},
+                        "is_valid": true
+                    }
+                ],
+                "num_paths": [
+                    1,
+                    0,
+                    0
+                ],
+                "time": [
+                    0.19799269999930402,
+                    0.07940700000472134,
+                    0.11858260000008158
+                ],
+                "num_bounded_loops": 0
+            }
+        ]
+    }
+}

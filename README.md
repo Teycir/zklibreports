@@ -1,34 +1,37 @@
 # zklibreports
 
-This repo is a working log + artifact store for auditing ZK libraries and ZK-adjacent infrastructure (including bridges).
+This repo is a working log and artifact store for auditing ZK libraries and ZK-adjacent infrastructure (including bridges and rollups).
 
-## What We Mean By “Provable Vulns”
+## What We Mean By Provable Vulnerabilities
 
-We are not interested in “tool says scary thing” findings unless we can produce a witness:
-- A minimal repro (test, PoC, transaction sequence, input file) that triggers the bad behavior.
-- A trace/counterexample (e.g. `govulncheck` symbol trace, Halmos counterexample model, sanitizer crash, etc.).
-- A clear reachability path from in-repo code to a vulnerable dependency.
+We do not treat "tool says scary thing" output as a vulnerability claim unless there is a witness.
 
-Tool output is treated as *leads* until proven.
+Accepted witness types:
+- Minimal repro (test, PoC, transaction sequence, or crafted input) that triggers the behavior.
+- Counterexample trace/model (symbolic or fuzzing).
+- Deterministic crash or assertion evidence.
+- Clear in-repo reachability path to vulnerable dependency code.
 
-More detail: `docs/PROOF_BAR.md`
+Tool output is treated as a lead until proven.
+
+References:
+- `docs/PROOF_BAR.md`
+- `docs/METHODOLOGY.md`
 
 ## Layout
 
-- `reports/cat8_libs/`: category-8 library audits (reports + artifacts).
-- `reports/cat1_bridges/`: category-1 bridge audits (per-repo reports + artifacts).
-- `scripts/`: automation to generate reports.
-- `artifacts/`: shared tool outputs and formal-analysis artifacts.
+- `reports/cat8_libs/`: category-8 library audits (reports and artifacts).
+- `reports/cat1_bridges/`: category-1 bridge audits (reports and artifacts).
+- `reports/cat2_rollups/`: category-2 rollup audits (reports and artifacts).
+- `scripts/`: automation and tool wrappers.
+- `artifacts/`: shared tool outputs and analysis artifacts.
+- `proof_harness/`: executable witness harnesses.
 
 ## Tooling
 
-We use different tools depending on language surface:
-- Secrets: `gitleaks`
-- Dependency vulns: `osv-scanner` (+ language-specific reachability where safe)
-- Go: `govulncheck`, `gosec`
-- Rust: `cargo audit`, `cargo deny`
-- Node: `npm audit` (note: on this host use `cmd /c npm.cmd ...` due to PowerShell script policy)
-- Solidity/EVM: `halmos` (symbolic / invariant testing; usually driven from Foundry tests)
+Primary tool map and proof expectations:
+- `docs/TOOLS.md`
 
-Details + “what counts as proof” per tool: `docs/TOOLS.md`
+Formal operating process:
+- `docs/METHODOLOGY.md`
 

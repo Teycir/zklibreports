@@ -1,0 +1,212 @@
+    1: // SPDX-License-Identifier: MIT
+    2: 
+    3: pragma solidity =0.8.24;
+    4: 
+    5: import {OwnableUpgradeable} from "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
+    6: import {ECDSAUpgradeable} from "@openzeppelin/contracts-upgradeable/utils/cryptography/ECDSAUpgradeable.sol";
+    7: import {EIP712Upgradeable} from "@openzeppelin/contracts-upgradeable/utils/cryptography/EIP712Upgradeable.sol";
+    8: import {ReentrancyGuardUpgradeable} from "@openzeppelin/contracts-upgradeable/security/ReentrancyGuardUpgradeable.sol";
+    9: import {PausableUpgradeable} from "@openzeppelin/contracts-upgradeable/security/PausableUpgradeable.sol";
+   10: 
+   11: import {IL1MessageQueueV2} from "../rollup/IL1MessageQueueV2.sol";
+   12: 
+   13: import {AddressAliasHelper} from "../../libraries/common/AddressAliasHelper.sol";
+   14: 
+   15: // solhint-disable reason-string
+   16: 
+   17: contract EnforcedTxGateway is OwnableUpgradeable, ReentrancyGuardUpgradeable, PausableUpgradeable, EIP712Upgradeable {
+   18:     /**********
+   19:      * Events *
+   20:      **********/
+   21: 
+   22:     /// @notice Emitted when owner updates fee vault contract.
+   23:     /// @param _oldFeeVault The address of old fee vault contract.
+   24:     /// @param _newFeeVault The address of new fee vault contract.
+   25:     event UpdateFeeVault(address _oldFeeVault, address _newFeeVault);
+   26: 
+   27:     /*************
+   28:      * Constants *
+   29:      *************/
+   30: 
+   31:     // solhint-disable-next-line var-name-mixedcase
+   32:     bytes32 private constant _ENFORCED_TX_TYPEHASH =
+   33:         keccak256(
+   34:             "EnforcedTransaction(address sender,address target,uint256 value,uint256 gasLimit,bytes data,uint256 nonce,uint256 deadline)"
+   35:         );
+   36: 
+   37:     /***********************
+   38:      * Immutable Variables *
+   39:      ***********************/
+   40: 
+   41:     /// @notice The address of `L1MessageQueueV2`.
+   42:     address public immutable messageQueue;
+   43: 
+   44:     /// @notice The address of `FeeVault`.
+   45:     address public immutable feeVault;
+   46: 
+   47:     /*************
+   48:      * Variables *
+   49:      *************/
+   50: 
+   51:     /// @dev The storage slot used as `L1MessageQueueV2` contract, which is deprecated now.
+   52:     address private __deprecated_messageQueue;
+   53: 
+   54:     /// @dev The storage slot used as `FeeVault` contract, which is deprecated now.
+   55:     address private __deprecated_feeVault;
+   56: 
+   57:     /// @notice Mapping from EOA address to current nonce.
+   58:     /// @dev Every successful call to `sendTransaction` with signature increases `_sender`'s nonce by one.
+   59:     /// This prevents a signature from being used multiple times.
+   60:     mapping(address => uint256) public nonces;
+   61: 
+   62:     /***************
+   63:      * Constructor *
+   64:      ***************/
+   65: 
+   66:     constructor(address _messageQueue, address _feeVault) {
+   67:         _disableInitializers();
+   68: 
+   69:         messageQueue = _messageQueue;
+   70:         feeVault = _feeVault;
+   71:     }
+   72: 
+   73:     function initialize() external initializer {
+   74:         OwnableUpgradeable.__Ownable_init();
+   75:         ReentrancyGuardUpgradeable.__ReentrancyGuard_init();
+   76:         PausableUpgradeable.__Pausable_init();
+   77:         EIP712Upgradeable.__EIP712_init("EnforcedTxGateway", "1");
+   78:     }
+   79: 
+   80:     /*************************
+   81:      * Public View Functions *
+   82:      *************************/
+   83: 
+   84:     /// @notice return the domain separator for the typed transaction
+   85:     // solhint-disable-next-line func-name-mixedcase
+   86:     function DOMAIN_SEPARATOR() external view returns (bytes32) {
+   87:         return _domainSeparatorV4();
+   88:     }
+   89: 
+   90:     /*****************************
+   91:      * Public Mutating Functions *
+   92:      *****************************/
+   93: 
+   94:     /// @notice Add an enforced transaction to L2.
+   95:     /// @dev The caller should be EOA only.
+   96:     /// @param _target The address of target contract to call in L2.
+   97:     /// @param _value The value passed
+   98:     /// @param _gasLimit The maximum gas should be used for this transaction in L2.
+   99:     /// @param _data The calldata passed to target contract.
+  100:     function sendTransaction(
+  101:         address _target,
+  102:         uint256 _value,
+  103:         uint256 _gasLimit,
+  104:         bytes calldata _data
+  105:     ) external payable whenNotPaused {
+  106:         address sender = _msgSender();
+  107:         if (sender != tx.origin) {
+  108:             // If sender is a classic SCA, then we apply address aliasing (consistent with message from L1ScrollMessenger).
+  109:             // If sender is an EOA with no code, no aliasing is applied.
+  110:             // If sender is an EIP-7702 delegated EOA, then aliasing behavior depends on which wallet initiated the call.
+  111:             sender = AddressAliasHelper.applyL1ToL2Alias(sender);
+  112:         }
+  113: 
+  114:         _sendTransaction(sender, _target, _value, _gasLimit, _data, msg.sender);
+  115:     }
+  116: 
+  117:     /// @notice Add an enforced transaction to L2.
+  118:     /// @dev The `_sender` should be EOA and match with the signature.
+  119:     /// @param _sender The address of sender who will initiate this transaction in L2.
+  120:     /// @param _target The address of target contract to call in L2.
+  121:     /// @param _value The value passed
+  122:     /// @param _gasLimit The maximum gas should be used for this transaction in L2.
+  123:     /// @param _data The calldata passed to target contract.
+  124:     /// @param _deadline The deadline of the signature.
+  125:     /// @param _signature The signature for the transaction.
+  126:     /// @param _refundAddress The address to refund exceeded fee.
+  127:     function sendTransaction(
+  128:         address _sender,
+  129:         address _target,
+  130:         uint256 _value,
+  131:         uint256 _gasLimit,
+  132:         bytes calldata _data,
+  133:         uint256 _deadline,
+  134:         bytes memory _signature,
+  135:         address _refundAddress
+  136:     ) external payable whenNotPaused {
+  137:         // solhint-disable-next-line not-rely-on-time
+  138:         require(block.timestamp <= _deadline, "signature expired");
+  139: 
+  140:         uint256 _nonce = nonces[_sender];
+  141:         bytes32 _structHash = keccak256(
+  142:             abi.encode(_ENFORCED_TX_TYPEHASH, _sender, _target, _value, _gasLimit, keccak256(_data), _nonce, _deadline)
+  143:         );
+  144:         unchecked {
+  145:             nonces[_sender] = _nonce + 1;
+  146:         }
+  147: 
+  148:         bytes32 _hash = _hashTypedDataV4(_structHash);
+  149:         address _signer = ECDSAUpgradeable.recover(_hash, _signature);
+  150: 
+  151:         // no need to check `_signer != address(0)`, since it is checked in `recover`.
+  152:         require(_signer == _sender, "Incorrect signature");
+  153: 
+  154:         _sendTransaction(_sender, _target, _value, _gasLimit, _data, _refundAddress);
+  155:     }
+  156: 
+  157:     /************************
+  158:      * Restricted Functions *
+  159:      ************************/
+  160: 
+  161:     /// @notice Pause or unpause this contract.
+  162:     /// @param _status Pause this contract if it is true, otherwise unpause this contract.
+  163:     function setPause(bool _status) external onlyOwner {
+  164:         if (_status) {
+  165:             _pause();
+  166:         } else {
+  167:             _unpause();
+  168:         }
+  169:     }
+  170: 
+  171:     /**********************
+  172:      * Internal Functions *
+  173:      **********************/
+  174: 
+  175:     /// @dev Internal function to charge fee and add enforced transaction.
+  176:     /// @param _sender The address of sender who will initiate this transaction in L2.
+  177:     /// @param _target The address of target contract to call in L2.
+  178:     /// @param _value The value passed
+  179:     /// @param _gasLimit The maximum gas should be used for this transaction in L2.
+  180:     /// @param _data The calldata passed to target contract.
+  181:     /// @param _refundAddress The address to refund exceeded fee.
+  182:     function _sendTransaction(
+  183:         address _sender,
+  184:         address _target,
+  185:         uint256 _value,
+  186:         uint256 _gasLimit,
+  187:         bytes calldata _data,
+  188:         address _refundAddress
+  189:     ) internal nonReentrant {
+  190:         address _messageQueue = messageQueue;
+  191: 
+  192:         // charge fee
+  193:         uint256 _fee = IL1MessageQueueV2(_messageQueue).estimateCrossDomainMessageFee(_gasLimit);
+  194:         require(msg.value >= _fee, "Insufficient value for fee");
+  195:         if (_fee > 0) {
+  196:             (bool _success, ) = feeVault.call{value: _fee}("");
+  197:             require(_success, "Failed to deduct the fee");
+  198:         }
+  199: 
+  200:         // append transaction
+  201:         IL1MessageQueueV2(_messageQueue).appendEnforcedTransaction(_sender, _target, _value, _gasLimit, _data);
+  202: 
+  203:         // refund fee to `_refundAddress`
+  204:         unchecked {
+  205:             uint256 _refund = msg.value - _fee;
+  206:             if (_refund > 0) {
+  207:                 (bool _success, ) = _refundAddress.call{value: _refund}("");
+  208:                 require(_success, "Failed to refund the fee");
+  209:             }
+  210:         }
+  211:     }
+  212: }

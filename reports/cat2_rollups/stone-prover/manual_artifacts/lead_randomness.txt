@@ -1,0 +1,39 @@
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\statement\statement.h:57:    Returns the default initial seed to be used in the hash chain. This is obtained from the public
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\statement\statement.h:104:  Helper class for serializing the public input to be used as initial hash chain seed.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\statement\fibonacci\fibonacci_statement.inl:43:      "Can't calculate initial hash chain seed, claimed Fibonacci value not set.");
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\statement\cpu\cpu_air_statement.h:47:    Returns the initial hash chain seed which is the public input serialized as follows:
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\statement\cpu\cpu_air_statement.h:104:    The hash function used to compute the hash of the memory pages in the initial seed.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\randomness\prng_test.cc:83:  1. Reseed with some seed
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\randomness\prng_test.cc:85:  3. Reseed with the same seed and check that a second sequence of numbers is identical to the
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\randomness\prng_test.cc:91:  std::array<std::byte, 5> seed = MakeByteArray<1, 2, 3, 4, 5>();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\randomness\prng_test.cc:92:  prng.Reseed(seed);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\randomness\prng_test.cc:97:  prng.Reseed(seed);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\randomness\prng.h:49:    Resets the seed of the prng.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\randomness\prng.h:59:    Calculates a new "random" seed based on the current seed and the given bytes.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\randomness\prng.h:84:    Initializes seed using system time.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\randomness\prng.h:113:    Expects a string with same format used to print the seed when the PRNG is initialized from
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\randomness\prng.cc:28:DEFINE_string(override_random_seed, "", "override seed for prng");
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\randomness\prng.cc:35:  uint64_t seed = std::chrono::duration_cast<std::chrono::nanoseconds>(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\randomness\prng.cc:40:  Serialize<uint64_t>(seed, seed_bytes);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\randomness\hash_chain.h:52:    Similar to UpdateHashChain but the seed is incremented by 'seed_increment' before mixing it with
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\algebra\elliptic_curve\elliptic_curve_constants.h:101:  2) Each chunk of 76 digits is the seed for generating a point, except for the first chunk
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\algebra\elliptic_curve\elliptic_curve_constants.h:104:  3) For each such seed x:
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\channel.h:43:    Only relevant for non-interactive channels. Changes the channel seed to a "safer" seed.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\noninteractive_channel_test.cc:84:  // gets the expected vector and that the seed was updated correctly.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\noninteractive_felt_channel_test.cc:122:  // gets the expected vector and that the seed was updated correctly.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\noninteractive_prover_channel_test.cc:50:  // In this test we don't use a time based seed to avoid inaccurate EXPECT_NEAR and EXPECT_GT.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\proof_of_work.h:17:    Find a nonce of size 8 bytes for which hash(hash(magic || seed) || nonce) has work_bits leading
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\proof_of_work.h:38:    Returns nonce for which hash(hash(magic || seed || work_bits) || nonce) has work_bits leading
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\proof_of_work.h:42:      gsl::span<const std::byte> seed, size_t work_bits, uint64_t log_chunk_size = 20);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\proof_of_work.h:44:      gsl::span<const std::byte> seed, size_t work_bits, TaskManager* task_manager,
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\proof_of_work.h:56:    Returns true iff hash(hash(magic || seed || work_bits) || nonce) has work_bits leading zeros.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\proof_of_work.h:59:      gsl::span<const std::byte> seed, size_t work_bits, gsl::span<const std::byte> nonce_bytes);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\proof_of_work.inl:29:HashT InitHash(gsl::span<const std::byte> seed, size_t work_bits) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\proof_of_work.inl:32:  // init_bytes = kMagic || seed || work_bits.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\proof_of_work.inl:34:  std::copy(seed.begin(), seed.end(), std::back_inserter(init_bytes));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\proof_of_work.inl:45:    gsl::span<const std::byte> seed, size_t work_bits, uint64_t log_chunk_size) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\proof_of_work.inl:46:  return Prove(seed, work_bits, &TaskManager::GetInstance(), log_chunk_size);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\proof_of_work.inl:70:    gsl::span<const std::byte> seed, size_t work_bits, TaskManager* task_manager,
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\proof_of_work.inl:77:  const HashT init_hash = proof_of_work::details::InitHash<HashT>(seed, work_bits);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\proof_of_work.inl:125:    gsl::span<const std::byte> seed, size_t work_bits, gsl::span<const std::byte> nonce_bytes) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\proof_of_work.inl:129:  const HashT init_hash = proof_of_work::details::InitHash<HashT>(seed, work_bits);

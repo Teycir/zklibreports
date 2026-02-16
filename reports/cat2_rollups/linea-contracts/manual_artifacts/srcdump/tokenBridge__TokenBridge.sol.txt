@@ -1,0 +1,512 @@
+    1: // SPDX-License-Identifier: AGPL-3.0
+    2: pragma solidity 0.8.19;
+    3: 
+    4: import { ITokenBridge } from "./interfaces/ITokenBridge.sol";
+    5: import { IMessageService } from "../interfaces/IMessageService.sol";
+    6: 
+    7: import { IERC20PermitUpgradeable } from "@openzeppelin/contracts-upgradeable/token/ERC20/extensions/IERC20PermitUpgradeable.sol";
+    8: import { IERC20MetadataUpgradeable } from "@openzeppelin/contracts-upgradeable/token/ERC20/extensions/IERC20MetadataUpgradeable.sol";
+    9: import { IERC20Upgradeable } from "@openzeppelin/contracts-upgradeable/token/ERC20/IERC20Upgradeable.sol";
+   10: import { Ownable2StepUpgradeable } from "@openzeppelin/contracts-upgradeable/access/Ownable2StepUpgradeable.sol";
+   11: import { PausableUpgradeable } from "@openzeppelin/contracts-upgradeable/security/PausableUpgradeable.sol";
+   12: import { SafeERC20Upgradeable } from "@openzeppelin/contracts-upgradeable/token/ERC20/utils/SafeERC20Upgradeable.sol";
+   13: import { BeaconProxy } from "@openzeppelin/contracts/proxy/beacon/BeaconProxy.sol";
+   14: import { ReentrancyGuardUpgradeable } from "@openzeppelin/contracts-upgradeable/security/ReentrancyGuardUpgradeable.sol";
+   15: 
+   16: import { BridgedToken } from "./BridgedToken.sol";
+   17: import { MessageServiceBase } from "../messageService/MessageServiceBase.sol";
+   18: 
+   19: /**
+   20:  * @title Linea Canonical Token Bridge
+   21:  * @notice Contract to manage cross-chain ERC20 bridging.
+   22:  * @author ConsenSys Software Inc.
+   23:  * @custom:security-contact security-report@linea.build
+   24:  */
+   25: contract TokenBridge is
+   26:   ITokenBridge,
+   27:   PausableUpgradeable,
+   28:   Ownable2StepUpgradeable,
+   29:   MessageServiceBase,
+   30:   ReentrancyGuardUpgradeable
+   31: {
+   32:   using SafeERC20Upgradeable for IERC20Upgradeable;
+   33: 
+   34:   // solhint-disable-next-line var-name-mixedcase
+   35:   bytes4 internal constant _PERMIT_SELECTOR = IERC20PermitUpgradeable.permit.selector;
+   36: 
+   37:   /// @notice used for the token metadata
+   38:   bytes private constant METADATA_NAME = abi.encodeCall(IERC20MetadataUpgradeable.name, ());
+   39:   bytes private constant METADATA_SYMBOL = abi.encodeCall(IERC20MetadataUpgradeable.symbol, ());
+   40:   bytes private constant METADATA_DECIMALS = abi.encodeCall(IERC20MetadataUpgradeable.decimals, ());
+   41: 
+   42:   address public tokenBeacon;
+   43:   /// @notice mapping (chainId => nativeTokenAddress => brigedTokenAddress)
+   44:   mapping(uint256 => mapping(address => address)) public nativeToBridgedToken;
+   45:   /// @notice mapping (brigedTokenAddress => nativeTokenAddress)
+   46:   mapping(address => address) public bridgedToNativeToken;
+   47: 
+   48:   /// @notice The current layer chainId from where the bridging is triggered
+   49:   uint256 public sourceChainId;
+   50:   /// @notice The targeted layer chainId where the bridging is received
+   51:   uint256 public targetChainId;
+   52: 
+   53:   // Special addresses used in the mappings to mark specific states for tokens.
+   54:   /// @notice EMPTY means a token is not present in the mapping.
+   55:   address internal constant EMPTY = address(0x0);
+   56:   /// @notice RESERVED means a token is reserved and cannot be bridged.
+   57:   address internal constant RESERVED_STATUS = address(0x111);
+   58:   /// @notice NATIVE means a token is native to the current local chain.
+   59:   address internal constant NATIVE_STATUS = address(0x222);
+   60:   /// @notice DEPLOYED means the bridged token contract has been deployed on the remote chain.
+   61:   address internal constant DEPLOYED_STATUS = address(0x333);
+   62: 
+   63:   /// @dev Keep free storage slots for future implementation updates to avoid storage collision.
+   64:   uint256[50] private __gap;
+   65: 
+   66:   /// @dev Ensures the token has not been bridged before.
+   67:   modifier isNewToken(address _token) {
+   68:     if (bridgedToNativeToken[_token] != EMPTY || nativeToBridgedToken[sourceChainId][_token] != EMPTY)
+   69:       revert AlreadyBridgedToken(_token);
+   70:     _;
+   71:   }
+   72: 
+   73:   /**
+   74:    * @dev Ensures the address is not address(0).
+   75:    * @param _addr Address to check.
+   76:    */
+   77:   modifier nonZeroAddress(address _addr) {
+   78:     if (_addr == EMPTY) revert ZeroAddressNotAllowed();
+   79:     _;
+   80:   }
+   81:   /**
+   82:    * @dev Ensures the amount is not 0.
+   83:    * @param _amount amount to check.
+   84:    */
+   85:   modifier nonZeroAmount(uint256 _amount) {
+   86:     if (_amount == 0) revert ZeroAmountNotAllowed(_amount);
+   87:     _;
+   88:   }
+   89: 
+   90:   /// @dev Disable constructor for safety
+   91:   /// @custom:oz-upgrades-unsafe-allow constructor
+   92:   constructor() {
+   93:     _disableInitializers();
+   94:   }
+   95: 
+   96:   /**
+   97:    * @dev Contract will be used as proxy implementation.
+   98:    * @param _messageService The address of the MessageService contract.
+   99:    * @param _tokenBeacon The address of the tokenBeacon.
+  100:    * @param _sourceChainId The source chain id of the current layer
+  101:    * @param _targetChainId The target chaind id of the targeted layer
+  102:    * @param _reservedTokens The list of reserved tokens to be set
+  103:    */
+  104:   function initialize(
+  105:     address _securityCouncil,
+  106:     address _messageService,
+  107:     address _tokenBeacon,
+  108:     uint256 _sourceChainId,
+  109:     uint256 _targetChainId,
+  110:     address[] calldata _reservedTokens
+  111:   ) external nonZeroAddress(_securityCouncil) nonZeroAddress(_messageService) nonZeroAddress(_tokenBeacon) initializer {
+  112:     __Pausable_init();
+  113:     __Ownable2Step_init();
+  114:     __MessageServiceBase_init(_messageService);
+  115:     __ReentrancyGuard_init();
+  116:     tokenBeacon = _tokenBeacon;
+  117:     sourceChainId = _sourceChainId;
+  118:     targetChainId = _targetChainId;
+  119: 
+  120:     unchecked {
+  121:       for (uint256 i; i < _reservedTokens.length; ) {
+  122:         if (_reservedTokens[i] == EMPTY) revert ZeroAddressNotAllowed();
+  123:         setReserved(_reservedTokens[i]);
+  124:         ++i;
+  125:       }
+  126:     }
+  127:     _transferOwnership(_securityCouncil);
+  128:   }
+  129: 
+  130:   /**
+  131:    * @notice This function is the single entry point to bridge tokens to the
+  132:    *   other chain, both for native and already bridged tokens. You can use it
+  133:    *   to bridge any ERC20. If the token is bridged for the first time an ERC20
+  134:    *   (BridgedToken.sol) will be automatically deployed on the target chain.
+  135:    * @dev User should first allow the bridge to transfer tokens on his behalf.
+  136:    *   Alternatively, you can use BridgeTokenWithPermit to do so in a single
+  137:    *   transaction. If you want the transfer to be automatically executed on the
+  138:    *   destination chain. You should send enough ETH to pay the postman fees.
+  139:    *   Note that Linea can reserve some tokens (which use a dedicated bridge).
+  140:    *   In this case, the token cannot be bridged. Linea can only reserve tokens
+  141:    *   that have not been bridged yet.
+  142:    *   Linea can pause the bridge for security reason. In this case new bridge
+  143:    *   transaction would revert.
+  144:    * @dev Note: If, when bridging an unbridged token and decimals are unknown,
+  145:    * the call will revert to prevent mismatched decimals. Only those ERC20s,
+  146:    * with a decimals function are supported.
+  147:    * @param _token The address of the token to be bridged.
+  148:    * @param _amount The amount of the token to be bridged.
+  149:    * @param _recipient The address that will receive the tokens on the other chain.
+  150:    */
+  151:   function bridgeToken(
+  152:     address _token,
+  153:     uint256 _amount,
+  154:     address _recipient
+  155:   ) public payable nonZeroAddress(_token) nonZeroAddress(_recipient) nonZeroAmount(_amount) whenNotPaused nonReentrant {
+  156:     uint256 sourceChainIdCache = sourceChainId;
+  157:     address nativeMappingValue = nativeToBridgedToken[sourceChainIdCache][_token];
+  158:     if (nativeMappingValue == RESERVED_STATUS) {
+  159:       // Token is reserved
+  160:       revert ReservedToken(_token);
+  161:     }
+  162: 
+  163:     address nativeToken = bridgedToNativeToken[_token];
+  164:     uint256 chainId;
+  165:     bytes memory tokenMetadata;
+  166: 
+  167:     if (nativeToken != EMPTY) {
+  168:       BridgedToken(_token).burn(msg.sender, _amount);
+  169:       chainId = targetChainId;
+  170:     } else {
+  171:       // Token is native
+  172: 
+  173:       // For tokens with special fee logic, ensure that only the amount received
+  174:       // by the bridge will be minted on the target chain.
+  175:       uint256 balanceBefore = IERC20Upgradeable(_token).balanceOf(address(this));
+  176:       IERC20Upgradeable(_token).safeTransferFrom(msg.sender, address(this), _amount);
+  177:       _amount = IERC20Upgradeable(_token).balanceOf(address(this)) - balanceBefore;
+  178:       nativeToken = _token;
+  179: 
+  180:       if (nativeMappingValue == EMPTY) {
+  181:         // New token
+  182:         nativeToBridgedToken[sourceChainIdCache][_token] = NATIVE_STATUS;
+  183:         emit NewToken(_token);
+  184:       }
+  185: 
+  186:       // Send Metadata only when the token has not been deployed on the other chain yet
+  187:       if (nativeMappingValue != DEPLOYED_STATUS) {
+  188:         tokenMetadata = abi.encode(_safeName(_token), _safeSymbol(_token), _safeDecimals(_token));
+  189:       }
+  190:       chainId = sourceChainIdCache;
+  191:     }
+  192:     messageService.sendMessage{ value: msg.value }(
+  193:       remoteSender,
+  194:       msg.value, // fees
+  195:       abi.encodeCall(ITokenBridge.completeBridging, (nativeToken, _amount, _recipient, chainId, tokenMetadata))
+  196:     );
+  197:     emit BridgingInitiatedV2(msg.sender, _recipient, _token, _amount);
+  198:   }
+  199: 
+  200:   /**
+  201:    * @notice Similar to `bridgeToken` function but allows to pass additional
+  202:    *   permit data to do the ERC20 approval in a single transaction.
+  203:    * @notice _permit can fail silently, don't rely on this function passing as a form
+  204:    *   of authentication
+  205:    * @dev There is no need for validation at this level as the validation on pausing,
+  206:    * and empty values exists on the "bridgeToken" call.
+  207:    * @param _token The address of the token to be bridged.
+  208:    * @param _amount The amount of the token to be bridged.
+  209:    * @param _recipient The address that will receive the tokens on the other chain.
+  210:    * @param _permitData The permit data for the token, if applicable.
+  211:    */
+  212:   function bridgeTokenWithPermit(
+  213:     address _token,
+  214:     uint256 _amount,
+  215:     address _recipient,
+  216:     bytes calldata _permitData
+  217:   ) external payable {
+  218:     if (_permitData.length != 0) {
+  219:       _permit(_token, _permitData);
+  220:     }
+  221:     bridgeToken(_token, _amount, _recipient);
+  222:   }
+  223: 
+  224:   /**
+  225:    * @dev It can only be called from the Message Service. To finalize the bridging
+  226:    *   process, a user or postman needs to use the `claimMessage` function of the
+  227:    *   Message Service to trigger the transaction.
+  228:    * @param _nativeToken The address of the token on its native chain.
+  229:    * @param _amount The amount of the token to be received.
+  230:    * @param _recipient The address that will receive the tokens.
+  231:    * @param _chainId The token's origin layer chaindId
+  232:    * @param _tokenMetadata Additional data used to deploy the bridged token if it
+  233:    *   doesn't exist already.
+  234:    */
+  235:   function completeBridging(
+  236:     address _nativeToken,
+  237:     uint256 _amount,
+  238:     address _recipient,
+  239:     uint256 _chainId,
+  240:     bytes calldata _tokenMetadata
+  241:   ) external nonReentrant onlyMessagingService onlyAuthorizedRemoteSender whenNotPaused {
+  242:     address nativeMappingValue = nativeToBridgedToken[_chainId][_nativeToken];
+  243:     address bridgedToken;
+  244: 
+  245:     if (nativeMappingValue == NATIVE_STATUS || nativeMappingValue == DEPLOYED_STATUS) {
+  246:       // Token is native on the local chain
+  247:       IERC20Upgradeable(_nativeToken).safeTransfer(_recipient, _amount);
+  248:     } else {
+  249:       bridgedToken = nativeMappingValue;
+  250:       if (nativeMappingValue == EMPTY) {
+  251:         // New token
+  252:         bridgedToken = deployBridgedToken(_nativeToken, _tokenMetadata, sourceChainId);
+  253:         bridgedToNativeToken[bridgedToken] = _nativeToken;
+  254:         nativeToBridgedToken[targetChainId][_nativeToken] = bridgedToken;
+  255:       }
+  256:       BridgedToken(bridgedToken).mint(_recipient, _amount);
+  257:     }
+  258:     emit BridgingFinalizedV2(_nativeToken, bridgedToken, _amount, _recipient);
+  259:   }
+  260: 
+  261:   /**
+  262:    * @dev Change the address of the Message Service.
+  263:    * @param _messageService The address of the new Message Service.
+  264:    */
+  265:   function setMessageService(address _messageService) public nonZeroAddress(_messageService) onlyOwner {
+  266:     address oldMessageService = address(messageService);
+  267:     messageService = IMessageService(_messageService);
+  268:     emit MessageServiceUpdated(_messageService, oldMessageService, msg.sender);
+  269:   }
+  270: 
+  271:   /**
+  272:    * @dev Change the status to DEPLOYED to the tokens passed in parameter
+  273:    *    Will call the method setDeployed on the other chain using the message Service
+  274:    * @param _tokens Array of bridged tokens that have been deployed.
+  275:    */
+  276:   function confirmDeployment(address[] memory _tokens) external payable {
+  277:     // Check that the tokens have actually been deployed
+  278:     for (uint256 i; i < _tokens.length; i++) {
+  279:       address nativeToken = bridgedToNativeToken[_tokens[i]];
+  280:       if (nativeToken == EMPTY) {
+  281:         revert TokenNotDeployed(_tokens[i]);
+  282:       }
+  283:       _tokens[i] = nativeToken;
+  284:     }
+  285: 
+  286:     messageService.sendMessage{ value: msg.value }(
+  287:       remoteSender,
+  288:       msg.value, // fees
+  289:       abi.encodeCall(ITokenBridge.setDeployed, (_tokens))
+  290:     );
+  291: 
+  292:     emit DeploymentConfirmed(_tokens, msg.sender);
+  293:   }
+  294: 
+  295:   /**
+  296:    * @dev Change the status of tokens to DEPLOYED. New bridge transaction will not
+  297:    *   contain token metadata, which save gas.
+  298:    *   Can only be called from the Message Service. A user or postman needs to use
+  299:    *   the `claimMessage` function of the Message Service to trigger the transaction.
+  300:    * @param _nativeTokens Array of native tokens for which the DEPLOYED status must be set.
+  301:    */
+  302:   function setDeployed(address[] calldata _nativeTokens) external onlyMessagingService onlyAuthorizedRemoteSender {
+  303:     unchecked {
+  304:       for (uint256 i; i < _nativeTokens.length; ) {
+  305:         nativeToBridgedToken[sourceChainId][_nativeTokens[i]] = DEPLOYED_STATUS;
+  306:         emit TokenDeployed(_nativeTokens[i]);
+  307:         ++i;
+  308:       }
+  309:     }
+  310:   }
+  311: 
+  312:   /**
+  313:    * @dev Sets the address of the remote token bridge. Can only be called once.
+  314:    * @param _remoteTokenBridge The address of the remote token bridge to be set.
+  315:    */
+  316:   function setRemoteTokenBridge(address _remoteTokenBridge) external onlyOwner {
+  317:     if (remoteSender != EMPTY) revert RemoteTokenBridgeAlreadySet(remoteSender);
+  318:     _setRemoteSender(_remoteTokenBridge);
+  319:     emit RemoteTokenBridgeSet(_remoteTokenBridge, msg.sender);
+  320:   }
+  321: 
+  322:   /**
+  323:    * @dev Deploy a new EC20 contract for bridged token using a beacon proxy pattern.
+  324:    *   To adapt to future requirements, Linea can update the implementation of
+  325:    *   all (existing and future) contracts by updating the beacon. This update is
+  326:    *   subject to a delay by a time lock.
+  327:    *   Contracts are deployed using CREATE2 so deployment address is deterministic.
+  328:    * @param _nativeToken The address of the native token on the source chain.
+  329:    * @param _tokenMetadata The encoded metadata for the token.
+  330:    * @param _chainId The chain id on which the token will be deployed, used to calculate the salt
+  331:    * @return The address of the newly deployed BridgedToken contract.
+  332:    */
+  333:   function deployBridgedToken(
+  334:     address _nativeToken,
+  335:     bytes calldata _tokenMetadata,
+  336:     uint256 _chainId
+  337:   ) internal returns (address) {
+  338:     bytes32 _salt = keccak256(abi.encode(_chainId, _nativeToken));
+  339:     BeaconProxy bridgedToken = new BeaconProxy{ salt: _salt }(tokenBeacon, "");
+  340:     address bridgedTokenAddress = address(bridgedToken);
+  341: 
+  342:     (string memory name, string memory symbol, uint8 decimals) = abi.decode(_tokenMetadata, (string, string, uint8));
+  343:     BridgedToken(bridgedTokenAddress).initialize(name, symbol, decimals);
+  344:     emit NewTokenDeployed(bridgedTokenAddress, _nativeToken);
+  345:     return bridgedTokenAddress;
+  346:   }
+  347: 
+  348:   /**
+  349:    * @dev Linea can reserve tokens. In this case, the token cannot be bridged.
+  350:    *   Linea can only reserve tokens that have not been bridged before.
+  351:    * @notice Make sure that _token is native to the current chain
+  352:    *   where you are calling this function from
+  353:    * @param _token The address of the token to be set as reserved.
+  354:    */
+  355:   function setReserved(address _token) public nonZeroAddress(_token) onlyOwner isNewToken(_token) {
+  356:     nativeToBridgedToken[sourceChainId][_token] = RESERVED_STATUS;
+  357:     emit TokenReserved(_token);
+  358:   }
+  359: 
+  360:   /**
+  361:    * @dev Removes a token from the reserved list.
+  362:    * @param _token The address of the token to be removed from the reserved list.
+  363:    */
+  364:   function removeReserved(address _token) external nonZeroAddress(_token) onlyOwner {
+  365:     uint256 cachedSourceChainId = sourceChainId;
+  366: 
+  367:     if (nativeToBridgedToken[cachedSourceChainId][_token] != RESERVED_STATUS) revert NotReserved(_token);
+  368:     nativeToBridgedToken[cachedSourceChainId][_token] = EMPTY;
+  369: 
+  370:     emit ReservationRemoved(_token);
+  371:   }
+  372: 
+  373:   /**
+  374:    * @dev Linea can set a custom ERC20 contract for specific ERC20.
+  375:    *   For security purpose, Linea can only call this function if the token has
+  376:    *   not been bridged yet.
+  377:    * @param _nativeToken The address of the token on the source chain.
+  378:    * @param _targetContract The address of the custom contract.
+  379:    */
+  380:   function setCustomContract(
+  381:     address _nativeToken,
+  382:     address _targetContract
+  383:   ) external nonZeroAddress(_nativeToken) nonZeroAddress(_targetContract) onlyOwner isNewToken(_nativeToken) {
+  384:     if (bridgedToNativeToken[_targetContract] != EMPTY) {
+  385:       revert AlreadyBrigedToNativeTokenSet(_targetContract);
+  386:     }
+  387:     if (_targetContract == NATIVE_STATUS || _targetContract == DEPLOYED_STATUS || _targetContract == RESERVED_STATUS) {
+  388:       revert StatusAddressNotAllowed(_targetContract);
+  389:     }
+  390: 
+  391:     uint256 cachedTargetChainId = targetChainId;
+  392: 
+  393:     if (nativeToBridgedToken[cachedTargetChainId][_nativeToken] != EMPTY) {
+  394:       revert NativeToBridgedTokenAlreadySet(_nativeToken);
+  395:     }
+  396: 
+  397:     nativeToBridgedToken[cachedTargetChainId][_nativeToken] = _targetContract;
+  398:     bridgedToNativeToken[_targetContract] = _nativeToken;
+  399:     emit CustomContractSet(_nativeToken, _targetContract, msg.sender);
+  400:   }
+  401: 
+  402:   /**
+  403:    * @dev Pause the contract, can only be called by the owner.
+  404:    */
+  405:   function pause() external onlyOwner {
+  406:     _pause();
+  407:   }
+  408: 
+  409:   /**
+  410:    * @dev Unpause the contract, can only be called by the owner.
+  411:    */
+  412:   function unpause() external onlyOwner {
+  413:     _unpause();
+  414:   }
+  415: 
+  416:   // Helpers to safely get the metadata from a token, inspired by
+  417:   // https://github.com/traderjoe-xyz/joe-core/blob/main/contracts/MasterChefJoeV3.sol#L55-L95
+  418: 
+  419:   /**
+  420:    * @dev Provides a safe ERC20.name version which returns 'NO_NAME' as fallback string.
+  421:    * @param _token The address of the ERC-20 token contract
+  422:    */
+  423:   function _safeName(address _token) internal view returns (string memory) {
+  424:     (bool success, bytes memory data) = _token.staticcall(METADATA_NAME);
+  425:     return success ? _returnDataToString(data) : "NO_NAME";
+  426:   }
+  427: 
+  428:   /**
+  429:    * @dev Provides a safe ERC20.symbol version which returns 'NO_SYMBOL' as fallback string
+  430:    * @param _token The address of the ERC-20 token contract
+  431:    */
+  432:   function _safeSymbol(address _token) internal view returns (string memory) {
+  433:     (bool success, bytes memory data) = _token.staticcall(METADATA_SYMBOL);
+  434:     return success ? _returnDataToString(data) : "NO_SYMBOL";
+  435:   }
+  436: 
+  437:   /**
+  438:    * @notice Provides a safe ERC20.decimals version which reverts when decimals are unknown
+  439:    *   Note Tokens with (decimals > 255) are not supported
+  440:    * @param _token The address of the ERC-20 token contract
+  441:    */
+  442:   function _safeDecimals(address _token) internal view returns (uint8) {
+  443:     (bool success, bytes memory data) = _token.staticcall(METADATA_DECIMALS);
+  444: 
+  445:     if (success && data.length == 32) {
+  446:       return abi.decode(data, (uint8));
+  447:     }
+  448: 
+  449:     revert DecimalsAreUnknown(_token);
+  450:   }
+  451: 
+  452:   /**
+  453:    * @dev Converts returned data to string. Returns 'NOT_VALID_ENCODING' as fallback value.
+  454:    * @param _data returned data
+  455:    */
+  456:   function _returnDataToString(bytes memory _data) internal pure returns (string memory) {
+  457:     if (_data.length >= 64) {
+  458:       return abi.decode(_data, (string));
+  459:     } else if (_data.length != 32) {
+  460:       return "NOT_VALID_ENCODING";
+  461:     }
+  462: 
+  463:     // Since the strings on bytes32 are encoded left-right, check the first zero in the data
+  464:     uint256 nonZeroBytes;
+  465:     unchecked {
+  466:       while (nonZeroBytes < 32 && _data[nonZeroBytes] != 0) {
+  467:         nonZeroBytes++;
+  468:       }
+  469:     }
+  470: 
+  471:     // If the first one is 0, we do not handle the encoding
+  472:     if (nonZeroBytes == 0) {
+  473:       return "NOT_VALID_ENCODING";
+  474:     }
+  475:     // Create a byte array with nonZeroBytes length
+  476:     bytes memory bytesArray = new bytes(nonZeroBytes);
+  477:     unchecked {
+  478:       for (uint256 i; i < nonZeroBytes; ) {
+  479:         bytesArray[i] = _data[i];
+  480:         ++i;
+  481:       }
+  482:     }
+  483:     return string(bytesArray);
+  484:   }
+  485: 
+  486:   /**
+  487:    * @notice Call the token permit method of extended ERC20
+  488:    * @notice Only support tokens implementing ERC-2612
+  489:    * @param _token ERC20 token address
+  490:    * @param _permitData Raw data of the call `permit` of the token
+  491:    */
+  492:   function _permit(address _token, bytes calldata _permitData) internal {
+  493:     if (bytes4(_permitData[:4]) != _PERMIT_SELECTOR)
+  494:       revert InvalidPermitData(bytes4(_permitData[:4]), _PERMIT_SELECTOR);
+  495:     // Decode the permit data
+  496:     // The parameters are:
+  497:     // 1. owner: The address of the wallet holding the tokens
+  498:     // 2. spender: The address of the entity permitted to spend the tokens
+  499:     // 3. value: The maximum amount of tokens the spender is allowed to spend
+  500:     // 4. deadline: The time until which the permit is valid
+  501:     // 5. v: Part of the signature (along with r and s), these three values form the signature of the permit
+  502:     // 6. r: Part of the signature
+  503:     // 7. s: Part of the signature
+  504:     (address owner, address spender, uint256 amount, uint256 deadline, uint8 v, bytes32 r, bytes32 s) = abi.decode(
+  505:       _permitData[4:],
+  506:       (address, address, uint256, uint256, uint8, bytes32, bytes32)
+  507:     );
+  508:     if (owner != msg.sender) revert PermitNotFromSender(owner);
+  509:     if (spender != address(this)) revert PermitNotAllowingBridge(spender);
+  510:     IERC20PermitUpgradeable(_token).permit(msg.sender, address(this), amount, deadline, v, r, s);
+  511:   }
+  512: }

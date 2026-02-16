@@ -1,0 +1,288 @@
+    1: // SPDX-License-Identifier: MIT
+    2: 
+    3: pragma solidity =0.8.24;
+    4: 
+    5: import {EnumerableSetUpgradeable} from "@openzeppelin/contracts-upgradeable/utils/structs/EnumerableSetUpgradeable.sol";
+    6: 
+    7: import {ScrollGatewayBase} from "../libraries/gateway/ScrollGatewayBase.sol";
+    8: 
+    9: // solhint-disable func-name-mixedcase
+   10: 
+   11: abstract contract LidoGatewayManager is ScrollGatewayBase {
+   12:     using EnumerableSetUpgradeable for EnumerableSetUpgradeable.AddressSet;
+   13: 
+   14:     /**********
+   15:      * Events *
+   16:      **********/
+   17: 
+   18:     /// @notice Emitted then caller enable deposits.
+   19:     /// @param enabler The address of caller.
+   20:     event DepositsEnabled(address indexed enabler);
+   21: 
+   22:     /// @notice Emitted then caller disable deposits.
+   23:     /// @param disabler The address of caller.
+   24:     event DepositsDisabled(address indexed disabler);
+   25: 
+   26:     /// @notice Emitted then caller enable withdrawals.
+   27:     /// @param enabler The address of caller.
+   28:     event WithdrawalsEnabled(address indexed enabler);
+   29: 
+   30:     /// @notice Emitted then caller disable withdrawals.
+   31:     /// @param disabler The address of caller.
+   32:     event WithdrawalsDisabled(address indexed disabler);
+   33: 
+   34:     /// @notice Emitted when `account` is granted `role`.
+   35:     ///
+   36:     /// @param role The role granted.
+   37:     /// @param account The address of account to grant the role.
+   38:     /// @param sender The address of owner.
+   39:     event RoleGranted(bytes32 indexed role, address indexed account, address indexed sender);
+   40: 
+   41:     /// @notice Emitted when `account` is revoked `role`.
+   42:     ///
+   43:     /// @param role The role revoked.
+   44:     /// @param account The address of account to revoke the role.
+   45:     /// @param sender The address of owner.
+   46:     event RoleRevoked(bytes32 indexed role, address indexed account, address indexed sender);
+   47: 
+   48:     /**********
+   49:      * Errors *
+   50:      **********/
+   51: 
+   52:     /// @dev Thrown when deposits are enabled while caller try to enable it again.
+   53:     error ErrorDepositsEnabled();
+   54: 
+   55:     /// @dev Thrown when deposits are disable while caller try to deposits related operation.
+   56:     error ErrorDepositsDisabled();
+   57: 
+   58:     /// @dev Thrown when withdrawals are enabled while caller try to enable it again.
+   59:     error ErrorWithdrawalsEnabled();
+   60: 
+   61:     /// @dev Thrown when withdrawals are disable while caller try to withdrawals related operation.
+   62:     error ErrorWithdrawalsDisabled();
+   63: 
+   64:     /// @dev Thrown when caller is not deposits enabler.
+   65:     error ErrorCallerIsNotDepositsEnabler();
+   66: 
+   67:     /// @dev Thrown when caller is not deposits disabler.
+   68:     error ErrorCallerIsNotDepositsDisabler();
+   69: 
+   70:     /// @dev Thrown when caller is not withdrawals enabler.
+   71:     error ErrorCallerIsNotWithdrawalsEnabler();
+   72: 
+   73:     /// @dev Thrown when caller is not withdrawals disabler.
+   74:     error ErrorCallerIsNotWithdrawalsDisabler();
+   75: 
+   76:     /***********
+   77:      * Structs *
+   78:      ***********/
+   79: 
+   80:     /// @dev Stores the state of the bridging
+   81:     /// @param isDepositsEnabled Stores the state of the deposits
+   82:     /// @param isWithdrawalsEnabled Stores the state of the withdrawals
+   83:     /// @param roles Mapping from role to list of role members.
+   84:     struct State {
+   85:         bool isDepositsEnabled;
+   86:         bool isWithdrawalsEnabled;
+   87:         mapping(bytes32 => EnumerableSetUpgradeable.AddressSet) roles;
+   88:     }
+   89: 
+   90:     /*************
+   91:      * Constants *
+   92:      *************/
+   93: 
+   94:     /// @dev The location of the slot with State
+   95:     bytes32 private constant STATE_SLOT = keccak256("LidoGatewayManager.bridgingState");
+   96: 
+   97:     /// @notice The role for deposits enabler.
+   98:     bytes32 public constant DEPOSITS_ENABLER_ROLE = keccak256("BridgingManager.DEPOSITS_ENABLER_ROLE");
+   99: 
+  100:     /// @notice The role for deposits disabler.
+  101:     bytes32 public constant DEPOSITS_DISABLER_ROLE = keccak256("BridgingManager.DEPOSITS_DISABLER_ROLE");
+  102: 
+  103:     /// @notice The role for withdrawals enabler.
+  104:     bytes32 public constant WITHDRAWALS_ENABLER_ROLE = keccak256("BridgingManager.WITHDRAWALS_ENABLER_ROLE");
+  105: 
+  106:     /// @notice The role for withdrawals disabler.
+  107:     bytes32 public constant WITHDRAWALS_DISABLER_ROLE = keccak256("BridgingManager.WITHDRAWALS_DISABLER_ROLE");
+  108: 
+  109:     /**********************
+  110:      * Function Modifiers *
+  111:      **********************/
+  112: 
+  113:     /// @dev Validates that deposits are enabled
+  114:     modifier whenDepositsEnabled() {
+  115:         if (!isDepositsEnabled()) revert ErrorDepositsDisabled();
+  116:         _;
+  117:     }
+  118: 
+  119:     /// @dev Validates that withdrawals are enabled
+  120:     modifier whenWithdrawalsEnabled() {
+  121:         if (!isWithdrawalsEnabled()) revert ErrorWithdrawalsDisabled();
+  122:         _;
+  123:     }
+  124: 
+  125:     /***************
+  126:      * Constructor *
+  127:      ***************/
+  128: 
+  129:     /// @notice Initialize the storage of LidoGatewayManager.
+  130:     /// @param _depositsEnabler The address of user who can enable deposits
+  131:     /// @param _depositsEnabler The address of user who can disable deposits
+  132:     /// @param _withdrawalsEnabler The address of user who can enable withdrawals
+  133:     /// @param _withdrawalsDisabler The address of user who can disable withdrawals
+  134:     function __LidoGatewayManager_init(
+  135:         address _depositsEnabler,
+  136:         address _depositsDisabler,
+  137:         address _withdrawalsEnabler,
+  138:         address _withdrawalsDisabler
+  139:     ) internal onlyInitializing {
+  140:         State storage s = _loadState();
+  141: 
+  142:         s.isDepositsEnabled = true;
+  143:         emit DepositsEnabled(_msgSender());
+  144: 
+  145:         s.isWithdrawalsEnabled = true;
+  146:         emit WithdrawalsEnabled(_msgSender());
+  147: 
+  148:         _grantRole(DEPOSITS_ENABLER_ROLE, _depositsEnabler);
+  149:         _grantRole(DEPOSITS_DISABLER_ROLE, _depositsDisabler);
+  150:         _grantRole(WITHDRAWALS_ENABLER_ROLE, _withdrawalsEnabler);
+  151:         _grantRole(WITHDRAWALS_DISABLER_ROLE, _withdrawalsDisabler);
+  152:     }
+  153: 
+  154:     /*************************
+  155:      * Public View Functions *
+  156:      *************************/
+  157: 
+  158:     /// @notice Returns whether the deposits are enabled or not
+  159:     function isDepositsEnabled() public view returns (bool) {
+  160:         return _loadState().isDepositsEnabled;
+  161:     }
+  162: 
+  163:     /// @notice Returns whether the withdrawals are enabled or not
+  164:     function isWithdrawalsEnabled() public view returns (bool) {
+  165:         return _loadState().isWithdrawalsEnabled;
+  166:     }
+  167: 
+  168:     /// @notice Returns `true` if `_account` has been granted `_role`.
+  169:     function hasRole(bytes32 _role, address _account) public view returns (bool) {
+  170:         return _loadState().roles[_role].contains(_account);
+  171:     }
+  172: 
+  173:     /// @notice Returns one of the accounts that have `_role`.
+  174:     ///
+  175:     /// @param _role The role to query.
+  176:     /// @param _index The index of account to query. It must be a value between 0 and  {getRoleMemberCount}, non-inclusive.
+  177:     function getRoleMember(bytes32 _role, uint256 _index) external view returns (address) {
+  178:         return _loadState().roles[_role].at(_index);
+  179:     }
+  180: 
+  181:     /// @notice Returns the number of accounts that have `role`.
+  182:     ///
+  183:     /// @dev Can be used together with {getRoleMember} to enumerate all bearers of a role.
+  184:     ///
+  185:     /// @param _role The role to query.
+  186:     function getRoleMemberCount(bytes32 _role) external view returns (uint256) {
+  187:         return _loadState().roles[_role].length();
+  188:     }
+  189: 
+  190:     /************************
+  191:      * Restricted Functions *
+  192:      ************************/
+  193: 
+  194:     /// @notice Enables the deposits if they are disabled
+  195:     function enableDeposits() external {
+  196:         if (isDepositsEnabled()) revert ErrorDepositsEnabled();
+  197:         if (!hasRole(DEPOSITS_ENABLER_ROLE, _msgSender())) {
+  198:             revert ErrorCallerIsNotDepositsEnabler();
+  199:         }
+  200: 
+  201:         _loadState().isDepositsEnabled = true;
+  202:         emit DepositsEnabled(_msgSender());
+  203:     }
+  204: 
+  205:     /// @notice Disables the deposits if they aren't disabled yet
+  206:     function disableDeposits() external whenDepositsEnabled {
+  207:         if (!hasRole(DEPOSITS_DISABLER_ROLE, _msgSender())) {
+  208:             revert ErrorCallerIsNotDepositsDisabler();
+  209:         }
+  210: 
+  211:         _loadState().isDepositsEnabled = false;
+  212:         emit DepositsDisabled(_msgSender());
+  213:     }
+  214: 
+  215:     /// @notice Enables the withdrawals if they are disabled
+  216:     function enableWithdrawals() external {
+  217:         if (isWithdrawalsEnabled()) revert ErrorWithdrawalsEnabled();
+  218:         if (!hasRole(WITHDRAWALS_ENABLER_ROLE, _msgSender())) {
+  219:             revert ErrorCallerIsNotWithdrawalsEnabler();
+  220:         }
+  221: 
+  222:         _loadState().isWithdrawalsEnabled = true;
+  223:         emit WithdrawalsEnabled(_msgSender());
+  224:     }
+  225: 
+  226:     /// @notice Disables the withdrawals if they aren't disabled yet
+  227:     function disableWithdrawals() external whenWithdrawalsEnabled {
+  228:         if (!hasRole(WITHDRAWALS_DISABLER_ROLE, _msgSender())) {
+  229:             revert ErrorCallerIsNotWithdrawalsDisabler();
+  230:         }
+  231: 
+  232:         _loadState().isWithdrawalsEnabled = false;
+  233:         emit WithdrawalsDisabled(_msgSender());
+  234:     }
+  235: 
+  236:     /// @notice Grants `_role` from `_account`.
+  237:     /// If `account` had been granted `role`, emits a {RoleGranted} event.
+  238:     ///
+  239:     /// @param _role The role to grant.
+  240:     /// @param _account The address of account to grant.
+  241:     function grantRole(bytes32 _role, address _account) external onlyOwner {
+  242:         _grantRole(_role, _account);
+  243:     }
+  244: 
+  245:     /// @notice Revokes `_role` from `_account`.
+  246:     /// If `account` had been granted `role`, emits a {RoleRevoked} event.
+  247:     ///
+  248:     /// @param _role The role to revoke.
+  249:     /// @param _account The address of account to revoke.
+  250:     function revokeRole(bytes32 _role, address _account) external onlyOwner {
+  251:         _revokeRole(_role, _account);
+  252:     }
+  253: 
+  254:     /**********************
+  255:      * Internal Functions *
+  256:      **********************/
+  257: 
+  258:     /// @dev Returns the reference to the slot with State struct
+  259:     function _loadState() private pure returns (State storage r) {
+  260:         bytes32 slot = STATE_SLOT;
+  261:         // solhint-disable-next-line no-inline-assembly
+  262:         assembly {
+  263:             r.slot := slot
+  264:         }
+  265:     }
+  266: 
+  267:     /// @dev Internal function to grant `_role` from `_account`.
+  268:     /// If `account` had been granted `role`, emits a {RoleGranted} event.
+  269:     ///
+  270:     /// @param _role The role to grant.
+  271:     /// @param _account The address of account to grant.
+  272:     function _grantRole(bytes32 _role, address _account) internal {
+  273:         if (_loadState().roles[_role].add(_account)) {
+  274:             emit RoleGranted(_role, _account, _msgSender());
+  275:         }
+  276:     }
+  277: 
+  278:     /// @dev Internal function to revoke `_role` from `_account`.
+  279:     /// If `account` had been granted `role`, emits a {RoleRevoked} event.
+  280:     ///
+  281:     /// @param _role The role to revoke.
+  282:     /// @param _account The address of account to revoke.
+  283:     function _revokeRole(bytes32 _role, address _account) internal {
+  284:         if (_loadState().roles[_role].remove(_account)) {
+  285:             emit RoleRevoked(_role, _account, _msgSender());
+  286:         }
+  287:     }
+  288: }

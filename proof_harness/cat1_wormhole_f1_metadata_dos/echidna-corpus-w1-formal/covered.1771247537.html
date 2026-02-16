@@ -1,0 +1,328 @@
+<style> code { white-space: pre-wrap; display: block; background-color: #eee; }.executed { background-color: #afa; }.reverted { background-color: #ffa; }.unexecuted { background-color: #faa; }.neutral { background-color: #eee; }</style><b>C:/Users/vboxuser/Desktop/Repos/zklibreports/proof_harness/cat1_wormhole_f1_metadata_dos/src/BridgeMetadataCompatHarness.sol</b>
+<code>
+   1 |     | <span class='neutral'>// SPDX-License-Identifier: MIT</span>
+   2 |     | <span class='neutral'>pragma solidity ^0.8.24;</span>
+   3 |     | <span class='neutral'></span>
+   4 |     | <span class='neutral'>/// @notice ERC20-like token that intentionally omits decimals/symbol/name.</span>
+   5 | *   | <span class='executed'>contract MockNoMetadataTokenW {</span>
+   6 |     | <span class='unexecuted'>    mapping(address =&gt; uint256) public balanceOf;</span>
+   7 |     | <span class='unexecuted'>    mapping(address =&gt; mapping(address =&gt; uint256)) public allowance;</span>
+   8 |     | <span class='neutral'></span>
+   9 | *   | <span class='executed'>    function mint(address _to, uint256 _amount) external {</span>
+  10 | *   | <span class='executed'>        balanceOf[_to] += _amount;</span>
+  11 |     | <span class='neutral'>    }</span>
+  12 |     | <span class='neutral'></span>
+  13 |     | <span class='unexecuted'>    function approve(address _spender, uint256 _amount) external returns (bool) {</span>
+  14 |     | <span class='unexecuted'>        allowance[msg.sender][_spender] = _amount;</span>
+  15 |     | <span class='unexecuted'>        return true;</span>
+  16 |     | <span class='neutral'>    }</span>
+  17 |     | <span class='neutral'></span>
+  18 |     | <span class='unexecuted'>    function transfer(address _to, uint256 _amount) external returns (bool) {</span>
+  19 |     | <span class='unexecuted'>        uint256 _bal = balanceOf[msg.sender];</span>
+  20 |     | <span class='unexecuted'>        require(_bal &gt;= _amount, &quot;!balance&quot;);</span>
+  21 |     | <span class='neutral'>        unchecked {</span>
+  22 |     | <span class='unexecuted'>            balanceOf[msg.sender] = _bal - _amount;</span>
+  23 |     | <span class='neutral'>        }</span>
+  24 |     | <span class='unexecuted'>        balanceOf[_to] += _amount;</span>
+  25 |     | <span class='unexecuted'>        return true;</span>
+  26 |     | <span class='neutral'>    }</span>
+  27 |     | <span class='neutral'></span>
+  28 |     | <span class='unexecuted'>    function transferFrom(address _from, address _to, uint256 _amount)</span>
+  29 |     | <span class='neutral'>        external</span>
+  30 |     | <span class='unexecuted'>        returns (bool)</span>
+  31 |     | <span class='neutral'>    {</span>
+  32 |     | <span class='unexecuted'>        uint256 _allowed = allowance[_from][msg.sender];</span>
+  33 |     | <span class='unexecuted'>        require(_allowed &gt;= _amount, &quot;!allowance&quot;);</span>
+  34 |     | <span class='unexecuted'>        uint256 _bal = balanceOf[_from];</span>
+  35 |     | <span class='unexecuted'>        require(_bal &gt;= _amount, &quot;!balance&quot;);</span>
+  36 |     | <span class='neutral'>        unchecked {</span>
+  37 |     | <span class='unexecuted'>            allowance[_from][msg.sender] = _allowed - _amount;</span>
+  38 |     | <span class='unexecuted'>            balanceOf[_from] = _bal - _amount;</span>
+  39 |     | <span class='neutral'>        }</span>
+  40 |     | <span class='unexecuted'>        balanceOf[_to] += _amount;</span>
+  41 |     | <span class='unexecuted'>        return true;</span>
+  42 |     | <span class='neutral'>    }</span>
+  43 |     | <span class='neutral'>}</span>
+  44 |     | <span class='neutral'></span>
+  45 |     | <span class='neutral'>/// @notice Metadata-compliant token control.</span>
+  46 | *   | <span class='executed'>contract MockMetadataTokenW is MockNoMetadataTokenW {</span>
+  47 |     | <span class='unexecuted'>    function decimals() external pure returns (uint8) {</span>
+  48 |     | <span class='unexecuted'>        return 18;</span>
+  49 |     | <span class='neutral'>    }</span>
+  50 |     | <span class='neutral'></span>
+  51 |     | <span class='unexecuted'>    function symbol() external pure returns (string memory) {</span>
+  52 |     | <span class='unexecuted'>        return &quot;META&quot;;</span>
+  53 |     | <span class='neutral'>    }</span>
+  54 |     | <span class='neutral'></span>
+  55 |     | <span class='unexecuted'>    function name() external pure returns (string memory) {</span>
+  56 |     | <span class='unexecuted'>        return &quot;Metadata Token&quot;;</span>
+  57 |     | <span class='neutral'>    }</span>
+  58 |     | <span class='neutral'>}</span>
+  59 |     | <span class='neutral'></span>
+  60 |     | <span class='neutral'>/// @notice Model mirroring Wormhole Bridge metadata reads:</span>
+  61 |     | <span class='neutral'>/// staticcall + abi.decode without checking call success.</span>
+  62 | *   | <span class='executed'>contract BridgeMetadataBugModel {</span>
+  63 | *   | <span class='executed'>    function attestToken(address _token)</span>
+  64 |     | <span class='neutral'>        external</span>
+  65 |     | <span class='neutral'>        view</span>
+  66 | *   | <span class='executed'>        returns (uint8 _decimals, bytes32 _symbol, bytes32 _name)</span>
+  67 |     | <span class='neutral'>    {</span>
+  68 | *   | <span class='executed'>        (, bytes memory queriedDecimals) =</span>
+  69 | *   | <span class='executed'>            _token.staticcall(abi.encodeWithSignature(&quot;decimals()&quot;));</span>
+  70 | *   | <span class='executed'>        (, bytes memory queriedSymbol) =</span>
+  71 | *   | <span class='executed'>            _token.staticcall(abi.encodeWithSignature(&quot;symbol()&quot;));</span>
+  72 | *   | <span class='executed'>        (, bytes memory queriedName) =</span>
+  73 | *   | <span class='executed'>            _token.staticcall(abi.encodeWithSignature(&quot;name()&quot;));</span>
+  74 |     | <span class='neutral'></span>
+  75 | *   | <span class='executed'>        _decimals = abi.decode(queriedDecimals, (uint8));</span>
+  76 |     | <span class='unexecuted'>        string memory symbolString = abi.decode(queriedSymbol, (string));</span>
+  77 |     | <span class='unexecuted'>        string memory nameString = abi.decode(queriedName, (string));</span>
+  78 |     | <span class='neutral'></span>
+  79 |     | <span class='unexecuted'>        assembly {</span>
+  80 |     | <span class='unexecuted'>            _symbol := mload(add(symbolString, 32))</span>
+  81 |     | <span class='unexecuted'>            _name := mload(add(nameString, 32))</span>
+  82 |     | <span class='neutral'>        }</span>
+  83 |     | <span class='neutral'>    }</span>
+  84 |     | <span class='neutral'></span>
+  85 | *   | <span class='executed'>    function transferTokens(address _token, uint256 _amount)</span>
+  86 |     | <span class='neutral'>        external</span>
+  87 |     | <span class='neutral'>        view</span>
+  88 | *   | <span class='executed'>        returns (uint256 _normalized)</span>
+  89 |     | <span class='unexecuted'>    {</span>
+  90 | *   | <span class='executed'>        (, bytes memory queriedDecimals) =</span>
+  91 | *   | <span class='executed'>            _token.staticcall(abi.encodeWithSignature(&quot;decimals()&quot;));</span>
+  92 | *   | <span class='executed'>        uint8 decimals = abi.decode(queriedDecimals, (uint8));</span>
+  93 |     | <span class='unexecuted'>        _normalized = _deNormalize(_normalize(_amount, decimals), decimals);</span>
+  94 |     | <span class='neutral'>    }</span>
+  95 |     | <span class='neutral'></span>
+  96 |     | <span class='unexecuted'>    function _normalize(uint256 _amount, uint8 _decimals)</span>
+  97 |     | <span class='neutral'>        internal</span>
+  98 |     | <span class='neutral'>        pure</span>
+  99 |     | <span class='unexecuted'>        returns (uint256)</span>
+ 100 |     | <span class='neutral'>    {</span>
+ 101 |     | <span class='unexecuted'>        if (_decimals &gt; 8) {</span>
+ 102 |     | <span class='unexecuted'>            return _amount / (10 ** (_decimals - 8));</span>
+ 103 |     | <span class='neutral'>        }</span>
+ 104 |     | <span class='unexecuted'>        return _amount;</span>
+ 105 |     | <span class='neutral'>    }</span>
+ 106 |     | <span class='neutral'></span>
+ 107 |     | <span class='unexecuted'>    function _deNormalize(uint256 _amount, uint8 _decimals)</span>
+ 108 |     | <span class='neutral'>        internal</span>
+ 109 |     | <span class='neutral'>        pure</span>
+ 110 |     | <span class='unexecuted'>        returns (uint256)</span>
+ 111 |     | <span class='neutral'>    {</span>
+ 112 |     | <span class='unexecuted'>        if (_decimals &gt; 8) {</span>
+ 113 |     | <span class='unexecuted'>            return _amount * (10 ** (_decimals - 8));</span>
+ 114 |     | <span class='neutral'>        }</span>
+ 115 |     | <span class='unexecuted'>        return _amount;</span>
+ 116 |     | <span class='neutral'>    }</span>
+ 117 |     | <span class='neutral'>}</span>
+ 118 |     | <span class='neutral'></span>
+ 119 |     | <span class='neutral'>/// @notice Reference fix model:</span>
+ 120 |     | <span class='neutral'>/// tolerate missing metadata methods by falling back to safe defaults.</span>
+ 121 | *   | <span class='executed'>contract BridgeMetadataFixedModel {</span>
+ 122 | *   | <span class='executed'>    bytes32 internal constant UNKNOWN = bytes32(&quot;UNKNOWN&quot;);</span>
+ 123 |     | <span class='neutral'></span>
+ 124 | *   | <span class='executed'>    function attestToken(address _token)</span>
+ 125 |     | <span class='neutral'>        external</span>
+ 126 |     | <span class='neutral'>        view</span>
+ 127 | *   | <span class='executed'>        returns (uint8 _decimals, bytes32 _symbol, bytes32 _name)</span>
+ 128 |     | <span class='neutral'>    {</span>
+ 129 | *   | <span class='executed'>        _decimals = _safeDecimals(_token);</span>
+ 130 | *   | <span class='executed'>        _symbol = _safeSymbol(_token);</span>
+ 131 | *   | <span class='executed'>        _name = _safeName(_token);</span>
+ 132 |     | <span class='neutral'>    }</span>
+ 133 |     | <span class='neutral'></span>
+ 134 | *   | <span class='executed'>    function transferTokens(address _token, uint256 _amount)</span>
+ 135 |     | <span class='neutral'>        external</span>
+ 136 |     | <span class='neutral'>        view</span>
+ 137 | *   | <span class='executed'>        returns (uint256 _normalized)</span>
+ 138 | *   | <span class='executed'>    {</span>
+ 139 | *   | <span class='executed'>        uint8 decimals = _safeDecimals(_token);</span>
+ 140 | *   | <span class='executed'>        _normalized = _deNormalize(_normalize(_amount, decimals), decimals);</span>
+ 141 |     | <span class='neutral'>    }</span>
+ 142 |     | <span class='neutral'></span>
+ 143 | *   | <span class='executed'>    function _safeDecimals(address _token) internal view returns (uint8) {</span>
+ 144 | *   | <span class='executed'>        (bool ok, bytes memory data) =</span>
+ 145 | *   | <span class='executed'>            _token.staticcall(abi.encodeWithSignature(&quot;decimals()&quot;));</span>
+ 146 | *   | <span class='executed'>        if (!ok || data.length &lt; 32) return 18;</span>
+ 147 |     | <span class='unexecuted'>        return abi.decode(data, (uint8));</span>
+ 148 |     | <span class='neutral'>    }</span>
+ 149 |     | <span class='neutral'></span>
+ 150 | *   | <span class='executed'>    function _safeSymbol(address _token) internal view returns (bytes32 out) {</span>
+ 151 | *   | <span class='executed'>        (bool ok, bytes memory data) =</span>
+ 152 | *   | <span class='executed'>            _token.staticcall(abi.encodeWithSignature(&quot;symbol()&quot;));</span>
+ 153 | *   | <span class='executed'>        if (!ok || data.length &lt; 64) return UNKNOWN;</span>
+ 154 |     | <span class='unexecuted'>        try this.decodeString(data) returns (string memory s) {</span>
+ 155 |     | <span class='neutral'>            assembly {</span>
+ 156 |     | <span class='unexecuted'>                out := mload(add(s, 32))</span>
+ 157 |     | <span class='neutral'>            }</span>
+ 158 |     | <span class='neutral'>        } catch {</span>
+ 159 |     | <span class='unexecuted'>            out = UNKNOWN;</span>
+ 160 |     | <span class='neutral'>        }</span>
+ 161 |     | <span class='neutral'>    }</span>
+ 162 |     | <span class='neutral'></span>
+ 163 | *   | <span class='executed'>    function _safeName(address _token) internal view returns (bytes32 out) {</span>
+ 164 | *   | <span class='executed'>        (bool ok, bytes memory data) =</span>
+ 165 | *   | <span class='executed'>            _token.staticcall(abi.encodeWithSignature(&quot;name()&quot;));</span>
+ 166 | *   | <span class='executed'>        if (!ok || data.length &lt; 64) return UNKNOWN;</span>
+ 167 |     | <span class='unexecuted'>        try this.decodeString(data) returns (string memory s) {</span>
+ 168 |     | <span class='neutral'>            assembly {</span>
+ 169 |     | <span class='unexecuted'>                out := mload(add(s, 32))</span>
+ 170 |     | <span class='neutral'>            }</span>
+ 171 |     | <span class='neutral'>        } catch {</span>
+ 172 |     | <span class='unexecuted'>            out = UNKNOWN;</span>
+ 173 |     | <span class='neutral'>        }</span>
+ 174 |     | <span class='neutral'>    }</span>
+ 175 |     | <span class='neutral'></span>
+ 176 |     | <span class='unexecuted'>    function decodeString(bytes memory data) external pure returns (string memory) {</span>
+ 177 |     | <span class='unexecuted'>        return abi.decode(data, (string));</span>
+ 178 |     | <span class='neutral'>    }</span>
+ 179 |     | <span class='neutral'></span>
+ 180 | *   | <span class='executed'>    function _normalize(uint256 _amount, uint8 _decimals)</span>
+ 181 |     | <span class='neutral'>        internal</span>
+ 182 |     | <span class='neutral'>        pure</span>
+ 183 | *   | <span class='executed'>        returns (uint256)</span>
+ 184 |     | <span class='neutral'>    {</span>
+ 185 | *   | <span class='executed'>        if (_decimals &gt; 8) {</span>
+ 186 | *   | <span class='executed'>            return _amount / (10 ** (_decimals - 8));</span>
+ 187 |     | <span class='neutral'>        }</span>
+ 188 |     | <span class='unexecuted'>        return _amount;</span>
+ 189 |     | <span class='neutral'>    }</span>
+ 190 |     | <span class='neutral'></span>
+ 191 | *   | <span class='executed'>    function _deNormalize(uint256 _amount, uint8 _decimals)</span>
+ 192 |     | <span class='neutral'>        internal</span>
+ 193 |     | <span class='neutral'>        pure</span>
+ 194 | *   | <span class='executed'>        returns (uint256)</span>
+ 195 |     | <span class='neutral'>    {</span>
+ 196 | *   | <span class='executed'>        if (_decimals &gt; 8) {</span>
+ 197 | *   | <span class='executed'>            return _amount * (10 ** (_decimals - 8));</span>
+ 198 |     | <span class='neutral'>        }</span>
+ 199 |     | <span class='unexecuted'>        return _amount;</span>
+ 200 |     | <span class='neutral'>    }</span>
+ 201 |     | <span class='neutral'>}</span>
+ 202 |     | <span class='neutral'></span>
+ 203 |     | <span class='neutral'></span>
+
+</code>
+<br />
+
+<b>C:/Users/vboxuser/Desktop/Repos/zklibreports/proof_harness/cat1_wormhole_f1_metadata_dos/src/MedusaBridgeMetadataCompatHarness.sol</b>
+<code>
+   1 |     | <span class='neutral'>// SPDX-License-Identifier: MIT</span>
+   2 |     | <span class='neutral'>pragma solidity ^0.8.24;</span>
+   3 |     | <span class='neutral'></span>
+   4 |     | <span class='neutral'>import {</span>
+   5 |     | <span class='neutral'>    BridgeMetadataBugModel,</span>
+   6 |     | <span class='neutral'>    BridgeMetadataFixedModel,</span>
+   7 |     | <span class='neutral'>    MockMetadataTokenW,</span>
+   8 |     | <span class='neutral'>    MockNoMetadataTokenW</span>
+   9 |     | <span class='neutral'>} from &quot;./BridgeMetadataCompatHarness.sol&quot;;</span>
+  10 |     | <span class='neutral'></span>
+  11 |     | <span class='neutral'>/// @notice Stateful specialist-fuzz harness for metadata-method compatibility.</span>
+  12 | *   | <span class='executed'>contract MedusaBridgeMetadataCompatHarness {</span>
+  13 |     | <span class='unexecuted'>    BridgeMetadataBugModel public bug;</span>
+  14 |     | <span class='unexecuted'>    BridgeMetadataFixedModel public fixedModel;</span>
+  15 |     | <span class='unexecuted'>    MockNoMetadataTokenW public noMeta;</span>
+  16 |     | <span class='unexecuted'>    MockMetadataTokenW public withMeta;</span>
+  17 |     | <span class='neutral'></span>
+  18 |     | <span class='unexecuted'>    bool public bugNoMetaAttestFailed;</span>
+  19 |     | <span class='unexecuted'>    bool public bugNoMetaTransferFailed;</span>
+  20 |     | <span class='unexecuted'>    bool public fixedNoMetaFailed;</span>
+  21 |     | <span class='neutral'></span>
+  22 | *   | <span class='executed'>    constructor() {</span>
+  23 | *   | <span class='executed'>        bug = new BridgeMetadataBugModel();</span>
+  24 | *   | <span class='executed'>        fixedModel = new BridgeMetadataFixedModel();</span>
+  25 | *   | <span class='executed'>        noMeta = new MockNoMetadataTokenW();</span>
+  26 | *   | <span class='executed'>        withMeta = new MockMetadataTokenW();</span>
+  27 | *   | <span class='executed'>        noMeta.mint(address(this), 1_000_000 ether);</span>
+  28 | *   | <span class='executed'>        withMeta.mint(address(this), 1_000_000 ether);</span>
+  29 |     | <span class='neutral'>    }</span>
+  30 |     | <span class='neutral'></span>
+  31 | *   | <span class='executed'>    function _amount(uint256 _seed) internal pure returns (uint256) {</span>
+  32 | *   | <span class='executed'>        return (_seed % 10_000 ether) + 1;</span>
+  33 |     | <span class='neutral'>    }</span>
+  34 |     | <span class='neutral'></span>
+  35 | *   | <span class='executed'>    function action_probeBugAttestNoMetadata() external {</span>
+  36 | *   | <span class='executed'>        try bug.attestToken(address(noMeta)) returns (uint8, bytes32, bytes32) {</span>
+  37 |     | <span class='neutral'>            // should not happen in bug model for non-metadata token</span>
+  38 |     | <span class='neutral'>        } catch {</span>
+  39 | *   | <span class='executed'>            bugNoMetaAttestFailed = true;</span>
+  40 |     | <span class='neutral'>        }</span>
+  41 |     | <span class='neutral'>    }</span>
+  42 |     | <span class='neutral'></span>
+  43 | *   | <span class='executed'>    function action_probeBugTransferNoMetadata(uint96 _amountSeed) external {</span>
+  44 | *   | <span class='executed'>        uint256 amount = _amount(_amountSeed);</span>
+  45 | *   | <span class='executed'>        try bug.transferTokens(address(noMeta), amount) returns (uint256) {</span>
+  46 |     | <span class='neutral'>            // should not happen in bug model for non-metadata token</span>
+  47 |     | <span class='neutral'>        } catch {</span>
+  48 | *   | <span class='executed'>            bugNoMetaTransferFailed = true;</span>
+  49 |     | <span class='neutral'>        }</span>
+  50 |     | <span class='neutral'>    }</span>
+  51 |     | <span class='neutral'></span>
+  52 | *   | <span class='executed'>    function action_probeFixedNoMetadata(uint96 _amountSeed) external {</span>
+  53 | *   | <span class='executed'>        uint256 amount = _amount(_amountSeed);</span>
+  54 | *   | <span class='executed'>        try fixedModel.attestToken(address(noMeta)) returns (uint8, bytes32, bytes32) {</span>
+  55 | *   | <span class='executed'>            try fixedModel.transferTokens(address(noMeta), amount) returns (uint256) {</span>
+  56 |     | <span class='neutral'>                // expected pass</span>
+  57 |     | <span class='neutral'>            } catch {</span>
+  58 |     | <span class='unexecuted'>                fixedNoMetaFailed = true;</span>
+  59 |     | <span class='neutral'>            }</span>
+  60 |     | <span class='neutral'>        } catch {</span>
+  61 |     | <span class='unexecuted'>            fixedNoMetaFailed = true;</span>
+  62 |     | <span class='neutral'>        }</span>
+  63 |     | <span class='neutral'>    }</span>
+  64 |     | <span class='neutral'></span>
+  65 |     | <span class='unexecuted'>    function action_probeBugAndFixedWithMetadata(uint96 _amountSeed) external {</span>
+  66 |     | <span class='unexecuted'>        uint256 amount = _amount(_amountSeed);</span>
+  67 |     | <span class='neutral'>        // Control path: both models should handle metadata-compliant token.</span>
+  68 |     | <span class='unexecuted'>        try bug.attestToken(address(withMeta)) returns (uint8, bytes32, bytes32) {</span>
+  69 |     | <span class='unexecuted'>            try bug.transferTokens(address(withMeta), amount) returns (uint256) {} catch {}</span>
+  70 |     | <span class='neutral'>        } catch {}</span>
+  71 |     | <span class='unexecuted'>        try fixedModel.attestToken(address(withMeta)) returns (uint8, bytes32, bytes32) {</span>
+  72 |     | <span class='unexecuted'>            try fixedModel.transferTokens(address(withMeta), amount) returns (uint256) {} catch {}</span>
+  73 |     | <span class='neutral'>        } catch {}</span>
+  74 |     | <span class='neutral'>    }</span>
+  75 |     | <span class='neutral'></span>
+  76 |     | <span class='neutral'>    /// @notice Nonstandard tokens should not break attestation path.</span>
+  77 |     | <span class='unexecuted'>    function property_nonstandard_token_attest_should_not_fail()</span>
+  78 |     | <span class='neutral'>        external</span>
+  79 |     | <span class='neutral'>        view</span>
+  80 |     | <span class='unexecuted'>        returns (bool)</span>
+  81 |     | <span class='neutral'>    {</span>
+  82 |     | <span class='unexecuted'>        return !bugNoMetaAttestFailed;</span>
+  83 |     | <span class='neutral'>    }</span>
+  84 |     | <span class='neutral'></span>
+  85 |     | <span class='neutral'>    /// @notice Nonstandard tokens should not break transfer path.</span>
+  86 |     | <span class='unexecuted'>    function property_nonstandard_token_transfer_should_not_fail()</span>
+  87 |     | <span class='neutral'>        external</span>
+  88 |     | <span class='neutral'>        view</span>
+  89 |     | <span class='unexecuted'>        returns (bool)</span>
+  90 |     | <span class='neutral'>    {</span>
+  91 |     | <span class='unexecuted'>        return !bugNoMetaTransferFailed;</span>
+  92 |     | <span class='neutral'>    }</span>
+  93 |     | <span class='neutral'></span>
+  94 |     | <span class='neutral'>    /// @notice Fixed model must tolerate missing metadata methods.</span>
+  95 |     | <span class='unexecuted'>    function property_fixed_model_tolerates_missing_metadata()</span>
+  96 |     | <span class='neutral'>        external</span>
+  97 |     | <span class='neutral'>        view</span>
+  98 |     | <span class='unexecuted'>        returns (bool)</span>
+  99 |     | <span class='neutral'>    {</span>
+ 100 |     | <span class='unexecuted'>        return !fixedNoMetaFailed;</span>
+ 101 |     | <span class='neutral'>    }</span>
+ 102 |     | <span class='neutral'></span>
+ 103 |     | <span class='neutral'>    /// @notice Echidna-compatible alias.</span>
+ 104 |     | <span class='unexecuted'>    function echidna_nonstandard_token_attest_should_not_fail()</span>
+ 105 |     | <span class='neutral'>        external</span>
+ 106 |     | <span class='neutral'>        view</span>
+ 107 |     | <span class='unexecuted'>        returns (bool)</span>
+ 108 |     | <span class='neutral'>    {</span>
+ 109 |     | <span class='unexecuted'>        return !bugNoMetaAttestFailed;</span>
+ 110 |     | <span class='neutral'>    }</span>
+ 111 |     | <span class='neutral'>}</span>
+ 112 |     | <span class='neutral'></span>
+ 113 |     | <span class='neutral'></span>
+
+</code>
+<br />
+

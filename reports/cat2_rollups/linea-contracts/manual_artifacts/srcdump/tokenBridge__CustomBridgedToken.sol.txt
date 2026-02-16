@@ -1,0 +1,22 @@
+    1: // SPDX-License-Identifier: AGPL-3.0
+    2: pragma solidity 0.8.19;
+    3: 
+    4: import { BridgedToken } from "./BridgedToken.sol";
+    5: 
+    6: /**
+    7:  * @title Custom BridgedToken Contract
+    8:  * @notice Custom ERC20 token manually deployed for the Linea TokenBridge
+    9:  */
+   10: contract CustomBridgedToken is BridgedToken {
+   11:   function initializeV2(
+   12:     string memory _tokenName,
+   13:     string memory _tokenSymbol,
+   14:     uint8 _tokenDecimals,
+   15:     address _bridge
+   16:   ) public reinitializer(2) {
+   17:     __ERC20_init(_tokenName, _tokenSymbol);
+   18:     __ERC20Permit_init(_tokenName);
+   19:     bridge = _bridge;
+   20:     _decimals = _tokenDecimals;
+   21:   }
+   22: }

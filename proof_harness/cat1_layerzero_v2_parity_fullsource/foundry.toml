@@ -1,0 +1,17 @@
+[profile.default]
+src = "src"
+test = "test"
+out = "out"
+cache_path = "cache"
+solc_version = "0.8.24"
+optimizer = true
+optimizer_runs = 20000
+via_ir = true
+allow_paths = ["external"]
+
+remappings = [
+    "@openzeppelin/contracts/=lib/openzeppelin-contracts/contracts/",
+    "@layerzerolabs/lz-evm-protocol-v2/=external/lz-evm-protocol-v2/",
+    "@layerzerolabs/lz-evm-messagelib-v2/contracts/=external/lz-evm-messagelib-v2/",
+    "solidity-bytes-utils/=lib/solidity-bytes-utils/"
+]

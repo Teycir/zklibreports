@@ -1,0 +1,143 @@
+[ScrollChain initializer sets owner from first caller, no caller auth]
+  243:     /// @notice Initialize the storage of ScrollChain.
+  244:     ///
+  245:     /// @dev The parameters `_messageQueue` and `_verifier` are no longer used.
+  246:     ///
+  247:     /// @param _messageQueue The address of `L1MessageQueue` contract.
+  248:     /// @param _verifier The address of zkevm verifier contract.
+  249:     /// @param _maxNumTxInChunk The maximum number of transactions allowed in each chunk.
+  250:     function initialize(
+  251:         address _messageQueue,
+  252:         address _verifier,
+  253:         uint256 _maxNumTxInChunk
+  254:     ) external initializer {
+  255:         OwnableUpgradeable.__Ownable_init();
+  256: 
+  257:         __maxNumTxInChunk = _maxNumTxInChunk;
+  258:         __verifier = _verifier;
+  259:         __messageQueue = _messageQueue;
+  260:     }
+  261: 
+  262:     function initializeV2() external reinitializer(2) {
+  263:         // binary search on lastCommittedBatchIndex
+  264:         uint256 index = __lastFinalizedBatchIndex;
+  265:         uint256 step = 1;
+  266:         unchecked {
+
+[ScrollChain owner-only privileged controls after takeover]
+  455: 
+  456:     /// @notice Add an account to the sequencer list.
+  457:     /// @param _account The address of account to add.
+  458:     function addSequencer(address _account) external onlyOwner {
+  459:         // @note Currently many external services rely on EOA sequencer to decode metadata directly from tx.calldata.
+  460:         // So we explicitly make sure the account is EOA.
+  461:         if (_account.code.length > 0) revert ErrorAccountIsNotEOA();
+  462: 
+  463:         isSequencer[_account] = true;
+  464: 
+  465:         emit UpdateSequencer(_account, true);
+  466:     }
+  467: 
+  468:     /// @notice Remove an account from the sequencer list.
+  469:     /// @param _account The address of account to remove.
+  470:     function removeSequencer(address _account) external onlyOwner {
+  471:         isSequencer[_account] = false;
+  472: 
+  473:         emit UpdateSequencer(_account, false);
+  474:     }
+  475: 
+  476:     /// @notice Add an account to the prover list.
+  477:     /// @param _account The address of account to add.
+  478:     function addProver(address _account) external onlyOwner {
+  479:         // @note Currently many external services rely on EOA prover to decode metadata directly from tx.calldata.
+  480:         // So we explicitly make sure the account is EOA.
+  481:         if (_account.code.length > 0) revert ErrorAccountIsNotEOA();
+  482:         isProver[_account] = true;
+  483: 
+  484:         emit UpdateProver(_account, true);
+  485:     }
+  486: 
+  487:     /// @notice Add an account from the prover list.
+  488:     /// @param _account The address of account to remove.
+  489:     function removeProver(address _account) external onlyOwner {
+  490:         isProver[_account] = false;
+  491: 
+  492:         emit UpdateProver(_account, false);
+  493:     }
+  494: 
+  495:     /// @notice Pause the contract
+  496:     /// @param _status The pause status to update.
+  497:     function setPause(bool _status) external onlyOwner {
+  498:         if (_status) {
+  499:             _pause();
+  500:         } else {
+  501:             _unpause();
+  502:         }
+  503:     }
+  504: 
+  505:     /// @notice Exit from enforced batch mode.
+  506:     function disableEnforcedBatchMode() external onlyOwner {
+  507:         miscData.flags = uint8(_insertBoolToFlag(miscData.flags, ENFORCED_MODE_OFFSET, false));
+  508:         emit UpdateEnforcedBatchMode(false, miscData.lastCommittedBatchIndex);
+  509:     }
+  510: 
+
+[Deployment script documents non-atomic upgrade then initialize flow]
+   95:             ITransparentUpgradeableProxy(L1_SYSTEM_CONFIG_PROXY_ADDR),
+   96:             L1_SYSTEM_CONFIG_IMPLEMENTATION_ADDR
+   97:         );
+   98: 
+   99:         SystemConfig(L1_SYSTEM_CONFIG_PROXY_ADDR).initialize(
+  100:             vm.addr(L1_DEPLOYER_PRIVATE_KEY),
+  101:             L2GETH_SIGNER_ADDRESS,
+  102:             SystemConfig.MessageQueueParameters({
+  103:                 maxGasLimit: uint32(MAX_L1_MESSAGE_GAS_LIMIT),
+  104:                 baseFeeOverhead: 1000000000,
+  105:                 baseFeeScalar: 1000000000
+  106:             }),
+  107:             SystemConfig.EnforcedBatchParameters({
+  108:                 maxDelayEnterEnforcedMode: uint24(FINALIZE_BATCH_DEADLINE_SEC),
+  109:                 maxDelayMessageQueue: uint24(RELAY_MESSAGE_DEADLINE_SEC)
+  110:             })
+  111:         );
+  112: 
+  113:         // initialize ScrollChain
+  114:         proxyAdmin.upgrade(
+  115:             ITransparentUpgradeableProxy(L1_SCROLL_CHAIN_PROXY_ADDR),
+  116:             L1_SCROLL_CHAIN_IMPLEMENTATION_ADDR
+  117:         );
+  118: 
+  119:         ScrollChain(L1_SCROLL_CHAIN_PROXY_ADDR).initialize(
+  120:             L1_MESSAGE_QUEUE_V1_PROXY_ADDR, // not used
+  121:             L1_MULTIPLE_VERSION_ROLLUP_VERIFIER_ADDR,
+  122:             MAX_TX_IN_CHUNK
+  123:         );
+  124: 
+  125:         ScrollChain(L1_SCROLL_CHAIN_PROXY_ADDR).initializeV2();
+  126: 
+  127:         ScrollChain(L1_SCROLL_CHAIN_PROXY_ADDR).addSequencer(L1_COMMIT_SENDER_ADDRESS);
+  128:         ScrollChain(L1_SCROLL_CHAIN_PROXY_ADDR).addProver(L1_FINALIZE_SENDER_ADDRESS);
+  129: 
+  130:         // initialize L2GasPriceOracle
+  131:         L2GasPriceOracle(L2_GAS_PRICE_ORACLE_PROXY_ADDR).initialize(
+  132:             21000, // _txGas
+  133:             53000, // _txGasContractCreation
+  134:             4, // _zeroGas
+  135:             16 // _nonZeroGas
+  136:         );
+  137:         L2GasPriceOracle(L2_GAS_PRICE_ORACLE_PROXY_ADDR).updateWhitelist(L1_WHITELIST_ADDR);
+  138: 
+
+[Script explicitly chooses non-atomic upgrade then initialize sequence]
+   85:     function run() external {
+   86:         ProxyAdmin proxyAdmin = ProxyAdmin(L1_PROXY_ADMIN_ADDR);
+   87: 
+   88:         vm.startBroadcast(L1_DEPLOYER_PRIVATE_KEY);
+   89: 
+   90:         // note: we use call upgrade(...) and initialize(...) instead of upgradeAndCall(...),
+   91:         // otherwise the contract owner would become ProxyAdmin.
+   92: 
+   93:         // initialize system config
+   94:         proxyAdmin.upgrade(
+   95:             ITransparentUpgradeableProxy(L1_SYSTEM_CONFIG_PROXY_ADDR),
+   96:             L1_SYSTEM_CONFIG_IMPLEMENTATION_ADDR

@@ -1,0 +1,13 @@
+lead_contract_decls=353
+lead_initialization=143
+lead_auth_controls=125
+lead_raw_calls=179
+lead_assembly=118
+lead_txorigin=0
+lead_selfdestruct=4
+lead_signature_paths=1
+lead_decode_encode=42
+lead_unchecked=51
+lead_time_block=26
+lead_create_create2=5
+lead_bridge_message=450

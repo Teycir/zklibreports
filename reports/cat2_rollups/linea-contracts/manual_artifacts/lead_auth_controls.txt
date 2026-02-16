@@ -1,0 +1,125 @@
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\LineaRollup.sol:72:   * @dev DEFAULT_ADMIN_ROLE is set for the security council.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\LineaRollup.sol:105:    _grantRole(DEFAULT_ADMIN_ROLE, _securityCouncil);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\LineaRollup.sol:154:  function setVerifierAddress(address _newVerifierAddress, uint256 _proofType) external onlyRole(VERIFIER_SETTER_ROLE) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\LineaRollup.sol:169:  function unsetVerifierAddress(uint256 _proofType) external onlyRole(VERIFIER_SETTER_ROLE) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\LineaRollup.sol:187:  ) external whenTypeAndGeneralNotPaused(PROVING_SYSTEM_PAUSE_TYPE) onlyRole(OPERATOR_ROLE) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\LineaRollup.sol:267:  ) external whenTypeAndGeneralNotPaused(PROVING_SYSTEM_PAUSE_TYPE) onlyRole(OPERATOR_ROLE) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\LineaRollup.sol:442:  ) external whenTypeAndGeneralNotPaused(PROVING_SYSTEM_PAUSE_TYPE) onlyRole(OPERATOR_ROLE) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\LineaRollup.sol:480:   * @dev DEFAULT_ADMIN_ROLE is required to execute.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\LineaRollup.sol:485:  ) external whenTypeNotPaused(GENERAL_PAUSE_TYPE) onlyRole(DEFAULT_ADMIN_ROLE) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\tokenBridge\TokenBridge.sol:155:  ) public payable nonZeroAddress(_token) nonZeroAddress(_recipient) nonZeroAmount(_amount) whenNotPaused nonReentrant {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\tokenBridge\TokenBridge.sol:241:  ) external nonReentrant onlyMessagingService onlyAuthorizedRemoteSender whenNotPaused {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\tokenBridge\TokenBridge.sol:265:  function setMessageService(address _messageService) public nonZeroAddress(_messageService) onlyOwner {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\tokenBridge\TokenBridge.sol:316:  function setRemoteTokenBridge(address _remoteTokenBridge) external onlyOwner {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\tokenBridge\TokenBridge.sol:355:  function setReserved(address _token) public nonZeroAddress(_token) onlyOwner isNewToken(_token) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\tokenBridge\TokenBridge.sol:364:  function removeReserved(address _token) external nonZeroAddress(_token) onlyOwner {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\tokenBridge\TokenBridge.sol:383:  ) external nonZeroAddress(_nativeToken) nonZeroAddress(_targetContract) onlyOwner isNewToken(_nativeToken) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\tokenBridge\TokenBridge.sol:405:  function pause() external onlyOwner {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\tokenBridge\TokenBridge.sol:412:  function unpause() external onlyOwner {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\interfaces\l1\ILineaRollup.sol:319:   * @dev DEFAULT_ADMIN_ROLE is required to execute.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\TestRateLimiter.sol:13:    _grantRole(DEFAULT_ADMIN_ROLE, msg.sender);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\TestPauseManager.sol:9:    _grantRole(DEFAULT_ADMIN_ROLE, msg.sender);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\TestL1MessageService.sol:21:    _grantRole(DEFAULT_ADMIN_ROLE, msg.sender);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:13: * @dev External interface of AccessControl declared to support ERC165 detection.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:19:   * `DEFAULT_ADMIN_ROLE` is the starting admin for all roles, despite
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:30:   * bearer except when using {AccessControl-_setupRole}.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:52:   * To change a role's admin, use {AccessControl-_setRoleAdmin}.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:1091:// OpenZeppelin Contracts (last updated v4.9.0) (access/AccessControl.sol)
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:1124: * By default, the admin role for all roles is `DEFAULT_ADMIN_ROLE`, which means
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:1129: * WARNING: The `DEFAULT_ADMIN_ROLE` is also its own admin: it has permission to
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:1147:  bytes32 public constant DEFAULT_ADMIN_ROLE = 0x00;
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:1155:   *  /^AccessControl: account (0x[0-9a-f]{40}) is missing role (0x[0-9a-f]{64})$/
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:1159:  modifier onlyRole(bytes32 role) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:1183:   * Overriding this function changes the behavior of the {onlyRole} modifier.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:1198:   *  /^AccessControl: account (0x[0-9a-f]{40}) is missing role (0x[0-9a-f]{64})$/
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:1205:            "AccessControl: account ",
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:1237:  function grantRole(bytes32 role, address account) public virtual override onlyRole(getRoleAdmin(role)) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:1252:  function revokeRole(bytes32 role, address account) public virtual override onlyRole(getRoleAdmin(role)) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:1273:    require(account == _msgSender(), "AccessControl: can only renounce roles for self");
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:1293:   * system imposed by {AccessControl}.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:1726:   * @dev DEFAULT_ADMIN_ROLE is required to execute.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:2357:  function pauseByType(uint8 _pauseType) external onlyRole(PAUSE_MANAGER_ROLE) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:2371:  function unPauseByType(uint8 _pauseType) external onlyRole(PAUSE_MANAGER_ROLE) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:2539:  function resetRateLimitAmount(uint256 _amount) external onlyRole(RATE_LIMIT_SETTER_ROLE) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:2568:  function resetAmountUsedInPeriod() external onlyRole(RATE_LIMIT_SETTER_ROLE) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:3090:   * @dev DEFAULT_ADMIN_ROLE is set for the security council.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:3122:    _grantRole(DEFAULT_ADMIN_ROLE, _securityCouncil);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:3154:  function setVerifierAddress(address _newVerifierAddress, uint256 _proofType) external onlyRole(VERIFIER_SETTER_ROLE) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:3178:  ) external whenTypeAndGeneralNotPaused(PROVING_SYSTEM_PAUSE_TYPE) onlyRole(OPERATOR_ROLE) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:3208:  ) external whenTypeAndGeneralNotPaused(PROVING_SYSTEM_PAUSE_TYPE) onlyRole(OPERATOR_ROLE) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:3367:  ) external whenTypeAndGeneralNotPaused(PROVING_SYSTEM_PAUSE_TYPE) onlyRole(OPERATOR_ROLE) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:3425:   * @dev DEFAULT_ADMIN_ROLE is required to execute.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:3430:  ) external whenTypeNotPaused(GENERAL_PAUSE_TYPE) onlyRole(DEFAULT_ADMIN_ROLE) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\L2MessageServiceLineaMainnet.sol:12: * @dev External interface of AccessControl declared to support ERC165 detection.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\L2MessageServiceLineaMainnet.sol:18:   * `DEFAULT_ADMIN_ROLE` is the starting admin for all roles, despite
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\L2MessageServiceLineaMainnet.sol:29:   * bearer except when using {AccessControl-_setupRole}.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\L2MessageServiceLineaMainnet.sol:51:   * To change a role's admin, use {AccessControl-_setRoleAdmin}.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\L2MessageServiceLineaMainnet.sol:1088:// OpenZeppelin Contracts (last updated v4.9.0) (access/AccessControl.sol)
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\L2MessageServiceLineaMainnet.sol:1121: * By default, the admin role for all roles is `DEFAULT_ADMIN_ROLE`, which means
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\L2MessageServiceLineaMainnet.sol:1126: * WARNING: The `DEFAULT_ADMIN_ROLE` is also its own admin: it has permission to
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\L2MessageServiceLineaMainnet.sol:1148:  bytes32 public constant DEFAULT_ADMIN_ROLE = 0x00;
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\L2MessageServiceLineaMainnet.sol:1156:   *  /^AccessControl: account (0x[0-9a-f]{40}) is missing role (0x[0-9a-f]{64})$/
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\L2MessageServiceLineaMainnet.sol:1160:  modifier onlyRole(bytes32 role) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\L2MessageServiceLineaMainnet.sol:1181:   * Overriding this function changes the behavior of the {onlyRole} modifier.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\L2MessageServiceLineaMainnet.sol:1196:   *  /^AccessControl: account (0x[0-9a-f]{40}) is missing role (0x[0-9a-f]{64})$/
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\L2MessageServiceLineaMainnet.sol:1203:            "AccessControl: account ",
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\L2MessageServiceLineaMainnet.sol:1235:  function grantRole(bytes32 role, address account) public virtual override onlyRole(getRoleAdmin(role)) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\L2MessageServiceLineaMainnet.sol:1250:  function revokeRole(bytes32 role, address account) public virtual override onlyRole(getRoleAdmin(role)) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\L2MessageServiceLineaMainnet.sol:1271:    require(account == _msgSender(), "AccessControl: can only renounce roles for self");
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\L2MessageServiceLineaMainnet.sol:1291:   * system imposed by {AccessControl}.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\L2MessageServiceLineaMainnet.sol:1570:  function pauseByType(bytes32 _pauseType) external whenTypeNotPaused(_pauseType) onlyRole(PAUSE_MANAGER_ROLE) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\L2MessageServiceLineaMainnet.sol:1580:  function unPauseByType(bytes32 _pauseType) external whenTypePaused(_pauseType) onlyRole(PAUSE_MANAGER_ROLE) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\L2MessageServiceLineaMainnet.sol:1629:  function addL1L2MessageHashes(bytes32[] calldata _messageHashes) external onlyRole(L1_L2_MESSAGE_SETTER_ROLE) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\L2MessageServiceLineaMainnet.sol:1888:  function resetRateLimitAmount(uint256 _amount) external onlyRole(RATE_LIMIT_SETTER_ROLE) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\L2MessageServiceLineaMainnet.sol:1917:  function resetAmountUsedInPeriod() external onlyRole(RATE_LIMIT_SETTER_ROLE) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\L2MessageServiceLineaMainnet.sol:1996:    _grantRole(DEFAULT_ADMIN_ROLE, _securityCouncil);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\L2MessageServiceLineaMainnet.sol:2104:  function setMinimumFee(uint256 _feeInWei) external onlyRole(MINIMUM_FEE_SETTER_ROLE) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\TestL2MessageManager.sol:28:    _grantRole(DEFAULT_ADMIN_ROLE, msg.sender);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\TestL1MessageServiceMerkleProof.sol:26:    _grantRole(DEFAULT_ADMIN_ROLE, msg.sender);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\proxies\ProxyAdmin.sol:30:// File contracts/access/Ownable.sol
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\proxies\ProxyAdmin.sol:32:// OpenZeppelin Contracts (last updated v4.9.0) (access/Ownable.sol)
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\proxies\ProxyAdmin.sol:45: * `onlyOwner`, which can be applied to your functions to restrict their use to
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\proxies\ProxyAdmin.sol:48:abstract contract Ownable is Context {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\proxies\ProxyAdmin.sol:63:  modifier onlyOwner() {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\proxies\ProxyAdmin.sol:79:    require(owner() == _msgSender(), "Ownable: caller is not the owner");
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\proxies\ProxyAdmin.sol:84:   * `onlyOwner` functions. Can only be called by the current owner.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\proxies\ProxyAdmin.sol:89:  function renounceOwnership() public virtual onlyOwner {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\proxies\ProxyAdmin.sol:97:  function transferOwnership(address newOwner) public virtual onlyOwner {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\proxies\ProxyAdmin.sol:98:    require(newOwner != address(0), "Ownable: new owner is the zero address");
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\proxies\ProxyAdmin.sol:1036:contract ProxyAdmin is Ownable {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\proxies\ProxyAdmin.sol:1074:  function changeProxyAdmin(ITransparentUpgradeableProxy proxy, address newAdmin) public virtual onlyOwner {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\proxies\ProxyAdmin.sol:1085:  function upgrade(ITransparentUpgradeableProxy proxy, address implementation) public virtual onlyOwner {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\proxies\ProxyAdmin.sol:1101:  ) public payable virtual onlyOwner {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\token\TokenMintingRateLimiter.sol:4:import { AccessControl } from "@openzeppelin/contracts/access/AccessControl.sol";
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\token\TokenMintingRateLimiter.sol:14:contract TokenMintingRateLimiter is ITokenMinter, ITokenMintingRateLimiter, AccessControl {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\token\TokenMintingRateLimiter.sol:72:    _grantRole(DEFAULT_ADMIN_ROLE, _defaultAdmin);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\token\TokenMintingRateLimiter.sol:88:  function mint(address _to, uint256 _amount) external onlyRole(MINTER_ROLE) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\token\TokenMintingRateLimiter.sol:101:  function batchMint(address[] calldata _to, uint256 _amount) external onlyRole(MINTER_ROLE) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\token\TokenMintingRateLimiter.sol:113:  function batchMintMultiple(address[] calldata _to, uint256[] calldata _amounts) external onlyRole(MINTER_ROLE) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\token\TokenMintingRateLimiter.sol:165:  function resetRateLimitAmount(uint256 _amount) external onlyRole(RATE_LIMIT_SETTER_ROLE) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\token\MyToken.sol:5:import { AccessControl } from "@openzeppelin/contracts/access/AccessControl.sol";
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\token\MyToken.sol:7:contract MyToken is ERC20, AccessControl {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\token\MyToken.sol:13:    _grantRole(DEFAULT_ADMIN_ROLE, minter);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\token\MyToken.sol:17:  function mint(address _to, uint256 _amount) external onlyRole(MINTER_ROLE) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\token\MyToken.sol:21:  function batchMint(address[] calldata _to, uint256 _amount) external onlyRole(MINTER_ROLE) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\token\MyToken.sol:32:  function batchMintMultiple(address[] calldata _to, uint256[] calldata _amounts) external onlyRole(MINTER_ROLE) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\token\LineaVoyageXP.sol:5:import { AccessControl } from "@openzeppelin/contracts/access/AccessControl.sol";
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\token\LineaVoyageXP.sol:12:contract LineaVoyageXP is ERC20, AccessControl {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\token\LineaVoyageXP.sol:18:    _grantRole(DEFAULT_ADMIN_ROLE, minter);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\token\LineaVoyageXP.sol:28:  function mint(address _to, uint256 _amount) external onlyRole(MINTER_ROLE) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\token\LineaVoyageXP.sol:38:  function batchMint(address[] calldata _to, uint256 _amount) external onlyRole(MINTER_ROLE) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\token\LineaVoyageXP.sol:55:  function batchMintMultiple(address[] calldata _to, uint256[] calldata _amounts) external onlyRole(MINTER_ROLE) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\messageService\l2\v1\L2MessageServiceV1.sol:83:    _grantRole(DEFAULT_ADMIN_ROLE, _securityCouncil);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\messageService\l2\v1\L2MessageServiceV1.sol:186:  function setMinimumFee(uint256 _feeInWei) external onlyRole(MINIMUM_FEE_SETTER_ROLE) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\token\LineaSurgeXP.sol:5:import { AccessControl } from "@openzeppelin/contracts/access/AccessControl.sol";
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\token\LineaSurgeXP.sol:12:contract LineaSurgeXP is ERC20, AccessControl {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\token\LineaSurgeXP.sol:32:    _grantRole(DEFAULT_ADMIN_ROLE, admin);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\token\LineaSurgeXP.sol:42:  function mint(address _to, uint256 _amount) external onlyRole(MINTER_ROLE) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\token\LineaSurgeXP.sol:52:  function batchMint(address[] calldata _to, uint256 _amount) external onlyRole(MINTER_ROLE) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\token\LineaSurgeXP.sol:69:  function batchMintMultiple(address[] calldata _to, uint256[] calldata _amounts) external onlyRole(MINTER_ROLE) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\token\LineaSurgeXP.sol:90:  ) public virtual override onlyRole(TRANSFER_ROLE) onlyContractCaller returns (bool) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\messageService\lib\RateLimiter.sol:84:  function resetRateLimitAmount(uint256 _amount) external onlyRole(RATE_LIMIT_SETTER_ROLE) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\messageService\lib\RateLimiter.sol:113:  function resetAmountUsedInPeriod() external onlyRole(RATE_LIMIT_SETTER_ROLE) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\messageService\lib\PauseManager.sol:88:  function pauseByType(uint8 _pauseType) external onlyRole(PAUSE_MANAGER_ROLE) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\messageService\lib\PauseManager.sol:102:  function unPauseByType(uint8 _pauseType) external onlyRole(PAUSE_MANAGER_ROLE) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\messageService\l2\L2MessageManager.sol:40:  ) external whenTypeNotPaused(GENERAL_PAUSE_TYPE) onlyRole(L1_L2_MESSAGE_SETTER_ROLE) {

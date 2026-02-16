@@ -1,0 +1,3 @@
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts\contracts\LineaRollup.sol:132:  ) external reinitializer(5) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts\contracts\LineaRollupInit.sol:18:  function initializeV2(uint256 _initialL2BlockNumber, bytes32 _initialStateRootHash) external reinitializer(3) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts\contracts\tokenBridge\CustomBridgedToken.sol:16:  ) public reinitializer(2) {

@@ -1,0 +1,780 @@
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\air\test_utils_test.cc:90:  // Verify degrees.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\air\test_utils_test.cc:203:  // Verify.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\air\test_utils.h:198:  A general function to verify constraint satisfiability.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\air\test_utils.h:202:  1) Draw a random trace, and verify constraint is not satisfied on it.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\air\test_utils.h:204:  true as last parameter), and verify manipulated trace satisfies constraint.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\air\test_utils.h:206:  'false' as it's last parameter, and verify the ruined trace does not satisfy the constraint.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\air\test_utils.cc:249:  // Verify constraint satisfied.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\algebra\field_element_base.h:76:    Relevant in case the Stark protocol uses an extension field. In that case, returns true iff the
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\algebra\field_element_base.h:92:    Relevant in case the Stark protocol uses an extension field. In that case, returns the generator
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\air\fibonacci\fibonacci_air_test.cc:53:  // Verify composition degree.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\air\fibonacci\fibonacci_air_test.cc:63:  // Verify composition degree.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\air\degree_three_example\degree_three_example_air_test.cc:53:  // Verify composition degree.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\air\degree_three_example\degree_three_example_air_test.cc:63:  // Verify composition degree.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\utils\maybe_owned_ptr.h:39:     function, MakeA, whose signature is "A MakeA()" may create an instance of B and pass it to the
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\utils\json_test.cc:38:  auto fri = builder["stark"]["fri"];
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\utils\json_test.cc:39:  fri["int"] = 5;
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\utils\json_test.cc:40:  fri["string"] = "hello";
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\utils\json_test.cc:41:  fri["uint64"] = Pow2(40);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\utils\json_test.cc:42:  fri["negativeInt"] = -5;
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\utils\json_test.cc:43:  fri["field_elements"]
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\utils\json_test.cc:46:  fri["int_array"].Append(10).Append(20).Append(30);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\utils\json_test.cc:47:  fri["bools"].Append(true).Append(false).Append(true);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\utils\json_test.cc:51:  fri["mixed_array"].Append(0).Append("string").Append(json_sub);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\utils\json_test.cc:52:  fri["int_as_string"] = std::to_string(Pow2(40));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\utils\json_test.cc:63:      root["stark"]["fri2"]["int"], HasSubstr("Missing configuration object: /stark/fri2/"));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\utils\json_test.cc:65:      root["stark"]["fri"]["int"]["test"],
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\utils\json_test.cc:66:      HasSubstr("Configuration at /stark/fri/int/ is expected to be an object."));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\utils\json_test.cc:70:  EXPECT_EQ(20U, root["stark"]["fri"]["int_array"][1].AsSizeT());
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\utils\json_test.cc:73:      root["stark"]["fri"]["int"][1],
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\utils\json_test.cc:74:      HasSubstr("Configuration at /stark/fri/int/ is expected to be an array."));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\utils\json_test.cc:78:  EXPECT_TRUE(root["stark"].HasValue());
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\utils\json_test.cc:83:  EXPECT_EQ(true, root["stark"]["fri"]["bools"][0].AsBool());
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\utils\json_test.cc:85:      root["stark"]["fri"]["int"].AsBool(),
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\utils\json_test.cc:86:      HasSubstr("Configuration at /stark/fri/int/ is expected to be a boolean."));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\utils\json_test.cc:90:  EXPECT_EQ(Pow2(40), root["stark"]["fri"]["uint64"].AsUint64());
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\utils\json_test.cc:91:  EXPECT_EQ(5, root["stark"]["fri"]["int"].AsUint64());
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\utils\json_test.cc:93:      root["stark"]["fri"]["string"].AsUint64(),
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\utils\json_test.cc:94:      HasSubstr("Configuration at /stark/fri/string/ is expected to be a uint64."));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\utils\json_test.cc:96:      root["stark"]["fri"]["negativeInt"].AsUint64(),
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\utils\json_test.cc:97:      HasSubstr("Configuration at /stark/fri/negativeInt/ is expected to be a uint64."));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\utils\json_test.cc:101:  EXPECT_EQ(Pow2(40), root["stark"]["fri"]["int_as_string"].AsUint64FromString());
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\utils\json_test.cc:103:      root["stark"]["fri"]["string"].AsUint64FromString(),
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\utils\json_test.cc:106:      root["stark"]["fri"]["int"].AsUint64FromString(),
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\utils\json_test.cc:107:      HasSubstr("Configuration at /stark/fri/int/ is expected to be a string."));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\utils\json_test.cc:111:  EXPECT_THAT(root["stark"]["fri"]["bools"].AsBoolVector(), ElementsAre(true, false, true));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\utils\json_test.cc:115:  EXPECT_EQ(5U, root["stark"]["fri"]["int"].AsSizeT());
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\utils\json_test.cc:117:      root["stark"]["fri"]["missing"].AsSizeT(),
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\utils\json_test.cc:118:      HasSubstr("Missing configuration value: /stark/fri/missing/"));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\utils\json_test.cc:120:      root["stark"]["fri"]["string"].AsSizeT(),
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\utils\json_test.cc:121:      HasSubstr("Configuration at /stark/fri/string/ is expected to be an integer."));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\utils\json_test.cc:126:      root["stark"]["fri"]["int"].ArrayLength(),
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\utils\json_test.cc:127:      HasSubstr("Configuration at /stark/fri/int/ is expected to be an array."));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\utils\json_test.cc:128:  EXPECT_EQ(3U, root["stark"]["fri"]["int_array"].ArrayLength());
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\utils\json_test.cc:129:  EXPECT_EQ(3U, root["stark"]["fri"]["mixed_array"].ArrayLength());
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\utils\json_test.cc:130:  EXPECT_EQ(4U, root["stark"]["fri"]["mixed_array"][2]["array"].ArrayLength());
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\utils\json_test.cc:134:  EXPECT_THAT(root["stark"]["fri"]["int_array"].AsSizeTVector(), ElementsAre(10, 20, 30));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\utils\json_test.cc:136:      root["stark"]["fri"]["int"].AsSizeTVector(),
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\utils\json_test.cc:137:      HasSubstr("Configuration at /stark/fri/int/ is expected to be an array."));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\utils\json_test.cc:139:      root["stark"]["fri"]["mixed_array"].AsSizeTVector(),
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\utils\json_test.cc:140:      HasSubstr("Configuration at /stark/fri/mixed_array/1/ is expected to be an integer."));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\utils\json_test.cc:144:  EXPECT_EQ("hello", root["stark"]["fri"]["string"].AsString());
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\utils\json_test.cc:146:      root["stark"]["fri"]["int"].AsString(),
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\utils\json_test.cc:147:      HasSubstr("Configuration at /stark/fri/int/ is expected to be a string."));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\utils\json_test.cc:152:  EXPECT_ASSERT(root["stark"]["fri"]["string"].AsField(), HasSubstr("Undefined field 'hello'."));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\utils\json_test.cc:158:      root["stark"]["fri"]["field_elements"][0].AsFieldElement<TestFieldElement>());
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\utils\json_test.cc:160:      root["stark"]["fri"]["string"].AsFieldElement<TestFieldElement>(),
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\utils\json_test.cc:166:      root["stark"]["fri"]["field_elements"].AsFieldElementVector<TestFieldElement>(),
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\utils\json_test.cc:172:      root["stark"]["fri"].Keys(),
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\air\cpu\builtin\signature\signature_builtin_prover_context.h:50:          name + "/signature" + std::to_string(rep), ctx, height, n_hash_bits, sig_config));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\air\cpu\builtin\signature\signature_builtin_prover_context.h:57:    Writes the trace cells for the hash builtin.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\air\cpu\builtin\signature\signature_builtin_prover_context.h:62:    Parses the private input for the signature builtin. private_input should be a list of
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\air\cpu\builtin\signature\signature_builtin_prover_context.h:67:        "r": <signature's `r`>,
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\air\cpu\builtin\signature\signature_builtin_prover_context.h:68:        "w": <signature's `w`>
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\air\cpu\builtin\signature\signature_builtin_prover_context.h:89:#include "starkware/air/cpu/builtin/signature/signature_builtin_prover_context.inl"
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\utils\input_utils.cc:63:    params["stark"]["fri"]["fri_step_list"].Append(0U);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\utils\input_utils.cc:69:    params["stark"]["fri"]["fri_step_list"].Append(curr_step);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\utils\input_utils.cc:73:  // Our Solidity verifier doesn't support FRI steps of 1.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\utils\input_utils.cc:77:    params["stark"]["fri"]["fri_step_list"].Append(2);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\utils\input_utils.cc:82:  params["stark"]["log_n_cosets"] = log_n_cosets;
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\utils\input_utils.cc:83:  params["stark"]["fri"]["last_layer_degree_bound"] = Pow2(last_layer_log_deg);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\utils\input_utils.cc:84:  params["stark"]["fri"]["n_queries"] = n_queries;
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\utils\input_utils.cc:85:  params["stark"]["fri"]["proof_of_work_bits"] = proof_of_work_bits;
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\statement\statement.h:57:    Returns the default initial seed to be used in the hash chain. This is obtained from the public
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\statement\statement.h:83:    pedersen_merkle_statement.h --> "pedersen merkle" will appear in the title of the annotations.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\statement\statement.h:104:  Helper class for serializing the public input to be used as initial hash chain seed.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\statement\fibonacci\fibonacci_statement.inl:43:      "Can't calculate initial hash chain seed, claimed Fibonacci value not set.");
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\algebra\field_operations_test.cc:179:  // Verify does not crash for empty input.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\algebra\field_operations_test.cc:189:  // Verify the case of single element.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\algebra\field_operations_test.cc:200:  // Verify the case of single element with exponent having a single bit on.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\air\cpu\builtin\hash\hash_builtin_prover_context.h:24:#include "starkware/air/components/hash/hash_component.h"
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\air\cpu\builtin\hash\hash_builtin_prover_context.h:25:#include "starkware/air/components/hash/hash_factory.h"
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\air\cpu\builtin\hash\hash_builtin_prover_context.h:53:          hash_factory.CreateComponent(name + "/hash" + std::to_string(rep), ctx));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\air\cpu\builtin\hash\hash_builtin_prover_context.h:58:    Writes the trace cells for the hash builtin.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\air\cpu\builtin\hash\hash_builtin_prover_context.h:63:    Parses the private input for the hash builtin. private_input should be a list of objects of the
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\air\cpu\builtin\hash\hash_builtin_prover_context.h:83:#include "starkware/air/cpu/builtin/hash/hash_builtin_prover_context.inl"
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\statement\cpu\cpu_air_statement.h:47:    Returns the initial hash chain seed which is the public input serialized as follows:
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\statement\cpu\cpu_air_statement.h:95:    * Page 0: size, Hash of (addr0, M[addr0], addr1, M[addr1], ...).
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\statement\cpu\cpu_air_statement.h:96:    * Page 1: addr, size, Hash of (M[addr], M[addr + 1], ...).
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\statement\cpu\cpu_air_statement.h:104:    The hash function used to compute the hash of the memory pages in the initial seed.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\statement\cpu\cpu_air_statement.cc:150:       (/*size*/ sizeof(BigInt<4>) + /*hash*/ 1 * digest_num_bytes)) +
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\statement\cpu\cpu_air_statement.cc:152:                                 /*hash*/ 1 * digest_num_bytes));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\air\cpu\builtin\ec\ec_op_builtin_prover_context.h:87:    Parses the private input for the signature builtin. private_input should be a list of
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\stark\utils.inl:15:#include "starkware/stark/utils.h"
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\stark\utils.h:44:#include "starkware/stark/utils.inl"
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\stark\utils.cc:15:#include "starkware/stark/utils.h"
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\stark\utils.cc:26:  ASSERT_RELEASE(proof_file.is_open(), "Failed to open proof file.");
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\stark\stark_test.cc:15:#include "starkware/stark/stark.h"
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\stark\stark_test.cc:48:#include "starkware/stark/test_utils.h"
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\stark\stark_test.cc:49:#include "starkware/stark/utils.h"
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\stark\stark_test.cc:103:  // Fri steps - hard-coded pattern for this tests suit.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\stark\stark_test.cc:107:  // Bases used by FRI.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\stark\stark_test.cc:113:  // FRI parameters.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\stark\stark_test.cc:146:      const std::vector<std::byte>& proof,
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\stark\stark_test.cc:149:    NoninteractiveVerifierChannel verifier_channel(channel_prng.Clone(), proof);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\stark\stark_test.cc:287:  // Generate proof.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\stark\stark_test.cc:290:  // Verify proof.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\stark\stark_test.cc:295:  // Generate proof.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\stark\stark_test.cc:298:  // Verify proof.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\stark\stark_test.cc:313:  // Generate proof.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\stark\stark_test.cc:316:  // Verify proof, verifier should reject because the secret is not from the base field.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\stark\stark_test.cc:321:  // Generate proof.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\stark\stark_test.cc:324:  // Verify proof, verifier should reject because the secret is not from the base field.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\stark\stark_test.cc:336:  // Generate proof.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\stark\stark_test.cc:339:  // Verify proof.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\stark\stark_test.cc:348:  // Generate proof.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\stark\stark_test.cc:351:  // Verify proof.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\stark\stark_test.cc:360:  // Generate proof.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\stark\stark_test.cc:363:  // Verify proof.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\stark\stark_test.cc:389:  std::ofstream ofs("/tmp/stark_test.proof.txt");
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\stark\stark_test.cc:460:  EXPECT_ASSERT(this->GenerateProof(), HasSubstr("Fri parameters do not match"));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\stark\stark_test.cc:464:  // Generate proof.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\stark\stark_test.cc:465:  const std::vector<std::byte> proof = this->GenerateProof();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\stark\stark_test.cc:467:  // Modify proof.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\stark\stark_test.cc:468:  std::vector<std::byte> modified_proof = proof;
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\stark\stark_test.cc:472:  // Verify proof.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\stark\stark_test.cc:477:  // Generate proof.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\stark\stark_test.cc:478:  const std::vector<std::byte> proof = this->GenerateProof();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\stark\stark_test.cc:480:  // Modify proof.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\stark\stark_test.cc:481:  std::vector<std::byte> modified_proof = proof;
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\stark\stark_test.cc:484:  // Verify proof.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\stark\stark_test.cc:489:  // Generate proof.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\stark\stark_test.cc:490:  const std::vector<std::byte> proof = this->GenerateProof();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\stark\stark_test.cc:497:  // Verify proof.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\stark\stark_test.cc:498:  EXPECT_FALSE(this->VerifyProof(proof));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\stark\stark_params_test.cc:15:#include "starkware/stark/stark.h"
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\stark\stark_params_test.cc:28:  Tests that stark params throws an error when creating starkware params with use_extension_field =
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\stark\stark.h:38:#include "starkware/fri/fri_parameters.h"
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\stark\stark.h:39:#include "starkware/stark/committed_trace.h"
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\stark\stark.h:40:#include "starkware/stark/composition_oracle.h"
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\stark\stark.h:96:    Number of merkle layer that are not stored in memory but instead recalculated when required by
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\stark\stark.h:98:    stored in the merkle tree. When n_out_of_memory_merkle_layers is 1 it means that the layer of
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\stark\stark.h:137:    Implements the STARK prover side of the protocol given a trace context which stores parameters
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\stark\stark.h:138:    for Trace generation, a constraint system defined in an AIR (to verify the Trace) and a set of
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\stark\stark.h:141:    sending proof elements and receiving required randomness from the verifier (or simulated
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\stark\stark.h:142:    verifier in a non-interactive implementation). The STARK prover uses a Low Degree Test (LDT)
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\stark\stark.h:143:    prover as its main proof engine. We use FRI. The STARK prover is field and channel type
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\stark\stark.h:149:    The main STARK prover steps are:
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\stark\stark.h:155:    - Use the AIR constraint in order to calculate a virtual oracle (FRI top layer) representing the
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\stark\stark.h:157:    - Run a LDT prover (e.g. FRI) to prove that the virtual oracle is of the desired
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\stark\stark.h:159:    - The LDT (FRI) requires a method for responding to queries on the trace derived from queries on
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\stark\stark.h:160:      the virtual oracle. This is the last part that requires implementation by the STARK prover.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\stark\stark.h:203:    Implements the STARK verifier side of the protocol given constraint system defined in an AIR (to
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\stark\stark.h:204:    verify the Trace) and a set of protocol parameters definition attributes such as the required
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\stark\stark.h:206:    decommitments and a verifier channel for receiving proof elements and possibly some hiding
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\stark\stark.h:208:    STARK verifier uses a Low Degree Test (LDT) verifier as its main verification engine. We use
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\stark\stark.h:209:    FRI. The STARK verifier is field and channel type agnostic.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\stark\stark.h:211:    The main STARK verfier steps are:
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\stark\stark.h:215:    - Calculate the AIR constraint in order to calculate points of a virtual oracle (FRI top layer)
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\stark\stark.h:217:    - Run a LDT verfier (e.g. FRI) to verify that the virtual oracle is of the desired
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\stark\stark.h:219:    - The LDT (FRI) requires a method for calculating responses to queries on
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\stark\stark.h:221:      This is the last part that requires implementation by the STARK verifier.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\stark\stark.h:233:    verifier should verify that the field element queries of the trace are in the base field.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\stark\stark.cc:15:#include "starkware/stark/stark.h"
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\stark\stark.cc:27:#include "starkware/fri/fri_prover.h"
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\stark\stark.cc:28:#include "starkware/fri/fri_verifier.h"
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\stark\stark.cc:30:#include "starkware/stark/oods.h"
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\stark\stark.cc:64:  Currently, FRI ignores the offset, so
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\stark\stark.cc:81:  Computes the FRI degree bound from last_layer_degree_bound and fri_step_list.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\stark\stark.cc:134:  // Verify offsets and cosets sizes.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\stark\stark.cc:146:  // Verify compatibility of the two groups.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\stark\stark.cc:184:      "Fri parameters do not match stark degree bound. Expected FRI degree from "
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\stark\stark.cc:187:          ". STARK: " + std::to_string(stark_degree_bound));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\stark\stark.cc:209:      FriParameters::FromJson(json["fri"], TakeOwnershipFrom(std::move(bases)), field);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\stark\stark.cc:271:  AnnotationScope scope(channel_.get(), "FRI");
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\stark\stark.cc:279:      "Fri parameters do not match oracle degree. Expected FRI degree from "
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\stark\stark.cc:282:          ". STARK: " + std::to_string(oracle_degree_bound));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\stark\stark.cc:284:  ProfilingBlock profiling_block("FRI virtual oracle computation");
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\stark\stark.cc:290:  ProfilingBlock fri_profiling_block("FRI");
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\stark\stark.cc:291:  // Prepare FRI.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\stark\stark.cc:294:        ProfilingBlock profiling_block("FRI virtual oracle callback");
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\stark\stark.cc:394:  AnnotationScope scope(channel_.get(), "STARK");
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\stark\stark.cc:477:  AnnotationScope scope(channel_.get(), "FRI");
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\stark\stark.cc:485:      "Fri parameters do not match oracle degree. Expected FRI degree from "
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\stark\stark.cc:488:          ". STARK: " + std::to_string(oracle_degree_bound));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\stark\stark.cc:490:  // Prepare FRI.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\stark\stark.cc:543:  AnnotationScope scope(channel_.get(), "STARK");
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\stark\oods_test.cc:15:#include "starkware/stark/oods.h"
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\stark\oods_test.cc:30:#include "starkware/stark/committed_trace_mock.h"
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\stark\oods_test.cc:31:#include "starkware/stark/composition_oracle.h"
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\stark\oods_test.cc:32:#include "starkware/stark/test_utils.h"
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\stark\oods_test.cc:33:#include "starkware/stark/utils.h"
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\stark\oods_test.cc:177:  // Create a fake proof.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\stark\oods.h:26:#include "starkware/stark/composition_oracle.h"
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\stark\oods.h:52:  Returns the boundary constraints needed for the rest of the proof.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\stark\oods.h:67:  for the rest of the proof.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\air\components\poseidon\poseidon.h:35:    A component for computing the Poseidon hash function.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\stark\oods.cc:15:#include "starkware/stark/oods.h"
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\stark\oods.cc:54:  Sends values to channel. If verifier_friendly_channel_updates is true, we hash them using Poseidon
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\stark\oods.cc:148:  the channel using Pedersen hash chain on the elements or not. For more info, see
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\air\components\keccak\keccak.h:38:    A component for computing the Keccak hash function.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\stark\composition_oracle_test.cc:15:#include "starkware/stark/composition_oracle.h"
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\stark\composition_oracle_test.cc:26:#include "starkware/stark/committed_trace_mock.h"
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\stark\composition_oracle.h:27:#include "starkware/stark/committed_trace.h"
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\stark\composition_oracle.cc:15:#include "starkware/stark/composition_oracle.h"
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\air\components\perm_table_check\table_check_cell.h:30:  A cell class for components that verify that its values are in some specific set. Owns a virtual
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\stark\committed_trace_test.cc:15:#include "starkware/stark/committed_trace.h"
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\stark\committed_trace_test.cc:26:#include "starkware/stark/test_utils.h"
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\stark\committed_trace_test.cc:27:#include "starkware/stark/utils.h"
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\stark\committed_trace_test.cc:51:  // Merkle tree that is its leaves are the segments (cosets) roots.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\stark\committed_trace_test.cc:117:  // Verify.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\air\components\hash\hash_factory.h:24:#include "starkware/air/components/hash/hash_component.h"
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\air\components\hash\hash_factory.h:31:  An abstract base class that specifies the interface of Hash Factories.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\air\components\hash\hash_factory.h:32:  Every hash component should implement its own HashFactory, which extends this class.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\air\components\hash\hash_factory.h:33:  This allows for true polymorphism when using different hash components.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\air\components\hash\hash_factory.h:43:    Creates a new hash component, as implemented by the derived class.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\air\components\hash\hash_factory.h:49:    Prepares values for the periodic columns required for the hash.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\stark\committed_trace_mock.h:23:#include "starkware/stark/committed_trace.h"
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\air\components\hash\hash_component.h:25:  An abstract class that specifies the interface of Hash Components.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\air\components\hash\hash_component.h:26:  All classes that use hash components should be using this base class, all hash component should
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\air\components\hash\hash_component.h:27:  be extending it. This gives extra flexibility and allows to easily swap different hash components.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\air\components\hash\hash_component.h:36:    Returns the result of the hash on the given inputs.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\stark\committed_trace.h:144:    that the verifier should verify that the field element queries of the trace are in the base
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\stark\committed_trace.h:164:    True iff the verifier should verify that the corresponding trace elements are base field
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\stark\committed_trace.h:165:    elements (relevant only in case that the proof is done over an extension field).
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\stark\committed_trace.cc:15:#include "starkware/stark/committed_trace.h"
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\stark\committed_trace.cc:236:      "Prover responses did not pass integrity check: Proof rejected.");
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\air\components\ec_subset_sum\ec_subset_sum.inl:141:EcPoint<FieldElementT> EcSubsetSumComponent<FieldElementT, LimitLimbs>::Hash(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\air\components\ec_subset_sum\ec_subset_sum.h:84:  static EcPoint<FieldElementT> Hash(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\air\components\ecdsa\ecdsa.inl:27:  // one of them randomly. Check which of the two points yields a valid signature.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\air\components\ecdsa\ecdsa.inl:29:  if (Verify(config, input)) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\air\components\ecdsa\ecdsa.inl:35:  ASSERT_RELEASE(Verify(config, input), "Invalid signature.");
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\air\components\ecdsa\ecdsa.inl:82:    ASSERT_RELEASE((w_b - shift_point_).x == input.r, "Invalid signature.");
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\air\components\ecdsa\ecdsa.inl:87:bool EcdsaComponent<FieldElementT>::Verify(const Config& config, const Input& input) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\randomness\prng.h:69:    Return the name of the hash used by the prng.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\air\components\ecdsa\ecdsa.h:91:    FieldElementT z;      // The hash of the signed message.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\air\components\ecdsa\ecdsa.h:92:    FieldElementT r;      // The first element of the signature.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\air\components\ecdsa\ecdsa.h:93:    FieldElementT w;      // The second element of the signature.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\air\components\ecdsa\ecdsa.h:107:      z is the hash of the message.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\air\components\ecdsa\ecdsa.h:108:      r, w are the signature.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\air\components\ecdsa\ecdsa.h:110:    check_validity - if true, assert that the signature is valid.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\air\components\ecdsa\ecdsa.h:121:  static bool Verify(const Config& config, const Input& input);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\air\components\ecdsa\ecdsa.h:150:    The number of bits in the message hash (z).
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\randomness\hash_chain.h:30:    Initializes the hash chain to a value based on the public input and the constraints system. This
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\randomness\hash_chain.h:47:    Hash data of arbitrary length into the hash chain.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\randomness\hash_chain.h:78:    hash function is to hash the digest with an incrementing counter until sufficient bytes are
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\randomness\hash_chain.h:80:    This function takes a counter and a hash and returns their combined hash.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\randomness\hash_chain.h:82:  static HashT HashWithCounter(const HashT& hash, uint64_t counter);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\randomness\hash_chain.h:86:    current hash chain. num_bytes must be equal or less than the hash digest size.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\randomness\hash_chain.cc:114:HashT HashChain<HashT>::HashWithCounter(const HashT& hash, uint64_t counter) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\randomness\hash_chain.cc:123:  auto digest = hash.GetDigest();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\air\components\permutation\permutation_dummy_air_test.cc:85:  // Verify composition degree.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\air\cpu\board\load_targets.bzl:45:            "//src/starkware/air/cpu/builtin/hash",
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\air\cpu\board\load_targets.bzl:50:            "//src/starkware/air/cpu/builtin/signature",
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\air\components\pedersen_hash\pedersen_hash.h:27:#include "starkware/air/components/hash/hash_component.h"
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\air\components\pedersen_hash\pedersen_hash.h:28:#include "starkware/air/components/hash/hash_factory.h"
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\air\components\pedersen_hash\pedersen_hash.h:57:    Returns the result of the hash on the given inputs.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\air\components\pedersen_hash\pedersen_hash.h:76:    The hash configuration.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\main\verifier_main_helper_impl.h:21:#include "starkware/stark/stark.h"
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\main\verifier_main_helper_impl.h:27:  Helper function for writing a main() function for STARK verifiers.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\main\verifier_main_helper_impl.h:30:    Statement* statement, const std::vector<std::byte>& proof, const JsonValue& parameters,
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\air\cpu\board\cpu_air_test.cc:104:    // Verify composition degree.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\main\verifier_main_helper_impl.cc:41:    Statement* statement, const std::vector<std::byte>& proof, const JsonValue& parameters,
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\main\verifier_main_helper_impl.cc:54:        StarkParameters::FromJson(parameters["stark"], field, UseOwned(&air), use_extension_field);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\main\verifier_main_helper_impl.cc:82:    // a hash of the verifier friendly hash function, and afterwards the channel continues to
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\main\verifier_main_helper_impl.cc:103:      channel = new NoninteractiveVerifierFeltChannel(initial_state, proof, pow_hash);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\main\verifier_main_helper_impl.cc:110:      channel = new NoninteractiveVerifierChannel(std::move(prng), proof);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\main\verifier_main_helper_impl.cc:142:    // Create StarkVerifier and verify the proof.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\main\verifier_main_helper.h:29:  Helper function for writing a main() function for STARK verifiers.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\main\verifier_main_helper.cc:44:    "Optional. Path to the output file that will contain the annotated proof.");
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\main\verifier_main_helper.cc:59:  std::vector<std::byte> proof;
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\main\verifier_main_helper.cc:65:  std::vector<std::byte> proof((proof_hex.size() - 1) / 2);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\main\verifier_main_helper.cc:66:  starkware::HexStringToBytes(proof_hex, proof);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\main\verifier_main_helper.cc:67:  return {input_json["public_input"], input_json["proof_parameters"], proof};
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\main\verifier_main_helper.cc:78:      statement.get(), verifier_params.proof, verifier_params.parameters, FLAGS_annotation_file,
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\main\prover_main_helper_impl.h:23:#include "starkware/stark/stark.h"
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\main\prover_main_helper_impl.h:30:  proof generated. If a path proof_file_name is given, the proof is written to it.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\main\prover_main_helper_impl.cc:33:#include "starkware/stark/stark.h"
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\main\prover_main_helper_impl.cc:34:#include "starkware/stark/utils.h"
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\main\prover_main_helper_impl.cc:59:    const JsonValue& parameters, const JsonValue& prover_config, const std::string& proof,
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\main\prover_main_helper_impl.cc:71:  output["proof_hex"] = proof;
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\main\prover_main_helper_impl.cc:94:      StarkParameters::FromJson(parameters["stark"], field, UseOwned(&air), use_extension_field);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\main\prover_main_helper.h:19:#include "starkware/stark/stark.h"
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\main\prover_main_helper.h:25:  Helper function for writing a main() function for STARK provers.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\main\prover_main_helper.cc:27:#include "starkware/stark/stark.h"
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\main\prover_main_helper.cc:28:#include "starkware/stark/utils.h"
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\main\prover_main_helper.cc:45:DEFINE_bool(generate_annotations, false, "Optional. Generate proof annotations.");
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\main\prover_main_helper.cc:47:DEFINE_string(parameter_file, "", "Path to the json file containing the proof parameters.");
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\air\components\memory\memory_cell_test.cc:86:  // Call WriteTrace again with exactly the same values and verify that it fails.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\main\cpu\cpu_air_verifier_main.cc:16:  Verifies a CPU AIR proof. See cpu_air_prover_main.cc for details.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\main\cpu\cpu_air_verifier_main.cc:38:    LOG(INFO) << "Proof verified successfully.";
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\main\cpu\cpu_air_verifier_main.cc:40:    LOG(ERROR) << "Invalid proof.";
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\main\cpu\cpu_air_prover_main.cc:16:  Creates a proof for the claim:
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\air\cpu\board\cpu_air.inl:18:#include "starkware/air/cpu/builtin/hash/hash_builtin_prover_context.h"
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\air\cpu\board\cpu_air.inl:25:#include "starkware/air/cpu/builtin/signature/signature_builtin_prover_context.h"
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\air\cpu\board\cpu_air.inl:665:  // denominator is multiplied by the shifted hash of the next address-value pair of the public
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\fri\fri_verifier.h:23:#include "starkware/fri/fri_details.h"
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\fri\fri_verifier.h:41:        folder_(fri::details::FriFolderFromField(params_->field)),
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\fri\fri_verifier.h:46:    Applies the FRI protocol to verify that the prover has access to a witness whose degree is
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\fri\fri_verifier.h:95:  std::unique_ptr<const fri::details::FriFolderBase> folder_;
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\fri\fri_verifier.cc:15:#include "starkware/fri/fri_verifier.h"
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\fri\fri_verifier.cc:30:using starkware::fri::details::ApplyFriLayers;
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\fri\fri_verifier.cc:31:using starkware::fri::details::ChooseQueryIndices;
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\fri\fri_verifier.cc:32:using starkware::fri::details::GetTableProverRow;
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\fri\fri_verifier.cc:33:using starkware::fri::details::GetTableProverRowCol;
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\fri\fri_verifier.cc:34:using starkware::fri::details::NextLayerDataAndIntegrityQueries;
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\fri\fri_verifier.cc:35:using starkware::fri::details::SecondLayerQeuriesToFirstLayerQueries;
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\fri\fri_verifier.cc:146:      // Annotate previous FRI layer for fri-proof-splitting.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\fri\fri_verifier.cc:148:      // Compute and annotate the x-inv of query j for fri-proof-splitting.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\fri\fri_verifier.cc:189:        "FRI query #" + std::to_string(j) +
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\fri\fri_verifier.cc:196:    // Annotate last FRI layer for fri-proof-splitting.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\fri\fri_verifier.cc:199:    // Compute and annotate the x-inv of query j for fri-proof-splitting.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\fri\fri_verifier.cc:226:  // responses from the second layer, and by the end of the FRI protocol, it stores the same
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\fri\fri_verifier.cc:227:  // value in all its elements, since it comes from the last (constant) layer of the FRI.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\fri\fri_test_utils.h:25:namespace fri {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\fri\fri_test_utils.h:54:}  // namespace fri
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\fri\fri_test.cc:15:#include "starkware/fri/fri_prover.h"
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\fri\fri_test.cc:46:#include "starkware/fri/fri_parameters.h"
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\fri\fri_test.cc:47:#include "starkware/fri/fri_test_utils.h"
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\fri\fri_test.cc:48:#include "starkware/fri/fri_verifier.h"
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\fri\fri_test.cc:54:using starkware::fri::details::TestPolynomial;
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\fri\fri_test.cc:114:  std::unique_ptr<fri::details::FriFolderBase> folder =
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\fri\fri_test.cc:115:      fri::details::FriFolderFromField(params.field);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\fri\fri_test.cc:176:    // Proof of work.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\fri\fri_test.cc:191:    // second layer of FRI. The prover will additionally send the values at indices 1...5, 7
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\fri\fri_test.cc:238:  // In multiplicative FRI, if the verifier sends a sequence of evaluation points of the form x_0,
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\fri\fri_test.cc:241:  // Since we skip the division by 2 in FRI, the expected result is 2^n f(x_0) where n is the sum
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\fri\fri_test.cc:276:  std::unique_ptr<fri::details::FriFolderBase> folder =
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\fri\fri_test.cc:277:      fri::details::FriFolderFromField(params.field);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\fri\fri_test.cc:340:    // Proof of work.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\fri\fri_test.cc:485:    // Create a FRI proof.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\fri\fri_test.cc:494:      gsl::span<const std::byte> proof,
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\fri\fri_test.cc:496:    NoninteractiveVerifierChannel v_channel(channel_prng.Clone(), proof);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\fri\fri_test.cc:583:  EXPECT_ASSERT(this->GenerateProof(), HasSubstr("Last FRI layer"));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\fri\fri_test.cc:589:  std::vector<std::byte> proof = this->GenerateProof();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\fri\fri_test.cc:590:  EXPECT_TRUE(this->VerifyProof(proof));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\fri\fri_test.cc:592:  const auto byte_idx = this->prng.template UniformInt<size_t>(0, proof.size() - 1);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\fri\fri_test.cc:593:  proof[byte_idx] ^= std::byte(this->prng.template UniformInt<uint8_t>(1, 255));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\fri\fri_test.cc:595:  EXPECT_FALSE(this->VerifyProof(proof));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\fri\fri_prover.h:24:#include "starkware/fri/fri_committed_layer.h"
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\fri\fri_prover.h:25:#include "starkware/fri/fri_details.h"
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\fri\fri_prover.h:40:    Applies the FRI protocol to prove that the given witness is of degree smaller than 2^n_layers.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\fri\fri_prover.h:61:    Sends the coefficients of the polynomial, f(x), of the last FRI layer (which is expected to be
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\fri\fri_prover.h:69:    Creates the next fri layer. Next fri layer is always FriLayerProxy. It is created between every
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\fri\fri_prover.h:80:  std::unique_ptr<fri::details::FriFolderBase> folder_;
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\fri\fri_prover.cc:15:#include "starkware/fri/fri_prover.h"
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\fri\fri_prover.cc:27:using starkware::fri::details::ChooseQueryIndices;
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\fri\fri_prover.cc:37:      folder_(fri::details::FriFolderFromField(params_->field)),
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\fri\fri_prover.cc:47:  ProfilingBlock profiling_block("FRI commit phase");
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\fri\fri_prover.cc:67:    ASSERT_RELEASE(layer_num == 1 || fri_step != 0, "layer_num is not zero but fri step is");
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\fri\fri_prover.cc:134:  VLOG(3) << "FRI Size of last layer: " << last_layer_evaluations.Size();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\fri\fri_prover.cc:135:  VLOG(3) << "FRI Last layer: " << last_layer_evaluations;
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\fri\fri_prover.cc:140:      degree < (int64_t)degree_bound, "Last FRI layer is of degree: " + std::to_string(degree) +
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\fri\fri_prover.cc:166:  ProfilingBlock profiling_block("FRI response generation");
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\fri\fri_parameters.h:30:    A list of fri_step_i (one per FRI layer). FRI reduction in the i-th layer will be 2^fri_step_i
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\fri\fri_parameters.h:32:    the number of FRI layers.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\fri\fri_parameters.h:35:    first layer). It means that the two merkle trees for layers of sizes N/2 and N/4 will be
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\fri\fri_parameters.h:42:    For a simple FRI usage, take fri_step_list = {1, 1, ..., 1}.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\fri\fri_parameters.h:47:    In the original FRI protocol, one has to reduce the degree from N to 1 by using a total of
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\fri\fri_parameters.h:48:    log2(N) fri steps (sum of fri_step_list = log2(N)). This has two disadvantages:
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\fri\fri_parameters.h:49:      1. The last layers are small but still require Merkle authentication paths which are
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\fri\fri_parameters.h:54:    relatively small R using log2(N/R) fri steps. To do it we send the R coefficients of the last
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\fri\fri_parameters.h:55:    FRI layer instead of continuing with additional FRI layers.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\fri\fri_parameters.h:57:    To reduce proof-length, it is always better to pick last_layer_degree_bound > 1.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\fri\fri_parameters.h:65:    If greater than 0, used to apply proof of work right before randomizing the FRI queries. Since
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\fri\fri_parameters.h:106:    Log(Size) of the biggest in memory fri layer - bigger layers are out of memory.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\crypt_tools\utils_test.cc:57:  TypeParam hash = prng.RandomHash<TypeParam>();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\crypt_tools\utils_test.cc:59:      InitDigestFromSpan<TypeParam>(hash.GetDigest())};
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\crypt_tools\utils_test.cc:60:  EXPECT_EQ(bytes, hash.GetDigest());
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\fri\fri_layer_test.cc:15:#include "starkware/fri/fri_layer.h"
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\fri\fri_layer_test.cc:20:#include "starkware/fri/fri_folder.h"
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\fri\fri_layer_test.cc:21:#include "starkware/fri/fri_parameters.h"
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\fri\fri_layer_test.cc:22:#include "starkware/fri/fri_test_utils.h"
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\fri\fri_layer_test.cc:25:namespace fri {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\fri\fri_layer_test.cc:235:}  // namespace fri
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\crypt_tools\utils.h:32:      "Hash expects input of the length of a single digest: " +
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\fri\fri_layer.h:24:#include "starkware/fri/fri_folder.h"
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\fri\fri_layer.h:25:#include "starkware/fri/fri_parameters.h"
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\fri\fri_layer.h:32:  Base class of all FRI layers.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\fri\fri_layer.h:165:  using FriFolderBase = starkware::fri::details::FriFolderBase;
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\fri\fri_layer.cc:15:#include "starkware/fri/fri_layer.h"
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\fri\fri_folder.h:24:namespace fri {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\fri\fri_folder.h:28:  This class performs the "FRI formula", folding current layer into the next.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\fri\fri_folder.h:35:    Computes the values of the next FRI layer given the values and domain of the current layer.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\fri\fri_folder.h:45:    Computes the value of a single element in the next FRI layer given two corresponding
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\fri\fri_folder.h:56:}  // namespace fri
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\fri\fri_folder.cc:15:#include "starkware/fri/fri_folder.h"
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\fri\fri_folder.cc:26:namespace fri {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\fri\fri_folder.cc:142:}  // namespace fri
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\crypt_tools\poseidon_test.cc:58:TEST(Poseidon3, Hash) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\crypt_tools\poseidon_test.cc:65:  // Check hash.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\crypt_tools\poseidon_test.cc:66:  EXPECT_EQ(Poseidon3::Hash(AsDigest(val0), AsDigest(val1)), AsDigest(res));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\crypt_tools\poseidon_test.cc:68:  // Check that the hash output changes even with a slight change to the input.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\crypt_tools\poseidon_test.cc:69:  EXPECT_NE(Poseidon3::Hash(AsDigest(val0), AsDigest(changed_val1)), AsDigest(res));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\crypt_tools\poseidon_test.cc:79:  // Check hash.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\crypt_tools\poseidon_test.cc:81:      Poseidon3::Hash(FieldElementT::FromBigInt(val0), FieldElementT::FromBigInt(val1)),
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\crypt_tools\poseidon_test.cc:84:  // Check that the hash output changes even with a slight change to the input.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\crypt_tools\poseidon_test.cc:86:      Poseidon3::Hash(FieldElementT::FromBigInt(val0), FieldElementT::FromBigInt(changed_val1)),
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\crypt_tools\poseidon_test.cc:121:  // Check the hash results is equal to expected, and not equal to another unrelated value.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\crypt_tools\poseidon_test.cc:147:  // Check the hash results is equal to expected, and not equal to another unrelated value.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\fri\fri_details_test.cc:15:#include "starkware/fri/fri_details.h"
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\fri\fri_details_test.cc:27:#include "starkware/fri/fri_test_utils.h"
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\fri\fri_details_test.cc:30:namespace fri {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\fri\fri_details_test.cc:128:  then f_i(x0^(2^i)) = f(x0) where f_i is the i-th layer in FRI.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\fri\fri_details_test.cc:219:}  // namespace fri
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\crypt_tools\poseidon.inl:50:inline Poseidon3 Poseidon3::Hash(const Poseidon3& val0, const Poseidon3& val1) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\crypt_tools\poseidon.inl:64:inline FieldElementT Poseidon3::Hash(const FieldElementT& val0, const FieldElementT& val1) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\crypt_tools\poseidon.inl:74:  // Return the hash digest.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\crypt_tools\poseidon.inl:161:inline std::ostream& operator<<(std::ostream& out, const Poseidon3& hash) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\crypt_tools\poseidon.inl:162:  return out << hash.ToString();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\fri\fri_details.h:29:#include "starkware/fri/fri_folder.h"
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\fri\fri_details.h:30:#include "starkware/fri/fri_parameters.h"
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\fri\fri_details.h:35:namespace fri {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\fri\fri_details.h:39:  Computes the element from the next FRI layer, given the corresponding coset from the current
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\fri\fri_details.h:50:  Given query indices that refer to FRI's second layer, compute the indices of the cosets in the
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\fri\fri_details.h:57:  Given the query indices (of FRI's second layer), we compute the data queries and integrity queries
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\fri\fri_details.h:58:  for the next layer of FRI.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\fri\fri_details.h:99:}  // namespace fri
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\crypt_tools\poseidon.h:45:    In order to reduce Merkle initialization time, we don't want the digest to be initialized.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\crypt_tools\poseidon.h:51:    Gets the hash digest, defined as the first FieldElementT in the internal state.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\crypt_tools\poseidon.h:67:    Hash two elements. The function preforms:
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\crypt_tools\poseidon.h:70:  static Poseidon3 Hash(const Poseidon3& val0, const Poseidon3& val1);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\crypt_tools\poseidon.h:71:  static FieldElementT Hash(const FieldElementT& val0, const FieldElementT& val1);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\crypt_tools\poseidon.h:84:  friend std::ostream& operator<<(std::ostream& out, const Poseidon3& hash);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\fri\fri_details.cc:15:#include "starkware/fri/fri_details.h"
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\fri\fri_details.cc:27:namespace fri {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\fri\fri_details.cc:73:  // Proof of work right before randomizing queries.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\fri\fri_details.cc:130:}  // namespace fri
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\fri\fri_committed_layer_test.cc:15:#include "starkware/fri/fri_committed_layer.h"
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\fri\fri_committed_layer_test.cc:22:#include "starkware/fri/fri_folder.h"
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\fri\fri_committed_layer_test.cc:23:#include "starkware/fri/fri_parameters.h"
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\fri\fri_committed_layer_test.cc:24:#include "starkware/fri/fri_test_utils.h"
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\fri\fri_committed_layer_test.cc:25:#include "starkware/stark/utils.h"
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\fri\fri_committed_layer_test.cc:28:namespace fri {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\fri\fri_committed_layer_test.cc:116:}  // namespace fri
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\verifier_channel.h:78:    HashT hash = HashT::InitDigestTo(ReceiveBytes(HashT::kDigestNumBytes));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\verifier_channel.h:81:          annotation + ": Hash(" + hash.ToString() + ")", HashT::kDigestNumBytes);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\verifier_channel.h:85:    return hash;
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\verifier_channel.h:117:    HashT hash = HashT::InitDigestTo(ReceiveBytes(HashT::kDigestNumBytes));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\verifier_channel.h:120:          annotation + ": Hash(" + hash.ToString() + ")", HashT::kDigestNumBytes);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\verifier_channel.h:125:    return hash;
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\verifier_channel.h:129:  void AnnotateExtraDecommitmentNode(const HashT& hash, const std::string& annotation = "") {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\verifier_channel.h:130:    AddExtraAnnotation(annotation + ": Hash(" + hash.ToString() + ")");
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\crypt_tools\pedersen.inl:29:inline Pedersen Pedersen::Hash(const Pedersen& val0, const Pedersen& val1) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\crypt_tools\pedersen.inl:32:  const auto res = ctx.Hash(val0.state_, val1.state_);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\crypt_tools\pedersen.inl:56:    state = ctx.Hash(state, value) + shift;
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\crypt_tools\pedersen.inl:61:  ASSERT_RELEASE(bytes_to_hash == 0, "Pedersen hash currently does not support partial blocks.");
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\crypt_tools\pedersen.inl:62:  state = ctx.Hash(state, FieldElementT::FromUint(SafeDiv(bytes.size(), kDigestNumBytes)));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\crypt_tools\pedersen.inl:68:inline std::ostream& operator<<(std::ostream& out, const Pedersen& hash) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\crypt_tools\pedersen.inl:69:  return out << hash.ToString();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\fri\fri_committed_layer.h:24:#include "starkware/fri/fri_layer.h"
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\fri\fri_committed_layer.h:25:#include "starkware/fri/fri_parameters.h"
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\fri\fri_committed_layer.h:47:  It is mostly used for witness layer (FRI first layer).
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\crypt_tools\pedersen.h:33:// Note: This hash is collision resistant, but not known to have other pseudo random qualities in
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\crypt_tools\pedersen.h:44:  static Pedersen Hash(const Pedersen& val0, const Pedersen& val1);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\crypt_tools\pedersen.h:61:  friend std::ostream& operator<<(std::ostream& out, const Pedersen& hash);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\verifier_channel.cc:48:  // NOTE: Must be coupled with GetRandomNumber (for the non-interactive hash chain).
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\fri\fri_committed_layer.cc:15:#include "starkware/fri/fri_committed_layer.h"
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\fri\fri_committed_layer.cc:19:#include "starkware/fri/fri_details.h"
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\fri\fri_committed_layer.cc:23:using starkware::fri::details::NextLayerDataAndIntegrityQueries;
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\fri\fri_committed_layer.cc:24:using starkware::fri::details::SecondLayerQeuriesToFirstLayerQueries;
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\crypt_tools\masked_hash_test.cc:96:  // Check that HashBytesWithLength(h1||h1) == TypeParam::Hash(h1, h1).
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\crypt_tools\masked_hash_test.cc:97:  EXPECT_EQ(TypeParam::HashBytesWithLength(buf), TypeParam::Hash(h1, h1));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\crypt_tools\masked_hash_test.cc:135:  const Blake2s256 hash = Blake2s256::HashBytesWithLength(str_as_bytes);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\crypt_tools\masked_hash_test.cc:136:  EXPECT_EQ(hash.ToString(), "0xdcba38e4aea16a5f87e8b76039958941cc2b19c1bd836b3a53506489395aa54d");
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\crypt_tools\masked_hash.h:33:  Reduces the given hash, HashT, to be of size NumEffectiveBytes bytes. If IsMsb is true, it uses
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\crypt_tools\masked_hash.h:49:  // In order to reduce Merkle initialization time, we don't want the digest to be initialized.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\crypt_tools\masked_hash.h:60:  static MaskedHash Hash(const MaskedHash& val1, const MaskedHash& val2) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\crypt_tools\masked_hash.h:62:        HashT::Hash(HashT::InitDigestTo(val1.GetDigest()), HashT::InitDigestTo(val2.GetDigest())));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\crypt_tools\masked_hash.h:81:  friend std::ostream& operator<<(std::ostream& out, const MaskedHash& hash) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\crypt_tools\masked_hash.h:82:    return out << hash.ToString();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\crypt_tools\masked_hash.h:92:  static MaskedHash MaskHash(const HashT& hash) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\crypt_tools\masked_hash.h:95:      std::copy_n(hash.GetDigest().begin(), kNumEffectiveBytes, bytes.begin());
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\crypt_tools\masked_hash.h:98:      std::copy_n(hash.GetDigest().begin() + kOffset, kNumEffectiveBytes, bytes.begin() + kOffset);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\prover_channel.h:71:  void SendCommitmentHash(const HashT& hash, const std::string& annotation = "") {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\prover_channel.h:72:    SendBytes(hash.GetDigest());
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\prover_channel.h:75:          annotation + ": Hash(" + hash.ToString() + ")", HashT::kDigestNumBytes);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\prover_channel.h:99:          annotation + ": Hash(" + hash_node.ToString() + ")", HashT::kDigestNumBytes);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\prover_channel.h:121:  // Returns the current proof. Must be implemented by sub-class.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\table_verifier_impl_test.cc:61:      const std::vector<std::byte>& proof) const;
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\table_verifier_impl_test.cc:118:  // Add the integrity queries to the elements we wish to verify.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\table_verifier_impl_test.cc:178:  Create a valid proof using a non-interactive channel, with answers to the given queries.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\table_verifier_impl_test.cc:240:  // Obtain proof from channel.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\table_verifier_impl_test.cc:241:  std::vector<std::byte> proof = prover_channel.GetProof();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\table_verifier_impl_test.cc:243:  return proof;
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\table_verifier_impl_test.cc:247:  Verify a proof with given parameters, using a non-interactive verifier.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\table_verifier_impl_test.cc:252:    const std::set<RowCol>& integrity_queries, const std::vector<std::byte>& proof) const {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\table_verifier_impl_test.cc:254:  NoninteractiveVerifierChannel verifier_channel(channel_prng.Clone(), proof);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\table_verifier_impl_test.cc:295:  // Get proof.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\table_verifier_impl_test.cc:296:  std::vector<std::byte> proof = GetValidProof(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\table_verifier_impl_test.cc:300:  NoninteractiveVerifierChannel verifier_channel(channel_prng.Clone(), proof);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\table_verifier_impl_test.cc:337:  // Get proof.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\table_verifier_impl_test.cc:338:  std::vector<std::byte> proof = GetValidProof(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\table_verifier_impl_test.cc:343:      VerifyProof(field, kNColumns, kNRows, table_data, data_queries, integrity_queries, proof);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\table_verifier_impl_test.cc:364:  std::vector<std::byte> proof;
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\table_verifier_impl_test.cc:365:  // Try to get proof, expect the process to fail due to the duplicate query.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\table_verifier_impl_test.cc:371:  // Get proof, but for real now.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\table_verifier_impl_test.cc:372:  proof = GetValidProof(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\table_verifier_impl_test.cc:378:  NoninteractiveVerifierChannel verifier_channel(channel_prng.Clone(), proof);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\crypt_tools\keccak_256_test.cc:65:  // Check that HashBytesWithLength(h1||h1) == Keccak256::Hash(h1, h1).
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\crypt_tools\keccak_256_test.cc:66:  EXPECT_EQ(Keccak256::HashBytesWithLength(buf), Keccak256::Hash(h1, h1));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\crypt_tools\keccak_256.inl:37:  It exposes functions needed to calculate the Keccak256 hash.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\crypt_tools\keccak_256.inl:176:  return Hash(initial_hash, HashBytesWithLength(bytes));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\crypt_tools\keccak_256.inl:179:inline Keccak256 Keccak256::Hash(const Keccak256& val1, const Keccak256& val2) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\proof_of_work_test.cc:34:  EXPECT_TRUE(pow_verifier.Verify(prng.GetPrngState(), work_bits, witness));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\proof_of_work_test.cc:45:  EXPECT_FALSE(pow_verifier.Verify(prng.GetPrngState(), work_bits + 1, witness));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\proof_of_work_test.cc:46:  EXPECT_FALSE(pow_verifier.Verify(prng.GetPrngState(), work_bits - 1, witness));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\proof_of_work_test.cc:61:      ASSERT_FALSE(pow_verifier.Verify(prng.GetPrngState(), work_bits, witness));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\proof_of_work_test.cc:76:  EXPECT_TRUE(pow_verifier.Verify(prng.GetPrngState(), work_bits, witness));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\crypt_tools\keccak_256.h:34:  // In order to reduce Merkle initialization time, we don't want the digest to be initialized.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\crypt_tools\keccak_256.h:42:  static Keccak256 Hash(const Keccak256& val1, const Keccak256& val2);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\proof_of_work.inl:56:    const HashT hash = HashT::HashBytesWithLength(thread_bytes);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\proof_of_work.inl:58:        gsl::make_span(hash.GetDigest()).first(sizeof(uint64_t)),
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\proof_of_work.inl:75:  ProfilingBlock profiling_block("Proof of work");
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\proof_of_work.inl:124:bool ProofOfWorkVerifier<HashT>::Verify(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\proof_of_work.inl:136:  const HashT hash = HashT::HashBytesWithLength(bytes);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\proof_of_work.inl:138:      gsl::make_span(hash.GetDigest()).first(sizeof(uint64_t)), /*use_big_endian=*/true);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\crypt_tools\invoke.h:47:  one for the top Merkle tree layers and one for the bottom Merkle tree layers.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\crypt_tools\invoke.h:48:  Used to invoke arbitrary functions with the correct hash.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\crypt_tools\invoke.h:55:  explicit CommitmentHashes(const std::string& hash) : CommitmentHashes(hash, hash) {}
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\table_verifier.h:36:    Reads the initial commitment into the scheme (e.g., Merkle root).
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\table_verifier.h:52:    Given indexed field elements, verify that these field elements are indeed the ones committed to
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\proof_of_work.h:16:  Proof of work prover and verifier. The algorithm:
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\proof_of_work.h:17:    Find a nonce of size 8 bytes for which hash(hash(magic || seed) || nonce) has work_bits leading
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\proof_of_work.h:38:    Returns nonce for which hash(hash(magic || seed || work_bits) || nonce) has work_bits leading
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\proof_of_work.h:56:    Returns true iff hash(hash(magic || seed || work_bits) || nonce) has work_bits leading zeros.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\proof_of_work.h:58:  bool Verify(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\noninteractive_verifier_felt_channel.h:40:    system. This ensures that the prover doesn't modify the public input after generating the proof.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\noninteractive_verifier_felt_channel.h:43:      const FieldElementT initial_state, gsl::span<const std::byte> proof,
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\noninteractive_verifier_felt_channel.h:46:    ASSERT_RELEASE(proof.size() % FeltSizeInBytes == 0, "Bad input legnth.");
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\noninteractive_verifier_felt_channel.h:47:    proof_.reserve(proof.size());
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\noninteractive_verifier_felt_channel.h:48:    for (size_t felt_idx = 0; felt_idx < proof.size(); felt_idx += FeltSizeInBytes) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\noninteractive_verifier_felt_channel.h:51:          FieldElementT::ValueType::FromBytes(proof.subspan(felt_idx, FeltSizeInBytes));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\noninteractive_verifier_felt_channel.h:64:    ReceiveBytes reads felts from the proof and updates the state accordingly.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\noninteractive_verifier_felt_channel.h:69:    Reads field elements from the proof, hashes these elements with the state and updates it.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\noninteractive_verifier_felt_channel.h:83:    Returns true if the proof was fully read.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\table_prover_impl_test.cc:118:    // Commit() is expected to call ComputeCommitment() on the merkle tree and then send the result
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\noninteractive_verifier_felt_channel.cc:41:  // Hash the entire field elements that were sent, and then its result with the state and
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\noninteractive_verifier_felt_channel.cc:62:  // Any updates to the hash chain are the responsibility of functions requiring randomness.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\noninteractive_verifier_felt_channel.cc:72:  ASSERT_RELEASE((proof_read_index_ + n_felts) <= proof_.size(), "Proof too short.");
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\noninteractive_verifier_felt_channel.cc:90:  ASSERT_RELEASE(proof_read_index_ + n_felts <= proof_.size(), "Proof too short.");
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\noninteractive_verifier_felt_channel.cc:110:  FieldElementT random_felt = HashT::Hash(state_, counter_);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\noninteractive_verifier_felt_channel.cc:122:  FieldElement next_felt_to_prover = FieldElement(HashT::Hash(state_, counter_));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\noninteractive_verifier_felt_channel.cc:132:  AnnotationScope scope(this, "Proof of Work");
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\noninteractive_verifier_felt_channel.cc:145:    ASSERT_RELEASE(pow_verifier.Verify(prev_state, security_bits, witness), "Wrong proof of work");
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\noninteractive_verifier_channel.h:32:    Initialize the hash chain to a value based on the public input and the constraints system. This
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\noninteractive_verifier_channel.h:33:    ensures that the prover doesn't modify the public input after generating the proof.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\noninteractive_verifier_channel.h:36:      std::unique_ptr<PrngBase> prng, gsl::span<const std::byte> proof);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\noninteractive_verifier_channel.h:39:    SendBytes just updates the hash chain but has no other effect.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\noninteractive_verifier_channel.h:44:    ReceiveBytes reads bytes from the proof and updates the hash chain accordingly.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\noninteractive_verifier_channel.h:60:    Returns true if the proof was fully read.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\noninteractive_verifier_channel.cc:32:    std::unique_ptr<PrngBase> prng, const gsl::span<const std::byte> proof)
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\noninteractive_verifier_channel.cc:33:    : prng_(std::move(prng)), proof_(proof.begin(), proof.end()) {}
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\noninteractive_verifier_channel.cc:37:  // Any updates to the hash chain are the responsibility of functions requiring randomness.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\noninteractive_verifier_channel.cc:61:  ASSERT_RELEASE(proof_read_index_ + num_bytes <= proof_.size(), "Proof too short.");
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\noninteractive_verifier_channel.cc:88:  AnnotationScope scope(this, "Proof of Work");
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\noninteractive_verifier_channel.cc:95:    ASSERT_RELEASE(pow_verifier.Verify(prev_state, security_bits, witness), "Wrong proof of work");
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\table_prover.h:88:      but it wants to verify that its value are consistent with the commitment.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\crypt_tools\hash_context\pedersen_hash_context.h:29:  A struct representing the configuration for the Pedersen hash function. This way we can define
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\crypt_tools\hash_context\pedersen_hash_context.h:30:  the hash functionality as a standalone construct.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\crypt_tools\hash_context\pedersen_hash_context.h:31:      n_element_bits - stores the number of bits in a single hash input.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\crypt_tools\hash_context\pedersen_hash_context.h:33:      n_inputs - stores the number of hash inputs.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\crypt_tools\hash_context\pedersen_hash_context.h:35:      points - stores the constant points for the hash.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\crypt_tools\hash_context\pedersen_hash_context.h:59:    Calculates the hash of the given inputs.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\crypt_tools\hash_context\pedersen_hash_context.h:61:  FieldElementT Hash(const gsl::span<const FieldElementT> hash_inputs) const {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\crypt_tools\hash_context\pedersen_hash_context.h:64:        "The number of points is not equal to the number of bits in total in the hash input.");
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\crypt_tools\hash_context\pedersen_hash_context.h:70:      cur_sum = EcSubsetSumComponent<FieldElementT>::Hash(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\crypt_tools\hash_context\pedersen_hash_context.h:77:    Defines the hash function used on pairs of field elements.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\crypt_tools\hash_context\pedersen_hash_context.h:79:  FieldElementT Hash(const FieldElementT& x, const FieldElementT& y) const override {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\crypt_tools\hash_context\pedersen_hash_context.h:80:    return Hash(std::array<FieldElementT, 2>({x, y}));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\noninteractive_prover_felt_channel.h:40:    system. This ensures that the prover doesn't modify the public input after generating the proof.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\noninteractive_prover_felt_channel.h:47:    SendBytes writes raw bytes to the proof and updates the hash chain.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\noninteractive_prover_felt_channel.h:54:    Writes field elements to the proof, hashes these elements with the current state and updates it.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\noninteractive_prover_felt_channel.h:76:    the proof.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\noninteractive_prover_felt_channel.h:86:  // appended to the proof).
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\noninteractive_prover_felt_channel.cc:74:    // Insert (state_ + 1) to that start, then hash the entire vector and update the state_ to its
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\noninteractive_prover_felt_channel.cc:92:    // Hash the entire field elements that were sent, and then its result with the state and
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\noninteractive_prover_felt_channel.cc:105:  FieldElement felt_from_verifier = FieldElement(HashT::Hash(state_, counter_));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\noninteractive_prover_felt_channel.cc:116:  FieldElementT random_felt = HashT::Hash(state_, counter_);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\noninteractive_prover_felt_channel.cc:127:  AnnotationScope scope(this, "Proof of Work");
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\fft_utils\fft_domain.h:53:  Represents a succinct subset of the field that is used as the domain of an FFT/FRI layer.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\crypt_tools\hash_context\hash_context.h:24:  virtual FieldElementT Hash(const FieldElementT& x, const FieldElementT& y) const = 0;
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\crypt_tools\blake2s_test.cc:77:  Blake2s256 h3 = Blake2s256::Hash(h1, h2);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\noninteractive_prover_channel.h:33:    Initialize the hash chain to a value based on the public input and the constraints system. This
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\noninteractive_prover_channel.h:34:    ensures that the prover doesn't modify the public input after generating the proof.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\noninteractive_prover_channel.h:39:    SendBytes writes raw bytes to the proof and updates the hash chain.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\noninteractive_prover_channel.h:44:    Writes field elements to the proof, hashes these elements with the current state_.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\noninteractive_prover_channel.h:49:    ReceiveBytes is a method that uses a hash chain and every time it is called the requested number
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\noninteractive_prover_channel.h:50:    of random bytes are returned and the hash chain is updated.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\noninteractive_prover_channel.h:65:    has security_bits leading zero bits. Then, appends the nonce to the proof.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\crypt_tools\blake2s.inl:54:  for (size_t i = 0; i < kDigestNumDWords; ++i) { /* Output full hash to temp buffer */
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\crypt_tools\blake2s.inl:67:const Blake2s<DigestNumBits> Blake2s<DigestNumBits>::Hash(
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\crypt_tools\blake2s.inl:122:inline std::ostream& operator<<(std::ostream& out, const Blake2s248& hash) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\crypt_tools\blake2s.inl:123:  return out << hash.ToString();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\crypt_tools\blake2s.inl:126:inline std::ostream& operator<<(std::ostream& out, const Blake2s256& hash) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\crypt_tools\blake2s.inl:127:  return out << hash.ToString();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\noninteractive_prover_channel.cc:91:  AnnotationScope scope(this, "Proof of Work");
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\fft_utils\fft_bases.h:30:  Contains information about FFT/FRI layers. For a domain of size 2^N, there are N layers.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\crypt_tools\blake2s.h:35:  // In order to reduce Merkle initialization time, we don't want the digest to be initialized.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\crypt_tools\blake2s.h:46:  static const Blake2s Hash(const Blake2s& val1, const Blake2s& val2);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\crypt_tools\blake2s.h:59:  friend std::ostream& operator<<(std::ostream& out, const Blake2s<DNB>& hash);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\packer_hasher.h:28:  Handles packing elements together and hashing them, to be used e.g. by some Merkle tree.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\packer_hasher.h:31:  element size is smaller than the hash used by the tree. To minimize this waste - we can group
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\packer_hasher.h:32:  elements together into packages approximately the size of the hash (or larger), and use these as
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\packer_hasher.h:53:    A typical use case: when one wants to verify a decommitment for the i-th element. Internally,
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\packer_hasher.h:55:    together. In order to verify the decommitment, the hash for the package containing the i-th
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\packer_hasher.h:71:    package's index, and the value is the packages's hash.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\noninteractive_felt_channel_test.cc:193:      verifier_channel_bad_1.ApplyProofOfWork(work_bits + 1), HasSubstr("Wrong proof of work"));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\noninteractive_felt_channel_test.cc:200:      verifier_channel_bad_2.ApplyProofOfWork(work_bits - 1), HasSubstr("Wrong proof of work"));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\noninteractive_felt_channel_test.cc:213:  This test mimics the expected behavior of a FRI prover while using the channel.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\noninteractive_felt_channel_test.cc:214:  This is done without integration with the FRI implementation, as a complement to the FRI test
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\noninteractive_felt_channel_test.cc:218:  typical usage flow of a STARK/FRI proof protocol.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\noninteractive_felt_channel_test.cc:227:      pcommitment1, "First FRI layer");
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\noninteractive_felt_channel_test.cc:245:        pdecommitment1.back(), "FRI layer");
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\noninteractive_felt_channel_test.cc:248:  std::vector<std::byte> proof(prover_channel.GetProof());
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\noninteractive_felt_channel_test.cc:255:          "First FRI layer");
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\noninteractive_felt_channel_test.cc:273:        verifier_channel.ReceiveDecommitmentNode<typename TypeParam::ChannelHashT>("FRI layer"));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\noninteractive_felt_channel_test.cc:288:  // Send a random field element via channel, and apply proof of work.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\noninteractive_felt_channel_test.cc:297:  // state, and apply proof of work.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\noninteractive_felt_channel_test.cc:323:  // Verify.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\packer_hasher.cc:76:  // Each element in the next layer is hash of 2 elements in current layer.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\packer_hasher.cc:82:  // Compute next hash layer.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\packer_hasher.cc:84:    bytes_as_hash[i] = HashT::Hash(bytes_as_hash[i * 2], bytes_as_hash[i * 2 + 1]);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\packer_hasher.cc:129:    // Pack TwoToOne if defined as merkle layer. Also applies best effort approach - In case each
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\packer_hasher.cc:130:    // package contains 2 elements, each the same size as the hash digest, apply a TwoToOne behavior
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\packer_hasher.cc:188:  // Hash packages and returns the results as map of element indices with their hash value.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\packer_hasher.cc:194:    // Hash package.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\packaging_commitment_scheme_test.cc:205:  // hash in bytes.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\packaging_commitment_scheme_test.cc:276:  // Create 3 elements to verify.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\packaging_commitment_scheme_test.cc:285:  // Packer_hasher.ComputeNumElementsInPackage). Hence, In order to verify element no. 1 the
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\packaging_commitment_scheme_test.cc:286:  // verifier needs elements 0,2,3; and in order to verify elements no .10 and 11 the verifier
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\packaging_commitment_scheme_test.cc:304:  // package contains a single element. No extra elements are needed to calculate hash of a single
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\packaging_commitment_scheme_test.cc:305:  // element to verify.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\packaging_commitment_scheme_test.cc:309:  // Creates 3 elements to verify.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\packaging_commitment_scheme.h:62:    Constructs an instance of PackagingCommitmentSchemeProver for a Merkle layer.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\packaging_commitment_scheme.h:76:    Given a data segment, packes its elements in packages and hash each package. Call
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\packaging_commitment_scheme.h:104:  // Indicator for being a commitment scheme that does packaging and hashing of a merkle tree
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\packaging_commitment_scheme.h:105:  // layer. When set to true it saves memory - instead of storing the biggest layer of the merkle
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\packaging_commitment_scheme.h:132:    Constructs an instance of PackagingCommitmentSchemeVerifier for a Merkle layer.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\packaging_commitment_scheme.h:145:    Given elements_to_verify, verify elements using data it receives from the channel, and calls
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\noninteractive_channel_test.cc:98:  const auto proof = prover_channel.GetProof();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\noninteractive_channel_test.cc:99:  NoninteractiveVerifierChannel verifier_channel(this->channel_prng.Clone(), proof);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\noninteractive_channel_test.cc:143:      verifier_channel_bad_1.ApplyProofOfWork(work_bits + 1), HasSubstr("Wrong proof of work"));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\noninteractive_channel_test.cc:150:      verifier_channel_bad2.ApplyProofOfWork(work_bits - 1), HasSubstr("Wrong proof of work"));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\noninteractive_channel_test.cc:187:  // Verify.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\noninteractive_channel_test.cc:225:  std::vector<std::byte> proof(prover_channel.GetProof());
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\noninteractive_channel_test.cc:227:  NoninteractiveVerifierChannel verifier_channel(this->channel_prng.Clone(), proof);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\noninteractive_channel_test.cc:255:  std::vector<std::byte> proof(prover_channel.GetProof());
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\noninteractive_channel_test.cc:257:  NoninteractiveVerifierChannel verifier_channel(this->channel_prng.Clone(), proof);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\noninteractive_channel_test.cc:271:  // Attempt to read beyond the end of the proof.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\noninteractive_channel_test.cc:273:      verifier_channel.template ReceiveCommitmentHash<Blake2s256>(), HasSubstr("Proof too short."));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\noninteractive_channel_test.cc:277:  This test mimics the expected behavior of a FRI prover while using the channel.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\noninteractive_channel_test.cc:278:  This is done without integration with the FRI implementation, as a complement to the FRI test
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\noninteractive_channel_test.cc:282:  typical usage flow of a STARK/FRI proof protocol.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\noninteractive_channel_test.cc:290:  prover_channel.template SendCommitmentHash<TypeParam>(pcommitment1, "First FRI layer");
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\noninteractive_channel_test.cc:307:    prover_channel.SendDecommitmentNode<TypeParam>(pdecommitment1.back(), "FRI layer");
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\noninteractive_channel_test.cc:310:  std::vector<std::byte> proof(prover_channel.GetProof());
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\noninteractive_channel_test.cc:312:  NoninteractiveVerifierChannel verifier_channel(this->channel_prng.Clone(), proof);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\noninteractive_channel_test.cc:315:      verifier_channel.template ReceiveCommitmentHash<TypeParam>("First FRI layer");
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\noninteractive_channel_test.cc:332:    vdecommitment1.push_back(verifier_channel.ReceiveDecommitmentNode<TypeParam>("FRI layer"));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\packaging_commitment_scheme.cc:153:      // Send decommitment node with its index in the full merkle. The index is calculated as
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\packaging_commitment_scheme.cc:165:  // Pack and hash the data inner_commitment_scheme_ requested in StartDecommitmentPhase and send
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\packaging_commitment_scheme.cc:225:  // then missing_elements_idxs = {0,1,3,9,10,11}: 0,1,3 to verify the package for element 2 and
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\packaging_commitment_scheme.cc:226:  // 9,10,11 to verify the package for element 8.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\channel_statistics.h:28:                        "Hash count: " + std::to_string(hash_count) + "\n" +
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\channel.h:50:    Increases the amount of work a malicious prover needs to perform, in order to fake a proof.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\channel.h:81:    doesn't let the verify send randomness after it is called.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\channel.cc:43:      << " Proof Protocol\n\n";
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\annotation_scope_test.cc:38:    AnnotationScope scope(&prover_channel, "STARK");
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\annotation_scope_test.cc:40:      AnnotationScope scope(&prover_channel, "FRI");
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\annotation_scope_test.cc:46:          prover_channel.template SendCommitmentHash<Blake2s256>(pcommitment1, "First FRI layer");
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\annotation_scope_test.cc:74:              prng.RandomHash<Blake2s256>(), "FRI layer");
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\annotation_scope_test.cc:81:    EXPECT_THAT(output.str(), HasSubstr("/STARK/FRI/Layer 1/Commitment"));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\annotation_scope_test.cc:82:    EXPECT_THAT(output.str(), HasSubstr("/STARK/FRI/Layer 1/Eval point"));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\annotation_scope_test.cc:83:    EXPECT_THAT(output.str(), HasSubstr("/STARK/FRI/Decommitment"));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\annotation_scope.h:33:  P->V: /STARK/FRI/Layer 1/Commitment: First FRI layer: Commitment...
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\annotation_scope.h:34:  V->P: /STARK/FRI/Layer 1/Eval point: evaluation point: Field Element...
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\annotation_scope.h:35:  V->P: /STARK/FRI/Layer 1/Eval point: 2nd evaluation point: Field Element...
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\annotation_scope.h:36:  P->V: /STARK/FRI/Last Layer/Commitment: expected last layer const: Field Element...
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\annotation_scope.h:37:  V->P: /STARK/FRI/Last Layer/Query: index #1: Number...
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\annotation_scope.h:38:  V->P: /STARK/FRI/Last Layer/Query: index #2: Number...
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\channel\annotation_scope.h:39:  P->V: /STARK/FRI/Decommitment: FRI layer: Decommitment: ...
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\merkle\merkle.cc:21:#include "starkware/commitment_scheme/merkle/merkle.h"
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\merkle\merkle.cc:38:  // Hash to compute all internal nodes that can be derived solely from the given data.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\merkle\merkle.cc:45:      nodes_[i] = HashT::Hash(nodes_[i * 2], nodes_[i * 2 + 1]);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\merkle\merkle.cc:59:    nodes_[i] = HashT::Hash(nodes_[i * 2], nodes_[i * 2 + 1]);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\merkle\merkle.cc:119:  // either we have no more known nodes, or we can compute the hash of the root.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\merkle\merkle.cc:144:    VLOG(7) << "Adding hash for " << node_index;
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\merkle\merkle.cc:146:    queue.emplace(node_index / 2, HashT::Hash(siblings[0], siblings[1]));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\commitment_scheme.h:41:  Elements are to finest granularity a Verifier can verify integrity to, and in particular the
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\commitment_scheme.h:60:  includes all information required to verify integrity of the data in those location with the
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\commitment_scheme.h:63:  to allow optimization over communication-complexity (aka argument-length or proof-length), where
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\commitment_scheme.h:64:  in some cases the verify can compute by itself parts of committed data, and only needs to verify
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\merkle\merkle_test.cc:24:#include "starkware/commitment_scheme/merkle/merkle.h"
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\merkle\merkle_test.cc:126:  Generate random queries to a random tree, get decommitment, and then try to verify the
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\commitment_scheme_test.cc:29:#include "starkware/commitment_scheme/merkle/merkle_commitment_scheme.h"
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\commitment_scheme_test.cc:66:        "Wrong number of elements in segment in Merkle commitment scheme prover initialization. "
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\commitment_scheme_test.cc:83:  // Indicator that this is a Merkle commitment scheme layer. Used to set number of segments
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\commitment_scheme_test.cc:98:  // Indicator that this is a merkle commitment scheme layer. Used to set number of segments
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\commitment_scheme_test.cc:153:  // Note: we assume here that the largest layer of the Merkle tree uses the bottom hash (see the
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\commitment_scheme_test.cc:204:    // In case this is a Merkle commitment scheme, each segment contains a single element.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\commitment_scheme_test.cc:278:  NoninteractiveVerifierChannel GetVerifierChannel(const span<const std::byte> proof) const {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\commitment_scheme_test.cc:279:    return NoninteractiveVerifierChannel(channel_prng_.Clone(), proof);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\commitment_scheme_test.cc:343:    // Return proof.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\commitment_scheme_test.cc:348:      const vector<std::byte>& proof, const map<uint64_t, vector<std::byte>>& elements_to_verify) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\commitment_scheme_test.cc:352:    NoninteractiveVerifierChannel verifier_channel = GetVerifierChannel(proof);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\commitment_scheme_test.cc:361:    // Verify consistency of data_ with commitment.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\commitment_scheme_test.cc:367:  A derived class to set up specific parameters for commitment scheme that uses a single hash.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\commitment_scheme_test.cc:387:    // Get leaves as span of bottom hash.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\commitment_scheme_test.cc:404:            BottomHashT::Hash(data_hash_bottom[i * 2], data_hash_bottom[i * 2 + 1]);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\commitment_scheme_test.cc:421:        data_hash_top[i] = TopHashT::Hash(data_hash_top[i * 2], data_hash_top[i * 2 + 1]);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\commitment_scheme_test.cc:433:    Assuming proof contains only the commitment phase (see 'GenerateProof' function with
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\commitment_scheme_test.cc:434:    include_decommitment=false), converts the proof to the (single) hash it represents.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\commitment_scheme_test.cc:436:  TopHashT FromProofToRoot(const vector<std::byte> proof) { return TopHashT::InitDigestTo(proof); }
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\commitment_scheme_test.cc:444:  auto proof = this->GenerateProof(n_out_of_memory_layers);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\commitment_scheme_test.cc:449:  // Verify integrity of queried data_ with commitment using CommitmentSchemeVerifier instance.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\commitment_scheme_test.cc:450:  EXPECT_TRUE(this->VerifyProof(proof, elements_to_verify));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\commitment_scheme_test.cc:455:  const auto proof = this->GenerateProof(n_out_of_memory_layers, false);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\commitment_scheme_test.cc:456:  const auto actual_root = this->FromProofToRoot(proof);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\commitment_scheme_test.cc:464:  // As the tree height is 6=log(64), get proof with bottom layers hash.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\commitment_scheme_test.cc:469:  // Get proof where all layers are verifier friendly.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\commitment_scheme_test.cc:473:  // Get proof where all layers are verifier friendly, even with extra layers defined.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\commitment_scheme_test.cc:486:  const auto proof = this->GenerateProof(n_out_of_memory_layers);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\commitment_scheme_test.cc:491:  // Verify integrity of queried data_ with commitment using CommitmentSchemeVerifier instance.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\commitment_scheme_test.cc:492:  EXPECT_TRUE(this->VerifyProof(proof, elements_to_verify));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\commitment_scheme_test.cc:496:  Generates two proofs: first with 0 out of memory merkle layers and then with a random number of
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\commitment_scheme_test.cc:508:  const auto proof = this->GenerateProof(this->prng_.template UniformInt<size_t>(0, 6));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\commitment_scheme_test.cc:513:  // Construct corrupted proof.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\commitment_scheme_test.cc:514:  vector<std::byte> corrupted_proof = proof;
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\commitment_scheme_test.cc:515:  corrupted_proof[this->prng_.template UniformInt<size_t>(0, proof.size() - 1)] ^= std::byte(1);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\commitment_scheme_test.cc:517:  // Verify integrity of queried data_ with commitment using CommitmentSchemeVerifier instance.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\commitment_scheme_test.cc:523:  const auto proof = this->GenerateProof(this->prng_.template UniformInt<size_t>(0, 6));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\commitment_scheme_test.cc:535:  // Verify integrity of queried data_ with commitment using CommitmentSchemeVerifier instance.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\commitment_scheme_test.cc:536:  EXPECT_FALSE(this->VerifyProof(proof, corrupted_data));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\commitment_scheme_test.cc:547:  // Verify completeness.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\commitment_scheme_test.cc:550:  const auto proof = this->GenerateProof(this->prng_.template UniformInt<size_t>(0, 6));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\commitment_scheme_test.cc:555:  // Verify integrity of queried data_ with commitment using CommitmentSchemeVerifier instance.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\commitment_scheme_test.cc:556:  EXPECT_TRUE(this->VerifyProof(proof, elements_to_verify));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\commitment_scheme_test.cc:564:  // Try to generate proof.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\commitment_scheme_test.cc:573:  // Verify to verify consistency.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\commitment_scheme_test.cc:575:      100);  // Proof string must be long enough to contain the commitment.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\commitment_scheme_test.cc:581:  const auto proof = this->GenerateProof(this->prng_.template UniformInt<size_t>(0, 6));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\commitment_scheme_test.cc:592:  // Verify integrity of queried data_ with commitment using CommitmentSchemeVerifier instance.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\commitment_scheme_test.cc:593:  EXPECT_ASSERT(this->VerifyProof(proof, corrupted_data), HasSubstr("Element size mismatch"));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\commitment_scheme_test.cc:598:  const auto proof = this->GenerateProof(this->prng_.template UniformInt<size_t>(0, 6));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\commitment_scheme_test.cc:610:  // Verify integrity of queried data_ with commitment using CommitmentSchemeVerifier instance.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\commitment_scheme_test.cc:611:  EXPECT_ASSERT(this->VerifyProof(proof, corrupted_data), HasSubstr("Element size mismatches"));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\caching_commitment_scheme_test.cc:68:  // Assumes inner layer packs 2 elements in each hash, hance for queries no. 1, 6 inner layer
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\merkle\merkle_commitment_scheme.h:29:#include "starkware/commitment_scheme/merkle/merkle.h"
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\caching_commitment_scheme.h:37:  To simulate an in-memory Merkle tree, one can use interleaved layers of packaging commitment
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\commitment_scheme_builder.inl:17:#include "starkware/commitment_scheme/merkle/merkle_commitment_scheme.h"
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\commitment_scheme_builder.inl:50:          " layers should use the same hash. n_verifier_friendly_commitment_layers: " +
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\commitment_scheme_builder.inl:58:  First, creates the innermost layer which holds the Merkle Tree.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\commitment_scheme_builder.inl:65:  elements form the leaves of a Merkle tree.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\commitment_scheme_builder.inl:71:  // Creates the innermost layer which holds the Merkle Tree.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\commitment_scheme_builder.inl:72:  // If it is bigger then 0 the innermost layer definitely uses the top hash (the entire segment
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\commitment_scheme_builder.inl:73:  // tree uses a single hash).
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\commitment_scheme_builder.inl:97:  // Merkle tree layer (that was already created above)).
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\commitment_scheme_builder.inl:182:  // layer is a Merkle commitment scheme which holds a Merkle tree. The outermost layer is not one
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\commitment_scheme_builder.inl:183:  // of the out-of-memory Merkle layers.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\commitment_scheme_builder.inl:191:  // Two lambda functions are used here. The outer one is used to determine a hash function during
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\commitment_scheme_builder.inl:213:  // Create a chain of commitment scheme layers. The smallest most inner is a Merkle commitment
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\commitment_scheme_builder.inl:214:  // scheme which holds a Merkle tree. For the outermost layer is_merkle_layer == false, unless
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\commitment_scheme_builder.inl:221:  // Two lambda functions are used here. The outer one is used to determine a hash function during
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\merkle\merkle_commitment_scheme.cc:15:#include "starkware/commitment_scheme/merkle/merkle_commitment_scheme.h"
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\merkle\merkle_commitment_scheme.cc:37:      // Initialize the tree with the number of elements, each element is the hash stored in a leaf.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\merkle\merkle_commitment_scheme.cc:108:  // Verify decommitment.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\merkle\merkle.h:35:  Merkle Tree.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\merkle\merkle.h:43:    VLOG(3) << "Constructing a Merkle tree for data length = " << data_length;
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\commitment_scheme\merkle\merkle.h:66:    since the leaves were fed in pairs. Similarly, calling GetRoot(0) causes no hash operations to
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\stone-prover\src\starkware\composition_polynomial\periodic_column.h:33:  appear in a hash function and repeat every invocation.

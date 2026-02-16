@@ -1,0 +1,269 @@
+C:/Users/vboxuser/Desktop/Repos/zklibreports/proof_harness/cat1_wormhole_f3_outbound_sender_tax_insolvency/src/MedusaOutboundSenderTaxHarness.sol
+   1 |     | // SPDX-License-Identifier: MIT
+   2 |     | pragma solidity ^0.8.24;
+   3 |     | 
+   4 |     | import {
+   5 |     |     MockBridgeSenderTaxToken,
+   6 |     |     OutboundSenderTaxBugModel,
+   7 |     |     OutboundSenderTaxFixedModel
+   8 |     | } from "./OutboundSenderTaxHarness.sol";
+   9 |     | 
+  10 |     | /// @notice Stateful specialist-fuzz harness for outbound sender-tax insolvency.
+  11 | *   | contract MedusaOutboundSenderTaxHarness {
+  12 | *   |     uint256 internal constant INITIAL_MINT = 1_000_000 ether;
+  13 | *   |     uint256 internal constant MAX_STEP = 1_000 ether;
+  14 |     | 
+  15 |     |     OutboundSenderTaxBugModel public bugModel;
+  16 |     |     OutboundSenderTaxFixedModel public fixedModel;
+  17 |     |     MockBridgeSenderTaxToken public bugToken;
+  18 |     |     MockBridgeSenderTaxToken public fixedToken;
+  19 |     | 
+  20 |     |     bool public bugSolvencyBroken;
+  21 |     |     bool public fixedSolvencyBroken;
+  22 |     | 
+  23 | *   |     constructor() {
+  24 | *   |         bugModel = new OutboundSenderTaxBugModel();
+  25 | *   |         fixedModel = new OutboundSenderTaxFixedModel();
+  26 |     | 
+  27 |     |         // 100% extra sender-side debit on bridge-originated transfers.
+  28 | *   |         bugToken = new MockBridgeSenderTaxToken(address(bugModel), address(this), 10_000);
+  29 | *   |         fixedToken = new MockBridgeSenderTaxToken(address(fixedModel), address(this), 10_000);
+  30 |     | 
+  31 | *   |         bugToken.mint(address(this), INITIAL_MINT);
+  32 | *   |         fixedToken.mint(address(this), INITIAL_MINT);
+  33 |     | 
+  34 | *   |         bugToken.approve(address(bugModel), type(uint256).max);
+  35 | *   |         fixedToken.approve(address(fixedModel), type(uint256).max);
+  36 |     |     }
+  37 |     | 
+  38 | *   |     function _step(uint256 seed) internal pure returns (uint256) {
+  39 | *   |         return (seed % MAX_STEP) + 1;
+  40 |     |     }
+  41 |     | 
+  42 | *   |     function action_seedBug(uint96 amountSeed) external {
+  43 | *   |         uint256 amount = _step(amountSeed);
+  44 | *   |         try bugModel.depositAndBridgeOut(address(bugToken), address(this), amount) {} catch {}
+  45 | *   |         _refreshBugSolvencyFlag();
+  46 |     |     }
+  47 |     | 
+  48 | *   |     function action_redeemBug(uint96 amountSeed) external {
+  49 | *   |         uint256 out = bugModel.outstanding(address(bugToken));
+  50 | *   |         if (out == 0) return;
+  51 | *   |         uint256 amount = _step(amountSeed);
+  52 | *   |         if (amount > out) amount = out;
+  53 | *   |         try bugModel.completeTransfer(address(bugToken), address(this), amount) {} catch {}
+  54 | *   |         _refreshBugSolvencyFlag();
+  55 |     |     }
+  56 |     | 
+  57 | *   |     function action_seedFixed(uint96 amountSeed) external {
+  58 | *   |         uint256 amount = _step(amountSeed);
+  59 | *   |         try fixedModel.depositAndBridgeOut(address(fixedToken), address(this), amount) {} catch {}
+  60 | *   |         _refreshFixedSolvencyFlag();
+  61 |     |     }
+  62 |     | 
+  63 | *   |     function action_redeemFixed(uint96 amountSeed) external {
+  64 | *   |         uint256 out = fixedModel.outstanding(address(fixedToken));
+  65 | *   |         if (out == 0) return;
+  66 | *   |         uint256 amount = _step(amountSeed);
+  67 | *   |         if (amount > out) amount = out;
+  68 | *   |         try fixedModel.completeTransfer(address(fixedToken), address(this), amount) {} catch {}
+  69 | *   |         _refreshFixedSolvencyFlag();
+  70 |     |     }
+  71 |     | 
+  72 | *   |     function _refreshBugSolvencyFlag() internal {
+  73 | *   |         uint256 collateral = bugToken.balanceOf(address(bugModel));
+  74 | *   |         uint256 out = bugModel.outstanding(address(bugToken));
+  75 | *   |         if (collateral < out) bugSolvencyBroken = true;
+  76 |     |     }
+  77 |     | 
+  78 | *   |     function _refreshFixedSolvencyFlag() internal {
+  79 | *   |         uint256 collateral = fixedToken.balanceOf(address(fixedModel));
+  80 | *   |         uint256 out = fixedModel.outstanding(address(fixedToken));
+  81 | *   |         if (collateral < out) fixedSolvencyBroken = true;
+  82 |     |     }
+  83 |     | 
+  84 |     |     /// @notice Desired invariant: collateral should cover outstanding liabilities.
+  85 |     |     function property_bug_collateral_covers_outstanding()
+  86 |     |         external
+  87 |     |         view
+  88 |     |         returns (bool)
+  89 |     |     {
+  90 |     |         return !bugSolvencyBroken;
+  91 |     |     }
+  92 |     | 
+  93 |     |     /// @notice Fixed model should preserve collateral coverage.
+  94 |     |     function property_fixed_collateral_covers_outstanding()
+  95 |     |         external
+  96 |     |         view
+  97 |     |         returns (bool)
+  98 |     |     {
+  99 |     |         return !fixedSolvencyBroken;
+ 100 |     |     }
+ 101 |     | 
+ 102 |     |     /// @notice Echidna-compatible alias.
+ 103 |     |     function echidna_bug_collateral_covers_outstanding()
+ 104 |     |         external
+ 105 |     |         view
+ 106 |     |         returns (bool)
+ 107 |     |     {
+ 108 |     |         return !bugSolvencyBroken;
+ 109 |     |     }
+ 110 |     | }
+ 111 |     | 
+ 112 |     | 
+
+C:/Users/vboxuser/Desktop/Repos/zklibreports/proof_harness/cat1_wormhole_f3_outbound_sender_tax_insolvency/src/OutboundSenderTaxHarness.sol
+   1 |     | // SPDX-License-Identifier: MIT
+   2 |     | pragma solidity ^0.8.24;
+   3 |     | 
+   4 |     | interface IERC20Like {
+   5 |     |     function balanceOf(address account) external view returns (uint256);
+   6 |     |     function transfer(address to, uint256 amount) external returns (bool);
+   7 |     |     function transferFrom(address from, address to, uint256 amount) external returns (bool);
+   8 |     | }
+   9 |     | 
+  10 |     | /// @notice ERC20-like token where bridge-originated transfers can debit sender by
+  11 |     | /// amount + extra fee (sender-tax mode).
+  12 | *   | contract MockBridgeSenderTaxToken {
+  13 |     |     string public constant name = "Bridge Sender Tax Token";
+  14 |     |     string public constant symbol = "BST";
+  15 |     |     uint8 public constant decimals = 18;
+  16 |     | 
+  17 |     |     address public immutable bridge;
+  18 |     |     address public immutable feeCollector;
+  19 |     |     uint16 public immutable bridgeSenderTaxBps;
+  20 |     | 
+  21 | *   |     mapping(address => uint256) public balanceOf;
+  22 |     |     mapping(address => mapping(address => uint256)) public allowance;
+  23 |     | 
+  24 | *   |     constructor(address _bridge, address _feeCollector, uint16 _bridgeSenderTaxBps) {
+  25 | *   |         require(_bridge != address(0), "bridge=0");
+  26 | *   |         require(_feeCollector != address(0), "collector=0");
+  27 | *   |         require(_bridgeSenderTaxBps <= 10_000, "bps too high");
+  28 | *   |         bridge = _bridge;
+  29 | *   |         feeCollector = _feeCollector;
+  30 | *   |         bridgeSenderTaxBps = _bridgeSenderTaxBps;
+  31 |     |     }
+  32 |     | 
+  33 | *   |     function mint(address to, uint256 amount) external {
+  34 | *   |         balanceOf[to] += amount;
+  35 |     |     }
+  36 |     | 
+  37 | *   |     function approve(address spender, uint256 amount) external returns (bool) {
+  38 | *   |         allowance[msg.sender][spender] = amount;
+  39 | *   |         return true;
+  40 |     |     }
+  41 |     | 
+  42 | *   |     function transfer(address to, uint256 amount) external returns (bool) {
+  43 | *   |         _move(msg.sender, to, amount);
+  44 | *   |         return true;
+  45 |     |     }
+  46 |     | 
+  47 | *   |     function transferFrom(address from, address to, uint256 amount)
+  48 |     |         external
+  49 | *   |         returns (bool)
+  50 |     |     {
+  51 | *   |         if (msg.sender != from) {
+  52 | *   |             uint256 allowed = allowance[from][msg.sender];
+  53 | *   |             require(allowed >= amount, "!allowance");
+  54 |     |             unchecked {
+  55 | *   |                 allowance[from][msg.sender] = allowed - amount;
+  56 |     |             }
+  57 |     |         }
+  58 | *   |         _move(from, to, amount);
+  59 | *   |         return true;
+  60 |     |     }
+  61 |     | 
+  62 | *   |     function _move(address from, address to, uint256 amount) internal {
+  63 | *   |         uint256 senderTax = 0;
+  64 | *   |         if (from == bridge && bridgeSenderTaxBps > 0) {
+  65 | *   |             senderTax = (amount * bridgeSenderTaxBps) / 10_000;
+  66 |     |         }
+  67 |     | 
+  68 | *   |         uint256 totalDebit = amount + senderTax;
+  69 | *   |         uint256 bal = balanceOf[from];
+  70 | *   |         require(bal >= totalDebit, "!balance");
+  71 |     |         unchecked {
+  72 | *   |             balanceOf[from] = bal - totalDebit;
+  73 |     |         }
+  74 |     | 
+  75 | *   |         balanceOf[to] += amount;
+  76 | *   |         if (senderTax > 0) {
+  77 | *   |             balanceOf[feeCollector] += senderTax;
+  78 |     |         }
+  79 |     |     }
+  80 |     | }
+  81 |     | 
+  82 |     | /// @notice Model that mirrors Wormhole native-token accounting shape:
+  83 |     | /// inbound measures received amount, outbound debits outstanding by requested amount.
+  84 | *   | contract OutboundSenderTaxBugModel {
+  85 | *   |     mapping(address => uint256) public outstanding;
+  86 |     | 
+  87 | *   |     function depositAndBridgeOut(address token, address from, uint256 amount)
+  88 |     |         external
+  89 | *   |         returns (uint256 received)
+  90 | *   |     {
+  91 | *   |         uint256 balBefore = IERC20Like(token).balanceOf(address(this));
+  92 | *   |         require(
+  93 | *   |             IERC20Like(token).transferFrom(from, address(this), amount),
+  94 |     |             "transferFrom failed"
+  95 |     |         );
+  96 | *   |         uint256 balAfter = IERC20Like(token).balanceOf(address(this));
+  97 | *   |         received = balAfter - balBefore;
+  98 | *   |         outstanding[token] += received;
+  99 |     |     }
+ 100 |     | 
+ 101 | *   |     function completeTransfer(address token, address recipient, uint256 amount) external {
+ 102 | *   |         require(outstanding[token] >= amount, "insufficient outstanding");
+ 103 |     |         unchecked {
+ 104 | *   |             outstanding[token] -= amount;
+ 105 |     |         }
+ 106 | *   |         require(IERC20Like(token).transfer(recipient, amount), "transfer failed");
+ 107 |     |     }
+ 108 |     | 
+ 109 |     |     function collateral(address token) external view returns (uint256) {
+ 110 |     |         return IERC20Like(token).balanceOf(address(this));
+ 111 |     |     }
+ 112 |     | }
+ 113 |     | 
+ 114 |     | /// @notice Reference fix model:
+ 115 |     | /// require bridge-side debit to equal logical redeemed amount.
+ 116 | *   | contract OutboundSenderTaxFixedModel {
+ 117 | *   |     mapping(address => uint256) public outstanding;
+ 118 |     | 
+ 119 | *   |     function depositAndBridgeOut(address token, address from, uint256 amount)
+ 120 |     |         external
+ 121 | *   |         returns (uint256 received)
+ 122 | *   |     {
+ 123 | *   |         uint256 balBefore = IERC20Like(token).balanceOf(address(this));
+ 124 | *   |         require(
+ 125 | *   |             IERC20Like(token).transferFrom(from, address(this), amount),
+ 126 |     |             "transferFrom failed"
+ 127 |     |         );
+ 128 | *   |         uint256 balAfter = IERC20Like(token).balanceOf(address(this));
+ 129 | *   |         received = balAfter - balBefore;
+ 130 | *   |         outstanding[token] += received;
+ 131 |     |     }
+ 132 |     | 
+ 133 | *   |     function completeTransfer(address token, address recipient, uint256 amount) external {
+ 134 | *   |         require(outstanding[token] >= amount, "insufficient outstanding");
+ 135 |     | 
+ 136 | *   |         uint256 balBefore = IERC20Like(token).balanceOf(address(this));
+ 137 | *   |         require(IERC20Like(token).transfer(recipient, amount), "transfer failed");
+ 138 | *   |         uint256 balAfter = IERC20Like(token).balanceOf(address(this));
+ 139 |     | 
+ 140 | *   |         require(balBefore >= balAfter, "balance increased");
+ 141 | *   |         require(balBefore - balAfter == amount, "unexpected sender-side debit");
+ 142 |     | 
+ 143 |     |         unchecked {
+ 144 |     |             outstanding[token] -= amount;
+ 145 |     |         }
+ 146 |     |     }
+ 147 |     | 
+ 148 |     |     function collateral(address token) external view returns (uint256) {
+ 149 |     |         return IERC20Like(token).balanceOf(address(this));
+ 150 |     |     }
+ 151 |     | }
+ 152 |     | 
+ 153 |     | 
+

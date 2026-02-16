@@ -1,0 +1,4 @@
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts\contracts\LineaRollup.sol:67:    _disableInitializers();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts\contracts\tokenBridge\TokenBridge.sol:93:    _disableInitializers();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts\contracts\messageService\l2\v1\L2MessageServiceV1.sol:50:    _disableInitializers();
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts\contracts\tokenBridge\BridgedToken.sol:27:    _disableInitializers();

@@ -1,0 +1,283 @@
+C:/Users/vboxuser/Desktop/Repos/zklibreports/proof_harness/cat1_wormhole_h2_reentrancy_replay_guard/src/MedusaReentrancyReplayHarness.sol
+   1 |     | // SPDX-License-Identifier: MIT
+   2 |     | pragma solidity ^0.8.24;
+   3 |     | 
+   4 |     | import {
+   5 |     |     BridgeReplayBugModel,
+   6 |     |     BridgeReplayGuardModel,
+   7 |     |     MockReentrantToken
+   8 |     | } from "./ReentrancyReplayHarness.sol";
+   9 |     | 
+  10 |     | /// @notice Stateful specialist-fuzz harness for same-VM redemption reentrancy.
+  11 | *r  | contract MedusaReentrancyReplayHarness {
+  12 | *   |     uint256 internal constant INITIAL_MINT = 1_000_000 ether;
+  13 | *   |     uint256 internal constant MAX_STEP = 1_000 ether;
+  14 |     | 
+  15 | *   |     BridgeReplayBugModel public bugModel;
+  16 | *   |     BridgeReplayGuardModel public guardModel;
+  17 | *   |     MockReentrantToken public bugToken;
+  18 | *   |     MockReentrantToken public guardToken;
+  19 |     | 
+  20 | *   |     uint256 public vmNonce;
+  21 |     |     bool public bugDoubleRedeemObserved;
+  22 | *   |     bool public guardDoubleRedeemObserved;
+  23 |     | 
+  24 | *   |     constructor() {
+  25 | *   |         bugModel = new BridgeReplayBugModel();
+  26 | *   |         guardModel = new BridgeReplayGuardModel();
+  27 | *   |         bugToken = new MockReentrantToken(address(bugModel));
+  28 | *   |         guardToken = new MockReentrantToken(address(guardModel));
+  29 |     | 
+  30 | *   |         bugToken.mint(address(this), INITIAL_MINT);
+  31 | *   |         guardToken.mint(address(this), INITIAL_MINT);
+  32 |     | 
+  33 | *   |         bugToken.approve(address(bugModel), type(uint256).max);
+  34 | *   |         guardToken.approve(address(guardModel), type(uint256).max);
+  35 |     |     }
+  36 |     | 
+  37 | *   |     function _amount(uint256 seed) internal pure returns (uint256) {
+  38 | *   |         return (seed % MAX_STEP) + 1;
+  39 |     |     }
+  40 |     | 
+  41 | *   |     function _newVmHash(string memory tag, uint256 seed) internal returns (bytes32) {
+  42 | *   |         vmNonce += 1;
+  43 | *   |         return keccak256(abi.encodePacked(tag, seed, vmNonce));
+  44 |     |     }
+  45 |     | 
+  46 | *   |     function action_bug_same_vm_reentry(uint96 amountSeed) external {
+  47 | *   |         uint256 amount = _amount(amountSeed);
+  48 | *   |         bugModel.seed(address(bugToken), address(this), amount * 2);
+  49 |     | 
+  50 | *   |         bytes32 vmHash = _newVmHash("bug", amountSeed);
+  51 | *   |         bugModel.registerTransfer(vmHash, address(bugToken), address(this), amount);
+  52 | *   |         bugToken.configureHook(vmHash, true);
+  53 |     | 
+  54 | *   |         try bugModel.completeTransfer(vmHash) {} catch {}
+  55 | *   |         if (bugModel.redeemCount(vmHash) > 1) {
+  56 | *   |             bugDoubleRedeemObserved = true;
+  57 |     |         }
+  58 |     |     }
+  59 |     | 
+  60 | *   |     function action_guard_same_vm_reentry(uint96 amountSeed) external {
+  61 | *   |         uint256 amount = _amount(amountSeed);
+  62 | *   |         guardModel.seed(address(guardToken), address(this), amount * 2);
+  63 |     | 
+  64 | *   |         bytes32 vmHash = _newVmHash("guard", amountSeed);
+  65 | *   |         guardModel.registerTransfer(vmHash, address(guardToken), address(this), amount);
+  66 | *   |         guardToken.configureHook(vmHash, true);
+  67 |     | 
+  68 | *   |         try guardModel.completeTransfer(vmHash) {} catch {}
+  69 | *   |         if (guardModel.redeemCount(vmHash) > 1) {
+  70 |     |             guardDoubleRedeemObserved = true;
+  71 |     |         }
+  72 |     |     }
+  73 |     | 
+  74 |     |     /// @notice Negative-control property: expected to fail in bug model.
+  75 | *   |     function property_bug_model_same_vm_reentry_should_not_double_redeem()
+  76 |     |         external
+  77 |     |         view
+  78 | *   |         returns (bool)
+  79 |     |     {
+  80 | *   |         return !bugDoubleRedeemObserved;
+  81 |     |     }
+  82 |     | 
+  83 |     |     /// @notice Target property: guard ordering should block same-VM double redeem.
+  84 |     |     function property_guard_model_same_vm_reentry_should_not_double_redeem()
+  85 |     |         external
+  86 |     |         view
+  87 |     |         returns (bool)
+  88 |     |     {
+  89 |     |         return !guardDoubleRedeemObserved;
+  90 |     |     }
+  91 |     | 
+  92 |     |     /// @notice Echidna-compatible alias for target property.
+  93 |     |     function echidna_guard_model_same_vm_reentry_should_not_double_redeem()
+  94 |     |         external
+  95 |     |         view
+  96 |     |         returns (bool)
+  97 |     |     {
+  98 |     |         return !guardDoubleRedeemObserved;
+  99 |     |     }
+ 100 |     | }
+ 101 |     | 
+ 102 |     | 
+
+C:/Users/vboxuser/Desktop/Repos/zklibreports/proof_harness/cat1_wormhole_h2_reentrancy_replay_guard/src/ReentrancyReplayHarness.sol
+   1 |     | // SPDX-License-Identifier: MIT
+   2 |     | pragma solidity ^0.8.24;
+   3 |     | 
+   4 |     | interface IBridgeRedeemer {
+   5 |     |     function completeTransfer(bytes32 vmHash) external;
+   6 |     | }
+   7 |     | 
+   8 |     | interface IERC20LikeR {
+   9 |     |     function balanceOf(address account) external view returns (uint256);
+  10 |     |     function transfer(address to, uint256 amount) external returns (bool);
+  11 |     |     function transferFrom(address from, address to, uint256 amount) external returns (bool);
+  12 |     | }
+  13 |     | 
+  14 |     | struct ReplayTransfer {
+  15 |     |     address token;
+  16 |     |     address recipient;
+  17 |     |     uint256 amount;
+  18 |     |     bool valid;
+  19 |     | }
+  20 |     | 
+  21 |     | /// @notice Token that can reenter bridge redemption once during bridge-originated transfer.
+  22 | *   | contract MockReentrantToken {
+  23 |     |     string public constant name = "Reentrant Token";
+  24 |     |     string public constant symbol = "RNT";
+  25 |     |     uint8 public constant decimals = 18;
+  26 |     | 
+  27 |     |     address public immutable bridge;
+  28 |     | 
+  29 |     |     mapping(address => uint256) public balanceOf;
+  30 |     |     mapping(address => mapping(address => uint256)) public allowance;
+  31 |     | 
+  32 |     |     bool public hookEnabled;
+  33 |     |     bool public entered;
+  34 |     |     bytes32 public hookVmHash;
+  35 |     | 
+  36 | *   |     constructor(address _bridge) {
+  37 | *   |         require(_bridge != address(0), "bridge=0");
+  38 | *   |         bridge = _bridge;
+  39 |     |     }
+  40 |     | 
+  41 | *   |     function mint(address to, uint256 amount) external {
+  42 | *   |         balanceOf[to] += amount;
+  43 |     |     }
+  44 |     | 
+  45 | *   |     function approve(address spender, uint256 amount) external returns (bool) {
+  46 | *   |         allowance[msg.sender][spender] = amount;
+  47 | *   |         return true;
+  48 |     |     }
+  49 |     | 
+  50 | *   |     function configureHook(bytes32 vmHash, bool enabled) external {
+  51 | *   |         hookVmHash = vmHash;
+  52 | *   |         hookEnabled = enabled;
+  53 | *   |         entered = false;
+  54 |     |     }
+  55 |     | 
+  56 | *   |     function transfer(address to, uint256 amount) external returns (bool) {
+  57 | *   |         _move(msg.sender, to, amount);
+  58 | *   |         return true;
+  59 |     |     }
+  60 |     | 
+  61 | *   |     function transferFrom(address from, address to, uint256 amount)
+  62 |     |         external
+  63 | *   |         returns (bool)
+  64 |     |     {
+  65 | *   |         if (msg.sender != from) {
+  66 | *   |             uint256 allowed = allowance[from][msg.sender];
+  67 | *   |             require(allowed >= amount, "!allowance");
+  68 |     |             unchecked {
+  69 | *   |                 allowance[from][msg.sender] = allowed - amount;
+  70 |     |             }
+  71 |     |         }
+  72 | *   |         _move(from, to, amount);
+  73 | *   |         return true;
+  74 |     |     }
+  75 |     | 
+  76 | *   |     function _move(address from, address to, uint256 amount) internal {
+  77 | *   |         uint256 bal = balanceOf[from];
+  78 | *   |         require(bal >= amount, "!balance");
+  79 |     |         unchecked {
+  80 | *   |             balanceOf[from] = bal - amount;
+  81 |     |         }
+  82 | *   |         balanceOf[to] += amount;
+  83 |     | 
+  84 | *   |         if (from == bridge && hookEnabled && !entered) {
+  85 | *   |             entered = true;
+  86 |     |             // Reentrancy trigger is intentionally swallowed if rejected.
+  87 | *   |             try IBridgeRedeemer(bridge).completeTransfer(hookVmHash) {} catch {}
+  88 |     |         }
+  89 |     |     }
+  90 |     | }
+  91 |     | 
+  92 |     | /// @notice Control bug model: marks transfer completed after external token transfer.
+  93 |     | /// This ordering is intentionally vulnerable to same-VM reentrancy double redemption.
+  94 | *   | contract BridgeReplayBugModel is IBridgeRedeemer {
+  95 |     |     mapping(address => uint256) public outstanding;
+  96 |     |     mapping(bytes32 => bool) public completed;
+  97 | *   |     mapping(bytes32 => uint256) public redeemCount;
+  98 |     |     mapping(bytes32 => ReplayTransfer) public transfers;
+  99 |     | 
+ 100 | *   |     function seed(address token, address from, uint256 amount) external {
+ 101 | *   |         require(IERC20LikeR(token).transferFrom(from, address(this), amount), "seed transferFrom failed");
+ 102 | *   |         outstanding[token] += amount;
+ 103 |     |     }
+ 104 |     | 
+ 105 | *   |     function registerTransfer(
+ 106 |     |         bytes32 vmHash,
+ 107 |     |         address token,
+ 108 |     |         address recipient,
+ 109 |     |         uint256 amount
+ 110 |     |     ) external {
+ 111 | *   |         transfers[vmHash] = ReplayTransfer({
+ 112 | *   |             token: token,
+ 113 | *   |             recipient: recipient,
+ 114 | *   |             amount: amount,
+ 115 | *   |             valid: true
+ 116 |     |         });
+ 117 |     |     }
+ 118 |     | 
+ 119 | *   |     function completeTransfer(bytes32 vmHash) external override {
+ 120 | *   |         ReplayTransfer memory t = transfers[vmHash];
+ 121 | *   |         require(t.valid, "invalid vm");
+ 122 | *   |         require(!completed[vmHash], "transfer already completed");
+ 123 | *   |         require(outstanding[t.token] >= t.amount, "insufficient outstanding");
+ 124 |     | 
+ 125 | *   |         require(IERC20LikeR(t.token).transfer(t.recipient, t.amount), "transfer failed");
+ 126 |     | 
+ 127 | *   |         completed[vmHash] = true;
+ 128 |     |         unchecked {
+ 129 | *   |             outstanding[t.token] -= t.amount;
+ 130 |     |         }
+ 131 | *   |         redeemCount[vmHash] += 1;
+ 132 |     |     }
+ 133 |     | }
+ 134 |     | 
+ 135 |     | /// @notice Guard model matching Wormhole's key safety ordering:
+ 136 |     | /// mark completed and update accounting before external token transfer.
+ 137 | *   | contract BridgeReplayGuardModel is IBridgeRedeemer {
+ 138 |     |     mapping(address => uint256) public outstanding;
+ 139 |     |     mapping(bytes32 => bool) public completed;
+ 140 | *   |     mapping(bytes32 => uint256) public redeemCount;
+ 141 |     |     mapping(bytes32 => ReplayTransfer) public transfers;
+ 142 |     | 
+ 143 | *   |     function seed(address token, address from, uint256 amount) external {
+ 144 | *   |         require(IERC20LikeR(token).transferFrom(from, address(this), amount), "seed transferFrom failed");
+ 145 | *   |         outstanding[token] += amount;
+ 146 |     |     }
+ 147 |     | 
+ 148 | *   |     function registerTransfer(
+ 149 |     |         bytes32 vmHash,
+ 150 |     |         address token,
+ 151 |     |         address recipient,
+ 152 |     |         uint256 amount
+ 153 |     |     ) external {
+ 154 | *   |         transfers[vmHash] = ReplayTransfer({
+ 155 | *   |             token: token,
+ 156 | *   |             recipient: recipient,
+ 157 | *   |             amount: amount,
+ 158 | *   |             valid: true
+ 159 |     |         });
+ 160 |     |     }
+ 161 |     | 
+ 162 | *   |     function completeTransfer(bytes32 vmHash) external override {
+ 163 | *   |         ReplayTransfer memory t = transfers[vmHash];
+ 164 | *   |         require(t.valid, "invalid vm");
+ 165 | *   |         require(!completed[vmHash], "transfer already completed");
+ 166 | *   |         completed[vmHash] = true;
+ 167 | *   |         require(outstanding[t.token] >= t.amount, "insufficient outstanding");
+ 168 |     |         unchecked {
+ 169 | *   |             outstanding[t.token] -= t.amount;
+ 170 |     |         }
+ 171 |     | 
+ 172 | *   |         require(IERC20LikeR(t.token).transfer(t.recipient, t.amount), "transfer failed");
+ 173 | *   |         redeemCount[vmHash] += 1;
+ 174 |     |     }
+ 175 |     | }
+ 176 |     | 
+ 177 |     | 
+

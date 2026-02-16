@@ -1,0 +1,115 @@
+[LineaRollup.initializeParentShnarfsAndFinalizedState reinitializer(5) with no role guard]
+  125:    * @dev currentFinalizedState will also be initialized with existing storage values.
+  126:    * @param _shnarfs The shnarfs to reset.
+  127:    * @param _finalBlockNumbers The final blocks number to reset 1:1 with the shnarfs.
+  128:    */
+  129:   function initializeParentShnarfsAndFinalizedState(
+  130:     bytes32[] calldata _shnarfs,
+  131:     uint256[] calldata _finalBlockNumbers
+  132:   ) external reinitializer(5) {
+  133:     if (_shnarfs.length != _finalBlockNumbers.length) {
+  134:       revert ShnarfAndFinalBlockNumberLengthsMismatched(_shnarfs.length, _finalBlockNumbers.length);
+  135:     }
+  136: 
+  137:     for (uint256 i; i < _shnarfs.length; i++) {
+  138:       shnarfFinalBlockNumbers[_shnarfs[i]] = _finalBlockNumbers[i];
+  139:     }
+  140: 
+  141:     currentFinalizedState = _computeLastFinalizedState(
+  142:       currentL2StoredL1MessageNumber,
+  143:       currentL2StoredL1RollingHash,
+  144:       currentTimestamp
+  145:     );
+  146:   }
+  147: 
+  148:   /**
+  149:    * @notice Adds or updates the verifier contract address for a proof type.
+  150:    * @dev VERIFIER_SETTER_ROLE is required to execute.
+
+[LineaRollup.submitDataAsCalldata uses shnarfFinalBlockNumbers[parent] as parent continuity gate]
+  277:     });
+  278: 
+  279:     bytes32 currentDataHash = keccak256(_submissionData.compressedData);
+  280: 
+  281:     _validateSubmissionData(submissionData, shnarfFinalBlockNumbers[_parentShnarf], currentL2BlockNumber);
+  282: 
+  283:     bytes32 dataEvaluationPoint = Utils._efficientKeccak(_submissionData.snarkHash, currentDataHash);
+  284:     bytes32 computedShnarf = _computeShnarf(
+  285:       _parentShnarf,
+  286:       _submissionData.snarkHash,
+  287:       _submissionData.finalStateRootHash,
+  288:       dataEvaluationPoint,
+  289:       _calculateY(_submissionData.compressedData, dataEvaluationPoint)
+  290:     );
+  291: 
+  292:     if (_expectedShnarf != computedShnarf) {
+
+[LineaRollup._validateSubmissionData parentFinalBlock+1 continuity check]
+  321:       revert SnarkHashIsZeroHash();
+  322:     }
+  323: 
+  324:     // for it to be equal the number would have to wrap round twice in overflow..
+  325:     unchecked {
+  326:       if (_parentFinalBlockNumber + 1 != _submissionData.firstBlockInData) {
+  327:         revert DataStartingBlockDoesNotMatch(_parentFinalBlockNumber + 1, _submissionData.firstBlockInData);
+  328:       }
+  329:     }
+  330: 
+  331:     if (_submissionData.firstBlockInData <= _lastFinalizedBlockNumber) {
+  332:       revert FirstBlockLessThanOrEqualToLastFinalizedBlock(_submissionData.firstBlockInData, _lastFinalizedBlockNumber);
+  333:     }
+  334: 
+
+[LineaRollup.submit path blocks on already-set shnarf]
+  241:     /**
+  242:      * @dev validate we haven't submitted the last shnarf.
+  243:      * Note: As only the last shnarf is stored, we don't need to validate shnarfs,
+  244:      * computed for any previous blobs in the submission (if multiple are submitted).
+  245:      */
+  246:     if (shnarfFinalBlockNumbers[computedShnarf] != 0) {
+  247:       revert DataAlreadySubmitted(computedShnarf);
+  248:     }
+  249: 
+  250:     /// @dev use the last shnarf as the submission to store as technically it becomes the next parent shnarf.
+  251:     shnarfFinalBlockNumbers[computedShnarf] = blobFinalBlockNumber;
+  252: 
+  253:     emit DataSubmittedV2(computedShnarf, _blobSubmissionData[0].submissionData.firstBlockInData, blobFinalBlockNumber);
+  254:   }
+
+[LineaRollup constructor disables impl initializers; proxy initialize uses version 1]
+   65:   /// @custom:oz-upgrades-unsafe-allow constructor
+   66:   constructor() {
+   67:     _disableInitializers();
+   68:   }
+   69: 
+   70:   /**
+   71:    * @notice Initializes LineaRollup and underlying service dependencies - used for new networks only.
+   72:    * @dev DEFAULT_ADMIN_ROLE is set for the security council.
+   73:    * @dev OPERATOR_ROLE is set for operators.
+   74:    * @dev Note: This is used for new testnets and local/CI testing, and will not replace existing proxy based contracts.
+   75:    * @param _initialStateRootHash The initial hash at migration used for proof verification.
+   76:    * @param _initialL2BlockNumber The initial block number at migration.
+   77:    * @param _defaultVerifier The default verifier for rollup proofs.
+   78:    * @param _securityCouncil The address for the security council performing admin operations.
+   79:    * @param _operators The allowed rollup operators at initialization.
+   80:    * @param _rateLimitPeriodInSeconds The period in which withdrawal amounts and fees will be accumulated.
+   81:    * @param _rateLimitAmountInWei The limit allowed for withdrawing in the rate limit period.
+   82:    * @param _genesisTimestamp The L2 genesis timestamp for first finalization.
+   83:    */
+   84:   function initialize(
+   85:     bytes32 _initialStateRootHash,
+   86:     uint256 _initialL2BlockNumber,
+   87:     address _defaultVerifier,
+   88:     address _securityCouncil,
+   89:     address[] calldata _operators,
+   90:     uint256 _rateLimitPeriodInSeconds,
+   91:     uint256 _rateLimitAmountInWei,
+   92:     uint256 _genesisTimestamp
+   93:   ) external initializer {
+   94:     if (_defaultVerifier == address(0)) {
+   95:       revert ZeroAddressNotAllowed();
+   96:     }
+   97: 
+   98:     for (uint256 i; i < _operators.length; ++i) {
+   99:       if (_operators[i] == address(0)) {
+  100:         revert ZeroAddressNotAllowed();

@@ -1,0 +1,16 @@
+.h=218
+.cc=170
+.inl=83
+=78
+.hpp=9
+.c=5
+.bzl=5
+.s=3
+.md=3
+.bin=2
+.patch=2
+.cairo=1
+.json=1
+.markdown=1
+.cpp=1
+.txt=1

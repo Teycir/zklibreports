@@ -1,0 +1,8 @@
+Compiling 5 files with Solc 0.8.24
+Solc 0.8.24 finished in 243.28ms
+Compiler run successful!
+
+Running 1 tests for test/HalmosF4ChallengeBinding.t.sol:HalmosF4ChallengeBinding
+[31mCounterexample: ∅[0m
+[31m[FAIL][0m check_victim_cannot_be_forced_into_unrelated_challenge() (paths: 1, time: 0.22s, bounds: [])
+Symbolic test result: 0 passed; 1 failed; time: 0.23s

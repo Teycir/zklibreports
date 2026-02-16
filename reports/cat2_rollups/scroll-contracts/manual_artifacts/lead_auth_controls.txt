@@ -1,0 +1,112 @@
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\batch-bridge\L2BatchBridgeGateway.sol:128:        _grantRole(DEFAULT_ADMIN_ROLE, _msgSender());
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\batch-bridge\L2BatchBridgeGateway.sol:177:    function withdrawFailedAmount(address token, address receiver) external onlyRole(DEFAULT_ADMIN_ROLE) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\batch-bridge\L2BatchBridgeGateway.sol:193:    ) external onlyRole(KEEPER_ROLE) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\batch-bridge\L1BatchBridgeGateway.sol:197:        _grantRole(DEFAULT_ADMIN_ROLE, _msgSender());
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\batch-bridge\L1BatchBridgeGateway.sol:246:    function setBatchConfig(address token, BatchConfig calldata newConfig) external onlyRole(DEFAULT_ADMIN_ROLE) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\batch-bridge\L1BatchBridgeGateway.sol:259:    function executeBatchDeposit(address token) external payable onlyRole(KEEPER_ROLE) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\batch-bridge\L1BatchBridgeGateway.sol:288:            // no reentrancy risk (onlyRole modifier).
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\batch-bridge\L1BatchBridgeGateway.sol:344:                // no reentrancy risk (onlyRole modifier).
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L1\system-contract\SystemConfig.sol:104:    function updateMessageQueueParameters(MessageQueueParameters memory _params) external onlyOwner {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L1\system-contract\SystemConfig.sol:113:    function updateEnforcedBatchParameters(EnforcedBatchParameters memory _params) external onlyOwner {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L1\system-contract\SystemConfig.sol:122:    function updateSigner(address _newSigner) external onlyOwner {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\misc\ScrollOwner.sol:46:        require(_role == DEFAULT_ADMIN_ROLE || targetAccess[_target][_selector].contains(_role), "no access");
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\misc\ScrollOwner.sol:55:        _grantRole(DEFAULT_ADMIN_ROLE, _msgSender());
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\misc\ScrollOwner.sol:88:    ) external payable onlyRole(_role) hasAccess(_target, bytes4(_data[0:4]), _role) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\misc\ScrollOwner.sol:109:    ) external onlyRole(DEFAULT_ADMIN_ROLE) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\misc\PauseController.sol:111:    function pause(IPausable component) external onlyOwner {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\misc\PauseController.sol:136:    function unpause(IPausable component) external onlyOwner {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\misc\PauseController.sol:159:    function resetPauseCooldownPeriod(IPausable component) external onlyOwner {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\misc\PauseController.sol:167:    function updatePauseCooldownPeriod(uint256 newPauseCooldownPeriod) external onlyOwner {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\validium\ScrollChainValidium.sol:147:        _grantRole(DEFAULT_ADMIN_ROLE, _admin);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\validium\ScrollChainValidium.sol:181:    function importGenesisBatch(bytes calldata _batchHeader) external onlyRole(GENESIS_IMPORTER_ROLE) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\validium\ScrollChainValidium.sol:220:    ) external onlyRole(SEQUENCER_ROLE) whenNotPaused {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\validium\ScrollChainValidium.sol:248:    function revertBatch(bytes calldata batchHeader) external onlyRole(DEFAULT_ADMIN_ROLE) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\validium\ScrollChainValidium.sol:272:    ) external override onlyRole(PROVER_ROLE) whenNotPaused {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\validium\ScrollChainValidium.sol:280:    function registerNewEncryptionKey(bytes memory _key) external onlyRole(KEY_MANAGER_ROLE) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\validium\ScrollChainValidium.sol:293:    function setPause(bool _status) external onlyRole(DEFAULT_ADMIN_ROLE) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\misc\Fallback.sol:20:    ) external onlyOwner {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\misc\Fallback.sol:32:    function execute(address _target, bytes calldata _data) external payable onlyOwner {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\validium\FastWithdrawVault.sol:101:        _grantRole(DEFAULT_ADMIN_ROLE, _admin);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\validium\FastWithdrawVault.sol:155:    ) external nonReentrant onlyRole(DEFAULT_ADMIN_ROLE) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L1\rollup\ScrollChain.sol:346:    ) external override OnlySequencer whenNotPaused whenEnforcedBatchNotEnabled {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L1\rollup\ScrollChain.sol:354:    function revertBatch(bytes calldata batchHeader) external onlyOwner {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L1\rollup\ScrollChain.sol:380:    ) external override OnlyProver whenNotPaused whenEnforcedBatchNotEnabled {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L1\rollup\ScrollChain.sol:458:    function addSequencer(address _account) external onlyOwner {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L1\rollup\ScrollChain.sol:470:    function removeSequencer(address _account) external onlyOwner {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L1\rollup\ScrollChain.sol:478:    function addProver(address _account) external onlyOwner {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L1\rollup\ScrollChain.sol:489:    function removeProver(address _account) external onlyOwner {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L1\rollup\ScrollChain.sol:497:    function setPause(bool _status) external onlyOwner {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L1\rollup\ScrollChain.sol:506:    function disableEnforcedBatchMode() external onlyOwner {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\lido\LidoGatewayManager.sol:241:    function grantRole(bytes32 _role, address _account) external onlyOwner {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\lido\LidoGatewayManager.sol:250:    function revokeRole(bytes32 _role, address _account) external onlyOwner {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L1\rollup\MultipleVersionRollupVerifier.sol:153:    ) external onlyOwner {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L1\rollup\L2GasPriceOracle.sol:130:    function updateWhitelist(address _newWhitelist) external onlyOwner {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L1\rollup\L2GasPriceOracle.sol:147:    ) external onlyOwner {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L1\rollup\L1MessageQueueV1WithGasPriceOracle.sol:110:    function updateWhitelistChecker(address _newWhitelistChecker) external onlyOwner {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L1\rollup\L1MessageQueueV1.sol:439:    function updateGasOracle(address _newGasOracle) external onlyOwner {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L1\rollup\L1MessageQueueV1.sol:449:    function updateMaxGasLimit(uint256 _newMaxGasLimit) external onlyOwner {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L1\L1ScrollMessenger.sol:160:    ) external payable override whenNotPaused {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L1\L1ScrollMessenger.sol:171:    ) external payable override whenNotPaused {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L1\L1ScrollMessenger.sol:183:    ) external override whenNotPaused notInExecution {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L1\L1ScrollMessenger.sol:229:    ) external payable override whenNotPaused notInExecution {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\mocks\ScrollChainValidiumMock.sol:33:    function setRequireProof(bool _requireProof) external onlyRole(DEFAULT_ADMIN_ROLE) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\mocks\ScrollChainMockFinalize.sol:29:    ) external OnlyProver whenNotPaused {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\libraries\token\ScrollStandardERC20Factory.sol:35:    function deployL2Token(address _gateway, address _l1Token) external onlyOwner returns (address) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L1\gateways\usdc\L1USDCGateway.sol:117:    function updateCircleCaller(address _caller) external onlyOwner {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L1\gateways\usdc\L1USDCGateway.sol:123:    function pauseDeposit(bool _paused) external onlyOwner {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L1\gateways\usdc\L1USDCGateway.sol:129:    function pauseWithdraw(bool _paused) external onlyOwner {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L1\gateways\usdc\draft-L1USDCGatewayCCTP.sol:124:    function updateCCTPContracts(address _messenger, address _transmitter) external onlyOwner {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L1\gateways\L1GatewayRouter.sol:233:    function setETHGateway(address _newEthGateway) external onlyOwner {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L1\gateways\L1GatewayRouter.sol:241:    function setDefaultERC20Gateway(address _newDefaultERC20Gateway) external onlyOwner {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L1\gateways\L1GatewayRouter.sol:249:    function setERC20Gateway(address[] memory _tokens, address[] memory _gateways) external onlyOwner {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L1\gateways\L1ERC721Gateway.sol:146:    function updateTokenMapping(address _l1Token, address _l2Token) external onlyOwner {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L1\gateways\L1ERC1155Gateway.sol:148:    function updateTokenMapping(address _l1Token, address _l2Token) external onlyOwner {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\libraries\ScrollMessengerBase.sol:93:    receive() external payable onlyOwner {}
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\libraries\ScrollMessengerBase.sol:102:    function updateFeeVault(address _newFeeVault) external onlyOwner {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\libraries\ScrollMessengerBase.sol:112:    function setPause(bool _status) external onlyOwner {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L1\gateways\L1CustomERC20Gateway.sol:89:    function updateTokenMapping(address _l1Token, address _l2Token) external payable onlyOwner {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L1\gateways\EnforcedTxGateway.sol:105:    ) external payable whenNotPaused {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L1\gateways\EnforcedTxGateway.sol:136:    ) external payable whenNotPaused {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L1\gateways\EnforcedTxGateway.sol:163:    function setPause(bool _status) external onlyOwner {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\validium\FastWithdrawVault.t.sol:93:        assertTrue(vault.hasRole(vault.DEFAULT_ADMIN_ROLE(), vaultAdmin));
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\validium\FastWithdrawVault.t.sol:241:                StringsUpgradeable.toHexString(uint256(vault.DEFAULT_ADMIN_ROLE()), 32)
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\L1ScrollMessengerTest.t.sol:199:        hevm.expectRevert("Pausable: paused");
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\L1ScrollMessengerTest.t.sol:201:        hevm.expectRevert("Pausable: paused");
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\L1ScrollMessengerTest.t.sol:203:        hevm.expectRevert("Pausable: paused");
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\L1ScrollMessengerTest.t.sol:206:        hevm.expectRevert("Pausable: paused");
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\ScrollChain.t.sol:672:        hevm.expectRevert("Pausable: paused");
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\test\ScrollChain.t.sol:674:        hevm.expectRevert("Pausable: paused");
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\libraries\common\OwnableBase.sol:27:    modifier onlyOwner() {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\libraries\common\OwnableBase.sol:37:    /// `onlyOwner` functions anymore. Can only be called by the current owner.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\libraries\common\OwnableBase.sol:41:    function renounceOwnership() public onlyOwner {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\libraries\common\OwnableBase.sol:47:    function transferOwnership(address _newOwner) public onlyOwner {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L2\L2ScrollMessenger.sol:75:    ) external payable override whenNotPaused {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L2\L2ScrollMessenger.sol:86:    ) external payable override whenNotPaused {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L2\L2ScrollMessenger.sol:97:    ) external override whenNotPaused {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L2\L2SystemConfig.sol:68:    function updateBaseFeeOverhead(uint256 _baseFeeOverhead) external onlyOwner {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L2\L2SystemConfig.sol:76:    function updateBaseFeeScalar(uint256 _baseFeeScalar) external onlyOwner {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L2\predeploys\L2MessageQueue.sol:42:    function initialize(address _messenger) external onlyOwner {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L2\predeploys\Whitelist.sol:29:    function updateWhitelistStatus(address[] memory _accounts, bool _status) external onlyOwner {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L2\predeploys\L1GasPriceOracle.sol:209:    function setOverhead(uint256 _overhead) external onlyOwner {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L2\predeploys\L1GasPriceOracle.sol:218:    function setScalar(uint256 _scalar) external onlyOwner {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L2\predeploys\L1GasPriceOracle.sol:227:    function setCommitScalar(uint256 _scalar) external onlyOwner {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L2\predeploys\L1GasPriceOracle.sol:236:    function setBlobScalar(uint256 _scalar) external onlyOwner {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L2\predeploys\L1GasPriceOracle.sol:245:    function setPenaltyFactor(uint256 _factor) external onlyOwner {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L2\predeploys\L1GasPriceOracle.sol:254:    function updateWhitelist(address _newWhitelist) external onlyOwner {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L2\predeploys\L1GasPriceOracle.sol:266:    function enableCurie() external onlyOwner {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L2\predeploys\L1GasPriceOracle.sol:276:    function enableFeynman() external onlyOwner {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L2\predeploys\L1GasPriceOracle.sol:286:    function enableGalileo() external onlyOwner {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L2\predeploys\L2TxFeeVault.sol:145:    function updateMessenger(address _newMessenger) external onlyOwner {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L2\predeploys\L2TxFeeVault.sol:154:    function updateRecipient(address _newRecipient) external onlyOwner {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L2\predeploys\L2TxFeeVault.sol:163:    function updateMinWithdrawAmount(uint256 _newMinWithdrawAmount) external onlyOwner {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L2\predeploys\L1BlockContainer.sol:69:    ) external onlyOwner {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L2\predeploys\L1BlockContainer.sol:299:    function updateWhitelist(address _newWhitelist) external onlyOwner {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L2\gateways\L2ERC1155Gateway.sol:151:    function updateTokenMapping(address _l2Token, address _l1Token) external onlyOwner {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L2\gateways\L2ERC721Gateway.sol:146:    function updateTokenMapping(address _l2Token, address _l1Token) external onlyOwner {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L2\gateways\L2GatewayRouter.sol:181:    function setETHGateway(address _newEthGateway) external onlyOwner {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L2\gateways\L2GatewayRouter.sol:189:    function setDefaultERC20Gateway(address _newDefaultERC20Gateway) external onlyOwner {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L2\gateways\L2GatewayRouter.sol:197:    function setERC20Gateway(address[] memory _tokens, address[] memory _gateways) external onlyOwner {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L2\gateways\usdc\draft-L2USDCGatewayCCTP.sol:108:    function updateCCTPContracts(address _messenger, address _transmitter) external onlyOwner {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L2\gateways\usdc\L2USDCGateway.sol:145:    function updateCircleCaller(address _caller) external onlyOwner {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L2\gateways\usdc\L2USDCGateway.sol:151:    function pauseDeposit(bool _paused) external onlyOwner {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L2\gateways\usdc\L2USDCGateway.sol:157:    function pauseWithdraw(bool _paused) external onlyOwner {

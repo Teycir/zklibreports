@@ -1,0 +1,26 @@
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\LineaRollup.sol:527:    if (_finalizationData.finalTimestamp >= block.timestamp) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\LineaRollup.sol:528:      revert FinalizationInTheFuture(_finalizationData.finalTimestamp, block.timestamp);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\interfaces\l1\ILineaRollup.sol:225:   * @dev Thrown when final l2 block timestamp higher than current block.timestamp during finalization.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\messageService\lib\RateLimiter.sol:48:    currentPeriodEnd = block.timestamp + _periodInSeconds;
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\messageService\lib\RateLimiter.sol:62:    if (currentPeriodEnd < block.timestamp) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\messageService\lib\RateLimiter.sol:63:      currentPeriodEnd = block.timestamp + periodInSeconds;
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\messageService\lib\RateLimiter.sol:89:    if (currentPeriodEnd < block.timestamp) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\messageService\lib\RateLimiter.sol:90:      currentPeriodEnd = block.timestamp + periodInSeconds;
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\token\TokenMintingRateLimiter.sol:76:    uint256 mintingPeriodEnd = block.timestamp + _mintingPeriodInSeconds;
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\token\TokenMintingRateLimiter.sol:143:    if (currentPeriodEnd < block.timestamp) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\token\TokenMintingRateLimiter.sol:144:      currentPeriodEnd = block.timestamp + mintingPeriodInSeconds;
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\token\TokenMintingRateLimiter.sol:170:    if (currentPeriodEnd < block.timestamp) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\token\TokenMintingRateLimiter.sol:171:      currentPeriodEnd = block.timestamp + mintingPeriodInSeconds;
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:1668:   * @dev Thrown when final l2 block timestamp higher than current block.timestamp during finalization.
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:2503:    currentPeriodEnd = block.timestamp + _periodInSeconds;
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:2517:    if (currentPeriodEnd < block.timestamp) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:2518:      currentPeriodEnd = block.timestamp + periodInSeconds;
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:2544:    if (currentPeriodEnd < block.timestamp) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:2545:      currentPeriodEnd = block.timestamp + periodInSeconds;
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:3467:    if (_finalizationData.finalTimestamp >= block.timestamp) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\LineaRollupAlphaV3.sol:3468:      revert FinalizationInTheFuture(_finalizationData.finalTimestamp, block.timestamp);
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\L2MessageServiceLineaMainnet.sol:1854:    currentPeriodEnd = block.timestamp + _periodInSeconds;
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\L2MessageServiceLineaMainnet.sol:1866:    if (currentPeriodEnd < block.timestamp) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\L2MessageServiceLineaMainnet.sol:1867:      currentPeriodEnd = block.timestamp + periodInSeconds;
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\L2MessageServiceLineaMainnet.sol:1893:    if (currentPeriodEnd < block.timestamp) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\linea-contracts/contracts\test-contracts\L2MessageServiceLineaMainnet.sol:1894:      currentPeriodEnd = block.timestamp + periodInSeconds;

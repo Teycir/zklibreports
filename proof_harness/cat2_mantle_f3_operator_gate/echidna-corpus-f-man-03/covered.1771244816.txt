@@ -1,0 +1,226 @@
+C:/Users/vboxuser/Desktop/Repos/zklibreports/proof_harness/cat2_mantle_f3_operator_gate/src/EchidnaMantleHarnesses.sol
+   1 |     | // SPDX-License-Identifier: MIT
+   2 |     | pragma solidity 0.8.24;
+   3 |     | 
+   4 |     | import {ChallengeSettlementHarness, DefenderCaller, RollupOperatorGateHarness} from "./MantleF3Harness.sol";
+   5 |     | 
+   6 |     | interface IRollupCompleteCallback {
+   7 |     |     function completeChallenge(address winner, address loser) external;
+   8 |     | }
+   9 |     | 
+  10 |     | contract RollupCallbackRecorder is IRollupCompleteCallback {
+  11 |     |     address public lastWinner;
+  12 |     |     address public lastLoser;
+  13 |     |     uint256 public callCount;
+  14 |     | 
+  15 |     |     function completeChallenge(address winner, address loser) external {
+  16 |     |         lastWinner = winner;
+  17 |     |         lastLoser = loser;
+  18 |     |         callCount++;
+  19 |     |     }
+  20 |     | }
+  21 |     | 
+  22 |     | /// @notice Echidna witness harness for F-MAN-01.
+  23 |     | /// @dev Property expected by secure settlement:
+  24 |     | ///      once challenger is winner, defender cannot rewrite outcome.
+  25 |     | contract EchidnaF1WinnerFlipHarness {
+  26 |     |     DefenderCaller public defenderBot;
+  27 |     |     ChallengeSettlementHarness public challenge;
+  28 |     |     RollupCallbackRecorder public recorder;
+  29 |     | 
+  30 |     |     address public defenderOperator;
+  31 |     |     address public challengerOperator;
+  32 |     | 
+  33 |     |     constructor() {
+  34 |     |         defenderBot = new DefenderCaller();
+  35 |     |         recorder = new RollupCallbackRecorder();
+  36 |     | 
+  37 |     |         defenderOperator = address(defenderBot);
+  38 |     |         challengerOperator = address(0xC0FFEE);
+  39 |     | 
+  40 |     |         challenge = new ChallengeSettlementHarness(defenderOperator, challengerOperator, address(recorder));
+  41 |     |         challenge.setWinner(challengerOperator);
+  42 |     |     }
+  43 |     | 
+  44 |     |     function action_defender_settles_false() public {
+  45 |     |         defenderBot.callComplete(challenge, false);
+  46 |     |     }
+  47 |     | 
+  48 |     |     function action_defender_settles_true() public {
+  49 |     |         defenderBot.callComplete(challenge, true);
+  50 |     |     }
+  51 |     | 
+  52 |     |     function echidna_challenger_win_cannot_be_rewritten() public view returns (bool) {
+  53 |     |         return challenge.winner() == challengerOperator;
+  54 |     |     }
+  55 |     | }
+  56 |     | 
+  57 |     | /// @notice Echidna witness harness for F-MAN-03.
+  58 |     | /// @dev Property expected by robust challenge plumbing:
+  59 |     | ///      after setup, settlement should progress without hidden operator registration.
+  60 | *r  | contract EchidnaF3OperatorGateHarness {
+  61 |     |     RollupOperatorGateHarness public rollup;
+  62 |     |     DefenderCaller public defenderBot;
+  63 |     |     ChallengeSettlementHarness public challenge;
+  64 |     | 
+  65 |     |     address public defenderOperator;
+  66 |     |     address public challengerOperator;
+  67 |     |     address public defenderStaker;
+  68 |     |     address public challengerStaker;
+  69 |     |     address public syntheticChallengeOperatorStaker;
+  70 |     | 
+  71 |     |     bool public attemptedSettlement;
+  72 |     |     bool public registeredChallengeOperator;
+  73 |     | 
+  74 | *   |     constructor() {
+  75 | *   |         rollup = new RollupOperatorGateHarness();
+  76 | *   |         defenderBot = new DefenderCaller();
+  77 |     | 
+  78 | *   |         defenderOperator = address(defenderBot);
+  79 | *   |         challengerOperator = address(0xBEEF);
+  80 | *   |         defenderStaker = address(0xAA01);
+  81 | *   |         challengerStaker = address(0xBB02);
+  82 | *   |         syntheticChallengeOperatorStaker = address(0xCC03);
+  83 |     | 
+  84 | *   |         rollup.register(defenderOperator, defenderStaker);
+  85 | *   |         rollup.register(challengerOperator, challengerStaker);
+  86 |     | 
+  87 | *   |         challenge = new ChallengeSettlementHarness(defenderOperator, challengerOperator, address(rollup));
+  88 | *   |         rollup.pairChallenge(defenderOperator, challengerOperator, address(challenge));
+  89 | *   |         challenge.setWinner(defenderOperator);
+  90 |     |     }
+  91 |     | 
+  92 | *   |     function action_attempt_settlement(bool result) public {
+  93 | *   |         attemptedSettlement = true;
+  94 | *   |         try defenderBot.callComplete(challenge, result) {} catch {}
+  95 |     |     }
+  96 |     | 
+  97 | *   |     function action_register_challenge_operator() public {
+  98 | *   |         if (registeredChallengeOperator) {
+  99 | *   |             return;
+ 100 |     |         }
+ 101 | *   |         rollup.register(address(challenge), syntheticChallengeOperatorStaker);
+ 102 | *   |         registeredChallengeOperator = true;
+ 103 |     |     }
+ 104 |     | 
+ 105 |     |     function echidna_settlement_progresses_without_hidden_registration() public view returns (bool) {
+ 106 |     |         if (!attemptedSettlement) {
+ 107 |     |             return true;
+ 108 |     |         }
+ 109 |     |         return rollup.challengeCompleted();
+ 110 |     |     }
+ 111 |     | }
+ 112 |     | 
+
+C:/Users/vboxuser/Desktop/Repos/zklibreports/proof_harness/cat2_mantle_f3_operator_gate/src/MantleF3Harness.sol
+   1 |     | // SPDX-License-Identifier: MIT
+   2 |     | pragma solidity 0.8.24;
+   3 |     | 
+   4 |     | interface IRollupCallback {
+   5 |     |     function completeChallenge(address winner, address loser) external;
+   6 |     | }
+   7 |     | 
+   8 |     | /// @notice Minimal model of Mantle Rollup challenge settlement gating:
+   9 |     | ///         operatorOnly + msg.sender == challenge.
+  10 | *   | contract RollupOperatorGateHarness {
+  11 |     |     struct Staker {
+  12 |     |         bool isStaked;
+  13 |     |         address currentChallenge;
+  14 |     |     }
+  15 |     | 
+  16 |     |     mapping(address => Staker) public stakers;
+  17 |     |     mapping(address => address) public registers; // operator => staker
+  18 |     |     bool public challengeCompleted;
+  19 |     | 
+  20 | *   |     function register(address operator, address staker) external {
+  21 | *   |         registers[operator] = staker;
+  22 | *   |         stakers[staker].isStaked = true;
+  23 |     |     }
+  24 |     | 
+  25 | *   |     function pairChallenge(address winnerOperator, address loserOperator, address challenge) external {
+  26 | *   |         address winnerStaker = registers[winnerOperator];
+  27 | *   |         address loserStaker = registers[loserOperator];
+  28 | *   |         stakers[winnerStaker].currentChallenge = challenge;
+  29 | *   |         stakers[loserStaker].currentChallenge = challenge;
+  30 |     |     }
+  31 |     | 
+  32 |     |     modifier operatorOnly() {
+  33 | *   |         if (registers[msg.sender] == address(0)) {
+  34 | *   |             revert("NotOperator");
+  35 |     |         }
+  36 |     |         _;
+  37 |     |     }
+  38 |     | 
+  39 | *   |     function completeChallenge(address winner, address loser) external operatorOnly {
+  40 | *   |         address winnerStaker = registers[winner];
+  41 | *   |         address loserStaker = registers[loser];
+  42 | *   |         if (!stakers[loserStaker].isStaked) {
+  43 |     |             revert("NotStaked");
+  44 |     |         }
+  45 |     | 
+  46 | *   |         address challenge = _getChallenge(winnerStaker, loserStaker);
+  47 | *   |         if (msg.sender != challenge) {
+  48 |     |             revert("NotChallenge");
+  49 |     |         }
+  50 |     | 
+  51 | *   |         challengeCompleted = true;
+  52 |     |     }
+  53 |     | 
+  54 | *   |     function _getChallenge(address winnerStaker, address loserStaker) private view returns (address) {
+  55 | *   |         address challenge = stakers[winnerStaker].currentChallenge;
+  56 | *   |         if (challenge == address(0)) {
+  57 |     |             revert("NotInChallenge");
+  58 |     |         }
+  59 | *   |         if (challenge != stakers[loserStaker].currentChallenge) {
+  60 |     |             revert("InDifferentChallenge");
+  61 |     |         }
+  62 | *   |         return challenge;
+  63 |     |     }
+  64 |     | }
+  65 |     | 
+  66 |     | /// @notice Minimal model of Mantle Challenge.completeChallenge(bool result).
+  67 | *   | contract ChallengeSettlementHarness {
+  68 |     |     address public defender;
+  69 |     |     address public challenger;
+  70 |     |     address public resultReceiver;
+  71 |     |     address public winner;
+  72 |     | 
+  73 |     |     modifier onlyDefender() {
+  74 | *   |         require(defender != address(0), "Defender not set");
+  75 | *   |         require(msg.sender == defender, "Caller not defender");
+  76 | *   |         _;
+  77 |     |     }
+  78 |     | 
+  79 | *   |     constructor(address defender_, address challenger_, address resultReceiver_) {
+  80 | *   |         defender = defender_;
+  81 | *   |         challenger = challenger_;
+  82 | *   |         resultReceiver = resultReceiver_;
+  83 |     |     }
+  84 |     | 
+  85 |     |     /// @dev test helper to control pre-state.
+  86 | *   |     function setWinner(address winner_) external {
+  87 | *   |         winner = winner_;
+  88 |     |     }
+  89 |     | 
+  90 | *   |     function completeChallenge(bool result) external onlyDefender {
+  91 | *   |         require(winner != address(0), "Do not have winner");
+  92 |     | 
+  93 | *   |         if (winner == challenger) {
+  94 |     |             if (result) {
+  95 |     |                 IRollupCallback(resultReceiver).completeChallenge(challenger, defender);
+  96 |     |                 return;
+  97 |     |             }
+  98 |     |             winner = defender;
+  99 |     |         }
+ 100 |     | 
+ 101 | *   |         IRollupCallback(resultReceiver).completeChallenge(defender, challenger);
+ 102 |     |     }
+ 103 |     | }
+ 104 |     | 
+ 105 | *   | contract DefenderCaller {
+ 106 | *   |     function callComplete(ChallengeSettlementHarness challenge, bool result) external {
+ 107 | *   |         challenge.completeChallenge(result);
+ 108 |     |     }
+ 109 |     | }
+ 110 |     | 
+

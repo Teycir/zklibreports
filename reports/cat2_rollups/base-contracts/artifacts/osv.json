@@ -1,0 +1,3408 @@
+{
+  "results": [
+    {
+      "source": {
+        "path": "//VBOXSVR/elements/Repos/zk0d/cat2_rollups/base-contracts/bindings/go.mod",
+        "type": "lockfile"
+      },
+      "packages": [
+        {
+          "package": {
+            "name": "github.com/consensys/gnark-crypto",
+            "version": "0.14.0",
+            "ecosystem": "Go"
+          },
+          "groups": [
+            {
+              "ids": [
+                "GO-2025-4087",
+                "GHSA-fj2x-735w-74vq"
+              ],
+              "aliases": [
+                "GHSA-fj2x-735w-74vq",
+                "GO-2025-4087"
+              ],
+              "experimental_analysis": {
+                "GO-2025-4087": {
+                  "called": false,
+                  "unimportant": false
+                }
+              },
+              "max_severity": "7.5"
+            }
+          ],
+          "vulnerabilities": [
+            {
+              "affected": [
+                {
+                  "database_specific": {
+                    "source": "https://vuln.go.dev/ID/GO-2025-4087.json"
+                  },
+                  "ecosystem_specific": {
+                    "imports": [
+                      {
+                        "path": "github.com/consensys/gnark-crypto/ecc/secp256k1/fr",
+                        "symbols": [
+                          "Vector.AsyncReadFrom",
+                          "Vector.ReadFrom",
+                          "Vector.UnmarshalBinary"
+                        ]
+                      },
+                      {
+                        "path": "github.com/consensys/gnark-crypto/ecc/bw6-633/fp",
+                        "symbols": [
+                          "Vector.AsyncReadFrom",
+                          "Vector.ReadFrom",
+                          "Vector.UnmarshalBinary"
+                        ]
+                      },
+                      {
+                        "path": "github.com/consensys/gnark-crypto/ecc/bls12-377/fp",
+                        "symbols": [
+                          "Vector.AsyncReadFrom",
+                          "Vector.ReadFrom",
+                          "Vector.UnmarshalBinary"
+                        ]
+                      },
+                      {
+                        "path": "github.com/consensys/gnark-crypto/ecc/bls12-381/fp",
+                        "symbols": [
+                          "Vector.AsyncReadFrom",
+                          "Vector.ReadFrom",
+                          "Vector.UnmarshalBinary"
+                        ]
+                      },
+                      {
+                        "path": "github.com/consensys/gnark-crypto/ecc/grumpkin/fp",
+                        "symbols": [
+                          "Vector.AsyncReadFrom",
+                          "Vector.ReadFrom",
+                          "Vector.UnmarshalBinary"
+                        ]
+                      },
+                      {
+                        "path": "github.com/consensys/gnark-crypto/ecc/bw6-633/fr",
+                        "symbols": [
+                          "Vector.AsyncReadFrom",
+                          "Vector.ReadFrom",
+                          "Vector.UnmarshalBinary"
+                        ]
+                      },
+                      {
+                        "path": "github.com/consensys/gnark-crypto/ecc/bls12-377/fr",
+                        "symbols": [
+                          "Vector.AsyncReadFrom",
+                          "Vector.ReadFrom",
+                          "Vector.UnmarshalBinary"
+                        ]
+                      },
+                      {
+                        "path": "github.com/consensys/gnark-crypto/ecc/bls24-315/fr",
+                        "symbols": [
+                          "Vector.AsyncReadFrom",
+                          "Vector.ReadFrom",
+                          "Vector.UnmarshalBinary"
+                        ]
+                      },
+                      {
+                        "path": "github.com/consensys/gnark-crypto/field/babybear",
+                        "symbols": [
+                          "Vector.AsyncReadFrom",
+                          "Vector.ReadFrom",
+                          "Vector.UnmarshalBinary"
+                        ]
+                      },
+                      {
+                        "path": "github.com/consensys/gnark-crypto/ecc/stark-curve/fr",
+                        "symbols": [
+                          "Vector.AsyncReadFrom",
+                          "Vector.ReadFrom",
+                          "Vector.UnmarshalBinary"
+                        ]
+                      },
+                      {
+                        "path": "github.com/consensys/gnark-crypto/ecc/grumpkin/fr",
+                        "symbols": [
+                          "Vector.AsyncReadFrom",
+                          "Vector.ReadFrom",
+                          "Vector.UnmarshalBinary"
+                        ]
+                      },
+                      {
+                        "path": "github.com/consensys/gnark-crypto/ecc/bn254/fp",
+                        "symbols": [
+                          "Vector.AsyncReadFrom",
+                          "Vector.ReadFrom",
+                          "Vector.UnmarshalBinary"
+                        ]
+                      },
+                      {
+                        "path": "github.com/consensys/gnark-crypto/ecc/bls24-317/fr",
+                        "symbols": [
+                          "Vector.AsyncReadFrom",
+                          "Vector.ReadFrom",
+                          "Vector.UnmarshalBinary"
+                        ]
+                      },
+                      {
+                        "path": "github.com/consensys/gnark-crypto/field/goldilocks",
+                        "symbols": [
+                          "Vector.AsyncReadFrom",
+                          "Vector.ReadFrom",
+                          "Vector.UnmarshalBinary"
+                        ]
+                      },
+                      {
+                        "path": "github.com/consensys/gnark-crypto/ecc/bn254/fr",
+                        "symbols": [
+                          "Vector.AsyncReadFrom",
+                          "Vector.ReadFrom",
+                          "Vector.UnmarshalBinary"
+                        ]
+                      },
+                      {
+                        "path": "github.com/consensys/gnark-crypto/ecc/bls12-381/fr",
+                        "symbols": [
+                          "Vector.AsyncReadFrom",
+                          "Vector.ReadFrom",
+                          "Vector.UnmarshalBinary"
+                        ]
+                      },
+                      {
+                        "path": "github.com/consensys/gnark-crypto/ecc/secp256k1/fp",
+                        "symbols": [
+                          "Vector.AsyncReadFrom",
+                          "Vector.ReadFrom",
+                          "Vector.UnmarshalBinary"
+                        ]
+                      },
+                      {
+                        "path": "github.com/consensys/gnark-crypto/field/koalabear",
+                        "symbols": [
+                          "Vector.AsyncReadFrom",
+                          "Vector.ReadFrom",
+                          "Vector.UnmarshalBinary"
+                        ]
+                      },
+                      {
+                        "path": "github.com/consensys/gnark-crypto/ecc/bls24-315/fp",
+                        "symbols": [
+                          "Vector.AsyncReadFrom",
+                          "Vector.ReadFrom",
+                          "Vector.UnmarshalBinary"
+                        ]
+                      },
+                      {
+                        "path": "github.com/consensys/gnark-crypto/ecc/stark-curve/fp",
+                        "symbols": [
+                          "Vector.AsyncReadFrom",
+                          "Vector.ReadFrom",
+                          "Vector.UnmarshalBinary"
+                        ]
+                      },
+                      {
+                        "path": "github.com/consensys/gnark-crypto/ecc/bw6-761/fp",
+                        "symbols": [
+                          "Vector.AsyncReadFrom",
+                          "Vector.ReadFrom",
+                          "Vector.UnmarshalBinary"
+                        ]
+                      },
+                      {
+                        "path": "github.com/consensys/gnark-crypto/ecc/bls24-317/fp",
+                        "symbols": [
+                          "Vector.AsyncReadFrom",
+                          "Vector.ReadFrom",
+                          "Vector.UnmarshalBinary"
+                        ]
+                      },
+                      {
+                        "path": "github.com/consensys/gnark-crypto/ecc/bw6-761/fr",
+                        "symbols": [
+                          "Vector.AsyncReadFrom",
+                          "Vector.ReadFrom",
+                          "Vector.UnmarshalBinary"
+                        ]
+                      }
+                    ]
+                  },
+                  "package": {
+                    "ecosystem": "Go",
+                    "name": "github.com/consensys/gnark-crypto",
+                    "purl": "pkg:golang/github.com/consensys/gnark-crypto"
+                  },
+                  "ranges": [
+                    {
+                      "events": [
+                        {
+                          "introduced": "0.9.1"
+                        },
+                        {
+                          "fixed": "0.18.1"
+                        },
+                        {
+                          "introduced": "0.19.0"
+                        },
+                        {
+                          "fixed": "0.19.2"
+                        }
+                      ],
+                      "type": "SEMVER"
+                    }
+                  ]
+                }
+              ],
+              "aliases": [
+                "GHSA-fj2x-735w-74vq"
+              ],
+              "database_specific": {
+                "review_status": "REVIEWED",
+                "url": "https://pkg.go.dev/vuln/GO-2025-4087"
+              },
+              "details": "Unchecked memory allocation during vector deserialization in github.com/consensys/gnark-crypto",
+              "id": "GO-2025-4087",
+              "modified": "2026-02-04T14:39:05.494613Z",
+              "published": "2025-11-05T18:41:07Z",
+              "references": [
+                {
+                  "type": "ADVISORY",
+                  "url": "https://github.com/Consensys/gnark-crypto/security/advisories/GHSA-fj2x-735w-74vq"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/Consensys/gnark-crypto/commit/2e7bf9190a0aac896eeec3876c87c77a35661be7"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/Consensys/gnark-crypto/pull/759"
+                },
+                {
+                  "type": "FIX",
+                  "url": "https://github.com/Consensys/gnark-crypto/commit/2e7bf9190a0aac896eeec3876c87c77a35661be7"
+                }
+              ],
+              "related": [
+                "CGA-q3pc-g2qx-vmhf"
+              ],
+              "schema_version": "1.7.3",
+              "summary": "Unchecked memory allocation during vector deserialization in github.com/consensys/gnark-crypto"
+            },
+            {
+              "affected": [
+                {
+                  "database_specific": {
+                    "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2025/10/GHSA-fj2x-735w-74vq/GHSA-fj2x-735w-74vq.json"
+                  },
+                  "package": {
+                    "ecosystem": "Go",
+                    "name": "github.com/consensys/gnark-crypto",
+                    "purl": "pkg:golang/github.com/consensys/gnark-crypto"
+                  },
+                  "ranges": [
+                    {
+                      "events": [
+                        {
+                          "introduced": "0.9.1"
+                        },
+                        {
+                          "fixed": "0.18.1"
+                        }
+                      ],
+                      "type": "SEMVER"
+                    }
+                  ]
+                },
+                {
+                  "database_specific": {
+                    "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2025/10/GHSA-fj2x-735w-74vq/GHSA-fj2x-735w-74vq.json"
+                  },
+                  "package": {
+                    "ecosystem": "Go",
+                    "name": "github.com/consensys/gnark-crypto",
+                    "purl": "pkg:golang/github.com/consensys/gnark-crypto"
+                  },
+                  "ranges": [
+                    {
+                      "events": [
+                        {
+                          "introduced": "0.19.0"
+                        },
+                        {
+                          "fixed": "0.19.2"
+                        }
+                      ],
+                      "type": "SEMVER"
+                    }
+                  ],
+                  "versions": [
+                    "0.19.0"
+                  ]
+                }
+              ],
+              "aliases": [
+                "GO-2025-4087"
+              ],
+              "database_specific": {
+                "cwe_ids": [
+                  "CWE-400"
+                ],
+                "github_reviewed": true,
+                "github_reviewed_at": "2025-10-30T17:10:40Z",
+                "nvd_published_at": null,
+                "severity": "HIGH"
+              },
+              "details": "The issue has been reported by @raefko from @fuzzinglabs. Excerpts from the report:\n\u003e A critical vulnerability exists in the gnark-crypto library's `Vector.ReadFrom()` function that allows an attacker to trigger arbitrary memory allocation by crafting malicious input data. An attacker can cause the verifier to attempt allocating up to 128 GB of memory with a minimal malicious input, leading to out-of-memory crashes and denial of service.\n\u003e ### **Root Cause**\n\u003e \n\u003e \n\u003e The vulnerability stems from **unchecked deserialization** of attacker-controlled length fields in the gnark-crypto library's `Vector.ReadFrom()` function. The function reads a 4-byte unsigned integer from untrusted input and directly uses it to allocate memory without any validation or bounds checking.\n\u003e \n\u003e ### **Vulnerable Code Path**\n\u003e \n\u003e ```\n\u003e User Input (Malicious Proof/Data)\n\u003e          ↓\n\u003e gnark Proof/Data Deserialization\n\u003e          ↓\n\u003e Vector.ReadFrom() (ecc/bn254/fr/vector.go:136-144)\n\u003e   → sliceLen := binary.BigEndian.Uint32(buf[:4])   // ← ATTACKER-CONTROLLED\n\u003e   → (*vector) = make(Vector, sliceLen)             // ← UNCHECKED ALLOCATION\n\u003e          ↓\n\u003e runtime.makeslice attempts 100+ GB allocation\n\u003e          ↓\n\u003e fatal error: runtime: out of memory → SIGABRT\n\u003e \n\u003e ```\n\u003e\n\u003e ### **Vulnerable Code**\n\u003e \n\u003e **File**: [`gnark-crypto@v0.14.0+/ecc/bn254/fr/vector.go:136-144`](https://github.com/Consensys/gnark-crypto/blob/8310aae2de6104d3fe3610e3370b2bed10c63111/ecc/bn254/fr/vector.go#L136)\n\u003e \n\u003e The code reads a 4-byte big-endian unsigned integer (`sliceLen`) directly from the input stream and uses it to allocate a slice without any bounds checking or validation. Each element is 32 bytes (fr.Element for BN254 curve), so an attacker can request up to:\n\u003e \n\u003e **Maximum Allocation**: `2^32 elements × 32 bytes = 137,438,953,472 bytes ≈ 128 GB`\n\u003e \n\u003e ## **Root Cause Analysis**\n\u003e \n\u003e The gnark-crypto library implements a generic serialization format for field element vectors. The format is:\n\u003e \n\u003e ```\n\u003e [4 bytes: length (n)] [n × 32 bytes: elements]\n\u003e ```\n\u003e \n\u003e The deserialization code **trusts** the length field implicitly without any validation. This is a classic **integer-to-allocation vulnerability** pattern, similar to issues that have affected many serialization libraries over the years.\n\n### Impact\n\nThe issue impacts users deserializing vectors directly from untrusted sources. In case of malicious input it would lead to OOM in case the server doesn't have sufficient memory (depending on the field, but could allocate from 32GB to 196GB).\n\n### Patches\n\nThe issue is patched in https://github.com/Consensys/gnark-crypto/pull/759. It will be backported to gnark-crypto v0.18 and v0.19.\n\n### Workarounds\n\nThe user could manually peek into the first 4 bytes of the serialized data to estimate if the header would allocate large amounts of memory.",
+              "id": "GHSA-fj2x-735w-74vq",
+              "modified": "2026-02-04T04:31:48.663196Z",
+              "published": "2025-10-30T17:10:40Z",
+              "references": [
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/Consensys/gnark-crypto/security/advisories/GHSA-fj2x-735w-74vq"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/Consensys/gnark-crypto/pull/759"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/Consensys/gnark-crypto/commit/2e7bf9190a0aac896eeec3876c87c77a35661be7"
+                },
+                {
+                  "type": "PACKAGE",
+                  "url": "https://github.com/Consensys/gnark-crypto"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://pkg.go.dev/vuln/GO-2025-4087"
+                }
+              ],
+              "related": [
+                "CGA-q3pc-g2qx-vmhf"
+              ],
+              "schema_version": "1.7.3",
+              "severity": [
+                {
+                  "score": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+                  "type": "CVSS_V3"
+                }
+              ],
+              "summary": "gnark-crypto allows unchecked memory allocation during vector deserialization"
+            }
+          ]
+        },
+        {
+          "package": {
+            "name": "github.com/ethereum/go-ethereum",
+            "version": "1.15.8",
+            "ecosystem": "Go"
+          },
+          "groups": [
+            {
+              "ids": [
+                "GO-2026-4314",
+                "GHSA-mq3p-rrmp-79jg"
+              ],
+              "aliases": [
+                "CVE-2026-22868",
+                "GHSA-mq3p-rrmp-79jg",
+                "GO-2026-4314"
+              ],
+              "max_severity": "7.1"
+            },
+            {
+              "ids": [
+                "GO-2026-4315",
+                "GHSA-mr7q-c9w9-wh4h"
+              ],
+              "aliases": [
+                "CVE-2026-22862",
+                "GHSA-mr7q-c9w9-wh4h",
+                "GO-2026-4315"
+              ],
+              "max_severity": "7.1"
+            }
+          ],
+          "vulnerabilities": [
+            {
+              "affected": [
+                {
+                  "database_specific": {
+                    "source": "https://vuln.go.dev/ID/GO-2026-4314.json"
+                  },
+                  "package": {
+                    "ecosystem": "Go",
+                    "name": "github.com/ethereum/go-ethereum",
+                    "purl": "pkg:golang/github.com/ethereum/go-ethereum"
+                  },
+                  "ranges": [
+                    {
+                      "events": [
+                        {
+                          "introduced": "0"
+                        },
+                        {
+                          "fixed": "1.16.8"
+                        }
+                      ],
+                      "type": "SEMVER"
+                    }
+                  ]
+                }
+              ],
+              "aliases": [
+                "CVE-2026-22868",
+                "GHSA-mq3p-rrmp-79jg"
+              ],
+              "database_specific": {
+                "review_status": "REVIEWED",
+                "url": "https://pkg.go.dev/vuln/GO-2026-4314"
+              },
+              "details": "High CPU usage leading to DoS via malicious p2p message in github.com/ethereum/go-ethereum",
+              "id": "GO-2026-4314",
+              "modified": "2026-01-23T02:55:55.790266Z",
+              "published": "2026-01-23T02:28:11Z",
+              "references": [
+                {
+                  "type": "ADVISORY",
+                  "url": "https://github.com/ethereum/go-ethereum/security/advisories/GHSA-mq3p-rrmp-79jg"
+                },
+                {
+                  "type": "FIX",
+                  "url": "https://github.com/ethereum/go-ethereum/commit/abeb78c647e354ed922726a1d719ac7bc64a07e2"
+                }
+              ],
+              "schema_version": "1.7.3",
+              "summary": "High CPU usage leading to DoS via malicious p2p message in github.com/ethereum/go-ethereum"
+            },
+            {
+              "affected": [
+                {
+                  "database_specific": {
+                    "source": "https://vuln.go.dev/ID/GO-2026-4315.json"
+                  },
+                  "package": {
+                    "ecosystem": "Go",
+                    "name": "github.com/ethereum/go-ethereum",
+                    "purl": "pkg:golang/github.com/ethereum/go-ethereum"
+                  },
+                  "ranges": [
+                    {
+                      "events": [
+                        {
+                          "introduced": "0"
+                        },
+                        {
+                          "fixed": "1.16.8"
+                        }
+                      ],
+                      "type": "SEMVER"
+                    }
+                  ]
+                }
+              ],
+              "aliases": [
+                "CVE-2026-22862",
+                "GHSA-mr7q-c9w9-wh4h"
+              ],
+              "database_specific": {
+                "review_status": "REVIEWED",
+                "url": "https://pkg.go.dev/vuln/GO-2026-4315"
+              },
+              "details": "DoS via malicious p2p message affecting a vulnerable node in github.com/ethereum/go-ethereum",
+              "id": "GO-2026-4315",
+              "modified": "2026-01-23T02:55:55.025477Z",
+              "published": "2026-01-23T02:28:11Z",
+              "references": [
+                {
+                  "type": "ADVISORY",
+                  "url": "https://github.com/ethereum/go-ethereum/security/advisories/GHSA-mr7q-c9w9-wh4h"
+                },
+                {
+                  "type": "FIX",
+                  "url": "https://github.com/ethereum/go-ethereum/commit/abeb78c647e354ed922726a1d719ac7bc64a07e2"
+                }
+              ],
+              "schema_version": "1.7.3",
+              "summary": "DoS via malicious p2p message affecting a vulnerable node in github.com/ethereum/go-ethereum"
+            },
+            {
+              "affected": [
+                {
+                  "database_specific": {
+                    "last_known_affected_version_range": "\u003c= 1.16.7",
+                    "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2026/01/GHSA-mq3p-rrmp-79jg/GHSA-mq3p-rrmp-79jg.json"
+                  },
+                  "package": {
+                    "ecosystem": "Go",
+                    "name": "github.com/ethereum/go-ethereum",
+                    "purl": "pkg:golang/github.com/ethereum/go-ethereum"
+                  },
+                  "ranges": [
+                    {
+                      "events": [
+                        {
+                          "introduced": "0"
+                        },
+                        {
+                          "fixed": "1.16.8"
+                        }
+                      ],
+                      "type": "SEMVER"
+                    }
+                  ]
+                }
+              ],
+              "aliases": [
+                "CVE-2026-22868",
+                "GO-2026-4314"
+              ],
+              "database_specific": {
+                "cwe_ids": [
+                  "CWE-20",
+                  "CWE-400"
+                ],
+                "github_reviewed": true,
+                "github_reviewed_at": "2026-01-13T21:55:29Z",
+                "nvd_published_at": "2026-01-13T21:15:54Z",
+                "severity": "HIGH"
+              },
+              "details": "**Impact**\n\nAn attacker can cause high CPU usage by sending a specially crafted p2p message.\nMore details to be released later.\n\n**Credit**\n\nThis issue was reported to the Ethereum Foundation Bug Bounty Program by @Yenya030",
+              "id": "GHSA-mq3p-rrmp-79jg",
+              "modified": "2026-02-03T02:58:49.032697Z",
+              "published": "2026-01-13T21:55:29Z",
+              "references": [
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/ethereum/go-ethereum/security/advisories/GHSA-mq3p-rrmp-79jg"
+                },
+                {
+                  "type": "ADVISORY",
+                  "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-22868"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/ethereum/go-ethereum/commit/abeb78c647e354ed922726a1d719ac7bc64a07e2"
+                },
+                {
+                  "type": "PACKAGE",
+                  "url": "https://github.com/ethereum/go-ethereum"
+                }
+              ],
+              "schema_version": "1.7.3",
+              "severity": [
+                {
+                  "score": "CVSS:4.0/AV:N/AC:L/AT:N/PR:L/UI:N/VC:N/VI:N/VA:H/SC:N/SI:N/SA:N",
+                  "type": "CVSS_V4"
+                }
+              ],
+              "summary": "go-ethereum is vulnerable to high CPU usage leading to DoS via malicious p2p message"
+            },
+            {
+              "affected": [
+                {
+                  "database_specific": {
+                    "last_known_affected_version_range": "\u003c= 1.16.7",
+                    "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2026/01/GHSA-mr7q-c9w9-wh4h/GHSA-mr7q-c9w9-wh4h.json"
+                  },
+                  "package": {
+                    "ecosystem": "Go",
+                    "name": "github.com/ethereum/go-ethereum",
+                    "purl": "pkg:golang/github.com/ethereum/go-ethereum"
+                  },
+                  "ranges": [
+                    {
+                      "events": [
+                        {
+                          "introduced": "0"
+                        },
+                        {
+                          "fixed": "1.16.8"
+                        }
+                      ],
+                      "type": "SEMVER"
+                    }
+                  ]
+                }
+              ],
+              "aliases": [
+                "CVE-2026-22862",
+                "GO-2026-4315"
+              ],
+              "database_specific": {
+                "cwe_ids": [
+                  "CWE-20"
+                ],
+                "github_reviewed": true,
+                "github_reviewed_at": "2026-01-13T21:55:12Z",
+                "nvd_published_at": "2026-01-13T21:15:54Z",
+                "severity": "HIGH"
+              },
+              "details": "**Impact**\n\nA vulnerable node can be forced to shutdown/crash using a specially crafted message. \nMore details to be released later.\n\n**Credit**\n\nThis issue was reported to the Ethereum Foundation Bug Bounty Program by DELENE TCHIO ROMUALD.",
+              "id": "GHSA-mr7q-c9w9-wh4h",
+              "modified": "2026-02-03T02:59:06.834692Z",
+              "published": "2026-01-13T21:55:12Z",
+              "references": [
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/ethereum/go-ethereum/security/advisories/GHSA-mr7q-c9w9-wh4h"
+                },
+                {
+                  "type": "ADVISORY",
+                  "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-22862"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/ethereum/go-ethereum/commit/abeb78c647e354ed922726a1d719ac7bc64a07e2"
+                },
+                {
+                  "type": "PACKAGE",
+                  "url": "https://github.com/ethereum/go-ethereum"
+                }
+              ],
+              "schema_version": "1.7.3",
+              "severity": [
+                {
+                  "score": "CVSS:4.0/AV:N/AC:L/AT:N/PR:L/UI:N/VC:N/VI:N/VA:H/SC:N/SI:N/SA:N",
+                  "type": "CVSS_V4"
+                }
+              ],
+              "summary": "go-ethereum is vulnerable to DoS via malicious p2p message affecting a vulnerable node"
+            }
+          ]
+        },
+        {
+          "package": {
+            "name": "golang.org/x/crypto",
+            "version": "0.35.0",
+            "ecosystem": "Go"
+          },
+          "groups": [
+            {
+              "ids": [
+                "GO-2025-4116"
+              ],
+              "aliases": [
+                "CVE-2025-47913",
+                "GO-2025-4116"
+              ],
+              "experimental_analysis": {
+                "GO-2025-4116": {
+                  "called": false,
+                  "unimportant": false
+                }
+              },
+              "max_severity": ""
+            },
+            {
+              "ids": [
+                "GO-2025-4134",
+                "GHSA-j5w8-q4qc-rx2x"
+              ],
+              "aliases": [
+                "CVE-2025-58181",
+                "GHSA-j5w8-q4qc-rx2x",
+                "GO-2025-4134"
+              ],
+              "experimental_analysis": {
+                "GO-2025-4134": {
+                  "called": false,
+                  "unimportant": false
+                }
+              },
+              "max_severity": "5.3"
+            },
+            {
+              "ids": [
+                "GO-2025-4135",
+                "GHSA-f6x5-jh6r-wrfv"
+              ],
+              "aliases": [
+                "CVE-2025-47914",
+                "GHSA-f6x5-jh6r-wrfv",
+                "GO-2025-4135"
+              ],
+              "experimental_analysis": {
+                "GO-2025-4135": {
+                  "called": false,
+                  "unimportant": false
+                }
+              },
+              "max_severity": "5.3"
+            }
+          ],
+          "vulnerabilities": [
+            {
+              "affected": [
+                {
+                  "database_specific": {
+                    "source": "https://vuln.go.dev/ID/GO-2025-4116.json"
+                  },
+                  "ecosystem_specific": {
+                    "imports": [
+                      {
+                        "path": "golang.org/x/crypto/ssh/agent",
+                        "symbols": [
+                          "agentKeyringSigner.Sign",
+                          "agentKeyringSigner.SignWithAlgorithm",
+                          "client.List",
+                          "client.Sign",
+                          "client.SignWithFlags",
+                          "client.Signers"
+                        ]
+                      }
+                    ]
+                  },
+                  "package": {
+                    "ecosystem": "Go",
+                    "name": "golang.org/x/crypto",
+                    "purl": "pkg:golang/golang.org/x/crypto"
+                  },
+                  "ranges": [
+                    {
+                      "events": [
+                        {
+                          "introduced": "0"
+                        },
+                        {
+                          "fixed": "0.43.0"
+                        }
+                      ],
+                      "type": "SEMVER"
+                    }
+                  ]
+                }
+              ],
+              "aliases": [
+                "CVE-2025-47913"
+              ],
+              "credits": [
+                {
+                  "name": "Jakub Ciolek"
+                },
+                {
+                  "name": "Nicola Murino"
+                }
+              ],
+              "database_specific": {
+                "review_status": "REVIEWED",
+                "url": "https://pkg.go.dev/vuln/GO-2025-4116"
+              },
+              "details": "SSH clients receiving SSH_AGENT_SUCCESS when expecting a typed response will panic and cause early termination of the client process.",
+              "id": "GO-2025-4116",
+              "modified": "2026-02-04T02:20:33.199390Z",
+              "published": "2025-11-13T21:12:03Z",
+              "references": [
+                {
+                  "type": "FIX",
+                  "url": "https://go.dev/cl/700295"
+                },
+                {
+                  "type": "REPORT",
+                  "url": "https://go.dev/issue/75178"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://github.com/advisories/GHSA-56w8-48fp-6mgv"
+                }
+              ],
+              "related": [
+                "CGA-w3q9-xwjj-575v",
+                "RHSA-2026:0436",
+                "RHSA-2026:0437",
+                "RHSA-2026:0470",
+                "RHSA-2026:0545",
+                "RHSA-2026:0753",
+                "RHSA-2026:1084"
+              ],
+              "schema_version": "1.7.3",
+              "summary": "Potential denial of service in golang.org/x/crypto/ssh/agent"
+            },
+            {
+              "affected": [
+                {
+                  "database_specific": {
+                    "source": "https://vuln.go.dev/ID/GO-2025-4134.json"
+                  },
+                  "ecosystem_specific": {
+                    "imports": [
+                      {
+                        "path": "golang.org/x/crypto/ssh",
+                        "symbols": [
+                          "NewServerConn",
+                          "parseGSSAPIPayload"
+                        ]
+                      }
+                    ]
+                  },
+                  "package": {
+                    "ecosystem": "Go",
+                    "name": "golang.org/x/crypto",
+                    "purl": "pkg:golang/golang.org/x/crypto"
+                  },
+                  "ranges": [
+                    {
+                      "events": [
+                        {
+                          "introduced": "0"
+                        },
+                        {
+                          "fixed": "0.45.0"
+                        }
+                      ],
+                      "type": "SEMVER"
+                    }
+                  ]
+                }
+              ],
+              "aliases": [
+                "CVE-2025-58181",
+                "GHSA-j5w8-q4qc-rx2x"
+              ],
+              "credits": [
+                {
+                  "name": "Jakub Ciolek"
+                }
+              ],
+              "database_specific": {
+                "review_status": "REVIEWED",
+                "url": "https://pkg.go.dev/vuln/GO-2025-4134"
+              },
+              "details": "SSH servers parsing GSSAPI authentication requests do not validate the number of mechanisms specified in the request, allowing an attacker to cause unbounded memory consumption.",
+              "id": "GO-2025-4134",
+              "modified": "2025-11-20T16:52:31Z",
+              "published": "2025-11-19T20:11:57Z",
+              "references": [
+                {
+                  "type": "ADVISORY",
+                  "url": "https://groups.google.com/g/golang-announce/c/w-oX3UxNcZA"
+                },
+                {
+                  "type": "FIX",
+                  "url": "https://go.dev/cl/721961"
+                },
+                {
+                  "type": "REPORT",
+                  "url": "https://go.dev/issue/76363"
+                }
+              ],
+              "schema_version": "1.7.3",
+              "summary": "Unbounded memory consumption in golang.org/x/crypto/ssh"
+            },
+            {
+              "affected": [
+                {
+                  "database_specific": {
+                    "source": "https://vuln.go.dev/ID/GO-2025-4135.json"
+                  },
+                  "ecosystem_specific": {
+                    "imports": [
+                      {
+                        "path": "golang.org/x/crypto/ssh/agent",
+                        "symbols": [
+                          "ForwardToAgent",
+                          "ServeAgent",
+                          "parseConstraints"
+                        ]
+                      }
+                    ]
+                  },
+                  "package": {
+                    "ecosystem": "Go",
+                    "name": "golang.org/x/crypto",
+                    "purl": "pkg:golang/golang.org/x/crypto"
+                  },
+                  "ranges": [
+                    {
+                      "events": [
+                        {
+                          "introduced": "0"
+                        },
+                        {
+                          "fixed": "0.45.0"
+                        }
+                      ],
+                      "type": "SEMVER"
+                    }
+                  ]
+                }
+              ],
+              "aliases": [
+                "CVE-2025-47914",
+                "GHSA-f6x5-jh6r-wrfv"
+              ],
+              "credits": [
+                {
+                  "name": "Jakub Ciolek"
+                }
+              ],
+              "database_specific": {
+                "review_status": "REVIEWED",
+                "url": "https://pkg.go.dev/vuln/GO-2025-4135"
+              },
+              "details": "SSH Agent servers do not validate the size of messages when processing new identity requests, which may cause the program to panic if the message is malformed due to an out of bounds read.",
+              "id": "GO-2025-4135",
+              "modified": "2025-11-20T16:52:31Z",
+              "published": "2025-11-19T20:11:57Z",
+              "references": [
+                {
+                  "type": "ADVISORY",
+                  "url": "https://groups.google.com/g/golang-announce/c/w-oX3UxNcZA"
+                },
+                {
+                  "type": "FIX",
+                  "url": "https://go.dev/cl/721960"
+                },
+                {
+                  "type": "REPORT",
+                  "url": "https://go.dev/issue/76364"
+                }
+              ],
+              "schema_version": "1.7.3",
+              "summary": "Malformed constraint may cause denial of service in golang.org/x/crypto/ssh/agent"
+            },
+            {
+              "affected": [
+                {
+                  "database_specific": {
+                    "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2025/11/GHSA-f6x5-jh6r-wrfv/GHSA-f6x5-jh6r-wrfv.json"
+                  },
+                  "package": {
+                    "ecosystem": "Go",
+                    "name": "golang.org/x/crypto",
+                    "purl": "pkg:golang/golang.org/x/crypto"
+                  },
+                  "ranges": [
+                    {
+                      "events": [
+                        {
+                          "introduced": "0"
+                        },
+                        {
+                          "fixed": "0.45.0"
+                        }
+                      ],
+                      "type": "SEMVER"
+                    }
+                  ]
+                }
+              ],
+              "aliases": [
+                "CVE-2025-47914",
+                "GO-2025-4135"
+              ],
+              "database_specific": {
+                "cwe_ids": [
+                  "CWE-125"
+                ],
+                "github_reviewed": true,
+                "github_reviewed_at": "2025-11-19T23:16:40Z",
+                "nvd_published_at": "2025-11-19T21:15:50Z",
+                "severity": "MODERATE"
+              },
+              "details": "SSH Agent servers do not validate the size of messages when processing new identity requests, which may cause the program to panic if the message is malformed due to an out of bounds read.",
+              "id": "GHSA-f6x5-jh6r-wrfv",
+              "modified": "2025-11-20T16:35:18Z",
+              "published": "2025-11-19T23:16:40Z",
+              "references": [
+                {
+                  "type": "ADVISORY",
+                  "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-47914"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://go.dev/cl/721960"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://go.dev/issue/76364"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://go.googlesource.com/crypto"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://groups.google.com/g/golang-announce/c/w-oX3UxNcZA"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://pkg.go.dev/vuln/GO-2025-4135"
+                }
+              ],
+              "schema_version": "1.7.3",
+              "severity": [
+                {
+                  "score": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L",
+                  "type": "CVSS_V3"
+                }
+              ],
+              "summary": "golang.org/x/crypto/ssh/agent vulnerable to panic if message is malformed due to out of bounds read"
+            },
+            {
+              "affected": [
+                {
+                  "database_specific": {
+                    "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2025/11/GHSA-j5w8-q4qc-rx2x/GHSA-j5w8-q4qc-rx2x.json"
+                  },
+                  "package": {
+                    "ecosystem": "Go",
+                    "name": "golang.org/x/crypto",
+                    "purl": "pkg:golang/golang.org/x/crypto"
+                  },
+                  "ranges": [
+                    {
+                      "events": [
+                        {
+                          "introduced": "0"
+                        },
+                        {
+                          "fixed": "0.45.0"
+                        }
+                      ],
+                      "type": "SEMVER"
+                    }
+                  ]
+                }
+              ],
+              "aliases": [
+                "CVE-2025-58181",
+                "GO-2025-4134"
+              ],
+              "database_specific": {
+                "cwe_ids": [
+                  "CWE-770"
+                ],
+                "github_reviewed": true,
+                "github_reviewed_at": "2025-11-19T23:01:20Z",
+                "nvd_published_at": "2025-11-19T21:15:50Z",
+                "severity": "MODERATE"
+              },
+              "details": "SSH servers parsing GSSAPI authentication requests do not validate the number of mechanisms specified in the request, allowing an attacker to cause unbounded memory consumption.",
+              "id": "GHSA-j5w8-q4qc-rx2x",
+              "modified": "2025-11-20T14:43:40.331513Z",
+              "published": "2025-11-19T23:01:20Z",
+              "references": [
+                {
+                  "type": "ADVISORY",
+                  "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-58181"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://go.dev/cl/721961"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://go.dev/issue/76363"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://groups.google.com/g/golang-announce/c/w-oX3UxNcZA"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://pkg.go.dev/vuln/GO-2025-4134"
+                }
+              ],
+              "schema_version": "1.7.3",
+              "severity": [
+                {
+                  "score": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L",
+                  "type": "CVSS_V3"
+                }
+              ],
+              "summary": "golang.org/x/crypto/ssh allows an attacker to cause unbounded memory consumption"
+            }
+          ]
+        },
+        {
+          "package": {
+            "name": "stdlib",
+            "version": "1.23.8",
+            "ecosystem": "Go"
+          },
+          "groups": [
+            {
+              "ids": [
+                "GO-2025-3750"
+              ],
+              "aliases": [
+                "BIT-golang-2025-0913",
+                "CVE-2025-0913",
+                "GO-2025-3750"
+              ],
+              "experimental_analysis": {
+                "GO-2025-3750": {
+                  "called": true,
+                  "unimportant": false
+                }
+              },
+              "max_severity": ""
+            },
+            {
+              "ids": [
+                "GO-2025-3751"
+              ],
+              "aliases": [
+                "BIT-golang-2025-4673",
+                "CVE-2025-4673",
+                "GO-2025-3751"
+              ],
+              "experimental_analysis": {
+                "GO-2025-3751": {
+                  "called": false,
+                  "unimportant": false
+                }
+              },
+              "max_severity": ""
+            },
+            {
+              "ids": [
+                "GO-2025-3849"
+              ],
+              "aliases": [
+                "BIT-golang-2025-47907",
+                "CVE-2025-47907",
+                "GO-2025-3849"
+              ],
+              "experimental_analysis": {
+                "GO-2025-3849": {
+                  "called": false,
+                  "unimportant": false
+                }
+              },
+              "max_severity": ""
+            },
+            {
+              "ids": [
+                "GO-2025-3956"
+              ],
+              "aliases": [
+                "BIT-golang-2025-47906",
+                "CVE-2025-47906",
+                "GO-2025-3956"
+              ],
+              "experimental_analysis": {
+                "GO-2025-3956": {
+                  "called": false,
+                  "unimportant": false
+                }
+              },
+              "max_severity": ""
+            },
+            {
+              "ids": [
+                "GO-2025-4006"
+              ],
+              "aliases": [
+                "BIT-golang-2025-61725",
+                "CVE-2025-61725",
+                "GO-2025-4006"
+              ],
+              "experimental_analysis": {
+                "GO-2025-4006": {
+                  "called": false,
+                  "unimportant": false
+                }
+              },
+              "max_severity": ""
+            },
+            {
+              "ids": [
+                "GO-2025-4007"
+              ],
+              "aliases": [
+                "BIT-golang-2025-58187",
+                "CVE-2025-58187",
+                "GO-2025-4007"
+              ],
+              "experimental_analysis": {
+                "GO-2025-4007": {
+                  "called": true,
+                  "unimportant": false
+                }
+              },
+              "max_severity": ""
+            },
+            {
+              "ids": [
+                "GO-2025-4008"
+              ],
+              "aliases": [
+                "BIT-golang-2025-58189",
+                "CVE-2025-58189",
+                "GO-2025-4008"
+              ],
+              "experimental_analysis": {
+                "GO-2025-4008": {
+                  "called": true,
+                  "unimportant": false
+                }
+              },
+              "max_severity": ""
+            },
+            {
+              "ids": [
+                "GO-2025-4009"
+              ],
+              "aliases": [
+                "BIT-golang-2025-61723",
+                "CVE-2025-61723",
+                "GO-2025-4009"
+              ],
+              "experimental_analysis": {
+                "GO-2025-4009": {
+                  "called": false,
+                  "unimportant": false
+                }
+              },
+              "max_severity": ""
+            },
+            {
+              "ids": [
+                "GO-2025-4010"
+              ],
+              "aliases": [
+                "BIT-golang-2025-47912",
+                "CVE-2025-47912",
+                "GO-2025-4010"
+              ],
+              "experimental_analysis": {
+                "GO-2025-4010": {
+                  "called": true,
+                  "unimportant": false
+                }
+              },
+              "max_severity": ""
+            },
+            {
+              "ids": [
+                "GO-2025-4011"
+              ],
+              "aliases": [
+                "BIT-golang-2025-58185",
+                "CVE-2025-58185",
+                "GO-2025-4011"
+              ],
+              "experimental_analysis": {
+                "GO-2025-4011": {
+                  "called": true,
+                  "unimportant": false
+                }
+              },
+              "max_severity": ""
+            },
+            {
+              "ids": [
+                "GO-2025-4012"
+              ],
+              "aliases": [
+                "BIT-golang-2025-58186",
+                "CVE-2025-58186",
+                "GO-2025-4012"
+              ],
+              "experimental_analysis": {
+                "GO-2025-4012": {
+                  "called": false,
+                  "unimportant": false
+                }
+              },
+              "max_severity": ""
+            },
+            {
+              "ids": [
+                "GO-2025-4013"
+              ],
+              "aliases": [
+                "BIT-golang-2025-58188",
+                "CVE-2025-58188",
+                "GO-2025-4013"
+              ],
+              "experimental_analysis": {
+                "GO-2025-4013": {
+                  "called": true,
+                  "unimportant": false
+                }
+              },
+              "max_severity": ""
+            },
+            {
+              "ids": [
+                "GO-2025-4014"
+              ],
+              "aliases": [
+                "BIT-golang-2025-58183",
+                "CVE-2025-58183",
+                "GO-2025-4014"
+              ],
+              "experimental_analysis": {
+                "GO-2025-4014": {
+                  "called": false,
+                  "unimportant": false
+                }
+              },
+              "max_severity": ""
+            },
+            {
+              "ids": [
+                "GO-2025-4015"
+              ],
+              "aliases": [
+                "BIT-golang-2025-61724",
+                "CVE-2025-61724",
+                "GO-2025-4015"
+              ],
+              "experimental_analysis": {
+                "GO-2025-4015": {
+                  "called": false,
+                  "unimportant": false
+                }
+              },
+              "max_severity": ""
+            },
+            {
+              "ids": [
+                "GO-2025-4155"
+              ],
+              "aliases": [
+                "BIT-golang-2025-61729",
+                "CVE-2025-61729",
+                "GO-2025-4155"
+              ],
+              "experimental_analysis": {
+                "GO-2025-4155": {
+                  "called": true,
+                  "unimportant": false
+                }
+              },
+              "max_severity": ""
+            },
+            {
+              "ids": [
+                "GO-2025-4175"
+              ],
+              "aliases": [
+                "BIT-golang-2025-61727",
+                "CVE-2025-61727",
+                "GO-2025-4175"
+              ],
+              "experimental_analysis": {
+                "GO-2025-4175": {
+                  "called": true,
+                  "unimportant": false
+                }
+              },
+              "max_severity": ""
+            },
+            {
+              "ids": [
+                "GO-2026-4337"
+              ],
+              "aliases": [
+                "CVE-2025-68121",
+                "GO-2026-4337"
+              ],
+              "experimental_analysis": {
+                "GO-2026-4337": {
+                  "called": true,
+                  "unimportant": false
+                }
+              },
+              "max_severity": ""
+            },
+            {
+              "ids": [
+                "GO-2026-4340"
+              ],
+              "aliases": [
+                "BIT-golang-2025-61730",
+                "CVE-2025-61730",
+                "GO-2026-4340"
+              ],
+              "experimental_analysis": {
+                "GO-2026-4340": {
+                  "called": true,
+                  "unimportant": false
+                }
+              },
+              "max_severity": ""
+            },
+            {
+              "ids": [
+                "GO-2026-4341"
+              ],
+              "aliases": [
+                "BIT-golang-2025-61726",
+                "CVE-2025-61726",
+                "GO-2026-4341"
+              ],
+              "experimental_analysis": {
+                "GO-2026-4341": {
+                  "called": false,
+                  "unimportant": false
+                }
+              },
+              "max_severity": ""
+            },
+            {
+              "ids": [
+                "GO-2026-4342"
+              ],
+              "aliases": [
+                "BIT-golang-2025-61728",
+                "CVE-2025-61728",
+                "GO-2026-4342"
+              ],
+              "experimental_analysis": {
+                "GO-2026-4342": {
+                  "called": false,
+                  "unimportant": false
+                }
+              },
+              "max_severity": ""
+            },
+            {
+              "ids": [
+                "GO-2026-4403"
+              ],
+              "aliases": [
+                "BIT-golang-2025-22873",
+                "CVE-2025-22873",
+                "GO-2026-4403"
+              ],
+              "experimental_analysis": {
+                "GO-2026-4403": {
+                  "called": false,
+                  "unimportant": false
+                }
+              },
+              "max_severity": ""
+            }
+          ],
+          "vulnerabilities": [
+            {
+              "affected": [
+                {
+                  "database_specific": {
+                    "source": "https://vuln.go.dev/ID/GO-2025-3750.json"
+                  },
+                  "ecosystem_specific": {
+                    "imports": [
+                      {
+                        "goos": [
+                          "windows"
+                        ],
+                        "path": "syscall",
+                        "symbols": [
+                          "Open"
+                        ]
+                      },
+                      {
+                        "goos": [
+                          "windows"
+                        ],
+                        "path": "os",
+                        "symbols": [
+                          "Chdir",
+                          "Chmod",
+                          "Chown",
+                          "CopyFS",
+                          "Create",
+                          "CreateTemp",
+                          "File.ReadDir",
+                          "File.Readdir",
+                          "File.Readdirnames",
+                          "Getwd",
+                          "Lchown",
+                          "Link",
+                          "Lstat",
+                          "Mkdir",
+                          "MkdirAll",
+                          "MkdirTemp",
+                          "NewFile",
+                          "Open",
+                          "OpenFile",
+                          "OpenInRoot",
+                          "OpenRoot",
+                          "Pipe",
+                          "ReadDir",
+                          "ReadFile",
+                          "Remove",
+                          "RemoveAll",
+                          "Rename",
+                          "Root.Create",
+                          "Root.Lstat",
+                          "Root.Mkdir",
+                          "Root.Open",
+                          "Root.OpenFile",
+                          "Root.OpenRoot",
+                          "Root.Remove",
+                          "Root.Stat",
+                          "StartProcess",
+                          "Stat",
+                          "Symlink",
+                          "Truncate",
+                          "WriteFile",
+                          "dirFS.Open",
+                          "dirFS.ReadDir",
+                          "dirFS.ReadFile",
+                          "dirFS.Stat",
+                          "rootFS.Open",
+                          "rootFS.ReadDir",
+                          "rootFS.ReadFile",
+                          "rootFS.Stat",
+                          "unixDirent.Info"
+                        ]
+                      }
+                    ]
+                  },
+                  "package": {
+                    "ecosystem": "Go",
+                    "name": "stdlib",
+                    "purl": "pkg:golang/stdlib"
+                  },
+                  "ranges": [
+                    {
+                      "events": [
+                        {
+                          "introduced": "0"
+                        },
+                        {
+                          "fixed": "1.23.10"
+                        },
+                        {
+                          "introduced": "1.24.0-0"
+                        },
+                        {
+                          "fixed": "1.24.4"
+                        }
+                      ],
+                      "type": "SEMVER"
+                    }
+                  ]
+                }
+              ],
+              "aliases": [
+                "BIT-golang-2025-0913",
+                "CVE-2025-0913"
+              ],
+              "credits": [
+                {
+                  "name": "Junyoung Park and Dong-uk Kim of KAIST Hacking Lab"
+                }
+              ],
+              "database_specific": {
+                "review_status": "REVIEWED",
+                "url": "https://pkg.go.dev/vuln/GO-2025-3750"
+              },
+              "details": "os.OpenFile(path, os.O_CREATE|O_EXCL) behaved differently on Unix and Windows systems when the target path was a dangling symlink. On Unix systems, OpenFile with O_CREATE and O_EXCL flags never follows symlinks. On Windows, when the target path was a symlink to a nonexistent location, OpenFile would create a file in that location. OpenFile now always returns an error when the O_CREATE and O_EXCL flags are both set and the target path is a symlink.",
+              "id": "GO-2025-3750",
+              "modified": "2026-02-04T03:28:12.135241Z",
+              "published": "2025-06-11T16:59:06Z",
+              "references": [
+                {
+                  "type": "FIX",
+                  "url": "https://go.dev/cl/672396"
+                },
+                {
+                  "type": "REPORT",
+                  "url": "https://go.dev/issue/73702"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://groups.google.com/g/golang-announce/c/ufZ8WpEsA3A"
+                }
+              ],
+              "related": [
+                "CGA-455f-g86x-5phg"
+              ],
+              "schema_version": "1.7.3",
+              "summary": "Inconsistent handling of O_CREATE|O_EXCL on Unix and Windows in os in syscall"
+            },
+            {
+              "affected": [
+                {
+                  "database_specific": {
+                    "source": "https://vuln.go.dev/ID/GO-2025-3751.json"
+                  },
+                  "ecosystem_specific": {
+                    "imports": [
+                      {
+                        "path": "net/http",
+                        "symbols": [
+                          "Client.Do",
+                          "Client.Get",
+                          "Client.Head",
+                          "Client.Post",
+                          "Client.PostForm",
+                          "Client.makeHeadersCopier",
+                          "Get",
+                          "Head",
+                          "Post",
+                          "PostForm"
+                        ]
+                      }
+                    ]
+                  },
+                  "package": {
+                    "ecosystem": "Go",
+                    "name": "stdlib",
+                    "purl": "pkg:golang/stdlib"
+                  },
+                  "ranges": [
+                    {
+                      "events": [
+                        {
+                          "introduced": "0"
+                        },
+                        {
+                          "fixed": "1.23.10"
+                        },
+                        {
+                          "introduced": "1.24.0-0"
+                        },
+                        {
+                          "fixed": "1.24.4"
+                        }
+                      ],
+                      "type": "SEMVER"
+                    }
+                  ]
+                }
+              ],
+              "aliases": [
+                "BIT-golang-2025-4673",
+                "CVE-2025-4673"
+              ],
+              "credits": [
+                {
+                  "name": "Takeshi Kaneko (GMO Cybersecurity by Ierae, Inc.)"
+                }
+              ],
+              "database_specific": {
+                "review_status": "REVIEWED",
+                "url": "https://pkg.go.dev/vuln/GO-2025-3751"
+              },
+              "details": "Proxy-Authorization and Proxy-Authenticate headers persisted on cross-origin redirects potentially leaking sensitive information.",
+              "id": "GO-2025-3751",
+              "modified": "2026-02-04T02:40:11.578822Z",
+              "published": "2025-06-11T16:23:58Z",
+              "references": [
+                {
+                  "type": "FIX",
+                  "url": "https://go.dev/cl/679257"
+                },
+                {
+                  "type": "REPORT",
+                  "url": "https://go.dev/issue/73816"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://groups.google.com/g/golang-announce/c/ufZ8WpEsA3A"
+                }
+              ],
+              "related": [
+                "RHSA-2025:10672",
+                "RHSA-2025:10676",
+                "RHSA-2025:10677",
+                "RHSA-2025:15406",
+                "RHSA-2025:15887",
+                "RHSA-2025:16432"
+              ],
+              "schema_version": "1.7.3",
+              "summary": "Sensitive headers not cleared on cross-origin redirect in net/http"
+            },
+            {
+              "affected": [
+                {
+                  "database_specific": {
+                    "source": "https://vuln.go.dev/ID/GO-2025-3849.json"
+                  },
+                  "ecosystem_specific": {
+                    "imports": [
+                      {
+                        "path": "database/sql",
+                        "symbols": [
+                          "Row.Scan",
+                          "Rows.Scan"
+                        ]
+                      }
+                    ]
+                  },
+                  "package": {
+                    "ecosystem": "Go",
+                    "name": "stdlib",
+                    "purl": "pkg:golang/stdlib"
+                  },
+                  "ranges": [
+                    {
+                      "events": [
+                        {
+                          "introduced": "0"
+                        },
+                        {
+                          "fixed": "1.23.12"
+                        },
+                        {
+                          "introduced": "1.24.0"
+                        },
+                        {
+                          "fixed": "1.24.6"
+                        }
+                      ],
+                      "type": "SEMVER"
+                    }
+                  ]
+                }
+              ],
+              "aliases": [
+                "BIT-golang-2025-47907",
+                "CVE-2025-47907"
+              ],
+              "credits": [
+                {
+                  "name": "Spike Curtis from Coder"
+                }
+              ],
+              "database_specific": {
+                "review_status": "REVIEWED",
+                "url": "https://pkg.go.dev/vuln/GO-2025-3849"
+              },
+              "details": "Cancelling a query (e.g. by cancelling the context passed to one of the query methods) during a call to the Scan method of the returned Rows can result in unexpected results if other queries are being made in parallel. This can result in a race condition that may overwrite the expected results with those of another query, causing the call to Scan to return either unexpected results from the other query or an error.",
+              "id": "GO-2025-3849",
+              "modified": "2026-02-04T02:26:50.866679Z",
+              "published": "2025-08-07T15:07:27Z",
+              "references": [
+                {
+                  "type": "FIX",
+                  "url": "https://go.dev/cl/693735"
+                },
+                {
+                  "type": "REPORT",
+                  "url": "https://go.dev/issue/74831"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://groups.google.com/g/golang-announce/c/x5MKroML2yM"
+                }
+              ],
+              "related": [
+                "RHSA-2025:13935",
+                "RHSA-2025:13941",
+                "RHSA-2025:19397",
+                "RHSA-2025:19731",
+                "RHSA-2025:20909",
+                "RHSA-2025:20983",
+                "RHSA-2025:21336",
+                "RHSA-2025:21337",
+                "RHSA-2025:21382",
+                "RHSA-2025:21383",
+                "RHSA-2025:21384",
+                "RHSA-2025:21385"
+              ],
+              "schema_version": "1.7.3",
+              "summary": "Incorrect results returned from Rows.Scan in database/sql"
+            },
+            {
+              "affected": [
+                {
+                  "database_specific": {
+                    "source": "https://vuln.go.dev/ID/GO-2025-3956.json"
+                  },
+                  "ecosystem_specific": {
+                    "imports": [
+                      {
+                        "path": "os/exec",
+                        "symbols": [
+                          "LookPath"
+                        ]
+                      }
+                    ]
+                  },
+                  "package": {
+                    "ecosystem": "Go",
+                    "name": "stdlib",
+                    "purl": "pkg:golang/stdlib"
+                  },
+                  "ranges": [
+                    {
+                      "events": [
+                        {
+                          "introduced": "0"
+                        },
+                        {
+                          "fixed": "1.23.12"
+                        },
+                        {
+                          "introduced": "1.24.0"
+                        },
+                        {
+                          "fixed": "1.24.6"
+                        }
+                      ],
+                      "type": "SEMVER"
+                    }
+                  ]
+                }
+              ],
+              "aliases": [
+                "BIT-golang-2025-47906",
+                "CVE-2025-47906"
+              ],
+              "database_specific": {
+                "review_status": "REVIEWED",
+                "url": "https://pkg.go.dev/vuln/GO-2025-3956"
+              },
+              "details": "If the PATH environment variable contains paths which are executables (rather than just directories), passing certain strings to LookPath (\"\", \".\", and \"..\"), can result in the binaries listed in the PATH being unexpectedly returned.",
+              "id": "GO-2025-3956",
+              "modified": "2026-02-04T04:33:27.340869Z",
+              "published": "2025-09-18T18:21:44Z",
+              "references": [
+                {
+                  "type": "FIX",
+                  "url": "https://go.dev/cl/691775"
+                },
+                {
+                  "type": "REPORT",
+                  "url": "https://go.dev/issue/74466"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://groups.google.com/g/golang-announce/c/x5MKroML2yM"
+                }
+              ],
+              "related": [
+                "CGA-767v-h7fp-9hf6",
+                "RHSA-2025:13935",
+                "RHSA-2025:13941",
+                "RHSA-2025:21856",
+                "RHSA-2025:22004",
+                "RHSA-2025:22005",
+                "RHSA-2025:22181",
+                "RHSA-2025:22668",
+                "RHSA-2025:22899",
+                "RHSA-2025:23733",
+                "RHSA-2025:23737",
+                "RHSA-2025:23740",
+                "RHSA-2025:23741",
+                "RHSA-2025:23833",
+                "RHSA-2025:23834",
+                "RHSA-2025:23851"
+              ],
+              "schema_version": "1.7.3",
+              "summary": "Unexpected paths returned from LookPath in os/exec"
+            },
+            {
+              "affected": [
+                {
+                  "database_specific": {
+                    "source": "https://vuln.go.dev/ID/GO-2025-4006.json"
+                  },
+                  "ecosystem_specific": {
+                    "imports": [
+                      {
+                        "path": "net/mail",
+                        "symbols": [
+                          "AddressParser.Parse",
+                          "AddressParser.ParseList",
+                          "Header.AddressList",
+                          "ParseAddress",
+                          "ParseAddressList",
+                          "addrParser.consumeDomainLiteral"
+                        ]
+                      }
+                    ]
+                  },
+                  "package": {
+                    "ecosystem": "Go",
+                    "name": "stdlib",
+                    "purl": "pkg:golang/stdlib"
+                  },
+                  "ranges": [
+                    {
+                      "events": [
+                        {
+                          "introduced": "0"
+                        },
+                        {
+                          "fixed": "1.24.8"
+                        },
+                        {
+                          "introduced": "1.25.0"
+                        },
+                        {
+                          "fixed": "1.25.2"
+                        }
+                      ],
+                      "type": "SEMVER"
+                    }
+                  ]
+                }
+              ],
+              "aliases": [
+                "BIT-golang-2025-61725",
+                "CVE-2025-61725"
+              ],
+              "credits": [
+                {
+                  "name": "Philippe Antoine (Catena cyber)"
+                }
+              ],
+              "database_specific": {
+                "review_status": "REVIEWED",
+                "url": "https://pkg.go.dev/vuln/GO-2025-4006"
+              },
+              "details": "The ParseAddress function constructs domain-literal address components through repeated string concatenation. When parsing large domain-literal components, this can cause excessive CPU consumption.",
+              "id": "GO-2025-4006",
+              "modified": "2025-12-09T17:35:58.036871Z",
+              "published": "2025-10-29T21:48:35Z",
+              "references": [
+                {
+                  "type": "FIX",
+                  "url": "https://go.dev/cl/709860"
+                },
+                {
+                  "type": "REPORT",
+                  "url": "https://go.dev/issue/75680"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://groups.google.com/g/golang-announce/c/4Emdl2iQ_bI"
+                }
+              ],
+              "schema_version": "1.7.3",
+              "summary": "Excessive CPU consumption in ParseAddress in net/mail"
+            },
+            {
+              "affected": [
+                {
+                  "database_specific": {
+                    "source": "https://vuln.go.dev/ID/GO-2025-4007.json"
+                  },
+                  "ecosystem_specific": {
+                    "imports": [
+                      {
+                        "path": "crypto/x509",
+                        "symbols": [
+                          "CertPool.AppendCertsFromPEM",
+                          "Certificate.CheckCRLSignature",
+                          "Certificate.CheckSignature",
+                          "Certificate.CheckSignatureFrom",
+                          "Certificate.CreateCRL",
+                          "Certificate.Verify",
+                          "CertificateRequest.CheckSignature",
+                          "CreateCertificate",
+                          "CreateCertificateRequest",
+                          "CreateRevocationList",
+                          "DecryptPEMBlock",
+                          "EncryptPEMBlock",
+                          "MarshalECPrivateKey",
+                          "MarshalPKCS1PrivateKey",
+                          "MarshalPKCS1PublicKey",
+                          "MarshalPKCS8PrivateKey",
+                          "MarshalPKIXPublicKey",
+                          "ParseCRL",
+                          "ParseCertificate",
+                          "ParseCertificateRequest",
+                          "ParseCertificates",
+                          "ParseDERCRL",
+                          "ParseECPrivateKey",
+                          "ParsePKCS1PrivateKey",
+                          "ParsePKCS1PublicKey",
+                          "ParsePKCS8PrivateKey",
+                          "ParsePKIXPublicKey",
+                          "ParseRevocationList",
+                          "RevocationList.CheckSignatureFrom",
+                          "SetFallbackRoots",
+                          "SystemCertPool",
+                          "domainToReverseLabels",
+                          "parseSANExtension"
+                        ]
+                      }
+                    ]
+                  },
+                  "package": {
+                    "ecosystem": "Go",
+                    "name": "stdlib",
+                    "purl": "pkg:golang/stdlib"
+                  },
+                  "ranges": [
+                    {
+                      "events": [
+                        {
+                          "introduced": "0"
+                        },
+                        {
+                          "fixed": "1.24.9"
+                        },
+                        {
+                          "introduced": "1.25.0"
+                        },
+                        {
+                          "fixed": "1.25.3"
+                        }
+                      ],
+                      "type": "SEMVER"
+                    }
+                  ]
+                }
+              ],
+              "aliases": [
+                "BIT-golang-2025-58187",
+                "CVE-2025-58187"
+              ],
+              "credits": [
+                {
+                  "name": "Jakub Ciolek"
+                }
+              ],
+              "database_specific": {
+                "review_status": "REVIEWED",
+                "url": "https://pkg.go.dev/vuln/GO-2025-4007"
+              },
+              "details": "Due to the design of the name constraint checking algorithm, the processing time of some inputs scale non-linearly with respect to the size of the certificate.\n\nThis affects programs which validate arbitrary certificate chains.",
+              "id": "GO-2025-4007",
+              "modified": "2025-11-20T22:03:19Z",
+              "published": "2025-10-29T21:49:50Z",
+              "references": [
+                {
+                  "type": "REPORT",
+                  "url": "https://go.dev/issue/75681"
+                },
+                {
+                  "type": "FIX",
+                  "url": "https://go.dev/cl/709854"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://groups.google.com/g/golang-announce/c/4Emdl2iQ_bI"
+                }
+              ],
+              "schema_version": "1.7.3",
+              "summary": "Quadratic complexity when checking name constraints in crypto/x509"
+            },
+            {
+              "affected": [
+                {
+                  "database_specific": {
+                    "source": "https://vuln.go.dev/ID/GO-2025-4008.json"
+                  },
+                  "ecosystem_specific": {
+                    "imports": [
+                      {
+                        "path": "crypto/tls",
+                        "symbols": [
+                          "Conn.Handshake",
+                          "Conn.HandshakeContext",
+                          "Conn.Read",
+                          "Conn.Write",
+                          "Dial",
+                          "DialWithDialer",
+                          "Dialer.Dial",
+                          "Dialer.DialContext",
+                          "QUICConn.Start",
+                          "negotiateALPN"
+                        ]
+                      }
+                    ]
+                  },
+                  "package": {
+                    "ecosystem": "Go",
+                    "name": "stdlib",
+                    "purl": "pkg:golang/stdlib"
+                  },
+                  "ranges": [
+                    {
+                      "events": [
+                        {
+                          "introduced": "0"
+                        },
+                        {
+                          "fixed": "1.24.8"
+                        },
+                        {
+                          "introduced": "1.25.0"
+                        },
+                        {
+                          "fixed": "1.25.2"
+                        }
+                      ],
+                      "type": "SEMVER"
+                    }
+                  ]
+                }
+              ],
+              "aliases": [
+                "BIT-golang-2025-58189",
+                "CVE-2025-58189"
+              ],
+              "credits": [
+                {
+                  "name": "National Cyber Security Centre Finland"
+                }
+              ],
+              "database_specific": {
+                "review_status": "REVIEWED",
+                "url": "https://pkg.go.dev/vuln/GO-2025-4008"
+              },
+              "details": "When Conn.Handshake fails during ALPN negotiation the error contains attacker controlled information (the ALPN protocols sent by the client) which is not escaped.",
+              "id": "GO-2025-4008",
+              "modified": "2025-11-06T13:59:30.251421Z",
+              "published": "2025-10-29T21:49:53Z",
+              "references": [
+                {
+                  "type": "FIX",
+                  "url": "https://go.dev/cl/707776"
+                },
+                {
+                  "type": "REPORT",
+                  "url": "https://go.dev/issue/75652"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://groups.google.com/g/golang-announce/c/4Emdl2iQ_bI"
+                }
+              ],
+              "schema_version": "1.7.3",
+              "summary": "ALPN negotiation error contains attacker controlled information in crypto/tls"
+            },
+            {
+              "affected": [
+                {
+                  "database_specific": {
+                    "source": "https://vuln.go.dev/ID/GO-2025-4009.json"
+                  },
+                  "ecosystem_specific": {
+                    "imports": [
+                      {
+                        "path": "encoding/pem",
+                        "symbols": [
+                          "Decode",
+                          "getLine"
+                        ]
+                      }
+                    ]
+                  },
+                  "package": {
+                    "ecosystem": "Go",
+                    "name": "stdlib",
+                    "purl": "pkg:golang/stdlib"
+                  },
+                  "ranges": [
+                    {
+                      "events": [
+                        {
+                          "introduced": "0"
+                        },
+                        {
+                          "fixed": "1.24.8"
+                        },
+                        {
+                          "introduced": "1.25.0"
+                        },
+                        {
+                          "fixed": "1.25.2"
+                        }
+                      ],
+                      "type": "SEMVER"
+                    }
+                  ]
+                }
+              ],
+              "aliases": [
+                "BIT-golang-2025-61723",
+                "CVE-2025-61723"
+              ],
+              "credits": [
+                {
+                  "name": "Jakub Ciolek"
+                }
+              ],
+              "database_specific": {
+                "review_status": "REVIEWED",
+                "url": "https://pkg.go.dev/vuln/GO-2025-4009"
+              },
+              "details": "The processing time for parsing some invalid inputs scales non-linearly with respect to the size of the input.\n\nThis affects programs which parse untrusted PEM inputs.",
+              "id": "GO-2025-4009",
+              "modified": "2026-02-13T02:58:48.571208Z",
+              "published": "2025-10-29T21:49:55Z",
+              "references": [
+                {
+                  "type": "REPORT",
+                  "url": "https://go.dev/issue/75676"
+                },
+                {
+                  "type": "FIX",
+                  "url": "https://go.dev/cl/709858"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://groups.google.com/g/golang-announce/c/4Emdl2iQ_bI"
+                }
+              ],
+              "related": [
+                "CGA-4w29-qr5q-79pj"
+              ],
+              "schema_version": "1.7.3",
+              "summary": "Quadratic complexity when parsing some invalid inputs in encoding/pem"
+            },
+            {
+              "affected": [
+                {
+                  "database_specific": {
+                    "source": "https://vuln.go.dev/ID/GO-2025-4010.json"
+                  },
+                  "ecosystem_specific": {
+                    "imports": [
+                      {
+                        "path": "net/url",
+                        "symbols": [
+                          "JoinPath",
+                          "Parse",
+                          "ParseRequestURI",
+                          "URL.Parse",
+                          "URL.UnmarshalBinary",
+                          "parseHost"
+                        ]
+                      }
+                    ]
+                  },
+                  "package": {
+                    "ecosystem": "Go",
+                    "name": "stdlib",
+                    "purl": "pkg:golang/stdlib"
+                  },
+                  "ranges": [
+                    {
+                      "events": [
+                        {
+                          "introduced": "0"
+                        },
+                        {
+                          "fixed": "1.24.8"
+                        },
+                        {
+                          "introduced": "1.25.0"
+                        },
+                        {
+                          "fixed": "1.25.2"
+                        }
+                      ],
+                      "type": "SEMVER"
+                    }
+                  ]
+                }
+              ],
+              "aliases": [
+                "BIT-golang-2025-47912",
+                "CVE-2025-47912"
+              ],
+              "credits": [
+                {
+                  "name": "Enze Wang, Jingcheng Yang and Zehui Miao of Tsinghua University"
+                }
+              ],
+              "database_specific": {
+                "review_status": "REVIEWED",
+                "url": "https://pkg.go.dev/vuln/GO-2025-4010"
+              },
+              "details": "The Parse function permits values other than IPv6 addresses to be included in square brackets within the host component of a URL. RFC 3986 permits IPv6 addresses to be included within the host component, enclosed within square brackets. For example: \"http://[::1]/\". IPv4 addresses and hostnames must not appear within square brackets. Parse did not enforce this requirement.",
+              "id": "GO-2025-4010",
+              "modified": "2026-02-13T21:28:48.362505Z",
+              "published": "2025-10-29T21:49:58Z",
+              "references": [
+                {
+                  "type": "REPORT",
+                  "url": "https://go.dev/issue/75678"
+                },
+                {
+                  "type": "FIX",
+                  "url": "https://go.dev/cl/709857"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://groups.google.com/g/golang-announce/c/4Emdl2iQ_bI"
+                }
+              ],
+              "related": [
+                "CGA-crxx-5xpf-m6mv"
+              ],
+              "schema_version": "1.7.3",
+              "summary": "Insufficient validation of bracketed IPv6 hostnames in net/url"
+            },
+            {
+              "affected": [
+                {
+                  "database_specific": {
+                    "source": "https://vuln.go.dev/ID/GO-2025-4011.json"
+                  },
+                  "ecosystem_specific": {
+                    "imports": [
+                      {
+                        "path": "encoding/asn1",
+                        "symbols": [
+                          "Unmarshal",
+                          "UnmarshalWithParams",
+                          "parseSequenceOf"
+                        ]
+                      }
+                    ]
+                  },
+                  "package": {
+                    "ecosystem": "Go",
+                    "name": "stdlib",
+                    "purl": "pkg:golang/stdlib"
+                  },
+                  "ranges": [
+                    {
+                      "events": [
+                        {
+                          "introduced": "0"
+                        },
+                        {
+                          "fixed": "1.24.8"
+                        },
+                        {
+                          "introduced": "1.25.0"
+                        },
+                        {
+                          "fixed": "1.25.2"
+                        }
+                      ],
+                      "type": "SEMVER"
+                    }
+                  ]
+                }
+              ],
+              "aliases": [
+                "BIT-golang-2025-58185",
+                "CVE-2025-58185"
+              ],
+              "credits": [
+                {
+                  "name": "Jakub Ciolek"
+                }
+              ],
+              "database_specific": {
+                "review_status": "REVIEWED",
+                "url": "https://pkg.go.dev/vuln/GO-2025-4011"
+              },
+              "details": "Parsing a maliciously crafted DER payload could allocate large amounts of memory, causing memory exhaustion.",
+              "id": "GO-2025-4011",
+              "modified": "2025-11-06T13:59:40.997708Z",
+              "published": "2025-10-29T21:50:00Z",
+              "references": [
+                {
+                  "type": "REPORT",
+                  "url": "https://go.dev/issue/75671"
+                },
+                {
+                  "type": "FIX",
+                  "url": "https://go.dev/cl/709856"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://groups.google.com/g/golang-announce/c/4Emdl2iQ_bI"
+                }
+              ],
+              "schema_version": "1.7.3",
+              "summary": "Parsing DER payload can cause memory exhaustion in encoding/asn1"
+            },
+            {
+              "affected": [
+                {
+                  "database_specific": {
+                    "source": "https://vuln.go.dev/ID/GO-2025-4012.json"
+                  },
+                  "ecosystem_specific": {
+                    "imports": [
+                      {
+                        "path": "net/http",
+                        "symbols": [
+                          "Client.Do",
+                          "Client.Get",
+                          "Client.Head",
+                          "Client.Post",
+                          "Client.PostForm",
+                          "Get",
+                          "Head",
+                          "ParseCookie",
+                          "Post",
+                          "PostForm",
+                          "Request.Cookie",
+                          "Request.Cookies",
+                          "Request.CookiesNamed",
+                          "Response.Cookies",
+                          "readCookies",
+                          "readSetCookies"
+                        ]
+                      }
+                    ]
+                  },
+                  "package": {
+                    "ecosystem": "Go",
+                    "name": "stdlib",
+                    "purl": "pkg:golang/stdlib"
+                  },
+                  "ranges": [
+                    {
+                      "events": [
+                        {
+                          "introduced": "0"
+                        },
+                        {
+                          "fixed": "1.24.8"
+                        },
+                        {
+                          "introduced": "1.25.0"
+                        },
+                        {
+                          "fixed": "1.25.2"
+                        }
+                      ],
+                      "type": "SEMVER"
+                    }
+                  ]
+                }
+              ],
+              "aliases": [
+                "BIT-golang-2025-58186",
+                "CVE-2025-58186"
+              ],
+              "credits": [
+                {
+                  "name": "jub0bs"
+                }
+              ],
+              "database_specific": {
+                "review_status": "REVIEWED",
+                "url": "https://pkg.go.dev/vuln/GO-2025-4012"
+              },
+              "details": "Despite HTTP headers having a default limit of 1MB, the number of cookies that can be parsed does not have a limit. By sending a lot of very small cookies such as \"a=;\", an attacker can make an HTTP server allocate a large amount of structs, causing large memory consumption.",
+              "id": "GO-2025-4012",
+              "modified": "2025-11-06T13:59:39.685338Z",
+              "published": "2025-10-29T21:50:05Z",
+              "references": [
+                {
+                  "type": "REPORT",
+                  "url": "https://go.dev/issue/75672"
+                },
+                {
+                  "type": "FIX",
+                  "url": "https://go.dev/cl/709855"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://groups.google.com/g/golang-announce/c/4Emdl2iQ_bI"
+                }
+              ],
+              "schema_version": "1.7.3",
+              "summary": "Lack of limit when parsing cookies can cause memory exhaustion in net/http"
+            },
+            {
+              "affected": [
+                {
+                  "database_specific": {
+                    "source": "https://vuln.go.dev/ID/GO-2025-4013.json"
+                  },
+                  "ecosystem_specific": {
+                    "imports": [
+                      {
+                        "path": "crypto/x509",
+                        "symbols": [
+                          "Certificate.Verify",
+                          "alreadyInChain"
+                        ]
+                      }
+                    ]
+                  },
+                  "package": {
+                    "ecosystem": "Go",
+                    "name": "stdlib",
+                    "purl": "pkg:golang/stdlib"
+                  },
+                  "ranges": [
+                    {
+                      "events": [
+                        {
+                          "introduced": "0"
+                        },
+                        {
+                          "fixed": "1.24.8"
+                        },
+                        {
+                          "introduced": "1.25.0"
+                        },
+                        {
+                          "fixed": "1.25.2"
+                        }
+                      ],
+                      "type": "SEMVER"
+                    }
+                  ]
+                }
+              ],
+              "aliases": [
+                "BIT-golang-2025-58188",
+                "CVE-2025-58188"
+              ],
+              "credits": [
+                {
+                  "name": "Jakub Ciolek"
+                }
+              ],
+              "database_specific": {
+                "review_status": "REVIEWED",
+                "url": "https://pkg.go.dev/vuln/GO-2025-4013"
+              },
+              "details": "Validating certificate chains which contain DSA public keys can cause programs to panic, due to a interface cast that assumes they implement the Equal method.\n\nThis affects programs which validate arbitrary certificate chains.",
+              "id": "GO-2025-4013",
+              "modified": "2025-11-06T13:59:52.252801Z",
+              "published": "2025-10-29T21:50:08Z",
+              "references": [
+                {
+                  "type": "FIX",
+                  "url": "https://go.dev/cl/709853"
+                },
+                {
+                  "type": "REPORT",
+                  "url": "https://go.dev/issue/75675"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://groups.google.com/g/golang-announce/c/4Emdl2iQ_bI"
+                }
+              ],
+              "schema_version": "1.7.3",
+              "summary": "Panic when validating certificates with DSA public keys in crypto/x509"
+            },
+            {
+              "affected": [
+                {
+                  "database_specific": {
+                    "source": "https://vuln.go.dev/ID/GO-2025-4014.json"
+                  },
+                  "ecosystem_specific": {
+                    "imports": [
+                      {
+                        "path": "archive/tar",
+                        "symbols": [
+                          "Reader.Next",
+                          "readGNUSparseMap1x0"
+                        ]
+                      }
+                    ]
+                  },
+                  "package": {
+                    "ecosystem": "Go",
+                    "name": "stdlib",
+                    "purl": "pkg:golang/stdlib"
+                  },
+                  "ranges": [
+                    {
+                      "events": [
+                        {
+                          "introduced": "0"
+                        },
+                        {
+                          "fixed": "1.24.8"
+                        },
+                        {
+                          "introduced": "1.25.0"
+                        },
+                        {
+                          "fixed": "1.25.2"
+                        }
+                      ],
+                      "type": "SEMVER"
+                    }
+                  ]
+                }
+              ],
+              "aliases": [
+                "BIT-golang-2025-58183",
+                "CVE-2025-58183"
+              ],
+              "credits": [
+                {
+                  "name": "Harshit Gupta (Mr HAX)"
+                }
+              ],
+              "database_specific": {
+                "review_status": "REVIEWED",
+                "url": "https://pkg.go.dev/vuln/GO-2025-4014"
+              },
+              "details": "tar.Reader does not set a maximum size on the number of sparse region data blocks in GNU tar pax 1.0 sparse files. A maliciously-crafted archive containing a large number of sparse regions can cause a Reader to read an unbounded amount of data from the archive into memory. When reading from a compressed source, a small compressed input can result in large allocations.",
+              "id": "GO-2025-4014",
+              "modified": "2026-02-11T10:28:59.084678Z",
+              "published": "2025-10-29T21:51:04Z",
+              "references": [
+                {
+                  "type": "FIX",
+                  "url": "https://go.dev/cl/709861"
+                },
+                {
+                  "type": "REPORT",
+                  "url": "https://go.dev/issue/75677"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://groups.google.com/g/golang-announce/c/4Emdl2iQ_bI"
+                }
+              ],
+              "related": [
+                "RHSA-2025:21778",
+                "RHSA-2025:21779",
+                "RHSA-2025:21815",
+                "RHSA-2025:21816",
+                "RHSA-2025:21856",
+                "RHSA-2025:21964",
+                "RHSA-2025:22011",
+                "RHSA-2025:22012",
+                "RHSA-2025:22030",
+                "RHSA-2025:22181",
+                "RHSA-2025:22255",
+                "RHSA-2025:22668",
+                "RHSA-2025:22899",
+                "RHSA-2025:23001",
+                "RHSA-2025:23002",
+                "RHSA-2025:23087",
+                "RHSA-2025:23088",
+                "RHSA-2025:23294",
+                "RHSA-2025:23295",
+                "RHSA-2025:23325",
+                "RHSA-2025:23326",
+                "RHSA-2025:23347",
+                "RHSA-2025:23348",
+                "RHSA-2025:23374",
+                "RHSA-2025:23394",
+                "RHSA-2025:23733",
+                "RHSA-2025:23736",
+                "RHSA-2025:23737",
+                "RHSA-2025:23740",
+                "RHSA-2025:23741",
+                "RHSA-2025:23746",
+                "RHSA-2025:23747",
+                "RHSA-2025:23948",
+                "RHSA-2026:0226",
+                "RHSA-2026:0227",
+                "RHSA-2026:0243",
+                "RHSA-2026:0244",
+                "RHSA-2026:0245",
+                "RHSA-2026:0246",
+                "RHSA-2026:0314",
+                "RHSA-2026:0424",
+                "RHSA-2026:0426",
+                "RHSA-2026:0477",
+                "RHSA-2026:0973",
+                "RHSA-2026:0987",
+                "RHSA-2026:1025",
+                "RHSA-2026:1377",
+                "RHSA-2026:1378",
+                "RHSA-2026:1379",
+                "RHSA-2026:1380",
+                "RHSA-2026:1381",
+                "RHSA-2026:1837",
+                "RHSA-2026:1838",
+                "RHSA-2026:2071",
+                "RHSA-2026:2082"
+              ],
+              "schema_version": "1.7.3",
+              "summary": "Unbounded allocation when parsing GNU sparse map in archive/tar"
+            },
+            {
+              "affected": [
+                {
+                  "database_specific": {
+                    "source": "https://vuln.go.dev/ID/GO-2025-4015.json"
+                  },
+                  "ecosystem_specific": {
+                    "imports": [
+                      {
+                        "path": "net/textproto",
+                        "symbols": [
+                          "Reader.ReadResponse"
+                        ]
+                      }
+                    ]
+                  },
+                  "package": {
+                    "ecosystem": "Go",
+                    "name": "stdlib",
+                    "purl": "pkg:golang/stdlib"
+                  },
+                  "ranges": [
+                    {
+                      "events": [
+                        {
+                          "introduced": "0"
+                        },
+                        {
+                          "fixed": "1.24.8"
+                        },
+                        {
+                          "introduced": "1.25.0"
+                        },
+                        {
+                          "fixed": "1.25.2"
+                        }
+                      ],
+                      "type": "SEMVER"
+                    }
+                  ]
+                }
+              ],
+              "aliases": [
+                "BIT-golang-2025-61724",
+                "CVE-2025-61724"
+              ],
+              "credits": [
+                {
+                  "name": "Jakub Ciolek"
+                }
+              ],
+              "database_specific": {
+                "review_status": "REVIEWED",
+                "url": "https://pkg.go.dev/vuln/GO-2025-4015"
+              },
+              "details": "The Reader.ReadResponse function constructs a response string through repeated string concatenation of lines. When the number of lines in a response is large, this can cause excessive CPU consumption.",
+              "id": "GO-2025-4015",
+              "modified": "2025-11-06T13:59:33.352271Z",
+              "published": "2025-10-29T21:51:07Z",
+              "references": [
+                {
+                  "type": "FIX",
+                  "url": "https://go.dev/cl/709859"
+                },
+                {
+                  "type": "REPORT",
+                  "url": "https://go.dev/issue/75716"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://groups.google.com/g/golang-announce/c/4Emdl2iQ_bI"
+                }
+              ],
+              "schema_version": "1.7.3",
+              "summary": "Excessive CPU consumption in Reader.ReadResponse in net/textproto"
+            },
+            {
+              "affected": [
+                {
+                  "database_specific": {
+                    "source": "https://vuln.go.dev/ID/GO-2025-4155.json"
+                  },
+                  "ecosystem_specific": {
+                    "imports": [
+                      {
+                        "path": "crypto/x509",
+                        "symbols": [
+                          "Certificate.Verify",
+                          "Certificate.VerifyHostname"
+                        ]
+                      }
+                    ]
+                  },
+                  "package": {
+                    "ecosystem": "Go",
+                    "name": "stdlib",
+                    "purl": "pkg:golang/stdlib"
+                  },
+                  "ranges": [
+                    {
+                      "events": [
+                        {
+                          "introduced": "0"
+                        },
+                        {
+                          "fixed": "1.24.11"
+                        },
+                        {
+                          "introduced": "1.25.0"
+                        },
+                        {
+                          "fixed": "1.25.5"
+                        }
+                      ],
+                      "type": "SEMVER"
+                    }
+                  ]
+                }
+              ],
+              "aliases": [
+                "BIT-golang-2025-61729",
+                "CVE-2025-61729"
+              ],
+              "credits": [
+                {
+                  "name": "Philippe Antoine (Catena cyber)"
+                }
+              ],
+              "database_specific": {
+                "review_status": "REVIEWED",
+                "url": "https://pkg.go.dev/vuln/GO-2025-4155"
+              },
+              "details": "Within HostnameError.Error(), when constructing an error string, there is no limit to the number of hosts that will be printed out. Furthermore, the error string is constructed by repeated string concatenation, leading to quadratic runtime. Therefore, a certificate provided by a malicious actor can result in excessive resource consumption.",
+              "id": "GO-2025-4155",
+              "modified": "2026-02-11T10:28:58.962017Z",
+              "published": "2025-12-02T18:30:24Z",
+              "references": [
+                {
+                  "type": "FIX",
+                  "url": "https://go.dev/cl/725920"
+                },
+                {
+                  "type": "REPORT",
+                  "url": "https://go.dev/issue/76445"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://groups.google.com/g/golang-announce/c/8FJoBkPddm4"
+                }
+              ],
+              "related": [
+                "CGA-2v46-jq6v-rr82",
+                "RHSA-2026:0921",
+                "RHSA-2026:0922",
+                "RHSA-2026:0923",
+                "RHSA-2026:1249",
+                "RHSA-2026:1344",
+                "RHSA-2026:1497",
+                "RHSA-2026:1506",
+                "RHSA-2026:1518",
+                "RHSA-2026:1715",
+                "RHSA-2026:1813",
+                "RHSA-2026:1814",
+                "RHSA-2026:1907",
+                "RHSA-2026:1908",
+                "RHSA-2026:2124",
+                "RHSA-2026:2217",
+                "RHSA-2026:2218",
+                "RHSA-2026:2219",
+                "RHSA-2026:2223",
+                "RHSA-2026:2265",
+                "RHSA-2026:2320",
+                "RHSA-2026:2323",
+                "RHSA-2026:2334",
+                "RHSA-2026:2441"
+              ],
+              "schema_version": "1.7.3",
+              "summary": "Excessive resource consumption when printing error string for host certificate validation in crypto/x509"
+            },
+            {
+              "affected": [
+                {
+                  "database_specific": {
+                    "source": "https://vuln.go.dev/ID/GO-2025-4175.json"
+                  },
+                  "ecosystem_specific": {
+                    "imports": [
+                      {
+                        "path": "crypto/x509",
+                        "symbols": [
+                          "Certificate.Verify"
+                        ]
+                      }
+                    ]
+                  },
+                  "package": {
+                    "ecosystem": "Go",
+                    "name": "stdlib",
+                    "purl": "pkg:golang/stdlib"
+                  },
+                  "ranges": [
+                    {
+                      "events": [
+                        {
+                          "introduced": "0"
+                        },
+                        {
+                          "fixed": "1.24.11"
+                        },
+                        {
+                          "introduced": "1.25.0"
+                        },
+                        {
+                          "fixed": "1.25.5"
+                        }
+                      ],
+                      "type": "SEMVER"
+                    }
+                  ]
+                }
+              ],
+              "aliases": [
+                "BIT-golang-2025-61727",
+                "CVE-2025-61727"
+              ],
+              "database_specific": {
+                "review_status": "REVIEWED",
+                "url": "https://pkg.go.dev/vuln/GO-2025-4175"
+              },
+              "details": "An excluded subdomain constraint in a certificate chain does not restrict the usage of wildcard SANs in the leaf certificate. For example a constraint that excludes the subdomain test.example.com does not prevent a leaf certificate from claiming the SAN *.example.com.",
+              "id": "GO-2025-4175",
+              "modified": "2026-02-04T04:38:59.126121Z",
+              "published": "2025-12-02T20:55:55Z",
+              "references": [
+                {
+                  "type": "FIX",
+                  "url": "https://go.dev/cl/723900"
+                },
+                {
+                  "type": "REPORT",
+                  "url": "https://go.dev/issue/76442"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://groups.google.com/g/golang-announce/c/8FJoBkPddm4"
+                }
+              ],
+              "related": [
+                "CGA-h5w2-2hch-h662"
+              ],
+              "schema_version": "1.7.3",
+              "summary": "Improper application of excluded DNS name constraints when verifying wildcard names in crypto/x509"
+            },
+            {
+              "affected": [
+                {
+                  "database_specific": {
+                    "source": "https://vuln.go.dev/ID/GO-2026-4337.json"
+                  },
+                  "ecosystem_specific": {
+                    "imports": [
+                      {
+                        "path": "crypto/tls",
+                        "symbols": [
+                          "Conn.Handshake",
+                          "Conn.HandshakeContext",
+                          "Conn.Read",
+                          "Conn.Write",
+                          "Conn.handshakeContext",
+                          "Dial",
+                          "DialWithDialer",
+                          "Dialer.Dial",
+                          "Dialer.DialContext",
+                          "QUICConn.Start"
+                        ]
+                      }
+                    ]
+                  },
+                  "package": {
+                    "ecosystem": "Go",
+                    "name": "stdlib",
+                    "purl": "pkg:golang/stdlib"
+                  },
+                  "ranges": [
+                    {
+                      "events": [
+                        {
+                          "introduced": "0"
+                        },
+                        {
+                          "fixed": "1.24.13"
+                        },
+                        {
+                          "introduced": "1.25.0-0"
+                        },
+                        {
+                          "fixed": "1.25.7"
+                        },
+                        {
+                          "introduced": "1.26.0-rc.1"
+                        },
+                        {
+                          "fixed": "1.26.0-rc.3"
+                        }
+                      ],
+                      "type": "SEMVER"
+                    }
+                  ]
+                }
+              ],
+              "aliases": [
+                "CVE-2025-68121"
+              ],
+              "credits": [
+                {
+                  "name": "Coia Prant (github.com/rbqvq)"
+                },
+                {
+                  "name": "Go Security Team"
+                }
+              ],
+              "database_specific": {
+                "review_status": "REVIEWED",
+                "url": "https://pkg.go.dev/vuln/GO-2026-4337"
+              },
+              "details": "During session resumption in crypto/tls, if the underlying Config has its ClientCAs or RootCAs fields mutated between the initial handshake and the resumed handshake, the resumed handshake may succeed when it should have failed. This may happen when a user calls Config.Clone and mutates the returned Config, or uses Config.GetConfigForClient. This can cause a client to resume a session with a server that it would not have resumed with during the initial handshake, or cause a server to resume a session with a client that it would not have resumed with during the initial handshake.",
+              "id": "GO-2026-4337",
+              "modified": "2026-02-05T18:11:18.077689Z",
+              "published": "2026-02-05T17:23:09Z",
+              "references": [
+                {
+                  "type": "WEB",
+                  "url": "https://groups.google.com/g/golang-announce/c/K09ubi9FQFk"
+                },
+                {
+                  "type": "FIX",
+                  "url": "https://go.dev/cl/737700"
+                },
+                {
+                  "type": "REPORT",
+                  "url": "https://go.dev/issue/77217"
+                }
+              ],
+              "schema_version": "1.7.3",
+              "summary": "Unexpected session resumption in crypto/tls"
+            },
+            {
+              "affected": [
+                {
+                  "database_specific": {
+                    "source": "https://vuln.go.dev/ID/GO-2026-4340.json"
+                  },
+                  "ecosystem_specific": {
+                    "imports": [
+                      {
+                        "path": "crypto/tls",
+                        "symbols": [
+                          "Conn.Handshake",
+                          "Conn.HandshakeContext",
+                          "Conn.Read",
+                          "Conn.Write",
+                          "Conn.handleKeyUpdate",
+                          "Conn.handshakeContext",
+                          "Conn.quicSetReadSecret",
+                          "Dial",
+                          "DialWithDialer",
+                          "Dialer.Dial",
+                          "Dialer.DialContext",
+                          "QUICConn.HandleData",
+                          "QUICConn.Start",
+                          "clientHandshakeStateTLS13.establishHandshakeKeys",
+                          "clientHandshakeStateTLS13.readServerFinished",
+                          "clientHandshakeStateTLS13.sendClientFinished",
+                          "serverHandshakeStateTLS13.checkForResumption",
+                          "serverHandshakeStateTLS13.doHelloRetryRequest",
+                          "serverHandshakeStateTLS13.readClientFinished",
+                          "serverHandshakeStateTLS13.sendServerFinished",
+                          "serverHandshakeStateTLS13.sendServerParameters"
+                        ]
+                      }
+                    ]
+                  },
+                  "package": {
+                    "ecosystem": "Go",
+                    "name": "stdlib",
+                    "purl": "pkg:golang/stdlib"
+                  },
+                  "ranges": [
+                    {
+                      "events": [
+                        {
+                          "introduced": "0"
+                        },
+                        {
+                          "fixed": "1.24.12"
+                        },
+                        {
+                          "introduced": "1.25.0"
+                        },
+                        {
+                          "fixed": "1.25.6"
+                        }
+                      ],
+                      "type": "SEMVER"
+                    }
+                  ]
+                }
+              ],
+              "aliases": [
+                "BIT-golang-2025-61730",
+                "CVE-2025-61730"
+              ],
+              "credits": [
+                {
+                  "name": "Coia Prant (github.com/rbqvq)"
+                }
+              ],
+              "database_specific": {
+                "review_status": "REVIEWED",
+                "url": "https://pkg.go.dev/vuln/GO-2026-4340"
+              },
+              "details": "During the TLS 1.3 handshake if multiple messages are sent in records that span encryption level boundaries (for instance the Client Hello and Encrypted Extensions messages), the subsequent messages may be processed before the encryption level changes. This can cause some minor information disclosure if a network-local attacker can inject messages during the handshake.",
+              "id": "GO-2026-4340",
+              "modified": "2026-02-04T02:58:11.702669Z",
+              "published": "2026-01-28T19:08:09Z",
+              "references": [
+                {
+                  "type": "FIX",
+                  "url": "https://go.dev/cl/724120"
+                },
+                {
+                  "type": "REPORT",
+                  "url": "https://go.dev/issue/76443"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://groups.google.com/g/golang-announce/c/Vd2tYVM8eUc"
+                }
+              ],
+              "related": [
+                "CGA-4r5q-7r6m-7v9p"
+              ],
+              "schema_version": "1.7.3",
+              "summary": "Handshake messages may be processed at the incorrect encryption level in crypto/tls"
+            },
+            {
+              "affected": [
+                {
+                  "database_specific": {
+                    "source": "https://vuln.go.dev/ID/GO-2026-4341.json"
+                  },
+                  "ecosystem_specific": {
+                    "imports": [
+                      {
+                        "path": "net/url",
+                        "symbols": [
+                          "ParseQuery",
+                          "URL.Query",
+                          "parseQuery"
+                        ]
+                      }
+                    ]
+                  },
+                  "package": {
+                    "ecosystem": "Go",
+                    "name": "stdlib",
+                    "purl": "pkg:golang/stdlib"
+                  },
+                  "ranges": [
+                    {
+                      "events": [
+                        {
+                          "introduced": "0"
+                        },
+                        {
+                          "fixed": "1.24.12"
+                        },
+                        {
+                          "introduced": "1.25.0"
+                        },
+                        {
+                          "fixed": "1.25.6"
+                        }
+                      ],
+                      "type": "SEMVER"
+                    }
+                  ]
+                }
+              ],
+              "aliases": [
+                "BIT-golang-2025-61726",
+                "CVE-2025-61726"
+              ],
+              "credits": [
+                {
+                  "name": "jub0bs"
+                }
+              ],
+              "database_specific": {
+                "review_status": "REVIEWED",
+                "url": "https://pkg.go.dev/vuln/GO-2026-4341"
+              },
+              "details": "The net/url package does not set a limit on the number of query parameters in a query.\n\nWhile the maximum size of query parameters in URLs is generally limited by the maximum request header size, the net/http.Request.ParseForm method can parse large URL-encoded forms. Parsing a large form containing many unique query parameters can cause excessive memory consumption.",
+              "id": "GO-2026-4341",
+              "modified": "2026-02-04T03:16:50.659443Z",
+              "published": "2026-01-28T19:08:18Z",
+              "references": [
+                {
+                  "type": "FIX",
+                  "url": "https://go.dev/cl/736712"
+                },
+                {
+                  "type": "REPORT",
+                  "url": "https://go.dev/issue/77101"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://groups.google.com/g/golang-announce/c/Vd2tYVM8eUc"
+                }
+              ],
+              "related": [
+                "CGA-j4jw-ch2g-7f2h"
+              ],
+              "schema_version": "1.7.3",
+              "summary": "Memory exhaustion in query parameter parsing in net/url"
+            },
+            {
+              "affected": [
+                {
+                  "database_specific": {
+                    "source": "https://vuln.go.dev/ID/GO-2026-4342.json"
+                  },
+                  "ecosystem_specific": {
+                    "imports": [
+                      {
+                        "path": "archive/zip",
+                        "symbols": [
+                          "Reader.Open",
+                          "Reader.initFileList"
+                        ]
+                      }
+                    ]
+                  },
+                  "package": {
+                    "ecosystem": "Go",
+                    "name": "stdlib",
+                    "purl": "pkg:golang/stdlib"
+                  },
+                  "ranges": [
+                    {
+                      "events": [
+                        {
+                          "introduced": "0"
+                        },
+                        {
+                          "fixed": "1.24.12"
+                        },
+                        {
+                          "introduced": "1.25.0"
+                        },
+                        {
+                          "fixed": "1.25.6"
+                        }
+                      ],
+                      "type": "SEMVER"
+                    }
+                  ]
+                }
+              ],
+              "aliases": [
+                "BIT-golang-2025-61728",
+                "CVE-2025-61728"
+              ],
+              "credits": [
+                {
+                  "name": "Jakub Ciolek"
+                }
+              ],
+              "database_specific": {
+                "review_status": "REVIEWED",
+                "url": "https://pkg.go.dev/vuln/GO-2026-4342"
+              },
+              "details": "archive/zip uses a super-linear file name indexing algorithm that is invoked the first time a file in an archive is opened. This can lead to a denial of service when consuming a maliciously constructed ZIP archive.",
+              "id": "GO-2026-4342",
+              "modified": "2026-02-04T02:59:19.152891Z",
+              "published": "2026-01-28T19:08:28Z",
+              "references": [
+                {
+                  "type": "FIX",
+                  "url": "https://go.dev/cl/736713"
+                },
+                {
+                  "type": "REPORT",
+                  "url": "https://go.dev/issue/77102"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://groups.google.com/g/golang-announce/c/Vd2tYVM8eUc"
+                }
+              ],
+              "related": [
+                "CGA-mmfw-mpcj-7qfm"
+              ],
+              "schema_version": "1.7.3",
+              "summary": "Excessive CPU consumption when building archive index in archive/zip"
+            },
+            {
+              "affected": [
+                {
+                  "database_specific": {
+                    "source": "https://vuln.go.dev/ID/GO-2026-4403.json"
+                  },
+                  "ecosystem_specific": {
+                    "imports": [
+                      {
+                        "path": "os",
+                        "symbols": [
+                          "checkPathEscapesInternal",
+                          "doInRoot",
+                          "splitPathInRoot"
+                        ]
+                      }
+                    ]
+                  },
+                  "package": {
+                    "ecosystem": "Go",
+                    "name": "stdlib",
+                    "purl": "pkg:golang/stdlib"
+                  },
+                  "ranges": [
+                    {
+                      "events": [
+                        {
+                          "introduced": "0"
+                        },
+                        {
+                          "fixed": "1.23.9"
+                        },
+                        {
+                          "introduced": "1.24.0-0"
+                        },
+                        {
+                          "fixed": "1.24.3"
+                        }
+                      ],
+                      "type": "SEMVER"
+                    }
+                  ]
+                }
+              ],
+              "aliases": [
+                "BIT-golang-2025-22873",
+                "CVE-2025-22873"
+              ],
+              "credits": [
+                {
+                  "name": "Dan Sebastian Thrane of SDU eScience Center"
+                }
+              ],
+              "database_specific": {
+                "review_status": "REVIEWED",
+                "url": "https://pkg.go.dev/vuln/GO-2026-4403"
+              },
+              "details": "It was possible to improperly access the parent directory of an os.Root by opening a filename ending in \"../\". For example, Root.Open(\"../\") would open the parent directory of the Root. This escape only permits opening the parent directory itself, not ancestors of the parent or files contained within the parent.",
+              "id": "GO-2026-4403",
+              "modified": "2026-02-06T09:40:56.765821Z",
+              "published": "2026-02-04T22:42:26Z",
+              "references": [
+                {
+                  "type": "FIX",
+                  "url": "https://go.dev/cl/670036"
+                },
+                {
+                  "type": "REPORT",
+                  "url": "https://go.dev/issue/73555"
+                },
+                {
+                  "type": "WEB",
+                  "url": "https://groups.google.com/g/golang-announce/c/UZoIkUT367A/m/5WDxKizJAQAJ"
+                }
+              ],
+              "schema_version": "1.7.3",
+              "summary": "Improper access to parent directory of root in os"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "experimental_config": {
+    "licenses": {
+      "summary": false,
+      "allowlist": null
+    }
+  }
+}

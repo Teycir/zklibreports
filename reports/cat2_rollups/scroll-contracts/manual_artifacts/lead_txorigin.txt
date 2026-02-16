@@ -1,0 +1,2 @@
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L1\rollup\ScrollChain.sol:201:        if (msg.sender != tx.origin || msg.sender.code.length != 0) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L1\gateways\EnforcedTxGateway.sol:107:        if (sender != tx.origin) {

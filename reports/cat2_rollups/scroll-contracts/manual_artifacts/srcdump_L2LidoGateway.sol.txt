@@ -1,0 +1,187 @@
+    1: // SPDX-License-Identifier: MIT
+    2: 
+    3: pragma solidity =0.8.24;
+    4: 
+    5: import {IL1ERC20Gateway} from "../L1/gateways/IL1ERC20Gateway.sol";
+    6: import {IL2ERC20Gateway} from "../L2/gateways/IL2ERC20Gateway.sol";
+    7: import {L2ERC20Gateway} from "../L2/gateways/L2ERC20Gateway.sol";
+    8: import {IL2ScrollMessenger} from "../L2/IL2ScrollMessenger.sol";
+    9: import {IScrollERC20Upgradeable} from "../libraries/token/IScrollERC20Upgradeable.sol";
+   10: import {ScrollGatewayBase} from "../libraries/gateway/ScrollGatewayBase.sol";
+   11: 
+   12: import {LidoBridgeableTokens} from "./LidoBridgeableTokens.sol";
+   13: import {LidoGatewayManager} from "./LidoGatewayManager.sol";
+   14: 
+   15: contract L2LidoGateway is L2ERC20Gateway, LidoBridgeableTokens, LidoGatewayManager {
+   16:     /**********
+   17:      * Errors *
+   18:      **********/
+   19: 
+   20:     /// @dev Thrown when withdraw zero amount token.
+   21:     error ErrorWithdrawZeroAmount();
+   22: 
+   23:     /// @dev Thrown when withdraw erc20 with calldata.
+   24:     error WithdrawAndCallIsNotAllowed();
+   25: 
+   26:     /*************
+   27:      * Variables *
+   28:      *************/
+   29: 
+   30:     /// @dev The initial version of `L2LidoGateway` use `L2CustomERC20Gateway`. We keep the storage
+   31:     /// slot for `tokenMapping` for compatibility. It should no longer be used.
+   32:     mapping(address => address) private __tokenMapping;
+   33: 
+   34:     /***************
+   35:      * Constructor *
+   36:      ***************/
+   37: 
+   38:     /// @notice Constructor for `L2LidoGateway` implementation contract.
+   39:     ///
+   40:     /// @param _l1Token The address of the bridged token in the L1 chain
+   41:     /// @param _l2Token The address of the token minted on the L2 chain when token bridged
+   42:     /// @param _counterpart The address of `L1LidoGateway` contract in L1.
+   43:     /// @param _router The address of `L2GatewayRouter` contract in L2.
+   44:     /// @param _messenger The address of `L2ScrollMessenger` contract in L2.
+   45:     constructor(
+   46:         address _l1Token,
+   47:         address _l2Token,
+   48:         address _counterpart,
+   49:         address _router,
+   50:         address _messenger
+   51:     ) LidoBridgeableTokens(_l1Token, _l2Token) ScrollGatewayBase(_counterpart, _router, _messenger) {
+   52:         if (_l1Token == address(0) || _l2Token == address(0) || _router == address(0)) {
+   53:             revert ErrorZeroAddress();
+   54:         }
+   55: 
+   56:         _disableInitializers();
+   57:     }
+   58: 
+   59:     /// @notice Initialize the storage of L2LidoGateway v1.
+   60:     ///
+   61:     /// @dev The parameters `_counterpart`, `_router` and `_messenger` are no longer used.
+   62:     ///
+   63:     /// @param _counterpart The address of `L1LidoGateway` contract in L1.
+   64:     /// @param _router The address of `L2GatewayRouter` contract in L2.
+   65:     /// @param _messenger The address of `L2ScrollMessenger` contract in L2.
+   66:     function initialize(
+   67:         address _counterpart,
+   68:         address _router,
+   69:         address _messenger
+   70:     ) external initializer {
+   71:         ScrollGatewayBase._initialize(_counterpart, _router, _messenger);
+   72:     }
+   73: 
+   74:     /// @notice Initialize the storage of L2LidoGateway v2.
+   75:     /// @param _depositsEnabler The address of user who can enable deposits
+   76:     /// @param _depositsEnabler The address of user who can disable deposits
+   77:     /// @param _withdrawalsEnabler The address of user who can enable withdrawals
+   78:     /// @param _withdrawalsDisabler The address of user who can disable withdrawals
+   79:     function initializeV2(
+   80:         address _depositsEnabler,
+   81:         address _depositsDisabler,
+   82:         address _withdrawalsEnabler,
+   83:         address _withdrawalsDisabler
+   84:     ) external reinitializer(2) {
+   85:         __LidoGatewayManager_init(_depositsEnabler, _depositsDisabler, _withdrawalsEnabler, _withdrawalsDisabler);
+   86:     }
+   87: 
+   88:     /*************************
+   89:      * Public View Functions *
+   90:      *************************/
+   91: 
+   92:     /// @inheritdoc IL2ERC20Gateway
+   93:     function getL1ERC20Address(address _l2Token)
+   94:         external
+   95:         view
+   96:         override
+   97:         onlySupportedL2Token(_l2Token)
+   98:         returns (address)
+   99:     {
+  100:         return l1Token;
+  101:     }
+  102: 
+  103:     /// @inheritdoc IL2ERC20Gateway
+  104:     function getL2ERC20Address(address _l1Token)
+  105:         external
+  106:         view
+  107:         override
+  108:         onlySupportedL1Token(_l1Token)
+  109:         returns (address)
+  110:     {
+  111:         return l2Token;
+  112:     }
+  113: 
+  114:     /*****************************
+  115:      * Public Mutating Functions *
+  116:      *****************************/
+  117: 
+  118:     /// @inheritdoc IL2ERC20Gateway
+  119:     /// @dev The length of `_data` always be zero, which guarantee by `L1LidoGateway`.
+  120:     function finalizeDepositERC20(
+  121:         address _l1Token,
+  122:         address _l2Token,
+  123:         address _from,
+  124:         address _to,
+  125:         uint256 _amount,
+  126:         bytes calldata _data
+  127:     )
+  128:         external
+  129:         payable
+  130:         override
+  131:         onlyCallByCounterpart
+  132:         nonReentrant
+  133:         onlySupportedL1Token(_l1Token)
+  134:         onlySupportedL2Token(_l2Token)
+  135:         whenDepositsEnabled
+  136:     {
+  137:         if (msg.value != 0) revert ErrorNonZeroMsgValue();
+  138: 
+  139:         IScrollERC20Upgradeable(_l2Token).mint(_to, _amount);
+  140: 
+  141:         emit FinalizeDepositERC20(_l1Token, _l2Token, _from, _to, _amount, _data);
+  142:     }
+  143: 
+  144:     /**********************
+  145:      * Internal Functions *
+  146:      **********************/
+  147: 
+  148:     /// @inheritdoc L2ERC20Gateway
+  149:     function _withdraw(
+  150:         address _l2Token,
+  151:         address _to,
+  152:         uint256 _amount,
+  153:         bytes memory _data,
+  154:         uint256 _gasLimit
+  155:     )
+  156:         internal
+  157:         virtual
+  158:         override
+  159:         nonReentrant
+  160:         onlySupportedL2Token(_l2Token)
+  161:         onlyNonZeroAccount(_to)
+  162:         whenWithdrawalsEnabled
+  163:     {
+  164:         if (_amount == 0) revert ErrorWithdrawZeroAmount();
+  165: 
+  166:         // 1. Extract real sender if this call is from L2GatewayRouter.
+  167:         address _from = _msgSender();
+  168:         if (router == _from) {
+  169:             (_from, _data) = abi.decode(_data, (address, bytes));
+  170:         }
+  171:         if (_data.length != 0) revert WithdrawAndCallIsNotAllowed();
+  172: 
+  173:         // 2. Burn token.
+  174:         IScrollERC20Upgradeable(_l2Token).burn(_from, _amount);
+  175: 
+  176:         // 3. Generate message passed to L1LidoGateway.
+  177:         bytes memory _message = abi.encodeCall(
+  178:             IL1ERC20Gateway.finalizeWithdrawERC20,
+  179:             (l1Token, _l2Token, _from, _to, _amount, _data)
+  180:         );
+  181: 
+  182:         // 4. send message to L2ScrollMessenger
+  183:         IL2ScrollMessenger(messenger).sendMessage{value: msg.value}(counterpart, 0, _message, _gasLimit);
+  184: 
+  185:         emit WithdrawERC20(l1Token, _l2Token, _from, _to, _amount, _data);
+  186:     }
+  187: }

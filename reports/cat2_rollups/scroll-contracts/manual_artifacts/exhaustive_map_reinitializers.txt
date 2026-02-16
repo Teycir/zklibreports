@@ -1,0 +1,5 @@
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L1\rollup\ScrollChain.sol:262:    function initializeV2() external reinitializer(2) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L1\rollup\L1MessageQueueV1WithGasPriceOracle.sol:50:    function initializeV2() external reinitializer(2) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\L1\rollup\L1MessageQueueV1WithGasPriceOracle.sol:55:    function initializeV3() external reinitializer(3) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\lido\L2LidoGateway.sol:84:    ) external reinitializer(2) {
+\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\scroll-contracts\src\lido\L1LidoGateway.sol:83:    ) external reinitializer(2) {
