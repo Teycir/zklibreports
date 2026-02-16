@@ -4,7 +4,7 @@ Scope: `\\VBOXSVR\elements\Repos\zk0d\cat1_bridges\LayerZero-v2`
 
 HEAD: `ab9b083410b9359285a5756807e1b6145d4711a7`
 
-Pass status: In progress (top three high-signal hypotheses evidence-closed; full-source parity `H1/H2/H3` validated).
+Pass status: Exhausted for this pass (LZ1/LZ2/LZ3/LZ4 evidence-closed; full-source parity `H1/H2/H3/H4` validated).
 
 Primary scope (this pass):
 - EVM OFT/OApp and Endpoint delegate-control surfaces.
@@ -20,6 +20,7 @@ Non-goals (this pass):
 - Endpoint auth/config:
   - `evm/protocol/contracts/EndpointV2.sol` stores per-OApp delegate mapping and accepts config mutations when caller is OApp or delegate.
   - `evm/oapp/contracts/oapp/OAppCore.sol` sets delegate in constructor and via explicit `setDelegate`.
+  - `evm/protocol/contracts/EndpointV2Alt.sol` uses ERC20 `nativeErc20` for native-fee accounting and derives supplied native fee from endpoint balance.
 
 ## Critical Invariants
 
@@ -29,6 +30,7 @@ Non-goals (this pass):
   - After ownership transfer, prior owner/delegate should not retain endpoint config authority unless explicitly intended.
 - Fee attribution boundary:
   - `payInLzToken` refunds should only return caller-supplied excess, not pre-existing endpoint residual balances.
+  - EndpointV2Alt native-fee refunds should only return caller-supplied excess of `nativeErc20`, not pre-existing endpoint residual balances.
 
 ## Proven Findings
 
@@ -168,6 +170,47 @@ Executable witness:
   - `reports/cat1_bridges/LayerZero-v2/manual_artifacts/lz3_residual_sweep_formal_campaign_meta.json`
   - `reports/cat1_bridges/LayerZero-v2/manual_artifacts/h3_fullsource_lztoken_residual_sweep_forge_test.txt`
 
+### LZ4: EndpointV2Alt native-fee path can sweep preloaded residual `nativeErc20` balance to caller-selected refund address
+
+Severity: Medium (requires nonzero endpoint residual, but causes direct token loss of that residual once present)
+
+Affected code:
+- `\\VBOXSVR\elements\Repos\zk0d\cat1_bridges\LayerZero-v2\packages\layerzero-v2\evm\protocol\contracts\EndpointV2Alt.sol`
+  - `_suppliedNative(...)`
+  - `_payNative(...)`
+- `\\VBOXSVR\elements\Repos\zk0d\cat1_bridges\LayerZero-v2\packages\layerzero-v2\evm\protocol\contracts\EndpointV2.sol`
+  - `send(...)`
+  - `_payToken(...)`
+
+Root cause:
+- `EndpointV2Alt._suppliedNative()` returns full endpoint `nativeErc20` balance as supplied native fee.
+- `send(...)` uses that supplied value in `_payNative(...)` and `_payToken(...)`, refunding `_supplied - _required` to caller-selected refund address.
+- Pre-existing residual endpoint `nativeErc20` is therefore treated as caller-supplied fee.
+
+Concrete witness sequence:
+1. Deploy `EndpointV2Alt` with `nativeErc20` token and configure send/receive libraries.
+2. Configure message library fee to require nonzero native fee (`77`) and zero `lzToken` fee.
+3. Preload endpoint with residual `nativeErc20` balance (`1_000`).
+4. Arbitrary caller invokes `send(payInLzToken=false, refundAddress=attacker)` with no additional token contribution.
+5. Endpoint pays required fee (`77`) to message library and refunds remaining residual (`923`) to attacker.
+
+Impact:
+- Any stranded/preloaded `nativeErc20` balance in EndpointV2Alt becomes permissionlessly sweepable by arbitrary send caller.
+- Mirrors LZ3 residual-sweep behavior on alternate endpoint native-fee path.
+
+Recommended fix:
+- Attribute supplied native fee using per-call deltas (or explicit transfer-in on `send`), not total endpoint balance.
+- Refund only caller-contributed excess above required native fee.
+- Keep residual-native recovery behind privileged/admin flow.
+
+Executable witness:
+- Harness:
+  - `proof_harness/cat1_layerzero_v2_parity_fullsource`
+- Tests:
+  - `test_h4_full_source_endpoint_alt_native_residual_sweep`
+- Artifacts:
+  - `reports/cat1_bridges/LayerZero-v2/manual_artifacts/h4_fullsource_alt_native_residual_sweep_forge_test.txt`
+
 ## Specialist Fuzzing (Medusa + Echidna)
 
 LZ1 harness:
@@ -226,6 +269,14 @@ H3 parity replay (`EndpointV2` `payInLzToken` residual sweep):
 - Artifact:
   - `reports/cat1_bridges/LayerZero-v2/manual_artifacts/h3_fullsource_lztoken_residual_sweep_forge_test.txt`
 
+H4 parity replay (`EndpointV2Alt` native-fee residual sweep):
+- Test:
+  - `test_h4_full_source_endpoint_alt_native_residual_sweep`
+- Result:
+  - preloaded endpoint `nativeErc20` residual is counted as supplied native fee, enabling refund of residual minus required native fee to attacker-selected refund address.
+- Artifact:
+  - `reports/cat1_bridges/LayerZero-v2/manual_artifacts/h4_fullsource_alt_native_residual_sweep_forge_test.txt`
+
 ## Hypotheses (Next Validation Targets)
 
 H1: Full-source parity replay for LZ1 against copied `OFTAdapter` stack
@@ -240,7 +291,10 @@ H3: Endpoint LZ-token residual-balance sweep path
 - Goal: validate whether preloaded residual `lzToken` balance can be opportunistically consumed/refunded by third parties via `send(payInLzToken=true)` under real message-lib settings.
 - Status: validated.
 
+H4: EndpointV2Alt native-fee residual-balance sweep path
+- Goal: validate whether preloaded `nativeErc20` endpoint residual can be opportunistically consumed/refunded by third parties via `send(payInLzToken=false)` on alternate endpoint deployments.
+- Status: validated.
+
 ## Next Actions (Immediate)
 
-1. Start next ranked high/medium hypothesis on Endpoint/OApp config safety after parity closure.
-2. Extend parity checks to alternate endpoint variants (`EndpointV2Alt`) and fee-token operational edge cases.
+1. LayerZero-v2 pass is exhausted for this cycle; move to next cat1 repo/workstream.
