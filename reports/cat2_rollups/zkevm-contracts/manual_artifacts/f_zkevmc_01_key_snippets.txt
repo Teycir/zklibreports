@@ -1,0 +1,67 @@
+=== AggLayerGateway initialize (unguarded role bootstrap) ===
+   82:     function initialize(
+   83:         address defaultAdmin,
+   84:         address aggchainDefaultVKeyRole,
+   85:         address addRouteRole,
+   86:         address freezeRouteRole,
+   87:         bytes4 pessimisticVKeySelector,
+   88:         address verifier,
+   89:         bytes32 pessimisticVKey
+   90:     ) external initializer {
+   91:         if (
+   92:             defaultAdmin == address(0) ||
+   93:             aggchainDefaultVKeyRole == address(0) ||
+   94:             addRouteRole == address(0) ||
+   95:             freezeRouteRole == address(0)
+   96:         ) {
+   97:             revert InvalidZeroAddress();
+   98:         }
+   99: 
+  100:         _grantRole(DEFAULT_ADMIN_ROLE, defaultAdmin);
+  101:         _grantRole(AGGCHAIN_DEFAULT_VKEY_ROLE, aggchainDefaultVKeyRole);
+  102:         _grantRole(AL_ADD_PP_ROUTE_ROLE, addRouteRole);
+  103:         _grantRole(AL_FREEZE_PP_ROUTE_ROLE, freezeRouteRole);
+  104: 
+  105:         _addPessimisticVKeyRoute(
+  106:             pessimisticVKeySelector,
+  107:             verifier,
+  108:             pessimisticVKey
+  109:         );
+  110:     }
+
+=== AggLayerGateway verify path (route-selected verifier) ===
+  124:     function verifyPessimisticProof(
+  125:         bytes calldata publicValues,
+  126:         bytes calldata proofBytes
+  127:     ) external view {
+  128:         /// @dev By protocol the proof should at least have the 4 bytes selector, the other bytes are not part of our protocol
+  129:         if (proofBytes.length < 4) {
+  130:             revert InvalidProofBytesLength();
+  131:         }
+  132: 
+  133:         bytes4 ppSelector = bytes4(proofBytes[:4]);
+  134: 
+  135:         AggLayerVerifierRoute memory route = pessimisticVKeyRoutes[ppSelector];
+  136:         if (route.verifier == address(0)) {
+  137:             revert RouteNotFound(ppSelector);
+  138:         } else if (route.frozen) {
+  139:             revert RouteIsFrozen(ppSelector);
+  140:         }
+  141: 
+  142:         ISP1Verifier(route.verifier).verifyProof(
+  143:             route.pessimisticVKey,
+  144:             publicValues,
+  145:             proofBytes[4:]
+  146:         );
+  147:     }
+
+=== PolygonRollupManager uses AggLayerGateway for ALGateway proofs ===
+ 1350:         if (rollup.rollupVerifierType == VerifierType.ALGateway) {
+ 1351:             // Verify proof. The pessimistic proof selector is attached at the first 4 bytes of the proof
+ 1352:             // proof[0:4]: 4 bytes selector pp
+ 1353:             // proof[4:8]: 4 bytes selector SP1 verifier
+ 1354:             // proof[8:]: proof
+ 1355:             aggLayerGateway.verifyPessimisticProof(
+ 1356:                 inputPessimisticBytes,
+ 1357:                 proof
+ 1358:             );

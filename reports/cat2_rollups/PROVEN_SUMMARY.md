@@ -17,7 +17,7 @@ Category: `cat2_rollups`
 10. `taiko-contracts`: `CONFIRMED` (1 finding). See `reports/cat2_rollups/taiko-contracts/report.md`.
 11. `taiko-mono`: `CONFIRMED` (1 finding). See `reports/cat2_rollups/taiko-mono/report.md`.
 12. `zkevm-circuits`: `CONFIRMED` (1 finding). See `reports/cat2_rollups/zkevm-circuits/report.md`.
-13. `zkevm-contracts`: `NOT CONFIRMED` (baseline scanner leads only).
+13. `zkevm-contracts`: `CONFIRMED` (1 finding). See `reports/cat2_rollups/zkevm-contracts/report.md`.
 
 ## Confirmed Findings
 
@@ -29,6 +29,7 @@ Category: `cat2_rollups`
 - `F-TAIKO-01` (`Medium`): `TrailblazersBadgesS2.getBadge(uint256)` uses an inverted existence boundary check, allowing nonexistent token IDs to be returned as zero-value structs while reverting for valid older minted IDs.
 - `F-TAIKOMONO-01` (`Medium`): `TrailblazersBadgesS2.getBadge(uint256)` uses the same inverted existence boundary check in `taiko-mono`, allowing nonexistent token IDs to appear valid while valid older IDs can revert.
 - `F-ZKEVM-01` (`High`): `aggregator::decode_bytes` panics on malformed `blob_bytes`, allowing malformed proving-task payloads to crash batch proving sanity path instead of returning a recoverable error.
+- `F-ZKEVMC-01` (`Critical`): `AggLayerGateway.initialize(...)` can be first-called by an attacker in a non-atomic proxy deployment/upgrade flow, allowing attacker-controlled admin and verifier-route role capture over ALGateway proof validation paths.
 - `F-OPT-01` (`High`): `ProtocolVersions.initialize(...)` can be first-called by an attacker in a non-atomic proxy upgrade flow, enabling owner capture and protocol-version control.
 - `F-MAN-01` (`Critical`): Defender can rewrite challenger win in `Challenge.completeChallenge(bool)`.
 - `F-MAN-02` (`High`): `Rollup.createAssertion` auto-confirms assertions in the same transaction.
@@ -38,6 +39,7 @@ Category: `cat2_rollups`
 - `F-BASE-01`: Forge + Medusa + Echidna + Halmos counterexamples (`f_base_01_initializer_hijack_forge_test.txt`, `f_base_01_medusa_failfast_30s.txt`, `f_base_01_echidna_30s.txt`, `f_base_01_halmos.txt`).
 - `F-ERA-01`: Deterministic Rust harness witness (`f_era_01_resolver_page_overflow_cargo_test.txt`).
 - `F-ZKEVM-01`: Deterministic Rust harness witness (`f_zkevm_01_decode_bytes_panic_cargo_test.txt`).
+- `F-ZKEVMC-01`: Forge counterexample (`f_zkevmc_01_agglayer_gateway_init_hijack_forge_test.txt`).
 - `F-ERAC-01`: Forge + Medusa + Echidna + Halmos counterexamples (`f_erac_01_chain_registrar_init_hijack_forge_test.txt`, `f_erac_01_medusa_failfast_30s.txt`, `f_erac_01_echidna_30s.txt`, `f_erac_01_halmos.txt`).
 - `F-LINEA-01`: Forge + Medusa + Echidna + Halmos counterexamples (`f_linea_01_reinitializer_dos_forge_test.txt`, `f_linea_01_medusa_failfast_30s.txt`, `f_linea_01_echidna_30s.txt`, `f_linea_01_halmos.txt`).
 - `F-SCROLL-01`: Forge + Medusa + Echidna + Halmos counterexamples (`f_scroll_01_scrollchain_init_hijack_forge_test.txt`, `f_scroll_01_medusa_failfast_30s.txt`, `f_scroll_01_echidna_30s.txt`, `f_scroll_01_halmos.txt`).
@@ -59,3 +61,4 @@ Primary reports:
 - `reports/cat2_rollups/taiko-contracts/report.md`
 - `reports/cat2_rollups/taiko-mono/report.md`
 - `reports/cat2_rollups/zkevm-circuits/report.md`
+- `reports/cat2_rollups/zkevm-contracts/report.md`
