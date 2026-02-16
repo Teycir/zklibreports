@@ -4,7 +4,7 @@ Scope: `\\VBOXSVR\elements\Repos\zk0d\cat1_bridges\connext-monorepo`
 
 HEAD: `7758e62037bba281b8844c37831bde0b838edd36`
 
-Pass status: In progress (F1/F2 evidence-closed; one high-signal hypothesis still open).
+Pass status: In progress (F1/F2/F3 evidence-closed; one high-signal hypothesis still open).
 
 Primary scope (this pass):
 - `packages/deployments/contracts/contracts/core/connext/facets`
@@ -25,6 +25,9 @@ Non-goals (this pass):
   - `BridgeFacet.execute(...)` delegates to `_handleExecuteLiquidity(...)` and `_handleExecuteTransaction(...)`.
   - Canonical-domain cap-tracked path decrements `s.tokenConfigs[_key].custodied` by intent amount (`toSwap`) in `_handleExecuteLiquidity(...)`.
   - Payout to recipient uses `AssetLogic.handleOutgoingAsset(...)`.
+- Relayer fee bump path:
+  - `BridgeFacet._bumpTransfer(...)` pulls ERC20 relayer fee in using `AssetLogic.handleIncomingAsset(...)`.
+  - It then forwards relayer fee out via `AssetLogic.handleOutgoingAsset(...)`.
 - Core transfer helpers:
   - `AssetLogic.handleIncomingAsset(...)` validates exact incoming amount and rejects fee-on-transfer behavior.
   - `AssetLogic.handleOutgoingAsset(...)` performs raw transfer out without sender-side debit validation.
@@ -37,6 +40,8 @@ Non-goals (this pass):
   - Router-balance decrement amount should match actual collateral debit caused by payout transfer.
 - Canonical cap/custody accounting coverage:
   - For cap-tracked canonical assets, real collateral should not fall below tracked `custodied`.
+- Relayer-fee neutrality:
+  - ERC20 `bumpTransfer` fee forwarding should not consume pre-existing bridge collateral.
 
 ## Proven Findings
 
@@ -139,11 +144,61 @@ Executable witness:
   - `reports/cat1_bridges/connext-monorepo/manual_artifacts/f2_execute_custodied_sender_tax_formal_echidna_30s.txt`
   - `reports/cat1_bridges/connext-monorepo/manual_artifacts/f2_execute_custodied_sender_tax_formal_campaign_meta.json`
 
+### F3: ERC20 `bumpTransfer` fee forwarding can consume bridge collateral under sender-tax payout token behavior
+
+Severity: Medium (token-specific collateral drift / solvency pressure)
+
+Affected code:
+- `\\VBOXSVR\elements\Repos\zk0d\cat1_bridges\connext-monorepo\packages\deployments\contracts\contracts\core\connext\facets\BridgeFacet.sol`
+  - `_bumpTransfer(...)` pulls fee in (`AssetLogic.handleIncomingAsset`) then forwards fee out (`AssetLogic.handleOutgoingAsset`) (line ~719+)
+- `\\VBOXSVR\elements\Repos\zk0d\cat1_bridges\connext-monorepo\packages\deployments\contracts\contracts\core\connext\libraries\AssetLogic.sol`
+  - `handleIncomingAsset(...)` enforces exact incoming amount (line ~55)
+  - `handleOutgoingAsset(...)` performs transfer without sender-side debit validation (line ~85)
+
+Root cause:
+- ERC20 `bumpTransfer` path is modeled as value-neutral: pull `_relayerFee` from caller, then push `_relayerFee` to relayer vault.
+- Incoming leg is exact-delta validated, but outgoing leg assumes sender debit equals transfer amount.
+- For sender-tax token behavior on Connext-originated transfers, outgoing fee transfer can debit `amount + tax`.
+- Net effect: each bump operation can consume pre-existing contract collateral by `tax`.
+
+Concrete witness sequence:
+1. Seed bridge with router liabilities: add `100_000` for router A and `100_000` for router B (`totalRouterBalances = 200_000`).
+2. Configure sender-tax behavior for transfers where Connext contract is sender (5% extra debit).
+3. Call ERC20 bump-fee path with `relayerFee = 100_000`.
+4. Incoming leg credits exactly `100_000` into contract.
+5. Outgoing fee transfer debits `105_000` from contract.
+6. Post-state: collateral `195_000` while router liabilities remain `200_000`; invariant fails (`collateral < totalRouterBalances`).
+
+Impact:
+- Repeated bump-fee operations can drain bridge-side collateral for affected token classes.
+- This can undercollateralize outstanding router liabilities and stress liquidity/settlement liveness.
+- Drift is created on a path expected to be accounting-neutral.
+
+Recommended fix:
+- Validate sender-side balance delta for outgoing ERC20 relayer-fee transfers.
+- Revert or block unsupported sender-tax token classes for relayer-fee assets.
+- Consider asset compatibility constraints requiring predictable transfer debit semantics.
+
+Executable witness:
+- Harness:
+  - `proof_harness/cat1_connext_f3_bump_transfer_sender_tax`
+- Tests:
+  - `test_f3_bug_model_sender_tax_bump_transfer_breaks_collateral_vs_router_balances`
+  - `test_f3_fixed_model_rejects_sender_tax_bump_transfer`
+  - `testFuzz_f3_bug_model_sender_tax_bump_transfer_can_break_collateral_invariant`
+- Artifacts:
+  - `reports/cat1_bridges/connext-monorepo/manual_artifacts/f3_bump_transfer_sender_tax_forge_test.txt`
+  - `reports/cat1_bridges/connext-monorepo/manual_artifacts/f3_bump_transfer_sender_tax_fuzz_5000_runs.txt`
+  - `reports/cat1_bridges/connext-monorepo/manual_artifacts/f3_bump_transfer_sender_tax_formal_medusa_30s.txt`
+  - `reports/cat1_bridges/connext-monorepo/manual_artifacts/f3_bump_transfer_sender_tax_formal_echidna_30s.txt`
+  - `reports/cat1_bridges/connext-monorepo/manual_artifacts/f3_bump_transfer_sender_tax_formal_campaign_meta.json`
+
 ## Specialist Fuzzing (Medusa + Echidna)
 
 Harnesses:
 - `proof_harness/cat1_connext_f1_router_sender_tax/src/MedusaConnextRouterSenderTaxHarness.sol`
 - `proof_harness/cat1_connext_f2_execute_custodied_sender_tax/src/MedusaConnextExecuteCustodiedSenderTaxHarness.sol`
+- `proof_harness/cat1_connext_f3_bump_transfer_sender_tax/src/MedusaConnextBumpTransferSenderTaxHarness.sol`
 
 Property results:
 - Bug properties falsified:
@@ -151,9 +206,12 @@ Property results:
   - `echidna_bug_collateral_covers_router_balances`
   - `property_bug_collateral_covers_custodied`
   - `echidna_bug_collateral_covers_custodied`
+  - `property_bug_collateral_covers_router_balances_after_bump`
+  - `echidna_bug_collateral_covers_router_balances_after_bump`
 - Fixed controls passed:
   - `property_fixed_collateral_covers_router_balances`
   - `property_fixed_collateral_covers_custodied`
+  - `property_fixed_collateral_covers_router_balances_after_bump`
 
 ## Hypotheses (Ranked Leads To Validate Next)
 
@@ -163,7 +221,10 @@ F1: Router liquidity withdrawal under sender-tax payout tokens
 F2: Execute/custodied accounting drift under sender-tax payout tokens
 - Status: validated and promoted (proven).
 
-F3: Fast-liquidity execute path trust boundary before reconcile
+F3: ERC20 `bumpTransfer` sender-tax collateral drift
+- Status: validated and promoted (proven).
+
+F4: Fast-liquidity execute path trust boundary before reconcile
 - Observation: `BridgeFacet.execute(...)` documentation notes calldata properties may be unverified prior to reconcile completion.
 - Question: can any externally meaningful state change occur in pre-reconcile windows that violates intended origin authenticity assumptions?
 - Status: open.
