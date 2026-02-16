@@ -1,5 +1,7 @@
 # mantle
 
+> Exhaustion status: closed at commit `5cda5f811f73d9f331e6168617f87d3e19e6db6b`. See `reports/cat2_rollups/mantle/manual_audit.md` and `reports/cat2_rollups/mantle/EXHAUSTION_ADDENDUM.md`.
+
 - Source: `\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\mantle`
 - HEAD: `5cda5f811f73d9f331e6168617f87d3e19e6db6b`
 - origin: `https://github.com/mantlenetworkio/mantle`
