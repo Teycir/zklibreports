@@ -9,7 +9,7 @@
 
 ## Manual Verdict
 
-- `CONFIRMED`: 1
+- `CONFIRMED`: 2
 - `LIKELY`: 0
 - `NOT CONFIRMED`: scanner-only dependency/secrets leads and non-production/test-only paths without exploit witness
 
@@ -53,6 +53,44 @@ Deterministic witness:
 
 Primary source snippets:
 - `reports/cat2_rollups/zkevm-circuits/manual_artifacts/f_zkevm_01_key_snippets.txt`
+
+## F-ZKEVM-02: Empty batch/bundle proving tasks panic in identifier path before validation
+
+Severity: `Medium`
+
+Status: `CONFIRMED`
+
+Affected code:
+- `\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-circuits\prover\src\types.rs:82` - `BatchProvingTask::identifier()` calls `.last().unwrap()` on `chunk_proofs`.
+- `\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-circuits\prover\src\types.rs:106` - `BundleProvingTask::identifier()` calls `.last().unwrap()` on `batch_proofs`.
+- `\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-circuits\prover\src\aggregator\prover.rs:135` - `gen_batch_proof(...)` derives `name` via `batch.identifier()` before any batch-content checks.
+- `\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-circuits\prover\src\aggregator\prover.rs:196` - `gen_bundle_proof(...)` derives `name` via `bundle.identifier()` before validation.
+
+Root cause:
+- Identifier helpers assume non-empty vectors and use `unwrap()` instead of returning a recoverable error for malformed empty tasks.
+
+Attacker preconditions:
+- Ability to submit or inject malformed proving tasks with empty `chunk_proofs` or `batch_proofs` to the prover service interface/queue.
+
+Witness sequence:
+1. Build `BatchProvingTask` with `chunk_proofs = []`.
+2. Call `gen_batch_proof(..., name=None, ...)` name-derivation path.
+3. `batch.identifier()` panics on `.last().unwrap()`.
+4. Similarly, `BundleProvingTask` with `batch_proofs = []` panics in `gen_bundle_proof(..., name=None, ...)`.
+
+Business implication (non-technical):
+- A malformed empty proving task can crash prover worker execution before the task is cleanly rejected.
+- Repeated malformed tasks can cause avoidable worker instability and processing disruption.
+- This is an availability and reliability risk in proving orchestration pipelines.
+
+Deterministic witness:
+- Harness: `proof_harness/cat2_zkevm_circuits_f2_empty_task_identifier_panic/src/lib.rs`
+- Run: `cargo test --manifest-path proof_harness/cat2_zkevm_circuits_f2_empty_task_identifier_panic/Cargo.toml -- --nocapture`
+- Artifact: `reports/cat2_rollups/zkevm-circuits/manual_artifacts/f_zkevm_02_empty_task_identifier_panic_cargo_test.txt`
+- Result: 3/3 tests passed; two panic traces (`Option::unwrap()` on `None`) observed for empty batch/bundle task paths.
+
+Primary source snippets:
+- `reports/cat2_rollups/zkevm-circuits/manual_artifacts/f_zkevm_02_key_snippets.txt`
 
 ## Tool Outputs (Baseline)
 

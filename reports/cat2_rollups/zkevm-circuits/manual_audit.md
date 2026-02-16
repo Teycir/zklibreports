@@ -29,12 +29,16 @@ From `reports/cat2_rollups/zkevm-circuits/manual_artifacts/lead_counts.txt`:
 ## Confirmed
 
 - `F-ZKEVM-01` (`High`): panic-based DoS in `aggregator::decode_bytes` with malformed `blob_bytes`, reachable through batch proving sanity path.
+- `F-ZKEVM-02` (`Medium`): panic-based DoS in empty-task identifier path (`BatchProvingTask` / `BundleProvingTask`) before validation.
 
 Witness artifacts:
 
 - `reports/cat2_rollups/zkevm-circuits/manual_artifacts/f_zkevm_01_decode_bytes_panic_cargo_test.txt`
 - `reports/cat2_rollups/zkevm-circuits/manual_artifacts/f_zkevm_01_key_snippets.txt`
 - `proof_harness/cat2_zkevm_circuits_f1_decode_bytes_panic/src/lib.rs`
+- `reports/cat2_rollups/zkevm-circuits/manual_artifacts/f_zkevm_02_empty_task_identifier_panic_cargo_test.txt`
+- `reports/cat2_rollups/zkevm-circuits/manual_artifacts/f_zkevm_02_key_snippets.txt`
+- `proof_harness/cat2_zkevm_circuits_f2_empty_task_identifier_panic/src/lib.rs`
 
 ## Not Promoted
 
@@ -43,4 +47,4 @@ Witness artifacts:
 
 ## Conclusion
 
-- Manual audit is closed for this repository at this commit with one confirmed, deterministic witness-grade vulnerability.
+- Manual audit is closed for this repository at this commit with two confirmed, deterministic witness-grade vulnerabilities.

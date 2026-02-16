@@ -1,0 +1,62 @@
+F-ZKEVM-02 key snippets (source-level)
+
+[1] Empty-task panic in identifier helpers
+File: \\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-circuits\prover\src\types.rs
+
+   77: impl BatchProvingTask {
+   78:     /// An identifier for the batch. It is the public input hash of the last chunk in the batch.
+   79:     ///
+   80:     /// This is used as a file descriptor to save to (load from) disk in order to avoid proof
+   81:     /// generation if the same proof/SNARK is already found on disk.
+   82:     pub fn identifier(&self) -> String {
+   83:         self.chunk_proofs
+   84:             .last()
+   85:             .unwrap()
+   86:             .inner
+   87:             .chunk_info()
+   88:             .public_input_hash()
+   89:             .to_low_u64_le()
+   90:             .to_string()
+   91:     }
+  101: impl BundleProvingTask {
+  102:     /// An identifier for the bundle. It is the batch hash of the last batch in the bundle.
+  103:     ///
+  104:     /// This is used as a file descriptor to save to (load from) disk in order to avoid proof
+  105:     /// generation if the same proof/SNARK is already found on disk.
+  106:     pub fn identifier(&self) -> String {
+  107:         self.batch_proofs
+  108:             .last()
+  109:             .unwrap()
+  110:             .inner
+  111:             .batch_hash
+  112:             .to_string()
+  113:     }
+
+[2] Prover entry points call identifier() before validation
+File: \\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-circuits\prover\src\aggregator\prover.rs
+
+  127:     pub fn gen_batch_proof(
+  128:         &mut self,
+  129:         batch: BatchProvingTask,
+  130:         name: Option<&str>,
+  131:         output_dir: Option<&str>,
+  132:     ) -> Result<BatchProofV2, ProverError> {
+  133:         // Denotes the identifier for this batch proving task. Eventually a generated proof is
+  134:         // cached to disk using this identifier.
+  135:         let name = name.map_or_else(|| batch.identifier(), |name| name.to_string());
+  136: 
+  188:     pub fn gen_bundle_proof(
+  189:         &mut self,
+  190:         bundle: BundleProvingTask,
+  191:         name: Option<&str>,
+  192:         output_dir: Option<&str>,
+  193:     ) -> Result<BundleProofV2, ProverError> {
+  194:         // Denotes the identifier for this bundle proving task. Eventually a generated proof is
+  195:         // written to disk using this name.
+  196:         let name = name.map_or_else(|| bundle.identifier(), |name| name.to_string());
+  197: 
+
+[3] Deterministic witness harness
+Harness: proof_harness/cat2_zkevm_circuits_f2_empty_task_identifier_panic/src/lib.rs
+Artifact: reports/cat2_rollups/zkevm-circuits/manual_artifacts/f_zkevm_02_empty_task_identifier_panic_cargo_test.txt
+Command: cargo test --manifest-path proof_harness/cat2_zkevm_circuits_f2_empty_task_identifier_panic/Cargo.toml -- --nocapture
