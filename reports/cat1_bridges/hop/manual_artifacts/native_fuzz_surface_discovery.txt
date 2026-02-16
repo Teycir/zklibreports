@@ -1,0 +1,4 @@
+Target: hop
+UTC: 2026-02-16T22:20:55.1588825Z
+Command: rg -n --hidden --glob !**/.git/** --glob !**/node_modules/** --glob !**/pnpm-lock.yaml --glob !**/*.min.js --glob !**/dist/** <pattern> <repo>
+Result: no in-repo JS/TS fuzz or property-test framework markers found in source files.

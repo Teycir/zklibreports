@@ -4,13 +4,13 @@ Scope: `\\VBOXSVR\elements\Repos\zk0d\cat1_bridges\poly`
 
 HEAD: `eb4489eeedd17f7904e6ba73810bd2ef799cde82`
 
-Pass status: Blocked for specialist-fuzzer phase in this pass (no in-repo Solidity/Foundry target surface).
+Pass status: Blocked for native-fuzz confirmation in this pass (no in-repo Go fuzz harness/entrypoints).
 
 Primary scope (this pass):
 - Bridge-critical logic in `native`, `core`, `consensus`, `http`, and validator/tx processing paths.
 
 Non-goals (this pass):
-- Any EVM fuzz campaign requiring local Solidity contracts/harnesses (Foundry/Medusa/Halmos/Echidna), because this repo snapshot has no Solidity source surface.
+- Target-code modifications to add new fuzz harnesses in this pass.
 
 ## Protocol Snapshot (Go Runtime Plane)
 
@@ -32,17 +32,24 @@ Non-goals (this pass):
   - `reports/cat1_bridges/poly/artifacts/gosec.json`
 - These are triage inputs only; no vulnerability promoted without witness.
 
-## Specialist-Fuzzer Applicability Blocker
+## Native-Fuzz Confirmation Blocker
 
-Evidence artifact:
+Evidence artifacts:
 - `reports/cat1_bridges/poly/manual_artifacts/fuzzer_applicability_blocker.txt`
+- `reports/cat1_bridges/poly/manual_artifacts/go_native_fuzz_attempt.txt`
+- `reports/cat1_bridges/poly/manual_artifacts/go_native_fuzz_discovery.txt`
+- `reports/cat1_bridges/poly/manual_artifacts/native_fuzz_surface_discovery.txt`
 
 Key facts:
 - `*.sol` files: `0`
 - `foundry.toml` files: `0`
+- `go test ./... -run=^$ -fuzz=Fuzz -fuzztime=30s` cannot run with multiple packages (`go test` fuzz restriction).
+- Package-by-package discovery across `137` packages found no `func Fuzz*` entrypoints.
+- Source scan found no in-repo `testing/fuzz` integration or common Go fuzz-framework markers.
 
 Conclusion:
-- Foundry/Medusa/Halmos/Echidna workflow is not applicable for this target snapshot.
+- Non-EVM Go-native fuzz workflow was attempted.
+- This repo snapshot does not expose runnable in-repo fuzz entrypoints for witness-grade campaigns without adding target fuzz code.
 
 ## Outcome
 

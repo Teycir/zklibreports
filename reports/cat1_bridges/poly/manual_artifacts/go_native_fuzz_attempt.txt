@@ -1,0 +1,7 @@
+Target: poly
+UTC: 2026-02-16T22:25:27.1824142Z
+Working dir: \\VBOXSVR\elements\Repos\zk0d\cat1_bridges\poly
+Command: go test ./... -run=^$ -fuzz=Fuzz -fuzztime=30s
+
+Exit code: 1
+cannot use -fuzz flag with multiple packages

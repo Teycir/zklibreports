@@ -1,0 +1,4 @@
+Target: poly
+UTC: 2026-02-16T22:21:09.6134268Z
+Command: rg -n --hidden --glob !**/.git/** <pattern> <repo>
+Result: no in-repo Go fuzz entrypoints/framework markers found (no Fuzz* tests / testing/fuzz integration).

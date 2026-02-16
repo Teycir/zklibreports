@@ -4,13 +4,13 @@ Scope: `\\VBOXSVR\elements\Repos\zk0d\cat1_bridges\hop`
 
 HEAD: `3ae90badbed5708d72cec46d0efeb004a4d0c587`
 
-Pass status: Blocked for specialist-fuzzer phase in this pass (no in-repo Solidity/Foundry target surface).
+Pass status: Blocked for native-fuzz confirmation in this pass (no in-repo fuzz harness/entrypoints; third-party tooling probe unresolved).
 
 Primary scope (this pass):
 - Bridge-critical logic in `packages/hop-node`, `packages/v2-hop-node`, `packages/sdk`, `packages/v2-sdk`.
 
 Non-goals (this pass):
-- Any EVM fuzz campaign requiring local Solidity contracts/harnesses (Foundry/Medusa/Halmos/Echidna), because this repo snapshot has no Solidity source surface.
+- Target-code modifications to add new fuzz harnesses in this pass.
 
 ## Protocol Snapshot (Off-chain / Node-SDK Plane)
 
@@ -30,17 +30,22 @@ Non-goals (this pass):
   - `reports/cat1_bridges/hop/artifacts/osv.json` (158 vulnerabilities)
 - These are triage inputs only; no vulnerability promoted without witness.
 
-## Specialist-Fuzzer Applicability Blocker
+## Native-Fuzz Confirmation Blocker
 
-Evidence artifact:
+Evidence artifacts:
 - `reports/cat1_bridges/hop/manual_artifacts/fuzzer_applicability_blocker.txt`
+- `reports/cat1_bridges/hop/manual_artifacts/jazzerjs_core_probe.txt`
+- `reports/cat1_bridges/hop/manual_artifacts/native_fuzz_surface_discovery.txt`
 
 Key facts:
 - `*.sol` files: `0`
 - `foundry.toml` files: `0`
+- Repo-wide source scan found no in-repo JS/TS fuzz/property-framework markers in source files.
+- `cmd /c npx.cmd --yes "@jazzer.js/core" --help` is runnable on this host, but Jazzer.js requires a fuzz target module exporting `fuzz(Buffer)`; no such in-repo harness entrypoint was found.
 
 Conclusion:
-- Foundry/Medusa/Halmos/Echidna workflow is not applicable for this target snapshot.
+- Non-EVM fuzz tooling was attempted.
+- This repo snapshot does not expose an in-repo native fuzz harness/entrypoint surface for witness-grade campaigns without adding target fuzz code.
 
 ## Outcome
 

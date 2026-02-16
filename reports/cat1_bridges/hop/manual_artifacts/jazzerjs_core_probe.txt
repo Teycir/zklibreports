@@ -1,0 +1,108 @@
+Target: hop
+UTC: 2026-02-16T22:23:25.1223205Z
+Command: cmd /c npx.cmd --yes "@jazzer.js/core" --help
+
+jazzer <fuzz_target> [corpus..]
+
+Coverage-guided, in-process fuzzer for the Node.js platform.
+
+The "target" module has to export a function "fuzz" which accepts a byte array
+as first parameter and uses that to invoke the actual function to fuzz.
+
+The "corpus" directory is optional and can be used to provide initial seed
+input. It is also used to store interesting inputs between fuzzing runs.
+
+To pass options to the internal fuzzing engine (libFuzzer) use a double-dash,
+"--", to mark the end of the normal fuzzer arguments. An example is shown in the
+examples section of this help message.
+
+Positionals:
+  fuzz_target  Name of the module that exports the fuzz target function.[string]
+  corpus       Paths to the corpus directories. If not given, no initial seeds
+               are used nor interesting inputs saved.                   [string]
+
+Fuzzer:
+  -f, --fuzz_entry_point, --fuzz_function   Name of the fuzz test entry point.
+                                            It must be an exported function with
+                                            a single Buffer parameter
+                                                        [string] [default: fuzz]
+  -i, --includes,                           Part of filepath names to include in
+  --instrumentation_includes                the instrumentation. A tailing "/"
+                                            should be used to include
+                                            directories and prevent confusion
+                                            with filenames. "*" can be used to
+                                            include all files.
+                                            Can be specified multiple times.
+                                                        [array] [default: ["*"]]
+  -e, --excludes,                           Part of filepath names to exclude in
+  --instrumentation_excludes                the instrumentation. A tailing "/"
+                                            should be used to exclude
+                                            directories and prevent confusion
+                                            with filenames. "*" can be used to
+                                            exclude all files.
+                                            Can be specified multiple times.
+                                             [array] [default: ["node_modules"]]
+  -h, --custom_hooks                        Allow users to hook functions. This
+                                            can be used for writing bug
+                                            detectors, for stubbing, and for
+                                            writing feedback functions for the
+                                            fuzzer.        [array] [default: []]
+      --disable_bug_detectors               A list of patterns to disable
+                                            internal bug detectors. By default
+                                            all internal bug detectors are
+                                            enabled. To disable all, use the
+                                            '.*' pattern.Following bug
+                                            detectors are available:
+                                            command-injection
+                                            path-traversal
+                                            prototype-pollution
+                                                           [array] [default: []]
+  -m, --mode                                Configure if fuzzing should be
+                                            performed, 'fuzzing' mode, or if the
+                                            fuzz target should only be invoked
+                                            using existing corpus entries,
+                                            'regression' mode.Regression mode is
+                                            helpful if only coverage reports
+                                            should be generated.
+                                                   [string] [default: "fuzzing"]
+  -d, --dry_run                             Perform a run with the fuzzing
+                                            instrumentation disabled.
+                                                      [boolean] [default: false]
+      --timeout                             Timeout in milliseconds for each
+                                            fuzz test execution.
+                                                        [number] [default: 5000]
+      --sync                                Run the fuzz target synchronously.
+                                                      [boolean] [default: false]
+  -v, --verbose                             Enable verbose debugging logs.
+                                                      [boolean] [default: false]
+
+Coverage:
+      --coverage, --cov                     Enable code coverage.
+                                                      [boolean] [default: false]
+      --coverage_directory, --cov_dir       Directory for storing coverage
+                                            reports.
+                                                  [string] [default: "coverage"]
+      --coverage_reporters,                 A list of reporter names for writing
+      --cov_reporters                       coverage reports.
+                              [array] [default: ["json","text","lcov","clover"]]
+
+Options:
+      --version  Show version number                                   [boolean]
+      --help     Show help                                             [boolean]
+
+Examples:
+  jazzer package/target -i packages/foo -i  Start a fuzzing run using the "fuzz"
+  packages/bar                              function exported by "target" and
+                                            only instrument code in the
+                                            "packages/a" and "packages/b"
+                                            modules.
+  jazzer package/target corpus --           Start a fuzzing run using the "fuzz"
+  -max_total_time=60                        function exported by "target" and
+                                            use the directory "corpus" to store
+                                            newly generated inputs. Also pass
+                                            the "-max_total_time" flag to the
+                                            internal fuzzing engine (libFuzzer)
+                                            to stop the fuzzing run after 60
+                                            seconds.
+
+Happy fuzzing!
