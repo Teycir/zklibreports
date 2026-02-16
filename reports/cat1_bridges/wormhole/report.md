@@ -1,0 +1,65 @@
+﻿# wormhole
+
+- Source: \\VBOXSVR\elements\Repos\zk0d\cat1_bridges\wormhole
+- HEAD: e11926a849391e8a035c69fc52f4efb3205258fd
+- origin: https://github.com/wormhole-foundation/wormhole
+- Stacks: go, node, rust, solidity
+
+## Tool Outputs
+- gitleaks: artifacts/gitleaks.json (exit=1, findings=1036)
+- osv-scanner: artifacts/osv.json (exit=1, vulns=2678)
+- govulncheck(json): artifacts/govulncheck.json (exit=1)
+- govulncheck(text): artifacts/govulncheck.txt (exit=1, includes traces)
+- gosec: artifacts/gosec.json (exit=1)
+- npm audit: artifacts/npm-audit_package-lock.json.json (lockfile=package-lock.json, exit=1)
+- npm audit: artifacts/npm-audit_near_package-lock.json.json (lockfile=near\package-lock.json, exit=1)
+- npm audit: artifacts/npm-audit_algorand_package-lock.json.json (lockfile=algorand\package-lock.json, exit=1)
+- npm audit: artifacts/npm-audit_algorand_audit_test_package-lock.json.json (lockfile=algorand\audit_test\package-lock.json, exit=1)
+- npm audit: artifacts/npm-audit_clients_js_package-lock.json.json (lockfile=clients\js\package-lock.json, exit=1)
+- npm audit: artifacts/npm-audit_cosmwasm_deployment_terra2_test_package-lock.json.json (lockfile=cosmwasm\deployment\terra2\test\package-lock.json, exit=1)
+- npm audit: artifacts/npm-audit_cosmwasm_deployment_terra2_tools_package-lock.json.json (lockfile=cosmwasm\deployment\terra2\tools\package-lock.json, exit=1)
+- npm audit: artifacts/npm-audit_cosmwasm_deployment_xpla_tools_package-lock.json.json (lockfile=cosmwasm\deployment\xpla\tools\package-lock.json, exit=1)
+- npm audit: artifacts/npm-audit_ethereum_package-lock.json.json (lockfile=ethereum\package-lock.json, exit=1)
+- npm audit: artifacts/npm-audit_lp_ui_package-lock.json.json (lockfile=lp_ui\package-lock.json, exit=1)
+- npm audit: artifacts/npm-audit_node_hack_governor_package-lock.json.json (lockfile=node\hack\governor\package-lock.json, exit=1)
+- npm audit: artifacts/npm-audit_relayer_ethereum_package-lock.json.json (lockfile=relayer\ethereum\package-lock.json, exit=1)
+- npm audit: artifacts/npm-audit_relayer_generic_relayer_relayer-engine-v2_package-lock.json.json (lockfile=relayer\generic_relayer\relayer-engine-v2\package-lock.json, exit=1)
+- npm audit: artifacts/npm-audit_sdk_js_package-lock.json.json (lockfile=sdk\js\package-lock.json, exit=1)
+- npm audit: artifacts/npm-audit_sdk_js-proto-node_package-lock.json.json (lockfile=sdk\js-proto-node\package-lock.json, exit=1)
+- npm audit: artifacts/npm-audit_sdk_js-proto-web_package-lock.json.json (lockfile=sdk\js-proto-web\package-lock.json, exit=1)
+- npm audit: artifacts/npm-audit_sdk_js-query_package-lock.json.json (lockfile=sdk\js-query\package-lock.json, exit=1)
+- npm audit: artifacts/npm-audit_sdk_js-wasm_package-lock.json.json (lockfile=sdk\js-wasm\package-lock.json, exit=1)
+- npm audit: artifacts/npm-audit_solana_scripts_package-lock.json.json (lockfile=solana\scripts\package-lock.json, exit=1)
+- npm audit: artifacts/npm-audit_spydk_js_package-lock.json.json (lockfile=spydk\js\package-lock.json, exit=1)
+- npm audit: artifacts/npm-audit_sui_testing_package-lock.json.json (lockfile=sui\testing\package-lock.json, exit=1)
+- npm audit: artifacts/npm-audit_terra_test_package-lock.json.json (lockfile=terra\test\package-lock.json, exit=1)
+- npm audit: artifacts/npm-audit_terra_tools_package-lock.json.json (lockfile=terra\tools\package-lock.json, exit=1)
+- npm audit: artifacts/npm-audit_testing_contract-integrations_package-lock.json.json (lockfile=testing\contract-integrations\package-lock.json, exit=1)
+- npm audit: artifacts/npm-audit_testing_contract-integrations_custom_consistency_level_package-lock.json.json (lockfile=testing\contract-integrations\custom_consistency_level\package-lock.json, exit=1)
+- npm audit: artifacts/npm-audit_testing_rollback_package-lock.json.json (lockfile=testing\rollback\package-lock.json, exit=1)
+- npm audit: artifacts/npm-audit_testing_solana-test-validator_package-lock.json.json (lockfile=testing\solana-test-validator\package-lock.json, exit=1)
+- npm audit: artifacts/npm-audit_testing_weth-switch_package-lock.json.json (lockfile=testing\weth-switch\package-lock.json, exit=1)
+- npm audit: artifacts/npm-audit_tools_package-lock.json.json (lockfile=tools\package-lock.json, exit=1)
+- npm audit: artifacts/npm-audit_wormchain_contracts_tools_package-lock.json.json (lockfile=wormchain\contracts\tools\package-lock.json, exit=1)
+- npm audit: artifacts/npm-audit_wormchain_testing_js_package-lock.json.json (lockfile=wormchain\testing\js\package-lock.json, exit=1)
+- npm audit: artifacts/npm-audit_wormchain_ts-sdk_package-lock.json.json (lockfile=wormchain\ts-sdk\package-lock.json, exit=1)
+- npm audit summary: vuln_count=0
+- cargo-audit: artifacts/cargo (lockfile=near\contracts\ft\Cargo.lock, exit=1)
+- cargo-audit: artifacts/cargo (lockfile=near\contracts\mock-bridge-integration\Cargo.lock, exit=1)
+- cargo-audit: artifacts/cargo (lockfile=near\contracts\mock-bridge-token\Cargo.lock, exit=1)
+- cargo-audit: artifacts/cargo (lockfile=near\contracts\nft-bridge\Cargo.lock, exit=1)
+- cargo-audit: artifacts/cargo (lockfile=near\contracts\nft-wrapped\Cargo.lock, exit=1)
+- cargo-audit: artifacts/cargo (lockfile=near\contracts\token-bridge\Cargo.lock, exit=1)
+- cargo-audit: artifacts/cargo (lockfile=near\contracts\wormhole\Cargo.lock, exit=1)
+- cargo-audit: artifacts/cargo (lockfile=cosmwasm\Cargo.lock, exit=1)
+- cargo-audit: artifacts/cargo (lockfile=solana\Cargo.lock, exit=1)
+- cargo-audit: artifacts/cargo (lockfile=solana\modules\token_bridge\token_metadata_parser\Cargo.lock, exit=1)
+- cargo-audit: artifacts/cargo (lockfile=svm\wormhole-core-shims\Cargo.lock, exit=1)
+- cargo-audit: artifacts/cargo (lockfile=svm\wormhole-core-shims\anchor\Cargo.lock, exit=1)
+- cargo-audit: artifacts/cargo (lockfile=terra\Cargo.lock, exit=1)
+- cargo-audit: artifacts/cargo (lockfile=wormchain\interchaintest\contracts\ibc_hooks\Cargo.lock, exit=1)
+- cargo-audit summary: vuln_count=78
+
+## Notes
+- This is an automated baseline (no repo build steps executed). Treat findings as leads until reproduced.
+- Many security tools use non-zero exit codes to indicate findings; see raw JSON for details.

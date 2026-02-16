@@ -1,5 +1,5 @@
 ﻿{
-    "timestamp_utc":  "2026-02-15 23:04:33 UTC",
+    "timestamp_utc":  "2026-02-16 00:13:23 UTC",
     "host":  "W10",
     "root":  "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat1_bridges",
     "tools":  {
@@ -11,6 +11,10 @@
                   "gosec":  "Version: dev\nGit tag: \nBuild date: ",
                   "rustc":  "rustc 1.93.0 (254b59607 2026-01-19)",
                   "cargo":  "cargo 1.93.0 (083ac5135 2025-12-15)",
-                  "cargo_audit":  "cargo-audit-audit 0.22.1"
+                  "cargo_audit":  "cargo-audit-audit 0.22.1",
+                  "halmos":  "halmos 0.3.3",
+                  "slither":  "0.11.5",
+                  "solc":  "solc, the solidity compiler commandline interface\nVersion: 0.8.33+commit.64118f21.Windows.msvc",
+                  "npm":  "11.6.2"
               }
 }

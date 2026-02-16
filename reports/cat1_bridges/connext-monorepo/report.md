@@ -1,0 +1,14 @@
+﻿# connext-monorepo
+
+- Source: \\VBOXSVR\elements\Repos\zk0d\cat1_bridges\connext-monorepo
+- HEAD: 7758e62037bba281b8844c37831bde0b838edd36
+- origin: https://github.com/connext/monorepo
+- Stacks: node, solidity
+
+## Tool Outputs
+- gitleaks: artifacts/gitleaks.json (exit=1, findings=73)
+- osv-scanner: artifacts/osv.json (exit=1, vulns=240)
+
+## Notes
+- This is an automated baseline (no repo build steps executed). Treat findings as leads until reproduced.
+- Many security tools use non-zero exit codes to indicate findings; see raw JSON for details.

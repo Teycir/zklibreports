@@ -19,11 +19,13 @@ Outputs:
 Baseline automation (`scripts/audit_cat1_bridges.ps1`) currently runs:
 - `gitleaks` (with redaction enabled)
 - `osv-scanner` (dependency vuln leads)
+- `npm audit --package-lock-only` for Node repos (when `package-lock.json` exists)
 - `govulncheck` + `gosec` for Go repos
 - `cargo audit` for Rust repos (only if `Cargo.lock` exists; no lockfile generation)
 
 For Solidity/EVM deep analysis we also use:
 - `halmos` (symbolic invariant testing; typically driven from Foundry tests)
+- `slither` (static analyzer; run in a controlled mode because it may invoke compilation/build steps)
 
 More detailed tool notes: `docs/TOOLS.md`
 

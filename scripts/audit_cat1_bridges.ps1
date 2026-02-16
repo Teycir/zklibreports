@@ -18,7 +18,28 @@ param(
   [switch]$SkipGo,
 
   [Parameter(Mandatory = $false)]
-  [switch]$SkipRust
+  [switch]$SkipRust,
+
+  [Parameter(Mandatory = $false)]
+  [switch]$SkipNpmAudit,
+
+  [Parameter(Mandatory = $false)]
+  [int]$GitleaksTimeoutSec = 600,
+
+  [Parameter(Mandatory = $false)]
+  [int]$OsvTimeoutSec = 600,
+
+  [Parameter(Mandatory = $false)]
+  [int]$GovulncheckTimeoutSec = 600,
+
+  [Parameter(Mandatory = $false)]
+  [int]$GosecTimeoutSec = 600,
+
+  [Parameter(Mandatory = $false)]
+  [int]$CargoAuditTimeoutSec = 600,
+
+  [Parameter(Mandatory = $false)]
+  [int]$NpmAuditTimeoutSec = 600
 )
 
 $ErrorActionPreference = "Stop"
@@ -37,6 +58,96 @@ function _RedactUrl([string]$url) {
   # Strip embedded credentials/tokens in URLs like:
   # https://TOKEN@github.com/org/repo or https://user:pass@host/path
   return ($url -replace '^(https?://)([^/@]+@)', '$1')
+}
+
+function _RunProcess(
+  [string]$name,
+  [string]$filePath,
+  [string[]]$argv,
+  [string]$cwd,
+  [int]$timeoutSec,
+  [string]$stdoutFile,
+  [string]$stderrFile
+) {
+  function _QuoteArg([string]$a) {
+    if ($null -eq $a) { return '""' }
+    if ($a -match '[\s"]') {
+      return '"' + ($a -replace '"', '\\"') + '"'
+    }
+    return $a
+  }
+
+  function _JoinArgs([string[]]$a) {
+    if ($null -eq $a -or $a.Count -eq 0) { return "" }
+    return (($a | ForEach-Object { _QuoteArg $_ }) -join ' ')
+  }
+
+  $result = [ordered]@{
+    name = $name
+    file = $filePath
+    args = $argv
+    arg_string = $null
+    runner = "cmd.exe"
+    runner_args = $null
+    cwd = $cwd
+    start_utc = (Get-Date).ToUniversalTime().ToString("yyyy-MM-dd HH:mm:ss 'UTC'")
+    end_utc = $null
+    duration_sec = $null
+    timed_out = $false
+    exit_code = $null
+    stdout = $stdoutFile
+    stderr = $stderrFile
+  }
+
+  $sw = [System.Diagnostics.Stopwatch]::StartNew()
+  try {
+    $argsString = _JoinArgs $argv
+    $result.arg_string = $argsString
+
+    $outDir = Split-Path -Parent $stdoutFile
+    if ($outDir -and !(Test-Path $outDir)) { New-Item -ItemType Directory -Force $outDir | Out-Null }
+    $errDir = Split-Path -Parent $stderrFile
+    if ($errDir -and !(Test-Path $errDir)) { New-Item -ItemType Directory -Force $errDir | Out-Null }
+
+    $cmdExe = "cmd.exe"
+    $exeQuoted = _QuoteArg $filePath
+    $stdoutQuoted = _QuoteArg $stdoutFile
+    $stderrQuoted = _QuoteArg $stderrFile
+    $full = ($exeQuoted + " " + $argsString).Trim()
+    $fullRedirected = ($full + " 1> " + $stdoutQuoted + " 2> " + $stderrQuoted)
+    $runnerArgs = @("/d", "/s", "/c", $fullRedirected)
+    $result.runner_args = $runnerArgs
+
+    $psi = New-Object System.Diagnostics.ProcessStartInfo
+    $psi.FileName = $cmdExe
+    $psi.Arguments = _JoinArgs $runnerArgs
+    $psi.WorkingDirectory = $cwd
+    $psi.UseShellExecute = $false
+    $psi.CreateNoWindow = $true
+
+    $p = New-Object System.Diagnostics.Process
+    $p.StartInfo = $psi
+
+    $null = $p.Start()
+
+    $done = $p.WaitForExit($timeoutSec * 1000)
+    if (!$done) {
+      $result.timed_out = $true
+      try { $p.Kill() } catch {}
+      try { $p.WaitForExit() } catch {}
+      $result.exit_code = 124
+    } else {
+      $result.exit_code = $p.ExitCode
+    }
+  } catch {
+    $result.exit_code = 1
+  } finally {
+    $sw.Stop()
+    $result.duration_sec = [int][Math]::Round($sw.Elapsed.TotalSeconds)
+    $result.end_utc = (Get-Date).ToUniversalTime().ToString("yyyy-MM-dd HH:mm:ss 'UTC'")
+  }
+
+  return $result
 }
 
 function _WriteJson([string]$path, $obj) {
@@ -65,6 +176,8 @@ if (!(Test-Path $OutRoot)) {
   New-Item -ItemType Directory -Force $OutRoot | Out-Null
 }
 
+$OutRootAbs = (Resolve-Path $OutRoot).Path
+
 $toolVersions = [ordered]@{
   timestamp_utc = (Get-Date).ToUniversalTime().ToString("yyyy-MM-dd HH:mm:ss 'UTC'")
   host = $env:COMPUTERNAME
@@ -83,8 +196,14 @@ if (_CmdExists "cargo") {
   try { $toolVersions.tools.cargo_audit = ((cargo audit -V) -join "`n") } catch {}
 }
 if (_CmdExists "halmos") { $toolVersions.tools.halmos = ((halmos --version) -join "`n") }
+if (_CmdExists "slither") { $toolVersions.tools.slither = ((slither --version) -join "`n") }
+if (_CmdExists "solc") { $toolVersions.tools.solc = ((solc --version) -join "`n") }
+try {
+  $npmCmd = Get-Command npm.cmd -ErrorAction SilentlyContinue
+  if ($npmCmd) { $toolVersions.tools.npm = (& cmd.exe /c "npm.cmd --version") -join "`n" }
+} catch {}
 
-_WriteJson (Join-Path $OutRoot "tool_versions.json") $toolVersions
+_WriteJson (Join-Path $OutRootAbs "tool_versions.json") $toolVersions
 
 $repos = Get-ChildItem -Force $Root -Directory | Where-Object { Test-Path (Join-Path $_.FullName ".git") }
 if ($RepoNames.Count -gt 0) {
@@ -98,9 +217,10 @@ $indexRows = New-Object System.Collections.Generic.List[object]
 foreach ($repo in ($repos | Sort-Object Name)) {
   $name = $repo.Name
   $src = $repo.FullName
-  $outDir = Join-Path $OutRoot $name
+  $outDir = Join-Path $OutRootAbs $name
   $artDir = Join-Path $outDir "artifacts"
   New-Item -ItemType Directory -Force $artDir | Out-Null
+  $logFile = Join-Path $outDir "progress.log"
 
   $meta = [ordered]@{
     name = $name
@@ -110,6 +230,9 @@ foreach ($repo in ($repos | Sort-Object Name)) {
     stacks = @()
     outputs = [ordered]@{}
   }
+
+  # Start a fresh progress log each run (avoid unbounded growth across reruns).
+  ("[{0}] start" -f $meta.scanned_at_utc) | Set-Content -Encoding UTF8 $logFile
 
   if (_CmdExists "git") {
     try { $meta.git.head = (git -C $src rev-parse HEAD).Trim() } catch {}
@@ -129,58 +252,72 @@ foreach ($repo in ($repos | Sort-Object Name)) {
   # gitleaks (secrets in history + working tree)
   if (!$SkipGitleaks -and (_CmdExists "gitleaks")) {
     $gitleaksOut = Join-Path $artDir "gitleaks.json"
-    # Always redact secrets in output; findings are still useful for triage.
-    $args = @("detect", "--source", $src, "--report-format", "json", "--report-path", $gitleaksOut, "--redact", "--no-banner")
-    $exit = 0
-    try {
-      & gitleaks @args | Out-Null
-      $exit = $LASTEXITCODE
-    } catch {
-      $exit = 1
-    }
-    $meta.outputs.gitleaks = [ordered]@{ file = $gitleaksOut; exit_code = $exit }
+    $stdout = Join-Path $artDir "gitleaks.stdout.log"
+    $stderr = Join-Path $artDir "gitleaks.stderr.log"
+    # Always redact secrets in output; exit code 1 means "leaks found".
+    $argv = @("detect", "--source", $src, "--report-format", "json", "--report-path", $gitleaksOut, "--redact", "--no-banner", "--log-level", "error", "--timeout", "$GitleaksTimeoutSec")
+    ("[{0}] gitleaks start" -f (Get-Date).ToUniversalTime().ToString("yyyy-MM-dd HH:mm:ss 'UTC'")) | Add-Content -Encoding UTF8 $logFile
+    $run = _RunProcess "gitleaks" "gitleaks" $argv $src $GitleaksTimeoutSec $stdout $stderr
+    ("[{0}] gitleaks end exit={1} timeout={2} dur={3}s" -f $run.end_utc, $run.exit_code, $run.timed_out, $run.duration_sec) | Add-Content -Encoding UTF8 $logFile
+    $meta.outputs.gitleaks = $run
+    $meta.outputs.gitleaks.report = $gitleaksOut
   }
 
   # osv-scanner (dependency vulns; manifest/lockfile driven)
   if (!$SkipOsv -and (_CmdExists "osv-scanner")) {
     $osvOut = Join-Path $artDir "osv.json"
-    $args = @("scan", "source", "-r", $src, "-f", "json", "--output", $osvOut, "--allow-no-lockfiles", "--verbosity", "warn")
-    $exit = 0
-    try {
-      & osv-scanner @args | Out-Null
-      $exit = $LASTEXITCODE
-    } catch {
-      $exit = 1
-    }
-    $meta.outputs.osv = [ordered]@{ file = $osvOut; exit_code = $exit }
+    $stdout = Join-Path $artDir "osv.stdout.log"
+    $stderr = Join-Path $artDir "osv.stderr.log"
+    # Exclude big build caches; osv-scanner still inspects manifests/lockfiles.
+    $argv = @(
+      "scan", "source", "-r", $src,
+      "-f", "json", "--output", $osvOut,
+      "--allow-no-lockfiles",
+      "--verbosity", "warn",
+      "--experimental-exclude", "g:**/node_modules",
+      "--experimental-exclude", "g:**/target",
+      "--experimental-exclude", "g:**/.git",
+      "--experimental-exclude", "g:**/dist",
+      "--experimental-exclude", "g:**/build",
+      "--experimental-exclude", "g:**/out"
+    )
+    ("[{0}] osv-scanner start" -f (Get-Date).ToUniversalTime().ToString("yyyy-MM-dd HH:mm:ss 'UTC'")) | Add-Content -Encoding UTF8 $logFile
+    $run = _RunProcess "osv-scanner" "osv-scanner" $argv $src $OsvTimeoutSec $stdout $stderr
+    ("[{0}] osv-scanner end exit={1} timeout={2} dur={3}s" -f $run.end_utc, $run.exit_code, $run.timed_out, $run.duration_sec) | Add-Content -Encoding UTF8 $logFile
+    $meta.outputs.osv = $run
+    $meta.outputs.osv.report = $osvOut
   }
 
   # Go: govulncheck + gosec
   if (!$SkipGo -and $hasGo -and (_CmdExists "govulncheck")) {
-    $govOut = Join-Path $artDir "govulncheck.json"
-    $exit = 0
-    try {
-      & govulncheck -C $src -format json ./... 2>$null | Set-Content -Encoding UTF8 $govOut
-      $exit = $LASTEXITCODE
-    } catch {
-      $exit = 1
-    }
-    $meta.outputs.govulncheck = [ordered]@{ file = $govOut; exit_code = $exit }
+    $meta.outputs.govulncheck = [ordered]@{}
+
+    $govJsonOut = Join-Path $artDir "govulncheck.json"
+    $govJsonErr = Join-Path $artDir "govulncheck.json.stderr.log"
+    ("[{0}] govulncheck(json) start" -f (Get-Date).ToUniversalTime().ToString("yyyy-MM-dd HH:mm:ss 'UTC'")) | Add-Content -Encoding UTF8 $logFile
+    $argv = @("-C", $src, "-format", "json", "./...")
+    $runJson = _RunProcess "govulncheck(json)" "govulncheck" $argv $src $GovulncheckTimeoutSec $govJsonOut $govJsonErr
+    ("[{0}] govulncheck(json) end exit={1} timeout={2} dur={3}s" -f $runJson.end_utc, $runJson.exit_code, $runJson.timed_out, $runJson.duration_sec) | Add-Content -Encoding UTF8 $logFile
+    $meta.outputs.govulncheck.json = $runJson
+
+    $govTxtOut = Join-Path $artDir "govulncheck.txt"
+    $govTxtErr = Join-Path $artDir "govulncheck.txt.stderr.log"
+    ("[{0}] govulncheck(text) start" -f (Get-Date).ToUniversalTime().ToString("yyyy-MM-dd HH:mm:ss 'UTC'")) | Add-Content -Encoding UTF8 $logFile
+    $argv = @("-C", $src, "-format", "text", "-show", "traces", "./...")
+    $runTxt = _RunProcess "govulncheck(text)" "govulncheck" $argv $src $GovulncheckTimeoutSec $govTxtOut $govTxtErr
+    ("[{0}] govulncheck(text) end exit={1} timeout={2} dur={3}s" -f $runTxt.end_utc, $runTxt.exit_code, $runTxt.timed_out, $runTxt.duration_sec) | Add-Content -Encoding UTF8 $logFile
+    $meta.outputs.govulncheck.text = $runTxt
   }
 
   if (!$SkipGo -and $hasGo -and (_CmdExists "gosec")) {
     $gosecOut = Join-Path $artDir "gosec.json"
-    $exit = 0
-    try {
-      Push-Location $src
-      & gosec -fmt=json -out=$gosecOut -confidence=high -severity=medium -exclude-generated -quiet ./... | Out-Null
-      $exit = $LASTEXITCODE
-    } catch {
-      $exit = 1
-    } finally {
-      Pop-Location
-    }
-    $meta.outputs.gosec = [ordered]@{ file = $gosecOut; exit_code = $exit }
+    $stdout = Join-Path $artDir "gosec.stdout.log"
+    $stderr = Join-Path $artDir "gosec.stderr.log"
+    ("[{0}] gosec start" -f (Get-Date).ToUniversalTime().ToString("yyyy-MM-dd HH:mm:ss 'UTC'")) | Add-Content -Encoding UTF8 $logFile
+    $argv = @("-fmt=json", "-out=$gosecOut", "-confidence=high", "-severity=medium", "-exclude-generated", "-quiet", "./...")
+    $run = _RunProcess "gosec" "gosec" $argv $src $GosecTimeoutSec $stdout $stderr
+    ("[{0}] gosec end exit={1} timeout={2} dur={3}s" -f $run.end_utc, $run.exit_code, $run.timed_out, $run.duration_sec) | Add-Content -Encoding UTF8 $logFile
+    $meta.outputs.gosec = $run
   }
 
   # Rust: cargo audit for every existing Cargo.lock (no lockfile generation)
@@ -194,19 +331,43 @@ foreach ($repo in ($repos | Sort-Object Name)) {
         $rel = $l.FullName.Substring($src.Length).TrimStart('\','/')
         $stem = _SafeName $rel
         $out = Join-Path $artDir ("cargo-audit_" + $stem + ".json")
-        $exit = 0
-        try {
-          & cargo audit --json --file $l.FullName | Set-Content -Encoding UTF8 $out
-          $exit = $LASTEXITCODE
-        } catch {
-          $exit = 1
-        }
-        $meta.outputs.cargo_audit += [ordered]@{ lockfile = $rel; file = $out; exit_code = $exit }
+        $stderr = Join-Path $artDir ("cargo-audit_" + $stem + ".stderr.log")
+        ("[{0}] cargo-audit start lock={1}" -f (Get-Date).ToUniversalTime().ToString("yyyy-MM-dd HH:mm:ss 'UTC'"), $rel) | Add-Content -Encoding UTF8 $logFile
+        $argv = @("audit", "--json", "--file", $l.FullName)
+        $run = _RunProcess "cargo-audit" "cargo" $argv $src $CargoAuditTimeoutSec $out $stderr
+        ("[{0}] cargo-audit end lock={1} exit={2} timeout={3} dur={4}s" -f $run.end_utc, $rel, $run.exit_code, $run.timed_out, $run.duration_sec) | Add-Content -Encoding UTF8 $logFile
+        $run.lockfile = $rel
+        $meta.outputs.cargo_audit += $run
       }
     }
   }
 
-  _WriteJson (Join-Path $outDir "meta.json") $meta
+  # Node: npm audit (lockfile-only)
+  if (!$SkipNpmAudit -and $hasNode) {
+    $npmCmd = $null
+    try { $npmCmd = (Get-Command npm.cmd -ErrorAction SilentlyContinue) } catch {}
+    if ($npmCmd) {
+      $locks = Get-ChildItem -Path $src -Recurse -File -Depth 4 -Filter package-lock.json -ErrorAction SilentlyContinue
+      if ($locks.Count -gt 0) {
+        $meta.outputs.npm_audit = @()
+        foreach ($l in $locks) {
+          $lockDir = Split-Path -Parent $l.FullName
+          $rel = $l.FullName.Substring($src.Length).TrimStart('\','/')
+          $stem = _SafeName $rel
+          $out = Join-Path $artDir ("npm-audit_" + $stem + ".json")
+          $stderr = Join-Path $artDir ("npm-audit_" + $stem + ".stderr.log")
+
+          ("[{0}] npm-audit start lock={1}" -f (Get-Date).ToUniversalTime().ToString("yyyy-MM-dd HH:mm:ss 'UTC'"), $rel) | Add-Content -Encoding UTF8 $logFile
+          $argv = @("audit", "--package-lock-only", "--json")
+          $run = _RunProcess "npm-audit" "npm.cmd" $argv $lockDir $NpmAuditTimeoutSec $out $stderr
+          # npm audit prints JSON to stdout; Start-Process redirect should capture it.
+          ("[{0}] npm-audit end lock={1} exit={2} timeout={3} dur={4}s" -f $run.end_utc, $rel, $run.exit_code, $run.timed_out, $run.duration_sec) | Add-Content -Encoding UTF8 $logFile
+          $run.lockfile = $rel
+          $meta.outputs.npm_audit += $run
+        }
+      }
+    }
+  }
 
   $gitleaksCount = _TryReadJsonCount (Join-Path $artDir "gitleaks.json") { param($j) if ($null -eq $j) { 0 } elseif ($j -is [System.Array]) { $j.Count } else { 0 } }
   $osvCount = _TryReadJsonCount (Join-Path $artDir "osv.json") {
@@ -225,10 +386,25 @@ foreach ($repo in ($repos | Sort-Object Name)) {
     return $c
   }
 
-  $govCount = _TryReadJsonCount (Join-Path $artDir "govulncheck.json") {
-    param($j)
-    # govulncheck JSON is a stream of JSON objects, not a single JSON document.
-    return $null
+  $npmCount = $null
+  $npmFiles = Get-ChildItem -Path $artDir -File -Filter "npm-audit_*.json" -ErrorAction SilentlyContinue
+  if ($npmFiles.Count -gt 0) {
+    $npmCount = 0
+    foreach ($f in $npmFiles) {
+      $n = _TryReadJsonCount $f.FullName {
+        param($j)
+        if ($j.metadata -and $j.metadata.vulnerabilities) {
+          $m = $j.metadata.vulnerabilities
+          $sum = 0
+          foreach ($k in @("info","low","moderate","high","critical")) {
+            if ($m.$k -ne $null) { $sum += [int]$m.$k }
+          }
+          return $sum
+        }
+        return 0
+      }
+      if ($null -ne $n) { $npmCount += $n }
+    }
   }
 
   $cargoCount = $null
@@ -244,6 +420,15 @@ foreach ($repo in ($repos | Sort-Object Name)) {
       if ($null -ne $n) { $cargoCount += $n }
     }
   }
+
+  $meta.summary = [ordered]@{
+    gitleaks_findings = $gitleaksCount
+    osv_vulns = $osvCount
+    npm_audit_vulns = $npmCount
+    cargo_audit_vulns = $cargoCount
+  }
+
+  _WriteJson (Join-Path $outDir "meta.json") $meta
 
   $report = @()
   $report += "# $name"
@@ -261,10 +446,24 @@ foreach ($repo in ($repos | Sort-Object Name)) {
     $report += "- osv-scanner: artifacts/osv.json (exit=$($meta.outputs.osv.exit_code), vulns=$osvCount)"
   }
   if ($meta.outputs.govulncheck) {
-    $report += "- govulncheck: artifacts/govulncheck.json (exit=$($meta.outputs.govulncheck.exit_code))"
+    if ($meta.outputs.govulncheck.json) {
+      $report += "- govulncheck(json): artifacts/govulncheck.json (exit=$($meta.outputs.govulncheck.json.exit_code))"
+    }
+    if ($meta.outputs.govulncheck.text) {
+      $report += "- govulncheck(text): artifacts/govulncheck.txt (exit=$($meta.outputs.govulncheck.text.exit_code), includes traces)"
+    }
   }
   if ($meta.outputs.gosec) {
     $report += "- gosec: artifacts/gosec.json (exit=$($meta.outputs.gosec.exit_code))"
+  }
+  if ($meta.outputs.npm_audit) {
+    foreach ($entry in $meta.outputs.npm_audit) {
+      $relLock = $entry.lockfile
+      $relOut = Split-Path -Leaf $entry.stdout
+      # stdout is the JSON report path.
+      $report += "- npm audit: artifacts/$relOut (lockfile=$relLock, exit=$($entry.exit_code))"
+    }
+    $report += "- npm audit summary: vuln_count=$npmCount"
   }
   if ($meta.outputs.cargo_audit) {
     foreach ($entry in $meta.outputs.cargo_audit) {
@@ -277,6 +476,7 @@ foreach ($repo in ($repos | Sort-Object Name)) {
   $report += ""
   $report += "## Notes"
   $report += "- This is an automated baseline (no repo build steps executed). Treat findings as leads until reproduced."
+  $report += "- Many security tools use non-zero exit codes to indicate findings; see raw JSON for details."
 
   ($report -join "`r`n") | Set-Content -Encoding UTF8 (Join-Path $outDir "report.md")
 
@@ -287,8 +487,29 @@ foreach ($repo in ($repos | Sort-Object Name)) {
     gitleaks_findings = $gitleaksCount
     osv_vulns = $osvCount
     cargo_audit_vulns = $cargoCount
+    npm_audit_vulns = $npmCount
     report = ("./" + $name + "/report.md")
   }) | Out-Null
+}
+
+$indexRows = New-Object System.Collections.Generic.List[object]
+foreach ($d in (Get-ChildItem -Directory $OutRoot -Force -ErrorAction SilentlyContinue | Where-Object { Test-Path (Join-Path $_.FullName "meta.json") } | Sort-Object Name)) {
+  try {
+    $metaPath = Join-Path $d.FullName "meta.json"
+    $m = (Get-Content -Raw -Encoding UTF8 $metaPath) | ConvertFrom-Json
+    $indexRows.Add([pscustomobject]@{
+      name = $m.name
+      head = $m.git.head
+      stacks = (($m.stacks | ForEach-Object { $_ }) -join ",")
+      gitleaks_findings = $m.summary.gitleaks_findings
+      osv_vulns = $m.summary.osv_vulns
+      npm_audit_vulns = $m.summary.npm_audit_vulns
+      cargo_audit_vulns = $m.summary.cargo_audit_vulns
+      report = ("./" + $m.name + "/report.md")
+    }) | Out-Null
+  } catch {
+    # ignore broken meta.json
+  }
 }
 
 $idx = @()
@@ -296,12 +517,12 @@ $idx += "# cat1_bridges index"
 $idx += ""
 $idx += "Scanned: $($toolVersions.timestamp_utc)"
 $idx += ""
-$idx += "| Repo | HEAD | Stacks | gitleaks | osv | cargo-audit | Report |"
-$idx += "|---|---|---|---:|---:|---:|---|"
+$idx += "| Repo | HEAD | Stacks | gitleaks | osv | npm-audit | cargo-audit | Report |"
+$idx += "|---|---|---|---:|---:|---:|---:|---|"
 foreach ($r in $indexRows) {
-  $idx += "| $($r.name) | $($r.head) | $($r.stacks) | $($r.gitleaks_findings) | $($r.osv_vulns) | $($r.cargo_audit_vulns) | [$($r.name)]($($r.report)) |"
+  $idx += "| $($r.name) | $($r.head) | $($r.stacks) | $($r.gitleaks_findings) | $($r.osv_vulns) | $($r.npm_audit_vulns) | $($r.cargo_audit_vulns) | [$($r.name)]($($r.report)) |"
 }
 
-($idx -join "`r`n") | Set-Content -Encoding UTF8 (Join-Path $OutRoot "INDEX.md")
+($idx -join "`r`n") | Set-Content -Encoding UTF8 (Join-Path $OutRootAbs "INDEX.md")
 
-Write-Host ("Wrote reports to " + (Resolve-Path $OutRoot))
+Write-Host ("Wrote reports to " + $OutRootAbs)

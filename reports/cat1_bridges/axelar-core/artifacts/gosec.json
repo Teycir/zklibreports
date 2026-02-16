@@ -1,0 +1,768 @@
+{
+	"Golang errors": {
+		"\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat1_bridges\\axelar-core\\app\\app.go": [
+			{
+				"line": 28,
+				"column": 7,
+				"error": "could not import github.com/cometbft/cometbft/abci/types (invalid package name: \"\")"
+			},
+			{
+				"line": 29,
+				"column": 9,
+				"error": "could not import github.com/cometbft/cometbft/libs/json (invalid package name: \"\")"
+			},
+			{
+				"line": 30,
+				"column": 7,
+				"error": "could not import github.com/cometbft/cometbft/libs/os (invalid package name: \"\")"
+			},
+			{
+				"line": 31,
+				"column": 10,
+				"error": "could not import github.com/cometbft/cometbft/proto/tendermint/types (invalid package name: \"\")"
+			}
+		],
+		"\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat1_bridges\\axelar-core\\cmd\\axelard\\cmd\\commands.go": [
+			{
+				"line": 12,
+				"column": 8,
+				"error": "could not import github.com/cometbft/cometbft/libs/cli (invalid package name: \"\")"
+			}
+		],
+		"\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat1_bridges\\axelar-core\\cmd\\axelard\\cmd\\root.go": [
+			{
+				"line": 12,
+				"column": 9,
+				"error": "could not import github.com/cometbft/cometbft/config (invalid package name: \"\")"
+			}
+		],
+		"\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat1_bridges\\axelar-core\\cmd\\axelard\\main.go": [
+			{
+				"line": 12,
+				"column": 8,
+				"error": "could not import github.com/cometbft/cometbft/config (invalid package name: \"\")"
+			},
+			{
+				"line": 13,
+				"column": 8,
+				"error": "could not import github.com/cometbft/cometbft/libs/cli (invalid package name: \"\")"
+			}
+		],
+		"\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat1_bridges\\axelar-core\\config\\seeds.go": [
+			{
+				"line": 6,
+				"column": 2,
+				"error": "could not import github.com/cometbft/cometbft/config (invalid package name: \"\")"
+			}
+		],
+		"\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat1_bridges\\axelar-core\\sdk-utils\\broadcast\\broadcast.go": [
+			{
+				"line": 12,
+				"column": 7,
+				"error": "could not import github.com/cometbft/cometbft/abci/types (invalid package name: \"\")"
+			},
+			{
+				"line": 13,
+				"column": 2,
+				"error": "could not import github.com/cometbft/cometbft/config (invalid package name: \"\")"
+			}
+		],
+		"\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat1_bridges\\axelar-core\\sdk-utils\\broadcast\\mock\\alias.go": [
+			{
+				"line": 4,
+				"column": 12,
+				"error": "could not import github.com/cometbft/cometbft/rpc/client (invalid package name: \"\")"
+			}
+		],
+		"\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat1_bridges\\axelar-core\\sdk-utils\\broadcast\\mock\\alias_mocks.go": [
+			{
+				"line": 8,
+				"column": 2,
+				"error": "\"github.com/cometbft/cometbft/libs/bytes\" imported as utils and not used"
+			},
+			{
+				"line": 8,
+				"column": 2,
+				"error": "other declaration of utils"
+			},
+			{
+				"line": 9,
+				"column": 2,
+				"error": "\"github.com/cometbft/cometbft/libs/log\" imported as utils and not used"
+			},
+			{
+				"line": 9,
+				"column": 2,
+				"error": "utils redeclared in this block"
+			},
+			{
+				"line": 11,
+				"column": 2,
+				"error": "could not import github.com/cometbft/cometbft/rpc/core/types (invalid package name: \"\")"
+			},
+			{
+				"line": 12,
+				"column": 16,
+				"error": "could not import github.com/cometbft/cometbft/types (invalid package name: \"\")"
+			},
+			{
+				"line": 23,
+				"column": 16,
+				"error": "cannot use \u0026ClientMock{} (value of type *ClientMock) as Client value in variable declaration"
+			},
+			{
+				"line": 165,
+				"column": 55,
+				"error": "undefined: coretypes"
+			},
+			{
+				"line": 168,
+				"column": 60,
+				"error": "undefined: bytes"
+			},
+			{
+				"line": 168,
+				"column": 78,
+				"error": "undefined: coretypes"
+			},
+			{
+				"line": 171,
+				"column": 71,
+				"error": "undefined: bytes"
+			},
+			{
+				"line": 171,
+				"column": 122,
+				"error": "undefined: coretypes"
+			},
+			{
+				"line": 174,
+				"column": 55,
+				"error": "undefined: coretypes"
+			},
+			{
+				"line": 177,
+				"column": 59,
+				"error": "undefined: coretypes"
+			},
+			{
+				"line": 180,
+				"column": 62,
+				"error": "undefined: coretypes"
+			},
+			{
+				"line": 183,
+				"column": 101,
+				"error": "undefined: coretypes"
+			},
+			{
+				"line": 186,
+				"column": 83,
+				"error": "undefined: coretypes"
+			},
+			{
+				"line": 189,
+				"column": 97,
+				"error": "undefined: coretypes"
+			},
+			{
+				"line": 192,
+				"column": 84,
+				"error": "undefined: coretypes"
+			},
+			{
+				"line": 195,
+				"column": 85,
+				"error": "undefined: coretypes"
+			},
+			{
+				"line": 198,
+				"column": 83,
+				"error": "undefined: coretypes"
+			},
+			{
+				"line": 201,
+				"column": 75,
+				"error": "undefined: coretypes"
+			},
+			{
+				"line": 204,
+				"column": 56,
+				"error": "undefined: coretypes"
+			},
+			{
+				"line": 207,
+				"column": 65,
+				"error": "undefined: coretypes"
+			},
+			{
+				"line": 210,
+				"column": 61,
+				"error": "undefined: coretypes"
+			},
+			{
+				"line": 213,
+				"column": 65,
+				"error": "undefined: coretypes"
+			},
+			{
+				"line": 216,
+				"column": 54,
+				"error": "undefined: coretypes"
+			},
+			{
+				"line": 219,
+				"column": 69,
+				"error": "undefined: coretypes"
+			},
+			{
+				"line": 222,
+				"column": 56,
+				"error": "undefined: coretypes"
+			},
+			{
+				"line": 225,
+				"column": 50,
+				"error": "undefined: bytes"
+			},
+			{
+				"line": 225,
+				"column": 68,
+				"error": "undefined: coretypes"
+			},
+			{
+				"line": 228,
+				"column": 53,
+				"error": "undefined: coretypes"
+			},
+			{
+				"line": 234,
+				"column": 54,
+				"error": "undefined: coretypes"
+			},
+			{
+				"line": 237,
+				"column": 64,
+				"error": "undefined: coretypes"
+			},
+			{
+				"line": 255,
+				"column": 28,
+				"error": "undefined: log"
+			},
+			{
+				"line": 261,
+				"column": 53,
+				"error": "undefined: coretypes"
+			},
+			{
+				"line": 270,
+				"column": 103,
+				"error": "undefined: coretypes"
+			},
+			{
+				"line": 273,
+				"column": 62,
+				"error": "undefined: coretypes"
+			},
+			{
+				"line": 276,
+				"column": 110,
+				"error": "undefined: coretypes"
+			},
+			{
+				"line": 279,
+				"column": 61,
+				"error": "undefined: coretypes"
+			},
+			{
+				"line": 288,
+				"column": 85,
+				"error": "undefined: coretypes"
+			},
+			{
+				"line": 304,
+				"column": 9,
+				"error": "undefined: bytes"
+			},
+			{
+				"line": 313,
+				"column": 9,
+				"error": "undefined: bytes"
+			},
+			{
+				"line": 443,
+				"column": 9,
+				"error": "undefined: bytes"
+			},
+			{
+				"line": 481,
+				"column": 11,
+				"error": "undefined: log"
+			},
+			{
+				"line": 612,
+				"column": 69,
+				"error": "undefined: coretypes"
+			},
+			{
+				"line": 644,
+				"column": 74,
+				"error": "undefined: bytes"
+			},
+			{
+				"line": 644,
+				"column": 92,
+				"error": "undefined: coretypes"
+			},
+			{
+				"line": 651,
+				"column": 8,
+				"error": "undefined: bytes"
+			},
+			{
+				"line": 670,
+				"column": 7,
+				"error": "undefined: bytes"
+			},
+			{
+				"line": 675,
+				"column": 8,
+				"error": "undefined: bytes"
+			},
+			{
+				"line": 684,
+				"column": 85,
+				"error": "undefined: bytes"
+			},
+			{
+				"line": 684,
+				"column": 136,
+				"error": "undefined: coretypes"
+			},
+			{
+				"line": 691,
+				"column": 8,
+				"error": "undefined: bytes"
+			},
+			{
+				"line": 712,
+				"column": 7,
+				"error": "undefined: bytes"
+			},
+			{
+				"line": 718,
+				"column": 8,
+				"error": "undefined: bytes"
+			},
+			{
+				"line": 728,
+				"column": 69,
+				"error": "undefined: coretypes"
+			},
+			{
+				"line": 764,
+				"column": 73,
+				"error": "undefined: coretypes"
+			},
+			{
+				"line": 800,
+				"column": 76,
+				"error": "undefined: coretypes"
+			},
+			{
+				"line": 836,
+				"column": 115,
+				"error": "undefined: coretypes"
+			},
+			{
+				"line": 884,
+				"column": 97,
+				"error": "undefined: coretypes"
+			},
+			{
+				"line": 924,
+				"column": 111,
+				"error": "undefined: coretypes"
+			},
+			{
+				"line": 960,
+				"column": 98,
+				"error": "undefined: coretypes"
+			},
+			{
+				"line": 996,
+				"column": 99,
+				"error": "undefined: coretypes"
+			},
+			{
+				"line": 1032,
+				"column": 97,
+				"error": "undefined: coretypes"
+			},
+			{
+				"line": 1068,
+				"column": 89,
+				"error": "undefined: coretypes"
+			},
+			{
+				"line": 1104,
+				"column": 70,
+				"error": "undefined: coretypes"
+			},
+			{
+				"line": 1140,
+				"column": 79,
+				"error": "undefined: coretypes"
+			},
+			{
+				"line": 1176,
+				"column": 75,
+				"error": "undefined: coretypes"
+			},
+			{
+				"line": 1208,
+				"column": 79,
+				"error": "undefined: coretypes"
+			},
+			{
+				"line": 1240,
+				"column": 68,
+				"error": "undefined: coretypes"
+			},
+			{
+				"line": 1272,
+				"column": 83,
+				"error": "undefined: coretypes"
+			},
+			{
+				"line": 1308,
+				"column": 70,
+				"error": "undefined: coretypes"
+			},
+			{
+				"line": 1344,
+				"column": 64,
+				"error": "undefined: bytes"
+			},
+			{
+				"line": 1344,
+				"column": 82,
+				"error": "undefined: coretypes"
+			},
+			{
+				"line": 1350,
+				"column": 8,
+				"error": "undefined: bytes"
+			},
+			{
+				"line": 1367,
+				"column": 7,
+				"error": "undefined: bytes"
+			},
+			{
+				"line": 1371,
+				"column": 8,
+				"error": "undefined: bytes"
+			},
+			{
+				"line": 1380,
+				"column": 67,
+				"error": "undefined: coretypes"
+			},
+			{
+				"line": 1439,
+				"column": 68,
+				"error": "undefined: coretypes"
+			},
+			{
+				"line": 1471,
+				"column": 78,
+				"error": "undefined: coretypes"
+			},
+			{
+				"line": 1638,
+				"column": 42,
+				"error": "undefined: log"
+			},
+			{
+				"line": 1643,
+				"column": 10,
+				"error": "undefined: log"
+			},
+			{
+				"line": 1658,
+				"column": 9,
+				"error": "undefined: log"
+			},
+			{
+				"line": 1661,
+				"column": 10,
+				"error": "undefined: log"
+			},
+			{
+				"line": 1697,
+				"column": 67,
+				"error": "undefined: coretypes"
+			},
+			{
+				"line": 1783,
+				"column": 117,
+				"error": "undefined: coretypes"
+			},
+			{
+				"line": 1827,
+				"column": 76,
+				"error": "undefined: coretypes"
+			},
+			{
+				"line": 1867,
+				"column": 124,
+				"error": "undefined: coretypes"
+			},
+			{
+				"line": 1919,
+				"column": 75,
+				"error": "undefined: coretypes"
+			},
+			{
+				"line": 2031,
+				"column": 99,
+				"error": "undefined: coretypes"
+			}
+		],
+		"\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat1_bridges\\axelar-core\\testutils\\rand\\rand.go": [
+			{
+				"line": 13,
+				"column": 10,
+				"error": "could not import github.com/cometbft/cometbft/proto/tendermint/types (invalid package name: \"\")"
+			}
+		],
+		"\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat1_bridges\\axelar-core\\testutils\\utils.go": [
+			{
+				"line": 8,
+				"column": 7,
+				"error": "could not import github.com/cometbft/cometbft/abci/types (invalid package name: \"\")"
+			}
+		],
+		"\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat1_bridges\\axelar-core\\utils\\nopLogger.go": [
+			{
+				"line": 3,
+				"column": 8,
+				"error": "could not import github.com/cometbft/cometbft/libs/log (invalid package name: \"\")"
+			}
+		],
+		"\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat1_bridges\\axelar-core\\utils\\slice.go": [
+			{
+				"line": 11,
+				"column": 10,
+				"error": "could not import github.com/cometbft/cometbft/libs/bytes (invalid package name: \"\")"
+			}
+		],
+		"\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat1_bridges\\axelar-core\\utils\\testutils\\setup.go": [
+			{
+				"line": 6,
+				"column": 7,
+				"error": "could not import github.com/cometbft/cometbft/proto/tendermint/types (invalid package name: \"\")"
+			}
+		],
+		"\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat1_bridges\\axelar-core\\vald\\start.go": [
+			{
+				"line": 15,
+				"column": 12,
+				"error": "could not import github.com/cometbft/cometbft/rpc/client (invalid package name: \"\")"
+			}
+		],
+		"\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat1_bridges\\axelar-core\\x\\auxiliary\\module.go": [
+			{
+				"line": 9,
+				"column": 7,
+				"error": "could not import github.com/cometbft/cometbft/abci/types (invalid package name: \"\")"
+			}
+		],
+		"\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat1_bridges\\axelar-core\\x\\axelarnet\\abci.go": [
+			{
+				"line": 6,
+				"column": 7,
+				"error": "could not import github.com/cometbft/cometbft/abci/types (invalid package name: \"\")"
+			}
+		],
+		"\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat1_bridges\\axelar-core\\x\\axelarnet\\types\\expected_keepers.go": [
+			{
+				"line": 10,
+				"column": 10,
+				"error": "could not import github.com/cometbft/cometbft/libs/bytes (invalid package name: \"\")"
+			}
+		],
+		"\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat1_bridges\\axelar-core\\x\\axelarnet\\types\\mock\\expected_keepers.go": [
+			{
+				"line": 15,
+				"column": 10,
+				"error": "could not import github.com/cometbft/cometbft/libs/bytes (invalid package name: \"\")"
+			}
+		],
+		"\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat1_bridges\\axelar-core\\x\\distribution\\keeper\\keeper.go": [
+			{
+				"line": 6,
+				"column": 7,
+				"error": "could not import github.com/cometbft/cometbft/abci/types (invalid package name: \"\")"
+			}
+		],
+		"\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat1_bridges\\axelar-core\\x\\evm\\abci.go": [
+			{
+				"line": 8,
+				"column": 7,
+				"error": "could not import github.com/cometbft/cometbft/abci/types (invalid package name: \"\")"
+			}
+		],
+		"\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat1_bridges\\axelar-core\\x\\multisig\\abci.go": [
+			{
+				"line": 5,
+				"column": 7,
+				"error": "could not import github.com/cometbft/cometbft/abci/types (invalid package name: \"\")"
+			}
+		],
+		"\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat1_bridges\\axelar-core\\x\\nexus\\abci.go": [
+			{
+				"line": 6,
+				"column": 7,
+				"error": "could not import github.com/cometbft/cometbft/abci/types (invalid package name: \"\")"
+			}
+		],
+		"\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat1_bridges\\axelar-core\\x\\permission\\module.go": [
+			{
+				"line": 9,
+				"column": 7,
+				"error": "could not import github.com/cometbft/cometbft/abci/types (invalid package name: \"\")"
+			}
+		],
+		"\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat1_bridges\\axelar-core\\x\\reward\\abci.go": [
+			{
+				"line": 5,
+				"column": 7,
+				"error": "could not import github.com/cometbft/cometbft/abci/types (invalid package name: \"\")"
+			}
+		],
+		"\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat1_bridges\\axelar-core\\x\\snapshot\\keeper\\mock\\mock.go": [
+			{
+				"line": 8,
+				"column": 2,
+				"error": "could not import github.com/cometbft/cometbft/proto/tendermint/crypto (invalid package name: \"\")"
+			}
+		],
+		"\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat1_bridges\\axelar-core\\x\\snapshot\\module.go": [
+			{
+				"line": 9,
+				"column": 7,
+				"error": "could not import github.com/cometbft/cometbft/abci/types (invalid package name: \"\")"
+			}
+		],
+		"\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat1_bridges\\axelar-core\\x\\tss\\abci.go": [
+			{
+				"line": 4,
+				"column": 7,
+				"error": "could not import github.com/cometbft/cometbft/abci/types (invalid package name: \"\")"
+			}
+		],
+		"\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat1_bridges\\axelar-core\\x\\vote\\abci.go": [
+			{
+				"line": 6,
+				"column": 7,
+				"error": "could not import github.com/cometbft/cometbft/abci/types (invalid package name: \"\")"
+			}
+		]
+	},
+	"Issues": [
+		{
+			"severity": "MEDIUM",
+			"confidence": "HIGH",
+			"cwe": {
+				"id": "22",
+				"url": "https://cwe.mitre.org/data/definitions/22.html"
+			},
+			"rule_id": "G304",
+			"details": "Potential file inclusion via variable",
+			"file": "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat1_bridges\\axelar-core\\x\\evm\\types\\contractsgen\\generate.go",
+			"code": "72: \n73: \t\tcontent, err := os.ReadFile(fp)\n74: \t\tif err != nil {\n",
+			"line": "73",
+			"column": "19",
+			"nosec": false,
+			"suppressions": null,
+			"autofix": "Consider using os.Root to scope file access under a fixed root (Go \u003e=1.24). Prefer root.Open/root.Stat over os.Open/os.Stat to prevent directory traversal."
+		},
+		{
+			"severity": "MEDIUM",
+			"confidence": "HIGH",
+			"cwe": {
+				"id": "22",
+				"url": "https://cwe.mitre.org/data/definitions/22.html"
+			},
+			"rule_id": "G304",
+			"details": "Potential file inclusion via variable",
+			"file": "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat1_bridges\\axelar-core\\x\\evm\\client\\cli\\tx.go",
+			"code": "382: \n383: \t\t\tbyteValue, err := ioutil.ReadFile(jsonFile)\n384: \t\t\tif err != nil {\n",
+			"line": "383",
+			"column": "22",
+			"nosec": false,
+			"suppressions": null,
+			"autofix": "Consider using os.Root to scope file access under a fixed root (Go \u003e=1.24). Prefer root.Open/root.Stat over os.Open/os.Stat to prevent directory traversal."
+		},
+		{
+			"severity": "MEDIUM",
+			"confidence": "HIGH",
+			"cwe": {
+				"id": "22",
+				"url": "https://cwe.mitre.org/data/definitions/22.html"
+			},
+			"rule_id": "G304",
+			"details": "Potential file inclusion via variable",
+			"file": "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat1_bridges\\axelar-core\\cmd\\axelard\\main.go",
+			"code": "80: \tfilename := filepath.Join(dir, \"toc.md\")\n81: \tf, err := os.Create(filename)\n82: \tif err != nil {\n",
+			"line": "81",
+			"column": "12",
+			"nosec": false,
+			"suppressions": null,
+			"autofix": "Consider using os.Root to scope file access under a fixed root (Go \u003e=1.24). Prefer root.Open/root.Stat over os.Open/os.Stat to prevent directory traversal."
+		},
+		{
+			"severity": "MEDIUM",
+			"confidence": "HIGH",
+			"cwe": {
+				"id": "22",
+				"url": "https://cwe.mitre.org/data/definitions/22.html"
+			},
+			"rule_id": "G304",
+			"details": "Potential file inclusion via variable",
+			"file": "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat1_bridges\\axelar-core\\cmd\\axelard\\cmd\\helpers.go",
+			"code": "30: func getByteCodes(file string) ([]byte, error) {\n31: \tjsonStr, err := ioutil.ReadFile(file)\n32: \tif err != nil {\n",
+			"line": "31",
+			"column": "18",
+			"nosec": false,
+			"suppressions": null,
+			"autofix": "Consider using os.Root to scope file access under a fixed root (Go \u003e=1.24). Prefer root.Open/root.Stat over os.Open/os.Stat to prevent directory traversal."
+		},
+		{
+			"severity": "MEDIUM",
+			"confidence": "HIGH",
+			"cwe": {
+				"id": "276",
+				"url": "https://cwe.mitre.org/data/definitions/276.html"
+			},
+			"rule_id": "G306",
+			"details": "Expect WriteFile permissions to be 0600 or less",
+			"file": "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat1_bridges\\axelar-core\\x\\evm\\types\\contractsgen\\generate.go",
+			"code": "54: \n55: \tif err := os.WriteFile(outFP, bz, 0644); err != nil {\n56: \t\tlog.Fatal(errors.Wrapf(err, \"cannot write to file %s\", *out))\n",
+			"line": "55",
+			"column": "12",
+			"nosec": false,
+			"suppressions": null
+		}
+	],
+	"Stats": {
+		"files": 378,
+		"lines": 42285,
+		"nosec": 0,
+		"found": 5
+	},
+	"GosecVersion": "dev"
+}

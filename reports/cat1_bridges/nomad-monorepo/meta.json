@@ -1,0 +1,448 @@
+﻿{
+    "name":  "nomad-monorepo",
+    "source_path":  "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat1_bridges\\nomad-monorepo",
+    "scanned_at_utc":  "2026-02-16 00:29:58 UTC",
+    "git":  {
+                "head":  "f326b402285e3255a654e5e44c919ce412c2bed0",
+                "branch":  "main",
+                "remote_origin":  "https://github.com/nomad-xyz/nomad-monorepo"
+            },
+    "stacks":  [
+                   "node",
+                   "rust",
+                   "solidity"
+               ],
+    "outputs":  {
+                    "gitleaks":  {
+                                     "name":  "gitleaks",
+                                     "file":  "gitleaks",
+                                     "args":  [
+                                                  "detect",
+                                                  "--source",
+                                                  "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat1_bridges\\nomad-monorepo",
+                                                  "--report-format",
+                                                  "json",
+                                                  "--report-path",
+                                                  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\nomad-monorepo\\artifacts\\gitleaks.json",
+                                                  "--redact",
+                                                  "--no-banner",
+                                                  "--log-level",
+                                                  "error",
+                                                  "--timeout",
+                                                  "1800"
+                                              ],
+                                     "arg_string":  "detect --source \\\\VBOXSVR\\elements\\Repos\\zk0d\\cat1_bridges\\nomad-monorepo --report-format json --report-path C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\nomad-monorepo\\artifacts\\gitleaks.json --redact --no-banner --log-level error --timeout 1800",
+                                     "runner":  "cmd.exe",
+                                     "runner_args":  [
+                                                         "/d",
+                                                         "/s",
+                                                         "/c",
+                                                         "gitleaks detect --source \\\\VBOXSVR\\elements\\Repos\\zk0d\\cat1_bridges\\nomad-monorepo --report-format json --report-path C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\nomad-monorepo\\artifacts\\gitleaks.json --redact --no-banner --log-level error --timeout 1800 1\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\nomad-monorepo\\artifacts\\gitleaks.stdout.log 2\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\nomad-monorepo\\artifacts\\gitleaks.stderr.log"
+                                                     ],
+                                     "cwd":  "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat1_bridges\\nomad-monorepo",
+                                     "start_utc":  "2026-02-16 00:30:01 UTC",
+                                     "end_utc":  "2026-02-16 00:30:03 UTC",
+                                     "duration_sec":  4,
+                                     "timed_out":  false,
+                                     "exit_code":  1,
+                                     "stdout":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\nomad-monorepo\\artifacts\\gitleaks.stdout.log",
+                                     "stderr":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\nomad-monorepo\\artifacts\\gitleaks.stderr.log",
+                                     "report":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\nomad-monorepo\\artifacts\\gitleaks.json"
+                                 },
+                    "osv":  {
+                                "name":  "osv-scanner",
+                                "file":  "osv-scanner",
+                                "args":  [
+                                             "scan",
+                                             "source",
+                                             "-r",
+                                             "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat1_bridges\\nomad-monorepo",
+                                             "-f",
+                                             "json",
+                                             "--output",
+                                             "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\nomad-monorepo\\artifacts\\osv.json",
+                                             "--allow-no-lockfiles",
+                                             "--verbosity",
+                                             "warn",
+                                             "--experimental-exclude",
+                                             "g:**/node_modules",
+                                             "--experimental-exclude",
+                                             "g:**/target",
+                                             "--experimental-exclude",
+                                             "g:**/.git",
+                                             "--experimental-exclude",
+                                             "g:**/dist",
+                                             "--experimental-exclude",
+                                             "g:**/build",
+                                             "--experimental-exclude",
+                                             "g:**/out"
+                                         ],
+                                "arg_string":  "scan source -r \\\\VBOXSVR\\elements\\Repos\\zk0d\\cat1_bridges\\nomad-monorepo -f json --output C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\nomad-monorepo\\artifacts\\osv.json --allow-no-lockfiles --verbosity warn --experimental-exclude g:**/node_modules --experimental-exclude g:**/target --experimental-exclude g:**/.git --experimental-exclude g:**/dist --experimental-exclude g:**/build --experimental-exclude g:**/out",
+                                "runner":  "cmd.exe",
+                                "runner_args":  [
+                                                    "/d",
+                                                    "/s",
+                                                    "/c",
+                                                    "osv-scanner scan source -r \\\\VBOXSVR\\elements\\Repos\\zk0d\\cat1_bridges\\nomad-monorepo -f json --output C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\nomad-monorepo\\artifacts\\osv.json --allow-no-lockfiles --verbosity warn --experimental-exclude g:**/node_modules --experimental-exclude g:**/target --experimental-exclude g:**/.git --experimental-exclude g:**/dist --experimental-exclude g:**/build --experimental-exclude g:**/out 1\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\nomad-monorepo\\artifacts\\osv.stdout.log 2\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\nomad-monorepo\\artifacts\\osv.stderr.log"
+                                                ],
+                                "cwd":  "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat1_bridges\\nomad-monorepo",
+                                "start_utc":  "2026-02-16 00:30:03 UTC",
+                                "end_utc":  "2026-02-16 00:30:27 UTC",
+                                "duration_sec":  33,
+                                "timed_out":  false,
+                                "exit_code":  1,
+                                "stdout":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\nomad-monorepo\\artifacts\\osv.stdout.log",
+                                "stderr":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\nomad-monorepo\\artifacts\\osv.stderr.log",
+                                "report":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\nomad-monorepo\\artifacts\\osv.json"
+                            },
+                    "cargo_audit":  [
+                                        {
+                                            "name":  "cargo-audit",
+                                            "file":  "cargo",
+                                            "args":  [
+                                                         "audit",
+                                                         "--json",
+                                                         "--file",
+                                                         "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat1_bridges\\nomad-monorepo\\rust\\Cargo.lock"
+                                                     ],
+                                            "arg_string":  "audit --json --file \\\\VBOXSVR\\elements\\Repos\\zk0d\\cat1_bridges\\nomad-monorepo\\rust\\Cargo.lock",
+                                            "runner":  "cmd.exe",
+                                            "runner_args":  [
+                                                                "/d",
+                                                                "/s",
+                                                                "/c",
+                                                                "cargo audit --json --file \\\\VBOXSVR\\elements\\Repos\\zk0d\\cat1_bridges\\nomad-monorepo\\rust\\Cargo.lock 1\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\nomad-monorepo\\artifacts\\cargo-audit_rust_Cargo.lock.json 2\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\nomad-monorepo\\artifacts\\cargo-audit_rust_Cargo.lock.stderr.log"
+                                                            ],
+                                            "cwd":  "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat1_bridges\\nomad-monorepo",
+                                            "start_utc":  "2026-02-16 00:30:28 UTC",
+                                            "end_utc":  "2026-02-16 00:30:32 UTC",
+                                            "duration_sec":  5,
+                                            "timed_out":  false,
+                                            "exit_code":  1,
+                                            "stdout":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\nomad-monorepo\\artifacts\\cargo-audit_rust_Cargo.lock.json",
+                                            "stderr":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\nomad-monorepo\\artifacts\\cargo-audit_rust_Cargo.lock.stderr.log",
+                                            "lockfile":  "rust\\Cargo.lock"
+                                        }
+                                    ],
+                    "npm_audit":  [
+                                      {
+                                          "name":  "npm-audit",
+                                          "file":  "npm.cmd",
+                                          "args":  [
+                                                       "audit",
+                                                       "--package-lock-only",
+                                                       "--json"
+                                                   ],
+                                          "arg_string":  "audit --package-lock-only --json",
+                                          "runner":  "cmd.exe",
+                                          "runner_args":  [
+                                                              "/d",
+                                                              "/s",
+                                                              "/c",
+                                                              "npm.cmd audit --package-lock-only --json 1\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\nomad-monorepo\\artifacts\\npm-audit_package-lock.json.json 2\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\nomad-monorepo\\artifacts\\npm-audit_package-lock.json.stderr.log"
+                                                          ],
+                                          "cwd":  "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat1_bridges\\nomad-monorepo",
+                                          "start_utc":  "2026-02-16 00:30:32 UTC",
+                                          "end_utc":  "2026-02-16 00:30:34 UTC",
+                                          "duration_sec":  1,
+                                          "timed_out":  false,
+                                          "exit_code":  1,
+                                          "stdout":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\nomad-monorepo\\artifacts\\npm-audit_package-lock.json.json",
+                                          "stderr":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\nomad-monorepo\\artifacts\\npm-audit_package-lock.json.stderr.log",
+                                          "lockfile":  "package-lock.json"
+                                      },
+                                      {
+                                          "name":  "npm-audit",
+                                          "file":  "npm.cmd",
+                                          "args":  [
+                                                       "audit",
+                                                       "--package-lock-only",
+                                                       "--json"
+                                                   ],
+                                          "arg_string":  "audit --package-lock-only --json",
+                                          "runner":  "cmd.exe",
+                                          "runner_args":  [
+                                                              "/d",
+                                                              "/s",
+                                                              "/c",
+                                                              "npm.cmd audit --package-lock-only --json 1\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\nomad-monorepo\\artifacts\\npm-audit_examples_counter-xapp_package-lock.json.json 2\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\nomad-monorepo\\artifacts\\npm-audit_examples_counter-xapp_package-lock.json.stderr.log"
+                                                          ],
+                                          "cwd":  "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat1_bridges\\nomad-monorepo\\examples\\counter-xapp",
+                                          "start_utc":  "2026-02-16 00:30:34 UTC",
+                                          "end_utc":  "2026-02-16 00:30:34 UTC",
+                                          "duration_sec":  1,
+                                          "timed_out":  false,
+                                          "exit_code":  1,
+                                          "stdout":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\nomad-monorepo\\artifacts\\npm-audit_examples_counter-xapp_package-lock.json.json",
+                                          "stderr":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\nomad-monorepo\\artifacts\\npm-audit_examples_counter-xapp_package-lock.json.stderr.log",
+                                          "lockfile":  "examples\\counter-xapp\\package-lock.json"
+                                      },
+                                      {
+                                          "name":  "npm-audit",
+                                          "file":  "npm.cmd",
+                                          "args":  [
+                                                       "audit",
+                                                       "--package-lock-only",
+                                                       "--json"
+                                                   ],
+                                          "arg_string":  "audit --package-lock-only --json",
+                                          "runner":  "cmd.exe",
+                                          "runner_args":  [
+                                                              "/d",
+                                                              "/s",
+                                                              "/c",
+                                                              "npm.cmd audit --package-lock-only --json 1\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\nomad-monorepo\\artifacts\\npm-audit_examples_example-ui_package-lock.json.json 2\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\nomad-monorepo\\artifacts\\npm-audit_examples_example-ui_package-lock.json.stderr.log"
+                                                          ],
+                                          "cwd":  "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat1_bridges\\nomad-monorepo\\examples\\example-ui",
+                                          "start_utc":  "2026-02-16 00:30:34 UTC",
+                                          "end_utc":  "2026-02-16 00:30:35 UTC",
+                                          "duration_sec":  1,
+                                          "timed_out":  false,
+                                          "exit_code":  1,
+                                          "stdout":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\nomad-monorepo\\artifacts\\npm-audit_examples_example-ui_package-lock.json.json",
+                                          "stderr":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\nomad-monorepo\\artifacts\\npm-audit_examples_example-ui_package-lock.json.stderr.log",
+                                          "lockfile":  "examples\\example-ui\\package-lock.json"
+                                      },
+                                      {
+                                          "name":  "npm-audit",
+                                          "file":  "npm.cmd",
+                                          "args":  [
+                                                       "audit",
+                                                       "--package-lock-only",
+                                                       "--json"
+                                                   ],
+                                          "arg_string":  "audit --package-lock-only --json",
+                                          "runner":  "cmd.exe",
+                                          "runner_args":  [
+                                                              "/d",
+                                                              "/s",
+                                                              "/c",
+                                                              "npm.cmd audit --package-lock-only --json 1\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\nomad-monorepo\\artifacts\\npm-audit_solidity_nomad-core_package-lock.json.json 2\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\nomad-monorepo\\artifacts\\npm-audit_solidity_nomad-core_package-lock.json.stderr.log"
+                                                          ],
+                                          "cwd":  "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat1_bridges\\nomad-monorepo\\solidity\\nomad-core",
+                                          "start_utc":  "2026-02-16 00:30:35 UTC",
+                                          "end_utc":  "2026-02-16 00:30:35 UTC",
+                                          "duration_sec":  1,
+                                          "timed_out":  false,
+                                          "exit_code":  1,
+                                          "stdout":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\nomad-monorepo\\artifacts\\npm-audit_solidity_nomad-core_package-lock.json.json",
+                                          "stderr":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\nomad-monorepo\\artifacts\\npm-audit_solidity_nomad-core_package-lock.json.stderr.log",
+                                          "lockfile":  "solidity\\nomad-core\\package-lock.json"
+                                      },
+                                      {
+                                          "name":  "npm-audit",
+                                          "file":  "npm.cmd",
+                                          "args":  [
+                                                       "audit",
+                                                       "--package-lock-only",
+                                                       "--json"
+                                                   ],
+                                          "arg_string":  "audit --package-lock-only --json",
+                                          "runner":  "cmd.exe",
+                                          "runner_args":  [
+                                                              "/d",
+                                                              "/s",
+                                                              "/c",
+                                                              "npm.cmd audit --package-lock-only --json 1\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\nomad-monorepo\\artifacts\\npm-audit_solidity_nomad-xapps_package-lock.json.json 2\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\nomad-monorepo\\artifacts\\npm-audit_solidity_nomad-xapps_package-lock.json.stderr.log"
+                                                          ],
+                                          "cwd":  "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat1_bridges\\nomad-monorepo\\solidity\\nomad-xapps",
+                                          "start_utc":  "2026-02-16 00:30:35 UTC",
+                                          "end_utc":  "2026-02-16 00:30:36 UTC",
+                                          "duration_sec":  1,
+                                          "timed_out":  false,
+                                          "exit_code":  1,
+                                          "stdout":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\nomad-monorepo\\artifacts\\npm-audit_solidity_nomad-xapps_package-lock.json.json",
+                                          "stderr":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\nomad-monorepo\\artifacts\\npm-audit_solidity_nomad-xapps_package-lock.json.stderr.log",
+                                          "lockfile":  "solidity\\nomad-xapps\\package-lock.json"
+                                      },
+                                      {
+                                          "name":  "npm-audit",
+                                          "file":  "npm.cmd",
+                                          "args":  [
+                                                       "audit",
+                                                       "--package-lock-only",
+                                                       "--json"
+                                                   ],
+                                          "arg_string":  "audit --package-lock-only --json",
+                                          "runner":  "cmd.exe",
+                                          "runner_args":  [
+                                                              "/d",
+                                                              "/s",
+                                                              "/c",
+                                                              "npm.cmd audit --package-lock-only --json 1\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\nomad-monorepo\\artifacts\\npm-audit_tools_local-environment_package-lock.json.json 2\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\nomad-monorepo\\artifacts\\npm-audit_tools_local-environment_package-lock.json.stderr.log"
+                                                          ],
+                                          "cwd":  "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat1_bridges\\nomad-monorepo\\tools\\local-environment",
+                                          "start_utc":  "2026-02-16 00:30:36 UTC",
+                                          "end_utc":  "2026-02-16 00:30:36 UTC",
+                                          "duration_sec":  1,
+                                          "timed_out":  false,
+                                          "exit_code":  1,
+                                          "stdout":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\nomad-monorepo\\artifacts\\npm-audit_tools_local-environment_package-lock.json.json",
+                                          "stderr":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\nomad-monorepo\\artifacts\\npm-audit_tools_local-environment_package-lock.json.stderr.log",
+                                          "lockfile":  "tools\\local-environment\\package-lock.json"
+                                      },
+                                      {
+                                          "name":  "npm-audit",
+                                          "file":  "npm.cmd",
+                                          "args":  [
+                                                       "audit",
+                                                       "--package-lock-only",
+                                                       "--json"
+                                                   ],
+                                          "arg_string":  "audit --package-lock-only --json",
+                                          "runner":  "cmd.exe",
+                                          "runner_args":  [
+                                                              "/d",
+                                                              "/s",
+                                                              "/c",
+                                                              "npm.cmd audit --package-lock-only --json 1\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\nomad-monorepo\\artifacts\\npm-audit_tools_local-environment_hardhat_package-lock.json.json 2\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\nomad-monorepo\\artifacts\\npm-audit_tools_local-environment_hardhat_package-lock.json.stderr.log"
+                                                          ],
+                                          "cwd":  "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat1_bridges\\nomad-monorepo\\tools\\local-environment\\hardhat",
+                                          "start_utc":  "2026-02-16 00:30:36 UTC",
+                                          "end_utc":  "2026-02-16 00:30:37 UTC",
+                                          "duration_sec":  1,
+                                          "timed_out":  false,
+                                          "exit_code":  1,
+                                          "stdout":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\nomad-monorepo\\artifacts\\npm-audit_tools_local-environment_hardhat_package-lock.json.json",
+                                          "stderr":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\nomad-monorepo\\artifacts\\npm-audit_tools_local-environment_hardhat_package-lock.json.stderr.log",
+                                          "lockfile":  "tools\\local-environment\\hardhat\\package-lock.json"
+                                      },
+                                      {
+                                          "name":  "npm-audit",
+                                          "file":  "npm.cmd",
+                                          "args":  [
+                                                       "audit",
+                                                       "--package-lock-only",
+                                                       "--json"
+                                                   ],
+                                          "arg_string":  "audit --package-lock-only --json",
+                                          "runner":  "cmd.exe",
+                                          "runner_args":  [
+                                                              "/d",
+                                                              "/s",
+                                                              "/c",
+                                                              "npm.cmd audit --package-lock-only --json 1\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\nomad-monorepo\\artifacts\\npm-audit_typescript_nomad-deploy_package-lock.json.json 2\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\nomad-monorepo\\artifacts\\npm-audit_typescript_nomad-deploy_package-lock.json.stderr.log"
+                                                          ],
+                                          "cwd":  "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat1_bridges\\nomad-monorepo\\typescript\\nomad-deploy",
+                                          "start_utc":  "2026-02-16 00:30:37 UTC",
+                                          "end_utc":  "2026-02-16 00:30:38 UTC",
+                                          "duration_sec":  1,
+                                          "timed_out":  false,
+                                          "exit_code":  1,
+                                          "stdout":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\nomad-monorepo\\artifacts\\npm-audit_typescript_nomad-deploy_package-lock.json.json",
+                                          "stderr":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\nomad-monorepo\\artifacts\\npm-audit_typescript_nomad-deploy_package-lock.json.stderr.log",
+                                          "lockfile":  "typescript\\nomad-deploy\\package-lock.json"
+                                      },
+                                      {
+                                          "name":  "npm-audit",
+                                          "file":  "npm.cmd",
+                                          "args":  [
+                                                       "audit",
+                                                       "--package-lock-only",
+                                                       "--json"
+                                                   ],
+                                          "arg_string":  "audit --package-lock-only --json",
+                                          "runner":  "cmd.exe",
+                                          "runner_args":  [
+                                                              "/d",
+                                                              "/s",
+                                                              "/c",
+                                                              "npm.cmd audit --package-lock-only --json 1\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\nomad-monorepo\\artifacts\\npm-audit_typescript_nomad-monitor_package-lock.json.json 2\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\nomad-monorepo\\artifacts\\npm-audit_typescript_nomad-monitor_package-lock.json.stderr.log"
+                                                          ],
+                                          "cwd":  "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat1_bridges\\nomad-monorepo\\typescript\\nomad-monitor",
+                                          "start_utc":  "2026-02-16 00:30:38 UTC",
+                                          "end_utc":  "2026-02-16 00:30:38 UTC",
+                                          "duration_sec":  1,
+                                          "timed_out":  false,
+                                          "exit_code":  1,
+                                          "stdout":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\nomad-monorepo\\artifacts\\npm-audit_typescript_nomad-monitor_package-lock.json.json",
+                                          "stderr":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\nomad-monorepo\\artifacts\\npm-audit_typescript_nomad-monitor_package-lock.json.stderr.log",
+                                          "lockfile":  "typescript\\nomad-monitor\\package-lock.json"
+                                      },
+                                      {
+                                          "name":  "npm-audit",
+                                          "file":  "npm.cmd",
+                                          "args":  [
+                                                       "audit",
+                                                       "--package-lock-only",
+                                                       "--json"
+                                                   ],
+                                          "arg_string":  "audit --package-lock-only --json",
+                                          "runner":  "cmd.exe",
+                                          "runner_args":  [
+                                                              "/d",
+                                                              "/s",
+                                                              "/c",
+                                                              "npm.cmd audit --package-lock-only --json 1\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\nomad-monorepo\\artifacts\\npm-audit_typescript_nomad-sdk_package-lock.json.json 2\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\nomad-monorepo\\artifacts\\npm-audit_typescript_nomad-sdk_package-lock.json.stderr.log"
+                                                          ],
+                                          "cwd":  "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat1_bridges\\nomad-monorepo\\typescript\\nomad-sdk",
+                                          "start_utc":  "2026-02-16 00:30:38 UTC",
+                                          "end_utc":  "2026-02-16 00:30:39 UTC",
+                                          "duration_sec":  1,
+                                          "timed_out":  false,
+                                          "exit_code":  1,
+                                          "stdout":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\nomad-monorepo\\artifacts\\npm-audit_typescript_nomad-sdk_package-lock.json.json",
+                                          "stderr":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\nomad-monorepo\\artifacts\\npm-audit_typescript_nomad-sdk_package-lock.json.stderr.log",
+                                          "lockfile":  "typescript\\nomad-sdk\\package-lock.json"
+                                      },
+                                      {
+                                          "name":  "npm-audit",
+                                          "file":  "npm.cmd",
+                                          "args":  [
+                                                       "audit",
+                                                       "--package-lock-only",
+                                                       "--json"
+                                                   ],
+                                          "arg_string":  "audit --package-lock-only --json",
+                                          "runner":  "cmd.exe",
+                                          "runner_args":  [
+                                                              "/d",
+                                                              "/s",
+                                                              "/c",
+                                                              "npm.cmd audit --package-lock-only --json 1\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\nomad-monorepo\\artifacts\\npm-audit_typescript_nomad-tests_package-lock.json.json 2\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\nomad-monorepo\\artifacts\\npm-audit_typescript_nomad-tests_package-lock.json.stderr.log"
+                                                          ],
+                                          "cwd":  "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat1_bridges\\nomad-monorepo\\typescript\\nomad-tests",
+                                          "start_utc":  "2026-02-16 00:30:39 UTC",
+                                          "end_utc":  "2026-02-16 00:30:39 UTC",
+                                          "duration_sec":  1,
+                                          "timed_out":  false,
+                                          "exit_code":  1,
+                                          "stdout":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\nomad-monorepo\\artifacts\\npm-audit_typescript_nomad-tests_package-lock.json.json",
+                                          "stderr":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\nomad-monorepo\\artifacts\\npm-audit_typescript_nomad-tests_package-lock.json.stderr.log",
+                                          "lockfile":  "typescript\\nomad-tests\\package-lock.json"
+                                      },
+                                      {
+                                          "name":  "npm-audit",
+                                          "file":  "npm.cmd",
+                                          "args":  [
+                                                       "audit",
+                                                       "--package-lock-only",
+                                                       "--json"
+                                                   ],
+                                          "arg_string":  "audit --package-lock-only --json",
+                                          "runner":  "cmd.exe",
+                                          "runner_args":  [
+                                                              "/d",
+                                                              "/s",
+                                                              "/c",
+                                                              "npm.cmd audit --package-lock-only --json 1\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\nomad-monorepo\\artifacts\\npm-audit_typescript_typechain_package-lock.json.json 2\u003e C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\nomad-monorepo\\artifacts\\npm-audit_typescript_typechain_package-lock.json.stderr.log"
+                                                          ],
+                                          "cwd":  "\\\\VBOXSVR\\elements\\Repos\\zk0d\\cat1_bridges\\nomad-monorepo\\typescript\\typechain",
+                                          "start_utc":  "2026-02-16 00:30:39 UTC",
+                                          "end_utc":  "2026-02-16 00:30:40 UTC",
+                                          "duration_sec":  1,
+                                          "timed_out":  false,
+                                          "exit_code":  1,
+                                          "stdout":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\nomad-monorepo\\artifacts\\npm-audit_typescript_typechain_package-lock.json.json",
+                                          "stderr":  "C:\\Users\\vboxuser\\Desktop\\Repos\\zklibreports\\reports\\cat1_bridges\\nomad-monorepo\\artifacts\\npm-audit_typescript_typechain_package-lock.json.stderr.log",
+                                          "lockfile":  "typescript\\typechain\\package-lock.json"
+                                      }
+                                  ]
+                },
+    "summary":  {
+                    "gitleaks_findings":  62,
+                    "osv_vulns":  1217,
+                    "npm_audit_vulns":  0,
+                    "cargo_audit_vulns":  26
+                }
+}

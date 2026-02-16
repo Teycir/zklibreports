@@ -39,5 +39,8 @@ This is a quick reference for the tools we run and what “proof” typically lo
   - Install: `python -m pip install halmos`
   - Run (example): `halmos --root <repo> --match-contract <TestContractRegex> --match-test <InvariantRegex>`
 
-Other common follow-ups (optional, project-dependent): Slither, Echidna, Foundry invariant tests, custom fuzzers, formal specs.
+ - `slither`: static analyzer for Solidity.
+   - Proof: usually needs a minimized contract/testcase or an exploit sequence; treat default output as leads.
+   - Run (example): `slither . --exclude-dependencies --filter-paths node_modules`
 
+Other common follow-ups (optional, project-dependent): Echidna, Foundry invariant tests, custom fuzzers, formal specs.
