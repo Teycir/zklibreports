@@ -1,5 +1,7 @@
 # zkevm-contracts
 
+> Exhaustion status: closed at commit `e468f9b0967334403069aa650d9f1164b1731ebb`. See `reports/cat2_rollups/zkevm-contracts/manual_audit.md` and `reports/cat2_rollups/zkevm-contracts/EXHAUSTION_ADDENDUM.md`.
+
 - Source: `\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\zkevm-contracts`
 - HEAD: `e468f9b0967334403069aa650d9f1164b1731ebb`
 - origin: `https://github.com/0xPolygonHermez/zkevm-contracts`
