@@ -3,6 +3,8 @@
 Date: `2026-02-16`  
 Category: `cat2_rollups`
 
+Detailed synthesis: `reports/cat2_rollups/DETAILED_FINDINGS_SUMMARY.md`
+
 ## Repo-by-Repo Outcome
 
 1. `arbitrum`: `NOT CONFIRMED` (index repo only, no in-repo protocol code).
