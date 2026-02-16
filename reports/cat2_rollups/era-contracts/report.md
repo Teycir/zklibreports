@@ -1,5 +1,7 @@
 # era-contracts
 
+> Exhaustion status: closed at commit `920501207baed3f33c66914039409c49f2dea1bb`. See `reports/cat2_rollups/era-contracts/manual_audit.md` and `reports/cat2_rollups/era-contracts/EXHAUSTION_ADDENDUM.md`.
+
 - Source: `\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\era-contracts`
 - HEAD: `920501207baed3f33c66914039409c49f2dea1bb`
 - origin: `https://github.com/matter-labs/era-contracts`
@@ -79,4 +81,3 @@ Deployment note:
 ## Notes
 
 - Baseline scanner counts remain triage-only unless tied to exploitability/reachability witnesses.
-> Exhaustion status: closed at commit `920501207baed3f33c66914039409c49f2dea1bb`. See `reports/cat2_rollups/era-contracts/manual_audit.md` and `reports/cat2_rollups/era-contracts/EXHAUSTION_ADDENDUM.md`.
