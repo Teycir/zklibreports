@@ -25,6 +25,17 @@ This is a quick reference for the tools we run and what “proof” typically lo
   - Proof: reachability evidence from in-repo code to vulnerable crate APIs under the actual feature set.
 - `cargo deny`: policy checks (licenses, bans, advisories, sources).
   - Proof: typically policy, not “vuln”; treat as compliance issues unless it maps to a concrete exploit.
+ - `cargo-fuzz`: libFuzzer harness runner for Rust (`cargo fuzz`).
+   - Proof: a deterministic crashing input plus a minimized corpus entry and (ideally) a root-cause patch.
+   - Version on this host: `cargo-fuzz 0.13.1`.
+ - `bolero`: Rust property-based testing/fuzzing library (crate).
+   - Proof: a minimized failing seed or shrinking counterexample, plus a clear property/invariant statement.
+   - Add to `Cargo.toml` (example):
+
+```toml
+[dev-dependencies]
+bolero = "0.11"
+```
 
 ## Node / TypeScript
 
