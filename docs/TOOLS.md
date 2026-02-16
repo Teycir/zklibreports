@@ -13,10 +13,10 @@ This is a quick reference for the tools we run and what "proof" typically looks 
   - Proof: show an in-repo dependency edge that pulls the vulnerable version *and* a reachability path to the vulnerable code (call trace, import path, or a minimal repro).
 - `syft` (SBOM): generate an SBOM to understand what is actually shipped (useful on monorepos and polyglot repos).
   - Proof: not a vuln by itself; use it to support reachability and inventory claims.
-  - Run (example): `powershell -NoProfile -File scripts/syft.ps1 dir:<repo> -o json > sbom.json`
+  - Run (example): `powershell -NoProfile -ExecutionPolicy Bypass -File scripts/syft.ps1 dir:<repo> -o json > sbom.json`
 - `grype` (vuln scan): scans an SBOM or filesystem image for known vulns.
   - Proof: same as other dependency scanners: show the vulnerable package version is present *and* reachable/used in the target runtime path.
-  - Run (example): `powershell -NoProfile -File scripts/grype.ps1 dir:<repo> -o json > grype.json`
+  - Run (example): `powershell -NoProfile -ExecutionPolicy Bypass -File scripts/grype.ps1 dir:<repo> -o json > grype.json`
 
 ## Go
 
@@ -28,7 +28,7 @@ This is a quick reference for the tools we run and what "proof" typically looks 
   - Proof: a concrete misuse reachable in the codebase (or a minimal repro), not just a style warning.
 - `codeql` (optional, deep dataflow): heavy but excellent for taint/reachability questions in Go/TS monorepos.
   - Proof: a concrete CodeQL path to a sink, then a manual confirmation (call graph / repro / failing test).
-  - Run (example): `powershell -NoProfile -File scripts/codeql.ps1 version`
+  - Run (example): `powershell -NoProfile -ExecutionPolicy Bypass -File scripts/codeql.ps1 version`
 
 ## Rust
 
@@ -57,7 +57,7 @@ bolero = "0.11"
   - Proof: a confirmed dataflow path, exploit, or minimized repro in the specific target code.
   - Host note: Semgrep conflicts with Halmos deps when installed in the global Python env, so we run it from a venv:
     - `tools/venv/semgrep/Scripts/semgrep.exe`
-  - Run (example): `powershell -NoProfile -File scripts/semgrep.ps1 scan --config auto .`
+  - Run (example): `powershell -NoProfile -ExecutionPolicy Bypass -File scripts/semgrep.ps1 scan --config auto .`
 
 ## Solidity / EVM
 
@@ -78,17 +78,17 @@ bolero = "0.11"
 - Foundry (local harness + fuzzing):
   - `C:\\Tools\\foundry\\bin\\forge.exe` is installed on this host (not on `PATH` by default).
   - Proof: a failing test/invariant with a minimized transaction sequence; ideally paired with a root-cause fix.
-  - Run (examples): `powershell -NoProfile -File scripts/forge.ps1 test` and `powershell -NoProfile -File scripts/anvil.ps1`
+  - Run (examples): `powershell -NoProfile -ExecutionPolicy Bypass -File scripts/forge.ps1 test` and `powershell -NoProfile -ExecutionPolicy Bypass -File scripts/anvil.ps1`
 
  - Echidna (stateful fuzzing / invariants):
    - Proof: a minimized transaction sequence (or corpus) that breaks an invariant, plus a manual confirmation and root cause in code.
    - Host note: installed at `C:\\echidna\\echidna.exe` (not on `PATH` by default).
-   - Run (example): `powershell -NoProfile -File scripts/echidna.ps1 --version`
+   - Run (example): `powershell -NoProfile -ExecutionPolicy Bypass -File scripts/echidna.ps1 --version`
 
 - Medusa (stateful fuzzing / invariants):
   - Proof: a minimized transaction sequence/corpus that violates a property, plus a manual confirmation and root cause in code.
   - Host note: installed at `C:\\Users\\vboxuser\\go\\bin\\medusa.exe` (Go toolchain install).
-  - Run (example): `powershell -NoProfile -File scripts/medusa.ps1 --version`
+  - Run (example): `powershell -NoProfile -ExecutionPolicy Bypass -File scripts/medusa.ps1 --version`
 
 ## ZK / Circom
 
@@ -96,7 +96,7 @@ bolero = "0.11"
   - Proof: not a vuln tool; used to produce artifacts for witness/proof verification and to reproduce circuit issues.
 - `snarkjs`: proof generation/verification CLI (Groth16/Plonk tooling).
   - Proof: not a vuln tool; used to validate that a witness/proof is valid/invalid as claimed.
-  - Run (example): `powershell -NoProfile -File scripts/snarkjs.ps1 --help`
+  - Run (example): `powershell -NoProfile -ExecutionPolicy Bypass -File scripts/snarkjs.ps1 --help`
 
 ## ZK / Circuits
 
@@ -104,16 +104,16 @@ bolero = "0.11"
   - Version on this host: `zkfuzz 2.2.1` (Cargo package name: `zkfuzz`).
   - Binary location:
     - `C:\\Users\\vboxuser\\Desktop\\Repos\\smartcontractpatternfinder\\zkFuzz\\target\\release\\zkfuzz.exe`
-  - Run (example): `powershell -NoProfile -File scripts/zkfuzz.ps1 --help`
+  - Run (example): `powershell -NoProfile -ExecutionPolicy Bypass -File scripts/zkfuzz.ps1 --help`
   - Proof: a minimized failing witness (input + circuit/config) plus backend verification that the failure is real (not a tooling artifact).
 
 ## C/C++ Verification (Optional)
 
 - `cbmc` (bounded model checking):
   - Proof: a concrete counterexample trace for a property (assertion) in a harness you can explain and reproduce.
-  - Run (example): `powershell -NoProfile -File scripts/cbmc.ps1 --version`
+  - Run (example): `powershell -NoProfile -ExecutionPolicy Bypass -File scripts/cbmc.ps1 --version`
 - `z3` (SMT solver):
   - Proof: a model/counterexample; typically used indirectly (CBMC, custom SMT encodings).
-  - Run (example): `powershell -NoProfile -File scripts/z3.ps1 -version`
+  - Run (example): `powershell -NoProfile -ExecutionPolicy Bypass -File scripts/z3.ps1 -version`
 
 Other common follow-ups (optional, project-dependent): Echidna/Medusa (EVM stateful fuzzing), bytecode-level symbolic tools, Kani (Rust model checking), and chain-level integration testbeds.

@@ -12,6 +12,9 @@ Baseline scan script:
 powershell -NoProfile -ExecutionPolicy Bypass -File scripts/audit_cat1_bridges.ps1
 ```
 
+Host note: this Windows host has a restrictive PowerShell execution policy, so wrapper scripts in `scripts/*.ps1`
+should generally be run with `-ExecutionPolicy Bypass` as above.
+
 Outputs:
 - `reports/cat1_bridges/INDEX.md` summary table.
 - Per-repo: `reports/cat1_bridges/<repo>/report.md` + `reports/cat1_bridges/<repo>/artifacts/*`.
