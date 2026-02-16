@@ -156,6 +156,8 @@ Concrete in-repo example (Category 1 / Nomad):
 - LayerZero-v2 residual-lzToken sweep run artifact: `reports/cat1_bridges/LayerZero-v2/manual_artifacts/lz3_residual_sweep_formal_medusa_30s.txt`
 - LayerZero-v2 full-source parity harness: `proof_harness/cat1_layerzero_v2_parity_fullsource/test/LayerZeroV2FullSourceParity.t.sol`
 - LayerZero-v2 full-source parity run artifacts: `reports/cat1_bridges/LayerZero-v2/manual_artifacts/h1_fullsource_parity_oft_adapter_forge_test.txt`, `reports/cat1_bridges/LayerZero-v2/manual_artifacts/h2_fullsource_parity_delegate_stale_forge_test.txt`, `reports/cat1_bridges/LayerZero-v2/manual_artifacts/h3_fullsource_lztoken_residual_sweep_forge_test.txt`
+- Hyperlane fee-on-transfer collateral harness: `proof_harness/cat1_hyperlane_f1_collateral_fee_on_transfer/src/MedusaHyperlaneCollateralFeeHarness.sol`
+- Hyperlane fee-on-transfer collateral run artifact: `reports/cat1_bridges/hyperlane-monorepo/manual_artifacts/h1_collateral_fee_on_transfer_formal_medusa_30s.txt`
 
 ## ZK / Circom
 

@@ -15,3 +15,7 @@
 ## Notes
 - This is an automated baseline (no repo build steps executed). Treat findings as leads until reproduced.
 - Many security tools use non-zero exit codes to indicate findings; see raw JSON for details.
+
+## Manual Audit Progress
+- Manual report: `reports/cat1_bridges/hyperlane-monorepo/manual_audit.md`
+- Proven (model + fuzz + specialist): H1 `HypERC20Collateral`/`TokenRouter` intent-level accounting can over-credit remote liabilities for inbound-fee collateral tokens.
