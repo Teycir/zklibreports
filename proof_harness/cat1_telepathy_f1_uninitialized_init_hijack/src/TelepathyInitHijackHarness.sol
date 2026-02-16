@@ -230,25 +230,15 @@ contract AlwaysFalseVerifier is IMessageVerifier {
     }
 }
 
-contract MinimalHandler is ITelepathyHandlerV2, IVerifierTypeHint {
+contract PlainHandler is ITelepathyHandlerV2 {
     uint256 public calls;
     uint32 public lastSourceChain;
     address public lastSourceAddress;
     bytes32 public lastPayloadHash;
     address public immutable expectedRouter;
-    VerifierType public mode;
 
-    constructor(address _expectedRouter, VerifierType _mode) {
+    constructor(address _expectedRouter) {
         expectedRouter = _expectedRouter;
-        mode = _mode;
-    }
-
-    function setVerifierType(VerifierType _mode) external {
-        mode = _mode;
-    }
-
-    function verifierType() external view returns (VerifierType) {
-        return mode;
     }
 
     function handleTelepathy(uint32 _sourceChainId, address _sourceAddress, bytes memory _data)
@@ -261,5 +251,107 @@ contract MinimalHandler is ITelepathyHandlerV2, IVerifierTypeHint {
         lastSourceAddress = _sourceAddress;
         lastPayloadHash = keccak256(_data);
         return ITelepathyHandlerV2.handleTelepathy.selector;
+    }
+}
+
+contract MinimalHandler is ITelepathyHandlerV2, IVerifierTypeHint, IMessageVerifier {
+    uint256 public calls;
+    uint32 public lastSourceChain;
+    address public lastSourceAddress;
+    bytes32 public lastPayloadHash;
+    address public immutable expectedRouter;
+    VerifierType public mode;
+    bool public verifyResult = true;
+
+    constructor(address _expectedRouter, VerifierType _mode) {
+        expectedRouter = _expectedRouter;
+        mode = _mode;
+    }
+
+    function setVerifierType(VerifierType _mode) external {
+        mode = _mode;
+    }
+
+    function setVerifyResult(bool _verifyResult) external {
+        verifyResult = _verifyResult;
+    }
+
+    function verifierType() external view returns (VerifierType) {
+        return mode;
+    }
+
+    function verify(bytes calldata, bytes calldata) external view returns (bool) {
+        return verifyResult;
+    }
+
+    function handleTelepathy(uint32 _sourceChainId, address _sourceAddress, bytes memory _data)
+        external
+        returns (bytes4)
+    {
+        require(msg.sender == expectedRouter, "router only");
+        calls += 1;
+        lastSourceChain = _sourceChainId;
+        lastSourceAddress = _sourceAddress;
+        lastPayloadHash = keccak256(_data);
+        return ITelepathyHandlerV2.handleTelepathy.selector;
+    }
+}
+
+struct AttestationResponse {
+    uint32 chainId;
+    uint64 nonce;
+    bytes32 messageId;
+}
+
+contract AttestationGatewayModel {
+    AttestationResponse public currentResponse;
+
+    function setCurrentResponse(AttestationResponse memory _response) external {
+        currentResponse = _response;
+    }
+
+    function getCurrentResponse() external view returns (AttestationResponse memory) {
+        return currentResponse;
+    }
+}
+
+/// @notice Simplified attestation verifier model:
+///         verification succeeds only when gateway response matches message chain/nonce/id.
+contract AttestationVerifierModel is IMessageVerifier {
+    using MessageCodec for bytes;
+
+    AttestationGatewayModel public immutable gateway;
+    mapping(uint32 => address) public telepathyRouters;
+
+    constructor(
+        address _gateway,
+        uint32[] memory _sourceChains,
+        address[] memory _routers
+    ) {
+        require(_sourceChains.length == _routers.length, "len mismatch");
+        gateway = AttestationGatewayModel(_gateway);
+        for (uint256 i = 0; i < _sourceChains.length; i++) {
+            telepathyRouters[_sourceChains[i]] = _routers[i];
+        }
+    }
+
+    function verify(bytes calldata, bytes calldata _message) external view returns (bool) {
+        MessageCodec.Envelope memory env = _message.decode();
+        AttestationResponse memory response = gateway.getCurrentResponse();
+
+        // Same core binding as upstream: source chain + nonce + attested message id.
+        if (response.chainId != env.sourceChainId) {
+            return false;
+        }
+        if (response.nonce != env.nonce) {
+            return false;
+        }
+        if (telepathyRouters[env.sourceChainId] == address(0)) {
+            return false;
+        }
+        if (response.messageId != keccak256(_message)) {
+            return false;
+        }
+        return true;
     }
 }

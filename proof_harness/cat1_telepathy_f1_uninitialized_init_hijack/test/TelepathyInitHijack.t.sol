@@ -2,10 +2,14 @@
 pragma solidity ^0.8.24;
 
 import {
+    AttestationGatewayModel,
+    AttestationResponse,
+    AttestationVerifierModel,
     AlwaysFalseVerifier,
     AlwaysTrueVerifier,
     MessageCodec,
     MinimalHandler,
+    PlainHandler,
     TelepathyRouterV2Model,
     VerifierType
 } from "../src/TelepathyInitHijackHarness.sol";
@@ -85,6 +89,38 @@ contract TelepathyInitHijackTest {
             uint32(block.chainid),
             destinationAddress,
             data
+        );
+    }
+
+    function _setupAttestationRouter()
+        internal
+        returns (TelepathyRouterV2Model router, Actor attacker, AttestationGatewayModel gateway)
+    {
+        router = new TelepathyRouterV2Model();
+        Actor trustedTimelock = new Actor();
+        Actor trustedGuardian = new Actor();
+        attacker = new Actor();
+
+        _assertTrue(
+            trustedTimelock.initializeRouter(
+                router, true, true, address(0), address(trustedTimelock), address(trustedGuardian)
+            ),
+            "trusted initialize should succeed"
+        );
+
+        gateway = new AttestationGatewayModel();
+        uint32[] memory sourceChains = new uint32[](1);
+        sourceChains[0] = 42161;
+        address[] memory sourceRouters = new address[](1);
+        sourceRouters[0] = address(0x1111111111111111111111111111111111111111);
+        AttestationVerifierModel verifier =
+            new AttestationVerifierModel(address(gateway), sourceChains, sourceRouters);
+
+        _assertTrue(
+            trustedTimelock.setDefaultVerifier(
+                router, VerifierType.ATTESTATION_STATE_QUERY, address(verifier)
+            ),
+            "attestation verifier should be set"
         );
     }
 
@@ -182,6 +218,139 @@ contract TelepathyInitHijackTest {
         bool executed = attacker.execute(router, hex"", forged);
         _assertTrue(!executed, "forged execute should fail when verifier remains trusted");
         _assertTrue(handler.calls() == 0, "handler should not be called");
+    }
+
+    /// @notice F2 trust-boundary falsification:
+    /// if destination contract does not explicitly provide a verifier hint, router falls back
+    /// to default verifier and forged execution cannot bypass that default policy.
+    function test_f2_plain_destination_uses_default_verifier_and_rejects_forged_message() public {
+        TelepathyRouterV2Model router = new TelepathyRouterV2Model();
+        Actor trustedTimelock = new Actor();
+        Actor trustedGuardian = new Actor();
+        Actor attacker = new Actor();
+
+        _assertTrue(
+            trustedTimelock.initializeRouter(
+                router, true, true, address(0), address(trustedTimelock), address(trustedGuardian)
+            ),
+            "trusted initialize should succeed"
+        );
+        _assertTrue(
+            trustedTimelock.setDefaultVerifier(
+                router, VerifierType.ATTESTATION_STATE_QUERY, address(new AlwaysFalseVerifier())
+            ),
+            "strict default attestation verifier should be set"
+        );
+
+        PlainHandler handler = new PlainHandler(address(router));
+        bytes memory forged =
+            _message(10, 42161, address(0x1234), address(handler), abi.encodePacked("f2-plain"));
+
+        bool executed = attacker.execute(router, hex"", forged);
+        _assertTrue(!executed, "forged execute should fail through default verifier");
+        _assertTrue(handler.calls() == 0, "plain destination should not be called");
+    }
+
+    /// @notice F2 trust-boundary witness:
+    /// custom verifier path is only reached when destination contract explicitly opts in
+    /// by exposing `verifierType() = CUSTOM` and verifier logic.
+    function test_f2_custom_verifier_path_requires_destination_contract_cooperation() public {
+        TelepathyRouterV2Model router = new TelepathyRouterV2Model();
+        Actor trustedTimelock = new Actor();
+        Actor trustedGuardian = new Actor();
+        Actor attacker = new Actor();
+
+        _assertTrue(
+            trustedTimelock.initializeRouter(
+                router, true, true, address(0), address(trustedTimelock), address(trustedGuardian)
+            ),
+            "trusted initialize should succeed"
+        );
+        _assertTrue(
+            trustedTimelock.setDefaultVerifier(
+                router, VerifierType.ATTESTATION_STATE_QUERY, address(new AlwaysFalseVerifier())
+            ),
+            "strict default verifier should be set"
+        );
+
+        MinimalHandler customHandler = new MinimalHandler(address(router), VerifierType.CUSTOM);
+        customHandler.setVerifyResult(true);
+
+        bytes memory forged1 = _message(
+            11,
+            42161,
+            address(0xABCD),
+            address(customHandler),
+            abi.encodePacked("f2-custom-true")
+        );
+        bool executed1 = attacker.execute(router, hex"", forged1);
+        _assertTrue(executed1, "custom destination verifier should allow its own message");
+        _assertTrue(customHandler.calls() == 1, "custom destination should be called once");
+
+        customHandler.setVerifyResult(false);
+        bytes memory forged2 = _message(
+            12,
+            42161,
+            address(0xABCD),
+            address(customHandler),
+            abi.encodePacked("f2-custom-false")
+        );
+        bool executed2 = attacker.execute(router, hex"", forged2);
+        _assertTrue(!executed2, "custom destination verifier controls acceptance");
+        _assertTrue(customHandler.calls() == 1, "call count should remain unchanged");
+    }
+
+    /// @notice F3 falsification:
+    /// attestation-mode execution requires gateway response bound to source chain, nonce, and messageId.
+    function test_f3_attestation_requires_matching_gateway_response() public {
+        (TelepathyRouterV2Model router, Actor attacker, AttestationGatewayModel gateway) =
+            _setupAttestationRouter();
+
+        PlainHandler handler = new PlainHandler(address(router));
+        bytes memory message =
+            _message(33, 42161, address(0xCAFE), address(handler), abi.encodePacked("f3-bound"));
+
+        gateway.setCurrentResponse(
+            AttestationResponse({
+                chainId: 42161,
+                nonce: 34,
+                messageId: keccak256(message)
+            })
+        );
+        _assertTrue(!attacker.execute(router, hex"", message), "nonce mismatch must fail");
+        _assertTrue(handler.calls() == 0, "handler should not be called on mismatch");
+
+        gateway.setCurrentResponse(
+            AttestationResponse({
+                chainId: 42161,
+                nonce: 33,
+                messageId: keccak256(message)
+            })
+        );
+        _assertTrue(attacker.execute(router, hex"", message), "matching response should allow execute");
+        _assertTrue(handler.calls() == 1, "handler should be called once");
+    }
+
+    /// @notice F3 control:
+    /// once executed, replay is blocked even if gateway response remains unchanged.
+    function test_f3_attestation_matching_response_still_replay_protected() public {
+        (TelepathyRouterV2Model router, Actor attacker, AttestationGatewayModel gateway) =
+            _setupAttestationRouter();
+
+        PlainHandler handler = new PlainHandler(address(router));
+        bytes memory message =
+            _message(44, 42161, address(0xBEEF), address(handler), abi.encodePacked("f3-replay"));
+
+        gateway.setCurrentResponse(
+            AttestationResponse({
+                chainId: 42161,
+                nonce: 44,
+                messageId: keccak256(message)
+            })
+        );
+        _assertTrue(attacker.execute(router, hex"", message), "first execute should succeed");
+        _assertTrue(!attacker.execute(router, hex"", message), "second execute should fail replay guard");
+        _assertTrue(handler.calls() == 1, "handler should only be called once");
     }
 
     /// @notice Fuzz witness:
@@ -282,5 +451,45 @@ contract TelepathyInitHijackTest {
         bool executed = attacker.execute(router, hex"", forged);
         _assertTrue(!executed, "forged message should fail");
         _assertTrue(handler.calls() == 0, "handler should remain untouched");
+    }
+
+    /// @notice F3 fuzz falsification:
+    /// mismatched attestation response cannot execute.
+    function testFuzz_f3_mismatched_attestation_response_cannot_execute(
+        uint64 nonce,
+        bytes calldata payload,
+        bytes32 badMessageId
+    ) public {
+        if (payload.length > 128) {
+            return;
+        }
+
+        (TelepathyRouterV2Model router, Actor attacker, AttestationGatewayModel gateway) =
+            _setupAttestationRouter();
+
+        PlainHandler handler = new PlainHandler(address(router));
+        bytes memory message = _message(
+            nonce,
+            42161,
+            address(uint160(uint256(keccak256(payload)))),
+            address(handler),
+            payload
+        );
+        bytes32 messageId = keccak256(message);
+        if (badMessageId == messageId) {
+            badMessageId = bytes32(uint256(messageId) ^ uint256(1));
+        }
+
+        gateway.setCurrentResponse(
+            AttestationResponse({
+                chainId: 42161,
+                nonce: nonce,
+                messageId: badMessageId
+            })
+        );
+
+        bool executed = attacker.execute(router, hex"", message);
+        _assertTrue(!executed, "mismatched attestation should fail");
+        _assertTrue(handler.calls() == 0, "handler should not be called");
     }
 }

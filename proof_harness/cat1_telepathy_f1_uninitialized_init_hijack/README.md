@@ -7,6 +7,12 @@ This harness validates a deployment-time trust boundary for `TelepathyRouterV2`-
 - Fixed controls are:
   - trusted first initialization (no attacker first-call window), and
   - preserving timelock ownership over default verifier configuration.
+- Verifier hint trust-boundary behavior:
+  - destinations without verifier hints stay on default verifier policy,
+  - custom verifier path is destination opt-in (contract cooperation required).
+- Attestation binding behavior:
+  - execution requires matching `(sourceChainId, nonce, messageId)` gateway response,
+  - replay remains blocked after first successful execute.
 
 ## Layout
 
