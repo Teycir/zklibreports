@@ -1,0 +1,5 @@
+Root: "C:/Users/vboxuser/Desktop/Repos/zklibreports/workdir/wormhole-ethereum", Src: Some(["contracts"]), Include: None, Exclude: Some(["forge-test/", "script/", "lib/", "node_modules/"])
+Resolving sources versions by graph ...
+Compiling 79 files with Solc 0.8.33+commit.64118f21.Windows.msvc
+Get Detectors
+Running 63 detectors

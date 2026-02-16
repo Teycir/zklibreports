@@ -9,6 +9,7 @@
 
 # Local tool installs / scratch
 tools/
+workdir/
 
 # OS/editor
 .DS_Store

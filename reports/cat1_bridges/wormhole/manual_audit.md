@@ -143,6 +143,11 @@ Slither snapshot (this workspace):
   - `reentrancy-*` findings appear around ETH flows and redemption paths; these should be validated with a concrete harness (ties to H2).
   - `arbitrary-send-eth` appears in governance fee transfer logic; validate that only governance VAAs can trigger it.
 
+Aderyn (additional Solidity analyzer):
+- Aderyn is installed on this host (`aderyn 0.1.9`), but attempting to run it on the Wormhole EVM contracts currently triggers a panic on Windows (no report emitted).
+- Failure artifact: `reports/cat1_bridges/wormhole/manual_artifacts/aderyn_skipbuild.stderr.txt`
+- Action: keep using Slither + targeted tests/symbolic checks for now; retry Aderyn on Linux/WSL or after upgrading Aderyn.
+
 Halmos (symbolic / invariant testing):
 - Halmos is installed on this host.
 - To use it effectively, we should install Foundry (`forge`) and use the existing Foundry tests under `wormhole/ethereum/forge-test`.

@@ -43,4 +43,9 @@ This is a quick reference for the tools we run and what “proof” typically lo
    - Proof: usually needs a minimized contract/testcase or an exploit sequence; treat default output as leads.
    - Run (example): `slither . --exclude-dependencies --filter-paths node_modules`
 
+ - `aderyn`: Rust-based Solidity analyzer (detector registry + auditor mode).
+   - Proof: still needs a witness; treat findings as leads until you can write a minimal test/PoC.
+   - Note: on this Windows host, Aderyn may crash on some large Foundry projects; if that happens, rerun on Linux/WSL or pin/upgrade Aderyn.
+   - Run (example): `aderyn . --src contracts --no-snippets`
+
 Other common follow-ups (optional, project-dependent): Echidna, Foundry invariant tests, custom fuzzers, formal specs.

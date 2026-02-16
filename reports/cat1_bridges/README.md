@@ -28,6 +28,7 @@ Baseline automation (`scripts/audit_cat1_bridges.ps1`) currently runs:
 For Solidity/EVM deep analysis we also use:
 - `halmos` (symbolic invariant testing; typically driven from Foundry tests)
 - `slither` (static analyzer; run in a controlled mode because it may invoke compilation/build steps)
+- `aderyn` (additional Solidity analyzer; treat output as leads until you have a repro)
 
 More detailed tool notes: `docs/TOOLS.md`
 
