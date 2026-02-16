@@ -1,0 +1,67 @@
+Taiko-contracts F-TAIKO-02 key snippets
+
+Source: \\VBOXSVR\elements\Repos\zk0d\cat2_rollups\taiko-contracts
+Contract: packages/nfts/contracts/eventRegister/EventRegister.sol
+Script: packages/nfts/script/trailblazer/eventRegister/Deploy.s.sol
+
+--- EventRegister.initialize and role setup ---
+   87:      * @notice Contract initializer
+   88:      * @dev Initializes the contract by granting the deployer the default admin role.
+   89:      *    The deployer is also granted the EVENT_MANAGER_ROLE.
+   90:      *    The deployer is set as the owner of the contract.
+   91:      */
+   92:     function initialize() external initializer {
+   93:         __Context_init();
+   94:         _grantRole(EVENT_MANAGER_ROLE, _msgSender());
+   95:         _transferOwnership(_msgSender());
+   96:     }
+   97: 
+   98:     /**
+   99:      * @notice Initializes the contract by granting the deployer the default admin role.
+  100:      * @dev The deployer of the contract is granted the DEFAULT_ADMIN_ROLE, allowing them to manage
+  101:      * roles.
+  102:      */
+  103:     constructor() {
+  104:         _grantRole(DEFAULT_ADMIN_ROLE, _msgSender());
+  105:     }
+  106: 
+  107:     /**
+  108:      * @notice Grants the EVENT_MANAGER_ROLE to a specified account.
+  109:      * @dev Only accounts with the DEFAULT_ADMIN_ROLE can call this function.
+  110:      * @param account The address to be granted the EVENT_MANAGER_ROLE.
+  111:      *
+  112:      * Requirements:
+  113:      *
+  114:      * - The caller must have the DEFAULT_ADMIN_ROLE.
+  115:      */
+  116:     function grantEventManagerRole(address account) external onlyRole(DEFAULT_ADMIN_ROLE) {
+  117:         grantRole(EVENT_MANAGER_ROLE, account);
+  118:     }
+
+--- Constructor-admin + manager-only privileged paths ---
+  100:      * @dev The deployer of the contract is granted the DEFAULT_ADMIN_ROLE, allowing them to manage
+  101:      * roles.
+  102:      */
+  103:     constructor() {
+  104:         _grantRole(DEFAULT_ADMIN_ROLE, _msgSender());
+  105:     }
+  106: 
+  143:     function createEvent(string memory _name) external onlyRole(EVENT_MANAGER_ROLE) {
+  144:         uint256 eventId = nextEventId;
+  145:         events[eventId] = Event({ id: eventId, name: _name, exists: true, registrationOpen: true });
+  146:         emit EventCreated(eventId, _name);
+  147:         emit RegistrationOpened(eventId); // Emit event indicating registrations are open
+  148:         nextEventId++;
+  149:     }
+
+--- Deploy script performs deploy then separate initialize call ---
+   12:         vm.startBroadcast(deployerPrivateKey);
+   13: 
+   14:         EventRegister eventRegister = new EventRegister();
+   15: 
+   16:         console.log("Deployed EventRegister to:", address(eventRegister), "from", deployerAddress);
+   17: 
+   18:         // Initialize the contract
+   19:         eventRegister.initialize();
+   20: 
+   21:         console.log("Initialized EventRegister contract.");

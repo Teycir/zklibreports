@@ -14,7 +14,7 @@ Category: `cat2_rollups`
 7. `optimism`: `CONFIRMED` (1 finding). See `reports/cat2_rollups/optimism/report.md`.
 8. `scroll-contracts`: `CONFIRMED` (1 finding). See `reports/cat2_rollups/scroll-contracts/report.md`.
 9. `stone-prover`: `NOT CONFIRMED` (no baseline findings; no exploit witness).
-10. `taiko-contracts`: `CONFIRMED` (1 finding). See `reports/cat2_rollups/taiko-contracts/report.md`.
+10. `taiko-contracts`: `CONFIRMED` (2 findings). See `reports/cat2_rollups/taiko-contracts/report.md`.
 11. `taiko-mono`: `CONFIRMED` (2 findings). See `reports/cat2_rollups/taiko-mono/report.md`.
 12. `zkevm-circuits`: `CONFIRMED` (1 finding). See `reports/cat2_rollups/zkevm-circuits/report.md`.
 13. `zkevm-contracts`: `CONFIRMED` (1 finding). See `reports/cat2_rollups/zkevm-contracts/report.md`.
@@ -27,6 +27,7 @@ Category: `cat2_rollups`
 - `F-LINEA-01` (`Critical`): `LineaRollup.initializeParentShnarfsAndFinalizedState(...)` is externally callable as `reinitializer(5)`, enabling permissionless `shnarfFinalBlockNumbers` poisoning and rollup submission DoS.
 - `F-SCROLL-01` (`Critical`): `ScrollChain.initialize(...)` can be first-called by an attacker in non-atomic upgrade flow, enabling owner capture and privileged rollup control actions.
 - `F-TAIKO-01` (`Medium`): `TrailblazersBadgesS2.getBadge(uint256)` uses an inverted existence boundary check, allowing nonexistent token IDs to be returned as zero-value structs while reverting for valid older minted IDs.
+- `F-TAIKO-02` (`Medium`): `EventRegister.initialize()` is first-caller in a non-atomic deploy-then-initialize flow, allowing attacker `EVENT_MANAGER_ROLE`/owner capture and persistent attacker-created event-state injection before recovery.
 - `F-TAIKOMONO-01` (`Medium`): `TrailblazersBadgesS2.getBadge(uint256)` uses the same inverted existence boundary check in `taiko-mono`, allowing nonexistent token IDs to appear valid while valid older IDs can revert.
 - `F-TAIKOMONO-02` (`Medium`): `EventRegister.initialize()` is first-caller in a non-atomic deploy-then-initialize flow, allowing attacker `EVENT_MANAGER_ROLE`/owner capture and persistent attacker-created event-state injection before recovery.
 - `F-ZKEVM-01` (`High`): `aggregator::decode_bytes` panics on malformed `blob_bytes`, allowing malformed proving-task payloads to crash batch proving sanity path instead of returning a recoverable error.
@@ -45,6 +46,7 @@ Category: `cat2_rollups`
 - `F-LINEA-01`: Forge + Medusa + Echidna + Halmos counterexamples (`f_linea_01_reinitializer_dos_forge_test.txt`, `f_linea_01_medusa_failfast_30s.txt`, `f_linea_01_echidna_30s.txt`, `f_linea_01_halmos.txt`).
 - `F-SCROLL-01`: Forge + Medusa + Echidna + Halmos counterexamples (`f_scroll_01_scrollchain_init_hijack_forge_test.txt`, `f_scroll_01_medusa_failfast_30s.txt`, `f_scroll_01_echidna_30s.txt`, `f_scroll_01_halmos.txt`).
 - `F-TAIKO-01`: Forge + Medusa + Echidna + Halmos counterexamples (`f_taiko_01_getbadge_boundary_forge_test.txt`, `f_taiko_01_medusa_failfast_30s.txt`, `f_taiko_01_echidna_30s.txt`, `f_taiko_01_halmos.txt`).
+- `F-TAIKO-02`: Forge witness (`f_taiko_02_eventregister_init_hijack_forge_test.txt`).
 - `F-TAIKOMONO-01`: Forge + Medusa + Echidna + Halmos counterexamples (`f_taikomono_01_getbadge_boundary_forge_test.txt`, `f_taikomono_01_medusa_failfast_30s.txt`, `f_taikomono_01_echidna_30s.txt`, `f_taikomono_01_halmos.txt`).
 - `F-TAIKOMONO-02`: Forge witness (`f_taikomono_02_eventregister_init_hijack_forge_test.txt`).
 - `F-OPT-01`: Forge + Medusa + Echidna + Halmos counterexamples (`f_opt_01_protocol_versions_init_hijack_forge_test.txt`, `f_opt_01_medusa_failfast_30s.txt`, `f_opt_01_echidna_30s.txt`, `f_opt_01_halmos.txt`).

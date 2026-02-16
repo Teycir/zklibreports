@@ -30,20 +30,23 @@ Date: `2026-02-16`
 ## Promoted finding
 
 - `F-TAIKO-01` (`Medium`): `TrailblazersBadgesS2.getBadge` uses inverted boundary check and breaks token-existence semantics.
+- `F-TAIKO-02` (`Medium`): `EventRegister` deploy/init split enables first-caller role takeover before intended initialization.
 - Proof artifacts:
 - `manual_artifacts/f_taiko_01_getbadge_boundary_forge_test.txt`
 - `manual_artifacts/f_taiko_01_medusa_failfast_30s.txt`
 - `manual_artifacts/f_taiko_01_echidna_30s.txt`
 - `manual_artifacts/f_taiko_01_halmos.txt`
 - `manual_artifacts/f_taiko_01_halmos.json`
+- `manual_artifacts/f_taiko_02_eventregister_init_hijack_forge_test.txt`
+- `manual_artifacts/f_taiko_02_key_snippets.txt`
 
 ## Non-promoted leads
 
-- Core protocol `initializer/reinitializer` paths in deployment scripts were reviewed against real deployment flows; reviewed paths were mostly atomic proxy init call-data and did not yield a first-caller takeover witness.
+- Core protocol `initializer/reinitializer` paths in deployment scripts were reviewed against real deployment flows; reviewed paths were mostly atomic proxy init call-data and did not yield a first-caller takeover witness beyond `F-TAIKO-02`.
 - Remaining static leads (auth/call/assembly/signature/unchecked) did not produce a reproducible unprivileged exploit witness under CAT2 promotion criteria.
 
 ## Manual verdict
 
-- `CONFIRMED`: 1
+- `CONFIRMED`: 2
 - `LIKELY`: 0
 - `NOT CONFIRMED`: all other triaged leads
