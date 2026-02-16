@@ -1,5 +1,7 @@
 # era-boojum
 
+> Exhaustion status: closed at commit `5a8c4035a9e10beacb1bf28ec453fe5fb01323ad`. See `reports/cat2_rollups/era-boojum/manual_audit.md` and `reports/cat2_rollups/era-boojum/EXHAUSTION_ADDENDUM.md`.
+
 - Source: `\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\era-boojum`
 - HEAD: `5a8c4035a9e10beacb1bf28ec453fe5fb01323ad`
 - origin: `https://github.com/matter-labs/era-boojum`
