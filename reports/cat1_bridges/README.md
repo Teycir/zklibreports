@@ -4,6 +4,8 @@ Inputs live at `\\VBOXSVR\elements\Repos\zk0d\cat1_bridges` (10 git repos).
 
 Goal: identify **provable** vulnerabilities (repro or trace), not just tool noise.
 
+Manual audit plan: `reports/cat1_bridges/ROADMAP.md`
+
 Baseline scan script:
 
 ```powershell
