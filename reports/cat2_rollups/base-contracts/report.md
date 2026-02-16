@@ -1,5 +1,7 @@
 # base-contracts
 
+> Exhaustion status: closed at commit `f87cacbfbba6d11dc29e11c60d8956610011edcc`. See `reports/cat2_rollups/base-contracts/manual_audit.md` and `reports/cat2_rollups/base-contracts/EXHAUSTION_ADDENDUM.md`.
+
 - Source: `\\VBOXSVR\elements\Repos\zk0d\cat2_rollups\base-contracts`
 - HEAD: `f87cacbfbba6d11dc29e11c60d8956610011edcc`
 - origin: `https://github.com/base-org/contracts`
