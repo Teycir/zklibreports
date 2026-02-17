@@ -15,6 +15,7 @@ Shared business impact is unauthorized reward/access claims and false denials th
 
 ### zkevm-contracts - F-ZKEVMC-01 (`Critical`)
 - Vulnerability type category: `Initialization/upgrade first-caller takeover`
+- Repository activity flag (9-month rule): Active (latest commit: 2025-10-22; cutoff: 2025-05-17).
 - [1] Program/Payout mapping: Policy class: `Access Control / Unsafe Initialization / Upgrade Integrity`; severity tier: `Critical`; target payout band: `$50k-$250k+ (program-cap dependent)`; recommended claim framing: exploitable security defect with deterministic proof artifact.
 - [2] Affected scope (exact): Repo `zkevm-contracts`; component/function `AggLayerGateway.initialize(...)`; audit reference `reports/cat2_rollups/zkevm-contracts/report.md`; reviewed commit hash: `TBD-pin-before-submission`; fixed commit hash: `not provided`; affected release/version range: `TBD-pin-before-submission`.
 - [3] Production exploitability verdict: Conditional-direct in production: exploitable whenever a non-atomic deploy/upgrade path is used.
@@ -57,6 +58,7 @@ Shared business impact is unauthorized reward/access claims and false denials th
 
 ### scroll-contracts - F-SCROLL-01 (`Critical`)
 - Vulnerability type category: `Initialization/upgrade first-caller takeover`
+- Repository activity flag (9-month rule): Active (latest commit: 2026-02-11; cutoff: 2025-05-17).
 - [1] Program/Payout mapping: Policy class: `Access Control / Unsafe Initialization / Upgrade Integrity`; severity tier: `Critical`; target payout band: `$50k-$250k+ (program-cap dependent)`; recommended claim framing: exploitable security defect with deterministic proof artifact.
 - [2] Affected scope (exact): Repo `scroll-contracts`; component/function `ScrollChain.initialize(...)`; audit reference `reports/cat2_rollups/scroll-contracts/report.md`; reviewed commit hash: `TBD-pin-before-submission`; fixed commit hash: `not provided`; affected release/version range: `TBD-pin-before-submission`.
 - [3] Production exploitability verdict: Conditional-direct in production: exploitable on split upgrade-then-initialize execution.
@@ -98,6 +100,7 @@ Shared business impact is unauthorized reward/access claims and false denials th
 
 ### linea-contracts - F-LINEA-01 (`Critical`)
 - Vulnerability type category: `Privilege and settlement-logic integrity flaws`
+- Repository activity flag (9-month rule): Inactive (latest commit: 2024-09-11; cutoff: 2025-05-17).
 - [1] Program/Payout mapping: Policy class: `Protocol Integrity / Privilege Logic / Settlement Correctness`; severity tier: `Critical`; target payout band: `$50k-$250k+ (program-cap dependent)`; recommended claim framing: exploitable security defect with deterministic proof artifact.
 - [2] Affected scope (exact): Repo `linea-contracts`; component/function `LineaRollup.initializeParentShnarfsAndFinalizedState(...)`; audit reference `reports/cat2_rollups/linea-contracts/report.md`; reviewed commit hash: `TBD-pin-before-submission`; fixed commit hash: `not provided`; affected release/version range: `TBD-pin-before-submission`.
 - [3] Production exploitability verdict: Direct (permissionless) while `reinitializer(5)` remains callable.
@@ -139,6 +142,7 @@ Shared business impact is unauthorized reward/access claims and false denials th
 
 ### mantle - F-MAN-01 (`Critical`)
 - Vulnerability type category: `Privilege and settlement-logic integrity flaws`
+- Repository activity flag (9-month rule): Inactive (latest commit: 2023-08-16; cutoff: 2025-05-17).
 - [1] Program/Payout mapping: Policy class: `Protocol Integrity / Privilege Logic / Settlement Correctness`; severity tier: `Critical`; target payout band: `$50k-$250k+ (program-cap dependent)`; recommended claim framing: exploitable security defect with deterministic proof artifact.
 - [2] Affected scope (exact): Repo `mantle`; component/function `Challenge.completeChallenge(bool)`; audit reference `reports/cat2_rollups/mantle/report.md`; reviewed commit hash: `TBD-pin-before-submission`; fixed commit hash: `not provided`; affected release/version range: `TBD-pin-before-submission`.
 - [3] Production exploitability verdict: Direct but role-constrained: requires defender control in active challenge settlement path.
@@ -179,6 +183,7 @@ Shared business impact is unauthorized reward/access claims and false denials th
 
 ### linea-contracts - F-LINEA-03 (`High`)
 - Vulnerability type category: `Initialization/upgrade first-caller takeover`
+- Repository activity flag (9-month rule): Inactive (latest commit: 2024-09-11; cutoff: 2025-05-17).
 - [1] Program/Payout mapping: Policy class: `Access Control / Unsafe Initialization / Upgrade Integrity`; severity tier: `High`; target payout band: `$15k-$100k (program-cap dependent)`; recommended claim framing: exploitable security defect with deterministic proof artifact.
 - [2] Affected scope (exact): Repo `linea-contracts`; component/function `CustomBridgedToken.initializeV2(...)`; audit reference `reports/cat2_rollups/linea-contracts/report.md`; reviewed commit hash: `TBD-pin-before-submission`; fixed commit hash: `not provided`; affected release/version range: `TBD-pin-before-submission`.
 - [3] Production exploitability verdict: Conditional-direct in production during non-atomic token upgrade windows.
@@ -220,6 +225,7 @@ Shared business impact is unauthorized reward/access claims and false denials th
 
 ### era-contracts - F-ERAC-01 (`High`)
 - Vulnerability type category: `Initialization/upgrade first-caller takeover`
+- Repository activity flag (9-month rule): Active (latest commit: 2026-02-10; cutoff: 2025-05-17).
 - [1] Program/Payout mapping: Policy class: `Access Control / Unsafe Initialization / Upgrade Integrity`; severity tier: `High`; target payout band: `$15k-$100k (program-cap dependent)`; recommended claim framing: exploitable security defect with deterministic proof artifact.
 - [2] Affected scope (exact): Repo `era-contracts`; component/function `ChainRegistrar.initialize(...)`; audit reference `reports/cat2_rollups/era-contracts/report.md`; reviewed commit hash: `TBD-pin-before-submission`; fixed commit hash: `not provided`; affected release/version range: `TBD-pin-before-submission`.
 - [3] Production exploitability verdict: Conditional-direct when `ChainRegistrar` proxy can be observed uninitialized.
@@ -260,6 +266,7 @@ Shared business impact is unauthorized reward/access claims and false denials th
 
 ### base-contracts - F-BASE-01 (`High`)
 - Vulnerability type category: `Initialization/upgrade first-caller takeover`
+- Repository activity flag (9-month rule): Active (latest commit: 2026-01-30; cutoff: 2025-05-17).
 - [1] Program/Payout mapping: Policy class: `Access Control / Unsafe Initialization / Upgrade Integrity`; severity tier: `High`; target payout band: `$15k-$100k (program-cap dependent)`; recommended claim framing: exploitable security defect with deterministic proof artifact.
 - [2] Affected scope (exact): Repo `base-contracts`; component/function `BalanceTracker.initialize(...)`; audit reference `reports/cat2_rollups/base-contracts/report.md`; reviewed commit hash: `TBD-pin-before-submission`; fixed commit hash: `not provided`; affected release/version range: `TBD-pin-before-submission`.
 - [3] Production exploitability verdict: Conditional-direct during non-atomic `BalanceTracker` upgrade initialization windows.
@@ -301,6 +308,7 @@ Shared business impact is unauthorized reward/access claims and false denials th
 
 ### optimism - F-OPT-01 (`High`)
 - Vulnerability type category: `Initialization/upgrade first-caller takeover`
+- Repository activity flag (9-month rule): Active (latest commit: 2026-02-17; cutoff: 2025-05-17).
 - [1] Program/Payout mapping: Policy class: `Access Control / Unsafe Initialization / Upgrade Integrity`; severity tier: `High`; target payout band: `$15k-$100k (program-cap dependent)`; recommended claim framing: exploitable security defect with deterministic proof artifact.
 - [2] Affected scope (exact): Repo `optimism`; component/function `ProtocolVersions.initialize(...)`; audit reference `reports/cat2_rollups/optimism/report.md`; reviewed commit hash: `TBD-pin-before-submission`; fixed commit hash: `not provided`; affected release/version range: `TBD-pin-before-submission`.
 - [3] Production exploitability verdict: Conditional-direct during non-atomic proxy upgrade to `ProtocolVersions`.
@@ -341,6 +349,7 @@ Shared business impact is unauthorized reward/access claims and false denials th
 
 ### linea-contracts - F-LINEA-02 (`High`)
 - Vulnerability type category: `Initialization/upgrade first-caller takeover`
+- Repository activity flag (9-month rule): Inactive (latest commit: 2024-09-11; cutoff: 2025-05-17).
 - [1] Program/Payout mapping: Policy class: `Access Control / Unsafe Initialization / Upgrade Integrity`; severity tier: `High`; target payout band: `$15k-$100k (program-cap dependent)`; recommended claim framing: exploitable security defect with deterministic proof artifact.
 - [2] Affected scope (exact): Repo `linea-contracts`; component/function `LineaRollupInit.initializeV2(...)`; audit reference `reports/cat2_rollups/linea-contracts/report.md`; reviewed commit hash: `TBD-pin-before-submission`; fixed commit hash: `not provided`; affected release/version range: `TBD-pin-before-submission`.
 - [3] Production exploitability verdict: Conditional-direct in plain `upgrade` paths without same-tx reinitializer call.
@@ -381,6 +390,7 @@ Shared business impact is unauthorized reward/access claims and false denials th
 
 ### mantle - F-MAN-04 (`High`)
 - Vulnerability type category: `Privilege and settlement-logic integrity flaws`
+- Repository activity flag (9-month rule): Inactive (latest commit: 2023-08-16; cutoff: 2025-05-17).
 - [1] Program/Payout mapping: Policy class: `Protocol Integrity / Privilege Logic / Settlement Correctness`; severity tier: `High`; target payout band: `$15k-$100k (program-cap dependent)`; recommended claim framing: exploitable security defect with deterministic proof artifact.
 - [2] Affected scope (exact): Repo `mantle`; component/function `Rollup.challengeAssertion(...)`; audit reference `reports/cat2_rollups/mantle/report.md`; reviewed commit hash: `TBD-pin-before-submission`; fixed commit hash: `not provided`; affected release/version range: `TBD-pin-before-submission`.
 - [3] Production exploitability verdict: Direct for griefing by valid operator/staker class; slash impact depends on settlement reachability.
@@ -421,6 +431,7 @@ Shared business impact is unauthorized reward/access claims and false denials th
 
 ### mantle - F-MAN-02 (`High`)
 - Vulnerability type category: `Privilege and settlement-logic integrity flaws`
+- Repository activity flag (9-month rule): Inactive (latest commit: 2023-08-16; cutoff: 2025-05-17).
 - [1] Program/Payout mapping: Policy class: `Protocol Integrity / Privilege Logic / Settlement Correctness`; severity tier: `High`; target payout band: `$15k-$100k (program-cap dependent)`; recommended claim framing: exploitable security defect with deterministic proof artifact.
 - [2] Affected scope (exact): Repo `mantle`; component/function `Rollup.createAssertion(...)`; audit reference `reports/cat2_rollups/mantle/report.md`; reviewed commit hash: `TBD-pin-before-submission`; fixed commit hash: `not provided`; affected release/version range: `TBD-pin-before-submission`.
 - [3] Production exploitability verdict: Direct for authorized operator class due create+confirm path coupling.
@@ -460,6 +471,7 @@ Shared business impact is unauthorized reward/access claims and false denials th
 
 ### mantle - F-MAN-03 (`High`)
 - Vulnerability type category: `Privilege and settlement-logic integrity flaws`
+- Repository activity flag (9-month rule): Inactive (latest commit: 2023-08-16; cutoff: 2025-05-17).
 - [1] Program/Payout mapping: Policy class: `Protocol Integrity / Privilege Logic / Settlement Correctness`; severity tier: `High`; target payout band: `$15k-$100k (program-cap dependent)`; recommended claim framing: exploitable security defect with deterministic proof artifact.
 - [2] Affected scope (exact): Repo `mantle`; component/function `Rollup.completeChallenge(...)`; audit reference `reports/cat2_rollups/mantle/report.md`; reviewed commit hash: `TBD-pin-before-submission`; fixed commit hash: `not provided`; affected release/version range: `TBD-pin-before-submission`.
 - [3] Production exploitability verdict: Direct liveness-failure trigger when hidden challenge-operator registration dependency is unmet.
@@ -500,6 +512,7 @@ Shared business impact is unauthorized reward/access claims and false denials th
 
 ### era-boojum - F-ERA-01 (`High`)
 - Vulnerability type category: `Prover reliability and crashable execution paths`
+- Repository activity flag (9-month rule): Inactive (latest commit: 2024-08-15; cutoff: 2025-05-17).
 - [1] Program/Payout mapping: Policy class: `Denial of Service / Reliability / Input Validation`; severity tier: `High`; target payout band: `$15k-$100k (program-cap dependent)`; recommended claim framing: exploitable security defect with deterministic proof artifact.
 - [2] Affected scope (exact): Repo `era-boojum`; component/function `resolver_box allocator reservation/commit logic`; audit reference `reports/cat2_rollups/era-boojum/report.md`; reviewed commit hash: `TBD-pin-before-submission`; fixed commit hash: `not provided`; affected release/version range: `TBD-pin-before-submission`.
 - [3] Production exploitability verdict: Direct if oversized reservation inputs are attacker-reachable; otherwise latent but high-impact.
@@ -540,6 +553,7 @@ Shared business impact is unauthorized reward/access claims and false denials th
 
 ### zkevm-circuits - F-ZKEVM-01 (`High`)
 - Vulnerability type category: `Prover reliability and crashable execution paths`
+- Repository activity flag (9-month rule): Inactive (latest commit: 2025-04-18; cutoff: 2025-05-17).
 - [1] Program/Payout mapping: Policy class: `Denial of Service / Reliability / Input Validation`; severity tier: `High`; target payout band: `$15k-$100k (program-cap dependent)`; recommended claim framing: exploitable security defect with deterministic proof artifact.
 - [2] Affected scope (exact): Repo `zkevm-circuits`; component/function `aggregator::decode_bytes`; audit reference `reports/cat2_rollups/zkevm-circuits/report.md`; reviewed commit hash: `TBD-pin-before-submission`; fixed commit hash: `not provided`; affected release/version range: `TBD-pin-before-submission`.
 - [3] Production exploitability verdict: Direct crash path if malformed payloads can reach proving queue ingress.
@@ -580,6 +594,7 @@ Shared business impact is unauthorized reward/access claims and false denials th
 
 ### zkevm-circuits - F-ZKEVM-02 (`Medium`)
 - Vulnerability type category: `Prover reliability and crashable execution paths`
+- Repository activity flag (9-month rule): Inactive (latest commit: 2025-04-18; cutoff: 2025-05-17).
 - [1] Program/Payout mapping: Policy class: `Denial of Service / Reliability / Input Validation`; severity tier: `Medium`; target payout band: `$5k-$30k (program-cap dependent)`; recommended claim framing: exploitable security defect with deterministic proof artifact.
 - [2] Affected scope (exact): Repo `zkevm-circuits`; component/function `BatchProvingTask/BundleProvingTask identifier()`; audit reference `reports/cat2_rollups/zkevm-circuits/report.md`; reviewed commit hash: `TBD-pin-before-submission`; fixed commit hash: `not provided`; affected release/version range: `TBD-pin-before-submission`.
 - [3] Production exploitability verdict: Direct crash path if malformed empty tasks can reach identifier path.
@@ -620,6 +635,7 @@ Shared business impact is unauthorized reward/access claims and false denials th
 
 ### taiko-contracts - F-TAIKO-02 (`Medium`)
 - Vulnerability type category: `Initialization/upgrade first-caller takeover`
+- Repository activity flag (9-month rule): Active (latest commit: 2026-02-16; cutoff: 2025-05-17).
 - [1] Program/Payout mapping: Policy class: `Access Control / Unsafe Initialization / Upgrade Integrity`; severity tier: `Medium`; target payout band: `$5k-$30k (program-cap dependent)`; recommended claim framing: exploitable security defect with deterministic proof artifact.
 - [2] Affected scope (exact): Repo `taiko-contracts`; component/function `EventRegister.initialize()`; audit reference `reports/cat2_rollups/taiko-contracts/report.md`; reviewed commit hash: `TBD-pin-before-submission`; fixed commit hash: `not provided`; affected release/version range: `TBD-pin-before-submission`.
 - [3] Production exploitability verdict: Conditional-direct in deploy/init race windows on exposed deployment flows.
@@ -660,6 +676,7 @@ Shared business impact is unauthorized reward/access claims and false denials th
 
 ### taiko-mono - F-TAIKOMONO-02 (`Medium`)
 - Vulnerability type category: `Initialization/upgrade first-caller takeover`
+- Repository activity flag (9-month rule): Active (latest commit: 2026-02-16; cutoff: 2025-05-17).
 - [1] Program/Payout mapping: Policy class: `Access Control / Unsafe Initialization / Upgrade Integrity`; severity tier: `Medium`; target payout band: `$5k-$30k (program-cap dependent)`; recommended claim framing: exploitable security defect with deterministic proof artifact.
 - [2] Affected scope (exact): Repo `taiko-mono`; component/function `EventRegister.initialize()`; audit reference `reports/cat2_rollups/taiko-mono/report.md`; reviewed commit hash: `TBD-pin-before-submission`; fixed commit hash: `not provided`; affected release/version range: `TBD-pin-before-submission`.
 - [3] Production exploitability verdict: Conditional-direct in mono deploy/init race windows where split flow exists.
@@ -700,6 +717,7 @@ Shared business impact is unauthorized reward/access claims and false denials th
 
 ### taiko-contracts - F-TAIKO-01 (`Medium`)
 - Vulnerability type category: `Integration-facing data validity flaws`
+- Repository activity flag (9-month rule): Active (latest commit: 2026-02-16; cutoff: 2025-05-17).
 - [1] Program/Payout mapping: Policy class: `Business Logic / Data Validation / Offchain Trust Boundary`; severity tier: `Medium`; target payout band: `$5k-$30k (program-cap dependent)`; recommended claim framing: exploitable security defect with deterministic proof artifact.
 - [2] Affected scope (exact): Repo `taiko-contracts`; component/function `TrailblazersBadgesS2.getBadge(uint256)`; audit reference `reports/cat2_rollups/taiko-contracts/report.md`; reviewed commit hash: `TBD-pin-before-submission`; fixed commit hash: `not provided`; affected release/version range: `TBD-pin-before-submission`.
 - [3] Production exploitability verdict: Indirect/business-logic exploitation via offchain consumer misuse of `getBadge` semantics.
@@ -739,6 +757,7 @@ Shared business impact is unauthorized reward/access claims and false denials th
 
 ### taiko-mono - F-TAIKOMONO-01 (`Medium`)
 - Vulnerability type category: `Integration-facing data validity flaws`
+- Repository activity flag (9-month rule): Active (latest commit: 2026-02-16; cutoff: 2025-05-17).
 - [1] Program/Payout mapping: Policy class: `Business Logic / Data Validation / Offchain Trust Boundary`; severity tier: `Medium`; target payout band: `$5k-$30k (program-cap dependent)`; recommended claim framing: exploitable security defect with deterministic proof artifact.
 - [2] Affected scope (exact): Repo `taiko-mono`; component/function `TrailblazersBadgesS2.getBadge(uint256)`; audit reference `reports/cat2_rollups/taiko-mono/report.md`; reviewed commit hash: `TBD-pin-before-submission`; fixed commit hash: `not provided`; affected release/version range: `TBD-pin-before-submission`.
 - [3] Production exploitability verdict: Indirect/business-logic exploitation via mono integration misuse of `getBadge` semantics.

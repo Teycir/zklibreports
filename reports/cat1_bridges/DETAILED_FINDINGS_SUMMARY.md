@@ -18,6 +18,7 @@ Shared business impact is asset-identity drift across chains, enabling unintende
 
 ### nomad-monorepo - F4 (`Critical`)
 - Vulnerability type category: `Authorization/governance control compromise and stale-trust acceptance`
+- Repository activity flag (9-month rule): Inactive (latest commit: 2022-03-25; cutoff: 2025-05-17).
 - [1] Program/Payout mapping: Policy class: `Access Control / Authorization Integrity / Governance Trust Boundary`; severity tier: `Critical`; target payout band: `$50k-$250k+ (program-cap dependent)`; recommended claim framing: exploitable security defect with deterministic proof artifact.
 - [2] Affected scope (exact): Repo `nomad-monorepo`; component/function `Retired replica can forge TransferGovernor handling and seize local governor privileges`; audit reference `reports/cat1_bridges/nomad-monorepo/report.md`; reviewed commit hash: `f326b402285e3255a654e5e44c919ce412c2bed0`; fixed commit hash: `not provided`; affected release/version range: `TBD-pin-before-submission`.
 - [3] Production exploitability verdict: Direct once stale authorization or trust-boundary preconditions are present.
@@ -57,6 +58,7 @@ Shared business impact is asset-identity drift across chains, enabling unintende
 
 ### nomad-monorepo - F5 (`Critical`)
 - Vulnerability type category: `Authorization/governance control compromise and stale-trust acceptance`
+- Repository activity flag (9-month rule): Inactive (latest commit: 2022-03-25; cutoff: 2025-05-17).
 - [1] Program/Payout mapping: Policy class: `Access Control / Authorization Integrity / Governance Trust Boundary`; severity tier: `Critical`; target payout band: `$50k-$250k+ (program-cap dependent)`; recommended claim framing: exploitable security defect with deterministic proof artifact.
 - [2] Affected scope (exact): Repo `nomad-monorepo`; component/function `Retired replica can inject forged governance batch and execute privileged calls via executeCallBatch`; audit reference `reports/cat1_bridges/nomad-monorepo/report.md`; reviewed commit hash: `f326b402285e3255a654e5e44c919ce412c2bed0`; fixed commit hash: `not provided`; affected release/version range: `TBD-pin-before-submission`.
 - [3] Production exploitability verdict: Direct once stale authorization or trust-boundary preconditions are present.
@@ -97,6 +99,7 @@ Shared business impact is asset-identity drift across chains, enabling unintende
 
 ### axelar-core - A2 (`High`)
 - Vulnerability type category: `Runtime liveness and DoS via unsafe input/state handling`
+- Repository activity flag (9-month rule): Active (latest commit: 2026-01-18; cutoff: 2025-05-17).
 - [1] Program/Payout mapping: Policy class: `Availability / Input Validation / Runtime Safety`; severity tier: `High`; target payout band: `$15k-$100k (program-cap dependent)`; recommended claim framing: exploitable security defect with deterministic proof artifact.
 - [2] Affected scope (exact): Repo `axelar-core`; component/function `RetryFailedEvent requeues failed events without persistent status transition, causing deterministic end-block panic`; audit reference `reports/cat1_bridges/axelar-core/report.md`; reviewed commit hash: `f303a5aa961771b475b63bce433ed3b0e6cf3b1a`; fixed commit hash: `not provided`; affected release/version range: `TBD-pin-before-submission`.
 - [3] Production exploitability verdict: Direct permissionless liveness DoS via unrestricted retry path on failed events.
@@ -139,6 +142,7 @@ Shared business impact is asset-identity drift across chains, enabling unintende
 
 ### LayerZero-v2 - LZ2 (`High`)
 - Vulnerability type category: `Authorization/governance control compromise and stale-trust acceptance`
+- Repository activity flag (9-month rule): Active (latest commit: 2025-11-08; cutoff: 2025-05-17).
 - [1] Program/Payout mapping: Policy class: `Access Control / Authorization Integrity / Governance Trust Boundary`; severity tier: `High`; target payout band: `$15k-$100k (program-cap dependent)`; recommended claim framing: exploitable security defect with deterministic proof artifact.
 - [2] Affected scope (exact): Repo `LayerZero-v2`; component/function `Endpoint delegate privilege can persist after OApp ownership transfer and retain config control`; audit reference `reports/cat1_bridges/LayerZero-v2/report.md`; reviewed commit hash: `ab9b083410b9359285a5756807e1b6145d4711a7`; fixed commit hash: `not provided`; affected release/version range: `TBD-pin-before-submission`.
 - [3] Production exploitability verdict: Role-contingent: exploitable by stale delegate key if ownership handoff does not rotate delegate authority.
@@ -176,6 +180,7 @@ Shared business impact is asset-identity drift across chains, enabling unintende
 
 ### nomad-monorepo - F1 (`High`)
 - Vulnerability type category: `Authorization/governance control compromise and stale-trust acceptance`
+- Repository activity flag (9-month rule): Inactive (latest commit: 2022-03-25; cutoff: 2025-05-17).
 - [1] Program/Payout mapping: Policy class: `Access Control / Authorization Integrity / Governance Trust Boundary`; severity tier: `High`; target payout band: `$15k-$100k (program-cap dependent)`; recommended claim framing: exploitable security defect with deterministic proof artifact.
 - [2] Affected scope (exact): Repo `nomad-monorepo`; component/function `Stale replicas remain authorized after domain re-enrollment (Auth boundary break)`; audit reference `reports/cat1_bridges/nomad-monorepo/report.md`; reviewed commit hash: `f326b402285e3255a654e5e44c919ce412c2bed0`; fixed commit hash: `not provided`; affected release/version range: `TBD-pin-before-submission`.
 - [3] Production exploitability verdict: Direct once stale authorization or trust-boundary preconditions are present.
@@ -214,6 +219,7 @@ Shared business impact is asset-identity drift across chains, enabling unintende
 
 ### nomad-monorepo - F3 (`High`)
 - Vulnerability type category: `Authorization/governance control compromise and stale-trust acceptance`
+- Repository activity flag (9-month rule): Inactive (latest commit: 2022-03-25; cutoff: 2025-05-17).
 - [1] Program/Payout mapping: Policy class: `Access Control / Authorization Integrity / Governance Trust Boundary`; severity tier: `High`; target payout band: `$15k-$100k (program-cap dependent)`; recommended claim framing: exploitable security defect with deterministic proof artifact.
 - [2] Affected scope (exact): Repo `nomad-monorepo`; component/function `Retired replica can still pass sink auth (onlyReplica + onlyRemoteRouter) and execute handle`; audit reference `reports/cat1_bridges/nomad-monorepo/report.md`; reviewed commit hash: `f326b402285e3255a654e5e44c919ce412c2bed0`; fixed commit hash: `not provided`; affected release/version range: `TBD-pin-before-submission`.
 - [3] Production exploitability verdict: Direct once stale authorization or trust-boundary preconditions are present.
@@ -252,6 +258,7 @@ Shared business impact is asset-identity drift across chains, enabling unintende
 
 ### nomad-monorepo - F6 (`High`)
 - Vulnerability type category: `Authorization/governance control compromise and stale-trust acceptance`
+- Repository activity flag (9-month rule): Inactive (latest commit: 2022-03-25; cutoff: 2025-05-17).
 - [1] Program/Payout mapping: Policy class: `Access Control / Authorization Integrity / Governance Trust Boundary`; severity tier: `High`; target payout band: `$15k-$100k (program-cap dependent)`; recommended claim framing: exploitable security defect with deterministic proof artifact.
 - [2] Affected scope (exact): Repo `nomad-monorepo`; component/function `Bootstrap committed root is immediately acceptable (optimistic timeout bypass at initialization boundary)`; audit reference `reports/cat1_bridges/nomad-monorepo/report.md`; reviewed commit hash: `f326b402285e3255a654e5e44c919ce412c2bed0`; fixed commit hash: `not provided`; affected release/version range: `TBD-pin-before-submission`.
 - [3] Production exploitability verdict: Direct once stale authorization or trust-boundary preconditions are present.
@@ -291,6 +298,7 @@ Shared business impact is asset-identity drift across chains, enabling unintende
 
 ### synapse-contracts - F2 (`High`)
 - Vulnerability type category: `Authorization/governance control compromise and stale-trust acceptance`
+- Repository activity flag (9-month rule): Active (latest commit: 2025-06-18; cutoff: 2025-05-17).
 - [1] Program/Payout mapping: Policy class: `Access Control / Authorization Integrity / Governance Trust Boundary`; severity tier: `High`; target payout band: `$15k-$100k (program-cap dependent)`; recommended claim framing: exploitable security defect with deterministic proof artifact.
 - [2] Affected scope (exact): Repo `synapse-contracts`; component/function `DEFAULT_ADMIN_ROLE compromise can escalate into NODEGROUP_ROLE settlement authority and drain bridge collateral`; audit reference `reports/cat1_bridges/synapse-contracts/report.md`; reviewed commit hash: `60f1c25cf2f115911e11255f515e1450fe96100c`; fixed commit hash: `not provided`; affected release/version range: `TBD-pin-before-submission`.
 - [3] Production exploitability verdict: Compromise-contingent: requires prior DEFAULT_ADMIN_ROLE compromise.
@@ -328,6 +336,7 @@ Shared business impact is asset-identity drift across chains, enabling unintende
 
 ### telepathy-contracts - F1 (`High`)
 - Vulnerability type category: `Initialization/upgrade first-caller takeover windows`
+- Repository activity flag (9-month rule): Inactive (latest commit: 2023-08-29; cutoff: 2025-05-17).
 - [1] Program/Payout mapping: Policy class: `Access Control / Unsafe Initialization / Upgrade Integrity`; severity tier: `High`; target payout band: `$15k-$100k (program-cap dependent)`; recommended claim framing: exploitable security defect with deterministic proof artifact.
 - [2] Affected scope (exact): Repo `telepathy-contracts`; component/function `Uninitialized-proxy first-caller initialization can seize bridge control plane and enable forged message execution`; audit reference `reports/cat1_bridges/telepathy-contracts/report.md`; reviewed commit hash: `0f3c6812d6bda96dde6ab7bdd8f8391c47bf5d0b`; fixed commit hash: `not provided`; affected release/version range: `TBD-pin-before-submission`.
 - [3] Production exploitability verdict: Conditional-direct in non-atomic deployment/initialization flows.
@@ -368,6 +377,7 @@ Shared business impact is asset-identity drift across chains, enabling unintende
 
 ### wormhole - W2 (`High`)
 - Vulnerability type category: `Authorization/governance control compromise and stale-trust acceptance`
+- Repository activity flag (9-month rule): Active (latest commit: 2026-02-13; cutoff: 2025-05-17).
 - [1] Program/Payout mapping: Policy class: `Access Control / Authorization Integrity / Governance Trust Boundary`; severity tier: `High`; target payout band: `$15k-$100k (program-cap dependent)`; recommended claim framing: exploitable security defect with deterministic proof artifact.
 - [2] Affected scope (exact): Repo `wormhole`; component/function `Token-bridge governance accepts stale guardian sets during expiry window`; audit reference `reports/cat1_bridges/wormhole/report.md`; reviewed commit hash: `e11926a849391e8a035c69fc52f4efb3205258fd`; fixed commit hash: `not provided`; affected release/version range: `TBD-pin-before-submission`.
 - [3] Production exploitability verdict: Conditional-direct: requires compromised stale guardian keys during guardian-set expiry window.
@@ -407,6 +417,7 @@ Shared business impact is asset-identity drift across chains, enabling unintende
 
 ### axelar-core - A1 (`Medium`)
 - Vulnerability type category: `Runtime liveness and DoS via unsafe input/state handling`
+- Repository activity flag (9-month rule): Active (latest commit: 2026-01-18; cutoff: 2025-05-17).
 - [1] Program/Payout mapping: Policy class: `Availability / Input Validation / Runtime Safety`; severity tier: `Medium`; target payout band: `$5k-$30k (program-cap dependent)`; recommended claim framing: exploitable security defect with deterministic proof artifact.
 - [2] Affected scope (exact): Repo `axelar-core`; component/function `Uppercase receiver filter in AxelarNet IBC path can panic on malformed uppercase receiver strings`; audit reference `reports/cat1_bridges/axelar-core/report.md`; reviewed commit hash: `f303a5aa961771b475b63bce433ed3b0e6cf3b1a`; fixed commit hash: `not provided`; affected release/version range: `TBD-pin-before-submission`.
 - [3] Production exploitability verdict: Direct permissionless DoS via crafted packet receiver input.
@@ -446,6 +457,7 @@ Shared business impact is asset-identity drift across chains, enabling unintende
 
 ### connext-monorepo - F1 (`Medium`)
 - Vulnerability type category: `Collateral/accounting insolvency and economic leakage`
+- Repository activity flag (9-month rule): Inactive (latest commit: 2024-10-03; cutoff: 2025-05-17).
 - [1] Program/Payout mapping: Policy class: `Business Logic / Accounting Integrity / Value Conservation`; severity tier: `Medium`; target payout band: `$5k-$30k (program-cap dependent)`; recommended claim framing: exploitable security defect with deterministic proof artifact.
 - [2] Affected scope (exact): Repo `connext-monorepo`; component/function `Router liquidity withdrawal can undercollateralize remaining router balances under sender-tax payout token behavior`; audit reference `reports/cat1_bridges/connext-monorepo/report.md`; reviewed commit hash: `7758e62037bba281b8844c37831bde0b838edd36`; fixed commit hash: `not provided`; affected release/version range: `TBD-pin-before-submission`.
 - [3] Production exploitability verdict: Direct on deployments supporting affected token behavior or residual-balance conditions.
@@ -484,6 +496,7 @@ Shared business impact is asset-identity drift across chains, enabling unintende
 
 ### connext-monorepo - F2 (`Medium`)
 - Vulnerability type category: `Collateral/accounting insolvency and economic leakage`
+- Repository activity flag (9-month rule): Inactive (latest commit: 2024-10-03; cutoff: 2025-05-17).
 - [1] Program/Payout mapping: Policy class: `Business Logic / Accounting Integrity / Value Conservation`; severity tier: `Medium`; target payout band: `$5k-$30k (program-cap dependent)`; recommended claim framing: exploitable security defect with deterministic proof artifact.
 - [2] Affected scope (exact): Repo `connext-monorepo`; component/function `Canonical-domain execute payout can desynchronize custodied from real collateral under sender-tax token behavior`; audit reference `reports/cat1_bridges/connext-monorepo/report.md`; reviewed commit hash: `7758e62037bba281b8844c37831bde0b838edd36`; fixed commit hash: `not provided`; affected release/version range: `TBD-pin-before-submission`.
 - [3] Production exploitability verdict: Direct on deployments supporting affected token behavior or residual-balance conditions.
@@ -525,6 +538,7 @@ Shared business impact is asset-identity drift across chains, enabling unintende
 
 ### connext-monorepo - F3 (`Medium`)
 - Vulnerability type category: `Collateral/accounting insolvency and economic leakage`
+- Repository activity flag (9-month rule): Inactive (latest commit: 2024-10-03; cutoff: 2025-05-17).
 - [1] Program/Payout mapping: Policy class: `Business Logic / Accounting Integrity / Value Conservation`; severity tier: `Medium`; target payout band: `$5k-$30k (program-cap dependent)`; recommended claim framing: exploitable security defect with deterministic proof artifact.
 - [2] Affected scope (exact): Repo `connext-monorepo`; component/function `ERC20 bumpTransfer fee forwarding can consume bridge collateral under sender-tax payout token behavior`; audit reference `reports/cat1_bridges/connext-monorepo/report.md`; reviewed commit hash: `7758e62037bba281b8844c37831bde0b838edd36`; fixed commit hash: `not provided`; affected release/version range: `TBD-pin-before-submission`.
 - [3] Production exploitability verdict: Direct on deployments supporting affected token behavior or residual-balance conditions.
@@ -566,6 +580,7 @@ Shared business impact is asset-identity drift across chains, enabling unintende
 
 ### hyperlane-monorepo - H1 (`Medium`)
 - Vulnerability type category: `Collateral/accounting insolvency and economic leakage`
+- Repository activity flag (9-month rule): Active (latest commit: 2026-02-16; cutoff: 2025-05-17).
 - [1] Program/Payout mapping: Policy class: `Business Logic / Accounting Integrity / Value Conservation`; severity tier: `Medium`; target payout band: `$5k-$30k (program-cap dependent)`; recommended claim framing: exploitable security defect with deterministic proof artifact.
 - [2] Affected scope (exact): Repo `hyperlane-monorepo`; component/function `HypERC20Collateral + TokenRouter intent-level accounting can create collateral deficits with inbound-fee tokens`; audit reference `reports/cat1_bridges/hyperlane-monorepo/report.md`; reviewed commit hash: `5302a89c830c5eb43b8d3f53fc65e0733f4d6bd1`; fixed commit hash: `not provided`; affected release/version range: `TBD-pin-before-submission`.
 - [3] Production exploitability verdict: Direct on deployments supporting affected token behavior or residual-balance conditions.
@@ -604,6 +619,7 @@ Shared business impact is asset-identity drift across chains, enabling unintende
 
 ### hyperlane-monorepo - H2 (`Medium`)
 - Vulnerability type category: `Collateral/accounting insolvency and economic leakage`
+- Repository activity flag (9-month rule): Active (latest commit: 2026-02-16; cutoff: 2025-05-17).
 - [1] Program/Payout mapping: Policy class: `Business Logic / Accounting Integrity / Value Conservation`; severity tier: `Medium`; target payout band: `$5k-$30k (program-cap dependent)`; recommended claim framing: exploitable security defect with deterministic proof artifact.
 - [2] Affected scope (exact): Repo `hyperlane-monorepo`; component/function `LpCollateralRouter can overstate lpAssets vs real collateral under inbound-fee collateral tokens`; audit reference `reports/cat1_bridges/hyperlane-monorepo/report.md`; reviewed commit hash: `5302a89c830c5eb43b8d3f53fc65e0733f4d6bd1`; fixed commit hash: `not provided`; affected release/version range: `TBD-pin-before-submission`.
 - [3] Production exploitability verdict: Direct on deployments supporting affected token behavior or residual-balance conditions.
@@ -644,6 +660,7 @@ Shared business impact is asset-identity drift across chains, enabling unintende
 
 ### hyperlane-monorepo - H3 (`Medium`)
 - Vulnerability type category: `Collateral/accounting insolvency and economic leakage`
+- Repository activity flag (9-month rule): Active (latest commit: 2026-02-16; cutoff: 2025-05-17).
 - [1] Program/Payout mapping: Policy class: `Business Logic / Accounting Integrity / Value Conservation`; severity tier: `Medium`; target payout band: `$5k-$30k (program-cap dependent)`; recommended claim framing: exploitable security defect with deterministic proof artifact.
 - [2] Affected scope (exact): Repo `hyperlane-monorepo`; component/function `TokenRouter fee transfer path can undercollateralize router accounting with sender-tax token behavior`; audit reference `reports/cat1_bridges/hyperlane-monorepo/report.md`; reviewed commit hash: `5302a89c830c5eb43b8d3f53fc65e0733f4d6bd1`; fixed commit hash: `not provided`; affected release/version range: `TBD-pin-before-submission`.
 - [3] Production exploitability verdict: Direct on deployments supporting affected token behavior or residual-balance conditions.
@@ -682,6 +699,7 @@ Shared business impact is asset-identity drift across chains, enabling unintende
 
 ### LayerZero-v2 - LZ1 (`Medium`)
 - Vulnerability type category: `Collateral/accounting insolvency and economic leakage`
+- Repository activity flag (9-month rule): Active (latest commit: 2025-11-08; cutoff: 2025-05-17).
 - [1] Program/Payout mapping: Policy class: `Business Logic / Accounting Integrity / Value Conservation`; severity tier: `Medium`; target payout band: `$5k-$30k (program-cap dependent)`; recommended claim framing: exploitable security defect with deterministic proof artifact.
 - [2] Affected scope (exact): Repo `LayerZero-v2`; component/function `OFTAdapter lossless-transfer assumption can create collateral deficit with inbound-fee tokens`; audit reference `reports/cat1_bridges/LayerZero-v2/report.md`; reviewed commit hash: `ab9b083410b9359285a5756807e1b6145d4711a7`; fixed commit hash: `not provided`; affected release/version range: `TBD-pin-before-submission`.
 - [3] Production exploitability verdict: Direct on deployments supporting affected token behavior or residual-balance conditions.
@@ -720,6 +738,7 @@ Shared business impact is asset-identity drift across chains, enabling unintende
 
 ### LayerZero-v2 - LZ3 (`Medium`)
 - Vulnerability type category: `Collateral/accounting insolvency and economic leakage`
+- Repository activity flag (9-month rule): Active (latest commit: 2025-11-08; cutoff: 2025-05-17).
 - [1] Program/Payout mapping: Policy class: `Business Logic / Accounting Integrity / Value Conservation`; severity tier: `Medium`; target payout band: `$5k-$30k (program-cap dependent)`; recommended claim framing: exploitable security defect with deterministic proof artifact.
 - [2] Affected scope (exact): Repo `LayerZero-v2`; component/function `Endpoint payInLzToken path can sweep preloaded residual lzToken balance to caller-selected refund address`; audit reference `reports/cat1_bridges/LayerZero-v2/report.md`; reviewed commit hash: `ab9b083410b9359285a5756807e1b6145d4711a7`; fixed commit hash: `not provided`; affected release/version range: `TBD-pin-before-submission`.
 - [3] Production exploitability verdict: Direct on deployments supporting affected token behavior or residual-balance conditions.
@@ -758,6 +777,7 @@ Shared business impact is asset-identity drift across chains, enabling unintende
 
 ### LayerZero-v2 - LZ4 (`Medium`)
 - Vulnerability type category: `Collateral/accounting insolvency and economic leakage`
+- Repository activity flag (9-month rule): Active (latest commit: 2025-11-08; cutoff: 2025-05-17).
 - [1] Program/Payout mapping: Policy class: `Business Logic / Accounting Integrity / Value Conservation`; severity tier: `Medium`; target payout band: `$5k-$30k (program-cap dependent)`; recommended claim framing: exploitable security defect with deterministic proof artifact.
 - [2] Affected scope (exact): Repo `LayerZero-v2`; component/function `EndpointV2Alt native-fee path can sweep preloaded residual nativeErc20 balance to caller-selected refund address`; audit reference `reports/cat1_bridges/LayerZero-v2/report.md`; reviewed commit hash: `ab9b083410b9359285a5756807e1b6145d4711a7`; fixed commit hash: `not provided`; affected release/version range: `TBD-pin-before-submission`.
 - [3] Production exploitability verdict: Direct on deployments supporting affected token behavior or residual-balance conditions.
@@ -796,6 +816,7 @@ Shared business impact is asset-identity drift across chains, enabling unintende
 
 ### nomad-monorepo - F10 (`Medium`)
 - Vulnerability type category: `Token identity/migration integrity breaks`
+- Repository activity flag (9-month rule): Inactive (latest commit: 2022-03-25; cutoff: 2025-05-17).
 - [1] Program/Payout mapping: Policy class: `Business Logic / Asset Identity / State Consistency`; severity tier: `Medium`; target payout band: `$5k-$30k (program-cap dependent)`; recommended claim framing: exploitable security defect with deterministic proof artifact.
 - [2] Affected scope (exact): Repo `nomad-monorepo`; component/function `migrate can convert canonical asset identity after representation alias overwrite`; audit reference `reports/cat1_bridges/nomad-monorepo/report.md`; reviewed commit hash: `f326b402285e3255a654e5e44c919ce412c2bed0`; fixed commit hash: `not provided`; affected release/version range: `TBD-pin-before-submission`.
 - [3] Production exploitability verdict: Direct after mapping/configuration drift; exploitable once inconsistent identity state exists.
@@ -835,6 +856,7 @@ Shared business impact is asset-identity drift across chains, enabling unintende
 
 ### nomad-monorepo - F2 (`Medium`)
 - Vulnerability type category: `Authorization/governance control compromise and stale-trust acceptance`
+- Repository activity flag (9-month rule): Inactive (latest commit: 2022-03-25; cutoff: 2025-05-17).
 - [1] Program/Payout mapping: Policy class: `Access Control / Authorization Integrity / Governance Trust Boundary`; severity tier: `Medium`; target payout band: `$5k-$30k (program-cap dependent)`; recommended claim framing: exploitable security defect with deterministic proof artifact.
 - [2] Affected scope (exact): Repo `nomad-monorepo`; component/function `Unenrolling stale replica can desync forward/reverse mappings`; audit reference `reports/cat1_bridges/nomad-monorepo/report.md`; reviewed commit hash: `f326b402285e3255a654e5e44c919ce412c2bed0`; fixed commit hash: `not provided`; affected release/version range: `TBD-pin-before-submission`.
 - [3] Production exploitability verdict: Direct once stale authorization or trust-boundary preconditions are present.
@@ -873,6 +895,7 @@ Shared business impact is asset-identity drift across chains, enabling unintende
 
 ### nomad-monorepo - F7 (`Medium`)
 - Vulnerability type category: `Collateral/accounting insolvency and economic leakage`
+- Repository activity flag (9-month rule): Inactive (latest commit: 2022-03-25; cutoff: 2025-05-17).
 - [1] Program/Payout mapping: Policy class: `Business Logic / Accounting Integrity / Value Conservation`; severity tier: `Medium`; target payout band: `$5k-$30k (program-cap dependent)`; recommended claim framing: exploitable security defect with deterministic proof artifact.
 - [2] Affected scope (exact): Repo `nomad-monorepo`; component/function `Forged preFill can drain dust pool without providing liquidity`; audit reference `reports/cat1_bridges/nomad-monorepo/report.md`; reviewed commit hash: `f326b402285e3255a654e5e44c919ce412c2bed0`; fixed commit hash: `not provided`; affected release/version range: `TBD-pin-before-submission`.
 - [3] Production exploitability verdict: Direct on deployments supporting affected token behavior or residual-balance conditions.
@@ -913,6 +936,7 @@ Shared business impact is asset-identity drift across chains, enabling unintende
 
 ### nomad-monorepo - F8 (`Medium`)
 - Vulnerability type category: `Token identity/migration integrity breaks`
+- Repository activity flag (9-month rule): Inactive (latest commit: 2022-03-25; cutoff: 2025-05-17).
 - [1] Program/Payout mapping: Policy class: `Business Logic / Asset Identity / State Consistency`; severity tier: `Medium`; target payout band: `$5k-$30k (program-cap dependent)`; recommended claim framing: exploitable security defect with deterministic proof artifact.
 - [2] Affected scope (exact): Repo `nomad-monorepo`; component/function `enrollCustom allows representation aliasing across canonical IDs, enabling cross-asset remapping`; audit reference `reports/cat1_bridges/nomad-monorepo/report.md`; reviewed commit hash: `f326b402285e3255a654e5e44c919ce412c2bed0`; fixed commit hash: `not provided`; affected release/version range: `TBD-pin-before-submission`.
 - [3] Production exploitability verdict: Direct after mapping/configuration drift; exploitable once inconsistent identity state exists.
@@ -953,6 +977,7 @@ Shared business impact is asset-identity drift across chains, enabling unintende
 
 ### nomad-monorepo - F9 (`Medium`)
 - Vulnerability type category: `Runtime liveness and DoS via unsafe input/state handling`
+- Repository activity flag (9-month rule): Inactive (latest commit: 2022-03-25; cutoff: 2025-05-17).
 - [1] Program/Payout mapping: Policy class: `Availability / Input Validation / Runtime Safety`; severity tier: `Medium`; target payout band: `$5k-$30k (program-cap dependent)`; recommended claim framing: exploitable security defect with deterministic proof artifact.
 - [2] Affected scope (exact): Repo `nomad-monorepo`; component/function `Governance domain-list churn inflates global dispatch scans (liveness/gas degradation)`; audit reference `reports/cat1_bridges/nomad-monorepo/report.md`; reviewed commit hash: `f326b402285e3255a654e5e44c919ce412c2bed0`; fixed commit hash: `not provided`; affected release/version range: `TBD-pin-before-submission`.
 - [3] Production exploitability verdict: Direct low-cost liveness degradation via repeated governance domain churn.
@@ -991,6 +1016,7 @@ Shared business impact is asset-identity drift across chains, enabling unintende
 
 ### synapse-contracts - F1 (`Medium`)
 - Vulnerability type category: `Collateral/accounting insolvency and economic leakage`
+- Repository activity flag (9-month rule): Active (latest commit: 2025-06-18; cutoff: 2025-05-17).
 - [1] Program/Payout mapping: Policy class: `Business Logic / Accounting Integrity / Value Conservation`; severity tier: `Medium`; target payout band: `$5k-$30k (program-cap dependent)`; recommended claim framing: exploitable security defect with deterministic proof artifact.
 - [2] Affected scope (exact): Repo `synapse-contracts`; component/function `deposit / depositAndSwap intent-level amount handling can over-credit cross-chain liabilities for fee-on-transfer tokens`; audit reference `reports/cat1_bridges/synapse-contracts/report.md`; reviewed commit hash: `60f1c25cf2f115911e11255f515e1450fe96100c`; fixed commit hash: `not provided`; affected release/version range: `TBD-pin-before-submission`.
 - [3] Production exploitability verdict: Direct on deployments supporting affected token behavior or residual-balance conditions.
@@ -1029,6 +1055,7 @@ Shared business impact is asset-identity drift across chains, enabling unintende
 
 ### synapse-contracts - F3 (`Medium`)
 - Vulnerability type category: `Collateral/accounting insolvency and economic leakage`
+- Repository activity flag (9-month rule): Active (latest commit: 2025-06-18; cutoff: 2025-05-17).
 - [1] Program/Payout mapping: Policy class: `Business Logic / Accounting Integrity / Value Conservation`; severity tier: `Medium`; target payout band: `$5k-$30k (program-cap dependent)`; recommended claim framing: exploitable security defect with deterministic proof artifact.
 - [2] Affected scope (exact): Repo `synapse-contracts`; component/function `Destination min-out can be violated on actual user receipt when payout token transfer applies sender-side tax`; audit reference `reports/cat1_bridges/synapse-contracts/report.md`; reviewed commit hash: `60f1c25cf2f115911e11255f515e1450fe96100c`; fixed commit hash: `not provided`; affected release/version range: `TBD-pin-before-submission`.
 - [3] Production exploitability verdict: Direct on deployments supporting affected token behavior or residual-balance conditions.
@@ -1067,6 +1094,7 @@ Shared business impact is asset-identity drift across chains, enabling unintende
 
 ### wormhole - W3 (`Medium`)
 - Vulnerability type category: `Collateral/accounting insolvency and economic leakage`
+- Repository activity flag (9-month rule): Active (latest commit: 2026-02-13; cutoff: 2025-05-17).
 - [1] Program/Payout mapping: Policy class: `Business Logic / Accounting Integrity / Value Conservation`; severity tier: `Medium`; target payout band: `$5k-$30k (program-cap dependent)`; recommended claim framing: exploitable security defect with deterministic proof artifact.
 - [2] Affected scope (exact): Repo `wormhole`; component/function `Outbound sender-tax tokens can break bridge token solvency accounting`; audit reference `reports/cat1_bridges/wormhole/report.md`; reviewed commit hash: `e11926a849391e8a035c69fc52f4efb3205258fd`; fixed commit hash: `not provided`; affected release/version range: `TBD-pin-before-submission`.
 - [3] Production exploitability verdict: Direct on deployments supporting affected token behavior or residual-balance conditions.
@@ -1105,6 +1133,7 @@ Shared business impact is asset-identity drift across chains, enabling unintende
 
 ### wormhole - W1 (`Low`)
 - Vulnerability type category: `Runtime liveness and DoS via unsafe input/state handling`
+- Repository activity flag (9-month rule): Active (latest commit: 2026-02-13; cutoff: 2025-05-17).
 - [1] Program/Payout mapping: Policy class: `Availability / Input Validation / Runtime Safety`; severity tier: `Low`; target payout band: `$1k-$10k (program-cap dependent)`; recommended claim framing: exploitable security defect with deterministic proof artifact.
 - [2] Affected scope (exact): Repo `wormhole`; component/function `Metadata-method assumptions in attestToken / _transferTokens cause deterministic token-specific DoS`; audit reference `reports/cat1_bridges/wormhole/report.md`; reviewed commit hash: `e11926a849391e8a035c69fc52f4efb3205258fd`; fixed commit hash: `not provided`; affected release/version range: `TBD-pin-before-submission`.
 - [3] Production exploitability verdict: Direct token-specific DoS for metadata-incompatible assets.
